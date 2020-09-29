@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "材料配比查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">查看</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>注塑追溯管理</a>
+    <a><cite>材料配比查询</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">材料配比代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_clpbdm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_clpbdm" lay-filter="tb_clpbdm"></table>
+    </div>
+</div>
+<div id="div_clpbdm" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="clpbdm_gc" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">原材料代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="clpbdm_ycldm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">配比代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="clpbdm_pbdm" autocomplete="off" class="layui-input" readonly="readonly">
+
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">材料配比代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="clpbdm_clpbdm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline" style="width: 530px;">
+                <input type="text" id="clpbdm_remark" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_clpbdm_wl" lay-filter="tb_clpbdm_wl"></table>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/CLPB_MANAGE_SELECT")
+}

@@ -1,0 +1,98 @@
+﻿@using Sonluk.UI.Model.MES.TM_TMINFOService;
+@{
+    ViewBag.Title = "TM_PRINT";
+    Layout = "~/Views/Shared/_Layout_Print_CRM.cshtml";
+    List<MES_TM_TMINFO_TSDY> data = ViewBag.data;
+
+}
+
+<style>
+    td {
+        text-align: left;
+        padding: 0px;
+        /*border-right:1px solid;*/
+    }
+
+    /*.print_page_td_nohaveborder_left {
+        font-size:10px;
+    }*/
+
+    .small-font {
+            font-size:12px;
+        -webkit-transform-origin-x: 0;
+        -webkit-transform: scale(0.5);
+    }
+
+
+    .smallsize-font {
+            font-size: 6px;
+
+    }
+</style>
+
+@for (int i = 0; i < data.Count; i++)
+{
+    for (int k = 0; k < ViewBag.Count; k++)
+    {
+        <div class="main3" style="margin-top:4mm;">
+
+            <table class="print_page_table_noborder_zfdc3" cellpadding="10">
+                <tr>
+                    <td style="text-align:center;">
+                        <img style="" src="@Url.Action("BarCode", "PD", new { area = "MES", code = data[i].KHWLH, format = "CODE39", width = 160, height = 30, pure = 1 })">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">
+                        @data[i].KHWLH
+                    </td>
+                </tr>
+            </table>
+
+            <table class="print_page_table_noborder_zfdc3" border="0">
+                <tr>
+                    <td class="print_page_td_nohaveborder_left2">
+                        品名:@data[i].KHWLMS
+                    </td>
+                    <td class="print_page_td_nohaveborder_left2">
+                        数量:@data[i].XZS
+                    </td>
+                </tr>
+            </table>
+            <table class="print_page_table_noborder_zfdc3" border="0" style="border-bottom:1px solid;">
+                <tr>
+                    <td class="print_page_td_nohaveborder_left2" style="width:0.8cm">
+                        规格:
+                    </td>
+                    <td class="print_page_td_nohaveborder_left2" style="width:3.3cm">
+                        @data[i].KHWLGG
+                    </td>
+                    <td class="print_page_td_nohaveborder_left2" rowspan="2" style="text-align:left">
+                        <img style="" src="@Url.Action("BarCode", "PD", new { area = "MES", code = data[i].XCTM, format = "QRCODE", width = 50, height = 50, pure = 1 })">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="print_page_td_nohaveborder_left2">
+                        线别:
+                    </td>
+                    <td class="print_page_td_nohaveborder_left2">
+                        @(data[i].XBNAME)日期:@data[i].SCDATE
+                    </td>
+                </tr>
+            </table>
+           @* <hr size="3" style="margin:0px;background-color:black;" />*@
+            <table class="print_page_table_noborder_zfdc3" border="0">
+                <tr>
+                    <td class="print_page_td_nohaveborder_left2">
+                        SN:@data[i].XCTM
+                    </td>
+                </tr>
+            </table>
+
+
+
+
+        </div>
+    }
+
+}

@@ -1,0 +1,333 @@
+﻿/*
+字号 初号 小初 一号 小一 二号 小二 三号 小三 
+磅    42   36   26   24   22   18   16   15 
+毫米 14.8 12.7 9.17 8.47 7.76 6.35 5.64 5.29 
+字号 四号 小四 五号 小五 六号 小六 七号 八号 
+磅    14   12  10.5   9   7.5  6.5  5.5   5 
+毫米 4.94 4.23 3.70 3.17 2.65 2.29 1.94 1.76
+
+
+A4:210*297mm
+A5:210*148mm
+三联二等分:241mm×140mm
+2X三联二等分:241mm×280mm
+*/
+
+  div, body {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    height: 100%;
+    text-align: center;
+    font-family: SimSun;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #000;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+td {
+    /*border:1px solid #000;*/
+    font-size: 0.317cm;
+}
+
+.print-header {
+    width: 100%;
+    height: 50px;
+}
+
+.print-header-fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 50px;
+    background-color: #060d08;
+    z-index: 20000;
+}
+
+.print-header-control {
+    width: 20.204cm;
+    height: 100%;
+    margin: auto;
+    color: #fff;
+}
+
+.print-header-button {
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height: 50px;
+    font-family: SimHei;
+    font-size: 28px;
+    cursor: pointer;
+    float: left;
+}
+
+    .print-header-button:hover {
+        background-color: #34495E;
+    }
+
+.print-page {
+    page-break-after: always;
+    margin: auto;
+    background-color: #f1f1f1;
+    overflow: hidden;
+}
+
+.print-page-A4 {
+    width: 20.204cm;
+    height: 28.8cm;
+}
+.print-page-A7 {
+    width :7cm;
+    height:5cm;
+}
+.print-page-241-140 {
+    width: 20.204cm;
+    height: 13cm;
+}
+
+.print-page-241-280 {
+    width: 20.204cm;
+    height: 27cm;
+}
+
+@media print {
+    .print-header {
+        display: none;
+    }
+
+    .print-page {
+        background-color: #fff;
+    }
+}
+
+.print-page-area {
+    margin: auto;
+    margin-top: 0.702cm;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.print-page-area-A4 {
+    width: 19.0cm;
+    height: 26.7cm;
+}
+
+.print-page-area-241-140 {
+    width: 19.0cm;
+    height: 10.9cm;
+}
+
+.print-page-area-241-280 {
+    width: 19.0cm;
+    height: 24.9cm;
+}
+/*@media print {
+  .print-page{
+    border:none;
+  }
+}*/
+
+.print-page-header {
+}
+
+.print-page-body {
+}
+
+.print-page-body-A4 {
+    height: 20.2cm;
+}
+
+.print-page-body-241-140 {
+    height: 4.7cm;
+}
+
+.print-page-body-241-280 {
+    height: 18.7cm;
+}
+
+.print-page-footer {
+}
+
+
+.print-page-header-company-name {
+    text-align: center;
+    font-size: 0.776cm;
+    font-weight: bold;
+}
+
+.print-page-header-report-name {
+    margin-top: 0.25cm;
+    text-align: center;
+    font-size: 0.635cm;
+    font-weight: bold;
+}
+
+.print-page-header-table-title {
+    width: 2cm;
+    height: 0.8cm;
+    padding-left: 0.2cm;
+    text-align: left;
+    font-weight: bold;
+}
+
+.print-page-header-table-content {
+    text-align: left;
+}
+
+.print-page-header-table-po-number {
+    width: 4cm;
+    text-align: left;
+}
+
+.print-page-header-table-check {
+    text-align: right;
+    font-size: 0.423cm;
+    padding-right: 0.5cm;
+}
+
+.print-page-header-table-check-box {
+    font-size: 0.776cm;
+}
+
+
+.print-page-body-table {
+    text-align: center;
+}
+
+    .print-page-body-table tr {
+        height: 0.8cm;
+    }
+
+    .print-page-body-table td {
+        max-width: 6cm;
+        border: 1px solid #000;
+    }
+
+.print-page-body-table-header {
+    font-weight: bold;
+}
+
+.print-page-footer-table {
+}
+
+    .print-page-footer-table td {
+        padding-top: 0.3cm;
+        padding-bottom: 0.3cm;
+    }
+
+.print-page-footer-table-title {
+    width: 1.7cm;
+    padding-left: 0.2cm;
+    font-weight: bold;
+    text-align: left;
+}
+
+.print-page-footer-table-content {
+    width: 3.3cm;
+}
+
+.print-page-footer-table-index {
+    padding-right: 0.5cm;
+    text-align: right;
+}
+
+
+.print-page-dashed-line-alpha {
+    border: 1px solid #000;
+    border-top: 2px solid #000;
+    border-bottom: 1px dotted #000;
+}
+
+    .print-page-dashed-line-alpha td {
+        border: 1px dotted #000;
+    }
+
+.print-page-dashed-line-beta {
+    border: 1px solid #000;
+    border-top: 1px dotted #000;
+}
+
+    .print-page-dashed-line-beta td {
+        border: 1px dotted #000;
+    }
+
+.print-page-dashed-line-gamma {
+    border: 1px solid #000;
+    border-top: 1px dotted #000;
+}
+
+    .print-page-dashed-line-gamma td {
+        border: 1px dotted #000;
+    }
+
+.print-page-text-align-left {
+    padding-left: 4px;
+    text-align: left;
+}
+
+.print-page-text-align-right {
+    padding-right: 4px;
+    text-align: right;
+}
+
+.print-layout-td-left {
+    background:#ffffff;
+    font-weight:bold;
+    font-family: "宋体";
+    font-size: 16px;
+    text-align:right;
+   
+}
+.print-layout-td-center {
+    background:#ffffff;
+    font-weight:bold;
+    font-family: "宋体";
+    font-size: 20px;
+    text-align:center;
+    
+}
+.print-layout-td-ritht {
+    background:#ffffff;
+    font-weight:bold;
+    font-family: "宋体";
+    font-size: 16px;
+    text-align:left
+}
+.print-layout-div{
+     background:#ffffff;
+     width:9cm;
+     
+    
+}
+.print-layout-A5-tr-style{
+    width:9cm;
+
+}
+.print-layout-code-style{
+    width:9cm;
+    height:1cm;
+}
+.print-IQCPM-font-stye{
+    font-family:"宋体"
+}

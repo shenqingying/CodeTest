@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_STAFF" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_STAFF">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFUSER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFPW" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFSEX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFMOBILE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFTEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SISLOCK" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SCANCEL" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISINIT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UPDATEPWDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISCQ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERLX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:MES_SY_STAFF_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_STAFF_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_STAFF" type="tns:ArrayOfMES_SY_STAFF" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_STAFF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_STAFF" nillable="true" type="tns:MES_SY_STAFF" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSGNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISCLMSG" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_STAFFPW">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="OLDPW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NEWPW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_STAFFPWResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_STAFFPWResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_STAFFPWSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_STAFFPW" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_STAFFPWSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_STAFFPWResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_STAFFPWHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="OLDPW" type="s:string" />
+    <wsdl:part name="NEWPW" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_STAFFPWHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_STAFFPWHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="OLDPW" type="s:string" />
+    <wsdl:part name="NEWPW" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_STAFFPWHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="SY_STAFFSoap">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_STAFFPW">
+      <wsdl:input message="tns:UPDATE_STAFFPWSoapIn" />
+      <wsdl:output message="tns:UPDATE_STAFFPWSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_STAFFHttpGet">
+    <wsdl:operation name="UPDATE_STAFFPW">
+      <wsdl:input message="tns:UPDATE_STAFFPWHttpGetIn" />
+      <wsdl:output message="tns:UPDATE_STAFFPWHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_STAFFHttpPost">
+    <wsdl:operation name="UPDATE_STAFFPW">
+      <wsdl:input message="tns:UPDATE_STAFFPWHttpPostIn" />
+      <wsdl:output message="tns:UPDATE_STAFFPWHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SY_STAFFSoap" type="tns:SY_STAFFSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_STAFFPW">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_STAFFPW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_STAFFSoap12" type="tns:SY_STAFFSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_STAFFPW">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_STAFFPW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_STAFFHttpGet" type="tns:SY_STAFFHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="UPDATE_STAFFPW">
+      <http:operation location="/UPDATE_STAFFPW" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_STAFFHttpPost" type="tns:SY_STAFFHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="UPDATE_STAFFPW">
+      <http:operation location="/UPDATE_STAFFPW" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SY_STAFF">
+    <wsdl:port name="SY_STAFFSoap" binding="tns:SY_STAFFSoap">
+      <soap:address location="http://localhost/API/MES/SY_STAFF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_STAFFSoap12" binding="tns:SY_STAFFSoap12">
+      <soap12:address location="http://localhost/API/MES/SY_STAFF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_STAFFHttpGet" binding="tns:SY_STAFFHttpGet">
+      <http:address location="http://localhost/API/MES/SY_STAFF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_STAFFHttpPost" binding="tns:SY_STAFFHttpPost">
+      <http:address location="http://localhost/API/MES/SY_STAFF.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

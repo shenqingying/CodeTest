@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/sonluk-ui/pdf-display")
+    @Styles.Render("~/Content/sonluk-ui/dialog-message")
+    @Styles.Render("~/Content/sonluk-ui/color")
+</head>
+<body>
+    <div class="pdf-display-header">
+        <div class="pdf-display-header-fixed">
+            <div class="pdf-display-header-control">
+                <div class="pdf-display-header-button" id="back">关闭</div>
+                <div class="pdf-display-header-hint" id="po-hint"></div>
+            </div>
+        </div>
+    </div>
+    <div class="pdf-display-body">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/sonluk-ui/dialog-message")
+    @Scripts.Render("~/bundles/sonluk-ui/pdf-display")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

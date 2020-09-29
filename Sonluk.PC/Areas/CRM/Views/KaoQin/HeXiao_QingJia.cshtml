@@ -1,0 +1,273 @@
+﻿@{
+    ViewBag.Title = "请假核销";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">核销</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="staffsex">
+    {{# if(d.STAFFSEX == 1){ }}
+    男
+    {{# }else if(d.STAFFSEX == 2){ }}
+    女
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>考勤管理</a>
+    <a><cite>请假核销</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始日期：</label>
+            <div class="layui-input-inline" style="width:120px;">
+                <input id="se_time_open" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+
+            </div>
+            <label class="layui-form-label">结束日期：</label>
+            <div class="layui-input-inline" style="width:120px;">
+                <input id="se_time_end" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline" style="width:120px;">
+                <input id="se_workID" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline" style="width:120px;">
+                <input id="se_name" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width:120px;">
+                <select id="se_department" lay-filter="se_department">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+
+        </div>
+
+        @*<div class="layui-form-item">
+                <button id="btn_insert" class="layui-btn" lay-filter="formDemo">新增</button>
+            </div>*@
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="div_jump" class="layui-form layui-form-pane" hidden>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px;text-align:right;">工号：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="workID" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+        </div>
+
+        <label class="layui-form-label">姓名：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="name" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+        </div>
+
+        <label class="layui-form-label">性别：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <select id="sex" lay-filter="sex" disabled>
+                <option value="0" selected="selected"></option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">部门：</label>
+        <div class="layui-input-inline" style="width:120px;">
+            <select id="department" lay-filter="department" disabled>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+    @* 第二行 *@
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label" style="width:150px;text-align:right;">请假类别：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <select id="qingjia_type" lay-filter="qingjia_type" disabled>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">去向：</label>
+        <div class="layui-input-inline" style="width:540px;">
+            <input id="where" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+        </div>
+
+    </div>
+    @* 第三行 *@
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:150px;text-align:right;">计划请假日期：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="jihua_time_open" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+
+        </div>
+        <label class="layui-form-label" style="width:110px;">时间：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <select id="jihua_clock_open" lay-filter="clock_open" disabled>
+                <option value="0" selected="selected"></option>
+                <option value="08:00:00">8:00</option>
+                <option value="12:00:00">12:00</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">至：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="jihua_time_end" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+        </div>
+        <label class="layui-form-label" style="width:110px;">时间：</label>
+        <div class="layui-input-inline" style="width:120px;">
+            <select id="jihua_clock_end" lay-filter="clock_end" disabled>
+                <option value="0" selected="selected"></option>
+                <option value="12:00:00">12:00</option>
+                <option value="17:00:00">17:00</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px;text-align:right;">计划工作日天数：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="jihua_total" type="text" autocomplete="off" class="layui-input" disabled>
+        </div>
+
+
+
+    </div>
+
+    @* 第四行 *@
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:150px;text-align:right;">实际请假日期：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="time_open" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+
+        </div>
+        <label class="layui-form-label" style="width:110px;">时间：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <select id="clock_open" lay-filter="clock_open">
+                <option value="0" selected="selected"></option>
+                <option value="08:00:00">8:00</option>
+                <option value="12:00:00">12:00</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">至：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="time_end" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label" style="width:110px;">时间：</label>
+        <div class="layui-input-inline" style="width:120px;">
+            <select id="clock_end" lay-filter="clock_end">
+                <option value="0" selected="selected"></option>
+                <option value="12:00:00">12:00</option>
+                <option value="17:00:00">17:00</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px;text-align:right;">实际工作日天数：</label>
+        <div class="layui-input-inline" style="width:90px;">
+            <input id="total" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px;text-align:right;">备注：</label>
+        <div class="layui-input-inline" style="width:750px;">
+            <textarea id="remark" name="desc" placeholder="请输入内容" class="layui-textarea" disabled></textarea>
+        </div>
+    </div>
+
+
+    <br />
+
+</div>
+
+
+
+
+<input id="staffid" hidden />
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/HeXiao_QingJia")
+}

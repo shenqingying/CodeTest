@@ -1,0 +1,153 @@
+﻿@using Sonluk.UI.Model.CRM.HG_TYPEService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "数据字段权限";
+    CRM_HG_TYPE[] TYPE = ViewBag.TYPE;
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>系统管理</a>
+    <a><cite>数据字典权限</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+        <button id="btn_cx" class="layui-btn">查询</button>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="text-align:right;">员工名称：</label>
+                <div class="layui-input-inline">
+                    <input id="staffname" type="text" autocomplete="off"  class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="text-align:right;">员工工号：</label>
+                <div class="layui-input-inline">
+                    <input id="staffno" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="text-align:right;">帐号：</label>
+                <div class="layui-input-inline">
+                    <input id="user" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        
+
+        
+        
+        <table id="table_result" lay-filter="table_result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<div id="div_dict" class="layui-form" hidden>
+    <button id="btn_insert" class="layui-btn">新增</button>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:60px;text-align:right;">类别：</label>
+            <div id="" class="layui-input-inline">
+                <select id="select_type" lay-filter="select_type" lay-search>
+                    <option value="0" selected="selected">全部</option>
+                    @for (int i = 0; i < TYPE.Length; i++)
+                    {
+                        <option value="@TYPE[i].TYPEID">@TYPE[i].TYPENAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <table id="table_staffdict" lay-filter="table_staffdict"></table>
+</div>
+
+
+<div id="div_insert" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:60px;text-align:right;">类别：</label>
+            <div id="" class="layui-input-inline">
+                <select id="select_type_insert" lay-filter="select_type_insert" lay-search>
+                    <option value="-1" selected="selected">全部</option>
+                    @for (int i = 0; i < TYPE.Length; i++)
+                    {
+                        <option value="@TYPE[i].TYPEID">@TYPE[i].TYPENAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:60px;text-align:right;">数据：</label>
+            <div id="" class="layui-input-inline">
+                <select id="select_dict_insert" lay-filter="select_dict_insert" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div id="div_jump" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align:right;">数据名称：</label>
+        <div id="" class="layui-input-inline" style="width:230px;">
+            <select id="select_dict" lay-filter="select_dict">
+                <option value="0" selected="selected">请选择</option>
+
+            </select>
+        </div>
+
+    </div>
+
+
+</div>*@
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+<input id="staffid" value="0" hidden />
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/System/STAFFDICT")
+}
+
+

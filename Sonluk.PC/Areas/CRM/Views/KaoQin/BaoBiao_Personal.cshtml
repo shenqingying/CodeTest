@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "考勤记录查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    正常
+    {{# }else if(d.ISACTIVE == 0){ }}
+    不在范围内
+    {{# }else { }}
+    
+    {{# } }}
+</script>
+
+<script type="text/html" id="shangxiaban">
+    {{# if(d.SXB == 1){ }}
+    上班
+    {{# }else if(d.SXB == 2){ }}
+    下班
+    {{# }else if(d.SXB == 10){ }}
+    上班
+    {{# }else if(d.SXB == 20){ }}
+    下班
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="isornot">
+    {{# if(d.BQYCC == true){ }}
+    是
+    {{# }else if(d.BQYCC == false){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="isornot2">
+    {{# if(d.ZCYWCC == true){ }}
+    是
+    {{# }else if(d.ZCYWCC == false){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="sex">
+    {{# if(d.STAFFSEX == 1){ }}
+    男
+    {{# }else if(d.STAFFSEX == 2){ }}
+    女
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="shangxiaban2">
+    {{# if(d.SMSXB == 1){ }}
+    上班
+    {{# }else if(d.SMSXB == 2){ }}
+    下班
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="shangban">
+    {{# if(d.SBQD == 1){ }}
+    正常
+    {{# }else if(d.SBQD == 0){ }}
+    无
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="xiaban">
+    {{# if(d.XBQD == 1){ }}
+    正常
+    {{# }else if(d.XBQD == 0){ }}
+    无
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="shangxiawu">
+    {{# if(d.CCSJLX == 1){ }}
+    上午
+    {{# }else if(d.CCSJLX == 2){ }}
+    下午
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="qiandao">
+    {{# if(d.ISQD == 1){ }}
+    已签到
+    {{# }else if(d.ISQD == 0){ }}
+    未签到
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="YCzhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else if(d.ISACTIVE == 31){ }}
+    已审核(缺勤)
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="imgTpl">
+    <img class="mytableimg" src="{{d.ML}}" />
+</script>
+
+<script type="text/html" id="CCbar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+</script>
+
+<script type="text/html" id="CCbar2">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看附件</a>
+    <a class="layui-btn layui-btn-xs" lay-event="img">自驾照片</a>
+</script>
+
+<style>
+    /*.laytable-cell-1-WJM, .laytable-cell-2-WJM, .laytable-cell-3-WJM, .laytable-cell-4-WJM, .laytable-cell-5-WJM, .laytable-cell-6-WJM, .laytable-cell-7-WJM, .laytable-cell-8-WJM, .laytable-cell-9-WJM, .laytable-cell-10-WJM { 
+        height: auto;
+        max-width: 100%;*/
+    }
+
+    /*.layui-table-cell {
+        height: auto;
+        max-width: 100%;
+    }*/
+</style>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>考勤管理</a>
+    <a><cite>考勤记录查询</cite></a>
+</span>
+<br />
+<br />
+
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div_result" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn">查询</button>
+        </div>
+
+
+
+
+
+        <div id="div1" class="layui-form-item">
+
+
+
+            <label class="layui-form-label">开始日期：</label>
+            <div class="layui-input-inline" style="width:120px;">
+                <input id="time_open" type="text" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+            </div>
+
+            <label class="layui-form-label">结束日期：</label>
+            <div class="layui-input-inline" style="width:120px;">
+                <input id="time_end" type="text" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+            </div>
+
+
+
+
+        </div>
+
+
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+    <div id="div_back" class="layui-form-item" hidden>
+        <button id="btn_back" class="layui-btn">返回</button>
+    </div>
+
+    <div id="div_QD" class="layui-form" hidden>
+
+        <table id="tb_QD" lay-filter="tb_QD"></table>
+
+    </div>
+
+    <div id="div_CC" class="layui-form" hidden>
+
+        <table id="tb_CC" lay-filter="tb_CC"></table>
+
+    </div>
+
+    <div id="div_QJ" class="layui-form" hidden>
+
+        <table id="tb_QJ" lay-filter="tb_QJ"></table>
+
+    </div>
+
+    <div id="div_YC" class="layui-form" hidden>
+
+        <table id="tb_YC" lay-filter="tb_YC"></table>
+
+    </div>
+
+    <div id="div_QQ" class="layui-form" hidden>
+
+        <table id="tb_QQ" lay-filter="tb_QQ"></table>
+
+    </div>
+
+    <div id="div_MXback" class="layui-form-item" hidden>
+        <button id="btn_MXback" class="layui-btn">返回</button>
+    </div>
+
+    <div id="div_CCMX" class="layui-form" hidden>
+
+        <table id="tb_CCMX" lay-filter="tb_CCMX"></table>
+
+    </div>
+
+
+</div>
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/BaoBiao_Personal")
+}

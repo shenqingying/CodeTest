@@ -1,0 +1,475 @@
+﻿@{
+    int loca = 0;
+    if (Session["location"] != null)
+    {
+        loca = Convert.ToInt32(Session["location"]);
+    }
+
+    string name = "";
+    if (Session["NAME"] != null)
+    {
+        name = Session["NAME"].ToString();
+    }
+    Session.Timeout = 1440;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <link href="~/Scripts/layui2.2.5/css/layui.css" rel="stylesheet" />
+
+</head>
+<body class="layui-layout-body">
+
+    <script>
+        $(document).ready(function () {
+            switch(@loca){
+                //客户管理
+                case 1:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#insert_kehu").addClass("layui-this");
+                    break;
+                case 42:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#submit_kehu").addClass("layui-this");
+                    break;
+                case 2:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#select_kehu").addClass("layui-this");
+                    break;
+                case 50:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#only_select_kehu").addClass("layui-this");
+                    break;
+                case 3:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#sap_kehu").addClass("layui-this");
+                    break;
+                case 4:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#daoru_kehu").addClass("layui-this");
+                    break;
+                case 5:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#power").addClass("layui-this");
+                    break;
+                case 6:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#user_power").addClass("layui-this");
+                    break;
+                case 7:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#kehu_power").addClass("layui-this");
+                    break;
+                case 8:
+                    $("#khgl").addClass("layui-nav-itemed");
+                    $("#baobiao_kehu").addClass("layui-this");
+                    break;
+                    //员工管理
+                case 9:
+                    $("#yggl").addClass("layui-nav-itemed");
+                    $("#insert_staff").addClass("layui-this");
+                    break;
+                case 10:
+                    $("#yggl").addClass("layui-nav-itemed");
+                    $("#select_staff").addClass("layui-this");
+                    break;
+                case 11:
+                    $("#yggl").addClass("layui-nav-itemed");
+                    $("#daoru_staff").addClass("layui-this");
+                    break;
+                case 45:
+                    $("#yggl").addClass("layui-nav-itemed");
+                    $("#kaoqin_manager").addClass("layui-this");
+                    break;
+                case 12:
+                    $("#yggl").addClass("layui-nav-itemed");
+                    $("#kaoqin_confirm").addClass("layui-this");
+                    break;
+                    //考勤管理
+                case 13:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#apply_qingjia").addClass("layui-this");
+                    break;
+                case 46:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#hexiao_qingjia").addClass("layui-this");
+                    break;
+                case 14:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#apply_chuchai").addClass("layui-this");
+                    break;
+                case 15:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#apply_yichang").addClass("layui-this");
+                    break;
+                case 16:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#select_kaoqin").addClass("layui-this");
+                    break;
+                case 51:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#select_kaoqin_personal").addClass("layui-this");
+                    break;
+                case 43:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#insert_chuchai").addClass("layui-this");
+                    break;
+                case 44:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#select_chuchai").addClass("layui-this");
+                    break;
+                    //拜访管理
+                case 17:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#plan_baifang").addClass("layui-this");
+                    break;
+                case 18:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#assign_baifang").addClass("layui-this");
+                    break;
+                case 19:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#signin_baifang").addClass("layui-this");
+                    break;
+                    //case 20:
+                    //    $("#bfgl").addClass("layui-nav-itemed");
+                    //    $("#log_baifang").addClass("layui-this");
+                    //    break;
+                case 21:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#select_baifang").addClass("layui-this");
+                    break;
+                case 47:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#manage_baifang").addClass("layui-this");
+                    break;
+                case 48:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#cx_baifang").addClass("layui-this");
+                    break;
+                case 49:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#insert_baifang").addClass("layui-this");
+                    break;
+                case 56:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#backlog").addClass("layui-this");
+                    break;
+                case 57:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#set_zxplan").addClass("layui-this");
+                    break;
+                case 58:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#set_zpplan").addClass("layui-this");
+                    break;
+                case 59:
+                    $("#bfgl").addClass("layui-nav-itemed");
+                    $("#set_plan").addClass("layui-this");
+                    break;
+                case 60:
+                    $("#kqgl").addClass("layui-nav-itemed");
+                    $("#hexiao_chuchai").addClass("layui-this");
+                    break;
+                    //活动管理
+                case 22:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#insert_fee").addClass("layui-this");
+                    break;
+                case 23:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#select_fee").addClass("layui-this");
+                    break;
+                case 24:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#insert_saler").addClass("layui-this");
+                    break;
+                case 25:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#select_saler").addClass("layui-this");
+                    break;
+                case 26:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#insert_system").addClass("layui-this");
+                    break;
+                case 27:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#select_system").addClass("layui-this");
+                    break;
+                case 28:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#insert_store").addClass("layui-this");
+                    break;
+                case 29:
+                    $("#hdgl").addClass("layui-nav-itemed");
+                    $("#select_store").addClass("layui-this");
+                    break;
+                    //销售报表
+                case 30:
+                    $("#xsbb").addClass("layui-nav-itemed");
+                    $("#select_dingdan").addClass("layui-this");
+                    break;
+                case 31:
+                    $("#xsbb").addClass("layui-nav-itemed");
+                    $("#select_chuhuo").addClass("layui-this");
+                    break;
+                case 32:
+                    $("#xsbb").addClass("layui-nav-itemed");
+                    $("#select_kaipiao").addClass("layui-this");
+                    break;
+                    //系统设置
+                case 33:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_department").addClass("layui-this");
+                    break;
+                case 34:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_job").addClass("layui-this");
+                    break;
+                case 35:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_user").addClass("layui-this");
+                    break;
+                case 36:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_role").addClass("layui-this");
+                    break;
+                case 37:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_data").addClass("layui-this");
+                    break;
+                case 38:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#selete_log").addClass("layui-this");
+                    break;
+                case 39:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_function").addClass("layui-this");
+                    break;
+                case 40:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_system").addClass("layui-this");
+                    break;
+                case 41:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#change_pwd").addClass("layui-this");
+                    break;
+                case 52:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_rili").addClass("layui-this");
+                    break;
+                case 53:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_banzu").addClass("layui-this");
+                    break;
+                case 54:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_pinci").addClass("layui-this");
+                    break;
+                case 55:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_xsqy").addClass("layui-this");
+                    break;
+                case 61:
+                    $("#xtgl").addClass("layui-nav-itemed");
+                    $("#set_khlx").addClass("layui-this");
+                    break;
+                case 62:
+                    $("#tmxm").addClass("layui-nav-itemed");
+                    $("#datagather").addClass("layui-this");
+                default:
+                    break;
+            }
+        });
+    </script>
+
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo"><a href="@Url.Action("Index","System")" class="layui-logo">客户关系管理系统</a></div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            @*<ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item"><a href="">控制台</a></li>
+                    <li class="layui-nav-item"><a href="">商品管理</a></li>
+                    <li class="layui-nav-item"><a href="">用户</a></li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">其它系统</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">邮件管理</a></dd>
+                            <dd><a href="">消息管理</a></dd>
+                            <dd><a href="">授权管理</a></dd>
+                        </dl>
+                    </li>
+                </ul>*@
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                        @name
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                    </dl>
+                </li>
+                @*<li class="layui-nav-item"><a href="@Url.Action("SignIn","Public")">退出</a></li>*@
+                <li class="layui-nav-item"><a href="../Public/SignIn">退出</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li id="khgl" class="layui-nav-item">
+                        <a class="" href="javascript:;">客户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd id="insert_kehu" class=""><a href="@Url.Action("Insert", "KeHu")">新增客户</a></dd>
+                            @*<dd id="submit_kehu"><a href="@Url.Action("SubmitOA", "KeHu")">批量提交</a></dd>*@
+                            <dd id="select_kehu"><a href="@Url.Action("Select", "KeHu")">客户列表</a></dd>
+                            <dd id="only_select_kehu"><a href="@Url.Action("Select_Only", "KeHu")">客户查询</a></dd>
+                            <dd id="sap_kehu"><a href="@Url.Action("Sap", "KeHu")">SAP匹配</a></dd>
+                            <dd id="daoru_kehu"><a href="@Url.Action("Daoru", "KeHu")">客户导入</a></dd>
+                            <dd id="power"><a href="@Url.Action("Power", "KeHu")">权限组管理</a></dd>
+                            <dd id="user_power"><a href="@Url.Action("UserPower", "KeHu")">分配用户到组</a></dd>
+                            <dd id="kehu_power"><a href="@Url.Action("KeHuPower", "KeHu")">分配客户到组</a></dd>
+                            <dd id="baobiao_kehu"><a href="@Url.Action("SpaceArea_Baobiao", "KeHu")">空白区域报表</a></dd>
+                        </dl>
+                    </li>
+                    <li id="yggl" class="layui-nav-item">
+                        <a>员工管理</a>
+                        <dl class="layui-nav-child">
+                            <dd id="insert_staff"><a href="@Url.Action("Insert", "Staff")">新增员工</a></dd>
+                            <dd id="select_staff"><a href="@Url.Action("Select", "Staff")">员工列表</a></dd>
+                            <dd id="daoru_staff"><a href="@Url.Action("Daoru", "Staff")">员工导入</a></dd>
+                            <dd id="kaoqin_manager"><a href="@Url.Action("Manager", "Staff")">考勤地址管理</a></dd>
+                            <dd id="kaoqin_confirm"><a href="@Url.Action("Confirm", "Staff")">考勤地址审核</a></dd>
+                        </dl>
+                    </li>
+                    <li id="kqgl" class="layui-nav-item">
+                        <a>考勤管理</a>
+                        <dl class="layui-nav-child">
+                            <dd id="apply_qingjia"><a href="@Url.Action("QingJia", "KaoQin")">请假管理</a></dd>
+                            <dd id="hexiao_qingjia"><a href="@Url.Action("HeXiao_QingJia", "KaoQin")">请假核销</a></dd>
+                            <dd id="apply_chuchai"><a href="@Url.Action("ChuChai", "KaoQin")">出差管理</a></dd>
+                            <dd id="hexiao_chuchai"><a href="@Url.Action("HeXiao_ChuChai", "KaoQin")">出差核销</a></dd>
+                            @*<dd id="insert_chuchai"><a href="@Url.Action("Insert_ChuChai", "KaoQin")">出差申请</a></dd>*@
+                            @*<dd id="select_chuchai"><a href="@Url.Action("Select_ChuChai", "KaoQin")">出差查询</a></dd>*@
+                            <dd id="apply_yichang"><a href="@Url.Action("YiChang", "KaoQin")">异常考勤</a></dd>
+                            <dd id="select_kaoqin"><a href="@Url.Action("BaoBiao", "KaoQin")">考勤记录查询</a></dd>
+                            <dd id="select_kaoqin_personal"><a href="@Url.Action("BaoBiao_Personal", "KaoQin")">个人考勤记录</a></dd>
+                        </dl>
+                    </li>
+
+                    <li id="bfgl" class="layui-nav-item">
+                        <a>拜访管理</a>
+                        <dl class="layui-nav-child">
+                            @*<dd id="plan_baifang"><a href="@Url.Action("Plan", "BaiFang")">新增拜访计划</a></dd>
+                                <dd id="assign_baifang"><a href="@Url.Action("Assign", "BaiFang")">拜访计划指派</a></dd>
+                                <dd id="signin_baifang"><a href="@Url.Action("ToDo", "BaiFang")">待办事项</a></dd>
+                                <dd id="select_baifang"><a href="@Url.Action("BaoBiao", "BaiFang")">拜访记录查询</a></dd>*@
+                            <dd id="set_plan"><a href="@Url.Action("PlanManage", "BaiFang")">日常任务拜访</a></dd>
+                            <dd id="set_zxplan"><a href="@Url.Action("ZXManage", "BaiFang")">专项活动</a></dd>
+                            <dd id="set_zpplan"><a href="@Url.Action("ZPManage", "BaiFang")">拜访指派</a></dd>
+                            <dd id="backlog"><a href="@Url.Action("Backlog", "BaiFang")">待办事项</a></dd>
+                            @*<dd id="insert_baifang"><a href="@Url.Action("Select_KeHu_ToBaiFang", "BaiFang")">拜访登记</a></dd>*@
+                            <dd id="manage_baifang"><a href="@Url.Action("BaiFangManage", "BaiFang")">拜访管理</a></dd>
+                            <dd id="cx_baifang"><a href="@Url.Action("CX_BaiFang", "BaiFang")">拜访查询</a></dd>
+                        </dl>
+                    </li>
+
+                    <li id="hdgl" class="layui-nav-item">
+                        <a>活动管理</a>
+                        <dl class="layui-nav-child">
+                            <dd id="insert_fee"><a href="@Url.Action("InsertFee", "HuoDong")">招待费申请</a></dd>
+                            <dd id="select_fee"><a href="@Url.Action("SelectFee", "HuoDong")">招待费记录查询</a></dd>
+                            <dd id="insert_saler"><a href="@Url.Action("InsertSaler", "HuoDong")">直营卖场促销员申请</a></dd>
+                            <dd id="select_saler"><a href="@Url.Action("SelectSaler", "HuoDong")">促销员申请记录查询</a></dd>
+                            <dd id="insert_system"><a href="@Url.Action("InsertSystem", "HuoDong")">NKA系统工作评估</a></dd>
+                            <dd id="select_system"><a href="@Url.Action("SelectSystem", "HuoDong")">NKA系统工作评估查询</a></dd>
+                            <dd id="insert_store"><a href="@Url.Action("InsertStore", "HuoDong")">NKA门店工作评估</a></dd>
+                            <dd id="select_store"><a href="@Url.Action("SelectStore", "HuoDong")">NKA门店工作评估查询</a></dd>
+                        </dl>
+                    </li>
+
+                    <li id="xsbb" class="layui-nav-item">
+                        <a>销售报表</a>
+                        <dl class="layui-nav-child">
+                            <dd id="select_dingdan"><a href="@Url.Action("Order", "SAPReport")">销售订单</a></dd>
+                            <dd id="select_chuhuo"><a href="@Url.Action("Shipment", "SAPReport")">销售出货</a></dd>
+                            <dd id="select_kaipiao"><a href="@Url.Action("Invoice", "SAPReport")">销售开票</a></dd>
+                        </dl>
+                    </li>
+
+                    <li id="xtgl" class="layui-nav-item">
+                        <a>系统管理</a>
+                        <dl class="layui-nav-child">
+                            <dd id="set_department"><a href="@Url.Action("Department", "System")">部门设置</a></dd>
+                            <dd id="set_job"><a href="@Url.Action("Job", "System")">职务设置</a></dd>
+                            <dd id="set_user"><a href="@Url.Action("Users", "System")">用户管理</a></dd>
+                            <dd id="set_role"><a href="@Url.Action("Role", "System")">角色设置</a></dd>
+                            <dd id="set_khlx"><a href="@Url.Action("KHLX", "System")">客户类型权限</a></dd>
+                            <dd id="set_data"><a href="@Url.Action("Data", "System")">数据字典</a></dd>
+                            <dd id="select_log"><a href="@Url.Action("Log", "System")">日志查询</a></dd>
+                            <dd id="set_function"><a href="@Url.Action("Function", "System")">功能设置</a></dd>
+                            <dd id="set_rili"><a href="@Url.Action("RiLi", "System")">日历设置</a></dd>
+                            <dd id="set_banzu"><a href="@Url.Action("BanZu", "System")">班组设置</a></dd>
+                            <dd id="set_pinci"><a href="@Url.Action("PinCi", "System")">拜访频次设置</a></dd>
+                            <dd id="set_xsqy"><a href="@Url.Action("SaleArea", "System")">销售区域设置</a></dd>
+                            <dd id="set_system"><a href="@Url.Action("System", "System")">系统配置</a></dd>
+                            <dd id="change_pwd"><a href="@Url.Action("Password", "System")">修改密码</a></dd>
+                        </dl>
+                    </li>
+
+                    <li id="tmxm" class="layui-nav-item">
+                        <a>MES</a>
+                        <dl class="layui-nav-child">
+                            <dd id="datagather"><a href="@Url.Action("DataGather","System")">数据字典维护</a></dd>
+                        </dl>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div id="detail" style="padding: 15px;">
+                <script src="~/Scripts/layui2.2.5/layui.js"></script>
+                @*@{Html.Action("/KeHu/Insert"); }*@
+                @RenderBody()
+
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © copyright by 双鹿电池-信息管理部
+        </div>
+    </div>
+
+    <script>
+        //JavaScript代码区域
+        $(document).ready(function(){
+            layui.use('element', function () {
+                var element = layui.element;
+
+            });
+            if("@name" == ""){
+                alert("由于长时间未操作,登录信息已过期,请重新登录");
+                return false;
+            }
+        });
+        
+    </script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

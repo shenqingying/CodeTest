@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_HD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KH_HD">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HDID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HDMC" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CZR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HDTC" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HDCL" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_HD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="HDID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByKHID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByKHIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByKHIDResult" type="tns:ArrayOfCRM_KH_HDList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KH_HDList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KH_HDList" nillable="true" type="tns:CRM_KH_HDList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KH_HDList">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CRM_KH_HD">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="HDMCDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CPLXDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CZRDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="KHMC" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="HDTCDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="HDCLDES" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IMGCOUNT" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ReadByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="HDID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByIDResult" type="tns:CRM_KH_HD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_KH_HDList" nillable="true" type="tns:ArrayOfCRM_KH_HDList" />
+      <s:element name="CRM_KH_HD" nillable="true" type="tns:CRM_KH_HD" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByKHID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByKHIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="HDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDHttpGetIn">
+    <wsdl:part name="KHID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_HDList" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpGetIn">
+    <wsdl:part name="HDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_KH_HD" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="HDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDHttpPostIn">
+    <wsdl:part name="KHID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_HDList" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpPostIn">
+    <wsdl:part name="HDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_KH_HD" />
+  </wsdl:message>
+  <wsdl:portType name="KH_HDSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHID">
+      <wsdl:input message="tns:ReadByKHIDSoapIn" />
+      <wsdl:output message="tns:ReadByKHIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDSoapIn" />
+      <wsdl:output message="tns:ReadByIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_HDHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHID">
+      <wsdl:input message="tns:ReadByKHIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByKHIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_HDHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHID">
+      <wsdl:input message="tns:ReadByKHIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByKHIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KH_HDSoap" type="tns:KH_HDSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHID">
+      <soap:operation soapAction="http://tempuri.org/ReadByKHID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <soap:operation soapAction="http://tempuri.org/ReadByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_HDSoap12" type="tns:KH_HDSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByKHID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_HDHttpGet" type="tns:KH_HDHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHID">
+      <http:operation location="/ReadByKHID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <http:operation location="/ReadByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_HDHttpPost" type="tns:KH_HDHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHID">
+      <http:operation location="/ReadByKHID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <http:operation location="/ReadByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KH_HD">
+    <wsdl:port name="KH_HDSoap" binding="tns:KH_HDSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/KH_HD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_HDSoap12" binding="tns:KH_HDSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/KH_HD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_HDHttpGet" binding="tns:KH_HDHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/KH_HD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_HDHttpPost" binding="tns:KH_HDHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/KH_HD.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

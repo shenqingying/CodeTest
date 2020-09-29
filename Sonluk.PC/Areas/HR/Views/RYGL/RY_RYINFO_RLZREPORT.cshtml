@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "入离职报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string dateks = "";
+    string datejs = "";
+    dateks = DateTime.Now.ToString("yyyy-MM") + "-01";
+    DateTime dtime = Convert.ToDateTime(dateks);
+    dtime = dtime.AddMonths(1);
+    dtime = dtime.AddDays(-1);
+    datejs = dtime.ToString("yyyy-MM-dd");
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR统计报表</a>
+    <a><cite>入离职报表</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">归属部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father1">
+                <select id="find_dept_child1" lay-filter="find_dept_child1">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">报表日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_dateks" autocomplete="off" class="layui-input" readonly="readonly" value="@dateks">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_datejs" autocomplete="off" class="layui-input" readonly="readonly" value="@datejs">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_yckq" lay-filter="tb_yckq"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/RYGL/RY_RYINFO_RLZREPORT")
+}

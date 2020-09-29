@@ -1,0 +1,158 @@
+﻿@using Sonluk.UI.Model.CRM.KH_KHService;
+@using Sonluk.UI.Model.CRM.HG_STAFFService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "新增订单";
+    Session["TITLENAME"] = "新增订单";
+
+    CRM_KH_KH[] SDF = ViewBag.SDF;
+    CRM_KH_KH KH = ViewBag.KH;
+    CRM_HG_STAFF STAFF = ViewBag.STAFF;
+
+}
+
+<style type="text/css">
+    label {
+        text-align: right;
+    }
+</style>
+
+
+<div class="weui-btn-area">
+    @*<a class="weui-btn weui-btn_primary" href="javascript:" id="btn_next">添加产品</a>*@
+    <button class="weui-btn weui-btn_plain-primary" id="btn_next" style="width:50%;display:initial;margin:0 0;">添加产品</button>
+    <button class="weui-btn weui-btn_plain-primary" id="insert_copy" style="width:50%;display:initial;margin:0 0;float:right;">复制订单</button>
+</div>
+
+<div class="weui-cells weui-cells_form">
+
+
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label" style="width:90px;">售达方：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="sdf" class="weui-select">
+                <option value="0">请选择</option>
+                @if (STAFF.USERLX == 1107)
+                {
+                    <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                }
+                @if (SDF != null)
+                {
+                    for (int i = 0; i < SDF.Length; i++)
+                    {
+                        <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div id="div_kh" hidden>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label" style="width:90px;">送达方：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="ship" class="weui-select">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label" style="width:90px;">收货地址：</label></div>
+            <div class="weui-cell__bd">
+                <label id="address" class="weui-label" style="width:100%;text-align:left;"></label>
+                @*<input id="address" class="weui-input" type="text" value="" disabled>*@
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label" style="width:90px;">付款时间：</label></div>
+            <div class="weui-cell__bd">
+                <input id="fksj" class="weui-input" type="date" value="" />
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label" style="width:90px;">备注：</label></div>
+            <div class="weui-cell__bd">
+                <input id="remark" class="weui-input" type="text" value="" />
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div id="div_cp" class="weui-cells weui-cells_form" style="margin:0 auto;" hidden>
+
+    <div id="div_cp1">
+
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_cx">查询</a>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content" style="padding-right: 0px;">
+
+                    @*<div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">订单类型：</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select id="ddlx" class="weui-select">
+                                <option value="0" selected="selected">全部</option>
+                            </select>
+                        </div>
+                    </div>*@
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">新建时间：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <input id="time_begin" class="weui-input" type="date" placeholder="" value="@ViewBag.startdate">
+                        </div>
+                    </div>
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">至：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <input id="time_end" class="weui-input" type="date" placeholder="" value="@ViewBag.enddate">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="div_result_cp1">
+
+        </div>
+    </div>
+    <div id="div_cp2" hidden>
+        <button id="btn_cp2_back" class="weui-btn weui-btn_primary" style="width:100%;">返回</button>
+        <div id="div_result_cp2">
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Insert_Order")
+}

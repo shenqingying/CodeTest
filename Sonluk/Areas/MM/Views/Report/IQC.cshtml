@@ -1,0 +1,102 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<POTitleInfo>
+@{
+    ViewBag.Title = "采购入库送检单";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+    int number = 1;
+    string revious = "";
+}
+@foreach (POTitleInfo node in Model)
+{
+    if (!revious.Equals(@node.Number))
+    {
+        number = 1;
+        revious = node.Number;
+    }
+    <div class="print-page print-page-A4">
+        <div class="print-page print-page-A4">
+            <div class="print-page-header">
+                <div class="print-page-header-company-name">@node.PlantName</div>
+                <div class="print-page-header-report-name">采购入库送检单</div>
+                <table>
+                    <tr>
+                        <td class="print-page-header-table-title">采购订单:</td>
+                        <td class="print-page-header-table-po-number">@node.Number</td>
+                        <td class="print-page-header-table-title">订单日期:</td>
+                        <td class="print-page-header-table-content">@node.Date</td>
+                        <td class="print-page-header-table-check">合格供方□</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page-header-table-title">供应商:</td>
+                        <td class="print-page-header-table-content" colspan="3">@ViewBag.Vendor</td>
+                        <td class="print-page-header-table-check">特殊供方□</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="print-page-body print-page-body-A4">
+                <table class="print-page-body-table">
+                    <tr>
+                        <td class="print-page-body-table-header">No.</td>
+                        <td class="print-page-body-table-header">行</td>
+                        <td class="print-page-body-table-header">物料编号</td>
+                        <td class="print-page-body-table-header">物料描述</td>
+                        <td class="print-page-body-table-header">送货数量</td>
+                        <td class="print-page-body-table-header">单位</td>
+                        <td class="print-page-body-table-header">合格数量</td>
+                        <td class="print-page-body-table-header">不合格数量</td>
+                        <td class="print-page-body-table-header">备注</td>
+                        <td class="print-page-body-table-header">交货日期</td>
+                    </tr>
+                    @foreach (POItemInfo child in node.Items)
+                    {
+                        <tr>
+                            <td>@number</td>
+                            <td>@child.Number</td>
+                            <td>@child.Material</td>
+                            <td class="print-page-text-align-left">@child.MaterialDescription</td>
+                            <td class="print-page-text-align-right">@child.DelivQty</td>
+                            <td>@child.BaseUOM</td>
+                            <td></td>
+                            <td></td>
+                            <td>@child.StgeLoc</td>
+                            <td>@child.DelivDate</td>
+                        </tr>
+                        number++;
+                    }
+
+                </table>
+            </div>
+            <div class="print-page-footer">
+                <table class="print-page-footer-table">
+                    <tr>
+                        <td class="print-page-footer-table-title">打印:</td>
+                        <td class="print-page-footer-table-content">@ViewBag.Printer</td>
+                        <td class="print-page-footer-table-title">检验员:</td>
+                        <td class="print-page-footer-table-content"></td>
+                        <td class="print-page-footer-table-title">审核:</td>
+                        <td class="print-page-footer-table-content"></td>
+                        <td class="print-page-footer-table-title">仓管:</td>
+                        <td class="print-page-footer-table-content"></td>
+                    </tr>
+                    <tr>
+                        <td class="print-page-footer-table-title">打印时间:</td>
+                        <td>@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td class="print-page-footer-table-title">日期:</td>
+                        <td></td>
+                        <td class="print-page-footer-table-title">日期:</td>
+                        <td></td>
+                        <td class="print-page-footer-table-title">日期:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="print-page-footer-table-title"><b>注:</b>&nbsp;&nbsp;&nbsp;&nbsp;送货数量以实际点收数量为准</td>
+                        <td class="print-page-footer-table-index">第@{@node.Status}页</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+
+

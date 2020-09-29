@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/LE/TRA/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/LE/TRA/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/LE/TRA/">
+      <s:element name="Read">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfCompanyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyInfo" nillable="true" type="tns:CompanyInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CityID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="District" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cellphone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOffices" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Default" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Children" type="tns:ArrayOfCompanyInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="General" type="tns:ArrayOfCompanyGeneralInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyGeneralInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyGeneralInfo" nillable="true" type="tns:CompanyGeneralInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyGeneralInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Client" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SortField" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HouseNumberAndStreet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstTelephoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganizationDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannelDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Division" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DivisionDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesGroupDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfCompanyInfo" nillable="true" type="tns:ArrayOfCompanyInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetIn" />
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostIn" />
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCompanyInfo" />
+  </wsdl:message>
+  <wsdl:portType name="CarrierSoap">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CarrierHttpGet">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CarrierHttpPost">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CarrierSoap" type="tns:CarrierSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CarrierSoap12" type="tns:CarrierSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CarrierHttpGet" type="tns:CarrierHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CarrierHttpPost" type="tns:CarrierHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Carrier">
+    <wsdl:port name="CarrierSoap" binding="tns:CarrierSoap">
+      <soap:address location="http://192.168.0.132/API/LE/TRA/Carrier.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CarrierSoap12" binding="tns:CarrierSoap12">
+      <soap12:address location="http://192.168.0.132/API/LE/TRA/Carrier.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CarrierHttpGet" binding="tns:CarrierHttpGet">
+      <http:address location="http://192.168.0.132/API/LE/TRA/Carrier.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CarrierHttpPost" binding="tns:CarrierHttpPost">
+      <http:address location="http://192.168.0.132/API/LE/TRA/Carrier.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

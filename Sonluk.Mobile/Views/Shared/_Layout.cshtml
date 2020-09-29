@@ -1,0 +1,63 @@
+﻿@{
+    string Name = "";
+    if (Session["NAME"] != null)
+    {
+        Name = Session["NAME"].ToString();
+    }
+    string titlename = "";
+    if (Session["TITLENAME"] != null)
+    {
+        titlename = Session["TITLENAME"].ToString();
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title lid="c_head">@titlename</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    @Styles.Render("~/Content/layui/css/layuimain")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo" lid="c_title">
+                @titlename
+            </div>
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item">
+                    <a href="@Url.Action("Main", "Access", new { area = "" })"><img class="layui-nav-img-home" src="~/Image/test1.png" /></a>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a>@Name</a>
+                    <dl class="layui-nav-child">
+                        @*<dd><a href="@Url.Action("SignIn", "Access", new { area = "" })" lid="c_logout">退出</a></dd>*@
+                        <dd><a href="~/Access/SignIn?LOGINTYPE=1" lid="c_logout">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <script src="~/Scripts/sonluk.min.js"></script>
+        <script>
+            sonluk.config.globalize.url = "../../CRM/Public/GlobalResources";
+        </script>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/layui/layui")
+    @Scripts.Render("~/bundles/PS/main")
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

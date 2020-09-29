@@ -1,0 +1,50 @@
+﻿@using Sonluk.UI.Model.CRM.COST_ZZFTTService;
+@{
+    ViewBag.Title = "Select_KAZZF_Unconnected_Part";
+    CRM_COST_ZZFTT[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MCNAME</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">制作类型</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].ZZLXDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">项目</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].COSTITEMIDDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SQJE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CJSJ</span>
+            </p>
+          
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_ZZFconfirm(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">确认</button>
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+    @*<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />*@

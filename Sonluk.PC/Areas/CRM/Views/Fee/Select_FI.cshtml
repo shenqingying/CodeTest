@@ -1,0 +1,175 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "费用科目代码管理";
+
+    CRM_HG_DICT[] CLASS1 = ViewBag.CLASS1;
+
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>费用科目代码管理</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lay-filter="formDemo">新增</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">财务核算编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_cwhsbh" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;">财务核算编号描述：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_cwhsbhdes" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;">费用归类1：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_class1" lay-filter="select_class1" lay-search>
+                                <option value="0" selected="selected">全部</option>
+                                @for (int i = 0; i < CLASS1.Length; i++)
+                                {
+                                    <option value="@CLASS1[i].DICID">@CLASS1[i].DICNAME</option>
+                                }
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label">费用归类2：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_class2" lay-filter="select_class2" lay-search>
+                                <option value="0" selected="selected">全部</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="div_jump" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">财务核算编号：</label>
+        <div class="layui-input-inline">
+            <input id="cwhsbh" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">财务核算编号描述：</label>
+        <div class="layui-input-inline">
+            <input id="cwhsbhdes" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">费用归类1：</label>
+        <div class="layui-input-inline">
+            <select id="class1" lay-filter="class1" lay-search>
+                <option value="0" selected="selected"></option>
+                @for (int i = 0; i < CLASS1.Length; i++)
+                {
+                    <option value="@CLASS1[i].DICID">@CLASS1[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">费用归类2：</label>
+        <div class="layui-input-inline">
+            <select id="class2" lay-filter="class2" lay-search>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">序号：</label>
+        <div class="layui-input-inline">
+            <input id="sort" type="text" autocomplete="off" class="layui-input" value="0">
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">备注：</label>
+        <div class="layui-input-inline">
+            <input id="beiz" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <br />
+
+</div>
+
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_FI")
+}

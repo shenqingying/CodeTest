@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "包装关联";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" name="in_sm" placeholder="请扫描" autocomplete="off" class="layui-input" id="in_sm" lid="vi_qsm" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div id="bodydiv" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_gzzx">工作中心：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_gzzx" id="lb_gzzx"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_sbh">设备号：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_sbh" id="lb_sbh"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_tpm">托盘码：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_tpm" id="lb_tpm"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_tskc">特殊库存：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_tskc" id="lb_tskc"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_wlbm">物料编码：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_wlh" id="lb_wlh"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_wlms">物料描述：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_wlms" id="lb_wlms"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_czr">操作人员：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_czr" id="lb_czr"></label>
+            </div>
+        </div>
+    </div>
+    <div id="div_xczj" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_xczj">下层组件：</label>
+            <div class="layui-input-block">
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_bom" lay-filter="tb_bom"></table>
+    </div>
+    <div id="div_tlxx" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_tlxx">投料信息：</label>
+            <div class="layui-input-block">
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_tlxx" lay-filter="tb_tlxx"></table>
+    </div>
+    <script type="text/html" id="barkh_tlxx">
+        <a class="layui-btn_table_min layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+    </script>
+</div>
+<div id="div_foot" class="layui-footer" align="right">
+    <button class="layui-btn" id="btn_rygl" lid="vi_rygl">人员管理</button>
+    <button class="layui-btn" id="btn_qrgl" lid="vi_qrgl">确认关联</button>
+</div>
+<div id="div_czry" hidden>
+    <table class="layui-hide" id="tb_czry" lay-filter="tb_czry"></table>
+</div>
+<div hidden>
+    <label class="layui-form-label" name="BL_GC" id="BL_GC"></label>
+    <label class="layui-form-label" name="BL_GZZXBH" id="BL_GZZXBH"></label>
+    <label class="layui-form-label" name="BL_SBBH" id="BL_SBBH"></label>
+    <label class="layui-form-label" name="BL_RWBH" id="BL_RWBH"></label>
+    <label class="layui-form-label" name="BL_SL" id="BL_SL"></label>
+    <label class="layui-form-label" name="BL_PC" id="BL_PC"></label>
+    <label class="layui-form-label" name="BL_SBNO" id="BL_SBNO"></label>
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SCRW_TL/TL_BB")
+}

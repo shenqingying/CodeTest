@@ -1,0 +1,1106 @@
+﻿@using Sonluk.UI.Model.CRM.COST_LKAHXZLTTService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+@using Sonluk.UI.Model.CRM.COST_ITEMService;
+@{
+    ViewBag.Title = "费用核销资料审核";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    CRM_COST_LKAHXZLTT TTdata = ViewBag.TTdata;
+    CRM_HG_DICT[] HXXS = ViewBag.HXXS;
+    CRM_HG_DICT[] MCHT = ViewBag.MCHT;
+    CRM_HG_DICT[] CSFP = ViewBag.CSFP;
+    CRM_COST_ITEM[] ITEM = ViewBag.ITEM;
+
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar_select_lka">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<script type="text/html" id="bar">
+    {{# if(d.COSTITEMID == 8){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="edit">门店</a>
+    {{# } }}
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    <a class="layui-btn layui-btn-xs" lay-event="img">照片</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<script type="text/html" id="bar2">
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<script type="text/html" id="bar_display">
+    <a class="layui-btn layui-btn-xs" lay-event="look">查看详细</a>
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    @*<a class="layui-btn layui-btn-xs" lay-event="img">照片</a>*@
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<script type="text/html" id="bar_zzf">
+    <a class="layui-btn layui-btn-xs" lay-event="img">照片</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<script type="text/html" id="bar_tool">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<script type="text/html" id="bar_delete">
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+
+
+
+
+<script type="text/html" id="imgTpl">
+    <img class="mytableimg" src="{{d.ML}}" />
+</script>
+
+<script type="text/html" id="baifenbi">
+    {{ d.SJFB + '%' }}
+</script>
+
+<script type="text/html" id="baifenbi2">
+    {{ d.YJFB + '%' }}
+</script>
+
+<script type="text/html" id="Tpl_zhuangtai">
+    {{# if(d.ISACTIVE == 10){ }}
+    未提交
+    {{# }else if (d.ISACTIVE == 20){ }}
+    审核中
+    {{# }else if (d.ISACTIVE == 30){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_haveimg">
+    {{# if(d.Display2ImgCount > 0){ }}
+    有
+    {{# }else { }}
+    无
+    {{# } }}
+</script>
+
+<script type="text/html" id="Tpl_kkmx">
+    {{# if(d.CSKKFPDY == 1){ }}
+    有
+    {{# }else if (d.CSKKFPDY == 2){ }}
+    无
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="Tpl_sfyhbyj">
+    {{# if(d.SFYHBYJ == 1){ }}
+    是
+    {{# }else if (d.SFYHBYJ == 2){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>费用核销资料审核</cite></a>
+</span>
+<br />
+<br />
+
+
+
+
+
+
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_save" class="layui-btn">保存</button>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">经销商销售数据</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">经销商SAP编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.JXSSAPSN" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">经销商名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.JXSNAME" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">经销商本年度销售任务：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.BNDXSRW" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">经销商本年度A类任务：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.BNDALRW" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">销售完成率(目前)：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.XSWCL" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">A类完成率(目前)：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.ALWCL" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">LKA基本信息</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">LKA系统CRM编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="lkacrmid" type="text" autocomplete="off" class="layui-input" value="@TTdata.LKACRMID" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">LKA系统名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="lkaname" type="text" autocomplete="off" class="layui-input" value="@TTdata.LKANAME" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">归属年份：</label>
+                        <div class="layui-input-inline">
+                            <input id="htyear" type="text" autocomplete="off" class="layui-input" value="@TTdata.HTYEAR" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">费用开始时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="begindate" type="text" autocomplete="off" class="layui-input" value="@TTdata.BEGINDATE" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">费用结束时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="enddate" type="text" autocomplete="off" class="layui-input" value="@TTdata.ENDDATE" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">审批金额：</label>
+                        <div class="layui-input-inline">
+                            <input id="spje" type="text" autocomplete="off" class="layui-input" value="@TTdata.SPJE" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">已核销金额：</label>
+                        <div class="layui-input-inline">
+                            <input id="yhxje" type="text" autocomplete="off" class="layui-input" value="@TTdata.YHXJE" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">LKA销售数据类型：</label>
+                        <div class="layui-input-inline">
+                            <input id="lkaxssjlx" type="text" autocomplete="off" class="layui-input" value="@TTdata.LKAXSSJLXDES" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">合同年度预估销售：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.HTNDYGXS" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">截止目前LKA销售数据：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.MQLKAXSSJ" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">LKA本年度完成率(%)：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.LKABNDWCL%" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">费用核销形式：</label>
+                        <div class="layui-input-inline">
+                            <select id="fyhxxs" lay-filter="fyhxxs">
+                                @for (int i = 0; i < HXXS.Length; i++)
+                                {
+                                    if (HXXS[i].DICID == TTdata.FYHXXS)
+                                    {
+                                        <option value="@HXXS[i].DICID" selected="selected">@HXXS[i].DICNAME</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@HXXS[i].DICID">@HXXS[i].DICNAME</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">LKA已进场门店数量：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.LKAYJCMDSL">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">CRM上备案的门店(有陈列照片的)：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@TTdata.CRMBAMD">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">卖场销售数据来源：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@ViewBag.MCXSSOURCE" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">文字说明：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@ViewBag.MCXSSOURCE_OTHER" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">单位：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="元" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">卖场费用扣款来源：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@ViewBag.MCFYSOURCEDES" disabled>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">文字说明：</label>
+                        <div class="layui-input-inline">
+                            <input id="" type="text" autocomplete="off" class="layui-input" value="@ViewBag.MCFYSOURCE_OTHER" disabled>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">核销员卖场销售数据、陈列照片审核结果：</label>
+                        <div class="layui-input-inline">
+                            <select id="spzt" lay-filter="spzt">
+                                <option value="0"></option>
+                                @if (TTdata.SPZT == 1)
+                                {
+                                    <option value="1" selected="selected">同意</option>
+                                    <option value="2">不同意</option>
+                                }
+                                else if (TTdata.SPZT == 2)
+                                {
+                                    <option value="1">同意</option>
+                                    <option value="2" selected="selected">不同意</option>
+                                }
+                                else
+                                {
+                                    <option value="1">同意</option>
+                                    <option value="2">不同意</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">审核意见：</label>
+                        <div class="layui-input-inline" style="width:560px;">
+                            <textarea id="opinion" class="layui-textarea" >@TTdata.OPINION</textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 id="h2_general" class="layui-colla-title">常规费用</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                @*<button id="btn_insert_general" class="layui-btn">新增核销项目</button>
+                <button id="btn_submit_general" class="layui-btn">提交</button>*@
+                <button id="btn_sh_general" class="layui-btn">审核</button>
+                <button id="btn_back_general" class="layui-btn">回退</button>
+                <table id="result_mx_general" lay-filter="result_mx_general"></table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 id="h2_haibao" class="layui-colla-title">海报费、堆头费</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                @*<button id="btn_insert_haibao" class="layui-btn">新增核销项目</button>
+                <button id="btn_submit_haibao" class="layui-btn">提交</button>*@
+                <button id="btn_sh_haibao" class="layui-btn">审核</button>
+                <button id="btn_back_haibao" class="layui-btn">回退</button>
+                <table id="result_mx_haibao" lay-filter="result_mx_haibao"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 id="h2_SpecialDisplay" class="layui-colla-title">特殊陈列费</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                @*<button id="btn_insert_SpecialDisplay" class="layui-btn">新增核销项目</button>
+                <button id="btn_submit_SpecialDisplay" class="layui-btn">提交</button>*@
+                <button id="btn_sh_SpecialDisplay" class="layui-btn">审核</button>
+                <button id="btn_back_SpecialDisplay" class="layui-btn">回退</button>
+                <table id="result_mx_SpecialDisplay" lay-filter="result_mx_SpecialDisplay"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 id="h2_zhizuo" class="layui-colla-title">制作费</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                @*<button id="btn_insert_ZZF" class="layui-btn">新增核销项目</button>
+                <button id="btn_submit_ZZF" class="layui-btn">提交</button>*@
+
+
+                @*<button id="btn_sh_ZZF" class="layui-btn">审核</button>
+                <button id="btn_back_ZZF" class="layui-btn">回退</button>*@
+                <table id="result_mx_zhizuo" lay-filter="result_mx_zhizuo"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 id="h2_other" class="layui-colla-title">其他费用</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                @*<button id="btn_insert_other" class="layui-btn">新增核销项目</button>
+                <button id="btn_submit_other" class="layui-btn">提交</button>*@
+                <button id="btn_sh_other" class="layui-btn">审核</button>
+                <button id="btn_back_other" class="layui-btn">回退</button>
+                <table id="result_mx_other" lay-filter="result_mx_other"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 id="h2_FYother" class="layui-colla-title">其他费用-补损费</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                @*<button id="btn_insert_FYother" class="layui-btn">新增核销项目</button>
+                <button id="btn_submit_FYother" class="layui-btn">提交</button>*@
+                <button id="btn_sh_FYother" class="layui-btn">审核</button>
+                <button id="btn_back_FYother" class="layui-btn">回退</button>
+                <table id="result_mx_FYother" lay-filter="result_mx_FYother"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+@*检索LKA*@
+<div id="div_select_lka" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_lka_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">LKA名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_lka_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_lka_result" lay-filter="select_lka_result"></table>
+
+</div>
+
+
+<div id="div_insert_general" class="layui-form" hidden>
+
+
+
+    <div id="div_insert_general2" hidden>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">项目：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_general_item" lay-filter="insert_general_item">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < ITEM.Length; i++)
+                        {
+                            if (ITEM[i].COSTCLASS2 == 1298)
+                            {
+                                <option value="@ITEM[i].COSTITEMID">@ITEM[i].COSTITEMMC</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">审批金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_general_spje" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">已核销金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_general_yhxje" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">本次申请核销金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_general_bcje" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">合同版本：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_general_mcht" lay-filter="insert_general_mcht">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < MCHT.Length; i++)
+                        {
+                            <option value="@MCHT[i].DICID">@MCHT[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">卖场合同条款：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_general_httk" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">卖场合同金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_general_htje" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">超市发票：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_general_csfp" lay-filter="insert_general_csfp">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < CSFP.Length; i++)
+                        {
+                            <option value="@CSFP[i].DICID">@CSFP[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">是否有对应的系统扣款明细：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_general_dy" lay-filter="insert_general_dy">
+                        <option value="0" selected="selected"></option>
+                        <option value="2">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">情况说明：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_general_qksm" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_general_beiz" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+    <div id="div_md" hidden>
+        <button id="btn_insert_md" class="layui-btn" style="display:none;">新增门店</button>
+        <table id="tb_md" lay-filter="tb_md"></table>
+    </div>
+</div>
+
+
+<div id="div_insert_haibao" class="layui-form" hidden>
+
+    <div class="layui-form-item" id="div_insert_haibao1">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">项目：</label>
+            <div class="layui-input-inline">
+                <select id="insert_haibao_item" lay-filter="insert_haibao_item">
+                    <option value="0" selected="selected"></option>
+                    @for (int i = 0; i < ITEM.Length; i++)
+                    {
+                        if (ITEM[i].COSTITEMID == 11 || ITEM[i].COSTITEMID == 12)
+                        {
+                            <option value="@ITEM[i].COSTITEMID">@ITEM[i].COSTITEMMC</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        @*<div id="div_tb_cost">
+                <button id="btn_mx_insert" class="layui-btn">新增细项</button>
+
+            </div>*@
+        <table id="tb_insert_haibao" lay-filter="tb_insert_haibao"></table>
+    </div>
+
+    <div id="div_insert_haibao2" hidden>
+        <button id="btn_back_haibao" class="layui-btn">返回</button>
+        <button id="btn_save_haibao" class="layui-btn">保存</button>
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">实际活动期间销售：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_haibao_sjxs" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">实际费比：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_haibao_sjfb" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">活动结束总结：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_haibao_zj" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_haibao_beiz" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <input id="insert_haibao_apply_cost" hidden />
+            <input id="insert_haibao_apply_costHJ" hidden />
+            <input id="insert_haibao_LKAFYTTID" hidden />
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="div_insert_SpecialDisplay" class="layui-form" hidden>
+
+    <div class="layui-form-item" id="div_insert_SpecialDisplay1">
+
+        @*<div class="layui-inline">
+                <label class="layui-form-label">项目：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_SpecialDisplay_item" lay-filter="insert_SpecialDisplay_item">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < ITEM.Length; i++)
+                        {
+                            if (ITEM[i].COSTITEMID == 10)
+                            {
+                                <option value="@ITEM[i].COSTITEMID">@ITEM[i].COSTITEMMC</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>*@
+        @*<div id="div_tb_cost">
+                <button id="btn_mx_insert" class="layui-btn">新增细项</button>
+
+            </div>*@
+        <table id="tb_insert_SpecialDisplay" lay-filter="tb_insert_SpecialDisplay"></table>
+    </div>
+
+    <div id="div_insert_SpecialDisplay2" hidden>
+        <button id="btn_back_SpecialDisplay" class="layui-btn">返回</button>
+        <button id="btn_save_SpecialDisplay" class="layui-btn">保存</button>
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label">实际销售：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_SpecialDisplay_sjxs" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">实际费比：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_SpecialDisplay_sjfb" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_SpecialDisplay_beiz" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <input id="insert_SpecialDisplay_apply_cost" hidden />
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="div_insert_ZZF" class="layui-form" hidden>
+
+    <div class="layui-form-item" id="div_insert_ZZF1">
+
+        @*<div class="layui-inline">
+                <label class="layui-form-label">项目：</label>
+                <div class="layui-input-inline">
+                    <select id="div_insert_ZZF_item" lay-filter="div_insert_ZZF_item">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < ITEM.Length; i++)
+                        {
+                            if (ITEM[i].COSTITEMID == 14)
+                            {
+                                <option value="@ITEM[i].COSTITEMID">@ITEM[i].COSTITEMMC</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>*@
+        @*<div id="div_tb_cost">
+                <button id="btn_mx_insert" class="layui-btn">新增细项</button>
+
+            </div>*@
+        <table id="tb_insert_ZZF" lay-filter="tb_insert_ZZF"></table>
+    </div>
+
+    @*<div id="div_insert_ZZF2" hidden>
+            <button id="btn_back_ZZF" class="layui-btn">返回</button>
+            <button id="btn_save_ZZF" class="layui-btn">保存</button>
+
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">实际销售：</label>
+                    <div class="layui-input-inline">
+                        <input id="mx_mcxs" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">实际费比：</label>
+                    <div class="layui-input-inline">
+                        <input id="mx_mcxs" type="text" autocomplete="off" class="layui-input" disabled>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">陈列照片是否已经提供：</label>
+                    <div class="layui-input-inline">
+                        <input id="mx_mcxs" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+        </div>*@
+
+</div>
+
+
+<div id="div_insert_other" class="layui-form" hidden>
+
+
+
+    <div id="div_insert_other2">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">项目：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_other_item" lay-filter="insert_other_item">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < ITEM.Length; i++)
+                        {
+                            if (ITEM[i].COSTITEMID == 13)
+                            {
+                                <option value="@ITEM[i].COSTITEMID">@ITEM[i].COSTITEMMC</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">审批金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_other_spje" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">已核销金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_other_yhxje" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">本次申请核销金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_other_bcje" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">合同版本：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_other_mcht" lay-filter="insert_other_mcht">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < MCHT.Length; i++)
+                        {
+                            <option value="@MCHT[i].DICID">@MCHT[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">卖场合同条款：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_other_httk" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">卖场合同金额：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_other_htje" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">超市发票：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_other_csfp" lay-filter="insert_other_csfp">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < CSFP.Length; i++)
+                        {
+                            <option value="@CSFP[i].DICID">@CSFP[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">是否有对应的系统扣款明细：</label>
+                <div class="layui-input-inline">
+                    <select id="insert_other_dy" lay-filter="insert_other_dy">
+                        <option value="0" selected="selected"></option>
+                        <option value="2">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">情况说明：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_other_qksm" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_other_beiz" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div id="div_insert_FYother" class="layui-form" hidden>
+
+    <div class="layui-form-item" id="div_insert_FYother1">
+
+
+        <table id="tb_insert_FYother" lay-filter="tb_insert_FYother"></table>
+    </div>
+
+    <div id="div_insert_FYother2" hidden>
+        <button id="btn_back_FYother" class="layui-btn">返回</button>
+        <button id="btn_save_FYother" class="layui-btn">保存</button>
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">实际活动期间销售：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_FYother_sjxs" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">实际费比：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_FYother_sjfb" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">活动结束总结：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_FYother_zj" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_FYother_beiz" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <input id="insert_FYother_apply_cost" hidden />
+            <input id="insert_FYother_apply_costHJ" hidden />
+            <input id="insert_FYother_LKAFYTTID" hidden />
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="div_insert_md" class="layui-form" hidden>
+    <br />
+
+    <div class="layui-form-item">
+        <button id="btn_cxkh" class="layui-btn">查询</button>
+        <button id="btn_save_md" class="layui-btn">保存</button>
+
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:120px;">门店名称：</label>
+                    <div class="layui-input-inline">
+                        <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label" style="width:120px;">门店CRM编号：</label>
+                    <div class="layui-input-inline">
+                        <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        @*<button id="btn_insert_tomx" class="layui-btn">添加</button>*@
+        <table id="tb_kh" lay-filter="tb_kh"></table>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+<div id="div_check" class="layui-form" hidden>
+    <br />
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:140px;">费用审核员检查内容：</label>
+        <div class="layui-input-inline" style="width:400px;">
+            <textarea id="check_content" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+<div id="004p" class="layui-form" hidden>
+
+
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            @*<button id="btn_upload_display" class="layui-btn" lay-filter="btn_upload_display">上传照片</button>*@
+        </div>
+    </div>
+
+
+    <table id="pic_display004" lay-filter="pic_display004"></table>
+
+
+
+
+</div>
+
+
+<input id="HXZLTTID" value="@TTdata.HXZLTTID" hidden />
+<input id="LKAID" value="@TTdata.LKAID" hidden />
+<input id="HXZLMXID" hidden />
+<input id="COSTID" hidden />
+<input id="khid" hidden />
+<input id="CRMID" value="@TTdata.LKACRMID" hidden />
+<input id="jxsid" hidden />
+<input id="ywyid" hidden />
+<input id="isactive" value="@ViewBag.ISACTIVE" hidden />
+
+<input id="path" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Update_SH_LKAHXZL")
+}

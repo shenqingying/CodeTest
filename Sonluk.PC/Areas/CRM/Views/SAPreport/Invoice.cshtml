@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "销售开票";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>销售报表</a>
+    <a><cite>销售开票</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+            <button id="btn_daochu" class="layui-btn">导出</button>
+            @*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="layui-btn" lay-filter="formDemo">汇总-按客户</button>
+                <button class="layui-btn" lay-filter="formDemo">汇总-按销售办公室</button>
+                <button class="layui-btn" lay-filter="formDemo">汇总-按销售组</button>*@
+        </div>
+
+
+
+
+        @*第一行*@
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:130px">统计选项：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <select id="option" lay-filter="option">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+
+            <label class="layui-form-label" style="width:130px">年度：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <input id="year" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.year">
+            </div>
+
+
+        </div>
+        @*第二行*@
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:130px">季度：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <select id="jidu_start" lay-filter="jidu_start">
+                    <option value="0" selected="selected"></option>
+                    <option value="01">第一季度</option>
+                    <option value="02">第二季度</option>
+                    <option value="03">第三季度</option>
+                    <option value="04">第四季度</option>
+                </select>
+            </div>
+
+            <label class="layui-form-label" style="width:130px">至：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <select id="jidu_end" lay-filter="jidu_end">
+                    <option value="0" selected="selected"></option>
+                    <option value="01">第一季度</option>
+                    <option value="02">第二季度</option>
+                    <option value="03">第三季度</option>
+                    <option value="04">第四季度</option>
+                </select>
+            </div>
+
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+        @*<table id="HZ_KH" lay-filter="HZ_KH"></table>
+            <table id="HZ_xsbgs" lay-filter="HZ_xsbgs"></table>
+            <table id="HZ_xsz" lay-filter="HZ_xsz"></table>*@
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<input id="netpath" hidden />
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+
+    });
+</script>
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/SAP/Invoice")
+}

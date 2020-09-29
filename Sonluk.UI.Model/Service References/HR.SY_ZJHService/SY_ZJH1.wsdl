@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_ZJH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_SY_ZJH">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ZJHID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_ZJH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_ZJH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:HR_SY_ZJH_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_SY_ZJH_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_SY_ZJH_LIST" type="tns:ArrayOfHR_SY_ZJH_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_SY_ZJH_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_SY_ZJH_LIST" nillable="true" type="tns:HR_SY_ZJH_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_SY_ZJH_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ZJHID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ZJHID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_ZJH_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ZJHID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_ZJH_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_ZJH_LAYResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_ZJH_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_ZJH_LAY" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_SY_ZJH_LAY">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ZJHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LYID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISMR" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_ZJH_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_ZJH_LAYResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_ZJH_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ZJHID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_ZJH_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_ZJH_LAYResult" type="tns:HR_SY_ZJH_LAY_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_SY_ZJH_LAY_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_SY_ZJH_LAY_LIST" type="tns:ArrayOfHR_SY_ZJH_LAY_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_SY_ZJH_LAY_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_SY_ZJH_LAY_LIST" nillable="true" type="tns:HR_SY_ZJH_LAY_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_SY_ZJH_LAY_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ZJHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LYID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LAY_CHECKED" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LYNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISMR" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_ZJH_ROLE_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_ZJH_ROLE_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_ZJH_ROLE_LAYResult" type="tns:HR_SY_ZJH_LAY_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_ZJH_ROLE_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_ZJH_LAY" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_ZJH_ROLE_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_ZJH_ROLE_LAYResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_ZJH_ROLE_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_ZJH_ROLE_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_ZJH_ROLE_LAYResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BY_ROLEResult" type="tns:HR_SY_ZJH_LAY_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="HR_SY_ZJH_LAY_SELECT" nillable="true" type="tns:HR_SY_ZJH_LAY_SELECT" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_ZJH_LAY" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_ZJH_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_ZJH_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_ZJH_LAY" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_ZJH_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_ZJH_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_ZJH_LAY" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_ZJH_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_ROLE_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_ZJH_ROLE_LAY" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_ROLE_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_ZJH_ROLE_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_ZJH_ROLE_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_ZJH_ROLE_LAY" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_ZJH_ROLE_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_ZJH_ROLE_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_ROLE_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_ZJH_ROLE_LAY" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_ROLE_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_ZJH_ROLE_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLESoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLESoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetIn">
+    <wsdl:part name="ZJHID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_LAYHttpGetIn">
+    <wsdl:part name="ZJHID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_LAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_LAYHttpGetIn">
+    <wsdl:part name="ZJHID" type="s:string" />
+    <wsdl:part name="GS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_LAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:HR_SY_ZJH_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_ROLE_LAYHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_ROLE_LAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:HR_SY_ZJH_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_ROLE_LAYHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_ROLE_LAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLEHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="GS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLEHttpGetOut">
+    <wsdl:part name="Body" element="tns:HR_SY_ZJH_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostIn">
+    <wsdl:part name="ZJHID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_LAYHttpPostIn">
+    <wsdl:part name="ZJHID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_LAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_LAYHttpPostIn">
+    <wsdl:part name="ZJHID" type="s:string" />
+    <wsdl:part name="GS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_LAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:HR_SY_ZJH_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_ROLE_LAYHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZJH_ROLE_LAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:HR_SY_ZJH_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_ROLE_LAYHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_ZJH_ROLE_LAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLEHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="GS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLEHttpPostOut">
+    <wsdl:part name="Body" element="tns:HR_SY_ZJH_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:portType name="SY_ZJHSoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_LAY">
+      <wsdl:input message="tns:DELETE_ZJH_LAYSoapIn" />
+      <wsdl:output message="tns:DELETE_ZJH_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_ZJH_LAY">
+      <wsdl:input message="tns:INSERT_ZJH_LAYSoapIn" />
+      <wsdl:output message="tns:INSERT_ZJH_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_LAY">
+      <wsdl:input message="tns:SELECT_ZJH_LAYSoapIn" />
+      <wsdl:output message="tns:SELECT_ZJH_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_ROLE_LAY">
+      <wsdl:input message="tns:SELECT_ZJH_ROLE_LAYSoapIn" />
+      <wsdl:output message="tns:SELECT_ZJH_ROLE_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_ZJH_ROLE_LAY">
+      <wsdl:input message="tns:INSERT_ZJH_ROLE_LAYSoapIn" />
+      <wsdl:output message="tns:INSERT_ZJH_ROLE_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_ROLE_LAY">
+      <wsdl:input message="tns:DELETE_ZJH_ROLE_LAYSoapIn" />
+      <wsdl:output message="tns:DELETE_ZJH_ROLE_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <wsdl:input message="tns:SELECT_BY_ROLESoapIn" />
+      <wsdl:output message="tns:SELECT_BY_ROLESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_ZJHHttpGet">
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpGetIn" />
+      <wsdl:output message="tns:DELETEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_LAY">
+      <wsdl:input message="tns:DELETE_ZJH_LAYHttpGetIn" />
+      <wsdl:output message="tns:DELETE_ZJH_LAYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_LAY">
+      <wsdl:input message="tns:SELECT_ZJH_LAYHttpGetIn" />
+      <wsdl:output message="tns:SELECT_ZJH_LAYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_ROLE_LAY">
+      <wsdl:input message="tns:SELECT_ZJH_ROLE_LAYHttpGetIn" />
+      <wsdl:output message="tns:SELECT_ZJH_ROLE_LAYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_ROLE_LAY">
+      <wsdl:input message="tns:DELETE_ZJH_ROLE_LAYHttpGetIn" />
+      <wsdl:output message="tns:DELETE_ZJH_ROLE_LAYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <wsdl:input message="tns:SELECT_BY_ROLEHttpGetIn" />
+      <wsdl:output message="tns:SELECT_BY_ROLEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_ZJHHttpPost">
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpPostIn" />
+      <wsdl:output message="tns:DELETEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_LAY">
+      <wsdl:input message="tns:DELETE_ZJH_LAYHttpPostIn" />
+      <wsdl:output message="tns:DELETE_ZJH_LAYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_LAY">
+      <wsdl:input message="tns:SELECT_ZJH_LAYHttpPostIn" />
+      <wsdl:output message="tns:SELECT_ZJH_LAYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_ROLE_LAY">
+      <wsdl:input message="tns:SELECT_ZJH_ROLE_LAYHttpPostIn" />
+      <wsdl:output message="tns:SELECT_ZJH_ROLE_LAYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_ROLE_LAY">
+      <wsdl:input message="tns:DELETE_ZJH_ROLE_LAYHttpPostIn" />
+      <wsdl:output message="tns:DELETE_ZJH_ROLE_LAYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <wsdl:input message="tns:SELECT_BY_ROLEHttpPostIn" />
+      <wsdl:output message="tns:SELECT_BY_ROLEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SY_ZJHSoap" type="tns:SY_ZJHSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_LAY">
+      <soap:operation soapAction="http://tempuri.org/DELETE_ZJH_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_ZJH_LAY">
+      <soap:operation soapAction="http://tempuri.org/INSERT_ZJH_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_LAY">
+      <soap:operation soapAction="http://tempuri.org/SELECT_ZJH_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_ROLE_LAY">
+      <soap:operation soapAction="http://tempuri.org/SELECT_ZJH_ROLE_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_ZJH_ROLE_LAY">
+      <soap:operation soapAction="http://tempuri.org/INSERT_ZJH_ROLE_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_ROLE_LAY">
+      <soap:operation soapAction="http://tempuri.org/DELETE_ZJH_ROLE_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BY_ROLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_ZJHSoap12" type="tns:SY_ZJHSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_LAY">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_ZJH_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_ZJH_LAY">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_ZJH_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_LAY">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_ZJH_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_ROLE_LAY">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_ZJH_ROLE_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_ZJH_ROLE_LAY">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_ZJH_ROLE_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_ROLE_LAY">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_ZJH_ROLE_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BY_ROLE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_ZJHHttpGet" type="tns:SY_ZJHHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_LAY">
+      <http:operation location="/DELETE_ZJH_LAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_LAY">
+      <http:operation location="/SELECT_ZJH_LAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_ROLE_LAY">
+      <http:operation location="/SELECT_ZJH_ROLE_LAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_ROLE_LAY">
+      <http:operation location="/DELETE_ZJH_ROLE_LAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <http:operation location="/SELECT_BY_ROLE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_ZJHHttpPost" type="tns:SY_ZJHHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_LAY">
+      <http:operation location="/DELETE_ZJH_LAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_LAY">
+      <http:operation location="/SELECT_ZJH_LAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZJH_ROLE_LAY">
+      <http:operation location="/SELECT_ZJH_ROLE_LAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_ZJH_ROLE_LAY">
+      <http:operation location="/DELETE_ZJH_ROLE_LAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <http:operation location="/SELECT_BY_ROLE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SY_ZJH">
+    <wsdl:port name="SY_ZJHSoap" binding="tns:SY_ZJHSoap">
+      <soap:address location="http://192.168.0.223/API/HR/SY_ZJH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_ZJHSoap12" binding="tns:SY_ZJHSoap12">
+      <soap12:address location="http://192.168.0.223/API/HR/SY_ZJH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_ZJHHttpGet" binding="tns:SY_ZJHHttpGet">
+      <http:address location="http://192.168.0.223/API/HR/SY_ZJH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_ZJHHttpPost" binding="tns:SY_ZJHHttpPost">
+      <http:address location="http://192.168.0.223/API/HR/SY_ZJH.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

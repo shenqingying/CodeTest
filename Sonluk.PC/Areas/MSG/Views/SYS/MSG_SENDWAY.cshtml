@@ -1,0 +1,200 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "推送方式";
+
+    CRM_HG_DICT[] MEDIUM = ViewBag.MEDIUM;
+    CRM_HG_DICT[] WAYSIGN = ViewBag.WAYSIGN;
+    CRM_HG_DICT[] MODEL = ViewBag.MODEL;
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>推送管理</a>
+    <a><cite>推送方式</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lay-filter="formDemo">新增</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">推送方式标识：</label>
+                            <div class="layui-input-inline">
+                                <select id="select_waysign" lay-filter="select_waysign" lay-search>
+                                    <option value="0" selected="selected">全部</option>
+                                    @for (int i = 0; i < WAYSIGN.Length; i++)
+                                    {
+                                        <option value="@WAYSIGN[i].DICID">@WAYSIGN[i].DICNAME</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">推送方式名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">推送媒介：</label>
+                            <div class="layui-input-inline">
+                                <select id="select_medium" lay-filter="select_medium" lay-search>
+                                    <option value="0" selected="selected">全部</option>
+                                    @for (int i = 0; i < MEDIUM.Length; i++)
+                                    {
+                                        <option value="@MEDIUM[i].DICID">@MEDIUM[i].DICNAME</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">平台标识：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_sign" type="text" autocomplete="off" class="layui-input">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="div_jump" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;">推送方式标识：</label>
+            <div class="layui-input-inline">
+                <select id="waysign" lay-filter="waysign" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < WAYSIGN.Length; i++)
+                    {
+                        <option value="@WAYSIGN[i].DICID">@WAYSIGN[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;">推送方式名称：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;">推送媒介：</label>
+            <div class="layui-input-inline">
+                <select id="medium" lay-filter="medium" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < MEDIUM.Length; i++)
+                    {
+                        <option value="@MEDIUM[i].DICID">@MEDIUM[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;">模版号：</label>
+            <div class="layui-input-inline">
+                <select id="model" lay-filter="model" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < MODEL.Length; i++)
+                    {
+                        <option value="@MODEL[i].DICID">@MODEL[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;">平台标识：</label>
+            <div class="layui-input-inline">
+                <input id="sign" type="text" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;">备注：</label>
+            <div class="layui-input-inline">
+                <input id="beiz" type="text" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <br />
+
+</div>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MSG/SYS/MSG_SENDWAY")
+}

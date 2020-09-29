@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:FIVES_SY_CHECKPOINT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FIVES_SY_CHECKPOINT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="POINTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATIONMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POINTMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DJ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHOWNAMEMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KSTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NUM" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="INFOID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPARTMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FREQUENCY" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FREQUENCYNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISNEED" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VIEWS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISREPORT" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfFIVES_SY_CHECKPOINT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFIVES_SY_CHECKPOINT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FIVES_SY_CHECKPOINT" nillable="true" type="tns:FIVES_SY_CHECKPOINT" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Compare">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:FIVES_SY_CHECKPOINT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CompareResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompareResult" type="tns:ArrayOfFIVES_SY_CHECKPOINT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadaddDepName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:FIVES_SY_CHECKPOINT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadaddDepNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadaddDepNameResult" type="tns:ArrayOfFIVES_SY_CHECKPOINTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFIVES_SY_CHECKPOINTList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FIVES_SY_CHECKPOINTList" nillable="true" type="tns:FIVES_SY_CHECKPOINTList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FIVES_SY_CHECKPOINTList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="POINTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LOCATIONMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POINTMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DJ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FREQUENCY" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FREQUENCYNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISNEED" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VIEWS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISREPORT" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:FIVES_SY_CHECKPOINT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSGNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISCLMSG" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CODE" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create_All">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:FIVES_SY_CHECKPOINT_CREATE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FIVES_SY_CHECKPOINT_CREATE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FIVES_SY_CHECKPOINT" type="tns:FIVES_SY_CHECKPOINT" />
+          <s:element minOccurs="0" maxOccurs="1" name="GW" type="tns:ArrayOfFIVES_SY_DICT" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHECKDETAI" type="tns:ArrayOfFIVES_SY_CHECKDETAILS" />
+          <s:element minOccurs="0" maxOccurs="1" name="LASTCHECKINFODETAIL" type="tns:ArrayOfFIVES_CHECK_INFODETAILList" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="FIVES_STAFF_DEP" type="tns:FIVES_STAFF_DEP" />
+          <s:element minOccurs="0" maxOccurs="1" name="GWLIST" type="tns:ArrayOfFIVES_SY_RELATIONSHIPBINDList" />
+          <s:element minOccurs="0" maxOccurs="1" name="MXLIST" type="tns:ArrayOfFIVES_SY_RELATIONSHIPBINDList" />
+          <s:element minOccurs="0" maxOccurs="1" name="PFLIST" type="tns:ArrayOfFIVES_SY_DICT" />
+          <s:element minOccurs="0" maxOccurs="1" name="FLlist" type="tns:ArrayOfFIVES_SY_RELATIONSHIPBINDList" />
+          <s:element minOccurs="0" maxOccurs="1" name="JydStr" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFIVES_SY_DICT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FIVES_SY_DICT" nillable="true" type="tns:FIVES_SY_DICT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FIVES_SY_DICT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DICID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TYPEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DICNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DICMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFIVES_SY_CHECKDETAILS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FIVES_SY_CHECKDETAILS" nillable="true" type="tns:FIVES_SY_CHECKDETAILS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FIVES_SY_CHECKDETAILS">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DETAILID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CATEGROYID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DETAILMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFIVES_CHECK_INFODETAILList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FIVES_CHECK_INFODETAILList" nillable="true" type="tns:FIVES_CHECK_INFODETAILList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FIVES_CHECK_INFODETAILList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DETAILID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="INFOID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TYPEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPEMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SCROEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCROEMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FIVES_STAFF_DEP">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TYPEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPENAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFIVES_SY_RELATIONSHIPBINDList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FIVES_SY_RELATIONSHIPBINDList" nillable="true" type="tns:FIVES_SY_RELATIONSHIPBINDList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FIVES_SY_RELATIONSHIPBINDList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OBJ1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OBJ2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TYPE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ACTION" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="OBJ1NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OBJ2NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPENAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPEREMARK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Dp" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create_AllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Create_AllResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update_All">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:FIVES_SY_CHECKPOINT_CREATE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update_AllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Update_AllResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_All">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pointid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_AllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Delete_AllResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select_ByPointID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PointID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select_ByPointIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Select_ByPointIDResult" type="tns:FIVES_SY_CHECKPOINT_CREATE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:FIVES_SY_CHECKPOINT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select_CHECKPOINT_byParms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pointId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="staffid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select_CHECKPOINT_byParmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Select_CHECKPOINT_byParmsResult" type="tns:FIVES_SY_CHECKPOINT_CREATE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="FIVES_SY_CHECKPOINT_CREATE" nillable="true" type="tns:FIVES_SY_CHECKPOINT_CREATE" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="CompareSoapIn">
+    <wsdl:part name="parameters" element="tns:Compare" />
+  </wsdl:message>
+  <wsdl:message name="CompareSoapOut">
+    <wsdl:part name="parameters" element="tns:CompareResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadaddDepNameSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadaddDepName" />
+  </wsdl:message>
+  <wsdl:message name="ReadaddDepNameSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadaddDepNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Create_AllSoapIn">
+    <wsdl:part name="parameters" element="tns:Create_All" />
+  </wsdl:message>
+  <wsdl:message name="Create_AllSoapOut">
+    <wsdl:part name="parameters" element="tns:Create_AllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Update_AllSoapIn">
+    <wsdl:part name="parameters" element="tns:Update_All" />
+  </wsdl:message>
+  <wsdl:message name="Update_AllSoapOut">
+    <wsdl:part name="parameters" element="tns:Update_AllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_AllSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete_All" />
+  </wsdl:message>
+  <wsdl:message name="Delete_AllSoapOut">
+    <wsdl:part name="parameters" element="tns:Delete_AllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Select_ByPointIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Select_ByPointID" />
+  </wsdl:message>
+  <wsdl:message name="Select_ByPointIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Select_ByPointIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="Select_CHECKPOINT_byParmsSoapIn">
+    <wsdl:part name="parameters" element="tns:Select_CHECKPOINT_byParms" />
+  </wsdl:message>
+  <wsdl:message name="Select_CHECKPOINT_byParmsSoapOut">
+    <wsdl:part name="parameters" element="tns:Select_CHECKPOINT_byParmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_AllHttpGetIn">
+    <wsdl:part name="pointid" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_AllHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="Select_ByPointIDHttpGetIn">
+    <wsdl:part name="PointID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Select_ByPointIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:FIVES_SY_CHECKPOINT_CREATE" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="Select_CHECKPOINT_byParmsHttpGetIn">
+    <wsdl:part name="pointId" type="s:string" />
+    <wsdl:part name="staffid" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Select_CHECKPOINT_byParmsHttpGetOut">
+    <wsdl:part name="Body" element="tns:FIVES_SY_CHECKPOINT_CREATE" />
+  </wsdl:message>
+  <wsdl:message name="Delete_AllHttpPostIn">
+    <wsdl:part name="pointid" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_AllHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="Select_ByPointIDHttpPostIn">
+    <wsdl:part name="PointID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Select_ByPointIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:FIVES_SY_CHECKPOINT_CREATE" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="Select_CHECKPOINT_byParmsHttpPostIn">
+    <wsdl:part name="pointId" type="s:string" />
+    <wsdl:part name="staffid" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Select_CHECKPOINT_byParmsHttpPostOut">
+    <wsdl:part name="Body" element="tns:FIVES_SY_CHECKPOINT_CREATE" />
+  </wsdl:message>
+  <wsdl:portType name="SY_CHECKPOINTSoap">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Compare">
+      <wsdl:input message="tns:CompareSoapIn" />
+      <wsdl:output message="tns:CompareSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadaddDepName">
+      <wsdl:input message="tns:ReadaddDepNameSoapIn" />
+      <wsdl:output message="tns:ReadaddDepNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_All">
+      <wsdl:input message="tns:Create_AllSoapIn" />
+      <wsdl:output message="tns:Create_AllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_All">
+      <wsdl:input message="tns:Update_AllSoapIn" />
+      <wsdl:output message="tns:Update_AllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_All">
+      <wsdl:input message="tns:Delete_AllSoapIn" />
+      <wsdl:output message="tns:Delete_AllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select_ByPointID">
+      <wsdl:input message="tns:Select_ByPointIDSoapIn" />
+      <wsdl:output message="tns:Select_ByPointIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select_CHECKPOINT_byParms">
+      <wsdl:input message="tns:Select_CHECKPOINT_byParmsSoapIn" />
+      <wsdl:output message="tns:Select_CHECKPOINT_byParmsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_CHECKPOINTHttpGet">
+    <wsdl:operation name="Delete_All">
+      <wsdl:input message="tns:Delete_AllHttpGetIn" />
+      <wsdl:output message="tns:Delete_AllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select_ByPointID">
+      <wsdl:input message="tns:Select_ByPointIDHttpGetIn" />
+      <wsdl:output message="tns:Select_ByPointIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpGetIn" />
+      <wsdl:output message="tns:DELETEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select_CHECKPOINT_byParms">
+      <wsdl:input message="tns:Select_CHECKPOINT_byParmsHttpGetIn" />
+      <wsdl:output message="tns:Select_CHECKPOINT_byParmsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_CHECKPOINTHttpPost">
+    <wsdl:operation name="Delete_All">
+      <wsdl:input message="tns:Delete_AllHttpPostIn" />
+      <wsdl:output message="tns:Delete_AllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select_ByPointID">
+      <wsdl:input message="tns:Select_ByPointIDHttpPostIn" />
+      <wsdl:output message="tns:Select_ByPointIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpPostIn" />
+      <wsdl:output message="tns:DELETEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select_CHECKPOINT_byParms">
+      <wsdl:input message="tns:Select_CHECKPOINT_byParmsHttpPostIn" />
+      <wsdl:output message="tns:Select_CHECKPOINT_byParmsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SY_CHECKPOINTSoap" type="tns:SY_CHECKPOINTSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Compare">
+      <soap:operation soapAction="http://tempuri.org/Compare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadaddDepName">
+      <soap:operation soapAction="http://tempuri.org/ReadaddDepName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_All">
+      <soap:operation soapAction="http://tempuri.org/Create_All" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_All">
+      <soap:operation soapAction="http://tempuri.org/Update_All" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_All">
+      <soap:operation soapAction="http://tempuri.org/Delete_All" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_ByPointID">
+      <soap:operation soapAction="http://tempuri.org/Select_ByPointID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_CHECKPOINT_byParms">
+      <soap:operation soapAction="http://tempuri.org/Select_CHECKPOINT_byParms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_CHECKPOINTSoap12" type="tns:SY_CHECKPOINTSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Compare">
+      <soap12:operation soapAction="http://tempuri.org/Compare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadaddDepName">
+      <soap12:operation soapAction="http://tempuri.org/ReadaddDepName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_All">
+      <soap12:operation soapAction="http://tempuri.org/Create_All" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_All">
+      <soap12:operation soapAction="http://tempuri.org/Update_All" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_All">
+      <soap12:operation soapAction="http://tempuri.org/Delete_All" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_ByPointID">
+      <soap12:operation soapAction="http://tempuri.org/Select_ByPointID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_CHECKPOINT_byParms">
+      <soap12:operation soapAction="http://tempuri.org/Select_CHECKPOINT_byParms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_CHECKPOINTHttpGet" type="tns:SY_CHECKPOINTHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Delete_All">
+      <http:operation location="/Delete_All" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_ByPointID">
+      <http:operation location="/Select_ByPointID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_CHECKPOINT_byParms">
+      <http:operation location="/Select_CHECKPOINT_byParms" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_CHECKPOINTHttpPost" type="tns:SY_CHECKPOINTHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Delete_All">
+      <http:operation location="/Delete_All" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_ByPointID">
+      <http:operation location="/Select_ByPointID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select_CHECKPOINT_byParms">
+      <http:operation location="/Select_CHECKPOINT_byParms" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SY_CHECKPOINT">
+    <wsdl:port name="SY_CHECKPOINTSoap" binding="tns:SY_CHECKPOINTSoap">
+      <soap:address location="http://192.168.0.77/API/FIVES/SY_CHECKPOINT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_CHECKPOINTSoap12" binding="tns:SY_CHECKPOINTSoap12">
+      <soap12:address location="http://192.168.0.77/API/FIVES/SY_CHECKPOINT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_CHECKPOINTHttpGet" binding="tns:SY_CHECKPOINTHttpGet">
+      <http:address location="http://192.168.0.77/API/FIVES/SY_CHECKPOINT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_CHECKPOINTHttpPost" binding="tns:SY_CHECKPOINTHttpPost">
+      <http:address location="http://192.168.0.77/API/FIVES/SY_CHECKPOINT.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

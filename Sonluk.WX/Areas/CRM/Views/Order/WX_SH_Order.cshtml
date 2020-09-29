@@ -1,0 +1,244 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "订单审核";
+    Session["TITLENAME"] = "订单审核";
+    CRM_ORDER_TT[] TTdata = ViewBag.TTdata;
+}
+
+<div class="layui-form-item" style="margin:0;">
+    <button id="btn_cx" class="layui-btn" style="width:100%;">查询</button>
+
+    <button id="btn_back" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+
+</div>
+<div id="div1">
+
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:70px;text-align:right;">订单类型：</label>
+                    <div class="layui-input-block" style=" margin-left: 80px;">
+                        <select id="ddlx" lay-filter="ddlx">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:70px;text-align:right;">订单状态：</label>
+                    <div class="layui-input-block" style=" margin-left: 80px;">
+                        <select id="isactive" lay-filter="isactive">
+                            @*<option value="0">全部</option>*@
+                            <option value="20" selected="selected">已提交 </option>
+                            <option value="50">已审核</option>
+                            <option value="60">已归档</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label" style="width:70px;text-align:right;">新建时间：</label>
+                    <div class="layui-input-block" style=" margin-left: 80px;">
+                        <input id="time_begin" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                    </div>
+
+                    <label class="layui-form-label" style="width:70px;text-align:right;">至：</label>
+                    <div class="layui-input-block" style=" margin-left: 80px;">
+                        <input id="time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <br />
+    <div id="div_result" style="margin:0 10px">
+        @for (int i = 0; i < TTdata.Length; i++)
+        {
+            string isactive = "";
+            switch (TTdata[i].ISACTIVE)
+            {
+                case 10:
+                    isactive = "未提交";
+                    break;
+                case 20:
+                    isactive = "已提交";
+                    break;
+                case 30:
+                    isactive = "";
+                    break;
+                case 40:
+                    isactive = "";
+                    break;
+                case 50:
+                    isactive = "已审核";
+                    break;
+                case 60:
+                    isactive = "已归档";
+                    break;
+                default:
+                    isactive = "";
+                    break;
+            }
+
+            <table id="table1" border="0" width="100%">
+
+                <tr>
+                    <td>序号：@(i + 1)</td>
+                </tr>
+                <tr>
+                    <td>状态：@isactive</td>
+                    @*<td width="60"><button class="layui-btn layui-btn-xs" style="width:100%;height:30px" onclick="SH_Order(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">审核</button></td>*@
+                    <td width="60"><button class="layui-btn layui-btn-xs" style="width:100%;height:30px" onclick="Link_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">查看</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2">售达方名称：@TTdata[i].SDFNAME</td>
+                </tr>
+                <tr>
+                    <td height="30" colspan="2">售达方SAP编号：@TTdata[i].SDFID</td>
+                </tr>
+                <tr>
+                    <td colspan="2">发起时间：@TTdata[i].CJSJ</td>
+                </tr>
+                <tr>
+                    <td>订单类型：@TTdata[i].DDLXDES</td>
+                    <td width="60" height="30">@*<button class="layui-btn layui-btn-xs layui-btn-danger" style="width:100%;height:30px" onclick="Back_Order(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">回退</button>*@</td>
+                </tr>
+                <tr>
+                    <td colspan="2">备注：@TTdata[i].BEIZ</td>
+                </tr>
+                <tr>
+                    <td colspan="2">业务员备注：@TTdata[i].BEIZ2</td>
+                </tr>
+            </table>
+            <hr class="layui-bg-black">
+        }
+        @if (TTdata.Length == 0)
+        {
+            <br />
+            <label>无数据！</label>
+        }
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div id="div_confirm" hidden>
+
+
+    <table border="0" style="margin:auto 10px;">
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:70px;text-align:right;">售达方：</label>
+            </td>
+            <td>
+                <label id="cfm_sdf" class="layui-form-label" style="width:100%;text-align:left;"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:70px;text-align:right;">送达方：</label>
+            </td>
+            <td>
+                <label id="cfm_ship" class="layui-form-label" style="width:100%;text-align:left;"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:70px;text-align:right;">收货地址：</label>
+            </td>
+            <td>
+                <label id="cfm_address" class="layui-form-label" style="width:100%;text-align:left;"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:70px;text-align:right;">付款时间：</label>
+            </td>
+            <td>
+                <label id="cfm_fksj" class="layui-form-label" style="width:100%;text-align:left;"></label>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <div id="div_mx" style="margin:auto 10px;">
+
+    </div>
+
+    <div id="div_hj">
+
+    </div>
+
+    @*<table id="tb_hj2" class="layui-table" style="text-align:right;width:100%;">
+            <tr>
+                <td width="130px;">金额合计：</td>
+                <td id="td_total"></td>
+            </tr>
+            <tr>
+                <td>可使用折扣金额：</td>
+                <td id="td_discount"></td>
+            </tr>
+            <tr>
+                <td width="130px;">本期使用折扣金额：</td>
+                <td id="td_discount_this"></td>
+            </tr>
+            <tr>
+                <td width="130px;">剩余折扣金额：</td>
+                <td id="td_discount_balance"></td>
+            </tr>
+            <tr>
+                <td>本单实际金额：</td>
+                <td id="td_actual"></td>
+            </tr>
+            <tr>
+                <td>上期余额：</td>
+                <td id="td_previous_balance"></td>
+            </tr>
+            <tr>
+                <td>本单应付金额：</td>
+                <td id="td_pay"></td>
+            </tr>
+        </table>*@
+
+</div>
+<br /><br /><br />
+
+
+
+@*background-color:#009688;*@
+<div id="div8" class="layui-footer" style="left:0;padding: 0;" hidden>
+    <div class="layui-form-item" style=" margin:0;">
+        <button id="btn_SH" class="layui-btn" style="width:49%;margin-left:0;">审核</button>
+        <button id="btn_HT" class="layui-btn layui-btn-danger" style="width:49%;margin-left:0;">回退</button>
+
+    </div>
+</div>
+
+
+
+
+<input id="ttid" hidden />
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/SH_Order")
+}

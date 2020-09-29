@@ -1,0 +1,73 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService
+@using Sonluk.UI.Model.CRM.COST_CXYService
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "差旅费报销单申请";
+    Session["TITLENAME"] = "差旅费报销单申请";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+}
+
+
+<div class="weui-btn-area">
+
+    <button class="weui-btn weui-btn_primary" id="btn_insert" style="width:49%;display:initial;margin:0 0;">新增</button>
+    <button class="weui-btn weui-btn_primary" id="btn_select" style="width:49%;display:initial;margin:0 0;float:right;">查询</button>
+
+</div>
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content" style="padding-right: 0px;">
+              
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">开始时间：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="time_begin" class="weui-input" type="date" placeholder="" value="@ViewBag.startdate">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">结束时间：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="time_end" class="weui-input" type="date" placeholder="" value="@ViewBag.enddate">
+                    </div>
+                </div>
+            
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">状态：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="ISACTIVE" class="weui-select">
+                            <option value="0">全部</option>
+                            <option value="10" selected="selected">未提交</option>
+                            <option value="20">审核中</option>
+                            <option value="30">已审核</option>
+                            <option value="60">已审批</option>
+                        </select>
+                    </div>
+                </div>
+             
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_result" style="margin:0 10px">
+</div>
+
+
+<input id="courrentid" value="@Session["STAFFID"]" hidden />
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_Travel")
+}
+
+

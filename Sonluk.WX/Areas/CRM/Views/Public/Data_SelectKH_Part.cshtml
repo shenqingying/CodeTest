@@ -1,0 +1,75 @@
+﻿@using Sonluk.UI.Model.CRM.KH_KHService;
+@{
+    ViewBag.Title = "CRM_KH_KHList";
+
+    CRM_KH_KHList[] TTdata = ViewBag.TTdata;
+}
+
+@for (int i = 0; i < TTdata.Length; i++)
+{
+    string str = "";
+    if (TTdata[i].MCSX == 1)
+    {
+        str = "系统";
+    }
+    else if(TTdata[i].MCSX == 2)
+    {
+        str = "门店";
+    }
+    else
+    {
+        str = "";
+    }
+ 
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@TTdata[i].MC</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户类型</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].KHLXDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">卖场属性</label>
+                <span class="weui-form-preview__value">&nbsp;@str</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">上级客户</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].PKHIDDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">上级客户编号</label>
+                @if (@TTdata[i].PKHID == 0)
+                {
+                    <span class="weui-form-preview__value">&nbsp;</span>
+                }
+                else
+                {
+                    <span class="weui-form-preview__value">&nbsp;@TTdata[i].PKHID</span>
+                }
+                
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_do(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">确定</a>
+            @*<a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">编辑</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="Delete_Order(@TTdata[i].CXYID)">删除</a>*@
+        </div>
+    </div>
+    <br />
+}
+@if (TTdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+

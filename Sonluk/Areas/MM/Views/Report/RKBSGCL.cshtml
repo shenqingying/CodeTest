@@ -1,0 +1,71 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+
+@{
+    ViewBag.Title = "采购订单-入库标识";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+    string pageSize = "A7";
+    ZMMFUN_PURBS_READ nodes = ViewBag.model;
+}
+
+
+
+
+<input type="hidden" id="page-size" value="@pageSize">
+@foreach (ZSL_BCS303_BS item in nodes.ZSL_BCS303_BS)
+{   
+    <div class="print-page print-layout-div" >
+        <table class="print-page print-layout-div">
+            <tr style="border:1px dashed;height:3cm">
+                <td colspan="2" style="font-size:25px;font-weight:bold">
+                    请    在    此    处    黏    贴
+                </td>
+            </tr>
+            <tr style="height:10px"></tr>
+            <tr class="print-layout-a5-tr-style">
+                <td colspan="2" >
+                   
+                    <img src="@Url.Action("BarCode", "BarCode", new { area = "BC", code = item.Matnr, format = "CODE128", width = 200, height = 28, pure = 1 })" style="width:8cm;height:1cm;text-align:center">
+                </td>
+            </tr>
+            <tr class="print-layout-a5-tr-style">
+                <td colspan="2" class="print-layout-td-center">@item.Matnr</td>
+            </tr>
+            <tr class="print-layout-a5-tr-style">
+                <td class="print-layout-td-left"  style="width:2.2cm;height:1cm">物料信息：</td>
+                <td class="print-layout-td-ritht"  style="height:1cm">@item.Maktx</td>
+            </tr>
+            @if (!string.IsNullOrEmpty(item.Sbh))
+            {
+                <tr class="print-layout-a5-tr-style">
+                    <td class="print-layout-td-left">WBS：</td>
+                    <td class="print-layout-td-ritht">@item.Sbh</td>
+                </tr>
+            }
+            @if (!string.IsNullOrEmpty(item.Gy))
+            {
+                <tr class="print-layout-a5-tr-style">
+                    <td class="print-layout-td-left" style="width:2.2cm;height:1cm">WBS描述：</td>
+                    <td class="print-layout-td-ritht" style="height:1cm">@item.Gy</td>
+                </tr>
+            }
+            @if (!string.IsNullOrEmpty(item.Ebeln) && !string.IsNullOrEmpty(item.Ebelp))
+            {
+                  <tr class="print-layout-a5-tr-style">
+                <td class="print-layout-td-left">采购订单：</td>
+                <td class="print-layout-td-ritht">@item.Ebeln/@Convert.ToInt32(@item.Ebelp).ToString()</td>
+            </tr>
+            }
+          
+            <tr class="print-layout-a5-tr-style">
+                <td class="print-layout-td-left">工厂：</td>
+                <td class="print-layout-td-ritht">@item.Werks</td>
+            </tr>
+        </table>
+
+    </div>
+}
+
+
+
+
+

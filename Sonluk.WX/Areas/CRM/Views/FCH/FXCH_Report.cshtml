@@ -1,0 +1,138 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "扫码出货查询";
+    Session["TITLENAME"] = "扫码出货查询";
+
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+
+    string DXM_url = System.Configuration.ConfigurationManager.AppSettings["DXM_url"];
+    
+}
+
+
+
+
+
+
+
+<div id="from1">
+    <div id="div1">
+
+        <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo" style="width:100%">查询</button>
+
+
+
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show" style="padding-right: 0px;">
+                    <div class="layui-form">
+                        <table width="100%">
+                            <tr>
+                                <td width="70px">
+                                    <label class="layui-form-label" style="width:60px; text-align:right;">箱码：</label>
+                                </td>
+                                <td>
+                                    <input id="dxm" type="text" style="width:100%;" class="layui-input">
+                                </td>
+                                <td width="70px">
+                                    <button id="btn_scan" class="layui-btn">扫码</button>
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+                    </div>
+
+                    @*<div class="layui-form-item">
+                            <label class="layui-form-label" style="width:100px; text-align:right;">客户名称：</label>
+                            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                                <input id="mc" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                        </div>*@
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        @*<table id="result" lay-filter="result"></table>*@
+
+        <div id="div_result" style="margin:0 10px">
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<input id="staffid" hidden />
+<input id="state" hidden />
+<input id="appid" hidden />
+
+<input id="dxm_url" hidden />
+
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+        $("#dxm_url").val("@DXM_url");
+    });
+</script>
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/FCH/FXCH_Report")
+}

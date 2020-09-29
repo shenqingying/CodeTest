@@ -1,0 +1,120 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "SelectKADD";
+    CRM_ORDER_TT[] nodes = ViewBag.TTdata;
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="bj">标记</a>
+    <a class="layui-btn layui-btn-xs" lay-event="dy">打印</a>
+   
+</script>
+
+<table class="layui-table" lay-data="{page:true,id:'result',height: 'full-320',limit:15}" lay-filter="result">
+    <thead>
+        <tr>
+            <th lay-data="{type: 'checkbox',fixed: 'left'}"></th>
+            
+            <th lay-data="{field:'StoreNum', width:140,fixed: 'left'}">门店编号</th>
+            <th lay-data="{field:'KHNAME', width:137,fixed: 'left'}">门店名称</th>
+            <th lay-data="{field:'KHPO', width:106}">订单号码</th>
+            <th lay-data="{field:'OrderST', width:118}">订单类别</th>
+            <th lay-data="{field:'PAY', width:126}">订购金额</th>
+            <th lay-data="{field:'OrderDate', width:140}">订货日期</th>
+            <th lay-data="{field:'DeliveryDate', width:140}">交货日期</th>
+            <th lay-data="{field:'StoreNews', width:137}">快报</th>
+            <th lay-data="{field:'BEIZ', width:106}">备注</th>
+            <th lay-data="{field:'DYSJ', width:200}">打印时间</th>
+            <th lay-data="{field:'SAPORDER', width:120}">SAP订单</th>
+            <th lay-data="{field:'TBSJ', width:200}">同步时间</th>
+            <th lay-data="{field:'BJSJ', width:200}">标记时间</th>
+            <th lay-data="{field:'PDFPATH', width:200,hide:true}">pdfpath</th>
+            <th lay-data="{field:'ORDERTTID', width:200,hide:true}">pdfpath</th>
+            <th lay-data="{field:'OrderSrcDES', width:140,hide:true}">订单来源</th>
+            <th lay-data="{fixed: 'right', width:130, align:'center', toolbar: '#bar'}"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < nodes.Length; i++)
+        {
+            <tr>
+                <td></td>
+                
+                <td>@nodes[i].StoreNum</td>
+                <td>@nodes[i].KHNAME</td>
+                <td>@nodes[i].KHPO</td>
+                @switch (@nodes[i].OrderST)
+                {
+                    case 1:
+                        <td>正常</td>
+                        break;
+                    case 2:
+                    <td>退货</td>
+                        break;
+                    case 3:
+                    <td>异动</td>
+                        break;
+                    default:
+                        break;
+                }
+                <td>@nodes[i].PAY</td>
+                <td>@nodes[i].OrderDate</td>
+                <td>@nodes[i].DeliveryDate</td>
+                <td>@nodes[i].StoreNews</td>
+                <td>@nodes[i].BEIZ</td>
+                <td>@nodes[i].DYSJ</td>
+                <td>@nodes[i].SAPORDER</td>
+                <td>@nodes[i].TBSJ</td>
+                <td>@nodes[i].BJSJ</td>
+                <td>@nodes[i].PDFPATH</td>
+                <td>@nodes[i].ORDERTTID</td> 
+                <td>@nodes[i].OrderSrcDES</td>               
+                @*<td hidden>@nodes[i].PDFPATH</td>*@
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+@*<script type="text/javascript">
+    var all_fy = 1;
+    var all_fysl = 12;
+    var all_limits = [12, 36, 108, 324, 972, 3000];
+    $(document).ready(function () {
+        var fyall = Math.ceil(@nodes.Length / all_fysl);
+        if (fyall > all_fy - 1) {
+        }
+        else {
+            all_fy = Number(fyall);
+        }
+        var table = layui.table;
+        table.render({
+            elem: 'result' //指定原始表格元素选择器（推荐id选择器）
+          ,  done: function (res, curr, count) {
+              for (var i = 0; i < all_limits.length; i++) {
+                  if (all_limits[i] >= res.data.length) {
+                      all_fysl = all_limits[i];
+                      break;
+                  }
+              }
+              all_fy = curr;
+          }, page: {
+              limits: all_limits,
+              limit: all_fysl,
+              curr: all_fy
+          }
+        });
+
+
+
+    }
+    )
+
+  
+  
+
+</script>*@
+
+
+
+

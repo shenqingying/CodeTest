@@ -1,0 +1,29 @@
+USE [HGMM]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[LE_TRA_Route_Insert]
+	@BZDID int = 0, 
+	@BZDMC varchar(100)=' ',
+	@EZDID int = 0, 
+	@EZDMC varchar(100)=' ',
+	@LIC int = 0, 
+	@SX int = 0, 
+	@GSID int = 0, 
+	@GSJC varchar(50)=' '
+AS
+BEGIN
+	DECLARE @ID INT;
+
+	SELECT @ID=MAX(SXID)+1 
+	FROM SP_SXB;
+		
+	INSERT INTO SP_SXB 
+	VALUES (@ID, @BZDID, @BZDMC, @EZDID, @EZDMC,@LIC,@SX,@GSID,@GSJC,null);
+			
+	SELECT @ID ID;
+END

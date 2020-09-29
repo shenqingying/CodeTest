@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "部门设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<style>
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+</style>
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>系统管理</a>
+    <a><cite>部门设置</cite></a>
+</span>
+<br /><br />
+<button id="btn_insert" class="layui-btn" lay-filter="btn_insert">新增</button>
+<button id="btn_edit" class="layui-btn" lay-filter="btn_edit">编辑</button>
+<button id="btn_delete" class="layui-btn" lay-filter="btn_delete">删除</button>
+
+@*<ul id="power_list"></ul>*@
+<div id="power_list"></div>
+
+<br /><br /><br />
+
+<div id="div_dep" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item" id="div_dep_id" hidden>
+        <label id="lb_dep_id" class="layui-form-label" style="width:130px;text-align:right;">部门ID：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="dep_id" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">部门名称：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="dep_name" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">上级部门ID：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="pdep_id" type="text" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">上级部门：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="pdep_name" type="text" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">层次：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="cengci" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">部门地址：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="address" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">部门说明：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="shuoming" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">备注：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="bz" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+</div>
+
+<input id="depid" hidden />
+<input id="depname" hidden />
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/System/Department")
+}

@@ -1,0 +1,213 @@
+﻿@using Sonluk.PC.Models;
+@{
+    ViewBag.Title = "Print_Order";
+    Layout = "~/Views/Shared/_Layout_Print_CRM.cshtml";
+    PrintOrder[] data = ViewBag.data;
+
+
+
+
+
+
+}
+
+
+
+<style>
+    label {
+        text-align: left;
+        width: inherit;
+    }
+</style>
+
+@for (int i = 0; i < data.Length; i++)
+{
+    <br />
+    <div class="main">
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td>
+                    <div class="print-page-header-company-name2">网上下单(@data[i].TTdata.KHNAME  @data[i].TTdata.CJSJ)</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="print-page-body-table-header">网上下单</div>
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr>
+                <td style="width:3cm;">
+                    <b>
+                        下单日期
+                    </b>
+
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" style="width:3.5cm;">
+                    @data[i].TTdata.CJSJ.Split(' ')[0]
+
+                </td>
+                <td style="width:3cm;">
+                    <b>CRM订单号</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">
+                    @data[i].TTdata.KHPO
+                </td>
+                <td style="width:3cm;">
+                    <b>SAP订单号</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" style="width:2.5cm;">
+                    @data[i].TTdata.SAPORDER
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>客户名称</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">
+                    @data[i].TTdata.KHNAME
+
+                </td>
+                <td>
+                    <b>客户编码</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">
+                    @data[i].TTdata.KHSAP
+                </td>
+                <td>
+                    <b>客户电话</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">
+                    @data[i].TTdata.TEL
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>送达方</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">
+                    @data[i].TTdata.SHIPID
+                </td>
+                <td>
+                    <b>收货地址</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">
+                    @data[i].TTdata.SHIPADD
+                </td>
+                <td>
+                    <b>售达方</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">
+                    @data[i].TTdata.SDFID
+                </td>
+            </tr>
+            @*<tr>
+                    <td class="print_page_td_haveborder_zfdc2">
+                        <b>订单写入SAP是否成功</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2">
+                        @data[i].TTdata.SUCCESS
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2">
+                        <b>失败原因</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                        @data[i].TTdata.REASON
+                    </td>
+                </tr>*@
+            <tr>
+                <td colspan="6">
+                    <table class="print-page_table_inside" cellspacing="0" cellpadding="5" border="1">
+                        <thead>
+                            <tr>
+                                <th>物料编码</th>
+                                <th>物料描述</th>
+                                <th>订单数量</th>
+                                <th>订单单位</th>
+                                <th>转换率</th>
+                                <th>标准单位</th>
+                                <th>标准数量</th>
+                                <th>单价</th>
+                                <th>金额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int j = 0; j < data[i].MXdata.Length; j++)
+                            {
+                                <tr>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].CPPH</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].CPMC</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].DDSL</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].DDDW</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].RATE</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].BZDW</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].BZSL</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].PRICE</td>
+                                    <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].AMOUNT</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="3" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr>
+                <td style="width:4cm;" class="print_page_td_haveborder_zfdc2"><b>金额合计</b></td>
+                <td class="print_page_td_haveborder_zfdc2"><b>可使用折扣金额</b></td>
+                <td class="print_page_td_haveborder_zfdc2"><b>本期使用折扣金额</b></td>
+                <td class="print_page_td_haveborder_zfdc2"><b>剩余折扣金额</b></td>
+                <td class="print_page_td_haveborder_zfdc2"><b>本单实际金额</b></td>
+                <td class="print_page_td_haveborder_zfdc2"><b>上期余额</b></td>
+                <td class="print_page_td_haveborder_zfdc2"><b>本单应付金额</b></td>
+            </tr>
+            <tr>
+                <td class="print_page_td_haveborder_zfdc2">
+                    <label>@data[i].TTdata.TOTAL</label>
+                    <label>@data[i].TTdata.TOTAL2</label>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.DISCOUNT</td>
+                <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.DISCOUNT_THIS</td>
+                <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.DISCOUNT_BALANCE</td>
+                <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.ACTUAL</td>
+                <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.PREVIOUS_BALANCE</td>
+                <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.PAY</td>
+            </tr>
+            <tr height="50px">
+                <td class="print_page_td_haveborder_zfdc2">
+                    <b>处理人意见区</b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" colspan="6">
+                    【同意】    @data[i].TTdata.SHRDES    @data[i].TTdata.SHSJ
+                </td>
+            </tr>
+            
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr height="50px">
+                <td style="width:3cm;"><b>客户备注</b></td>
+                <td class="print_page_td_haveborder_zfdc2" style="width:6cm;">@data[i].TTdata.BEIZ</td>
+                <td style="width:3cm;"><b>业务员备注</b></td>
+                <td class="print_page_td_haveborder_zfdc2" style="width:6cm;">@data[i].TTdata.BEIZ2</td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr>
+                <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">客服</td>
+                <td class="print_page_td_haveborder_zfdc2"></td>
+                <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">日期</td>
+                <td class="print_page_td_haveborder_zfdc2"></td>
+                <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">审核</td>
+                <td class="print_page_td_haveborder_zfdc2"></td>
+                <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">日期</td>
+                <td class="print_page_td_haveborder_zfdc2"></td>
+            </tr>
+        </table>
+
+    </div>
+}
+
+
+
+

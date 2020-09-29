@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "排班分组维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="ISGLJR_Tpl">
+    {{# if(d.ISGLJR == 0){ }}
+    否
+    {{# }else if(d.ISGLJR == 1){ }}
+    是
+    {{# } }}
+</script>
+<script type="text/html" id="ISMR_Tpl">
+    {{# if(d.ISMR == 0){ }}
+    否
+    {{# }else if(d.ISMR == 1){ }}
+    是
+    {{# } }}
+</script>
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="ISMRTpl">
+    <input type="checkbox" name="ismr" value="{{d.ISMR}}" lay-skin="switch" lay-text="是|否" lay-filter="cb_ismr" {{ d.ISMR == 1 ? 'checked' : '' }}>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>排班分组维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">分组名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_fzname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_pbfz" lay-filter="tb_pbfz"></table>
+</div>
+<div class="layui-form" id="div_pbfzinfo" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">排班分组：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="pbfzinfo_fzname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-inline">
+                <select id="pbfzinfo_isaction" lay-filter="pbfzinfo_isaction">
+                    <option value="0" selected="selected">关闭</option>
+                    <option value="1">启用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工作天数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="pbfzinfo_workday" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">休息天数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="pbfzinfo_freeday" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">关联假日：</label>
+            <div class="layui-input-inline">
+                <select id="pbfzinfo_isgljr" lay-filter="pbfzinfo_isgljr">
+                    <option value="0" selected="selected">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn layui-btn-sm" id="btn_bzxz">班制选择</button>
+    <table class="layui-hide" id="tb_pbfzmx" lay-filter="tb_pbfzmx"></table>
+</div>
+<div id="div_bzinfo" hidden>
+    <table class="layui-hide" id="tb_bzinfo" lay-filter="tb_bzinfo"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_PBFZ_MANAGE")
+}

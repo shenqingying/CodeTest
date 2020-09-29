@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "电池抽样数据";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>电池抽样数据</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search_samp">查询</button>
+        <button class="layui-btn" id="btn_add_samp">新增</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_export_samp">导出</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">电池型号：</label>
+            <div class="layui-input-inline">
+                <select id="list_specs" lay-filter="list_specs" lay-search="">
+                    <option value="">全部</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">数值类型：</label>
+            <div class="layui-input-inline">
+                <select id="list_size" lay-filter="list_size">
+                    <option value="">全部</option>
+                    <option value="开路电压">开路电压</option>
+                    <option value="电池尺寸A">电池尺寸A</option>
+                    <option value="电池尺寸B">电池尺寸B</option>
+                    <option value="电池尺寸C">电池尺寸C</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" id="tb_samp_list" lay-filter="tb_samp_list"></table>
+</div>
+
+<div id="div_modify" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_modify" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label">电池型号：</label>
+        <div class="layui-input-inline">
+            <select id="list_specs_a" lay-search="" lay-verify="required">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数值类型：</label>
+        <div class="layui-input-inline">
+            <select id="list_size_a" lay-verify="required">
+                <option value="">请选择</option>
+                <option value="开路电压">开路电压</option>
+                <option value="电池尺寸A">电池尺寸A</option>
+                <option value="电池尺寸B">电池尺寸B</option>
+                <option value="电池尺寸C">电池尺寸C</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数值：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="specs_value_a" class="layui-input" lay-verify="required|number">
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/YCLSY/BAT_SPECS_SAMP")
+}

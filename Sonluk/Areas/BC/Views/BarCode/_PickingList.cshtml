@@ -1,0 +1,24 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService;
+@model List<ZSL_BCS107>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">拣配单号</td>
+        <td class="data-table-header">托运SN</td>
+        <td class="data-table-header">送达方</td>
+        <td class="data-table-header">送达方名称</td>
+        <td class="data-table-header">送达方地址</td>
+        <td class="data-table-header">喷印内容</td>
+    </tr>
+    @foreach (ZSL_BCS107 node in Model)
+    {
+        <tr>
+            <td class="text-align-right">@node.Jpd</td>
+            <td class="text-align-right">@node.Ywc</td>
+            <td class="text-align-left">@node.Kunnr</td>
+            <td class="text-align-left">@node.Sdfmc</td>
+            <td class="text-align-left">@node.Sdfdz</td>
+            <td class="text-align-left">@node.Lxfs</td>
+        </tr>
+    }
+</table>

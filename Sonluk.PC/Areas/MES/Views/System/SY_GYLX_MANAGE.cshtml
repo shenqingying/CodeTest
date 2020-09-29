@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "工艺路线管理（车间）";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<style type="text/css">
+    .labelwidth {
+        width: 120px
+    }
+
+    .divContent {
+    }
+</style>
+<input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+<input type="hidden" value="@Url.Action("ImportSY_GYLX", "System")" id="ImportSY_GYLX" />
+<input type="hidden" value="@Url.Action("ExportByExcelGYLX")" id="ExportByExcelGYLX" />
+<input type="hidden" value="@Url.Action("CreateSY_GYLX")" id="CreateSY_GYLX" />
+<input type="hidden" value="@Url.Action("UpdateSY_GYLX")" id="UpdateSY_GYLX" />
+<input type="hidden" value="@Url.Action("ReadSY_GYLX")" id="ReadSY_GYLX" />
+<input type="hidden" value="@Url.Action("DeleteSY_GYLX")" id="DeleteSY_GYLX" />
+<input type="hidden" value="@Url.Action("ReadSY_TYPEMX")" id="ReadSY_TYPEMX" />
+<input type="hidden" value="@Url.Action("ExportByExcelTemplet")" id="ExportByExcelTemplet" />
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">{{common.c_modify}}</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">{{common.c_delete}}</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="head">MES系统设置</a>
+    <a lid="headsub"><cite>工艺路线管理（车间）</cite></a>
+</span>
+
+
+<div id="form1" class="layui-form">
+    <br />
+    <div class="layui-form-item">
+        <button class="layui-btn" lid="btn1" id="btn1">新增</button>
+        <button class="layui-btn" lid="btn2" id="btn2">查询</button>
+        <button class="layui-btn" lid="btn3" id="btn3">导入Excel</button>
+        <button class="layui-btn" lid="btn4" id="btn4">下载导入模板</button>
+        <button class="layui-btn" lid="btn6" id="btn6">导出Excel</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="in_gc" lay-filter="in_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label2">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label3">物料号：</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" class="layui-input" id="in_wlh">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label4">物料描述：</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" class="layui-input" id="in_wlms">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb1" lay-filter="tb1"></table>
+    </div>
+</div>
+
+<div id="div1" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_gc" lay-filter="div_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <label class="layui-form-label labelwidth" lid="label2">工作中心：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_gzzx" lay-filter="div_gzzx">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label3">物料号：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_wlh">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label4">物料描述：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_wlms">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label5">品牌：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_pp">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label6">型号：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_xh">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label7">只/卡：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_pks">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label8">人次：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_rs">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label9">车位产量：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_cl">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label10">车位产量单位：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_clunit" lay-filter="div_clunit">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label11">车位产量时间：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_sj">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label12">车位产量时间单位：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_sjunit" lay-filter="div_sjunit">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label13">只/箱：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_ctn">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label14">只/托：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_pal">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label15">模具编号：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_mjbh">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label16">备注1：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_remark1">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label17">备注2：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_remark2">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label18">备注：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_remark">
+        </div>
+    </div>
+
+
+</div>
+<div class="layui-upload layui-form" id="div2" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="div1_gc" lay-filter="div1_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+       
+        <div class="layui-inline" style="padding-top:10px">
+            <label class="layui-form-label" lid="label2">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="div1_gzzx" lay-filter="div1_gzzx">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+    
+    <div class="layui-form-item" style="padding-left:20px;padding-top:130px;text-align:center">
+        <button type="button" class="layui-btn" id="btn_dr_sc" style="width:120px">导入文件</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SYSTEM/SY_GYLX_MANAGE",
+                    "~/bundles/zwk")
+}

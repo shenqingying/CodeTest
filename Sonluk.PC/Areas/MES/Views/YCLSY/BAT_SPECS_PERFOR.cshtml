@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "电性能数据";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>电性能数据</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search_perfor">查询</button>
+        <button class="layui-btn" id="btn_add_perfor">新增</button>
+        <button class="layui-btn" id="btn_import_perfor_open">导入</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_export_perfor">导出</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">生产线：</label>
+            <div class="layui-input-inline">
+                <select id="list_pl" lay-filter="list_pl" lay-search="">
+                    <option value="">全部</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="perfor_dates" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="perfor_datee" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" id="tb_perfor_list" lay-filter="tb_perfor_list"></table>
+</div>
+
+<div id="div_import_info" class="layui-form" hidden style="padding:30px 30px 0px 20px">
+    <div class="layui-form-item">
+        <label class="layui-form-label" id="import_info_status" style="width:100px;color: gray;">无导入结果：</label>
+        <div class="layui-input-inline" style="width:380px">
+            <label class="layui-form-label" id="import_info_msg" style="width:380px;text-align:left"></label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">额外信息：</label>
+        <div class="layui-input-inline" style="width:380px">
+            <label class="layui-form-label" id="import_info_error" style="width:380px;text-align:left"></label>
+        </div>
+    </div>
+</div>
+
+<div id="div_import" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <button class="layui-btn" id="btn_import_perfor_template">导入模板下载</button>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="perfor_date_month" autocomplete="off" class="layui-input" placeholder="请选择年月">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" id="btn_import_perfor">导入</button>
+        </div>
+    </div>
+</div>
+
+<div id="div_modify" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_modify" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label">生产线：</label>
+        <div class="layui-input-inline">
+            <select id="list_pl_a" lay-search="" lay-verify="required">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">电池型号：</label>
+        <div class="layui-input-inline">
+            <select id="list_specs_a" lay-search="" lay-verify="required">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">素电类型：</label>
+        <div class="layui-input-inline">
+            <select id="list_type_a" lay-search="" lay-verify="required">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">日期：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="perfor_date_a" class="layui-input" lay-verify="required">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数值：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="perfor_value_a" class="layui-input" lay-verify="required|number">
+        </div>
+    </div>
+</div>
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/YCLSY/BAT_SPECS_PERFOR")
+}

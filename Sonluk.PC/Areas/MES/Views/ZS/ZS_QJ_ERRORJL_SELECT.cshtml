@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "全检错误日志记录";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>注塑追溯管理</a>
+    <a><cite>全检错误日志记录</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">记录日期：</label>
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="text" id="find_jlrqs" placeholder="日期" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="text" id="find_jlrqe" placeholder="日期" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_jl" lay-filter="tb_jl"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/ZS_QJ_ERRORJL_SELECT")
+}

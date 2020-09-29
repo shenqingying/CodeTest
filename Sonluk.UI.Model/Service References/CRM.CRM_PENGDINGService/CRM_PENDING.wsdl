@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_Summary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_SummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_SummaryResult" type="tns:ArrayOfCRM_PENDING_SUMMARY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_PENDING_SUMMARY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_PENDING_SUMMARY" nillable="true" type="tns:CRM_PENDING_SUMMARY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_PENDING_SUMMARY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SUMMARYDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SUMMARYID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHCOUNTS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FINISHCOUNTS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="REQUIRECOUNTS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UNFINISHEDCOUNTS" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Read_Detail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SummaryID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_DetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_DetailResult" type="tns:ArrayOfCRM_PENDING_DETAIL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_PENDING_DETAIL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_PENDING_DETAIL" nillable="true" type="tns:CRM_PENDING_DETAIL" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_PENDING_DETAIL">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHMC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BFJHID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BFJHDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="REQUIRECOUNTS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FINISHCOUNTS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UNFINISHEDCOUNTS" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfCRM_PENDING_SUMMARY" nillable="true" type="tns:ArrayOfCRM_PENDING_SUMMARY" />
+      <s:element name="ArrayOfCRM_PENDING_DETAIL" nillable="true" type="tns:ArrayOfCRM_PENDING_DETAIL" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_SummarySoapIn">
+    <wsdl:part name="parameters" element="tns:Read_Summary" />
+  </wsdl:message>
+  <wsdl:message name="Read_SummarySoapOut">
+    <wsdl:part name="parameters" element="tns:Read_SummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_DetailSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_Detail" />
+  </wsdl:message>
+  <wsdl:message name="Read_DetailSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_DetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_SummaryHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_SummaryHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_PENDING_SUMMARY" />
+  </wsdl:message>
+  <wsdl:message name="Read_DetailHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="SummaryID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_DetailHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_PENDING_DETAIL" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_SummaryHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_SummaryHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_PENDING_SUMMARY" />
+  </wsdl:message>
+  <wsdl:message name="Read_DetailHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="SummaryID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_DetailHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_PENDING_DETAIL" />
+  </wsdl:message>
+  <wsdl:portType name="CRM_PENDINGSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_Summary">
+      <wsdl:input message="tns:Read_SummarySoapIn" />
+      <wsdl:output message="tns:Read_SummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_Detail">
+      <wsdl:input message="tns:Read_DetailSoapIn" />
+      <wsdl:output message="tns:Read_DetailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_PENDINGHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_Summary">
+      <wsdl:input message="tns:Read_SummaryHttpGetIn" />
+      <wsdl:output message="tns:Read_SummaryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_Detail">
+      <wsdl:input message="tns:Read_DetailHttpGetIn" />
+      <wsdl:output message="tns:Read_DetailHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_PENDINGHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_Summary">
+      <wsdl:input message="tns:Read_SummaryHttpPostIn" />
+      <wsdl:output message="tns:Read_SummaryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_Detail">
+      <wsdl:input message="tns:Read_DetailHttpPostIn" />
+      <wsdl:output message="tns:Read_DetailHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CRM_PENDINGSoap" type="tns:CRM_PENDINGSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Summary">
+      <soap:operation soapAction="http://tempuri.org/Read_Summary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Detail">
+      <soap:operation soapAction="http://tempuri.org/Read_Detail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_PENDINGSoap12" type="tns:CRM_PENDINGSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Summary">
+      <soap12:operation soapAction="http://tempuri.org/Read_Summary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Detail">
+      <soap12:operation soapAction="http://tempuri.org/Read_Detail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_PENDINGHttpGet" type="tns:CRM_PENDINGHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Summary">
+      <http:operation location="/Read_Summary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Detail">
+      <http:operation location="/Read_Detail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_PENDINGHttpPost" type="tns:CRM_PENDINGHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Summary">
+      <http:operation location="/Read_Summary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_Detail">
+      <http:operation location="/Read_Detail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CRM_PENDING">
+    <wsdl:port name="CRM_PENDINGSoap" binding="tns:CRM_PENDINGSoap">
+      <soap:address location="http://192.168.0.16/API/CRM/CRM_PENDING.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_PENDINGSoap12" binding="tns:CRM_PENDINGSoap12">
+      <soap12:address location="http://192.168.0.16/API/CRM/CRM_PENDING.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_PENDINGHttpGet" binding="tns:CRM_PENDINGHttpGet">
+      <http:address location="http://192.168.0.16/API/CRM/CRM_PENDING.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_PENDINGHttpPost" binding="tns:CRM_PENDINGHttpPost">
+      <http:address location="http://192.168.0.16/API/CRM/CRM_PENDING.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

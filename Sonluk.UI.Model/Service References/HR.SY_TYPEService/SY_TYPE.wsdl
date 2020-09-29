@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:HR_SY_TYPE_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_SY_TYPE_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_SY_TYPE" type="tns:ArrayOfHR_SY_TYPE" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_SY_TYPE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_SY_TYPE" nillable="true" type="tns:HR_SY_TYPE" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_SY_TYPE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TYPEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPENAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPEMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISYXWH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISALL" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HR_SY_TYPE_SELECT" nillable="true" type="tns:HR_SY_TYPE_SELECT" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpGetOut">
+    <wsdl:part name="Body" element="tns:HR_SY_TYPE_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpPostOut">
+    <wsdl:part name="Body" element="tns:HR_SY_TYPE_SELECT" />
+  </wsdl:message>
+  <wsdl:portType name="SY_TYPESoap">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_TYPEHttpGet">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTHttpGetIn" />
+      <wsdl:output message="tns:SELECTHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_TYPEHttpPost">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTHttpPostIn" />
+      <wsdl:output message="tns:SELECTHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SY_TYPESoap" type="tns:SY_TYPESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_TYPESoap12" type="tns:SY_TYPESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_TYPEHttpGet" type="tns:SY_TYPEHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SELECT">
+      <http:operation location="/SELECT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_TYPEHttpPost" type="tns:SY_TYPEHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SELECT">
+      <http:operation location="/SELECT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SY_TYPE">
+    <wsdl:port name="SY_TYPESoap" binding="tns:SY_TYPESoap">
+      <soap:address location="http://192.168.0.223/API/HR/SY_TYPE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_TYPESoap12" binding="tns:SY_TYPESoap12">
+      <soap12:address location="http://192.168.0.223/API/HR/SY_TYPE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_TYPEHttpGet" binding="tns:SY_TYPEHttpGet">
+      <http:address location="http://192.168.0.223/API/HR/SY_TYPE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_TYPEHttpPost" binding="tns:SY_TYPEHttpPost">
+      <http:address location="http://192.168.0.223/API/HR/SY_TYPE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

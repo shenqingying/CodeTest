@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "登录";
+    string errorMessage = "";
+    if (Session["ErrorMessage"] != null)
+    {
+        errorMessage = (string)Session["ErrorMessage"];
+        Session["ErrorMessage"] = null;
+    }
+    string username = "";
+    string password = "";
+    if (Request.Cookies["userName"] != null)
+    {
+        username = Request.Cookies["userName"].Value;
+    }
+    if (Request.Cookies["password"] != null)
+    {
+        password = Request.Cookies["password"].Value;
+    }
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    @Styles.Render("~/Content/layui/css/login")
+    @Styles.Render("~/Content/layui/css/layui")
+    <title>Mobile</title>
+</head>
+<body>
+    <div class="login">
+        <h1>登录</h1>
+        <form class="layui-form" action="@Url.Action("Verify", "Access")" method="post" id="sign-in-form">
+            <div class="layui-form-item">
+                <input class="layui-input" name="name" placeholder="用户名" lay-verify="required" type="text" autocomplete="off" value="@username" />
+            </div>
+            <div class="layui-form-item">
+                <input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password" autocomplete="off" value="@password" />
+            </div>
+            <button class="layui-btn login_btn" id="demo1">登录</button>
+            <div class="layui-form-item">
+                <label class="layui-form-label">@errorMessage</label>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    Session["TITLENAME"] = "KA年度费用申请";
+
+    CRM_HG_DICT[] PAYWAY = ViewBag.PAYWAY;
+    CRM_HG_DICT[] CXY = ViewBag.CXY;
+}
+
+<div class="weui-btn-area">
+    <button class="weui-btn weui-btn_primary" id="btn_save" style="width:100%;display: initial;margin: 0 0;">保存</button>
+</div>
+
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+
+    <div id="div_clickkh">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="mc" class="weui-input" type="text" placeholder="" readonly>
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="crmid" class="weui-input" type="text" placeholder="" readonly>
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">客户SAP编号：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="sapsn" class="weui-input" type="text" placeholder="" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">合同年份：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="time_year" class="weui-select">
+                <option value="">请选择</option>
+                @for (int i = @DateTime.Now.Year - 10; i <= @DateTime.Now.Year + 10; i++)
+                {
+                    if (i == DateTime.Now.Year)
+                    {
+                        <option value="@i" selected="selected">@(i)年</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@(i)年</option>
+                    }
+
+                }
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">年度费用开始日期：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="time_begin" class="weui-input" type="date" placeholder="">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">年度费用结束日期：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="time_end" class="weui-input" type="date" placeholder="">
+        </div>
+    </div>
+
+    
+
+
+
+
+
+</div>
+
+
+
+
+<div id="div_jump" class="layui-form" hidden>
+
+    <button class="weui-btn weui-btn_primary" id="btn_cxkh">查询</button>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="KH_name" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="KH_ID" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="div_kh">
+
+    </div>
+
+
+
+
+
+    <br />
+
+</div>
+
+
+
+@*<div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">网上下单(六安市强盛商贸有限公司 2017-07-25 22:16)</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">发起时间</label>
+                <span class="weui-form-preview__value">2018-12-06</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单类型</label>
+                <span class="weui-form-preview__value">常规订单</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单状态</label>
+                <span class="weui-form-preview__value">未提交</span>
+            </p>
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">查看</a>
+            <a class="weui-form-preview__btn " href="javascript:">提交审核</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;">删除</a>
+        </div>
+    </div>*@
+
+
+
+<input id="khid" hidden />
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Insert_KAyear")
+}

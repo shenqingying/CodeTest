@@ -1,0 +1,48 @@
+﻿@using Sonluk.UI.Model.BC.EnqueueService
+@model IEnumerable<EnqueueInfo>
+@{
+    ViewBag.Title = "队列锁";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/bc/enqueue-index")
+<input type="hidden" value="@Url.Action("_Read", "User", new { area = "BC" })" id="user-read-uri">
+<input type="hidden" value="@Url.Action("_Read", "Table", new { area = "DEV" })" id="table-read-uri">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">队列锁</a>
+        >
+        <a href="#">显示</a>
+    </div>
+</div>
+
+<div class="panel-search">
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">匹配内容</div>
+        <input type="text" class="panel-search-item-input input-width-enqueue-content" id="value" />
+    </div>
+    <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+    <input type="hidden" value="@Url.Action("_List", "Enqueue")">
+</div>
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div class="sonluk-table-control-response-time"></div>
+            <div class="sonluk-table-control-self-adaption-display">
+                <div class="sonluk-table-control-message-left" id="message"></div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="enqueue"></div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/bc/enqueue-index")
+}
+

@@ -1,0 +1,398 @@
+﻿@{
+    ViewBag.Title = "物流部包材入库";
+}
+
+@Html.Partial("~/Areas/WMS/Views/Shared/WMSHttp.cshtml")
+
+<span class="layui-breadcrumb"></span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="rksjd+c_COLON">入库送检单：</label>
+            <div class="layui-input-inline">
+                <input id="inputTM" type="text" class="layui-input" lid="qsmrksjdbcl" placeholder="请扫描入库送检单(包材类)" onkeydown="javascript: if (event && event.keyCode == 13) searchWH();" autofocus>
+            </div>
+            <button class="layui-btn" onclick="updateWH()" lid="gz">过账</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        @*<div class="layui-inline">
+                <label class="layui-form-label1" lid="rksjd+c_COLON">入库送检单：</label>
+                <div class="layui-input-inline" style="width:105px;">
+                    <input type="text" id="SHNO" class="layui-input layui-disabled" readonly>
+                </div>
+            </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="c_GC+c_COLON">工厂：</label>
+            <div class="layui-input-inline" style="width:80px;">
+                <input type="text" id="GC" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="gzrq+c_COLON">过账日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="GZRQ" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="ttwb+c_COLON">抬头文本：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="HEADTEXT" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="gys+c_COLON">供应商：</label>
+            <div class="layui-input-inline" style="width:250px;">
+                <input type="text" id="GYS" class="layui-input layui-disabled" readonly style="font-size:13px;">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="kcdd+c_COLON">库存地点：</label>
+            <div class="layui-input-inline">
+                <select id="KCDD"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">条目数：</label>
+            <div class="layui-input-inline" style="width:80px;">
+                <input type="text" id="TMS" value="0" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" onclick="clearWH()" lid="qk">清空</button>
+        </div>
+    </div>
+    <table class="layui-hide" id="WHList" lay-filter="WHList"></table>
+</div>
+
+<script type="text/html" id="operate">
+    {{# if(d.MXBS == 1){ }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled">{{slv.btn_wxcc}}</a>
+    {{# } else { }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{sc.c_delete}}</a>
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_CGDD">
+    {{d.CGDDNO || ''}}-{{d.CGDDMXNO || ''}}
+</script>
+
+<script type="text/html" id="tpl_XSBILL">
+    {{# if(d.XSBILLNO){ }}
+    {{d.XSBILLNO || ''}}-{{d.XSBILLMXNO || ''}}
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_WL">
+    {{d.WLH || ''}}-{{d.WLMS || ''}}
+</script>
+
+<script type="text/html" id="tpl_CPZT">
+    {{# if(d.CPZT){ }}
+    <div style="color:{{subCache.CPZTColor[d.CPZT]}}">{{d.CPMXZTNAME}}</div>
+    {{# } else { }}
+    <div>{{slv.wzzt}}</div>
+    {{# } }}
+</script>
+
+@section scripts {
+    <script>
+        sonluk.global.getResources();
+        sonluk.global.getResources('WMS/Purchase', 'lv');
+        var sc = sonluk.values.global.common;
+        var slv = sonluk.values.global.lv;
+        var cache = {};
+        var subCache = {
+            Def: 0,
+            CPZTColor: [],
+            defaultKCDD: '',
+            oldCHARG: '',
+            oldSJSL: 0
+        }
+        layui.use(['table', 'layer', 'form', 'element', 'laydate'], function () {
+            sonluk.layui.breadcrumbefix();
+            sonluk.layuiCatch();
+            var table = layui.table;
+            var layer = layui.layer;
+            var form = layui.form;
+            var assist = sonluk.layui;
+            var msg = sonluk.msg;
+            var WHListCols = [
+                { field: 'SHNO', width: 115 },
+                { field: 'SHMXNO', width: 70 },
+                { templet: '#tpl_CGDD', title: slv.cgddxm, width: 160 },
+                { templet: '#tpl_WL', title: slv.wlxx, width: 400, align: 'left' },
+                { templet: '#tpl_XSBILL', title: slv.xsddxm, width: 130 },
+                { field: 'CGSL', align: 'right' },
+                { field: 'UNITNAME' },
+                { field: 'YHBS' },
+                { field: 'CHARG', edit: 'text', width: 100, event: 'CHARG' },
+                { field: 'REMARK', minWidth: 100, align: 'left' },
+                { fixed: 'right', templet: '#tpl_CPZT', title: slv.cpzt },
+                { fixed: 'right', field: 'SJSL', edit: 'text', width: 100, event: 'SJSL', align: 'right' },
+                { fixed: 'right', templet: '#operate', title: sc.c_Operate, width: 120 }
+            ]
+
+            initAll();
+
+            function initAll() {
+                $('#GZRQ').val(sonluk.date.now());
+                assist.laydate.render({ elem: '#GZRQ' });
+                table.on('tool(WHList)', function (obj) {
+                    var data = obj.data;
+                    var layEvent = obj.event;
+                    if (layEvent === 'delete') {
+                        for (var i = 0; i < cache.WMS_CG_SHNO_ITEM.length; i++) {
+                            if (cache.WMS_CG_SHNO_ITEM[i].SHNO == data.SHNO && cache.WMS_CG_SHNO_ITEM[i].SHMXNO == data.SHMXNO) {
+                                cache.WMS_CG_SHNO_ITEM.splice(i, 1);
+                                break;
+                            }
+                        }
+                        initTable();
+                    }
+                    else if (layEvent == 'CHARG') {
+                        subCache.oldCHARG = data.CHARG;
+                    }
+                    else if (layEvent == 'SJSL') {
+                        subCache.oldSJSL = data.SJSL;
+                    }
+                });
+                table.on('edit(WHList)', function (obj) {
+                    var value = obj.value
+                    var data = obj.data
+                    var field = obj.field;
+                    if (field == 'CHARG') {
+                        if (subCache.oldCHARG == '') {
+                            msg.err(slv.msg13);
+                            obj.update({ CHARG: subCache.oldCHARG });
+                            initTable();
+                            return;
+                        }
+                        else if (value == '') {
+                            msg.err(slv.msg14);
+                            obj.update({ CHARG: subCache.oldCHARG });
+                            initTable();
+                            return;
+                        }
+                    }
+                    else if (field == 'SJSL' && isNaN(value)) {
+                        msg.err(slv.msg6);
+                        obj.update({ SJSL: subCache.oldSJSL });
+                        initTable();
+                        return;
+                    }
+                    else if (field == 'SJSL' && value <= 0) {
+                        msg.err(slv.msg16);
+                        obj.update({ SJSL: subCache.oldSJSL });
+                        initTable();
+                        return;
+                    }
+                    msg.ok(slv.WHList.SHMXNO + data.SHMXNO + slv.msg7a + WHListCols.find(function (item) { return item.field == field }).title + slv.msg7b + value);
+                });
+            }
+
+            function initTitle() {
+                if (cache.SHNO) {
+                    $('#SHNO').val(cache.SHNO);
+                    $('#GZRQ').val(cache.GZRQ || sonluk.date.now());
+                    $('#HEADTEXT').val(cache.HEADTEXT);
+                    $('#GYS').val(cache.GYSNO + '-' + cache.GYSNAME);
+                    $('#GC').val(cache.GC);
+                    $('#KCDD').val(cache.KCDD || subCache.defaultKCDD);
+                }
+                else {
+                    $('#SHNO').val('');
+                    $('#GZRQ').val(sonluk.date.now());
+                    $('#HEADTEXT').val('');
+                    $('#GYS').val('');
+                    $('#GC').val('');
+                    $('#KCDD').val('');
+                }
+                form.render();
+            }
+
+            function initTable(data) {
+                data = data || cache.WMS_CG_SHNO_ITEM;
+                var fixHeight = 205;
+                $('.layui-form-item').each(function (index, elem) {
+                    fixHeight += elem.clientHeight;
+                });
+                assist.table.render({
+                    elem: '#WHList',
+                    data: data,
+                    height: 'full-' + fixHeight,
+                    cols: [WHListCols],
+                    limit: 9999
+                });
+                $('#TMS').val(data.length);
+            }
+
+            function initOtherInfo(GC, callback) {
+                wmshttp.post({
+                    url: 'MES/SY/READ_MM_CK_BY_STAFFID',
+                    data: {
+                        GC: GC
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            $('#KCDD').empty();
+                            $('#KCDD').append(new Option(sc.c_selectplz, ''));
+                            subCache.defaultKCDD = '';
+                            for (let key in data.data) {
+                                $('#KCDD').append(new Option(data.data[key].CKDM + '-' + data.data[key].CKMS, data.data[key].CKDM));
+                                if (data.data[key].CKDM === cache.KCDD) hasKey = true;
+                                if (data.data[key].CKDM == 1204) subCache.defaultKCDD = 1204;
+                            }
+                            wmshttp.get({
+                                url: 'Helper/Dic/ReadTypemxs',
+                                query: {
+                                    factoryCode: GC,
+                                    typeID: 9
+                                },
+                                success: function (data) {
+                                    if (data.success) {
+                                        for (var i = 0; i < data.data.length; i++) {
+                                            var param = data.data[i];
+                                            subCache.CPZTColor[param.ID] = param.MXREMARK;
+                                            if (param.MXBS == 1) subCache.Def = param.ID;
+                                        }
+                                        callback();
+                                    }
+                                    else msg.error(data.messages);
+                                }
+                            });
+                        }
+                        else msg.error(data.messages);
+                    }
+                });
+            }
+
+            window.searchWH = function () {
+                var number = $('#inputTM').val();
+                $('#inputTM').val('');
+                $('#inputTM').blur();
+                if (number.length == 0) {
+                    $('#inputTM').focus();
+                    return;
+                }
+                if (!number.toLowerCase().startsWith('s') || number.length != 10) {
+                    msg.warn(slv.msg1, null, function () { $('#inputTM').focus(); });
+                    return;
+                }
+                var loading = layer.load(1, { time: 10000 });
+                wmshttp.post({
+                    url: 'WMS/CG_SHNO/READ',
+                    data: { SHNO: number, LB: 2 },
+                    success: function (data) {
+                        if (data.success) {
+                            //条码校验
+                            if (data.data.length == 0) {
+                                msg.warn(slv.msg2, null, function () { $('#inputTM').focus(); });
+                                layer.close(loading);
+                                return;
+                            }
+                            else if (data.data[0].CGLB != 1) {
+                                msg.warn(slv.msg3, null, function () { $('#inputTM').focus(); });
+                                layer.close(loading);
+                                return;
+                            }
+                            if (cache && cache.WMS_CG_SHNO_ITEM) {
+                                layer.close(loading);
+                                var newData = data.data[0];
+                                //条码累加校验
+                                if (newData.GC != cache.GC) {
+                                    msg.warn(slv.msg17, null, function () { $('#inputTM').focus(); });
+                                    return;
+                                }
+                                if (newData.GYSNO != cache.GYSNO) {
+                                    msg.warn(slv.msg18, null, function () { $('#inputTM').focus(); });
+                                    return;
+                                }
+                                for (var i = 0; i < cache.WMS_CG_SHNO_ITEM.length; i++) {
+                                    if (cache.WMS_CG_SHNO_ITEM[i].SHNO == newData.SHNO) {
+                                        msg.warn(slv.msg19a + ' ' + newData.SHNO + ' ' + slv.msg19b, null, function () { $('#inputTM').focus(); });
+                                        return;
+                                    }
+                                }
+                                newData.WMS_CG_SHNO_ITEM.forEach(function (item) {
+                                    if (!item.SJSL) item.SJSL = item.CGSL;
+                                    cache.WMS_CG_SHNO_ITEM.push(item);
+                                });
+                                form.render();
+                                initTable();
+                                $('#inputTM').focus();
+                            }
+                            else {
+                                cache = data.data[0];
+                                cache.WMS_CG_SHNO_ITEM.forEach(function (item) {
+                                    if (!item.SJSL) item.SJSL = item.CGSL;
+                                });
+                                initOtherInfo(cache.GC, function () {
+                                    initTitle();
+                                    initTable();
+                                    $('#inputTM').focus();
+                                    layer.close(loading);
+                                });
+                            }
+                        }
+                        else msg.error(data.messages, null, function () { $('#inputTM').focus(); });
+                    }
+                });
+            };
+
+            window.updateWH = function () {
+                if (!cache.WMS_CG_SHNO_ITEM) {
+                    msg.warn(slv.msg20, null, function () { $('#inputTM').focus(); });
+                    return;
+                }
+                for (var i = 0; i < cache.WMS_CG_SHNO_ITEM.length; i++) {
+                    if (cache.WMS_CG_SHNO_ITEM[i].CPZT != subCache.Def) {
+                        msg.warn(cache.WMS_CG_SHNO_ITEM[i].SHNO + '/' + cache.WMS_CG_SHNO_ITEM[i].SHMXNO + slv.msg21, null, function () { $('#inputTM').focus(); });
+                        return;
+                    }
+                }
+                if (!cache.SHNO || !cache.SHNO.toLowerCase().startsWith('s') || cache.SHNO.length != 10) {
+                    msg.warn(slv.msg4, null, function () { $('#inputTM').focus(); });
+                    return;
+                }
+                cache.GZRQ = $('#GZRQ').val();
+                if (!cache.GZRQ) {
+                    msg.warn(slv.msg12, null, function () { $('#inputTM').focus(); });
+                    return;
+                }
+                cache.HEADTEXT = $('#HEADTEXT').val();
+                cache.KCDD = $('#KCDD').val();
+                var loading = layer.load(1);
+                wmshttp.post({
+                    url: 'WMS/CG_SHNO/UPDATE_SH',
+                    data: cache,
+                    success: function (data) {
+                        if (data.success && (data.type == 'S' || data.type == 'W')) {
+                            clearWH();
+                            msg.rep(data.messages, function () { $('#inputTM').focus(); });
+                        }
+                        else msg.err(data.messages, null, function () { $('#inputTM').focus(); });
+                    },
+                    complete: function () {
+                        layer.close(loading);
+                    }
+                });
+                $('#inputTM').focus();
+            };
+
+            window.clearWH = function () {
+                cache = {};
+                initTitle();
+                initTable([]);
+                $('#inputTM').val('');
+                $('#inputTM').focus();
+            };
+        });
+    </script>
+}

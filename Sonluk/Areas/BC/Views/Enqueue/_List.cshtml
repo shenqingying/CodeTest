@@ -1,0 +1,32 @@
+﻿@using Sonluk.UI.Model.BC.EnqueueService
+@model IEnumerable<EnqueueInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">No.</td>
+        <td class="data-table-header">集团</td>
+        <td class="data-table-header">用户名</td>
+        <td class="data-table-header">事务</td>
+        <td class="data-table-header">时间</td>
+        <td class="data-table-header">对象</td>
+        <td class="data-table-header">方式</td>
+        <td class="data-table-header">参数</td>
+        <td class="data-table-header">日期</td>
+    </tr>
+    @{int i = 1;}
+    @foreach (EnqueueInfo node in Model)
+    {
+        <tr>
+            <td>@(i++)</td>
+            <td>@node.Client</td>
+            <td>@node.User</td>
+            <td>@node.TCode</td>
+            <td>@node.Time</td>
+            <td class="text-align-left">@node.Name</td>
+            <td>@node.Mode</td>
+            <td class="text-align-left">@node.Argument</td>
+            <td>@node.Date</td>
+        </tr>
+    }
+</table>
+

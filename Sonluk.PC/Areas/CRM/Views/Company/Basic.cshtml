@@ -1,0 +1,72 @@
+﻿@using Sonluk.UI.Model.CRM.QYJS_MENUService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "企业基本情况";
+    CRM_QYJS_MENU[] data = ViewBag.data;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<div class="layui-tab layui-tab-brief" lay-filter="myTab">
+    <ul class="layui-tab-title">
+        <li class="layui-this" lay-id="@data[0].CATALOGID">@data[0].NAME</li>
+        @for (int i = 1; i < data.Length; i++)
+        {
+            <li lay-id="@data[i].CATALOGID">@data[i].NAME</li>
+        }
+
+    </ul>
+    <div class="layui-tab-content">
+        @{
+            string id0 = "div" + data[0].CATALOGID;
+        }
+        <div id="@id0" class="layui-tab-item layui-show"></div>
+        @for (int i = 1; i < data.Length; i++)
+        {
+            string id = "div" + data[i].CATALOGID;
+            <div id="@id" class="layui-tab-item"></div>
+        }
+
+    </div>
+</div>
+
+<input id="firstID" value="@data[0].CATALOGID" hidden />
+
+<div id="video" style="width: 600px; height: 400px;"></div>
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+<script src="~/Scripts/layui2.2.5/extend/ckplayer.js"></script>
+<script type="text/javascript">
+    //var videoObject = {
+    //    container: '#video', //容器的ID或className
+    //    variable: 'player',
+    //    flashplayer: false, //是否需要强制使用flashplayer
+    //    //loaded: 'loadedHandler', //当播放器加载后执行的函数				
+    //    video: 'http://dev.sonluk.com.cn/CRM/CRMupload/upload/2019/3/movie1.mp4'
+    //};
+    //var player = new ckplayer(videoObject);
+
+    //function loadedHandler() {
+    //    player.addListener('loadedmetadata', loadedMetaDataHandler); //监听元数据
+    //}
+
+    //function loadedMetaDataHandler() {
+    //    var metaData = player.getMetaDate();
+    //    var html = ''
+    //    html += '总时间：' + metaData['duration'] + '秒，';
+    //    html += '音量：' + metaData['volume'] + '（范围0-1），';
+    //    html += '播放器的宽度：' + metaData['width'] + 'px，';
+    //    html += '播放器的高度：' + metaData['height'] + 'px，';
+    //    html += '视频宽度：' + metaData['videoWidth'] + 'px，';
+    //    html += '视频高度：' + metaData['videoHeight'] + 'px，';
+    //    html += '视频原始宽度：' + metaData['streamWidth'] + 'px，';
+    //    html += '视频原始高度：' + metaData['streamHeight'] + 'px，';
+    //    html += '是否暂停状态：' + metaData['paused'];
+    //    console.log(html);
+    //}
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Company/Basic")
+}

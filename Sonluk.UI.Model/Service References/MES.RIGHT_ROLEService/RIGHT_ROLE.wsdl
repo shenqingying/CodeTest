@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RGROUPID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:MES_RIGHT_ROLE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RIGHT_ROLE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_HG_RIGHT" type="tns:ArrayOfCRM_HG_RIGHT" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_HG_RIGHTGROUP" type="tns:ArrayOfCRM_HG_RIGHTGROUP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_HG_RIGHT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_HG_RIGHT" nillable="true" type="tns:CRM_HG_RIGHT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_HG_RIGHT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RIGHTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RGROUPID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RIGHTNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RIGHTNO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RIGHTADD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RIGHTMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMAGELJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_HG_RIGHTGROUP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_HG_RIGHTGROUP" nillable="true" type="tns:CRM_HG_RIGHTGROUP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_HG_RIGHTGROUP">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RGROUPID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RGROUPNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRGROUPID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRIGHTNO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RGROUPMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMAGELJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_HG_RIGHT" type="tns:ArrayOfCRM_HG_RIGHT" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_ALL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RGROUPID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_ALLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_ALLResult" type="tns:MES_RIGHT_ROLE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RIGHT_ROLE" nillable="true" type="tns:MES_RIGHT_ROLE" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_ALL" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_ALLResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="RGROUPID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RIGHT_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="RGROUPID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RIGHT_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="RGROUPID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECTHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RIGHT_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="RGROUPID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RIGHT_ROLE" />
+  </wsdl:message>
+  <wsdl:portType name="RIGHT_ROLESoap">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALL">
+      <wsdl:input message="tns:SELECT_ALLSoapIn" />
+      <wsdl:output message="tns:SELECT_ALLSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RIGHT_ROLEHttpGet">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTHttpGetIn" />
+      <wsdl:output message="tns:SELECTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALL">
+      <wsdl:input message="tns:SELECT_ALLHttpGetIn" />
+      <wsdl:output message="tns:SELECT_ALLHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RIGHT_ROLEHttpPost">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTHttpPostIn" />
+      <wsdl:output message="tns:SELECTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALL">
+      <wsdl:input message="tns:SELECT_ALLHttpPostIn" />
+      <wsdl:output message="tns:SELECT_ALLHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RIGHT_ROLESoap" type="tns:RIGHT_ROLESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALL">
+      <soap:operation soapAction="http://tempuri.org/SELECT_ALL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RIGHT_ROLESoap12" type="tns:RIGHT_ROLESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALL">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_ALL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RIGHT_ROLEHttpGet" type="tns:RIGHT_ROLEHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SELECT">
+      <http:operation location="/SELECT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALL">
+      <http:operation location="/SELECT_ALL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RIGHT_ROLEHttpPost" type="tns:RIGHT_ROLEHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SELECT">
+      <http:operation location="/SELECT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALL">
+      <http:operation location="/SELECT_ALL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RIGHT_ROLE">
+    <wsdl:port name="RIGHT_ROLESoap" binding="tns:RIGHT_ROLESoap">
+      <soap:address location="http://192.168.0.223/API/MES/RIGHT_ROLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RIGHT_ROLESoap12" binding="tns:RIGHT_ROLESoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/RIGHT_ROLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RIGHT_ROLEHttpGet" binding="tns:RIGHT_ROLEHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/RIGHT_ROLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RIGHT_ROLEHttpPost" binding="tns:RIGHT_ROLEHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/RIGHT_ROLE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

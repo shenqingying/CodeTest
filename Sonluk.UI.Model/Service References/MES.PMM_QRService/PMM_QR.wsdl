@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="QLTY_SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PMM_QR">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="QID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QCODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QISACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RCODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RISACTION" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QLTY_SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QLTY_SELECTResult" type="tns:MES_PMM_QR_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PMM_QR_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_PMM_QR" type="tns:ArrayOfMES_PMM_QR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_PMM_QR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_PMM_QR" nillable="true" type="tns:MES_PMM_QR" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QLTY_INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QLTY_INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QLTY_INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QLTY_UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QLTY_UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QLTY_UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QLTY_DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="QID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QLTY_DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QLTY_DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="REP_SELECTResult" type="tns:MES_PMM_QR_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="REP_INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="REP_UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="REP_DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="REP_DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QR_SELECT_BY_QCODE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="QID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QR_SELECT_BY_QCODEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QR_SELECT_BY_QCODEResult" type="tns:MES_PMM_QR_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QR_COVER">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QR_COVERResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QR_COVERResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QR_DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PMM_QR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QR_DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QR_DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="MES_PMM_QR_SELECT" nillable="true" type="tns:MES_PMM_QR_SELECT" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="QLTY_SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:QLTY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:QLTY_SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:QLTY_INSERT" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:QLTY_INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:QLTY_UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:QLTY_UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:QLTY_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:QLTY_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="REP_SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:REP_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="REP_SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:REP_SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="REP_INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:REP_INSERT" />
+  </wsdl:message>
+  <wsdl:message name="REP_INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:REP_INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="REP_UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:REP_UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="REP_UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:REP_UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="REP_DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:REP_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="REP_DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:REP_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="QR_SELECT_BY_QCODESoapIn">
+    <wsdl:part name="parameters" element="tns:QR_SELECT_BY_QCODE" />
+  </wsdl:message>
+  <wsdl:message name="QR_SELECT_BY_QCODESoapOut">
+    <wsdl:part name="parameters" element="tns:QR_SELECT_BY_QCODEResponse" />
+  </wsdl:message>
+  <wsdl:message name="QR_COVERSoapIn">
+    <wsdl:part name="parameters" element="tns:QR_COVER" />
+  </wsdl:message>
+  <wsdl:message name="QR_COVERSoapOut">
+    <wsdl:part name="parameters" element="tns:QR_COVERResponse" />
+  </wsdl:message>
+  <wsdl:message name="QR_DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:QR_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="QR_DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:QR_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_DELETEHttpGetIn">
+    <wsdl:part name="QID" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="REP_DELETEHttpGetIn">
+    <wsdl:part name="RID" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="REP_DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="QR_SELECT_BY_QCODEHttpGetIn">
+    <wsdl:part name="QID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QR_SELECT_BY_QCODEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_PMM_QR_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_DELETEHttpPostIn">
+    <wsdl:part name="QID" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QLTY_DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="REP_DELETEHttpPostIn">
+    <wsdl:part name="RID" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="REP_DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="QR_SELECT_BY_QCODEHttpPostIn">
+    <wsdl:part name="QID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QR_SELECT_BY_QCODEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_PMM_QR_SELECT" />
+  </wsdl:message>
+  <wsdl:portType name="PMM_QRSoap">
+    <wsdl:operation name="QLTY_SELECT">
+      <wsdl:input message="tns:QLTY_SELECTSoapIn" />
+      <wsdl:output message="tns:QLTY_SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_INSERT">
+      <wsdl:input message="tns:QLTY_INSERTSoapIn" />
+      <wsdl:output message="tns:QLTY_INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_UPDATE">
+      <wsdl:input message="tns:QLTY_UPDATESoapIn" />
+      <wsdl:output message="tns:QLTY_UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_DELETE">
+      <wsdl:input message="tns:QLTY_DELETESoapIn" />
+      <wsdl:output message="tns:QLTY_DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="REP_SELECT">
+      <wsdl:input message="tns:REP_SELECTSoapIn" />
+      <wsdl:output message="tns:REP_SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="REP_INSERT">
+      <wsdl:input message="tns:REP_INSERTSoapIn" />
+      <wsdl:output message="tns:REP_INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="REP_UPDATE">
+      <wsdl:input message="tns:REP_UPDATESoapIn" />
+      <wsdl:output message="tns:REP_UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="REP_DELETE">
+      <wsdl:input message="tns:REP_DELETESoapIn" />
+      <wsdl:output message="tns:REP_DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QR_SELECT_BY_QCODE">
+      <wsdl:input message="tns:QR_SELECT_BY_QCODESoapIn" />
+      <wsdl:output message="tns:QR_SELECT_BY_QCODESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QR_COVER">
+      <wsdl:input message="tns:QR_COVERSoapIn" />
+      <wsdl:output message="tns:QR_COVERSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QR_DELETE">
+      <wsdl:input message="tns:QR_DELETESoapIn" />
+      <wsdl:output message="tns:QR_DELETESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PMM_QRHttpGet">
+    <wsdl:operation name="QLTY_DELETE">
+      <wsdl:input message="tns:QLTY_DELETEHttpGetIn" />
+      <wsdl:output message="tns:QLTY_DELETEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="REP_DELETE">
+      <wsdl:input message="tns:REP_DELETEHttpGetIn" />
+      <wsdl:output message="tns:REP_DELETEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QR_SELECT_BY_QCODE">
+      <wsdl:input message="tns:QR_SELECT_BY_QCODEHttpGetIn" />
+      <wsdl:output message="tns:QR_SELECT_BY_QCODEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PMM_QRHttpPost">
+    <wsdl:operation name="QLTY_DELETE">
+      <wsdl:input message="tns:QLTY_DELETEHttpPostIn" />
+      <wsdl:output message="tns:QLTY_DELETEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="REP_DELETE">
+      <wsdl:input message="tns:REP_DELETEHttpPostIn" />
+      <wsdl:output message="tns:REP_DELETEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QR_SELECT_BY_QCODE">
+      <wsdl:input message="tns:QR_SELECT_BY_QCODEHttpPostIn" />
+      <wsdl:output message="tns:QR_SELECT_BY_QCODEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PMM_QRSoap" type="tns:PMM_QRSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QLTY_SELECT">
+      <soap:operation soapAction="http://tempuri.org/QLTY_SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_INSERT">
+      <soap:operation soapAction="http://tempuri.org/QLTY_INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_UPDATE">
+      <soap:operation soapAction="http://tempuri.org/QLTY_UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_DELETE">
+      <soap:operation soapAction="http://tempuri.org/QLTY_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_SELECT">
+      <soap:operation soapAction="http://tempuri.org/REP_SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_INSERT">
+      <soap:operation soapAction="http://tempuri.org/REP_INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_UPDATE">
+      <soap:operation soapAction="http://tempuri.org/REP_UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_DELETE">
+      <soap:operation soapAction="http://tempuri.org/REP_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_SELECT_BY_QCODE">
+      <soap:operation soapAction="http://tempuri.org/QR_SELECT_BY_QCODE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_COVER">
+      <soap:operation soapAction="http://tempuri.org/QR_COVER" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_DELETE">
+      <soap:operation soapAction="http://tempuri.org/QR_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PMM_QRSoap12" type="tns:PMM_QRSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QLTY_SELECT">
+      <soap12:operation soapAction="http://tempuri.org/QLTY_SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_INSERT">
+      <soap12:operation soapAction="http://tempuri.org/QLTY_INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/QLTY_UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QLTY_DELETE">
+      <soap12:operation soapAction="http://tempuri.org/QLTY_DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_SELECT">
+      <soap12:operation soapAction="http://tempuri.org/REP_SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_INSERT">
+      <soap12:operation soapAction="http://tempuri.org/REP_INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/REP_UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_DELETE">
+      <soap12:operation soapAction="http://tempuri.org/REP_DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_SELECT_BY_QCODE">
+      <soap12:operation soapAction="http://tempuri.org/QR_SELECT_BY_QCODE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_COVER">
+      <soap12:operation soapAction="http://tempuri.org/QR_COVER" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_DELETE">
+      <soap12:operation soapAction="http://tempuri.org/QR_DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PMM_QRHttpGet" type="tns:PMM_QRHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="QLTY_DELETE">
+      <http:operation location="/QLTY_DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_DELETE">
+      <http:operation location="/REP_DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_SELECT_BY_QCODE">
+      <http:operation location="/QR_SELECT_BY_QCODE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PMM_QRHttpPost" type="tns:PMM_QRHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="QLTY_DELETE">
+      <http:operation location="/QLTY_DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="REP_DELETE">
+      <http:operation location="/REP_DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QR_SELECT_BY_QCODE">
+      <http:operation location="/QR_SELECT_BY_QCODE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PMM_QR">
+    <wsdl:port name="PMM_QRSoap" binding="tns:PMM_QRSoap">
+      <soap:address location="http://localhost/API/MES/PMM_QR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PMM_QRSoap12" binding="tns:PMM_QRSoap12">
+      <soap12:address location="http://localhost/API/MES/PMM_QR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PMM_QRHttpGet" binding="tns:PMM_QRHttpGet">
+      <http:address location="http://localhost/API/MES/PMM_QR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PMM_QRHttpPost" binding="tns:PMM_QRHttpPost">
+      <http:address location="http://localhost/API/MES/PMM_QR.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

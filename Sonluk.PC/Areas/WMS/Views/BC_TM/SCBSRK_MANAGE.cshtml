@@ -1,0 +1,105 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    ViewBag.Title = "货号信息维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">打印</a>
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA订单管理</a>
+    <a><cite>货号信息维护</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lay-filter="formDemo">条码关联</button>
+            <button id="btn_dc" class="layui-btn" lay-filter="formDemo">组合装关联</button>
+            <button id="btn_kb" class="layui-btn" lay-filter="formDemo">批量打印</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">导出</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">差选</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;text-align:right;">工厂：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_SY" lay-filter="select_SY" lay-search>
+                                <option value="0" selected>请选择</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">工作中心：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_SY" lay-filter="select_SY" lay-search>
+                                <option value="0" selected>请选择</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">条码：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_ProdName" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;text-align:right;">销售订单：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_ProdName" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">销售项目：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_ProdSpec" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px;text-align:right;">打印张数：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_DGDW" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;text-align:right;">ERP工单：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_ProdName" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">物料信息：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_ProdSpec" type="text" autocomplete="off" class="layui-input" placeholder="(物料信息/物料描述)">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px;text-align:right;">创建日期：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_DGDW" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label">是否读取唛头信息:</label>
+                        <div class="layui-input-inline" style="width:220px">
+                            <input type="checkbox" name="" lay-skin="primary" title="" checked="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-form-item" id="tb_result">
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/BC_TM/SCBSRK_MANAGE")
+}
+
+

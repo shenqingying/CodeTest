@@ -1,0 +1,93 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "物流追踪查选";
+}
+
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">首页</a>
+    <a>物流管理</a>
+    <a><cite>物流追踪查询</cite></a>
+</span>
+
+<br />
+<br />
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="imgTpl">
+    <img class="mytableimg" src="{{d.ML}}" />
+</script>
+
+
+<script type="text/html" id="tb_display">
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    <a class="layui-btn layui-btn-xs" lay-event="img">照片</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<script type="text/html" id="tb_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+</script>
+
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div class="layui-form" id="div1">
+        <div class="layui-form-item">
+            
+            <button id="btn_select" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">出库单编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="NUMBER" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">新建时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_begin" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="result" lay-filter="result"></table>
+    </div>
+</div>
+
+
+@*附件：新增广告设计图照片*@
+<div id="004p" class="layui-form" hidden>
+    <br />
+    @*<div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_upload_display" class="layui-btn" lay-filter="btn_upload_display">上传照片</button>
+        </div>
+    </div>*@
+    <table id="pic_display004" lay-filter="pic_display004"></table>
+
+</div>
+
+
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/WL/Select_Wl")
+}

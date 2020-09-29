@@ -1,0 +1,76 @@
+﻿@using Sonluk.UI.Model.Print.LayoutService
+@model LayoutInfo
+@{
+    ViewBag.Title = "布局编辑";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/sonluk-ui/control-panel")
+@Styles.Render("~/Content/print/layout-edit")
+<input type="hidden" value="@Url.Action("TempletBackground", "Upload")" />
+<input type="hidden" value="@Url.Action("Save", "Layout")" id="layout-save" />
+<input type="hidden" value="@Url.Action("Edit", "Layout",new { id = UrlParameter.Optional })" id="layout-copy" />
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">打印</a>
+        >
+        <a href="#">布局编辑</a>
+    </div>
+</div>
+<div class="print-layout-edit">
+    <div class="control-panel">
+        <input type="hidden" value="@Model.ID" id="ID" />
+        <div class="control-panel-item">
+            <div class="control-panel-item-title">名称</div>
+            <input type="text" class="control-panel-item-input" id="name" value="@Model.Name" />
+        </div>
+        <div class="control-panel-item">
+            <div class="control-panel-item-title">凭证</div>
+            <input type="text" class="control-panel-item-input" id="doc" value="@Model.Doc" />
+        </div>
+        <div class="control-panel-item">
+            <div class="control-panel-item-title">MAC</div>
+            <input type="text" class="control-panel-item-input" id="mac" value="@Model.Mac" />
+        </div>
+        <div class="sonluk-button control-panel-button btn-control-add">日期</div>
+        <input type="hidden" value="dateTime" />
+        <div class="sonluk-button control-panel-button btn-control-add">标签</div>
+        <input type="hidden" value="label" />
+        <div class="sonluk-button control-panel-button btn-control-add">文本框</div>
+        <input type="hidden" value="textBox" />
+        <div class="sonluk-button control-panel-button btn-control-add">二维码</div>
+        <input type="hidden" value="2dcode" />
+        <div class="sonluk-button control-panel-button">背景</div>
+        @*<form id="importFile" method="post" action="@Url.Action("_ImportSalesOrders", "PurchaseOrder")" target="importFileFrame" enctype="multipart/form-data">
+                <input type="text" class="import-bar-input-text">
+            </form>
+            <iframe id="importFileFrame" name="importFileFrame" class="importFileFrame"></iframe>
+            <input type="hidden" value="@Url.Action("_List", "PurchaseOrder")">*@
+    </div>
+    <div class="print-layout-edit-control-edit">
+        <div class="print-layout-edit-control-edit-style">
+            <input type="text" class="print-layout-edit-control-edit-style-sheet" id="style">
+        </div>
+        <div class="sonluk-button print-layout-edit-control-edit-delete">删除</div>
+    </div>
+    <div class="print-layout-edit-page" style="@Model.Style">
+        @if (Model.Controls != null)
+        {
+            foreach (ControlInfo node in Model.Controls)
+            {
+                <div class="print-layout-edit-control" style="@node.Style" name="@node.Value">
+                    <input class="print-layout-edit-control" type="hidden" value="@node.ID" />
+                    <input type="hidden" value="@node.Type" />
+                    <input class="print-layout-edit-control-input" type="text" value="@node.Value" />
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/print/layout-edit")
+}
+
+
+
+

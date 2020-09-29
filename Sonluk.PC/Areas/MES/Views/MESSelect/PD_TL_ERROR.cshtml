@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "投料错误记录";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vimesselect">MES查询</a>
+    <a><cite lid="vitl_error">投料错误记录</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="viselect">查询</button>
+        <button class="layui-btn" id="btn_DC" lid="viexport">数据导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vigc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    <option value="" selected="selected" lid="vioption">请选择</option>
+                    @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                    {
+                        <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="viworkcenter">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx" lay-search="">
+                    <option value="" selected="selected" lid="vioption">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vimachine">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="in_sbbh" lay-filter="in_sbbh">
+                    <option value="" selected="selected" lid="viworkcenter">请选择</option>
+                </select>
+            </div>
+        </div>
+        @*<div class="layui-inline">
+                <label class="layui-form-label">生产日期：</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="date" id="in_scrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+            </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vidate">生产日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="viwllb">物料类别：</label>
+            <div class="layui-input-inline">
+                <select id="in_wllb" lay-filter="in_wllb">
+                    <option value="0" selected="selected" lid="vioption">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_TL_ERROR" lay-filter="tb_TL_ERROR"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="print" lid="vidy">打印</a>
+    </script>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/PD_TL_ERROR")
+}

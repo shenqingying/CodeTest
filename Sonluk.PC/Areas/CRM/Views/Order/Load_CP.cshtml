@@ -1,0 +1,39 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_PRODUCTService;
+@{
+    ViewBag.Title = "Load_CP";
+    CRM_PRODUCT_PRODUCT[] data = ViewBag.PRODUCT;
+}
+
+<div class="layui-form-item">
+    @for (int i = 0; i < data.Length; i++)
+    {
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="text-align:center;">
+                <br /><br />
+                <img style="height:120px;" src="@data[i].ML" />
+                <label class="layui-form-label" style="width:inherit;height:50px;padding-left:0px;padding-right:0px;font-size:18px;text-align:left;">@data[i].CPMC</label>
+                @if (@data[i].CountInOrder == 0)
+                {
+                    <button id="btn_@data[i].PRODUCTID" class="layui-btn" style="width:100%" onclick="CP_click(@data[i].PRODUCTID)">添加</button>
+                }
+                else
+                {
+                    <button id="btn_@data[i].PRODUCTID" class="layui-btn layui-btn-danger" style="width:100%" onclick="CP_click(@data[i].PRODUCTID)" disabled>已添加</button>
+                }
+
+            </div>
+        </div>
+    }
+
+    @*<div class="layui-inline">
+            <div class="layui-input-inline">
+                <br /><br />
+                <img src="~/img/cp1.jpg" />
+                <label class="layui-form-label" style="width:inherit;height:50px;padding-left:0px;padding-right:0px;">双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX</label>
+                <button id="btn_add" class="layui-btn" style="width:100%">添加</button>
+            </div>
+        </div>*@
+
+
+
+</div>

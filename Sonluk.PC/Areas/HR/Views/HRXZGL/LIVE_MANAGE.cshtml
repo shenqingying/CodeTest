@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "宿舍入住管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="SHENGYCOUNT_Tpl">
+    {{d.ROOMRYCOUNT-d.LIVECOUNT}}
+</script>
+<script type="text/html" id="ROOMZT_Tpl">
+    {{# if(d.ROOMZT == 1){ }}
+    空房
+    {{# }else if(d.ROOMZT == 2){ }}
+    未满
+    {{# }else if(d.ROOMZT == 3){ }}
+    满房
+    {{# } }}
+</script>
+<script type="text/html" id="LIVETYPE_Tpl">
+    {{# if(d.LIVETYPE == 1){ }}
+    入住
+    {{# }else if(d.LIVETYPE == 2){ }}
+    搬离
+    {{# } }}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">出入登记</a>
+</script>
+<script type="text/html" id="barkh1">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>宿舍入住管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" onclick="location.href = '@Url.Action("LIVEMX_REPORT", "HRXZGL")'">明细报表</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿舍名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_dormname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_roomname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">入住人员：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_dormry" autocomplete="off" class="layui-input" placeholder="（姓名/工号）">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间类型：</label>
+            <div class="layui-input-inline">
+                <select xm-select="find_roomtype" id="find_roomtype" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间状态：</label>
+            <div class="layui-input-inline">
+                <select id="find_roomzt" lay-filter="find_roomzt">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">空房</option>
+                    <option value="2">未满</option>
+                    <option value="3">满房</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_dormnamelist" lay-filter="tb_dormnamelist"></table>
+</div>
+<div id="div_liveinfo" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿舍名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_dormname" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_roomname" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">房间类型：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_roomtype" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">额定人数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_rycount" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn" id="btn_liveadd">添加人员</button>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">房间类型：</label>
+            <div class="layui-input-inline">
+                <select id="liveinfo_livetype" lay-filter="liveinfo_livetype">
+                    <option value="1" selected="selected">入住</option>
+                    <option value="2">搬离</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_livelist" lay-filter="tb_livelist"></table>
+</div>
+<div id="div_liveinfo_add" class="layui-form" hidden>
+    <button class="layui-btn" id="btn_hrread">HR读取</button>
+    <button class="layui-btn" id="btn_zjadd">直接新增</button>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">所属公司：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_add_gs" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">归属部门：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_add_gsbm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_add_xm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">HR工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_add_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">性别：</label>
+            <div class="layui-input-inline">
+                <select id="liveinfo_add_xb" lay-filter="liveinfo_add_xb">
+                    <option value="" selected="selected">请选择</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">学历：</label>
+            <div class="layui-input-inline">
+                <select id="liveinfo_add_xl" lay-filter="liveinfo_add_xl"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">联系电话：</label>
+            <div class="layui-input-inline" style="width: 515px;">
+                <input type="text" id="liveinfo_add_lxdh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">状态：</label>
+            <div class="layui-input-inline">
+                <select id="liveinfo_add_livezt" lay-filter="liveinfo_add_livezt">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">入住</option>
+                    <option value="2">搬离</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">入住日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_add_rzrq" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">搬离日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_add_blrq" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">住宿费：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="liveinfo_add_zsf" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">元</div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline" style="width: 515px;">
+                <input type="text" id="liveinfo_add_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_readhr" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="readhr_gh" autocomplete="off" placeholder="（姓名/工号/证件号码）" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_wcdjinfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_wcdjinfo_add_ry" lay-filter="tb_wcdjinfo_add_ry"></table>
+</div>
+<div class="layui-form" hidden>
+    <input type="text" id="bl_roomid" value="">
+    <input type="text" id="bl_ryid" value="0">
+    <input type="text" id="bl_addlb" value="0">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/HRXZGL/LIVE_MANAGE")
+}

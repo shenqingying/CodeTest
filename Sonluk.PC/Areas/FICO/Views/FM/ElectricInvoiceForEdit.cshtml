@@ -1,0 +1,314 @@
+﻿@using Sonluk.UI.Model.HR.SY_GSService;
+@{
+    ViewBag.Title = "发票维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string staffname = "";
+
+    if (Session["NAME"] != null)
+    {
+        staffname = Session["NAME"].ToString();
+    }
+
+
+    HR_SY_GS_SELECT GCData = ViewBag.GCData;
+
+}
+
+<script type="text/html" id="manage">
+    <a class="layui-btn layui-btn-xs " lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">首页</a>
+    <a>财务管理</a>
+    <a><cite>发票维护</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form ">
+    <div class="layui-form" id="div1">
+        <div class="layui-form-item">
+            <button id="btn_select" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            <button id="btn_add" class="layui-btn">发票新增</button>
+            <button id="btn_dc" class="layui-btn">导出</button>
+            @*<button id="btn_dr" class="layui-btn">导入</button>*@
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content ">
+                    <div class="layui-form-item">
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <table>
+                                    <tr>
+                                        <td style="width: 140px; text-align: right;">
+                                            <label id="" class="layui-btn" style="text-align:right">扫描 </label>
+                                        </td>
+                                        <td style="width: 20px; text-align: right;"></td>
+                                        <td width="940px">
+                                            <input id="Read_Scan" name="Read_Scan" type="text" placeholder="请扫描" autocomplete="off" class="layui-input" style="ime-mode:disabled" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">发票代码：</label>
+                            <div class="layui-input-inline">
+                                <input id="SELECT_FPDM" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">发票号码：</label>
+                            <div class="layui-input-inline">
+                                <input id="SELECT_FPHM" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">报销人员：</label>
+                            <div class="layui-input-inline">
+                                <input id="SELECT_BXR" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">开票日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="BEGIN_KPRQ" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="END_KPRQ" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">录入人员：</label>
+                            <div class="layui-input-inline">
+                                <input id="SELECT_CJR" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">不含税金额：</label>
+                            <div class="layui-input-inline">
+                                <input id="BEGIN_AMOUNT" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="END_AMOUNT" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">会计年度：</label>
+                            <div class="layui-input-inline">
+                                <input id="SELECT_KJND" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">录入时间：</label>
+                            <div class="layui-input-inline">
+                                <input id="BEGIN_CJSJ" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="END_CJSJ" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">校验码：</label>
+                            <div class="layui-input-inline">
+                                <input id="SELECET_JYM" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">凭证编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="SELECT_PZBH" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">公司名称：</label>
+                            <div class="layui-input-inline" style="width:565px;">
+                                <select id="SELECT_GS" lay-filter="SELECT_GS" lay-search>
+                                    <option value="">请选择</option>
+                                    @for (int i = 0; i < GCData.HR_SY_GS_LIST.Length; i++)
+                                    {
+                                        if (GCData.HR_SY_GS_LIST.Length == 1)
+                                        {
+                                            <option value="@GCData.HR_SY_GS_LIST[i].GS" selected="selected">@GCData.HR_SY_GS_LIST[i].GSNAME</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@GCData.HR_SY_GS_LIST[i].GS">@GCData.HR_SY_GS_LIST[i].GSNAME</option>
+
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="result" lay-filter="result"></table>
+    </div>
+</div>
+<div id="div2" class="layui-form " hidden>
+    <br />
+    <br />
+    <div id="div_scan" class="layui-form-item" hidden>
+        <table>
+            <tr>
+                <td style="width: 140px; text-align: right;">
+                    <label id="" class="layui-btn">扫描 </label>
+                </td>
+                <td style="width: 20px; text-align: right;"></td>
+                <td width="565px">
+                    <input id="SCAN" name="SCAN" type="text" placeholder="请扫描" autocomplete="off" class="layui-input" style="ime-mode:disabled" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">公司名称：</label>
+        <div class="layui-input-inline" style="width: 565px;">
+            <select id="GSNAME" lay-filter="GSNAME" lay-search>
+                @*<option value="">请选择</option>*@
+                @for (int i = 0; i < GCData.HR_SY_GS_LIST.Length; i++)
+                {
+                    if (GCData.HR_SY_GS_LIST.Length == 1)
+                    {
+                        <option value="@GCData.HR_SY_GS_LIST[i].GS" selected="selected">@GCData.HR_SY_GS_LIST[i].GSNAME</option>
+                    }
+                    else
+                    {
+                        <option value="@GCData.HR_SY_GS_LIST[i].GS">@GCData.HR_SY_GS_LIST[i].GSNAME</option>
+
+                    }
+
+                }
+            </select>
+        </div>
+
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">发票代码：</label>
+            <div class="layui-input-inline">
+                <input id="FPDM" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">发票号码：</label>
+            <div class="layui-input-inline">
+                <input id="FPHM" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">开票日期：</label>
+            <div class="layui-input-inline">
+                <input id="KPRQ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">校验码：</label>
+            <div class="layui-input-inline">
+                <input id="JYM" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">不含税金额：</label>
+            <div class="layui-input-inline">
+                <input id="AMOUNT" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;"></label>
+            <div class="layui-input-inline">
+                @*<input id="" type="text" autocomplete="off" class="layui-input" value="@ViewBag.STAFFNAME" disabled>*@
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">纳税人识别号：</label>
+            <div class="layui-input-inline">
+                <input id="SELLERID" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;"></label>
+            <div class="layui-input-inline">
+                @*<input id="" type="text" autocomplete="off" class="layui-input" value="@ViewBag.STAFFNAME" disabled>*@
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">录入人员：</label>
+            <div class="layui-input-inline">
+                <input id="STAFF" type="text" autocomplete="off" class="layui-input" value="@ViewBag.STAFFNAME" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">会计年度：</label>
+            <div class="layui-input-inline">
+                <input id="KJND" type="text" autocomplete="off" class="layui-input" value="@ViewBag.YEAR">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">凭证编号：</label>
+            <div class="layui-input-inline">
+                <input id="PZBH" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">报销人员：</label>
+            <div class="layui-input-inline">
+                <input id="BXR" type="text" autocomplete="off" class="layui-input">
+                @*<div id="searchresult" style="display: none;">
+                </div>*@
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">备注：</label>
+            <div class="layui-input-inline" style="width:565px">
+                <textarea id="BEIZ" name="desc" placeholder="请输入备注" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_jump" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <button id="btn_down" class="layui-btn" lay-filter="formDemo">下载模板</button>
+        <button id="btn_template" class="layui-btn" lay-filter="formDemo">导入</button>
+    </div>
+    <br />
+</div>
+
+<input id="STAFFNAME" value="@staffname" hidden />
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/FICO/FM/ElectricInvoiceForEdit")
+}
+
+

@@ -1,0 +1,2362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateBarCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="format" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="width" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="height" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pure" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateBarCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateBarCodeResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_TBM_ZFTH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="srwlm" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tgwlm" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_TBM_ZFTHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_TBM_ZFTHResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_MAT_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="matnr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_MAT_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_MAT_GETResult" type="tns:ZSL_BCS007" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_BCS007">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Mtart" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Matnr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Maktx" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Zpar" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Zbon" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Zpks" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Zpcs" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zzsbs" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zltbs" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZBCFUN_CKGDP_DISPLAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRQ" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_LGNUM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_CKGDP_DISPLAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_CKGDP_DISPLAYResult" type="tns:PickingtaskInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PickingtaskInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Ev_ljs" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ev_ywcs" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zsl_bcs106" type="tns:ArrayOfZSL_BCST106" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCST106">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCST106" nillable="true" type="tns:ZSL_BCST106" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCST106">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Lgnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jpd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Yzf" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jjbz" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sdfdz" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lxr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Slhj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jdzs" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ywc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ztzs" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Xgr" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ScreenInfoRead">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ScreenInfoReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ScreenInfoReadResult" type="tns:ScreenInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ScreenInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ScreenID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MContent" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScreenName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ScreenInfoUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:ScreenInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ScreenInfoUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ScreenInfoUpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ScreenInfoReadALL">
+        <s:complexType />
+      </s:element>
+      <s:element name="ScreenInfoReadALLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ScreenInfoReadALLResult" type="tns:ArrayOfScreenInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfScreenInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ScreenInfo" nillable="true" type="tns:ScreenInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZBCFUN_LTPM_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_LGNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_JPD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRQ_S" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRQ_E" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_VBELN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_LTPM_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_LTPM_READResult" type="tns:ArrayOfZSL_BCS107" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSL_BCS107">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS107" nillable="true" type="tns:ZSL_BCS107" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS107">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Lgnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jpd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ywc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ltbs" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vbeln" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jjbz" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lnumt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Kunnr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sdfmc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sdfdz" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lxr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lxfs" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PickingListREAD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_LGNUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_JPD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRQ_S" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRQ_E" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_VBELN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PickingListREADResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PickingListREADResult" type="tns:ArrayOfZSL_BCS107" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_WLZS_READ_JSON">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WLM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_WLZS_READ_JSONResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_WLZS_READ_JSONResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_WLZS_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WLM" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_WLZS_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_WLZS_READResult" type="tns:TrackInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TrackInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RETURN" type="tns:ArrayOfZSL_BCST100" />
+          <s:element minOccurs="0" maxOccurs="1" name="ES_109" type="tns:ZSL_BCS109" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCST100">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCST100" nillable="true" type="tns:ZSL_BCST100" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCST100">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Log_no" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Log_msg_no" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message_v1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message_v2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message_v3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message_v4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Parameter" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Row" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Field" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="System" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS109">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Wlm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Matnr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Maktx" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sdfmc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sdfdz" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lgnum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jpd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jpdxm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phrq" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phsj" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_CUS_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_CUS_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_CUS_GETResult" type="tns:MODEL_ZBCFUN_CUS_GET" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_CUS_GET">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_CUSS" type="tns:ArrayOfZSL_BCS009" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RETURN" type="tns:ArrayOfZSL_BCST100" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS009">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS009" nillable="true" type="tns:ZSL_BCS009" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS009">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEZEI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ORT01" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_DLV_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_DLV_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_DLV_GETResult" type="tns:MODEL_ZBCFUN_DLV_GET" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_DLV_GET">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RETURN" type="tns:ArrayOfZSL_BCST100" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_TTXX" type="tns:ArrayOfZSL_BCS010" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_HXMXX" type="tns:ArrayOfZSL_BCS011" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS010">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS010" nillable="true" type="tns:ZSL_BCS010" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS010">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WADAT_IST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS011">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS011" nillable="true" type="tns:ZSL_BCS011" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS011">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NHM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LWEDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QXBS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_DLV_GET_CRM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_SYS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_DLV_GET_CRMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_DLV_GET_CRMResult" type="tns:MODEL_ZBCFUN_DLV_GET" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_MAT_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_DATUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_MTART" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_MATNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_ZSBS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_MAT_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_MAT_GETResult" type="tns:MODEL_ZBCFUN_MAT_GET" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_MAT_GET">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_MATS" type="tns:ArrayOfZSL_BCS007" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RETURN" type="tns:ArrayOfZSL_BCST100" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS007">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS007" nillable="true" type="tns:ZSL_BCS007" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_ORT_GET">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_ORT_GETResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_ORT_GETResult" type="tns:MODEL_ZBCFUN_ORT_GET" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_ORT_GET">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_ORTS" type="tns:ArrayOfZSL_BCS008" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RETURN" type="tns:ArrayOfZSL_BCST100" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS008">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS008" nillable="true" type="tns:ZSL_BCS008" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS008">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGOBE" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_TM_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_KZBEW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_TM_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_TM_READResult" type="tns:MODEL_ZBCFUN_TM_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_TM_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_TM" type="tns:ArrayOfZSL_BCT100" />
+          <s:element minOccurs="0" maxOccurs="1" name="RETURN_MSG" type="tns:RETURN_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCT100">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT100" nillable="true" type="tns:ZSL_BCT100" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCT100">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NHM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YZF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RETURN_MSG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_THLOG_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_THLOG_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_THLOG_READResult" type="tns:MODEL_ZBCFUN_THLOG_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_THLOG_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_THLOG" type="tns:ArrayOfZSL_BCT108" />
+          <s:element minOccurs="0" maxOccurs="1" name="RETURN_MSG" type="tns:RETURN_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCT108">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT108" nillable="true" type="tns:ZSL_BCT108" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCT108">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TGWLM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SRWLM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_DLV_GET2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KHmodeldata" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_DLV_GET2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_DLV_GET2Result" type="tns:MODEL_ZBCFUN_DLV_GET" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_POITEM_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_EBELN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_EBELP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_POITEM_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_POITEM_READResult" type="tns:MODEL_ZBCFUN_POITEM_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_POITEM_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RETURN" type="tns:ArrayOfZSL_BCST100" />
+          <s:element minOccurs="0" maxOccurs="1" name="ES_POITEM" type="tns:ZSL_BCS002" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS002">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EBELP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LIFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EKGRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EKNAM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EINDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MENGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OBMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGOBE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEMPF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ABLAD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOBKZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RETPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSART" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RESWK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="INSMK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATKL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WGBEZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZBCFUN_PO_RECEIPT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CKDJH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_KZBEW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZBCFUN_PO_RECEIPTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZBCFUN_PO_RECEIPTResult" type="tns:ZSL_BCST100" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JHD_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JHD_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JHD_READResult" type="tns:MODEL_ZBCFUN_JHD_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_JHD_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ES_HeadData" type="tns:ZSL_BCS013" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_ItemData" type="tns:ArrayOfZSL_BCST014" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS013">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAMEG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STREET" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FCODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZKGGKH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VTEXT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VKORG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YGZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCST014">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCST014" nillable="true" type="tns:ZSL_BCST014" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCST014">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ORMNG" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="VRKME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SONUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOBKZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UECHA" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LGMNG" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZPAR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZBON" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZPKS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZPCS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZLTBS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DXS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NHS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZKGGKH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="tns:ArrayOfTMmodel" />
+          <s:element minOccurs="0" maxOccurs="1" name="VGPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VGBEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SPLIT" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTMmodel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TMmodel" nillable="true" type="tns:TMmodel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TMmodel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Barcode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SCANED" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSGNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISCLMSG" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CODE" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="JHD_UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ArrayOfZSL_BCT110" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSL_BCT110">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT110" nillable="true" type="tns:ZSL_BCT110" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCT110">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NHM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QXBS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELNN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNRN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WADAT_IST" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="JHD_UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JHD_UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JHZ_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MODEL_ZBCFUN_JHZ_READ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MODEL_ZBCFUN_JHZ_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IV_MATNR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IV_SL" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EV_DXS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EV_NHS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EV_ZS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EV_JHZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="JHZ_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JHZ_READResult" type="tns:MODEL_ZBCFUN_JHZ_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="base64Binary" nillable="true" type="s:base64Binary" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ZSL_BCS007" nillable="true" type="tns:ZSL_BCS007" />
+      <s:element name="PickingtaskInfo" nillable="true" type="tns:PickingtaskInfo" />
+      <s:element name="ScreenInfo" nillable="true" type="tns:ScreenInfo" />
+      <s:element name="ArrayOfScreenInfo" nillable="true" type="tns:ArrayOfScreenInfo" />
+      <s:element name="ArrayOfZSL_BCS107" nillable="true" type="tns:ArrayOfZSL_BCS107" />
+      <s:element name="TrackInfo" nillable="true" type="tns:TrackInfo" />
+      <s:element name="MODEL_ZBCFUN_CUS_GET" nillable="true" type="tns:MODEL_ZBCFUN_CUS_GET" />
+      <s:element name="MODEL_ZBCFUN_DLV_GET" nillable="true" type="tns:MODEL_ZBCFUN_DLV_GET" />
+      <s:element name="MODEL_ZBCFUN_MAT_GET" nillable="true" type="tns:MODEL_ZBCFUN_MAT_GET" />
+      <s:element name="MODEL_ZBCFUN_ORT_GET" nillable="true" type="tns:MODEL_ZBCFUN_ORT_GET" />
+      <s:element name="MODEL_ZBCFUN_TM_READ" nillable="true" type="tns:MODEL_ZBCFUN_TM_READ" />
+      <s:element name="MODEL_ZBCFUN_THLOG_READ" nillable="true" type="tns:MODEL_ZBCFUN_THLOG_READ" />
+      <s:element name="MODEL_ZBCFUN_POITEM_READ" nillable="true" type="tns:MODEL_ZBCFUN_POITEM_READ" />
+      <s:element name="ZSL_BCST100" nillable="true" type="tns:ZSL_BCST100" />
+      <s:element name="MODEL_ZBCFUN_JHD_READ" nillable="true" type="tns:MODEL_ZBCFUN_JHD_READ" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateBarCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateBarCode" />
+  </wsdl:message>
+  <wsdl:message name="CreateBarCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateBarCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_TBM_ZFTHSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_TBM_ZFTH" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_TBM_ZFTHSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_TBM_ZFTHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_MAT_GETSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_MAT_GET" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_MAT_GETSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_MAT_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_CKGDP_DISPLAYSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_CKGDP_DISPLAY" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_CKGDP_DISPLAYSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_CKGDP_DISPLAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadSoapIn">
+    <wsdl:part name="parameters" element="tns:ScreenInfoRead" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ScreenInfoReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:ScreenInfoUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:ScreenInfoUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadALLSoapIn">
+    <wsdl:part name="parameters" element="tns:ScreenInfoReadALL" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadALLSoapOut">
+    <wsdl:part name="parameters" element="tns:ScreenInfoReadALLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_LTPM_READSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_LTPM_READ" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_LTPM_READSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_LTPM_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="PickingListREADSoapIn">
+    <wsdl:part name="parameters" element="tns:PickingListREAD" />
+  </wsdl:message>
+  <wsdl:message name="PickingListREADSoapOut">
+    <wsdl:part name="parameters" element="tns:PickingListREADResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READ_JSONSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_WLZS_READ_JSON" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READ_JSONSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_WLZS_READ_JSONResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_WLZS_READ" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_WLZS_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_CUS_GETSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_CUS_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_CUS_GETSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_CUS_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GETSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_DLV_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GETSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_DLV_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET_CRMSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_DLV_GET_CRM" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET_CRMSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_DLV_GET_CRMResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_MAT_GETSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_MAT_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_MAT_GETSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_MAT_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_ORT_GETSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_ORT_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_ORT_GETSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_ORT_GETResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_TM_READSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_TM_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_TM_READSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_TM_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_THLOG_READSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_THLOG_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_THLOG_READSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_THLOG_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET2SoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_DLV_GET2" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET2SoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_DLV_GET2Response" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_POITEM_READSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_POITEM_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_POITEM_READSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_POITEM_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_PO_RECEIPTSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_PO_RECEIPT" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_PO_RECEIPTSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZBCFUN_PO_RECEIPTResponse" />
+  </wsdl:message>
+  <wsdl:message name="JHD_READSoapIn">
+    <wsdl:part name="parameters" element="tns:JHD_READ" />
+  </wsdl:message>
+  <wsdl:message name="JHD_READSoapOut">
+    <wsdl:part name="parameters" element="tns:JHD_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="JHD_UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:JHD_UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="JHD_UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:JHD_UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="JHZ_READSoapIn">
+    <wsdl:part name="parameters" element="tns:JHZ_READ" />
+  </wsdl:message>
+  <wsdl:message name="JHZ_READSoapOut">
+    <wsdl:part name="parameters" element="tns:JHZ_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateBarCodeHttpGetIn">
+    <wsdl:part name="code" type="s:string" />
+    <wsdl:part name="format" type="s:string" />
+    <wsdl:part name="width" type="s:string" />
+    <wsdl:part name="height" type="s:string" />
+    <wsdl:part name="pure" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateBarCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_TBM_ZFTHHttpGetIn">
+    <wsdl:part name="srwlm" type="s:string" />
+    <wsdl:part name="tgwlm" type="s:string" />
+    <wsdl:part name="fcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_TBM_ZFTHHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_MAT_GETHttpGetIn">
+    <wsdl:part name="matnr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_MAT_GETHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZSL_BCS007" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_CKGDP_DISPLAYHttpGetIn">
+    <wsdl:part name="IV_CJRQ" type="s:string" />
+    <wsdl:part name="IV_LGNUM" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_CKGDP_DISPLAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:PickingtaskInfo" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:ScreenInfo" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadALLHttpGetIn" />
+  <wsdl:message name="ScreenInfoReadALLHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfScreenInfo" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_LTPM_READHttpGetIn">
+    <wsdl:part name="IV_LGNUM" type="s:string" />
+    <wsdl:part name="IV_JPD" type="s:string" />
+    <wsdl:part name="IV_CJRQ_S" type="s:string" />
+    <wsdl:part name="IV_CJRQ_E" type="s:string" />
+    <wsdl:part name="IV_VBELN" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_LTPM_READHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfZSL_BCS107" />
+  </wsdl:message>
+  <wsdl:message name="PickingListREADHttpGetIn">
+    <wsdl:part name="IV_LGNUM" type="s:string" />
+    <wsdl:part name="IV_JPD" type="s:string" />
+    <wsdl:part name="IV_CJRQ_S" type="s:string" />
+    <wsdl:part name="IV_CJRQ_E" type="s:string" />
+    <wsdl:part name="IV_VBELN" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PickingListREADHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfZSL_BCS107" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READ_JSONHttpGetIn">
+    <wsdl:part name="IV_WLM" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READ_JSONHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READHttpGetIn">
+    <wsdl:part name="IV_WLM" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READHttpGetOut">
+    <wsdl:part name="Body" element="tns:TrackInfo" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_CUS_GETHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_CUS_GETHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_CUS_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GETHttpGetIn">
+    <wsdl:part name="IV_DATE" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GETHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_DLV_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET_CRMHttpGetIn">
+    <wsdl:part name="IV_DATE" type="s:string" />
+    <wsdl:part name="IV_SYS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET_CRMHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_DLV_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_MAT_GETHttpGetIn">
+    <wsdl:part name="IV_DATUM" type="s:string" />
+    <wsdl:part name="IV_MTART" type="s:string" />
+    <wsdl:part name="IV_MATNR" type="s:string" />
+    <wsdl:part name="IV_ZSBS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_MAT_GETHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_MAT_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_ORT_GETHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_ORT_GETHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_ORT_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_TM_READHttpGetIn">
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="IV_KZBEW" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_TM_READHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_TM_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_THLOG_READHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_THLOG_READHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_THLOG_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET2HttpGetIn">
+    <wsdl:part name="KHmodeldata" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET2HttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_DLV_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_POITEM_READHttpGetIn">
+    <wsdl:part name="IV_EBELN" type="s:string" />
+    <wsdl:part name="IV_EBELP" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_POITEM_READHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_POITEM_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_PO_RECEIPTHttpGetIn">
+    <wsdl:part name="IV_CKDJH" type="s:string" />
+    <wsdl:part name="IV_KZBEW" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_PO_RECEIPTHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZSL_BCST100" />
+  </wsdl:message>
+  <wsdl:message name="JHD_READHttpGetIn">
+    <wsdl:part name="VBELN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JHD_READHttpGetOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_JHD_READ" />
+  </wsdl:message>
+  <wsdl:message name="CreateBarCodeHttpPostIn">
+    <wsdl:part name="code" type="s:string" />
+    <wsdl:part name="format" type="s:string" />
+    <wsdl:part name="width" type="s:string" />
+    <wsdl:part name="height" type="s:string" />
+    <wsdl:part name="pure" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateBarCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_TBM_ZFTHHttpPostIn">
+    <wsdl:part name="srwlm" type="s:string" />
+    <wsdl:part name="tgwlm" type="s:string" />
+    <wsdl:part name="fcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_TBM_ZFTHHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_MAT_GETHttpPostIn">
+    <wsdl:part name="matnr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_MAT_GETHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZSL_BCS007" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_CKGDP_DISPLAYHttpPostIn">
+    <wsdl:part name="IV_CJRQ" type="s:string" />
+    <wsdl:part name="IV_LGNUM" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_CKGDP_DISPLAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:PickingtaskInfo" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:ScreenInfo" />
+  </wsdl:message>
+  <wsdl:message name="ScreenInfoReadALLHttpPostIn" />
+  <wsdl:message name="ScreenInfoReadALLHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfScreenInfo" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_LTPM_READHttpPostIn">
+    <wsdl:part name="IV_LGNUM" type="s:string" />
+    <wsdl:part name="IV_JPD" type="s:string" />
+    <wsdl:part name="IV_CJRQ_S" type="s:string" />
+    <wsdl:part name="IV_CJRQ_E" type="s:string" />
+    <wsdl:part name="IV_VBELN" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_LTPM_READHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfZSL_BCS107" />
+  </wsdl:message>
+  <wsdl:message name="PickingListREADHttpPostIn">
+    <wsdl:part name="IV_LGNUM" type="s:string" />
+    <wsdl:part name="IV_JPD" type="s:string" />
+    <wsdl:part name="IV_CJRQ_S" type="s:string" />
+    <wsdl:part name="IV_CJRQ_E" type="s:string" />
+    <wsdl:part name="IV_VBELN" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PickingListREADHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfZSL_BCS107" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READ_JSONHttpPostIn">
+    <wsdl:part name="IV_WLM" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READ_JSONHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READHttpPostIn">
+    <wsdl:part name="IV_WLM" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_WLZS_READHttpPostOut">
+    <wsdl:part name="Body" element="tns:TrackInfo" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_CUS_GETHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_CUS_GETHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_CUS_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GETHttpPostIn">
+    <wsdl:part name="IV_DATE" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GETHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_DLV_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET_CRMHttpPostIn">
+    <wsdl:part name="IV_DATE" type="s:string" />
+    <wsdl:part name="IV_SYS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET_CRMHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_DLV_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_MAT_GETHttpPostIn">
+    <wsdl:part name="IV_DATUM" type="s:string" />
+    <wsdl:part name="IV_MTART" type="s:string" />
+    <wsdl:part name="IV_MATNR" type="s:string" />
+    <wsdl:part name="IV_ZSBS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_MAT_GETHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_MAT_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_ORT_GETHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_ORT_GETHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_ORT_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_TM_READHttpPostIn">
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="IV_KZBEW" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_TM_READHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_TM_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_THLOG_READHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_THLOG_READHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_THLOG_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET2HttpPostIn">
+    <wsdl:part name="KHmodeldata" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_DLV_GET2HttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_DLV_GET" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_POITEM_READHttpPostIn">
+    <wsdl:part name="IV_EBELN" type="s:string" />
+    <wsdl:part name="IV_EBELP" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_POITEM_READHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_POITEM_READ" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_PO_RECEIPTHttpPostIn">
+    <wsdl:part name="IV_CKDJH" type="s:string" />
+    <wsdl:part name="IV_KZBEW" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZBCFUN_PO_RECEIPTHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZSL_BCST100" />
+  </wsdl:message>
+  <wsdl:message name="JHD_READHttpPostIn">
+    <wsdl:part name="VBELN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JHD_READHttpPostOut">
+    <wsdl:part name="Body" element="tns:MODEL_ZBCFUN_JHD_READ" />
+  </wsdl:message>
+  <wsdl:portType name="BarCodeSoap">
+    <wsdl:operation name="CreateBarCode">
+      <wsdl:input message="tns:CreateBarCodeSoapIn" />
+      <wsdl:output message="tns:CreateBarCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_TBM_ZFTH">
+      <wsdl:input message="tns:ZBCFUN_TBM_ZFTHSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_TBM_ZFTHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_MAT_GET">
+      <wsdl:input message="tns:ZBCFUN_MAT_GETSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_MAT_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_CKGDP_DISPLAY">
+      <wsdl:input message="tns:ZBCFUN_CKGDP_DISPLAYSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_CKGDP_DISPLAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoRead">
+      <wsdl:input message="tns:ScreenInfoReadSoapIn" />
+      <wsdl:output message="tns:ScreenInfoReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoUpdate">
+      <wsdl:input message="tns:ScreenInfoUpdateSoapIn" />
+      <wsdl:output message="tns:ScreenInfoUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoReadALL">
+      <wsdl:input message="tns:ScreenInfoReadALLSoapIn" />
+      <wsdl:output message="tns:ScreenInfoReadALLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_LTPM_READ">
+      <wsdl:input message="tns:ZBCFUN_LTPM_READSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_LTPM_READSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PickingListREAD">
+      <wsdl:input message="tns:PickingListREADSoapIn" />
+      <wsdl:output message="tns:PickingListREADSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ_JSON">
+      <wsdl:input message="tns:ZBCFUN_WLZS_READ_JSONSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_WLZS_READ_JSONSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ">
+      <wsdl:input message="tns:ZBCFUN_WLZS_READSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_WLZS_READSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_CUS_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_CUS_GETSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_CUS_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GETSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET_CRM">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GET_CRMSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GET_CRMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_MAT_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_MAT_GETSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_MAT_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_ORT_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_ORT_GETSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_ORT_GETSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_TM_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_TM_READSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_TM_READSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_THLOG_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_THLOG_READSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_THLOG_READSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET2">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GET2SoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GET2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_POITEM_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_POITEM_READSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_POITEM_READSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_PO_RECEIPT">
+      <wsdl:input message="tns:GET_ZBCFUN_PO_RECEIPTSoapIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_PO_RECEIPTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JHD_READ">
+      <wsdl:input message="tns:JHD_READSoapIn" />
+      <wsdl:output message="tns:JHD_READSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JHD_UPDATE">
+      <wsdl:input message="tns:JHD_UPDATESoapIn" />
+      <wsdl:output message="tns:JHD_UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JHZ_READ">
+      <wsdl:input message="tns:JHZ_READSoapIn" />
+      <wsdl:output message="tns:JHZ_READSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BarCodeHttpGet">
+    <wsdl:operation name="CreateBarCode">
+      <wsdl:input message="tns:CreateBarCodeHttpGetIn" />
+      <wsdl:output message="tns:CreateBarCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_TBM_ZFTH">
+      <wsdl:input message="tns:ZBCFUN_TBM_ZFTHHttpGetIn" />
+      <wsdl:output message="tns:ZBCFUN_TBM_ZFTHHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_MAT_GET">
+      <wsdl:input message="tns:ZBCFUN_MAT_GETHttpGetIn" />
+      <wsdl:output message="tns:ZBCFUN_MAT_GETHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_CKGDP_DISPLAY">
+      <wsdl:input message="tns:ZBCFUN_CKGDP_DISPLAYHttpGetIn" />
+      <wsdl:output message="tns:ZBCFUN_CKGDP_DISPLAYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoRead">
+      <wsdl:input message="tns:ScreenInfoReadHttpGetIn" />
+      <wsdl:output message="tns:ScreenInfoReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoReadALL">
+      <wsdl:input message="tns:ScreenInfoReadALLHttpGetIn" />
+      <wsdl:output message="tns:ScreenInfoReadALLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_LTPM_READ">
+      <wsdl:input message="tns:ZBCFUN_LTPM_READHttpGetIn" />
+      <wsdl:output message="tns:ZBCFUN_LTPM_READHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PickingListREAD">
+      <wsdl:input message="tns:PickingListREADHttpGetIn" />
+      <wsdl:output message="tns:PickingListREADHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ_JSON">
+      <wsdl:input message="tns:ZBCFUN_WLZS_READ_JSONHttpGetIn" />
+      <wsdl:output message="tns:ZBCFUN_WLZS_READ_JSONHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ">
+      <wsdl:input message="tns:ZBCFUN_WLZS_READHttpGetIn" />
+      <wsdl:output message="tns:ZBCFUN_WLZS_READHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_CUS_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_CUS_GETHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_CUS_GETHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GETHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GETHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET_CRM">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GET_CRMHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GET_CRMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_MAT_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_MAT_GETHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_MAT_GETHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_ORT_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_ORT_GETHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_ORT_GETHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_TM_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_TM_READHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_TM_READHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_THLOG_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_THLOG_READHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_THLOG_READHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET2">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GET2HttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GET2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_POITEM_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_POITEM_READHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_POITEM_READHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_PO_RECEIPT">
+      <wsdl:input message="tns:GET_ZBCFUN_PO_RECEIPTHttpGetIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_PO_RECEIPTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JHD_READ">
+      <wsdl:input message="tns:JHD_READHttpGetIn" />
+      <wsdl:output message="tns:JHD_READHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BarCodeHttpPost">
+    <wsdl:operation name="CreateBarCode">
+      <wsdl:input message="tns:CreateBarCodeHttpPostIn" />
+      <wsdl:output message="tns:CreateBarCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_TBM_ZFTH">
+      <wsdl:input message="tns:ZBCFUN_TBM_ZFTHHttpPostIn" />
+      <wsdl:output message="tns:ZBCFUN_TBM_ZFTHHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_MAT_GET">
+      <wsdl:input message="tns:ZBCFUN_MAT_GETHttpPostIn" />
+      <wsdl:output message="tns:ZBCFUN_MAT_GETHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_CKGDP_DISPLAY">
+      <wsdl:input message="tns:ZBCFUN_CKGDP_DISPLAYHttpPostIn" />
+      <wsdl:output message="tns:ZBCFUN_CKGDP_DISPLAYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoRead">
+      <wsdl:input message="tns:ScreenInfoReadHttpPostIn" />
+      <wsdl:output message="tns:ScreenInfoReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoReadALL">
+      <wsdl:input message="tns:ScreenInfoReadALLHttpPostIn" />
+      <wsdl:output message="tns:ScreenInfoReadALLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_LTPM_READ">
+      <wsdl:input message="tns:ZBCFUN_LTPM_READHttpPostIn" />
+      <wsdl:output message="tns:ZBCFUN_LTPM_READHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PickingListREAD">
+      <wsdl:input message="tns:PickingListREADHttpPostIn" />
+      <wsdl:output message="tns:PickingListREADHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ_JSON">
+      <wsdl:input message="tns:ZBCFUN_WLZS_READ_JSONHttpPostIn" />
+      <wsdl:output message="tns:ZBCFUN_WLZS_READ_JSONHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ">
+      <wsdl:input message="tns:ZBCFUN_WLZS_READHttpPostIn" />
+      <wsdl:output message="tns:ZBCFUN_WLZS_READHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_CUS_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_CUS_GETHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_CUS_GETHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GETHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GETHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET_CRM">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GET_CRMHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GET_CRMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_MAT_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_MAT_GETHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_MAT_GETHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_ORT_GET">
+      <wsdl:input message="tns:GET_ZBCFUN_ORT_GETHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_ORT_GETHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_TM_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_TM_READHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_TM_READHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_THLOG_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_THLOG_READHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_THLOG_READHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET2">
+      <wsdl:input message="tns:GET_ZBCFUN_DLV_GET2HttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_DLV_GET2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_POITEM_READ">
+      <wsdl:input message="tns:GET_ZBCFUN_POITEM_READHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_POITEM_READHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_PO_RECEIPT">
+      <wsdl:input message="tns:GET_ZBCFUN_PO_RECEIPTHttpPostIn" />
+      <wsdl:output message="tns:GET_ZBCFUN_PO_RECEIPTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JHD_READ">
+      <wsdl:input message="tns:JHD_READHttpPostIn" />
+      <wsdl:output message="tns:JHD_READHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BarCodeSoap" type="tns:BarCodeSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateBarCode">
+      <soap:operation soapAction="http://tempuri.org/CreateBarCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_TBM_ZFTH">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_TBM_ZFTH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_MAT_GET">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_MAT_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_CKGDP_DISPLAY">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_CKGDP_DISPLAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoRead">
+      <soap:operation soapAction="http://tempuri.org/ScreenInfoRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoUpdate">
+      <soap:operation soapAction="http://tempuri.org/ScreenInfoUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoReadALL">
+      <soap:operation soapAction="http://tempuri.org/ScreenInfoReadALL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_LTPM_READ">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_LTPM_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PickingListREAD">
+      <soap:operation soapAction="http://tempuri.org/PickingListREAD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ_JSON">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_WLZS_READ_JSON" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_WLZS_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_CUS_GET">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_CUS_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_DLV_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET_CRM">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_DLV_GET_CRM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_MAT_GET">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_MAT_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_ORT_GET">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_ORT_GET" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_TM_READ">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_TM_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_THLOG_READ">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_THLOG_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET2">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_DLV_GET2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_POITEM_READ">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_POITEM_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_PO_RECEIPT">
+      <soap:operation soapAction="http://tempuri.org/GET_ZBCFUN_PO_RECEIPT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHD_READ">
+      <soap:operation soapAction="http://tempuri.org/JHD_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHD_UPDATE">
+      <soap:operation soapAction="http://tempuri.org/JHD_UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHZ_READ">
+      <soap:operation soapAction="http://tempuri.org/JHZ_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BarCodeSoap12" type="tns:BarCodeSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateBarCode">
+      <soap12:operation soapAction="http://tempuri.org/CreateBarCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_TBM_ZFTH">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_TBM_ZFTH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_MAT_GET">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_MAT_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_CKGDP_DISPLAY">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_CKGDP_DISPLAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoRead">
+      <soap12:operation soapAction="http://tempuri.org/ScreenInfoRead" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoUpdate">
+      <soap12:operation soapAction="http://tempuri.org/ScreenInfoUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoReadALL">
+      <soap12:operation soapAction="http://tempuri.org/ScreenInfoReadALL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_LTPM_READ">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_LTPM_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PickingListREAD">
+      <soap12:operation soapAction="http://tempuri.org/PickingListREAD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ_JSON">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_WLZS_READ_JSON" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_WLZS_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_CUS_GET">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_CUS_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_DLV_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET_CRM">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_DLV_GET_CRM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_MAT_GET">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_MAT_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_ORT_GET">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_ORT_GET" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_TM_READ">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_TM_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_THLOG_READ">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_THLOG_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET2">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_DLV_GET2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_POITEM_READ">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_POITEM_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_PO_RECEIPT">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZBCFUN_PO_RECEIPT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHD_READ">
+      <soap12:operation soapAction="http://tempuri.org/JHD_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHD_UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/JHD_UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHZ_READ">
+      <soap12:operation soapAction="http://tempuri.org/JHZ_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BarCodeHttpGet" type="tns:BarCodeHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="CreateBarCode">
+      <http:operation location="/CreateBarCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_TBM_ZFTH">
+      <http:operation location="/ZBCFUN_TBM_ZFTH" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_MAT_GET">
+      <http:operation location="/ZBCFUN_MAT_GET" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_CKGDP_DISPLAY">
+      <http:operation location="/ZBCFUN_CKGDP_DISPLAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoRead">
+      <http:operation location="/ScreenInfoRead" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoReadALL">
+      <http:operation location="/ScreenInfoReadALL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_LTPM_READ">
+      <http:operation location="/ZBCFUN_LTPM_READ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PickingListREAD">
+      <http:operation location="/PickingListREAD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ_JSON">
+      <http:operation location="/ZBCFUN_WLZS_READ_JSON" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ">
+      <http:operation location="/ZBCFUN_WLZS_READ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_CUS_GET">
+      <http:operation location="/GET_ZBCFUN_CUS_GET" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET">
+      <http:operation location="/GET_ZBCFUN_DLV_GET" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET_CRM">
+      <http:operation location="/GET_ZBCFUN_DLV_GET_CRM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_MAT_GET">
+      <http:operation location="/GET_ZBCFUN_MAT_GET" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_ORT_GET">
+      <http:operation location="/GET_ZBCFUN_ORT_GET" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_TM_READ">
+      <http:operation location="/GET_ZBCFUN_TM_READ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_THLOG_READ">
+      <http:operation location="/GET_ZBCFUN_THLOG_READ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET2">
+      <http:operation location="/GET_ZBCFUN_DLV_GET2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_POITEM_READ">
+      <http:operation location="/GET_ZBCFUN_POITEM_READ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_PO_RECEIPT">
+      <http:operation location="/GET_ZBCFUN_PO_RECEIPT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHD_READ">
+      <http:operation location="/JHD_READ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BarCodeHttpPost" type="tns:BarCodeHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="CreateBarCode">
+      <http:operation location="/CreateBarCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_TBM_ZFTH">
+      <http:operation location="/ZBCFUN_TBM_ZFTH" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_MAT_GET">
+      <http:operation location="/ZBCFUN_MAT_GET" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_CKGDP_DISPLAY">
+      <http:operation location="/ZBCFUN_CKGDP_DISPLAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoRead">
+      <http:operation location="/ScreenInfoRead" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScreenInfoReadALL">
+      <http:operation location="/ScreenInfoReadALL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_LTPM_READ">
+      <http:operation location="/ZBCFUN_LTPM_READ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PickingListREAD">
+      <http:operation location="/PickingListREAD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ_JSON">
+      <http:operation location="/ZBCFUN_WLZS_READ_JSON" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_WLZS_READ">
+      <http:operation location="/ZBCFUN_WLZS_READ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_CUS_GET">
+      <http:operation location="/GET_ZBCFUN_CUS_GET" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET">
+      <http:operation location="/GET_ZBCFUN_DLV_GET" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET_CRM">
+      <http:operation location="/GET_ZBCFUN_DLV_GET_CRM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_MAT_GET">
+      <http:operation location="/GET_ZBCFUN_MAT_GET" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_ORT_GET">
+      <http:operation location="/GET_ZBCFUN_ORT_GET" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_TM_READ">
+      <http:operation location="/GET_ZBCFUN_TM_READ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_THLOG_READ">
+      <http:operation location="/GET_ZBCFUN_THLOG_READ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_DLV_GET2">
+      <http:operation location="/GET_ZBCFUN_DLV_GET2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_POITEM_READ">
+      <http:operation location="/GET_ZBCFUN_POITEM_READ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZBCFUN_PO_RECEIPT">
+      <http:operation location="/GET_ZBCFUN_PO_RECEIPT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHD_READ">
+      <http:operation location="/JHD_READ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BarCode">
+    <wsdl:port name="BarCodeSoap" binding="tns:BarCodeSoap">
+      <soap:address location="http://192.168.0.135/API/BC/BarCode.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BarCodeSoap12" binding="tns:BarCodeSoap12">
+      <soap12:address location="http://192.168.0.135/API/BC/BarCode.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BarCodeHttpGet" binding="tns:BarCodeHttpGet">
+      <http:address location="http://192.168.0.135/API/BC/BarCode.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BarCodeHttpPost" binding="tns:BarCodeHttpPost">
+      <http:address location="http://192.168.0.135/API/BC/BarCode.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

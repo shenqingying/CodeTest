@@ -1,0 +1,24 @@
+﻿@using Sonluk.UI.Model.LE.TRA.CityService
+@model IEnumerable<CityInfo>
+<div class="panel-pop-up-header">站点</div>
+<div class="panel-pop-up-body">
+    <div class="panel-pop-up-content">
+        @foreach (CityInfo province in Model)
+        {
+            <div class="panel-pop-up-node panel-pop-up-children-trigger">
+                <font class="panel-pop-up-node-item">@province.Name</font>
+            </div>
+            <div class="panel-pop-up-children">
+                @foreach (CityInfo city in province.Children)
+                {
+                    <div class="panel-pop-up-child">
+                        <div class="panel-pop-up-child-content city-selected">@city.Name</div>
+                        <input type="hidden" value="@city.ID" />
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+<div class="panel-pop-up-footer">
+</div>

@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "物料转换申请";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="TPL_addclass">
+    <a class="{{ 'clolr_' + d.LAY_TABLE_INDEX}}">{{d.MBLNR}}</a>
+</script>
+
+<script type="text/html" id="color">
+    {{# if(d.DDSL == 0){ }}
+    <span class="span_color"></span>
+    {{# }else { }}
+    <span class="span_color">{{d.DDSL}}</span>
+    {{# } }}
+
+</script>
+
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_orderMX">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+</div>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>库存管理</a>
+    <a><cite>物料转换申请</cite></a>
+</span>
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div id="div_height">
+
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">仓库编码：</label>
+                <div class="layui-input-inline">
+                    <select id="ckno" lay-filter="ckno">
+                        <option value="0">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">物料凭证：</label>
+                <div class="layui-input-inline">
+                    <input id="IV_MBLNR" type="text" autocomplete="off" placeholder="请输入物料凭证号" class="layui-input">
+                </div>
+                <button id="btn_save" class="layui-btn">保存</button>
+            </div>
+
+        </div>
+
+
+    </div>
+    <table id="table_WL" lay-filter="table_WL"></table>
+
+
+</div>
+
+
+<div id="div_MX" class="layui-form" hidden>
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">物料凭证：</label>
+        <div class="layui-input-inline">
+            <label id="MBLNR" class="layui-form-label" style="width:100%;text-align:left;"></label>
+        </div>
+
+    </div>
+    <table>
+        <tr>
+            <td colspan="3"><label class="layui-form-label">源：</label></td>
+            <td></td>
+            <td colspan="3"><label class="layui-form-label">目标：</label></td>
+        </tr>
+        <tr>
+            <td><label class="layui-form-label">物料信息：</label></td>
+            <td colspan="2"><input id="MATNR1" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td></td>
+            <td><label class="layui-form-label">物料信息：</label></td>
+            <td colspan="2"><input id="MATNR2" type="text" autocomplete="off" class="layui-input" readonly></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2"><input id="MAKTX1" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td></td>
+            <td></td>
+            <td colspan="2"><input id="MAKTX2" type="text" autocomplete="off" class="layui-input" readonly></td>
+        </tr>
+        <tr>
+            <td><label class="layui-form-label">工厂：</label></td>
+            <td colspan="2"><input id="WERKS1" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td></td>
+            <td><label class="layui-form-label">工厂：</label></td>
+            <td colspan="2"><input id="WERKS2" type="text" autocomplete="off" class="layui-input" readonly></td>
+        </tr>
+        <tr>
+            <td><label class="layui-form-label">库存地点：</label></td>
+            <td colspan="2"><input id="KCDD1" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td></td>
+            <td><label class="layui-form-label">库存地点：</label></td>
+            <td colspan="2"><input id="KCDD2" type="text" autocomplete="off" class="layui-input" readonly></td>
+        </tr>
+        <tr>
+            <td width="90px;"><label class="layui-form-label">物料属性：</label></td>
+            <td><input id="CHARG1" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td><input id="POSNR1" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td></td>
+            <td width="90px;"><label class="layui-form-label">物料属性：</label></td>
+            <td><input id="CHARG2" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td><input id="POSNR2" type="text" autocomplete="off" class="layui-input" readonly></td>
+        </tr>
+        <tr>
+            <td><label class="layui-form-label">数量：</label></td>
+            <td><input id="SL" type="text" autocomplete="off" class="layui-input" readonly></td>
+            <td><input id="DW" type="text" autocomplete="off" class="layui-input" readonly></td>
+        </tr>
+    </table>
+
+    <table id="table_MX" lay-filter="table_MX"></table>
+</div>
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/BC_TM/WL_CHANGE")
+}

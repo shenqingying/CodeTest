@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "产能标准值查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<style type="text/css">
+    .labelwidth {
+        width: 120px
+    }
+
+    .divContent {
+    }
+</style>
+<input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+<input type="hidden" value="@Url.Action("ExportByExcel")" id="ExportSY_CN" />
+<input type="hidden" value="@Url.Action("ReadSY_CN")" id="ReadSY_CN" />
+<input type="hidden" value="@Url.Action("ReadSY_TYPEMX")" id="ReadSY_TYPEMX" />
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="head">MES系统设置</a>
+    <a lid="headsub1"><cite>产能标准值查询</cite></a>
+</span>
+<input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+<div id="form1" class="layui-form">
+    <br />
+    <div class="layui-form-item">
+        <button class="layui-btn" lid="btn2" id="btn2">查询</button>
+        <button class="layui-btn" lid="btn3" id="btn3">导出Excel</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="in_gc" lay-filter="in_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label2">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb1" lay-filter="tb1"></table>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SYSTEM/SY_CN_SELECT", "~/bundles/zwk")
+}
+

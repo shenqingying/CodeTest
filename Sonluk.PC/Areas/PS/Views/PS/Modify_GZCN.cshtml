@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "工种负荷维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<style>
+    .layui-form-item .layui-form-checkbox[lay-skin=primary] {
+        margin-top: 0px;
+    }
+</style>
+<script type="text/html" id="bar_CC">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<div class="layui-form">
+    <button class="layui-btn" id="btn_xsgz">新增工种</button>
+    <button class="layui-btn" id="btn_jgfh">维护工序外协周期</button>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_GZCN" lay-filter="tb_GZCN" ></table>
+    </div>
+</div>
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="lock" value="{{d.VLSCH}}" title="计算负荷" lay-filter="lockDemo" {{ d.FLAG == 'X' ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.VLSCH}}" lay-skin="switch" lay-text="分钟|天数" lay-filter="sexDemo" {{ d.UNIT != 'DAY' ? 'checked' : '' }}>
+</script>
+<input type="hidden" value="@Url.Action("ZPSFUG_M_GZCN", "PS")" id="ZPSFUG_M_GZCN" />
+<input type="hidden" value="@Url.Action("ZPSFUG_Q_GZCN", "PS")" id="ZPSFUG_Q_GZCN" />
+<input type="hidden" value="@Url.Action("JGHFMODIFY", "PS")" id="PS_JGHFMOFIDY" />
+<input type="hidden" value="@Url.Action("SelectFHDATA", "PS")" id="SelectFHDATA" />
+<input type="hidden" value="@Url.Action("SYNCCNDATA", "PS")" id="SYNCCNDATA" />
+<input type="hidden" value="@Url.Action("ZPSFUG_Q_GZCNREPORT", "PS")" id="ZPSFUG_Q_GZCNREPORT" />
+<div class="layui-form" hidden id="div_gzcn">
+    
+    <div class="layui-form-item" style="padding-top:30px">
+        <label class="layui-form-label">工种描述：</label>
+        <div class="layui-input-inline">
+            <input  id="input_GZMS" type="text" autocomplete="off" class="layui-input" >
+        </div>    
+        <label class="layui-form-label">产能(min)：</label>
+        <div class="layui-input-inline">
+            <input id="input_CN" type="text" autocomplete="off" class="layui-input" >
+        </div>
+    </div>
+    <input id="input_unit" type="hidden" autocomplete="off" class="layui-input" value="min">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+        <legend>工种对应工序集合</legend>
+    </fieldset>
+    <table class="layui-hide" id="tb_T435T" lay-filter="tb_T435T" style="height:260px"></table>
+</div>
+<div class="layui-form" hidden id="div_jgfh">
+    <div style="padding:10px">
+        <table class="layui-hide" id="tb_jgfh" lay-filter="tb_jgfh"></table>
+    </div>
+
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/PS/Modify_GZCN")
+}
+
+

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "密封圈全检实时工况";
+    Layout = "~/Views/Shared/_Layoutbig.cshtml";
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn_table_min layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tp_Tpl">
+    {{# if(d.TPNO != ""){ }}
+    <a style="font-size:x-large;">{{d.TPNO}}</a>
+    {{# } }}
+</script>
+
+@*<style type="text/css">
+    .layui-table-cell {
+        height: auto;
+        line-height: 28px;
+        padding: 0 15px;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        box-sizing: border-box;
+    }
+</style>*@
+<div class="layui-body">
+    
+    <div id="div_table" class="layui-form" >
+      
+       
+    </div>
+   
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/ZS_MFQQJ_SBLIST")
+}

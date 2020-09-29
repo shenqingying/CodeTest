@@ -1,0 +1,94 @@
+﻿@{
+    
+    ViewBag.Title = "平板管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<input type="hidden" value="@Url.Action("Create_PB", "System")" id="Create_PB" />
+<input type="hidden" value="@Url.Action("Update_PB", "System")" id="Update_PB" />
+<input type="hidden" value="@Url.Action("Read_PB", "System")" id="Read_PB" />
+<input type="hidden" value="@Url.Action("Delete_PB", "System")" id="Delete_PB" />
+<input type="hidden" value="@Url.Action("Read_STAFFIDBINDPB", "System")" id="Read_STAFFIDBINDPB" />
+<input type="hidden" value="@Url.Action("Modify_STAFFIDBINDPB", "System")" id="Modify_STAFFIDBINDPB" />
+<input type="hidden" value="@Url.Action("GET_STAFF", "System", new { area = "MES"})" id="GET_STAFF" />
+<input type="hidden" value="@Url.Action("Read_SBBINDPB", "System")" id="Read_SBBINDPB" />
+<input type="hidden" value="@Url.Action("Modify_SBBINDPB", "System")" id="Modify_SBBINDPB" />
+<input type="hidden" value="@Url.Action("Data_Select_Device", "System", new { area = "MES"})" id="Data_Select_Device" />
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="bdsb">绑定设备</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="bdry">绑定人员</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>电子文档系统管理</a>
+    <a><cite>平板管理</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button id="btn_insert" class="layui-btn">新增</button>
+        <button id="btn_cx" class="layui-btn">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平板编号：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_pbbh" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">平板描述：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_pbms" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    
+    <table class="layui-hide" id="tb_pb" lay-filter="tb_pb"></table>
+</div>
+
+<div id="div_pb" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">平板编号：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="div_it_pbbh" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平板描述：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="div_it_pbms" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">平板备注：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="div_it_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+</div>
+
+
+<div id="div_staff" class="layui-form" hidden>
+   
+    <table class="layui-hide" id="tb_staff" lay-filter="tb_staff"></table>
+   
+</div>
+<div id="div_sb" class="layui-form" hidden>
+
+    <table class="layui-hide" id="tb_sb" lay-filter="tb_sb"></table>
+
+</div>
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/EM/system/PBGL")
+}

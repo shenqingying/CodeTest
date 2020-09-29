@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    Session["TITLENAME"] = "KA门店特陈补损费";
+}
+
+<div class="weui-btn-area">
+    <button class="weui-btn weui-btn_primary" id="btn_cx" style="width:50%;display: initial;margin: 0 0;">查询</button>
+    <button class="weui-btn weui-btn_primary" id="btn_submit" style="width:50%;display: initial;margin: 0 0;float:right;">批量提交OA</button>
+
+</div>
+
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content" style="padding-right: 0px;">
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">新建开始时间：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_begin" class="weui-input" type="date" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">新建结束时间：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_end" class="weui-input" type="date" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_mc" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_crmid" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">客户SAP编号：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_sapsn" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">门店名称：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_mdmc" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">门店编号：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_mdcrmid" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">年份：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="select_year" class="weui-select">
+                            <option value="" selected="selected">全部</option>
+                            @for (int i = @DateTime.Now.Year - 10; i <= @DateTime.Now.Year + 10; i++)
+                            {
+                                <option value="@i">@(i)年</option>
+
+
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">月份：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="select_month" class="weui-select">
+                            <option value="" selected="selected">全部</option>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                string month = i.ToString();
+                                if (month.Length == 1)
+                                {
+                                    month = "0" + month;
+                                }
+
+                                    <option value="@month">@(month)月</option>
+                                
+
+                            }
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">费用类别：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="select_fylb" class="weui-select">
+                            <option value="0" selected="selected">全部</option>
+                            <option value="1">只看大润发、欧尚</option>
+                            <option value="2">除大润发、欧尚</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">状态：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="select_isactive" class="weui-select">
+                            <option value="101">全部</option>
+                            <option value="30" selected="selected">已审核</option>
+                            <option value="40">核销未提交</option>
+                            <option value="50">核销审核中</option>
+                            <option value="60">已核销</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+
+
+
+
+
+
+@*<div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">网上下单(六安市强盛商贸有限公司 2017-07-25 22:16)</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">发起时间</label>
+                <span class="weui-form-preview__value">2018-12-06</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单类型</label>
+                <span class="weui-form-preview__value">常规订单</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单状态</label>
+                <span class="weui-form-preview__value">未提交</span>
+            </p>
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">查看</a>
+            <a class="weui-form-preview__btn " href="javascript:">提交审核</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;">删除</a>
+        </div>
+    </div>*@
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_MDBS_HX")
+}

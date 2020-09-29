@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "考勤地址管理";
+}
+<script type="text/html" id="bar_select_address">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>人员管理</a>
+    <a><cite>考勤地址管理</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            @*<button id="reset" type="reset" class="layui-btn layui-btn-primary">重置</button>*@
+            @*<button id="daochu_list" class="layui-btn">导出列表</button>*@
+            <button id="insert" class="layui-btn" lay-submit lay-filter="formDemo2">新建</button>
+            @*<button id="submit_OA" class="layui-btn" style="display:none;">提交OA</button>*@
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="select_address" class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;">考勤地址名称：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="select_address_name" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="select_address_result" lay-filter="select_address_result"></table>
+
+
+    </div>
+</div>
+
+@*新增考勤地址*@
+<div id="form2" class="layui-form" hidden>
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_address" class="layui-btn" lay-filter="btn_save_display">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="text-align:right;">考勤地址：</label>
+        <div class="layui-input-inline" style="width:250px;">
+            <input id="address_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+        <button id="btn_confirm" class="layui-btn">地址校验</button>
+    </div>
+    <div id="div_shibie" class="layui-form-item" hidden>
+        <label class="layui-form-label" style="text-align:right;">识别地址：</label>
+        <div class="layui-input-inline" style="width:250px;">
+            <input id="shibieAddress" type="text" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+
+</div>
+
+@*修改考勤容差*@
+<div id="form3" class="layui-form" hidden>
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_address" class="layui-btn" lay-filter="btn_save_display">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item" hidden>
+        <label class="layui-form-label" style="text-align:right;">考勤地址：</label>
+        <div class="layui-input-inline" style="width:250px;">
+            <input id="address_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div id="div_shibie" class="layui-form-item">
+        <label class="layui-form-label" style="text-align:right;">考勤容差：</label>
+        <div class="layui-input-inline" style="width:250px;">
+            <input id="address_kqrc" type="text" autocomplete="off" class="layui-input" >
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Staff/Manager")
+}

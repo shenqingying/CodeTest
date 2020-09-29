@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "荣誉管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>荣誉管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">年度：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="find_nd" lay-verify="date" placeholder="yyyy" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">荣誉类别：</label>
+            <div class="layui-input-inline">
+                <select id="find_rylb" lay-filter="find_rylb">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">公司</option>
+                    <option value="2">个人</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">荣誉名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_ryname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">颁奖单位：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_rybjdw" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">荣誉级别：</label>
+            <div class="layui-input-inline">
+                <select id="find_ryjb" lay-filter="find_ryjb">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_ryno" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="ryTable" lay-filter="ryTable"></table>
+    </div>
+</div>
+<div id="div_rygl" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">荣誉类别：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="rylb" lay-filter="rylb">
+                <option value="0" selected="selected">请选择</option>
+                <option value="1">公司</option>
+                <option value="2">个人</option>
+            </select>
+        </div>
+        <button type="button" class="layui-btn layui-btn-normal" id="btn_fjsc">上传图片</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">荣誉名称：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="ryname" autocomplete="off" class="layui-input">
+        </div>
+        <button type="button" class="layui-btn" id="btn_xzfj">下载图片</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">颁奖单位：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="bjdw" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">荣誉级别：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="ryjb" lay-filter="ryjb">
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">获奖日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="hjrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">起始日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="ksdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">结束日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="jsdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">存放位置：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="zzjg" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="ry_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">姓名：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="isgh_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">关联员工：</label>
+    </div>
+    <div class="layui-form" id="table_div">
+        <table class="layui-hidden" id="ygTable" lay-filter="ygTable"></table>
+    </div>
+</div>
+<div class="layui-form" id="div_ghry" hidden>
+    <table class="layui-hidden" id="ghryTable" lay-filter="ghryTable"></table>
+</div>
+<div class="layui-form" id="div_sctp" hidden>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="test2">多图片上传</button>
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+            预览图：
+            <div class="layui-upload-list" id="demo2"></div>
+        </blockquote>
+    </div>
+    <div hidden>
+        <button type="button" class="layui-btn" id="btn_qrsc"></button>
+    </div>
+</div>
+<div class="layui-form" id="div_cktp" hidden>
+    <div class="layui-upload">
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+            预览图：
+            <div class="layui-upload-list" id="demo3"></div>
+        </blockquote>
+    </div>
+</div>
+    <style>
+        #rylb + .layui-form-select .layui-select-title input {
+            background-color: #FAFFBD;
+        }
+
+        #ryjb + .layui-form-select .layui-select-title input {
+            background-color: #FAFFBD;
+        }
+
+        #ryname {
+            background-color: #FAFFBD;
+        }
+
+        #bjdw {
+            background-color: #FAFFBD;
+        }
+
+        #hjrq {
+            background-color: #FAFFBD;
+        }
+
+        th .layui-table-cell {
+            text-align: center;
+        }
+    </style>
+    @section scripts {
+        @Scripts.Render("~/bundles/HR/HRXZGL/RONGYGL")
+    }

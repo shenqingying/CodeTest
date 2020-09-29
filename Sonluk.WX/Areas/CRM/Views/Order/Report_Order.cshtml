@@ -1,0 +1,179 @@
+﻿@using Sonluk.UI.Model.CRM.KH_KHService;
+@using Sonluk.UI.Model.CRM.HG_STAFFService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "订单报表";
+    Session["TITLENAME"] = "订单报表";
+
+    CRM_KH_KH[] SDF = ViewBag.SDF;
+    CRM_KH_KH KH = ViewBag.KH;
+    CRM_HG_STAFF STAFF = ViewBag.STAFF;
+}
+
+
+
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+    <div class="weui-btn-area" style="margin-top:0.3em;">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_cx">查询</a>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show" style="padding-right: 0px;">
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">报表类型：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="report_type" class="weui-select">
+                            <option value="0" selected="selected">请选择报表类型</option>
+                            <option value="1">对账报表</option>
+                            <option value="2">发货报表</option>
+                            <option value="3">折扣发放明细表</option>
+                        </select>
+                    </div>
+                </div>
+
+                @* 对账报表 *@
+                <div id="div_cx_duizhang" hidden>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">开始日期：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <input id="duizhang_time_start" class="weui-input" type="date" placeholder="" value="@ViewBag.startdate">
+                        </div>
+                    </div>
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">结束日期：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <input id="duizhang_time_end" class="weui-input" type="date" placeholder="" value="@ViewBag.enddate">
+                        </div>
+                    </div>
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label class="weui-label">售达方：</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            @*<input id="duizhang_sdf" class="weui-input" type="text" placeholder="">*@
+                            <select id="duizhang_sdf" class="weui-select">
+                                <option value="0"></option>
+                                @if (STAFF.USERLX == 1107)
+                                {
+                                    <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                                }
+                                @if (SDF != null)
+                                {
+                                    for (int i = 0; i < SDF.Length; i++)
+                                    {
+                                        <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                @* 发货报表 *@
+                <div id="div_cx_fahuo" hidden>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">开始日期：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <input id="fahuo_time_start" class="weui-input" type="date" placeholder="" value="@ViewBag.startdate">
+                        </div>
+                    </div>
+
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">结束日期：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <input id="fahuo_time_end" class="weui-input" type="date" placeholder="" value="@ViewBag.enddate">
+                        </div>
+                    </div>
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd"><label class="weui-label">售达方：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            @*<input id="fahuo_sdf" class="weui-input" type="text" placeholder="">*@
+                            <select id="fahuo_sdf" class="weui-select">
+                                <option value="0"></option>
+                                @if (STAFF.USERLX == 1107)
+                                {
+                                    <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                                }
+                                @if (SDF != null)
+                                {
+                                    for (int i = 0; i < SDF.Length; i++)
+                                    {
+                                        <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                @* 折扣发放明细表 *@
+                <div id="div_cx_zhekou" hidden>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">结束日期：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <input id="zhekou_time_end" class="weui-input" type="date" placeholder="" value="@ViewBag.enddate">
+                        </div>
+                    </div>
+
+                    <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd"><label class="weui-label">售达方：</label></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            @*<input id="zhekou_sdf" class="weui-input" type="text" placeholder="">*@
+                            <select id="zhekou_sdf" class="weui-select">
+                                <option value="0"></option>
+                                @if (STAFF.USERLX == 1107)
+                                {
+                                    <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                                }
+                                @if (SDF != null)
+                                {
+                                    for (int i = 0; i < SDF.Length; i++)
+                                    {
+                                        <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div id="div_result">
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Report_Order")
+}

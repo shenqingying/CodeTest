@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_YGQJ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KQ_YGQJ">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="YGQJID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFSEX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPNAME" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QJLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QWHC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHQJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHQJJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QJTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BMLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZGLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJQJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJJSKSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJQJTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_YGQJ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="YGQJID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySTAFFID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STATUS" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySTAFFIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadBySTAFFIDResult" type="tns:ArrayOfCRM_KQ_YGQJList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_YGQJList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_YGQJList" nillable="true" type="tns:CRM_KQ_YGQJList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_YGQJList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DEPNAMEDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJLBDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="YGQJID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFSEX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPNAME" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QJLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QWHC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHQJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHQJJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QJTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BMLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZGLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJQJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJJSKSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJQJTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Verify_QJ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="beginTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endTime" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="YGQJID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Verify_QJResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Verify_QJResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByYGQJID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="YGQJID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByYGQJIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByYGQJIDResult" type="tns:CRM_KQ_YGQJ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByDepartRight">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_YGQJ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByDepartRightResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByDepartRightResult" type="tns:ArrayOfCRM_KQ_YGQJList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_YGQJ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfCRM_KQ_YGQJList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_KQ_YGQJList" nillable="true" type="tns:ArrayOfCRM_KQ_YGQJList" />
+      <s:element name="CRM_KQ_YGQJ" nillable="true" type="tns:CRM_KQ_YGQJ" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadBySTAFFID" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadBySTAFFIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QJSoapIn">
+    <wsdl:part name="parameters" element="tns:Verify_QJ" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QJSoapOut">
+    <wsdl:part name="parameters" element="tns:Verify_QJResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByYGQJIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByYGQJID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByYGQJIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByYGQJIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByDepartRightSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByDepartRight" />
+  </wsdl:message>
+  <wsdl:message name="ReadByDepartRightSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByDepartRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="YGQJID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="STATUS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_YGQJList" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QJHttpGetIn">
+    <wsdl:part name="beginTime" type="s:string" />
+    <wsdl:part name="endTime" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="YGQJID" type="s:string" />
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QJHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadByYGQJIDHttpGetIn">
+    <wsdl:part name="YGQJID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByYGQJIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_KQ_YGQJ" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="YGQJID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="STATUS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_YGQJList" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QJHttpPostIn">
+    <wsdl:part name="beginTime" type="s:string" />
+    <wsdl:part name="endTime" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="YGQJID" type="s:string" />
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QJHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadByYGQJIDHttpPostIn">
+    <wsdl:part name="YGQJID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByYGQJIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_KQ_YGQJ" />
+  </wsdl:message>
+  <wsdl:portType name="KQ_YGQJSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDSoapIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QJ">
+      <wsdl:input message="tns:Verify_QJSoapIn" />
+      <wsdl:output message="tns:Verify_QJSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByYGQJID">
+      <wsdl:input message="tns:ReadByYGQJIDSoapIn" />
+      <wsdl:output message="tns:ReadByYGQJIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByDepartRight">
+      <wsdl:input message="tns:ReadByDepartRightSoapIn" />
+      <wsdl:output message="tns:ReadByDepartRightSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KQ_YGQJHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDHttpGetIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QJ">
+      <wsdl:input message="tns:Verify_QJHttpGetIn" />
+      <wsdl:output message="tns:Verify_QJHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByYGQJID">
+      <wsdl:input message="tns:ReadByYGQJIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByYGQJIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KQ_YGQJHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDHttpPostIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QJ">
+      <wsdl:input message="tns:Verify_QJHttpPostIn" />
+      <wsdl:output message="tns:Verify_QJHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByYGQJID">
+      <wsdl:input message="tns:ReadByYGQJIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByYGQJIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KQ_YGQJSoap" type="tns:KQ_YGQJSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <soap:operation soapAction="http://tempuri.org/ReadBySTAFFID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QJ">
+      <soap:operation soapAction="http://tempuri.org/Verify_QJ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByYGQJID">
+      <soap:operation soapAction="http://tempuri.org/ReadByYGQJID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByDepartRight">
+      <soap:operation soapAction="http://tempuri.org/ReadByDepartRight" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_YGQJSoap12" type="tns:KQ_YGQJSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <soap12:operation soapAction="http://tempuri.org/ReadBySTAFFID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QJ">
+      <soap12:operation soapAction="http://tempuri.org/Verify_QJ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByYGQJID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByYGQJID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByDepartRight">
+      <soap12:operation soapAction="http://tempuri.org/ReadByDepartRight" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_YGQJHttpGet" type="tns:KQ_YGQJHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <http:operation location="/ReadBySTAFFID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QJ">
+      <http:operation location="/Verify_QJ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByYGQJID">
+      <http:operation location="/ReadByYGQJID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_YGQJHttpPost" type="tns:KQ_YGQJHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <http:operation location="/ReadBySTAFFID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QJ">
+      <http:operation location="/Verify_QJ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByYGQJID">
+      <http:operation location="/ReadByYGQJID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KQ_YGQJ">
+    <wsdl:port name="KQ_YGQJSoap" binding="tns:KQ_YGQJSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/KQ_YGQJ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_YGQJSoap12" binding="tns:KQ_YGQJSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/KQ_YGQJ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_YGQJHttpGet" binding="tns:KQ_YGQJHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/KQ_YGQJ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_YGQJHttpPost" binding="tns:KQ_YGQJHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/KQ_YGQJ.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

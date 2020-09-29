@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "投料关联产出查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_MES_ALL
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_mestmgl">MES条码管理</a>
+    <a><cite lid="vi_tlglcccx">投料关联产出查询</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="vi_cx">查询</button>
+        <button class="layui-btn" id="btn_DC" lid="vi_dr">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_factory">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    @if (Model.GCCOUNT == 1)
+                    {
+                        <option value="" lid="vi_option">请选择</option>
+                        <option value="@Model.MES_SY_GC[0].GC" selected="selected">@Model.MES_SY_GC[0].GC-@Model.MES_SY_GC[0].GCMS</option>
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="vi_option">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gzzx">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    @if (Model.GCCOUNT == 1 && Model.GZZXCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="vi_option">请选择</option>
+                        <option value="@Model.MES_SY_GZZX[0].GZZXBH">@Model.MES_SY_GZZX[0].GZZXBH-@Model.MES_SY_GZZX[0].GZZXMS</option>
+                    }
+                    else if (Model.GCCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="vi_option">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GZZX.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GZZX[i].GZZXBH">@Model.MES_SY_GZZX[i].GZZXBH-@Model.MES_SY_GZZX[i].GZZXMS</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="vi_option">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_sbh">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="in_sbbh" lay-filter="in_sbbh">
+                    @if (Model.GCCOUNT == 1 && Model.GZZXCOUNT == 1 && Model.SBHCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="vi_option">请选择</option>
+                        <option value="@Model.MES_SY_GZZX_SBH[0].SBBH">@Model.MES_SY_GZZX_SBH[0].SBMS</option>
+                    }
+                    else if (Model.GCCOUNT == 1 && Model.GZZXCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="vi_option">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GZZX_SBH.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GZZX_SBH[i].SBBH">@Model.MES_SY_GZZX_SBH[i].SBMS</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="vi_option">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_tm">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_tm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlbm">物料编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_wlh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_pc">批次：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_pc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_xsdd">销售订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_nobillxs" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_ddxm">订单项目：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_nobillxsmx" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_erpgd">ERP工单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_erpno" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_scrq">生产日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_tm" lay-filter="tb_tm"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+    </script>
+</div>
+<div id="div_tm_delete" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_scan">请扫描：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_sm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_tm">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_tm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlh">物料号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_wlh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlms">物料描述：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_wlms" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_ygh">员工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_ygh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_ygname">员工姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_ygxm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/TL_GL_CC_SELECT")
+}

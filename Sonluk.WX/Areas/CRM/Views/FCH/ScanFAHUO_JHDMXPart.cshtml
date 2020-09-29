@@ -1,0 +1,86 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService;
+@{
+    ViewBag.Title = "ScanFAHUO_JHDPart";
+    ZSL_BCST014 data = ViewBag.data;
+    MODEL_ZBCFUN_JHZ_READ JHZdata = ViewBag.JHZdata;
+    int amount = 0;
+}
+
+<br />
+
+
+<div style="margin:0 10px;">
+    @for (int i = 0; i < data.TM.Length; i++)
+    {
+
+        <table border="0" width="100%">
+            <tr>
+                <td width="50%">
+                    @data.TM[i].Barcode
+                </td>
+                <td width="30%">
+                    数量：@data.TM[i].SCANED
+                </td>
+                <td>
+                    <button class="layui-btn layui-btn-xs layui-btn-danger" style="width:60px;height:30px" onclick="JHD_MXdelete('@data.POSNR','@data.TM[i].Barcode')">删除</button>
+                </td>
+            </tr>
+
+        </table>
+        <hr class="layui-bg-black" />
+
+        {
+            amount += data.TM[i].SCANED;
+        }
+    }
+    @if (data.TM.Length == 0)
+    {
+        <a>暂无数据！</a>
+    }
+    <hr class="layui-bg-black" />
+    <table border="0" width="100%">
+        <tr>
+            <td width="130px">
+                @data.VBELN/@data.POSNR
+            </td>
+            <td width="60px">
+                @data.LGMNG
+            </td>
+            <td>
+                @ViewBag.amount
+                (@JHZdata.EV_JHZ)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                @data.MATNR/@data.MAKTX
+            </td>
+        </tr>
+    </table>
+</div>
+<input id="POSNR_MATNR" value="@data.MATNR" hidden />
+
+<script>
+    if ("@data.LGMNG" == "@amount") {
+        $("#a_status_" + "@data.POSNR").css("color", "green");
+        $("#a_status_" + "@data.POSNR").html("已清");
+    }
+    else if (parseInt(@data.LGMNG) > parseInt(@amount)) {
+        $("#a_status_" + "@data.POSNR").css("color", "red");
+        $("#a_status_" + "@data.POSNR").html("未清");
+    }
+    else {
+        $("#a_status_" + "@data.POSNR").css("color", "red");
+        $("#a_status_" + "@data.POSNR").html("超出");
+    }
+
+    $("#a_JHZ_" + "@data.POSNR").html("@JHZdata.EV_JHZ");
+
+
+</script>
+
+
+
+
+
+

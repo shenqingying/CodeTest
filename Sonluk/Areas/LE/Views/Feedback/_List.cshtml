@@ -1,0 +1,28 @@
+﻿@using Sonluk.UI.Model.LE.TRA.FeedbackService
+@model IEnumerable<FeedbackInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">ID</td>
+        <td class="data-table-header">物流公司</td>
+        <td class="data-table-header">日期</td>
+        <td class="data-table-header">付款金额</td>
+        <td class="data-table-header">说明</td>
+        <td class="data-table-header">状态</td>
+        <td class="data-table-header">填写人</td>
+        <td class="data-table-header">填写时间</td>
+    </tr>
+    @foreach (FeedbackInfo node in Model)
+    {
+        <tr>
+            <td class="text-align-right">@node.ID</td>
+            <td class="text-align-left">@node.Carrier.ShortName</td>
+            <td>@node.Date</td>
+            <td class="text-align-right">@node.Payment</td>
+            <td class="text-align-left">@node.Remark</td>
+            <td>@node.Status</td>
+            <td>@node.Creator</td>
+            <td>@node.CreateDate</td>
+        </tr>
+    }
+</table>

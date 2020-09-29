@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "操作规程维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<input id="Insert_DEVICETYPE" value="@Url.Action("Insert_DEVICETYPE", "System")" type="hidden" />
+<input id="Update_DEVICETYPE" value="@Url.Action("Update_DEVICETYPE", "System")" type="hidden" />
+<input id="Read_DEVICETYPE" value="@Url.Action("Read_DEVICETYPE", "System")" type="hidden" />
+<input id="Delete_DEVICETYPE" value="@Url.Action("Delete_DEVICETYPE", "System")" type="hidden" />
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>电子文档系统管理</a>
+    <a><cite>操作规程维护</cite></a>
+</span>
+<br />
+<br />
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<div id="from1" class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+        <button id="btn_insert" class="layui-btn">新增</button>
+        <button id="btn_cx" class="layui-btn">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">规程名称：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_dms" autocomplete="off" class="layui-input" >
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_guide" lay-filter="tb_guide"></table>
+    </div>
+
+</div>
+<div id="div_guide" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">规程名称：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="div_it_dms" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序序号：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="div_it_xh" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="div_it_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+  
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/EM/system/DEVICEGUIDE")
+}

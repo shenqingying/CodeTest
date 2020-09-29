@@ -1,0 +1,186 @@
+﻿@using Sonluk.UI.Model.CRM.COST_ZZFTTService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+@using Sonluk.UI.Model.CRM.COST_ZZFMXService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "编辑制作费基本信息";
+
+
+    CRM_COST_ZZFTT data = ViewBag.data;
+    CRM_HG_DICT[] GGXMID = ViewBag.GGXMID;
+    CRM_HG_DICT[] SL = ViewBag.SL;
+
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+
+
+}
+
+
+
+
+
+
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="@Url.Action("UpdateIndex", "Fee", new { TTID = @data.TTID })" id="back">返回</a>
+    <br />
+    <button id="insert_ggzzfmx" class="weui-btn weui-btn_primary">新增</button>
+</div>
+
+<div id="div1" class="weui-cells weui-cells_form" style="margin-top:0;">
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="mendian1" class="weui-input" type="text" placeholder="" value="@data.MCNAME">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="CRMID" class="weui-input" type="text" placeholder="" value="@data.CRMID">
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div id="div1" class="weui-cells weui-cells_form" style="margin-top:0;">
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">税率：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="SL" class="weui-select">
+                <option value="0">请选择</option>
+                @for (int i = 0; i < SL.Length; i++)
+               {
+                    if (@SL[i].DICID == @data.SL)
+                    {
+                        <option value="@SL[i].DICID" selected="selected">@SL[i].DICNAME</option>
+                    }
+                    else
+                    {
+                        <option value="@SL[i].DICID">@SL[i].DICNAME</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">广告含税金额（元）：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="GGWSJE" class="weui-input" type="text" placeholder="" value="@data.GGWSJE" readonly>
+        </div>
+    </div>
+    @*<div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">税率</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="SL" class="weui-input" type="text" placeholder="" value="@data.SL" readonly>
+        </div>
+    </div>*@
+
+</div>
+
+<hr />
+
+<div id="div_result" style="margin:0 10px">
+</div>
+
+
+
+
+<div id="div2" class="weui-cells weui-cells_form" style="margin-top:0;" hidden>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">广告项目：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="GGXMID" class="weui-select">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < GGXMID.Length; i++)
+                {
+                    <option value="@GGXMID[i].DICID">@GGXMID[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">单价：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ggzzfmx_price" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">数量：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ggzzfmx_quantity" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ggzzfmx_amount" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">备注：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ggzzfmx_beizhu" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="div3" class="weui-cells weui-cells_form" style="margin-top:0;" hidden>
+
+    <div id="div_IMGresult">
+    </div>
+
+    <button class="weui-btn weui-btn_primary" id="btn_upload_img_camera" style="width:48%;display: initial;margin: 0 0;">拍照</button>
+    <button class="weui-btn weui-btn_primary" id="btn_upload_img_album" style="width:48%;display: initial;margin: 0 0;">相册</button>
+
+
+</div>
+
+
+
+
+<input id="staffid" value="@staffid" hidden />
+<input id="state" value="@state" hidden />
+<input id="appid" value="@appid" hidden />
+
+<input id="TTDATA" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />
+
+<input id="zzf_ttid" value="@data.TTID" hidden />
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/UpdateZZF_GGZZMX")
+}
+
+

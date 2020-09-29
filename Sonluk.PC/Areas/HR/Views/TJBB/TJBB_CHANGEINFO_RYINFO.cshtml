@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "变更日志查询报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR统计报表</a>
+    <a><cite>变更日志查询报表</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">更改日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_changeks" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_changejs" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_change" lay-filter="tb_change"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/TJBB/TJBB_CHANGEINFO_RYINFO")
+}

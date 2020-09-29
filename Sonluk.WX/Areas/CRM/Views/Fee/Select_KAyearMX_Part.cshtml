@@ -1,0 +1,78 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KAYEARCOSTService;
+@{
+    ViewBag.Title = "Select_KAyearMX_Part";
+    CRM_COST_KAYEARCOST[] MXdata = ViewBag.MXdata;
+}
+
+@for (int i = 0; i < MXdata.Length; i++)
+{
+
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@MXdata[i].COSTITEMIDDES</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">上年度合同条款</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].HTTK_LAST</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">上年度金额(含税)</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].JE_LAST</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">上年度金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].WSJE_LAST</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">上年度税率</label>
+                <span class="weui-form-preview__value">&nbsp;@(MXdata[i].SL_LASTDES)</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">上年度费用率</label>
+                <span class="weui-form-preview__value">&nbsp;@(MXdata[i].FYL_LAST)%</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">本年度合同条款</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].HTTK_THIS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">本年度金额(含税)</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].JEXG_THIS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">本年度金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].WSJEXG_THIS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">本年度税率</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].SL_THISDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">本年度费用率</label>
+                <span class="weui-form-preview__value">&nbsp;@(MXdata[i].FYL_THIS)%</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BEIZ</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">编辑</button>
+            <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_delete(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">删除</button>
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (MXdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata)" hidden />

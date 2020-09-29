@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "考勤地址查看";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "考勤地址查看";
+}
+
+
+
+<h2 id="h1" style="margin:0 10px"></h2>
+<h2 id="h2" style="margin:0 10px"></h2>
+
+
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+<br />
+<hr class="layui-bg-black" />
+<br />
+
+<div class="layui-footer" style="left:0;background: none;padding: 0;">
+    <div id="div8" class="layui-form" hidden>
+
+        @*<div class="layui-input-inline" style="width:100%;margin:0">
+                <button id="btn_insert" class="layui-btn" style="width:100%">上传地址</button>
+            </div>*@
+        <div class="layui-form-item" style="width:100%;background-color: #009688;">
+
+            <button id="btn_insert" class="layui-btn" style="width:48%">上传定位地址</button>
+            <button id="btn_insert2" class="layui-btn" style="width:48%">手工添加地址</button>
+
+        </div>
+    </div>
+</div>
+
+<div id="div_rongcha" hidden>
+    <br /><br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:70px">容差(米)：</label>
+        <div class="layui-input-block" style="width:150px;margin-left:80px;">
+            <input id="rongcha" type="text" autocomplete="off" class="layui-input" style="width:90px;">
+        </div>
+    </div>
+    @*<div class="layui-form-item" style="width:100%; margin:0">
+            <div class="layui-input-inline" style="width:100%; margin:0">
+                <button id="btn_save_pinzhong" class="layui-btn" lay-filter="btn_save_pinzhong" style="width:100%">保存</button>
+            </div>
+        </div>*@
+</div>
+
+
+@*新增签到地址*@
+<div id="009" class="layui-form" hidden>
+
+    @*<div class="layui-form-item" hidden>
+            <div class="layui-input-inline" style="width:150px;">
+                <button id="btn_save_group" class="layui-btn" lay-filter="btn_save_group">保存</button>
+            </div>
+        </div>*@
+    <br />
+    <div class="layui-form-item">
+        @*<label class="layui-form-label">地址：</label>
+            <div class="layui-input-inline" style="width:250px;">
+                <input id="address009" type="text" autocomplete="off" class="layui-input">
+
+            </div>
+            <button id="btn_confirm009" class="layui-btn">地址校验</button>*@
+        <table width="100%">
+            <tr>
+                <td width="70px">
+                    <label class="layui-form-label" style="text-align:right;">地址：</label>
+                </td>
+                <td>
+                    <input id="address009" type="text" autocomplete="off" class="layui-input">
+                </td>
+                <td width="70px">
+                    <button id="btn_confirm009" class="layui-btn">地址校验</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="div_shibie" class="layui-form-item">
+        @*<label id="lb009" class="layui-form-label">识别地址：</label>
+            <div class="layui-input-inline" style="width:250px;">
+                <input id="shibieAddress009" type="text" autocomplete="off" class="layui-input" disabled>
+
+            </div>*@
+        <table width="100%">
+            <tr>
+                <td width="70px">
+                    <label id="lb009" class="layui-form-label" style="text-align:right;">识别地址：</label>
+                </td>
+                <td>
+                    <input id="shibieAddress009" type="text" autocomplete="off" class="layui-input" disabled>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/KaoQin_Select")
+}

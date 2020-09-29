@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/sonluk-ui/print")    
+    @Styles.Render("~/Content/sonluk-ui/dialog-message")
+    @Styles.Render("~/Content/sonluk-ui/color")
+</head>
+<body>
+    <object id="factory" style="display:none" classid="clsid:1663ed61-23eb-11d2-b92f-008048fdd814" codebase="@Url.Content("~/Plugin/smsx.cab")#Version=7,5,0,20"></object>
+    <div class="print-header">
+        <div class="print-header-fixed">
+            <div class="print-header-control">
+                <div class="print-header-button" id="print-preview">预览</div>
+                <div class="print-header-button" id="print">打印</div> 
+                <div class="print-header-button" id="back">关闭</div> 
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/sonluk-ui/dialog-message")
+    @Scripts.Render("~/bundles/meadco-scriptx")
+    @Scripts.Render("~/bundles/sonluk-ui/print")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

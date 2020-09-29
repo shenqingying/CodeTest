@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "工艺路线查询（车间）";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+<input type="hidden" value="@Url.Action("ImportSY_GYLX", "System")" id="ImportSY_GYLX" />
+<input type="hidden" value="@Url.Action("ExportByExcelGYLX")" id="ExportByExcelGYLX" />
+<input type="hidden" value="@Url.Action("CreateSY_GYLX")" id="CreateSY_GYLX" />
+<input type="hidden" value="@Url.Action("UpdateSY_GYLX")" id="UpdateSY_GYLX" />
+<input type="hidden" value="@Url.Action("ReadSY_GYLX")" id="ReadSY_GYLX" />
+<input type="hidden" value="@Url.Action("DeleteSY_GYLX")" id="DeleteSY_GYLX" />
+<input type="hidden" value="@Url.Action("ReadSY_TYPEMX")" id="ReadSY_TYPEMX" />
+<input type="hidden" value="@Url.Action("ExportByExcelTemplet")" id="ExportByExcelTemplet" />
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">{{common.c_modify}}</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">{{common.c_delete}}</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="head">MES系统设置</a>
+    <a lid="headsub"><cite>工艺路线管理（车间）</cite></a>
+</span>
+
+
+<div id="form1" class="layui-form">
+    <br />
+    <div class="layui-form-item">
+        <button class="layui-btn" lid="btn2" id="btn2">查询</button>
+        <button class="layui-btn" lid="btn6" id="btn6">导出Excel</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="in_gc" lay-filter="in_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label2">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label3">物料号：</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" class="layui-input" id="in_wlh">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label4">物料描述：</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" class="layui-input" id="in_wlms">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb1" lay-filter="tb1"></table>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SYSTEM/SY_GYLX_SELECT",
+                    "~/bundles/zwk")
+}
+

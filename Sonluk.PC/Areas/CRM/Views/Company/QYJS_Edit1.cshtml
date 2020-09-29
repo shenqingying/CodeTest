@@ -1,0 +1,201 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "企业介绍编辑";
+
+
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="shangxiawu">
+    {{# if(d.CCSJLX == 1){ }}
+    上午
+    {{# }else if(d.CCSJLX == 2){ }}
+    下午
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    启用
+    {{# }else { }}
+    未启用
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_TT">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="tb_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>企业介绍</a>
+    <a><cite>企业介绍编辑</cite></a>
+</span>
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+
+        <button id="btn_cx" class="layui-btn">查询</button>
+        <button id="btn_insert" class="layui-btn">新增</button>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">上级目录：</label>
+                    <div class="layui-input-inline">
+                        <div class="layui-unselect layui-form-select downpanel">
+                            <div class="layui-select-title">
+                                <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                                <input type="hidden" name="selectID" value="0">
+                                <i class="layui-edge"></i>
+                            </div>
+                            <dl class="layui-anim layui-anim-upbit">
+                                <dd>
+                                    @*<ul id="classtree"></ul>*@
+                                    <div id="classtree"></div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    @*<label class="layui-form-label">上级目录：</label>
+                        <div class="layui-input-inline" style="width:120px;">
+                            <select id="status" lay-filter="status" lay-search>
+                                <option value="0" selected="selected">全部</option>
+                                <option value="1">促销品</option>
+                                <option value="2">促销道具</option>
+                            </select>
+                        </div>*@
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="div_TT">
+        <table id="tb_TT" lay-filter="tb_TT"></table>
+    </div>
+
+
+
+
+
+</div>
+
+<div id="div_insert" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="btn_img" class="layui-btn">上传图片</button>
+
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级目录：</label>
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                    <input type="hidden" name="selectID_insert" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="classtree_insert"></ul>*@
+                        <div id="classtree_insert"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+
+
+
+        <label class="layui-form-label">目录名称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">目录内容：</label>
+        <div class="layui-input-inline">
+            <textarea id="notice" type="text" class="layui-textarea" style="width:500px;"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="beiz" type="text" class="layui-input">
+        </div>
+
+
+
+        <label class="layui-form-label">序号：</label>
+        <div class="layui-input-inline">
+            <input id="sort" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">封面图片：</label>
+            <div class="layui-input-inline">
+
+                <img id="menuimg" src="" style="width:200px;" hidden />
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<input id="path" hidden />
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Company/QYJS_Edit")
+}

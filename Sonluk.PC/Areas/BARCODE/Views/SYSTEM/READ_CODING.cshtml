@@ -1,0 +1,303 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "条形码查询";
+
+    CRM_HG_DICT[] DATA = ViewBag.DATA;
+}
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    正常
+    {{# }else if(d.ISACTIVE == 2){ }}
+    作废
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>商品码管理系统</a>
+    <a><cite>商品码查询</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form ">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_read" class="layui-btn ">查询</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">描述：</label>
+                        <div class="layui-input-inline" style="width:550px;">
+                            <input id="select_DESCRIPTION" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">条形码：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_BARCODE" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">品牌：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_PP" lay-filter="select_PP" lay-search>
+                                <option value="0" selected="selected">请选择</option>
+                                @for (int i = 0; i < DATA.Length; i++)
+                                {
+                                    <option value="@DATA[i].DICID">@DATA[i].DICMEMO @DATA[i].DICNAME</option>
+
+                                }
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">产品种类：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_CPZL" lay-filter="select_CPZL" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">型号：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_XH" lay-filter="select_XH" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">数量：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_QUANTITY" lay-filter="select_QUANTITY" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">包装形式：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_BZXS" lay-filter="select_BZXS" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">包装数量：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_BZSL" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">包装系列：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_SERIES" lay-filter="select_SERIES" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">版本：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_VERSION" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">业务员：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_YWY" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">申请人：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_SQR" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">申请时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_KSTIME" type="text" autocomplete="off" class="layui-input" >
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_JSTIME" type="text" autocomplete="off" class="layui-input" >
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_ISACTIVE" lay-filter="select_ISACTIVE" lay-search>
+                                <option value="0" selected="selected">全部</option>
+                                <option value="1">正常</option>
+                                <option value="2">作废</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="result" lay-filter="result"></table>
+    </div>
+
+
+    <div id="div_jump" class="layui-form" hidden>
+
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">描述：</label>
+            <div class="layui-input-inline" style="width:550px;">
+                <input id="DESCRIPTION" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">品牌：</label>
+            <div class="layui-input-inline">
+                <select id="PP" lay-filter="PP" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < DATA.Length; i++)
+                    {
+                        <option value="@DATA[i].DICID">@DATA[i].DICMEMO @DATA[i].DICNAME</option>
+
+                    }
+                </select>
+            </div>
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品种类：</label>
+            <div class="layui-input-inline">
+                <select id="CPZL" lay-filter="CPZL" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+            <label class="layui-form-label" style="width:130px;text-align:right;">型号：</label>
+            <div class="layui-input-inline">
+                <select id="XH" lay-filter="XH" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">数量：</label>
+            <div class="layui-input-inline">
+                <select id="QUANTITY" lay-filter="QUANTITY" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+            <label class="layui-form-label" style="width:130px;text-align:right;">包装形式：</label>
+            <div class="layui-input-inline">
+                <select id="BZXS" lay-filter="BZXS" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+            <label class="layui-form-label" style="width:130px;text-align:right;">包装数量：</label>
+            <div class="layui-input-inline">
+                <input id="BZSL" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">包装系列：</label>
+            <div class="layui-input-inline">
+                <select id="SERIES" lay-filter="SERIES" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+            <label class="layui-form-label" style="width:130px;text-align:right;">版本：</label>
+            <div class="layui-input-inline">
+                <input id="VERSION" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">业务员：</label>
+            <div class="layui-input-inline">
+                <input id="YWY" type="text" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">申请人：</label>
+            <div class="layui-input-inline">
+                <input id="SQR" type="text" autocomplete="off" class="layui-input" value="@Session["NAME"]">
+            </div>
+        </div>
+        <br />
+        <div id="div_edit" hidden>
+            <div class="layui-form-item ">
+                <label class="layui-form-label" style="width:130px;text-align:right;">条码：</label>
+                <div class="layui-input-inline">
+                    <input id="EDIT_CODE" type="text" autocomplete="off" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button id="EDIT_picture" class="layui-btn ">生成图片</button>
+                <label class="layui-form-label" style="width:130px;text-align:right;">图片宽：</label>
+                <div class="layui-input-inline">
+                    <input id="EDIT_WIDTH" type="text" autocomplete="off" class="layui-input" value="2">
+                </div>
+
+                <label class="layui-form-label" style="width:130px;text-align:right;">图片高：</label>
+                <div class="layui-input-inline">
+                    <input id="EDIT_HEIGHT" type="text" autocomplete="off" class="layui-input" value="120">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text" id="div_EDIT_picture" hidden>
+                <div class="layui-input-inline" style="width:130px;text-align:right;">
+                    <button id="EDIT_download" class="layui-btn ">下载</button>
+                </div>
+                <div class="layui-input-inline" id="EDIT_Image">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="div_img" hidden>
+    <br />
+    <div class="layui-form-item ">
+        <label class="layui-form-label" style="width:130px;text-align:right;">条码：</label>
+        <div class="layui-input-inline">
+            <input id="RETURN_CODE" type="text" autocomplete="off" class="layui-input" readonly>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button id="btn_picture" class="layui-btn ">生成图片</button>
+
+        <label class="layui-form-label" style="width:130px;text-align:right;">图片宽：</label>
+        <div class="layui-input-inline">
+            <input id="WIDTH" type="text" autocomplete="off" class="layui-input" value="2">
+        </div>
+
+        <label class="layui-form-label" style="width:130px;text-align:right;">图片高：</label>
+        <div class="layui-input-inline">
+            <input id="HEIGHT" type="text" autocomplete="off" class="layui-input" value="120">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item layui-form-text" id="div_picture" hidden>
+
+        <div class="layui-input-inline" style="width:130px;text-align:right;">
+            <button id="btn_download" class="layui-btn ">下载</button>
+        </div>
+
+        <div class="layui-input-inline" id="BARCODEImage">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<input id="RemoteAddress" value="@ViewBag.RemoteAddress" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+<script src="~/Scripts/html2canvas.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/BARCODE/SYSTEM/READ_CODING")
+}
+
+

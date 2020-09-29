@@ -1,0 +1,400 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KAYEARTTService;
+@using Sonluk.UI.Model.CRM.COST_ITEMService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "KA年度费用申请";
+
+    CRM_COST_KAYEARTT TTdata = ViewBag.TTdata;
+    CRM_COST_ITEM[] ITEM = ViewBag.ITEM;
+    CRM_HG_DICT[] SL = ViewBag.SL;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="last_Tpl">
+    {{ d.FYL_LAST + '%' }}
+</script>
+
+<script type="text/html" id="this_Tpl">
+    {{ d.FYL_THIS + '%' }}
+</script>
+
+<div id="temp">
+    <script type="text/html" id="bar_tool">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_fujian">
+        <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_opinion">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">回复</a>
+    </script>
+</div>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>KA年度费用申请</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form">
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_save" class="layui-btn" lay-submit="">保存</button>
+            @if (TTdata.ISACTIVE == 10 || TTdata.ISACTIVE == 40 || TTdata.ISACTIVE == 45)
+            {
+                <button id="btn_submit" class="layui-btn" lay-submit="">提交</button>
+            }
+
+
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">合同年份：</label>
+            <div class="layui-input-inline">
+                <input id="year" type="text" autocomplete="off" class="layui-input" value="@TTdata.HTYEAR" disabled>
+            </div>
+        </div>
+
+
+        <div class="layui-inline">
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">申请人：</label>
+            <div class="layui-input-inline">
+                <input id="sqr" type="text" placeholder="" autocomplete="off" class="layui-input" value="@TTdata.CJRNAME" disabled>
+            </div>
+
+
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">单位：</label>
+            <div class="layui-input-inline">
+                <input id="dw" type="text" autocomplete="off" class="layui-input" value="元" disabled>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">首次申请日期：</label>
+            <div class="layui-input-inline">
+                <input id="sqdate" type="text" autocomplete="off" class="layui-input" value="@TTdata.CJSJ" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">最后修改时间：</label>
+            <div class="layui-input-inline">
+                <input id="sqdate" type="text" autocomplete="off" class="layui-input" value="@TTdata.XGSJ" disabled>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">SAP编号：</label>
+            <div class="layui-input-inline">
+                <input id="jxsid" type="text" autocomplete="off" class="layui-input" value="@TTdata.SAPSN" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">KA系统CRM编号：</label>
+            <div class="layui-input-inline">
+                <input id="crmid" type="text" autocomplete="off" class="layui-input" value="@TTdata.CRMID" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">卖场名称：</label>
+            <div class="layui-input-inline">
+                <input id="mcname" type="text" autocomplete="off" class="layui-input" value="@TTdata.MC" disabled>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">年度费用开始日期：</label>
+            <div class="layui-input-inline">
+                <input id="time_begin" type="text" autocomplete="off" class="layui-input" value="@TTdata.BEGINDATE">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">年度费用结束日期：</label>
+            <div class="layui-input-inline">
+                <input id="time_end" type="text" autocomplete="off" class="layui-input" value="@TTdata.ENDDATE">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">归属年度月份总数：</label>
+            <div class="layui-input-inline">
+                <input id="monthcount" type="text" autocomplete="off" class="layui-input" value="@TTdata.MONTHCOUNT" disabled>
+            </div>
+        </div>
+
+    </div>
+
+    <table border="0" class="layui-table" style="width:60%;">
+        <thead>
+            <tr>
+                <td></td>
+                <td>上年度</td>
+                <td>本年度</td>
+                <td>备注</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width:200px;">年度</td>
+                <td class="myinput" style="width:300px;"><input id="year_last" type="text" autocomplete="off" class="layui-input" value="@TTdata.YEAR_LAST"></td>
+                <td class="myinput" style="width:300px;"><input id="year_this" type="text" autocomplete="off" class="layui-input" value="@TTdata.YEAR_THIS"></td>
+                <td style="width:300px;"></td>
+            </tr>
+            <tr>
+                <td>账期</td>
+                <td class="myinput"><input id="zq_last" type="text" autocomplete="off" class="layui-input" value="@TTdata.ZQ_LAST"></td>
+                <td class="myinput"><input id="zq_this" type="text" autocomplete="off" class="layui-input" value="@TTdata.ZQ_THIS"></td>
+                <td class="myinput"><input id="zq_beiz" type="text" autocomplete="off" class="layui-input" value="@TTdata.ZQ_BEIZ"></td>
+            </tr>
+            <tr>
+                <td>门店数量</td>
+                <td class="myinput"><input id="mdsl_last" type="text" autocomplete="off" class="layui-input" value="@TTdata.MDSL_LAST"></td>
+                <td class="myinput"><input id="mdsl_this" type="text" autocomplete="off" class="layui-input" value="@TTdata.MDSL_THIS"></td>
+                <td class="myinput"><input id="mdsl_beiz" type="text" autocomplete="off" class="layui-input" value="@TTdata.MDSL_BEIZ"></td>
+            </tr>
+            <tr>
+                <td>POS零售额</td>
+                <td class="myinput"><input id="pos_last" type="text" autocomplete="off" class="layui-input" value="@TTdata.POS_LAST"></td>
+                <td class="myinput"><input id="pos_this" type="text" autocomplete="off" class="layui-input" value="@TTdata.POS_THIS"></td>
+                <td class="myinput"><input id="pos_beiz" type="text" autocomplete="off" class="layui-input" value="@TTdata.POS_BEIZ"></td>
+            </tr>
+            <tr>
+                <td>进货额</td>
+                <td class="myinput"><input id="jh_last" type="text" autocomplete="off" class="layui-input" value="@TTdata.JH_LAST"></td>
+                <td class="myinput"><input id="jh_this" type="text" autocomplete="off" class="layui-input" value="@TTdata.JH_THIS"></td>
+                <td class="myinput"><input id="jh_beiz" type="text" autocomplete="off" class="layui-input" value="@TTdata.JH_BEIZ"></td>
+            </tr>
+            <tr>
+                <td>开票额</td>
+                <td class="myinput"><input id="kp_last" type="text" autocomplete="off" class="layui-input" value="@TTdata.KP_LAST"></td>
+                <td class="myinput"><input id="kp_this" type="text" autocomplete="off" class="layui-input" value="@TTdata.KP_THIS"></td>
+                <td class="myinput"><input id="kp_beiz" type="text" autocomplete="off" class="layui-input" value="@TTdata.KP_BEIZ"></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+
+
+    <div class="layui-collapse">
+        @*费用明细*@
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">费用明细</h2>
+            <div class="layui-colla-content layui-show">
+                <button id="btn_insert" class="layui-btn" lay-submit="">新增费用</button>
+                <table id="result_mx" lay-filter="result_mx"></table>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        @*附件*@
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">附件</h2>
+            <div class="layui-colla-content">
+                <button id="insert_fujian" class="layui-btn">新增</button>
+                <table id="table_fujian" lay-filter="table_fujian"></table>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        @*审批意见*@
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">审批意见</h2>
+            <div class="layui-colla-content">
+                <table id="tb_opinion" lay-filter="tb_opinion"></table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div id="div_mx" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">费用项目：</label>
+            <div class="layui-input-inline">
+                <select id="item" lay-filter="item">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < ITEM.Length; i++)
+                    {
+                        <option value="@ITEM[i].COSTITEMID">@ITEM[i].COSTITEMMC</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="div_last" class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">上年度合同条款：</label>
+            <div class="layui-input-inline">
+                <input id="last_httk" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">上年度金额：</label>
+            <div class="layui-input-inline">
+                <input id="last_wsje" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">上年度费用率(%)：</label>
+            <div class="layui-input-inline">
+                <input id="last_fyl" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">上年度金额(含税)：</label>
+            <div class="layui-input-inline">
+                <input id="last_je" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">上年度税率：</label>
+            <div class="layui-input-inline">
+                <select id="last_sl" lay-filter="last_sl">
+                    @for (int i = 0; i < SL.Length; i++)
+                    {
+                        <option value="@SL[i].DICID">@SL[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="div_this" class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">本年度合同条款：</label>
+            <div class="layui-input-inline">
+                <input id="this_httk" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">本年度金额：</label>
+            <div class="layui-input-inline">
+                <input id="this_wsje" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">本年度费用率(%)：</label>
+            <div class="layui-input-inline">
+                <input id="this_fyl" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">本年度金额(含税)：</label>
+            <div class="layui-input-inline">
+                <input id="this_je" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">本年度税率：</label>
+            <div class="layui-input-inline">
+                <select id="this_sl" lay-filter="this_sl">
+                    @for (int i = 0; i < SL.Length; i++)
+                    {
+                        <option value="@SL[i].DICID">@SL[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">备注：</label>
+            <div class="layui-input-inline">
+                <input id="this_beiz" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@* 审批意见回复 *@
+<div id="div_opinion_edit" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">回复内容：</label>
+            <div class="layui-input-inline" style="width:400px">
+                <textarea id="div_opinion_content" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<input id="KAYEARTTID" value="@TTdata.KAYEARTTID" hidden />
+<input id="TTdata" value="@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata)" hidden />
+<input id="khid" value="@TTdata.KHID" hidden />
+<input id="isactive" value="@TTdata.ISACTIVE" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Update_KAyear")
+}

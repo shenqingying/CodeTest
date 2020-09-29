@@ -1,0 +1,27 @@
+﻿@using Sonluk.UI.Model.LE.TRA.ConsignmentNoteService
+@model IEnumerable<CNDeliveryInfo>
+@{ string select = "●";}
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">No.</td>
+        <td class="data-table-header">交货单</td>
+        <td class="data-table-header">托运单</td>
+        <td class="data-table-header">确认人</td>
+        <td class="data-table-header">确认时间</td>
+        <td class="data-table-header">是否确认</td>       
+    </tr>
+    @{int i = 1;}
+    @foreach (CNDeliveryInfo node in Model)
+    {
+        <tr>
+            <td>@(i++)</td>
+            <td>@node.VBELN</td>
+            <td>@node.TYDID</td>
+            <td>@node.FILLNAME</td>
+            <td>@node.FILLTIME</td>
+            <td>@if (@node.STATUS==1){ @select}</td>            
+        </tr>
+    }
+</table>
+

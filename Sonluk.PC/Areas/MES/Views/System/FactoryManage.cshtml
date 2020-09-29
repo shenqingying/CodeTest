@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "工厂维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="qyzt">
+    {{# if(d.ISACTION == 1){ }}
+    启用
+    {{# }else if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="tbfs">
+    {{# if(d.ISAUTOWORKSPACE == true){ }}
+    自动
+    {{# }else if(d.ISAUTOWORKSPACE == false){ }}
+    手动
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>工厂维护</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+        </div>
+
+        <table class="layui-hide" id="tb_gc" lay-filter="tb_gc"></table>
+        </div>
+    </div>
+
+<div id="div_fm" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工厂编号：</label>
+        <div class="layui-input-inline">
+            <input id="gcid" type="text" autocomplete="off" class="layui-input">
+
+
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工厂描述：</label>
+        <div class="layui-input-inline">
+            <input id="gcms" type="text" autocomplete="off" class="layui-input">
+            
+
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工厂打印描述：</label>
+        <div class="layui-input-inline">
+            <input id="gcdy" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">地址：</label>
+        <div class="layui-input-inline">
+            <input id="gcdz" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工作中心同步方式：</label>
+        <div class="layui-input-inline">
+            <select id="gczx" lay-filter="gczx">
+                <option value="true" selected="selected">自动</option>
+                <option value="false">手动</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工厂代码：</label>
+        <div class="layui-input-inline">
+            <input id="gcdm" type="text" autocomplete="off" maxlength="1" onkeyup="value = value.replace(/[^\d]/g, '')" class="layui-input" placeholder="请输入单位数字">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">启用状态：</label>
+        <div class="layui-input-inline">
+            <select id="gczt" lay-filter="gczt">
+                <option value="1" selected="selected">启用</option>
+                <option value="0">关闭</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/FactoryManage")
+}

@@ -1,0 +1,156 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "负极任务清单";
+    Layout = "~/Views/Shared/_Layout_noleft.cshtml";
+
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_MES_VIEW
+<script type="text/html" id="scrwzt_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    {{slv.wks}}
+    {{# }else if(d.ISACTION == 1){ }}
+    <span class="tlys">已投料</span>
+    {{# }else if(d.ISACTION == 2){ }}
+    {{slv.ywc}}
+    {{# } }}
+</script>
+<script type="text/html" id="pfdh_Tpl">
+    {{# if(d.PFDH != ""){ }}
+    <a style="font-size:22px;">{{d.PFDH}}</a>
+    {{# }else{ }}
+    {{# } }}
+</script>
+<script src="~/Scripts/layui2.2.5/layui.js"></script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="mescx">MES查询</a>
+    <a><cite lid="fjrwqd">负极任务清单</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_formGC">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    @if (Model.GC.Trim() == "")
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            if (Model.MES_SY_GC[i].GC == Model.GC)
+                            {
+                                <option value="@Model.MES_SY_GC[i].GC" selected="selected">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                            }
+                            else
+                            {
+                                <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_formGZZX">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    @if (Model.GZZXBH.Trim() == "")
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                    else
+                    {
+                        <option value="" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GZZX.Length; i++)
+                        {
+                            if (Model.MES_SY_GZZX[i].GC == Model.GC && Model.MES_SY_GZZX[i].GZZXBH == Model.GZZXBH)
+                            {
+                                <option value="@Model.MES_SY_GZZX[i].GZZXBH" selected="selected">@Model.MES_SY_GZZX[i].GZZXBH-@Model.MES_SY_GZZX[i].GZZXMS</option>
+                            }
+                            else
+                            {
+                                <option value="@Model.MES_SY_GZZX[i].GZZXBH">@Model.MES_SY_GZZX[i].GZZXBH-@Model.MES_SY_GZZX[i].GZZXMS</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_formSBBH">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="in_sbbh" lay-filter="in_sbbh">
+                    @if (Model.SBBH.Trim() == "")
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                    else
+                    {
+                        <option value="" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GZZX_SBH.Length; i++)
+                        {
+                            if (Model.MES_SY_GZZX_SBH[i].SBBH == Model.SBBH)
+                            {
+                                <option value="@Model.MES_SY_GZZX_SBH[i].SBBH" selected="selected">@Model.MES_SY_GZZX_SBH[i].SBMS</option>
+                            }
+                            else
+                            {
+                                <option value="@Model.MES_SY_GZZX_SBH[i].SBBH">@Model.MES_SY_GZZX_SBH[i].SBMS</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="ZPRQc">指派日期：</label>
+            <div class="layui-input-inline">
+                @if (Model.ZPRQ == "" || Model.ZPRQ == null)
+                {
+                    <input type="text" name="date" id="in_zprq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                }
+                else
+                {
+                    <input type="text" name="date" id="in_zprq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@Model.ZPRQ">
+                }
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="cxlx">查询类型：</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="cxlx" value="1" title="未完成" lay-filter="cxlx" checked="" lid="wwc">
+                <input type="radio" name="cxlx" value="2" title="全部" lay-filter="cxlx" lid="qb">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label lid="cxzt">查询状态：</label>
+        <label id="lb_cxzt"></label>
+        <label> / </label>
+        <label lid="sxsj">刷新时间：</label>
+        <label id="lb_sxsj"></label>
+        <label> / </label>
+        <label lid="sxjg">刷新间隔：</label>
+        <label id="lb_sxjg"></label>
+    </div>
+    <table class="layui-hide" id="tb_scrw" lay-filter="tb_scrw" style="font-size:18px;"></table>
+</div>
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/PD_SCRW_SELECT_FJ_LIST")
+}

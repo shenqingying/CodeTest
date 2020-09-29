@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_KQ_REPORT_SUMMARY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DEPID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFLX" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="beginTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endTime" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OnlyQQ" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_KQ_REPORT_SUMMARYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRM_KQ_REPORT_SUMMARYResult" type="tns:ArrayOfCRM_KQ_COLLECTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_COLLECTList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_COLLECTList" nillable="true" type="tns:CRM_KQ_COLLECTList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_COLLECTList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAYCOUNTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZCDAYCOUNTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCDAYCOUNTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QJDAYCOUNTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="YCDAYCOUNTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QQDAYCOUNTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CRM_KQ_Detail_QJ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Begintime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Endtime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_KQ_Detail_QJResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRM_KQ_Detail_QJResult" type="tns:ArrayOfCRM_KQ_YGQJList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_YGQJList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_YGQJList" nillable="true" type="tns:CRM_KQ_YGQJList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_YGQJList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DEPNAMEDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJLBDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="YGQJID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFSEX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPNAME" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QJLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QWHC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHQJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHQJJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QJTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BMLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZGLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJQJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJJSKSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJQJTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CRM_KQ_Detail_CC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Begintime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Endtime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_KQ_Detail_CCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRM_KQ_Detail_CCResult" type="tns:ArrayOfCRM_KQ_CCTTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_CCTTList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_CCTTList" nillable="true" type="tns:CRM_KQ_CCTTList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_CCTTList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCRBM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCDD" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BQYCC" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZCYWCC" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JHCCTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CXFS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="YJJE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="QTCXFS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QTCXFSJE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJJE" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJCCJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJCCTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSQR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSQSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXFSDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QTCXFSDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CRM_KQ_Detail_YC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Begintime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Endtime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_KQ_Detail_YCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRM_KQ_Detail_YCResult" type="tns:ArrayOfCRM_KQ_YCKQSM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_YCKQSM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_YCKQSM" nillable="true" type="tns:CRM_KQ_YCKQSM" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_YCKQSM">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="YCKQID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SMSXB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMRBMLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMRBMZG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMSX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CRM_KQ_Detail_QD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Begintime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Endtime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_KQ_Detail_QDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRM_KQ_Detail_QDResult" type="tns:ArrayOfCRM_KQ_QDList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_QDList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_QDList" nillable="true" type="tns:CRM_KQ_QDList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_QDList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="KQQDID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDGSHXMIDDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDGSID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDGSIDDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDGSHXMID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SXB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GJ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SF" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDWZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDJD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDWD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KQJL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CRM_KQ_Detail_QQ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Begintime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Endtime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_KQ_Detail_QQResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRM_KQ_Detail_QQResult" type="tns:ArrayOfCRM_KQ_QQList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_QQList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_QQList" nillable="true" type="tns:CRM_KQ_QQList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_QQList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SBQD" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XBQD" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RQ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfCRM_KQ_COLLECTList" nillable="true" type="tns:ArrayOfCRM_KQ_COLLECTList" />
+      <s:element name="ArrayOfCRM_KQ_YGQJList" nillable="true" type="tns:ArrayOfCRM_KQ_YGQJList" />
+      <s:element name="ArrayOfCRM_KQ_CCTTList" nillable="true" type="tns:ArrayOfCRM_KQ_CCTTList" />
+      <s:element name="ArrayOfCRM_KQ_YCKQSM" nillable="true" type="tns:ArrayOfCRM_KQ_YCKQSM" />
+      <s:element name="ArrayOfCRM_KQ_QDList" nillable="true" type="tns:ArrayOfCRM_KQ_QDList" />
+      <s:element name="ArrayOfCRM_KQ_QQList" nillable="true" type="tns:ArrayOfCRM_KQ_QQList" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_REPORT_SUMMARYSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_REPORT_SUMMARY" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_REPORT_SUMMARYSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_REPORT_SUMMARYResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QJSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_QJ" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QJSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_QJResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_CCSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_CC" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_CCSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_CCResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_YCSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_YC" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_YCSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_YCResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QDSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_QD" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QDSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_QDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QQSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_QQ" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QQSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_KQ_Detail_QQResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_REPORT_SUMMARYHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="DEPID" type="s:string" />
+    <wsdl:part name="STAFFLX" type="s:string" />
+    <wsdl:part name="STAFFNAME" type="s:string" />
+    <wsdl:part name="STAFFNO" type="s:string" />
+    <wsdl:part name="beginTime" type="s:string" />
+    <wsdl:part name="endTime" type="s:string" />
+    <wsdl:part name="OnlyQQ" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_REPORT_SUMMARYHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_COLLECTList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QJHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QJHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_YGQJList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_CCHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_CCHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCTTList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_YCHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_YCHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_YCKQSM" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QDHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QDList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QQHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QQHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QQList" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_REPORT_SUMMARYHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="DEPID" type="s:string" />
+    <wsdl:part name="STAFFLX" type="s:string" />
+    <wsdl:part name="STAFFNAME" type="s:string" />
+    <wsdl:part name="STAFFNO" type="s:string" />
+    <wsdl:part name="beginTime" type="s:string" />
+    <wsdl:part name="endTime" type="s:string" />
+    <wsdl:part name="OnlyQQ" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_REPORT_SUMMARYHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_COLLECTList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QJHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QJHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_YGQJList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_CCHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_CCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCTTList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_YCHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_YCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_YCKQSM" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QDHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QDList" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QQHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Begintime" type="s:string" />
+    <wsdl:part name="Endtime" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CRM_KQ_Detail_QQHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QQList" />
+  </wsdl:message>
+  <wsdl:portType name="CRM_KQ_ReportSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_REPORT_SUMMARY">
+      <wsdl:input message="tns:CRM_KQ_REPORT_SUMMARYSoapIn" />
+      <wsdl:output message="tns:CRM_KQ_REPORT_SUMMARYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QJ">
+      <wsdl:input message="tns:CRM_KQ_Detail_QJSoapIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QJSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_CC">
+      <wsdl:input message="tns:CRM_KQ_Detail_CCSoapIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_CCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_YC">
+      <wsdl:input message="tns:CRM_KQ_Detail_YCSoapIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_YCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QD">
+      <wsdl:input message="tns:CRM_KQ_Detail_QDSoapIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QQ">
+      <wsdl:input message="tns:CRM_KQ_Detail_QQSoapIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QQSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_KQ_ReportHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_REPORT_SUMMARY">
+      <wsdl:input message="tns:CRM_KQ_REPORT_SUMMARYHttpGetIn" />
+      <wsdl:output message="tns:CRM_KQ_REPORT_SUMMARYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QJ">
+      <wsdl:input message="tns:CRM_KQ_Detail_QJHttpGetIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QJHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_CC">
+      <wsdl:input message="tns:CRM_KQ_Detail_CCHttpGetIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_CCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_YC">
+      <wsdl:input message="tns:CRM_KQ_Detail_YCHttpGetIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_YCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QD">
+      <wsdl:input message="tns:CRM_KQ_Detail_QDHttpGetIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QQ">
+      <wsdl:input message="tns:CRM_KQ_Detail_QQHttpGetIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QQHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_KQ_ReportHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_REPORT_SUMMARY">
+      <wsdl:input message="tns:CRM_KQ_REPORT_SUMMARYHttpPostIn" />
+      <wsdl:output message="tns:CRM_KQ_REPORT_SUMMARYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QJ">
+      <wsdl:input message="tns:CRM_KQ_Detail_QJHttpPostIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QJHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_CC">
+      <wsdl:input message="tns:CRM_KQ_Detail_CCHttpPostIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_CCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_YC">
+      <wsdl:input message="tns:CRM_KQ_Detail_YCHttpPostIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_YCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QD">
+      <wsdl:input message="tns:CRM_KQ_Detail_QDHttpPostIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QQ">
+      <wsdl:input message="tns:CRM_KQ_Detail_QQHttpPostIn" />
+      <wsdl:output message="tns:CRM_KQ_Detail_QQHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CRM_KQ_ReportSoap" type="tns:CRM_KQ_ReportSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_REPORT_SUMMARY">
+      <soap:operation soapAction="http://tempuri.org/CRM_KQ_REPORT_SUMMARY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QJ">
+      <soap:operation soapAction="http://tempuri.org/CRM_KQ_Detail_QJ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_CC">
+      <soap:operation soapAction="http://tempuri.org/CRM_KQ_Detail_CC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_YC">
+      <soap:operation soapAction="http://tempuri.org/CRM_KQ_Detail_YC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QD">
+      <soap:operation soapAction="http://tempuri.org/CRM_KQ_Detail_QD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QQ">
+      <soap:operation soapAction="http://tempuri.org/CRM_KQ_Detail_QQ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_KQ_ReportSoap12" type="tns:CRM_KQ_ReportSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_REPORT_SUMMARY">
+      <soap12:operation soapAction="http://tempuri.org/CRM_KQ_REPORT_SUMMARY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QJ">
+      <soap12:operation soapAction="http://tempuri.org/CRM_KQ_Detail_QJ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_CC">
+      <soap12:operation soapAction="http://tempuri.org/CRM_KQ_Detail_CC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_YC">
+      <soap12:operation soapAction="http://tempuri.org/CRM_KQ_Detail_YC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QD">
+      <soap12:operation soapAction="http://tempuri.org/CRM_KQ_Detail_QD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QQ">
+      <soap12:operation soapAction="http://tempuri.org/CRM_KQ_Detail_QQ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_KQ_ReportHttpGet" type="tns:CRM_KQ_ReportHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_REPORT_SUMMARY">
+      <http:operation location="/CRM_KQ_REPORT_SUMMARY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QJ">
+      <http:operation location="/CRM_KQ_Detail_QJ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_CC">
+      <http:operation location="/CRM_KQ_Detail_CC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_YC">
+      <http:operation location="/CRM_KQ_Detail_YC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QD">
+      <http:operation location="/CRM_KQ_Detail_QD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QQ">
+      <http:operation location="/CRM_KQ_Detail_QQ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_KQ_ReportHttpPost" type="tns:CRM_KQ_ReportHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_REPORT_SUMMARY">
+      <http:operation location="/CRM_KQ_REPORT_SUMMARY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QJ">
+      <http:operation location="/CRM_KQ_Detail_QJ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_CC">
+      <http:operation location="/CRM_KQ_Detail_CC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_YC">
+      <http:operation location="/CRM_KQ_Detail_YC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QD">
+      <http:operation location="/CRM_KQ_Detail_QD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_KQ_Detail_QQ">
+      <http:operation location="/CRM_KQ_Detail_QQ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CRM_KQ_Report">
+    <wsdl:port name="CRM_KQ_ReportSoap" binding="tns:CRM_KQ_ReportSoap">
+      <soap:address location="http://192.168.0.16/API/CRM/CRM_KQ_Report.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_KQ_ReportSoap12" binding="tns:CRM_KQ_ReportSoap12">
+      <soap12:address location="http://192.168.0.16/API/CRM/CRM_KQ_Report.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_KQ_ReportHttpGet" binding="tns:CRM_KQ_ReportHttpGet">
+      <http:address location="http://192.168.0.16/API/CRM/CRM_KQ_Report.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_KQ_ReportHttpPost" binding="tns:CRM_KQ_ReportHttpPost">
+      <http:address location="http://192.168.0.16/API/CRM/CRM_KQ_Report.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

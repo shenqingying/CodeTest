@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "培训明细";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR培训发展</a>
+    <a><cite>培训明细</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_back" onclick="location.href = '@Url.Action("PXZT", "PXFZ")'">返回</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_gh" autocomplete="off" placeholder="（姓名/工号）" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">归属部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father"></div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">培训日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PXRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PXRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">培训主题：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_pxztname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="PXTable" lay-filter="PXTable"></table>
+    </div>
+</div>
+<style>
+    th .layui-table-cell {
+        text-align: center;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/PXFZ/PXMX")
+}

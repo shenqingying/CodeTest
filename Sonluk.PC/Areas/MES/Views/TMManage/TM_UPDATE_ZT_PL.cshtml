@@ -1,0 +1,222 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "条码批量更新";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_MES_ALL
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="mestmgl">MES条码管理</a>
+    <a><cite lid="tmplgx">条码批量更新</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="c_search">查询</button>
+        <button class="layui-btn" id="btn_plupdate" lid="plgg">批量更改</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_formGC">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    @if (Model.GCCOUNT == 1)
+                    {
+                        <option value="" lid="c_selectplz">请选择</option>
+                        <option value="@Model.MES_SY_GC[0].GC" selected="selected">@Model.MES_SY_GC[0].GC-@Model.MES_SY_GC[0].GCMS</option>
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_formGZZX">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx" lay-search="">
+                    @if (Model.GCCOUNT == 1 && Model.GZZXCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        <option value="@Model.MES_SY_GZZX[0].GZZXBH">@Model.MES_SY_GZZX[0].GZZXBH-@Model.MES_SY_GZZX[0].GZZXMS</option>
+                    }
+                    else if (Model.GCCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GZZX.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GZZX[i].GZZXBH">@Model.MES_SY_GZZX[i].GZZXBH-@Model.MES_SY_GZZX[i].GZZXMS</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_formSBBH">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="in_sbbh" lay-filter="in_sbbh">
+                    @if (Model.GCCOUNT == 1 && Model.GZZXCOUNT == 1 && Model.SBHCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        <option value="@Model.MES_SY_GZZX_SBH[0].SBBH">@Model.MES_SY_GZZX_SBH[0].SBMS</option>
+                    }
+                    else if (Model.GCCOUNT == 1 && Model.GZZXCOUNT == 1)
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GZZX_SBH.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GZZX_SBH[i].SBBH">@Model.MES_SY_GZZX_SBH[i].SBMS</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="SCDATEc">生产日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="TMc">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_tm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="WLHc">物料编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_wlh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="PCc">批次：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_pc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="CPZTNAMEc">产品状态：</label>
+            <div class="layui-input-inline">
+                <select id="in_cpzt" lay-filter="in_cpzt">
+                    @if (Model.GCCOUNT == 1)
+                    {
+                        <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_TYPEMXLIST_CPZT.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_TYPEMXLIST_CPZT[i].ID">@Model.MES_SY_TYPEMXLIST_CPZT[i].MXNAME</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="ZFDCLBNAMEc">暂放类别：</label>
+            <div class="layui-input-inline">
+                <select id="in_zfdclb" lay-filter="in_zfdclb">
+                    @if (Model.GCCOUNT == 1)
+                    {
+                        <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_TYPEMXLIST_ZFLB.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_TYPEMXLIST_ZFLB[i].ID">@Model.MES_SY_TYPEMXLIST_ZFLB[i].MXNAME</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_tm" lay-filter="tb_tm"></table>
+</div>
+<div id="div_tm_update" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="QSMc">请扫描：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_update_sm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()" placeholder="请扫描员工号">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="GGZTc">更改状态：</label>
+            <div class="layui-input-inline">
+                <select id="tm_update_cpzt" lay-filter="tm_update_cpzt">
+                    @if (Model.GCCOUNT == 1)
+                    {
+                        <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_TYPEMXLIST_CPZT.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_TYPEMXLIST_CPZT[i].ID">@Model.MES_SY_TYPEMXLIST_CPZT[i].MXNAME</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="ZJBZc">追加备注：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_update_remark" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="PCc">批次：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_update_pc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="YGHc">员工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_update_ygh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="YGXMc">员工姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_update_ygxm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/TMManage/TM_UPDATE_ZT_PL")
+}

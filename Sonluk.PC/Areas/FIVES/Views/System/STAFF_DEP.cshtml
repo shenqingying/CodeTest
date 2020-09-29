@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "人员绑定评分部门";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="sex_Tpl">
+    {{# if(d.STAFFSEX == 1){ }}
+    男
+    {{# }else if(d.STAFFSEX== 2){ }}
+    女
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+<script type="text/html" id="lock_Tpl">
+    {{# if(d.SISLOCK == true){ }}
+    锁定
+    {{# }else if(d.SISLOCK== false){ }}
+    未锁定
+    {{# }else { }}
+    d.SISLOCK
+    {{# } }}
+</script>
+<script type="text/html" id="switchTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch1" value="{{d.CJSTATUS}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.CJSTATUS == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTp2">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.XJSTATUS}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.XJSTATUS == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTp3">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.DJSTATUS}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.DJSTATUS == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTp4">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.TZSTATUS}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.TZSTATUS == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTp5">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.XFDJSTATUS}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.XFDJSTATUS == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTp6">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.STDJSTATUS}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.STDJSTATUS == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTp7">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.JFDJSTATUS}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.JFDJSTATUS == 1 ? 'checked' : '' }}>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">5S系统管理</a>
+    <a><cite>人员评分部门管理</cite></a>
+</span>
+<input type="hidden" value="@Url.Action("SY_DEPT_SELECT", "System")" id="SY_DEPT_SELECT" />
+<input type="hidden" value="@Url.Action("SY_DEPT_SELECTByStaffID", "System")" id="SY_DEPT_SELECTByStaffID" />
+<input type="hidden" value="@Url.Action("STAFF_DEP_Create", "System")" id="STAFF_DEP_Create" />
+<input type="hidden" value="@Url.Action("STAFF_DEP_Update", "System")" id="STAFF_DEP_Update" />
+
+
+<div class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline">
+                <select id="in_bm" lay-filter="in_bm" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.CRM_HG_DEPT.Length; i++)
+                    {
+                        <option value="@Model.CRM_HG_DEPT[i].DEPID">@Model.CRM_HG_DEPT[i].DEPNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">          
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_xm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_staff" lay-filter="tb_staff"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="bingDep">绑定部门</a>
+    </script>
+</div>
+<div class="layui-form" id="div_bingDep" hidden>
+    <div style="padding:10px  0 0 10px">
+
+        <button class="layui-btn" id="btn_cj">抽检反选</button>
+        <button class="layui-btn" id="btn_xj">巡检反选</button>
+    </div>
+
+    <div style="padding:0 10px 0 10px">
+        <table class="layui-hide" id="tb_dep" lay-filter="tb_dep"></table>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/System/STAFF_DEP")
+}
+

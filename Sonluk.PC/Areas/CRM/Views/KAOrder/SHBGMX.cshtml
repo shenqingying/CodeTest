@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "收货报告明细";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Sonluk.UI.Model.CRM.HG_DICTService.CRM_HG_DICT[] mxList = ViewBag.mxList;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="pm">
+    {{# if(d.ProdName != "" && d.ProdSpec != ""){ }}
+    {{ d.ProdName + "/" + d.ProdSpec}}
+    {{# }else if(d.ProdName != "" && d.ProdSpec == ""){ }}
+    {{ d.ProdName }}
+    {{# }else if(d.ProdName == "" && d.ProdSpec != ""){ }}
+    {{ d.ProdSpec }}
+
+    {{# } }}
+
+  
+</script>
+<script type="text/html" id="SL">
+    {{ d.SL  }}
+</script>
+<script type="text/html" id="ZKL">
+   {{ d.ZKL  }}
+</script>
+<input id="SELECT_ORDERSH_MX" value="@Url.Action("SELECT_ORDERSH_MX", "KAOrder")" type="hidden">
+
+<input id="EXPORT_KAORDER_SELECT" value="@Url.Action("EXPORT_KAORDER_SELECT", "KAOrder")" type="hidden">
+<input id="EXPORT_KAORDER" value="@Url.Action("EXPORT_KAORDER", "KAOrder")" type="hidden">
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA订单管理</a>
+    <a><cite>收货报告明细</cite></a>
+</span>
+<br />
+<br />
+<div id="form1" class="layui-form">
+
+    <div class="layui-form-item">
+        <button type="button" class="layui-btn" onclick= "window.close()">返回</button>
+        <button type="button" class="layui-btn" id="btn_dc">导出</button>     
+        <button type="button" class="layui-btn" id="btn_cx">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订单来源：</label>
+            <div class="layui-input-inline">
+                <select id="in_ddly" lay-filter="in_ddly" lay-search>
+                    @{
+                        <option value="0" selected="selected">请选择</option>
+                        if (@mxList != null)
+                        {
+                            for (int i = 0; i < @mxList.Length; i++)
+                            {
+                                <option value="@mxList[i].DICID">@mxList[i].DICNAME</option>
+                            }
+                        }
+
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">门店信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_mdxx" autocomplete="off" class="layui-input" placeholder="（门店编号/门店名称）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">订单号码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="id_ddhm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+          
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">货号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="id_hh" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">物料编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="id_wlbm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+
+        </div>
+       
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订货日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_dhrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_dhrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">交货日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_jhrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_jhrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">导入日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_drrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_drrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+            <input type="checkbox" id="in_cysj" lay-filter="in_cysj" name="" title="只显示差异数据" lay-skin="primary" checked>
+        </div>
+        
+        
+        <div class="layui-inline" id="div_rc">
+            
+            <label class="layui-form-label">容差(元)：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="id_rc" autocomplete="off" class="layui-input" value="1.00">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="div_orderTT">
+        <table class="layui-hide" id="tb_shbgmxtable" lay-filter="tb_shbgmxtable"></table>
+    </div>
+
+    @*<div class="layui-form-item">
+            <button id="btn_dr" class="layui-btn" style="width:120px;">导入</button><br />
+        </div>*@
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KAOrder/SHBGMX")
+}
+
+

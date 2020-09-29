@@ -1,0 +1,310 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "订单审核";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+        @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+        @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+    </script>
+
+
+
+
+
+    <script type="text/html" id="zhuangtai">
+        {{# if(d.ISACTIVE == 10){ }}
+        未提交
+        {{# }else if(d.ISACTIVE == 20){ }}
+        已提交
+        {{# }else if(d.ISACTIVE == 50){ }}
+        已审核
+        {{# }else if(d.ISACTIVE == 60){ }}
+        已归档
+        {{# }else { }}
+
+        {{# } }}
+    </script>
+
+    <script type="text/html" id="official">
+        {{# if(d.IsOfficial == 10){ }}
+        潜在客户
+        {{# }else if(d.IsOfficial == 20){ }}
+        签约客户
+        {{# }else if(d.IsOfficial == 30){ }}
+        非签约客户
+        {{# }else { }}
+
+        {{# } }}
+    </script>
+
+    <script type="text/html" id="havepower">
+        {{# if(d.GIDSTATUS == 1){ }}
+        是
+        {{# }else if(d.GIDSTATUS == 0){ }}
+        否
+        {{# }else { }}
+
+        {{# } }}
+    </script>
+</div>
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>订单管理</a>
+    <a><cite>订单审核</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+            <button id="btn_SH" class="layui-btn">审核</button>
+            <button id="btn_back" class="layui-btn">回退</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">订单类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="ddlx" lay-filter="ddlx">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">订单状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="isactive" lay-filter="isactive">
+                                @*<option value="0">全部</option>*@
+                                <option value="20" selected="selected">已提交 </option>
+                                <option value="50">已审核</option>
+                                <option value="60">已归档</option>
+                            </select>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">新建时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_begin" type="text" class="layui-input" value="@ViewBag.startdate">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_end" type="text" class="layui-input" value="@ViewBag.enddate">
+                        </div>
+
+                    </div>
+
+
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">售达方SAP：</label>
+                        <div class="layui-input-inline">
+                            <input id="sdfsap" type="text" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">售达方名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="sdfname" type="text" class="layui-input">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<div id="div_confirm" class="layui-form" hidden>
+    <table border="0" style="border:0">
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:90px;text-align:right;">售达方：</label>
+            </td>
+            <td>
+                <label id="cfm_sdf" class="layui-form-label" style="text-align:left;width:inherit;"></label>
+            </td>
+            <td>
+                <label class="layui-form-label" style="width:90px;text-align:right;">送达方：</label>
+            </td>
+            <td>
+                <label id="cfm_ship" class="layui-form-label" style="text-align:left;width:inherit;"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:90px;text-align:right;">收货地址：</label>
+            </td>
+            <td>
+                <label id="cfm_address" class="layui-form-label" style="text-align:left;width:inherit"></label>
+            </td>
+            <td>
+                <label class="layui-form-label" style="width:90px;text-align:right;">付款时间：</label>
+            </td>
+            <td>
+                <label id="cfm_fksj" class="layui-form-label" style="text-align:left;width:inherit;"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:90px;text-align:right;">备注：</label>
+            </td>
+            <td colspan="3">
+                <label id="cfm_remark" class="layui-form-label" style="text-align:left;width:inherit"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="layui-form-label" style="width:90px;text-align:right;">业务员备注：</label>
+            </td>
+            <td colspan="3">
+                <input id="cfm_remark2" type="text" class="layui-input">
+            </td>
+        </tr>
+    </table>
+    @*<div class="layui-form-item">
+        <div class="layui-inline">
+            
+            <div class="layui-input-inline" style="width:220px;">
+                
+            </div>
+        </div>
+        <div class="layui-inline">
+            
+            <div class="layui-input-inline" style="width:220px;">
+                
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div>
+                
+                <div class="layui-input-inline" style="width:220px;">
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="layui-inline">
+            
+            <div class="layui-input-inline" style="width:220px;">
+                
+            </div>
+        </div>
+    </div>*@
+
+    <table id="table_confirm" lay-filter="table_confirm"></table>
+
+    <div id="div_hj">
+
+    </div>
+
+    @*<table id="tb_hj2" class="layui-table" style="text-align:right;width:auto;">
+        <tr>
+            <td width="130px;">金额合计：</td>
+            <td id="td_total"></td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td>可使用折扣金额：</td>
+            <td id="td_discount"></td>
+            <td width="130px;">本期使用折扣金额：</td>
+            <td id="td_discount_this"></td>
+            <td width="130px;">剩余折扣金额：</td>
+            <td id="td_discount_balance"></td>
+        </tr>
+        <tr>
+            <td>本单实际金额：</td>
+            <td id="td_actual"></td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td>上期余额：</td>
+            <td id="td_previous_balance"></td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td>本单应付金额：</td>
+            <td id="td_pay"></td>
+            <td colspan="4"></td>
+        </tr>
+    </table>*@
+</div>
+
+<input id="netpath" hidden />
+
+
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/SH_Order")
+}

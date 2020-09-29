@@ -1,0 +1,64 @@
+﻿@using Sonluk.UI.Model.LE.OutboundDeliveryService
+@model IEnumerable<DeliveryInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">No.</td>
+        <td class="data-table-header">交货单</td>
+        <td class="data-table-header">日期</td>
+        <td class="data-table-header">送达方</td>
+        <td class="data-table-header">送达方名称</td>
+        <td class="data-table-header">城市</td>
+        <td class="data-table-header">电话</td>
+        <td class="data-table-header">地址</td>
+        <td class="data-table-header">备注</td>
+        <td class="data-table-header">总重量</td>
+        <td class="data-table-header">净重量</td>
+        <td class="data-table-header">单位</td>
+        <td class="data-table-header">销售</td>
+        <td class="data-table-header">售达方</td>
+        <td class="data-table-header">类型</td>
+        <td class="data-table-header">发货日期</td>
+        <td class="data-table-header">捡配日期</td>
+        <td class="data-table-header">创建者</td>
+        <td class="data-table-header">创建日期</td>
+        <td class="data-table-header">创建时间</td>
+        <td class="data-table-header">托运单</td>
+        <td class="data-table-header">进仓编号</td>
+        <td class="data-table-header">仓库地址</td>
+        <td class="data-table-header">联系人</td>
+        <td class="data-table-header">联系电话</td>
+    </tr>
+    @{int i = 1;}
+    @foreach (DeliveryInfo node in Model)
+    {
+        <tr>
+            <td>@(i++)</td>
+            <td>@node.SerialNumber</td>
+            <td>@node.Date</td>
+            <td class="text-align-right">@node.ShipToParty</td>
+            <td class="text-align-left">@node.ShipToPartyName</td>
+            <td class="text-align-left">@node.City</td>
+            <td class="text-align-left">@node.Telephone</td>
+            <td class="text-align-left">@node.Address</td>
+            <td class="text-align-left">@node.Remark</td>
+            <td class="text-align-right">@node.TotalWeight</td>
+            <td class="text-align-right">@node.NetWeight</td>
+            <td>@node.Unit</td>
+            <td>@node.SalesOrganization</td>
+            <td>@node.Customer</td>
+            <td>@node.Type</td>
+            <td>@node.DeliveryDate</td>
+            <td>@node.PickingDate</td>
+            <td class="text-align-left">@node.Creator</td>
+            <td>@node.CreateDate</td>
+            <td>@node.CreateTime</td>
+            <td>@node.ConsignmentNote</td>
+            <td class="text-align-right">@node.BillOfLoading</td>
+            <td class="text-align-left">@node.StoreLocation</td>
+            <td>@node.Contact</td>
+            <td class ="text-align-left">@node.ContactTelephone</td>
+        </tr>
+    }
+</table>
+

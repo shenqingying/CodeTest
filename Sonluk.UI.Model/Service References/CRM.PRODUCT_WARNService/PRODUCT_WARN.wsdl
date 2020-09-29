@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_PRODUCT_WARN" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_PRODUCT_WARN">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PROWARNID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRODUCTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="JCSJ" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="YJXS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="YJSL" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SYSL" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TBSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHMC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPXL" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPXH" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPXLDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPXHDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPPH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPMC" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_PRODUCT_WARN" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PROWARNID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PROWARNID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByIDResult" type="tns:CRM_PRODUCT_WARN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_PRODUCT_WARN" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByParamResult" type="tns:ArrayOfCRM_PRODUCT_WARN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_PRODUCT_WARN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_PRODUCT_WARN" nillable="true" type="tns:CRM_PRODUCT_WARN" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadByKHIDandPRODUCTID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PRODUCTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByKHIDandPRODUCTIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByKHIDandPRODUCTIDResult" type="tns:ArrayOfCRM_PRODUCT_WARN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="CRM_PRODUCT_WARN" nillable="true" type="tns:CRM_PRODUCT_WARN" />
+      <s:element name="ArrayOfCRM_PRODUCT_WARN" nillable="true" type="tns:ArrayOfCRM_PRODUCT_WARN" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDandPRODUCTIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByKHIDandPRODUCTID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDandPRODUCTIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByKHIDandPRODUCTIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="PROWARNID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpGetIn">
+    <wsdl:part name="PROWARNID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_PRODUCT_WARN" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDandPRODUCTIDHttpGetIn">
+    <wsdl:part name="KHID" type="s:string" />
+    <wsdl:part name="PRODUCTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDandPRODUCTIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_PRODUCT_WARN" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="PROWARNID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpPostIn">
+    <wsdl:part name="PROWARNID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_PRODUCT_WARN" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDandPRODUCTIDHttpPostIn">
+    <wsdl:part name="KHID" type="s:string" />
+    <wsdl:part name="PRODUCTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKHIDandPRODUCTIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_PRODUCT_WARN" />
+  </wsdl:message>
+  <wsdl:portType name="PRODUCT_WARNSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDSoapIn" />
+      <wsdl:output message="tns:ReadByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <wsdl:input message="tns:ReadByParamSoapIn" />
+      <wsdl:output message="tns:ReadByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHIDandPRODUCTID">
+      <wsdl:input message="tns:ReadByKHIDandPRODUCTIDSoapIn" />
+      <wsdl:output message="tns:ReadByKHIDandPRODUCTIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PRODUCT_WARNHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHIDandPRODUCTID">
+      <wsdl:input message="tns:ReadByKHIDandPRODUCTIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByKHIDandPRODUCTIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PRODUCT_WARNHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHIDandPRODUCTID">
+      <wsdl:input message="tns:ReadByKHIDandPRODUCTIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByKHIDandPRODUCTIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PRODUCT_WARNSoap" type="tns:PRODUCT_WARNSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <soap:operation soapAction="http://tempuri.org/ReadByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHIDandPRODUCTID">
+      <soap:operation soapAction="http://tempuri.org/ReadByKHIDandPRODUCTID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PRODUCT_WARNSoap12" type="tns:PRODUCT_WARNSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHIDandPRODUCTID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByKHIDandPRODUCTID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PRODUCT_WARNHttpGet" type="tns:PRODUCT_WARNHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <http:operation location="/ReadByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHIDandPRODUCTID">
+      <http:operation location="/ReadByKHIDandPRODUCTID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PRODUCT_WARNHttpPost" type="tns:PRODUCT_WARNHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <http:operation location="/ReadByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKHIDandPRODUCTID">
+      <http:operation location="/ReadByKHIDandPRODUCTID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PRODUCT_WARN">
+    <wsdl:port name="PRODUCT_WARNSoap" binding="tns:PRODUCT_WARNSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/PRODUCT_WARN.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PRODUCT_WARNSoap12" binding="tns:PRODUCT_WARNSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/PRODUCT_WARN.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PRODUCT_WARNHttpGet" binding="tns:PRODUCT_WARNHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/PRODUCT_WARN.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PRODUCT_WARNHttpPost" binding="tns:PRODUCT_WARNHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/PRODUCT_WARN.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

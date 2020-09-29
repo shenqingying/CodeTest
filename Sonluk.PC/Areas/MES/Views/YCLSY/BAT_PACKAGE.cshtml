@@ -1,0 +1,236 @@
+﻿@{
+    ViewBag.Title = "外观与包装";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<style type="text/css">
+    .layui-form-item-modify .layui-form-label {
+        width: 100px;
+    }
+
+    /*.layui-table-header th > .layui-table-cell {
+        height: 60px;
+        overflow: visible;
+        text-overflow: inherit;
+        white-space: normal;
+        word-break: break-all;
+        display:table-cell;
+        vertical-align:middle;
+    }*/
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES条码管理</a>
+    <a><cite>外观与包装</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search_package">查询</button>
+        <button class="layui-btn" id="btn_add_package">新增</button>
+        <button class="layui-btn" id="btn_import_package_open">导入</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_export_package">导出</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="package_fty" lay-search="" lay-verify="required">
+                    <option value="">全部</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">生产订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_po" class="layui-input" placeholder="请填写生产订单号">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">销售订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_so" class="layui-input" placeholder="请填写销售订单号">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline" style="width:120px">
+                <input type="text" id="package_so_item" class="layui-input" placeholder="请填写行项目">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">生产日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_dates" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="package_datee" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+        </div>
+    </div>
+    <table class="layui-table layui-table-modify" id="tb_package_list" lay-filter="tb_package_list"></table>
+</div>
+
+<div id="div_import" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <button class="layui-btn" id="btn_import_package_template">导入模板下载</button>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" id="btn_import_package">导入</button>
+        </div>
+    </div>
+</div>
+
+<div id="div_modify" class="layui-form layui-form-item-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_modify" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="package_GC" lay-search="" lay-verify="required">
+                    <option value="">无</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">生产订单号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_ERPNO" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">销售订单号：</label>
+            <div class="layui-input-inline" style="width:150px">
+                <input type="text" id="package_XSNOBILL" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline" style="width:60px">
+                <input type="text" id="package_XSNOBILLMX" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" id="package_btn_search_package">查询</button>
+        </div>
+    </div>
+    <div><hr class="layui-bg-gray"></div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">物料号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_WLH" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">物料描述：</label>
+            <div class="layui-input-inline" style="width:300px">
+                <input type="text" id="package_WLMS" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:79px;">订单数量：</label>
+            <div class="layui-input-inline" style="width:60px">
+                <input type="text" id="package_COUNTX" class="layui-input" lay-verify="required|number">
+            </div>
+            <div class="layui-form-mid layui-word-aux">箱，共</div>
+            <div class="layui-input-inline" style="width:65px">
+                <input type="text" id="package_COUNTZ" class="layui-input" disabled>
+            </div>
+            <div class="layui-form-mid layui-word-aux">只</div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">电池喷码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_CODOWORD" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">检验标准：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_SNINFO" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">喷码位置：</label>
+            <div class="layui-input-inline">
+                <select id="package_WORDSPACE" lay-search="" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">卡片日期唛：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="package_KPRQM" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">检验水平：</label>
+            <label class="layui-form-label" style="width:60px">抽箱数：</label>
+            <div class="layui-input-inline" style="width:100px">
+                <input type="text" id="package_CXS" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">绝缘圈：</label>
+            <div class="layui-input-inline">
+                <select id="package_INSULATION" lay-search="" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <label class="layui-form-label" style="width:60px">外观：</label>
+            <div class="layui-input-inline" style="width:100px">
+                <input type="text" id="package_WG" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="operate">
+    {{#  if(!d.ISPACK){ }}
+    <div class="layui-row">
+        <a class="layui-btn layui-btn-xs layui-btn-fluid" lay-event="add">填写</a>
+    </div>
+    {{#  } else { }}
+    <div class="layui-row">
+        <div class="layui-col-md6">
+            <a class="layui-btn layui-btn-xs layui-btn-fluid" lay-event="modify">修改</a>
+        </div>
+        <div class="layui-col-md6">
+            <a class="layui-btn layui-btn-danger layui-btn-xs layui-btn-fluid" lay-event="delete">删除</a>
+        </div>
+    </div>
+    {{#  } }}
+</script>
+
+<script type="text/html" id="ispack">
+    {{#  if(d.ISPACK){ }}
+    <i class="layui-icon layui-icon-ok" style="color: #009688;"></i>
+    {{#  } else { }}
+    <i class="layui-icon layui-icon-close" style="color: #FF5722;"></i>
+    {{#  } }}
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/YCLSY/BAT_PACKAGE")
+}

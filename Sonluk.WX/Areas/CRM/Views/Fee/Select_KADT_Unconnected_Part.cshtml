@@ -1,0 +1,89 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KADTTTService;
+@{
+    ViewBag.Title = "Select_KADT_Unconnected_Part";
+    CRM_COST_KADTTT[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MC</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">合同年份</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HTYEAR</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户SAP编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SAPSN</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">活动开始日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HDBEGINDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">活动结束时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HDENDDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">最晚发货时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].FHDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">预计活动期间销售</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].YJHDQJXS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SQZJE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">预计费比</label>
+                <span class="weui-form-preview__value">&nbsp;@(data[i].YJFB)%</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">日常月均销售</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].RCYJXS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">档期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].DQ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">促销级别</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CXJB</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">活动方案说明</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HDFASM</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].BEIZ</span>
+            </p>
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DTconfirm(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">确认</button>
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+    @*<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />*@

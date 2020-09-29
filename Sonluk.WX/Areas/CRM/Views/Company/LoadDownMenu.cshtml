@@ -1,0 +1,57 @@
+﻿@using Sonluk.UI.Model.CRM.QYJS_MENUService;
+@{
+    ViewBag.Title = "LoadDownMenu";
+    CRM_QYJS_MENU[] data = ViewBag.data;
+}
+
+
+@*@for (int i = 0; i < data.Length; i++)
+    {
+
+        <div style="height:200px;">
+            <img src="@data[i].ML" />
+        </div>
+
+
+
+    }*@
+
+
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        @for (int i = 0; i < data.Length; i++)
+        {
+
+            <div class="weui-flex">
+                <div class="weui-flex__item" style="text-align:center;">
+                    <img src="@data[i].ML" style="height:100px;" onclick="window.open('../Company/MenuMX?CATALOGID=@data[i].CATALOGID')" />
+                    <label class="weui-label" style="width:inherit;text-align:center;height: 50px;font-size:17px;">@data[i].NAME</label>
+
+                </div>
+
+                @if (i == data.Length - 1)
+                {
+                    <div class="weui-flex__item" style="text-align:center;">
+                    </div>
+                }
+                else
+                {
+                    i++;
+                    <div class="weui-flex__item" style="text-align:center;">
+                        <img src="@data[i].ML" style="height:100px;" onclick="window.open('../Company/MenuMX?CATALOGID=@data[i].CATALOGID')" />
+                        <label class="weui-label" style="width:inherit;text-align:center;height: 50px;font-size:17px;">@data[i].NAME</label>
+
+                    </div>
+
+                }
+
+
+
+            </div>
+            
+            
+            
+        }
+    </div>
+</div>

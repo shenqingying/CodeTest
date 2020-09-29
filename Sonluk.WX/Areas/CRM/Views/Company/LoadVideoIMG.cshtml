@@ -1,0 +1,60 @@
+﻿@using Sonluk.UI.Model.CRM.QYJS_FILEService;
+@{
+    ViewBag.Title = "LoadVideoIMG";
+    CRM_QYJS_FILE[] data = ViewBag.data;
+}
+<br />
+<div class="layui-form">
+    <div class="layui-form-item">
+        @for (int i = 0; i < data.Length; i++)
+        {
+            @*<div class="layui-inline">
+                <div class="layui-input-inline" style="text-align:center;">
+                    <br /><br />
+
+                    <img src="@data[i].COVER" style="height:120px;" onclick="window.open('../Company/Video_Play?ID=@data[i].ID')" />
+                    <label class="layui-form-label" style="width:inherit;height:50px;padding-left:0px;padding-right:0px;font-size:18px;text-align:center;">@data[i].TITLE</label>
+
+
+                </div>
+            </div>*@
+
+
+
+
+    <div class="weui-flex">
+        <div class="weui-flex__item" style="text-align:center;">
+            <img src="@data[i].COVER" style="height:100px;" onclick="window.open('../Company/Video_Play?ID=@data[i].ID')" />
+            <label class="weui-label" style="width:inherit;text-align:center;height: 50px;font-size:17px;">@data[i].TITLE</label>
+            
+        </div>
+
+        @if (i == data.Length - 1)
+        {
+            <div class="weui-flex__item" style="text-align:center;">
+            </div>
+        }
+        else
+        {
+            i++;
+            <div class="weui-flex__item" style="text-align:center;">
+                <img src="@data[i].COVER" style="height:100px;" onclick="window.open('../Company/Video_Play?ID=@data[i].ID')" />
+                <label class="weui-label" style="width:inherit;text-align:center;height: 50px;font-size:17px;">@data[i].TITLE</label>
+                
+            </div>
+
+        }
+
+
+
+    </div>
+
+
+
+
+
+
+
+        }
+    </div>
+</div>

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "投料记录";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+
+<script type="text/html" id="TLTH_Tpl">
+    {{# if(d.TLTH>0){ }}
+    {{ d.TLTH }}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid ="mescx">MES查询</a>
+    <a lid ="tljl"><cite>投料记录</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="btn_find">查询</button>
+        <button class="layui-btn" id="btn_xcfind" lid="btn_xcfind">下层查询</button>
+        <button class="layui-btn" id="btn_DC" lid="btn_DC">数据导出</button>
+        <button class="layui-btn" id="btn_xcDC" lid="btn_xcDC">下层查询导出</button>
+
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_gc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    <option value="" selected="selected" lid="option0">请选择</option>
+                    @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                    {
+                        <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_gzzx">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx" lay-search="">
+                    <option value="" selected="selected" lid="option0">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_sbh">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="in_sbbh" lay-filter="in_sbbh">
+                    <option value="" selected="selected" lid="option0">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_cclb">产出类别：</label>
+            <div class="layui-input-inline">
+                <select id="in_ccwllb" lay-filter="in_ccwllb">
+                    <option value="0" selected="selected" lid="option0">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_tllb">投料类别：</label>
+            <div class="layui-input-inline">
+                <select id="in_tlwllb" lay-filter="in_tlwllb">
+                    <option value="0" selected="selected" lid="option0">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_rwdh">任务单号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_rwbh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_tlrq">投料日期：</label>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="in_tlrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd") 00:00">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="in_tlrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd") 23:59">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_scrq">生产日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="lb_tm">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_tm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_TL" lay-filter="tb_TL"></table>
+
+    <div id="div_table_tlxc">
+        <table class="layui-hide" id="tb_TLxc" lay-filter="tb_TLxc"></table>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/PD_TL_SELECT")
+}

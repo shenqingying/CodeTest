@@ -1,0 +1,84 @@
+﻿@using Sonluk.UI.Model.S5.CHECK_INFOService;
+@{
+    ViewBag.Title = "Select_Order_Part";
+
+    FIVES_CHECK_INFOList[] TTdata = ViewBag.TTdata;
+}
+
+
+@for (int i = 0; i < TTdata.Length; i++)
+{
+    string str;
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@TTdata[i].OPINTMS</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">检查类型</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].TYPEMS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">检查结果</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].SCOREMS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">评分时间</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].JLTIME</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">评分人</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].STAFFNAME</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">总评</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].REMARK</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">部门描述</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].DEPARTMS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">检查点</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].OPINTLOCATION</span>
+            </p>
+            @if (@TTdata[i].DEPARTID == 11)
+            {
+                <label class="weui-form-preview__label">合格</label>
+                <span class="weui-form-preview__value">&nbsp;@if (TTdata[i].HG == 0) {
+                                                                 str = "合格";
+                                                             }
+                                                             else
+                                                             {
+                                                                 str = "不合格";
+                                                             }
+                    @str </span>
+            }
+            else
+            {
+
+            }
+
+        </div>
+        @if (@TTdata[i].DEPARTID == 11)
+        {
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">合格</a>
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="TableLoadMX(@TTdata[i].INFOID)">查看</a>
+                <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="Delete_Score(@TTdata[i].INFOID)">删除</a>
+            </div>
+        }
+        else
+        {
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="TableLoadMX(@TTdata[i].INFOID)">查看</a>
+                @*<a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">编辑</a>*@
+                <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="Delete_Score(@TTdata[i].INFOID)">删除</a>
+            </div>
+        }
+    </div>
+    <br />
+}
+
+

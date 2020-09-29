@@ -1,0 +1,142 @@
+﻿@using Sonluk.UI.Model.LE.TRA.ConsignmentNoteService
+@model IEnumerable<CNInfo>
+@{ string select = "●";}
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">ID</td>
+        <td class="data-table-header">物流公司</td>
+        <td class="data-table-header">托运日期</td>
+        <td class="data-table-header">到达日期</td>
+        <td class="data-table-header">SN</td>
+        <td class="data-table-header">总件数</td>
+        <td class="data-table-header">发站</td>
+        <td class="data-table-header">到站</td>
+        <td class="data-table-header">反馈</td>
+        <td class="data-table-header">投诉</td>
+        <td class="data-table-header">托运人单位</td>
+        <td class="data-table-header">收货人</td>
+        <td class="data-table-header">收货人单位</td>
+        <td class="data-table-header">收货人地址</td>
+        <td class="data-table-header">收货联系人</td>
+        <td class="data-table-header">收货人电话</td>
+        <td class="data-table-header">收货人手机</td>
+        <td class="data-table-header">计费重量</td>
+        <td class="data-table-header">计费体积</td>
+        <td class="data-table-header">计费单价</td>
+        <td class="data-table-header">运费</td>
+        <td class="data-table-header">保险费</td>
+        <td class="data-table-header">直送费</td>
+        <td class="data-table-header">中转费</td>
+        <td class="data-table-header">其他费用</td>
+        <td class="data-table-header">合计</td>
+        <td class="data-table-header">赔偿倍数</td>
+        <td class="data-table-header">未达通知</td>
+        <td class="data-table-header">送货单</td>
+        <td class="data-table-header">发票</td>
+        <td class="data-table-header">证明</td>
+        <td class="data-table-header">交货单</td>
+        <td class="data-table-header">特别说明</td>
+        <td class="data-table-header">备注</td>
+        <td class="data-table-header">自提</td>
+        <td class="data-table-header">送货上门</td>
+        <td class="data-table-header">凭证件提</td>
+        <td class="data-table-header">凭传真提</td>
+        <td class="data-table-header">签托运回执</td>
+        <td class="data-table-header">签客户送货单回执</td>
+        <td class="data-table-header">盖章</td>
+        <td class="data-table-header">急件</td>
+        <td class="data-table-header">其他要求</td>
+        <td class="data-table-header">状态</td>
+        <td class="data-table-header">单号</td>
+        <td class="data-table-header">创建</td>
+        <td class="data-table-header">创建时间</td>
+        <td class="data-table-header">交货单反馈</td>
+        <td class="data-table-header">未反馈交货单</td>
+        <td class="data-table-header">托运类别</td>
+    </tr>
+    @foreach (CNInfo node in Model)
+    {
+        string tylb = "";
+        if(node.TYLB ==1)
+        {
+            tylb = "民品";
+        }
+        else if(node.TYLB==2)
+        {
+            tylb = "OEM";
+        }
+        else if (node.TYLB == 3)
+        {
+            tylb = "外销";
+        }
+        else if (node.TYLB == 4)
+        {
+            tylb = "短驳";
+        }
+        else if (node.TYLB == 5)
+        {
+            tylb = "不计运费";
+        }
+        <tr>
+            <td>@node.ID<input type="hidden" value="@node.ID" /></td>
+            <td>@node.Carrier.Name</td>
+            <td>@node.Date</td>
+            <td>@node.DeliveryDate</td>
+            <td class="text-align-right">@node.SerialNumber</td>
+            <td class="text-align-right">@node.Total</td>
+            <td class="text-align-left">@node.Source.Name</td>
+            <td class="text-align-left">@node.Destination.Name</td>
+            <td>@if (node.FeedbackRecord) { @select}</td>
+            <td>@if (node.ComplaintRecord) { @select}</td>
+            <td class="text-align-left">@node.Sender.ShortName</td>
+            <td class="text-align-left">@node.Receiver.ShortName</td>
+            <td class="text-align-left">@node.Receiver.Name</td>
+            <td class="text-align-left">@node.Receiver.Address</td>
+            <td class="text-align-left">@node.Receiver.Contact</td>
+            <td class="text-align-left">@node.Receiver.Telephone</td>
+            <td class="text-align-left">@node.Receiver.Cellphone</td>
+            <td class="text-align-right">@node.Weight</td>
+            <td class="text-align-right">@node.Volume</td>
+            <td class="text-align-right">@node.UnitPrice</td>
+            <td class="text-align-right">@node.Cost</td>
+            <td class="text-align-right">@node.Insurance</td>
+            <td class="text-align-right">@node.DirectCost</td>
+            <td>@node.TransitCost</td>
+            <td>@node.OtherCost</td>
+            <td class="text-align-right">@node.TotalCost</td>
+            <td>@node.Compensation</td>
+            <td>@node.DefaultArrivalLimit</td>
+            <td>@node.DeliveryCount</td>
+            <td>@node.InvoiceCount</td>
+            <td>@node.CertificationCount</td>
+            <td class="text-align-left">@node.Delivery</td>
+            <td class="text-align-left">@node.Instruction</td>
+            <td class="text-align-left">@node.Remark</td>
+            <td>@if (node.PickUpByReceiver) { @select}</td>
+            <td>@if (node.HomeDelivery) { @select}</td>
+            <td>@if (node.PickUpByCertificate) { @select}</td>
+            <td>@if (node.PickUpByFax) { @select}</td>
+            <td>@if (node.Feedback) { @select}</td>
+            <td>@if (node.DeliveryFeedback) { @select}</td>
+            <td>@if (node.Stamp) { @select}</td>
+            <td>@if (node.Dispatch){ @select}</td>
+            <td>@node.Requirement</td>
+            <td>@node.Status</td>
+            <td class="text-align-right">@node.Number</td>
+            <td>@node.Creator</td>
+            <td>@node.CreateDate</td>
+            <td>@if (node.JHDFK){ @select}</td>
+            <td>@node.JHDWHLIST</td>
+            <td>@tylb</td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+
+

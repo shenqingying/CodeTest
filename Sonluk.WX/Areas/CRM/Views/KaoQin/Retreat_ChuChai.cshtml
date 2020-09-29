@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "出差审核退回";
+    Session["TITLENAME"] = "出差审核退回";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="shangxiawu">
+    {{# if(d.CCSJLX == 1){ }}
+    上午
+    {{# }else if(d.CCSJLX == 2){ }}
+    下午
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    申请未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    申请审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    申请已审核
+    {{# }else if(d.ISACTIVE == 4){ }}
+    核销未提交
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_CC">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="back">撤回</a>
+</script>
+
+
+
+<button id="btn_cx" class="layui-btn" lay-filter="formDemo" style="width:100%;">查询</button>
+
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开始日期：</label>
+                    <div class="layui-input-inline" style="width:120px;">
+                        <input id="se_time_open" type="text" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+
+                    </div>
+
+                    <label class="layui-form-label">结束日期：</label>
+                    <div class="layui-input-inline" style="width:120px;">
+                        <input id="se_time_end" type="text" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+
+
+<div id="div_chehui" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-block" style="margin-left: 110px;">
+            <input id="remark" type="text" autocomplete="off" class="layui-input">
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<input id="staffid" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/Retreat_ChuChai")
+}

@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_PFDH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_PFDH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PFDH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJRID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGRID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_PFDH_ACTION_SAP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_PFDH_ACTION_SAPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_PFDH_ACTION_SAPResult" type="tns:MES_SY_PFDH_LIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_PFDH_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_PFDH" type="tns:ArrayOfMES_SY_PFDH" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_PFDH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_PFDH" nillable="true" type="tns:MES_SY_PFDH" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_PFDH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:MES_SY_PFDH_LIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZJINFO_INIT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ZSL_BCT304_CT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_BCT304_CT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PLDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YYCH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SCBZID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCBZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MTSLID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MTSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PFDH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TH" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARBPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JLR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPZT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="THGG" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMLB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAC" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZJINFO_INITResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZJINFO_INITResult" type="tns:ZBCFUN_ZJLOT_PRT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_ZJLOT_PRT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ES_LOT" type="tns:ZSL_BCT304_LOT" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_PLDH" type="tns:ArrayOfZSL_BCT304_LOT" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_POLIST" type="tns:ArrayOfZSL_BCST024_PO" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCT304_LOT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="YYCH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PFDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PLDH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SCBZID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCBZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MTSLID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MTSL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TLJTS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PFLJTS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PLLJTS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QYRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SYSCX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SYCPGG" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCT304_LOT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT304_LOT" nillable="true" type="tns:ZSL_BCT304_LOT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCST024_PO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCST024_PO" nillable="true" type="tns:ZSL_BCST024_PO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCST024_PO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SBHMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATKL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLDL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AMEIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDAUF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GLTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARBPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LTXA1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSTDK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RSNUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OBJNR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JRL" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEMPF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VDATU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TMSL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_ZJINFO_BYPLDH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ZSL_BCT304_CT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_ZJINFO_BYPLDHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_ZJINFO_BYPLDHResult" type="tns:ZBCFUN_ZJLOT_PRT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZJ_CC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ZSL_BCT304_CT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZJ_CCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZJ_CCResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_PFDH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_PFDH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SY_PFDH_LIST" nillable="true" type="tns:MES_SY_PFDH_LIST" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_PFDH_ACTION_SAPSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_PFDH_ACTION_SAP" />
+  </wsdl:message>
+  <wsdl:message name="GET_PFDH_ACTION_SAPSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_PFDH_ACTION_SAPResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZJINFO_INITSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZJINFO_INIT" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZJINFO_INITSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZJINFO_INITResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZJINFO_BYPLDHSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_ZJINFO_BYPLDH" />
+  </wsdl:message>
+  <wsdl:message name="GET_ZJINFO_BYPLDHSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_ZJINFO_BYPLDHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZJ_CCSoapIn">
+    <wsdl:part name="parameters" element="tns:ZJ_CC" />
+  </wsdl:message>
+  <wsdl:message name="ZJ_CCSoapOut">
+    <wsdl:part name="parameters" element="tns:ZJ_CCResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_PFDH_ACTION_SAPHttpGetIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_PFDH_ACTION_SAPHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_SY_PFDH_LIST" />
+  </wsdl:message>
+  <wsdl:message name="GET_PFDH_ACTION_SAPHttpPostIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_PFDH_ACTION_SAPHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_SY_PFDH_LIST" />
+  </wsdl:message>
+  <wsdl:portType name="SY_PFDHSoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_PFDH_ACTION_SAP">
+      <wsdl:input message="tns:GET_PFDH_ACTION_SAPSoapIn" />
+      <wsdl:output message="tns:GET_PFDH_ACTION_SAPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZJINFO_INIT">
+      <wsdl:input message="tns:GET_ZJINFO_INITSoapIn" />
+      <wsdl:output message="tns:GET_ZJINFO_INITSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZJINFO_BYPLDH">
+      <wsdl:input message="tns:GET_ZJINFO_BYPLDHSoapIn" />
+      <wsdl:output message="tns:GET_ZJINFO_BYPLDHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZJ_CC">
+      <wsdl:input message="tns:ZJ_CCSoapIn" />
+      <wsdl:output message="tns:ZJ_CCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_PFDHHttpGet">
+    <wsdl:operation name="GET_PFDH_ACTION_SAP">
+      <wsdl:input message="tns:GET_PFDH_ACTION_SAPHttpGetIn" />
+      <wsdl:output message="tns:GET_PFDH_ACTION_SAPHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_PFDHHttpPost">
+    <wsdl:operation name="GET_PFDH_ACTION_SAP">
+      <wsdl:input message="tns:GET_PFDH_ACTION_SAPHttpPostIn" />
+      <wsdl:output message="tns:GET_PFDH_ACTION_SAPHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SY_PFDHSoap" type="tns:SY_PFDHSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_PFDH_ACTION_SAP">
+      <soap:operation soapAction="http://tempuri.org/GET_PFDH_ACTION_SAP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZJINFO_INIT">
+      <soap:operation soapAction="http://tempuri.org/GET_ZJINFO_INIT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZJINFO_BYPLDH">
+      <soap:operation soapAction="http://tempuri.org/GET_ZJINFO_BYPLDH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZJ_CC">
+      <soap:operation soapAction="http://tempuri.org/ZJ_CC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_PFDHSoap12" type="tns:SY_PFDHSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_PFDH_ACTION_SAP">
+      <soap12:operation soapAction="http://tempuri.org/GET_PFDH_ACTION_SAP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZJINFO_INIT">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZJINFO_INIT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_ZJINFO_BYPLDH">
+      <soap12:operation soapAction="http://tempuri.org/GET_ZJINFO_BYPLDH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZJ_CC">
+      <soap12:operation soapAction="http://tempuri.org/ZJ_CC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_PFDHHttpGet" type="tns:SY_PFDHHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GET_PFDH_ACTION_SAP">
+      <http:operation location="/GET_PFDH_ACTION_SAP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_PFDHHttpPost" type="tns:SY_PFDHHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GET_PFDH_ACTION_SAP">
+      <http:operation location="/GET_PFDH_ACTION_SAP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SY_PFDH">
+    <wsdl:port name="SY_PFDHSoap" binding="tns:SY_PFDHSoap">
+      <soap:address location="http://192.168.0.223/API/MES/SY_PFDH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_PFDHSoap12" binding="tns:SY_PFDHSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/SY_PFDH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_PFDHHttpGet" binding="tns:SY_PFDHHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/SY_PFDH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_PFDHHttpPost" binding="tns:SY_PFDHHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/SY_PFDH.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

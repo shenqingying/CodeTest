@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "大屏显示";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/CRM/css/layui")
+    @Scripts.Render("~/bundles/CRM/js/layui")
+    <style>
+        body {
+            background-color: #173d50;
+        }
+
+        .layui-table-view {
+            margin: 0px;
+        }
+
+        .bigscreen-title {
+            text-align: center;
+            color: white;
+            padding: 10px;
+        }
+
+            .bigscreen-title p {
+                padding-top: 10px;
+            }
+
+            .bigscreen-title h1 {
+                padding-top: 10px;
+            }
+
+            .bigscreen-title .layui-form-item {
+                width: 250px;
+                padding-top: 10px;
+                margin: 0 auto;
+            }
+
+        .layui-table tr {
+            -webkit-transition: all 0s;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-row bigscreen-title">
+        <div class="layui-col-md4" style="text-align:left;">
+            <p>上次刷新时间：<span id="refreshTime">暂无</span></p>
+            <p><span id="Label_Refresh">刷新</span>倒计时：<span id="refreshCount">@ViewBag.DefaultCount</span>s<span id="Label_RefreshNotes"></span></p>
+        </div>
+        <div class="layui-col-md4" style="font-size:large;">
+            <h1>模具维修流程进度</h1>
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-form-item" style="margin-right:0px;">
+                <label class="layui-form-label1" id="Label_SetCount">刷新时间：</label>
+                <div class="layui-input-inline" style="width:40px;">
+                    <input type="text" id="Term_Refresh" autocomplete="off" class="layui-input" placeholder="@ViewBag.DefaultCount">
+                </div>
+                <div class="layui-form-mid layui-word-aux">S</div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div id="detail" style="padding: 10px">
+            @Scripts.Render("~/bundles/jquery")
+            <script src="~/Scripts/layui2.5.4/layui.js"></script>
+            <script src="~/Scripts/layui.config.js"></script>
+            <script src="~/Scripts/sonlui.js"></script>
+            <table class="layui-hide" id="tb_MTC" lay-filter="tb_MTC"></table>
+            @RenderPage("~/Areas/MES/Views/Shared/MOULD.cshtml")
+        </div>
+    </div>
+    <div class="layui-row" id="Warnning" style="text-align:center; color:#FF5722;" hidden>
+        <h2>未知错误！</h2>
+    </div>
+    <script>
+        var cacheData = [];
+        var isCount = false;
+        var tableLimit = @ViewBag.DefaultTR;
+        var countNum = @ViewBag.DefaultCount;
+        var pageNow = 0;
+        layui.use(['table','layer', 'form', 'element', 'MES'], function () {
+            var layer = layui.layer;
+            var table = layui.table;
+            var form = layui.form;
+            var assist = sonluk.layui;
+
+            table_init();
+            $("#refreshTime").empty();
+            $("#refreshTime").append(sonluk.format.datetime());
+
+            setInterval(function () {
+                if (isCount) countNum--;
+                if (countNum <= 0) {
+                    if (pageNow == cacheData.length - 1) {
+                        pageNow = 0;
+                        table_init();
+                        $("#refreshTime").empty();
+                        $("#refreshTime").append(sonluk.format.datetime());
+                    }
+                    else {
+                        pageNow ++;
+                        table_render(cacheData[pageNow]);
+                    }
+                    countNum = @ViewBag.DefaultCount;
+                }
+                $("#refreshCount").empty();
+                $("#refreshCount").append(sonluk.format.prefix(countNum,(@ViewBag.DefaultCount).toString().length));
+            }, 1000);
+
+            $('#Term_Refresh').bind('keyup', function (event) {
+                if (event.keyCode == "13") {
+                    $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: "../MOULD/SetCookie",
+                        data: {
+                            KEY: "MES_MOULD_BIGSCREEN_refresh",
+                            VALUE:$('#Term_Refresh').val() > 1 ? $('#Term_Refresh').val() : 1
+                        },
+                        success: function (data) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+
+            function table_init() {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/BIGSCREEN_Refresh",
+                    success: function (data) {
+                        if (data != null && data != "") {
+                            var rstData = JSON.parse(data);
+                            if (rstData.MES_RETURN.TYPE == "S") {
+                                isCount = true;
+                                cacheData = [];
+                                for(var i=0;i<(rstData.MES_PMM_MTC.length/tableLimit);i++){
+                                    var child = [];
+                                    if(rstData.MES_PMM_MTC.length - i*tableLimit < tableLimit){
+                                        for(var j=0;j<rstData.MES_PMM_MTC.length - i*tableLimit;j++){
+                                            child.push(rstData.MES_PMM_MTC[i*tableLimit + j]);
+                                        }
+                                    }
+                                    else{
+                                        for(var j=0;j<tableLimit;j++){
+                                            child.push(rstData.MES_PMM_MTC[i*tableLimit + j]);
+                                        }
+                                    }
+                                    cacheData.push(child);
+                                }
+                                if(cacheData.length > 1) {
+                                    $("#Label_SetCount").empty();
+                                    $("#Label_SetCount").text("翻页时间：");
+                                    $("#Label_Refresh").empty();
+                                    $("#Label_Refresh").append("翻页");
+                                    $("#Label_RefreshNotes").empty();
+                                    $("#Label_RefreshNotes").append("（翻页完后自动刷新）");
+                                }
+                                else{
+                                    $("#Label_SetCount").empty();
+                                    $("#Label_SetCount").text("刷新时间：");
+                                    $("#Label_Refresh").empty();
+                                    $("#Label_Refresh").append("刷新");
+                                    $("#Label_RefreshNotes").empty();
+                                }
+                                table_render(cacheData[0]);
+                            }
+                            else {
+                                $("#Warnning").removeAttr('hidden');
+                                $("#Warnning h2").empty();
+                                $("#Warnning h2").append('服务器异常，请在解决问题后刷新重试！')
+                                isCount = false;
+                                layer.msg('服务器异常！', { icon: 0, time: 3000 });
+                            }
+                        }
+                        else {
+                            $("#Warnning").removeAttr('hidden');
+                            $("#Warnning h2").empty();
+                            $("#Warnning h2").append('请先去设置页面设置条件，然后刷新重试！')
+                            isCount = false;
+                            layer.msg('请先设置条件！', { icon: 0, time: 3000 });
+                        }
+                    },
+                    error: function (data) {
+                        $("#Warnning").removeAttr('hidden');
+                        $("#Warnning h2").empty();
+                        $("#Warnning h2").append('服务器异常，请在解决问题后刷新重试！')
+                        isCount = false;
+                        layer.msg('服务器异常！', { icon: 0, time: 3000 });
+                    }
+                });
+            }
+
+            function table_render(inputData){
+                assist.table.render({
+                    elem: '#tb_MTC',
+                    data: inputData,
+                    cols: [[
+                        { templet: '#tb_data_MTCID', title: '维修序号', width: 100 },
+                        { templet: '<div>{{d.MES_PMM_MOULD.MOULD}}</div>', title: '模具号', width: 100 },
+                        { templet: '#tb_data_CAVE', title: '腔号', width: 100 },
+                        { field: 'QNAME', title: '质量问题', width: 200 },
+                        { toolbar: '#tb_data_RID_ALL', title: '维修内容', minWidth: 150 },
+                        { field: 'MMSTAFFNAME', title: '责任机修' },
+                        { templet: '#tb_data_DATES', title: '发起时间', width: 200 },
+                        { templet: '#tb_data_MMCFM', title: '维修进度' },
+                        { templet: '#tb_data_WTCFM', title: '班组确认', width: 100 },
+                        { templet: '#tb_data_QCCFM', title: '品管确认', width: 100 },
+                        { templet: '#tb_data_TECCFM', title: '技术确认', width: 100 },
+                        { field: 'STATUS', title: '流程状态', width: 100 },
+                    ]],
+                    done: function (res, curr, count) {
+                        $("table thead th").css('color', 'white').css('background-color', '#2F4056').css('font-weight', 'bold');
+                        $("table tbody tr").css('color', 'white');
+                        for (var i = 0; i < res.data.length; i++) {
+                            if (res.data[i].STATUS == "全部合格") {
+                                $("table tbody tr").eq(i).css('background-color', '#1a3b1e');//#009688
+                            }
+                            else if (res.data[i].STATUS == "不合格") {
+                                $("table tbody tr").eq(i).css('background-color', '#6c0000');//#FF5722
+                            }
+                            else {
+                                $("table tbody tr").eq(i).css('background-color', '#733d00');//#eaa900
+                            }
+                        }
+                    },
+                    limit: tableLimit
+                });
+            }
+        });
+    </script>
+</body>
+</html>

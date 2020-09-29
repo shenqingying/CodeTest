@@ -1,0 +1,126 @@
+﻿@using Sonluk.UI.Model.PS.NetWorkService;
+@model Sonluk.UI.Model.PS.NetWorkService.NetworkRead
+
+@if (Model.ET_RETURN.TYPE == "S")
+{
+    int bl = 0;
+    NetworkINFO networkinfo = Model.E_network;
+    Ps_vorINFO[] ps_vor = Model.E_vor;
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">网络号</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="in_wlh" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Aufnr">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">网络名称</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="in_wlmc" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Ktext">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">WBS号</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="in_wbsh" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Posid">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">WBS名称</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="in_wbsmc" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Post1">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="in_wbsh" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Gstrp">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="in_wbsmc" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Gltrp">
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-skin="line" lay-filter="parse-table-demo">
+        <thead>
+            <tr>
+                <th lay-data="">作业</th>
+                <th lay-data="">作业名称</th>
+                <th lay-data="">计划数量</th>
+                <th lay-data="">报工数量</th>
+                <th lay-data="">报废数量</th>
+                <th lay-data="">进度</th>
+                <th lay-data="">预排人员工号</th>
+                <th lay-data="">预排人员姓名</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < ps_vor.Length; i++)
+            {
+                <tr>
+                    <th>@ps_vor[i].Vornr</th>
+                    <th>@ps_vor[i].LtxA1</th>
+                    <th>@(networkinfo.Zmenge - bl)</th>
+                    <th>@ps_vor[i].Confirmnum</th>
+                    <th>@ps_vor[i].Scrapnum</th>
+                    @if (ps_vor[i].STEUS != "ZPS2")
+                    {
+                        if ((networkinfo.Zmenge - bl) == 0 || (networkinfo.Zmenge - bl) < (ps_vor[i].Confirmnum + ps_vor[i].Scrapnum))
+                        {
+                            <th>已关闭</th>
+                        }
+                        else if (ps_vor[i].Confirmnum == 0 && ps_vor[i].Scrapnum == 0)
+                        {
+                            <th>未报工</th>
+                        }
+                        else if ((networkinfo.Zmenge - bl) == (ps_vor[i].Confirmnum + ps_vor[i].Scrapnum))
+                        {
+                            if (ps_vor[i].KTSCH == "GC00051")
+                            {
+                                <th>已零用</th>
+                            }
+                            else
+                            {
+                                <th>已完成</th>
+                            }
+                        }
+                        else
+                        {
+                            <th>进行中</th>
+                        }
+                    }
+                    else
+                    {
+                        if (ps_vor[i].AUERU == "X")
+                        {
+                            <th>已接收</th>
+                        }
+                        else if (ps_vor[i].Confirmnum > 0)
+                        {
+                            <th>已发出</th>
+                        }
+                        else
+                        {
+                            <th>未发出</th>
+                        }
+                    }
+                    <th>@ps_vor[i].USR02</th>
+                    <th>@ps_vor[i].USR03</th>
+                </tr>
+                    bl = bl + (int)ps_vor[i].Scrapnum;
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <a>@Model.ET_RETURN.MESSAGE</a>
+}

@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "交货单-查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime date = DateTime.Now;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/panel-pop-up")
+@Styles.Render("~/Content/sonluk-ui/table") 
+@Styles.Render("~/Content/sonluk-ui/input-width-od")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/le/outbound-delivery-index")    
+<input type="hidden" value="@Url.Action("_Items", "OutboundDelivery")" id="outbound-delivery-items-uri">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">交货单</a>
+        >
+        <a href="#">查询</a>
+    </div>
+</div>
+<div class="panel-search">
+    <div class="panel-search-line">
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">销售组织</div>
+            <input type="text" class="panel-search-item-input input-width-od-sales-organization" id="sales-organization" />
+        </div>
+        <div class="panel-search-item  panel-search-textarea-target">
+            <div class="panel-search-item-title">交货单</div>
+            <input type="text" class="panel-search-item-input input-width-od-sn   panel-search-textarea-target" id="serial-number" />
+        </div>
+        <div class="panel-search-item">
+            <img class="panel-search-textarea-toggle" src="@Url.Content("~/Content/sonluk-ui/images/icon_select_h24.png")" alt="" title="批量输入" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">售达方</div>
+            <input type="text" class="panel-search-item-input input-width-od-customer" id="customer" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">交货类型</div>
+            <input type="text" class="panel-search-item-input input-width-od-type" id="type" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">发货日期</div>
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="date-start" />
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="date-end" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">捡配日期</div>
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="picking-date-start" />
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="picking-date-end" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">送达方</div>
+            <input type="text" class="panel-search-item-input input-width-od-customer" id="ship-to-party" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">创建者</div>
+            <input type="text" class="panel-search-item-input input-width-od-creator" id="creator" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">创建日期</div>
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="create-date-start" value="@date.AddDays(-1).ToString("yyyy-MM-dd")" />
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="create-date-end" value="@date.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="panel-search-item">
+            <input type="radio" name="status" value="1" checked /> 未建托运单
+            <input type="radio" name="status" value="2" /> 已建托运单
+            <input type="radio" name="status" value="0" /> 全部
+        </div>
+        <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+        <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+        <input type="hidden" value="@Url.Action("_List", "OutboundDelivery")" id="outbound-delivery-select-uri">
+    </div>
+    <div class="panel-search-line-textarea">
+        <textarea class="panel-search-textarea" id="delivery-input-textarea"></textarea>
+    </div>
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="sonluk-table-control-title">物流公司:</div>
+                    <input type="text" class="sonluk-table-control-text drop-list-target-carrier input-width-cn-carrier" id="Carrier" />
+                    <input type="hidden" id="Carrier-ID" value="" />
+                    <input type="hidden" value="@Url.Action("_List", "Carrier")" />
+                    <div class="sonluk-table-control-button consignment-note-generate">生成托运单</div>
+                    <input type="hidden" value="@Url.Action("_Exists", "ConsignmentNote")">
+                    <input type="hidden" value="@Url.Action("_Generate", "ConsignmentNote")" >
+                    <input type="hidden" value="@Url.Action("Edit", "ConsignmentNote", new { ID = -1 })">
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="export-button sonluk-table-control-button outbound-delivery-export">导出</div>
+                    <input type="hidden" value="@Url.Action("_PrepareExport", "OutboundDelivery")">
+                    <input type="hidden" value="@Url.Action("_Export", "OutboundDelivery")">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="outbound-delivery"></div>
+
+    </div>
+</div>
+<div class="sonluk-table-response-time"></div>
+<!--弹出窗口-->
+<div class="panel-pop-up-background background-color-dark"></div>
+<div class="panel-pop-up" id="outbound-delivery-items"></div>
+<!--弹出窗口-->
+
+<!--下拉列表-->
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/le/outbound-delivery-index")
+}

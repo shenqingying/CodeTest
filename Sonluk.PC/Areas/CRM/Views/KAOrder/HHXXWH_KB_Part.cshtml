@@ -1,0 +1,51 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_KBService;
+@{
+    ViewBag.Title = "HHXXWH_KB_Part";
+    CRM_PRODUCT_KB[] HHdata = ViewBag.HHdata;
+}
+
+<table class="layui-table" lay-filter="result_ka">
+    <thead>
+        <tr>
+            <th lay-data="{ title: '序号', templet: '#indexTpl', width: 60 }">序号</th>
+            <th lay-data="{field:'KBID', width:134,hide:true}">快报ID</th>
+            <th lay-data="{field:'KBMXID', width:134,hide:true}">快报明细ID</th>
+            <th lay-data="{field:'OrderSrcDES', width:150}">订单来源</th>
+            <th lay-data="{field:'KBMC', width:134}">快报名称</th>
+            <th lay-data="{field:'CPHH',width:131,}">货号</th>
+            <th lay-data="{field:'WLBM', width:171}">物料编码</th>
+            <th lay-data="{field:'WLMS', width:271}">物料描述</th>
+            <th lay-data="{field:'DDDW', width:119}">订单单位</th>
+            @*<th lay-data="{field:'BarCode', width:180,}">条码</th>
+            <th lay-data="{field:'ProdName', width:134,hide:true}">品名</th>
+            <th lay-data="{field:'ProdSpec', width:134,hide:true}">规格</th>
+
+            <th lay-data="{field:'DGDW',width:90,}">订购单位</th>
+            <th lay-data="{field:'SAPBM',width:320,}">物料编码</th>*@
+            @*<th lay-data="{ fixed: 'right', width: 100,  toolbar: '#bar2', }">操作</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < HHdata.Length; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@HHdata[i].KBID</td>
+                <td>@HHdata[i].KBMXID</td>
+                <td>@HHdata[i].OrderSrcDES</td>
+                <td>@HHdata[i].KBMC</td>
+                <td>@HHdata[i].CPHH</td>
+                <td>@HHdata[i].WLBM</td>
+                <td>@HHdata[i].WLMS</td>
+                <td>@HHdata[i].DDDW</td>
+                @*<td>@HHdata[i].BarCode</td>
+                <td>@HHdata[i].ProdName</td>
+                <td>@HHdata[i].ProdSpec</td>
+                
+                <td>@HHdata[i].DGDW</td>
+                <td>@HHdata[i].SAPBM</td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+

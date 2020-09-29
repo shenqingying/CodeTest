@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "成功";
+    Session["TITLENAME"] = "成功";
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+
+}
+
+
+
+
+<div class="weui-msg">
+    <div class="weui-msg__icon-area"><i class="weui-icon-safe-success weui-icon_msg"></i></div>
+    <div class="weui-msg__text-area">
+        <h2 class="weui-msg__title">评分完成</h2>
+        <p class="weui-msg__desc">@ViewBag.MSG@*<a href="javascript:void(0);">文字链接</a>*@</p>
+    </div>
+    <div class="weui-msg__opr-area">
+        <p class="weui-btn-area">
+            <a id="btn_continu" class="weui-btn weui-btn_primary">继续评分</a>
+            @*<a href="javascript:history.back();" class="weui-btn weui-btn_default" onclick="window.close()">辅助操作</a>*@
+        </p>
+    </div>
+    <div class="weui-msg__extra-area">
+        <div class="weui-footer">
+            <p class="weui-footer__links">
+                <a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>
+            </p>
+            <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+        </div>
+    </div>
+</div>
+
+<input id="state" hidden />
+<input id="appid" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/Score/Success")
+}

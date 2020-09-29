@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "托盘组合码管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="see">查看</a>
+</script>
+
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="bar3">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>托盘</a>
+    <a><cite>托盘组合管理</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_xz" class="layui-btn">新增组合</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+            <button id="btn_dc" class="layui-btn">导出数据</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px">托盘组合编号：</label>
+            <div class="layui-input-inline">
+                <input id="cx_tpzhno" type="text" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label" style="width:130px">创建时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_CJRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_CJRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            @*<label class="layui-form-label" style="width:130px">创建人：</label>
+            <div class="layui-input-inline">
+                <input id="cx_CJR" type="text" autocomplete="off" class="layui-input">
+            </div>*@
+        </div>
+        <table class="layui-hide" id="tb_TPZHINFO" lay-filter="tb_TPZHINFO"></table>
+    </div>
+</div>
+
+<div id="div_xz" class="layui-form" hidden>
+    <br />
+    <div style="margin-left:10px;">
+        <input type="text" id="tm_tpm_sm" placeholder="请扫描托盘编号" autocomplete="off" style="height:40px;width:90%" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+    </div>
+    <div>
+        <table class="layui-hide" id="tb_TPINFO" lay-filter="tb_TPINFO"></table>
+    </div>
+</div>
+
+<div id="div_xg" class="layui-form" hidden>
+    <br />
+    <div style="margin-left:10px;">
+        <input type="text" id="tm_tpm_sm_xg" placeholder="请扫描托盘编号" autocomplete="off" style="height:40px;width:90%" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+    </div>
+    <div>
+        <table class="layui-hide" id="tb_TPINFO_xg" lay-filter="tb_TPINFO_xg"></table>
+    </div>
+    <div class="hidetable">
+        <table class="layui-hide" id="tb_TPINFO_new" lay-filter="tb_TPINFO_new"></table>
+    </div>
+</div>
+
+<div id="div_ck" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">托盘组合码：</label>
+        <div class="layui-input-inline">
+            <input id="ck_zhno" type="text" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <table class="layui-hide" id="child_TPZHINFO" lay-filter="child_TPZHINFO"></table>
+</div>
+
+<style type="text/css">
+    .hidetable .layui-table-header {
+        height: 0;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/TPM/TPM_ZHNO_Manage")
+}

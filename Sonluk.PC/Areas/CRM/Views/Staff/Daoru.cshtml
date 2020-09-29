@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "导入";
+}
+
+<div id="form1" class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">提交类型：</label>
+        <div class="layui-input-inline">
+            <select id="type" lay-filter="submit_status">
+                <option value="1" selected="selected">人员数据新增</option>
+                <option value="2">人员数据修改</option>
+                @*<option value="3">人员考勤地址新增</option>
+                <option value="4">人员考勤地址修改</option>*@
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button id="btn_insert" class="layui-btn" style="width:120px;">导入</button><br />
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var form = layui.form;
+        var upload = layui.upload;
+
+
+        layui.use(['form','upload'], function () {
+            var index_befo;
+            upload.render({
+                elem: '#btn_insert', //绑定元素
+                method: 'post',
+                accept: 'file',
+                url: '../Staff/Data_DaoRu', //上传接口
+                //data: { KHID: khid },
+                before: function () {
+
+                    index_befo = layer.load();
+                    this.data = {
+                        type: parseInt($("#type").val())
+                    }
+
+                },
+                done: function (res, index, upload) {
+                    //上传完毕回调
+                    layer.msg(res.Msg);
+
+                    layer.close(index_befo);
+                },
+                error: function (res) {
+                    //请求异常回调
+                    layer.msg(res);
+                    layer.close(index_befo);
+                }
+            });
+        });
+
+
+
+    });
+</script>

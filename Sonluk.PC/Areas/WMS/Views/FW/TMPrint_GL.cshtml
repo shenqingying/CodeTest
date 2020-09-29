@@ -1,0 +1,121 @@
+﻿@using Sonluk.UI.Model.MES.SY_TYPEMXService;
+@{
+    /**/
+
+    ViewBag.Title = "箱码关联打印";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    MES_SY_TYPEMXLIST[] TYPE = ViewBag.TYPE;
+    MES_SY_TYPEMXLIST[] PAPER = ViewBag.PAPER;
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="TPL_addclass">
+    <a class="{{ 'clolr_' + d.LAY_TABLE_INDEX}}">{{d.MBLNR}}</a>
+</script>
+
+<script type="text/html" id="color">
+    {{# if(d.DDSL == 0){ }}
+    <span class="span_color"></span>
+    {{# }else { }}
+    <span class="span_color">{{d.DDSL}}</span>
+    {{# } }}
+
+</script>
+
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_orderMX">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+</div>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>WMS防伪管理</a>
+    <a><cite>箱码关联打印</cite></a>
+</span>
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div id="div_height">
+
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:90px;text-align:right;">线别：</label>
+                <div class="layui-input-inline">
+                    <select id="linetype" lay-filter="linetype" lay-search>
+                        @for (int i = 0; i < TYPE.Length; i++)
+                        {
+                            <option value="@TYPE[i].ID">@TYPE[i].MXNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:90px;text-align:right;">份数：</label>
+                <div class="layui-input-inline">
+                    <input id="COUNT" type="number" autocomplete="off" placeholder="" class="layui-input" value="2">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:90px;text-align:right;">纸张尺寸：</label>
+                <div class="layui-input-inline">
+                    <select id="papertype" lay-filter="papertype" lay-search>
+                        @for (int i = 0; i < PAPER.Length; i++)
+                        {
+                            <option value="@PAPER[i].ID">@PAPER[i].MXNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:90px;text-align:right;">货物标识码：</label>
+                <div class="layui-input-inline">
+                    <input id="HWBSM" type="text" autocomplete="off" placeholder="请输入生产入库标识" class="layui-input">
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    @*<table id="table_WL" lay-filter="table_WL"></table>*@
+
+
+</div>
+
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/FW/TMPrint_GL")
+}

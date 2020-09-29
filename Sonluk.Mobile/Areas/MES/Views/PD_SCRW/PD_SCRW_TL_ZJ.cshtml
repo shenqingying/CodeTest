@@ -1,0 +1,47 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "正极投料";
+    Layout = "~/Views/Shared/_Layoutbig.cshtml";
+}
+
+
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" name="in_sm" placeholder="请扫描" autocomplete="off" class="layui-input" id="in_sm" onkeypress="if(window.event.keyCode==13) this.blur()" lid="qsm">
+            </div>
+        </div>
+    </div>
+    <div id="bodydiv" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="rwd">任务单</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_rwdh" id="lb_rwdh"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="c_GZZX">工作中心</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_gzzx" id="lb_gzzx"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="c_SBBH">设备号</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_sbh" id="lb_sbh"></label>
+            </div>
+        </div>
+    </div>
+    <div id="tablediv">
+        <table class="layui-hide" id="tb_bom" lay-filter="tb_bom"></table>
+    </div>
+</div>
+<div hidden>
+    <label class="layui-form-label" name="BL_REMARK" id="BL_REMARK"></label>
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/PD_SCRW/PD_SCRW_TL_ZJ")
+}

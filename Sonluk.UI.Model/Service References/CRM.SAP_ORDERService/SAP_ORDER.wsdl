@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ShipToParty">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="salesOrganization" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="distributionChannel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="division" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ShipToPartyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ShipToPartyResult" type="tns:ArrayOfSAP_CompanyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSAP_CompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_CompanyInfo" nillable="true" type="tns:SAP_CompanyInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_CompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CityID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="District" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cellphone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOffices" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Default" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Children" type="tns:ArrayOfSAP_CompanyInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SAP_Price">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serialNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="salesOrganization" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="distributionChannel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_PriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SAP_PriceResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_Discount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_DiscountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_DiscountResult" type="tns:ArrayOfSAP_DiscountInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSAP_DiscountInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_DiscountInfo" nillable="true" type="tns:SAP_DiscountInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_DiscountInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Available" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SAP_Balance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_BalanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SAP_BalanceResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:SAP_SOInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SAP_SOInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Header" type="tns:SAP_SOHeaderInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfSAP_SOItemInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_SOHeaderInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Division" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SoldToParty" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipToParty" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerPODate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSAP_SOItemInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_SOItemInfo" nillable="true" type="tns:SAP_SOItemInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_SOItemInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Client" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SONumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialEntered" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReqQty" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesUnit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatlDesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReqmtsType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatlGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChangedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Plant" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReqDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Creator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestPallet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestSpecific" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestShrinkFilm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestRemarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DelivStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="POItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Flag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessingRecordsStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessingRecordsDelete" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnitConversion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="material" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="unit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnitConversionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UnitConversionResult" type="tns:ArrayOfMaterialUnitInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMaterialUnitInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MaterialUnitInfo" nillable="true" type="tns:MaterialUnitInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MaterialUnitInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Base" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BasePrice" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Target" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TargetDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrossWeight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Volume" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfSAP_CompanyInfo" nillable="true" type="tns:ArrayOfSAP_CompanyInfo" />
+      <s:element name="decimal" type="s:decimal" />
+      <s:element name="ArrayOfSAP_DiscountInfo" nillable="true" type="tns:ArrayOfSAP_DiscountInfo" />
+      <s:element name="ArrayOfMaterialUnitInfo" nillable="true" type="tns:ArrayOfMaterialUnitInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ShipToPartySoapIn">
+    <wsdl:part name="parameters" element="tns:ShipToParty" />
+  </wsdl:message>
+  <wsdl:message name="ShipToPartySoapOut">
+    <wsdl:part name="parameters" element="tns:ShipToPartyResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_PriceSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_Price" />
+  </wsdl:message>
+  <wsdl:message name="SAP_PriceSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_PriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_DiscountSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_Discount" />
+  </wsdl:message>
+  <wsdl:message name="SAP_DiscountSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_DiscountResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_BalanceSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_Balance" />
+  </wsdl:message>
+  <wsdl:message name="SAP_BalanceSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_BalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UnitConversionSoapIn">
+    <wsdl:part name="parameters" element="tns:UnitConversion" />
+  </wsdl:message>
+  <wsdl:message name="UnitConversionSoapOut">
+    <wsdl:part name="parameters" element="tns:UnitConversionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ShipToPartyHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="salesOrganization" type="s:string" />
+    <wsdl:part name="distributionChannel" type="s:string" />
+    <wsdl:part name="division" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ShipToPartyHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_CompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_PriceHttpGetIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="salesOrganization" type="s:string" />
+    <wsdl:part name="distributionChannel" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_PriceHttpGetOut">
+    <wsdl:part name="Body" element="tns:decimal" />
+  </wsdl:message>
+  <wsdl:message name="SAP_DiscountHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_DiscountHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_DiscountInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_BalanceHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_BalanceHttpGetOut">
+    <wsdl:part name="Body" element="tns:decimal" />
+  </wsdl:message>
+  <wsdl:message name="UnitConversionHttpGetIn">
+    <wsdl:part name="material" type="s:string" />
+    <wsdl:part name="unit" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UnitConversionHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMaterialUnitInfo" />
+  </wsdl:message>
+  <wsdl:message name="ShipToPartyHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="salesOrganization" type="s:string" />
+    <wsdl:part name="distributionChannel" type="s:string" />
+    <wsdl:part name="division" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ShipToPartyHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_CompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_PriceHttpPostIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="salesOrganization" type="s:string" />
+    <wsdl:part name="distributionChannel" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_PriceHttpPostOut">
+    <wsdl:part name="Body" element="tns:decimal" />
+  </wsdl:message>
+  <wsdl:message name="SAP_DiscountHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_DiscountHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_DiscountInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_BalanceHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_BalanceHttpPostOut">
+    <wsdl:part name="Body" element="tns:decimal" />
+  </wsdl:message>
+  <wsdl:message name="UnitConversionHttpPostIn">
+    <wsdl:part name="material" type="s:string" />
+    <wsdl:part name="unit" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UnitConversionHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMaterialUnitInfo" />
+  </wsdl:message>
+  <wsdl:portType name="SAP_ORDERSoap">
+    <wsdl:operation name="ShipToParty">
+      <wsdl:input message="tns:ShipToPartySoapIn" />
+      <wsdl:output message="tns:ShipToPartySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Price">
+      <wsdl:input message="tns:SAP_PriceSoapIn" />
+      <wsdl:output message="tns:SAP_PriceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Discount">
+      <wsdl:input message="tns:SAP_DiscountSoapIn" />
+      <wsdl:output message="tns:SAP_DiscountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Balance">
+      <wsdl:input message="tns:SAP_BalanceSoapIn" />
+      <wsdl:output message="tns:SAP_BalanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UnitConversion">
+      <wsdl:input message="tns:UnitConversionSoapIn" />
+      <wsdl:output message="tns:UnitConversionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SAP_ORDERHttpGet">
+    <wsdl:operation name="ShipToParty">
+      <wsdl:input message="tns:ShipToPartyHttpGetIn" />
+      <wsdl:output message="tns:ShipToPartyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Price">
+      <wsdl:input message="tns:SAP_PriceHttpGetIn" />
+      <wsdl:output message="tns:SAP_PriceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Discount">
+      <wsdl:input message="tns:SAP_DiscountHttpGetIn" />
+      <wsdl:output message="tns:SAP_DiscountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Balance">
+      <wsdl:input message="tns:SAP_BalanceHttpGetIn" />
+      <wsdl:output message="tns:SAP_BalanceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UnitConversion">
+      <wsdl:input message="tns:UnitConversionHttpGetIn" />
+      <wsdl:output message="tns:UnitConversionHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SAP_ORDERHttpPost">
+    <wsdl:operation name="ShipToParty">
+      <wsdl:input message="tns:ShipToPartyHttpPostIn" />
+      <wsdl:output message="tns:ShipToPartyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Price">
+      <wsdl:input message="tns:SAP_PriceHttpPostIn" />
+      <wsdl:output message="tns:SAP_PriceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Discount">
+      <wsdl:input message="tns:SAP_DiscountHttpPostIn" />
+      <wsdl:output message="tns:SAP_DiscountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Balance">
+      <wsdl:input message="tns:SAP_BalanceHttpPostIn" />
+      <wsdl:output message="tns:SAP_BalanceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UnitConversion">
+      <wsdl:input message="tns:UnitConversionHttpPostIn" />
+      <wsdl:output message="tns:UnitConversionHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SAP_ORDERSoap" type="tns:SAP_ORDERSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ShipToParty">
+      <soap:operation soapAction="http://tempuri.org/ShipToParty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Price">
+      <soap:operation soapAction="http://tempuri.org/SAP_Price" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Discount">
+      <soap:operation soapAction="http://tempuri.org/SAP_Discount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Balance">
+      <soap:operation soapAction="http://tempuri.org/SAP_Balance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnitConversion">
+      <soap:operation soapAction="http://tempuri.org/UnitConversion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SAP_ORDERSoap12" type="tns:SAP_ORDERSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ShipToParty">
+      <soap12:operation soapAction="http://tempuri.org/ShipToParty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Price">
+      <soap12:operation soapAction="http://tempuri.org/SAP_Price" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Discount">
+      <soap12:operation soapAction="http://tempuri.org/SAP_Discount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Balance">
+      <soap12:operation soapAction="http://tempuri.org/SAP_Balance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnitConversion">
+      <soap12:operation soapAction="http://tempuri.org/UnitConversion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SAP_ORDERHttpGet" type="tns:SAP_ORDERHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ShipToParty">
+      <http:operation location="/ShipToParty" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Price">
+      <http:operation location="/SAP_Price" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Discount">
+      <http:operation location="/SAP_Discount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Balance">
+      <http:operation location="/SAP_Balance" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnitConversion">
+      <http:operation location="/UnitConversion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SAP_ORDERHttpPost" type="tns:SAP_ORDERHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ShipToParty">
+      <http:operation location="/ShipToParty" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Price">
+      <http:operation location="/SAP_Price" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Discount">
+      <http:operation location="/SAP_Discount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_Balance">
+      <http:operation location="/SAP_Balance" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnitConversion">
+      <http:operation location="/UnitConversion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SAP_ORDER">
+    <wsdl:port name="SAP_ORDERSoap" binding="tns:SAP_ORDERSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/SAP_ORDER.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SAP_ORDERSoap12" binding="tns:SAP_ORDERSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/SAP_ORDER.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SAP_ORDERHttpGet" binding="tns:SAP_ORDERHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/SAP_ORDER.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SAP_ORDERHttpPost" binding="tns:SAP_ORDERHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/SAP_ORDER.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

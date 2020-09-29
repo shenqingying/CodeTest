@@ -1,0 +1,292 @@
+﻿@{
+    ViewBag.Title = "载具请求";
+}
+
+@Html.Partial("~/Areas/WMS/Views/Shared/WMSHttp.cshtml")
+
+<style>
+    .layui-form-item .layui-input-inline-long {
+        width: 300px;
+    }
+
+    .layui-form-item .layui-input-inline-halflong {
+        width: 138px;
+    }
+</style>
+
+<span class="layui-breadcrumb"></span>
+
+<br />
+<br />
+
+<form class="layui-form layui-form-fix" id="requestTermForm">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">出库位置：</label>
+            <div class="layui-input-inline layui-input-inline-long">
+                <select name="KCDD" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">载具类型：</label>
+            <div class="layui-input-inline layui-input-inline-long">
+                <select name="ZJTYPE" lay-filter="requestTermZJTYPE" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">载具物料：</label>
+            <div class="layui-input-inline layui-input-inline-long">
+                <select name="WLH" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">托数量：</label>
+            <div class="layui-input-inline layui-input-inline-halflong">
+                <input name="SL" class="layui-input" type="number" lay-verify="required|TSL">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button type="button" lay-submit lay-filter="createVehicleRequest" class="layui-btn layui-input-inline-halflong">下达</button>
+        </div>
+    </div>
+</form>
+
+<form class="layui-form layui-form-fix" id="searchTermForm">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">任务日期：</label>
+            <div class="layui-input-inline layui-input-inline-halflong">
+                <input name="TIMES" class="layui-input" onkeydown="javascript: if (event && event.keyCode == 13) searchVehicleRequest();">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline layui-input-inline-halflong">
+                <input name="TIMEE" class="layui-input" onkeydown="javascript: if (event && event.keyCode == 13) searchVehicleRequest();">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">状态：</label>
+            <div class="layui-input-inline layui-input-inline-long">
+                <input type="radio" name="STATUS" value="1" title="执行中" lay-filter="searchTermSTATUS" checked>
+                <input type="radio" name="STATUS" value="3" title="失败" lay-filter="searchTermSTATUS">
+                <input type="radio" name="STATUS" value="" title="全部" lay-filter="searchTermSTATUS">
+            </div>
+        </div>
+    </div>
+</form>
+
+<table class="layui-hide" id="vehicleRequestTable" lay-filter="vehicleRequestTable"></table>
+
+<script type="text/html" id="STATUS">
+    {{# if(d.STATUS == 1){}}
+    <span style="color:green">完成</span>
+    {{# }else if(d.STATUS == 2){ }}
+    <span style="color:sandybrown">执行中</span>
+    {{# }else if(d.STATUS == 3){ }}
+    <span style="color:red">失败</span>
+    {{# }else{ }}
+    <span style="color:gray">未知状态</span>
+    {{# } }}
+</script>
+
+<script type="text/html" id="STATUS">
+    {{# if(d.WLH){}}
+    {{ d.WLH + '-' + d.WLMS }}
+    {{# } }}
+</script>
+
+@section scripts {
+    <script>
+        const temp = [
+            { RWBH: 'sadasdads', WLH: '100000', WLMS: 'sadasdads', SL: 10, STATUS: 1, REMARK: '456' },
+            { RWBH: 'sadasdads', WLH: '100000', WLMS: 'sadasdads', SL: 10, STATUS: 2, REMARK: '456' },
+            { RWBH: 'sadasdads', WLH: '100000', WLMS: 'sadasdads', SL: 10, STATUS: 1, REMARK: '456' },
+            { RWBH: 'sadasdads', WLH: '100000', WLMS: 'sadasdads', SL: 10, STATUS: 3, REMARK: '456' },
+            { RWBH: 'sadasdads', WLH: '100000', WLMS: 'sadasdads', SL: 10, STATUS: 1, REMARK: '456' },
+        ];
+
+        sonluk.global.getResources();
+        sonluk.global.getResources('WMS/Pallet', 'lv');
+        const sc = sonluk.values.global.common;
+        const slv = sonluk.values.global.lv;
+        const cache = [];
+        const cacheSelector = {
+            KCDD: {
+                elem: $('#requestTermForm [name=KCDD]'),
+                term: [{ label: 'test', value: 1 }]
+            },
+            ZJTYPE: {
+                elem: $('#requestTermForm [name=ZJTYPE]'),
+                term: []
+            },
+            WLH: {
+                elem: $('#requestTermForm [name=WLH]'),
+                term: []
+            }
+        };
+        const colsOfVehicleRequest = [[
+            { title: '序号', type: 'numbers' },
+            { field: 'RWBH', width: 120 },
+            { field: 'WLMS', width: 100, templet: '#WLMS' },
+            { field: 'SL', width: 100 },
+            { field: 'STATUS', width: 100, templet: '#STATUS' },
+            { field: 'REMARK', minWidth: 100 },
+        ]];
+        layui.use(['table', 'layer', 'form', 'element', 'laydate'], function () {
+            const layer = layui.layer;
+            const form = layui.form;
+            const assist = sonluk.layui;
+            const msg = sonluk.msg;
+
+            sonluk.layui.breadcrumbefix();
+            initAll();
+
+            function initAll() {
+                var loading = layer.load(1);
+                assist.laydate.render(initDate('[name=TIMES]'));
+                assist.laydate.render(initDate('[name=TIMEE]'));
+                form.on('radio(searchTermSTATUS)', function (data) { searchVehicleRequest(); });
+                form.on('submit(createVehicleRequest)', function (data) { createVehicleRequest(data.field); });
+                form.verify({
+                    TSL: function (value, item) {
+                        if (value <= 0) return '托数量必须大于0';
+                        if (!/^\d+$/.test(value)) return '托数量必须为整数';
+                    }
+                });
+                initList(function () { layer.close(loading); });
+            }
+
+            function initList(callback) {
+                //初始化
+                callback = callback || function () { };
+                var cindex = 0;
+                var sindex = 0;
+                const cFunc = function () {
+                    cindex++;
+                    if (cindex == 2 && cindex == sindex) {
+                        callback(true);
+                        initSelector('KCDD');
+                        initSelector('ZJTYPE', '', ['WLH']);
+                    }
+                    else if (cindex == 2) callback(false);
+                }
+
+                //请求
+                //-载具类型
+                wmshttp.post({
+                    url: 'Helper/Dic/ReadTypemxs',
+                    data: { TYPEID: 44 },
+                    success: function (data) {
+                        if (data.success) {
+                            sindex++;
+                            cacheSelector.ZJTYPE['term'] = [];
+                            data.data.forEach(function (item) {
+                                cacheSelector.ZJTYPE['term'].push({ label: item.MXNAME, value: item.ID });
+                            });
+                            //-载具物料
+                            wmshttp.post({
+                                url: 'WMS/BC_TPM/ReadTPMWL',
+                                success: function (data) {
+                                    if (data.success) {
+                                        sindex++;
+                                        data.data.forEach(function (item) {
+                                            const terms = cacheSelector.ZJTYPE.term;
+                                            cacheSelector.WLH['term' + item.ZJTYPE] = [];
+                                            for (var i = 0; i < terms.length; i++) {
+                                                if (terms[i].value == item.ZJTYPE) cacheSelector.WLH['term' + item.ZJTYPE].push({ label: item.WLH + '-' + item.WLMS, value: item.WLH });
+                                            }
+                                        });
+                                    }
+                                    else msg.error(data.messages);
+                                },
+                                complete: cFunc
+                            });
+                        }
+                        else msg.error(data.messages);
+                    },
+                    complete: cFunc
+                });
+
+                //监听
+                //-载具类型
+                form.on('select(requestTermZJTYPE)', function (data) {
+                    initSelector('WLH', data.value);
+                });
+
+                //填充
+                function initSelector(name, value, nexts) {
+                    value = value || '';
+                    const selector = cacheSelector[name].elem;
+                    const selectorList = cacheSelector[name]['term' + value];
+                    selector.empty();
+                    selector.append(new Option("请选择", ""));
+                    selectorList.forEach(function (item) {
+                        selector.append(new Option(item.label, item.value));
+                    });
+                    if (selectorList.length == 1) selector.val(selectorList[0].value);
+                    if (nexts && nexts.length > 0) {
+                        const next = nexts[0];
+                        nexts.splice(0, 1);
+                        initSelector(next, selector[0].value, nexts);
+                    }
+                    form.render();
+                }
+            }
+
+            function initTable(data) {
+                data = data || cache;
+                var fixHeight = 200;
+                $('.layui-form-fix').each(function (index, elem) {
+                    fixHeight += elem.clientHeight;
+                });
+                assist.table.render({
+                    elem: '#vehicleRequestTable',
+                    height: 'full-' + fixHeight,
+                    data: data,
+                    cols: colsOfVehicleRequest
+                });
+            }
+
+            function initDate(elem) {
+                const nowDate = sonluk.date.now();
+                return {
+                    elem: elem,
+                    value: nowDate,
+                    isInitValue: true,
+                    done: function (value) {
+                        if (value) searchVehicleRequest();
+                    }
+                };
+            }
+
+            //TODO
+            function createVehicleRequest(term) {
+                var loading = layer.load(1);
+                msg.success('下达完成');
+                $('#requestTermForm')[0].reset();
+                initList(function () { layer.close(loading); });
+            }
+
+            //TODO
+            window.searchVehicleRequest = function () {
+                const term = sonluk.convert.toObject($('#searchTermForm')[0]);
+                term.STATUS = $('#searchTermForm')[0]['STATUS'].value;
+                
+                initTable(temp);
+            }
+        });
+    </script>
+}

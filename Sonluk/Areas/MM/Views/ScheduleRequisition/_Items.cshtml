@@ -1,0 +1,65 @@
+﻿@using Sonluk.UI.Model.MM.ScheduleRequisitionService
+@model IEnumerable<ScheduleLineInfo>
+@{
+    string auth = ViewBag.Auth;
+    string uri = "";
+    switch (auth)
+    {
+        case "OP":
+        case "PP":
+            {
+                uri = Url.Action("Edit", "ScheduleRequisition", new { Auth = auth }) + "&";
+                break;
+            }
+        case "PPCtrl":
+        case "Pur":
+        case "PurCtrl":
+            {
+                uri = Url.Action("Release", "ScheduleRequisition", new { Auth = auth }) + "&";
+                break;
+            }
+    }
+    uri = uri + "SN=";
+}
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">供应商</td>
+        <td class="data-table-header">销售凭证</td>
+        <td class="data-table-header">行项目</td>
+        <td class="data-table-header">采购凭证</td>
+        <td class="data-table-header">行项目</td>
+        <td class="data-table-header">计划行</td>
+        <td class="data-table-header">物料号</td>
+        <td class="data-table-header">物料描述</td>
+        <td class="data-table-header">原数量</td>
+        <td class="data-table-header">需求数量</td>
+        <td class="data-table-header">原日期</td>
+        <td class="data-table-header">需求日期</td>
+        <td class="data-table-header">交货点</td>
+        <td class="data-table-header">状态</td>
+        <td class="data-table-header">请求序号</td>
+        <td class="data-table-header">采购组</td>
+    </tr>
+    @foreach (ScheduleLineInfo node in Model)
+    {
+        <tr>
+            <td>@node.Vendor</td>
+            <td>@node.SalesOrder</td>
+            <td>@node.SOItem</td>
+            <td>@node.Number</td>
+            <td>@node.Item</td>
+            <td>@node.Line</td>
+            <td>@node.Material</td>
+            <td class="text-align-left">@node.MaterialDescription</td>
+            <td class="text-align-right">@node.InitialQuantity.ToString("0.###")</td>
+            <td class="text-align-right @if (node.InitialQuantity != node.Quantity) {@("color-changed-background")}">@node.Quantity.ToString("0.###")</td>
+            <td>@node.InitialDate</td>
+            <td @if (node.InitialDate != node.Date) { @("class=color-changed-background") }>@node.Date</td>
+            <td @if (!node.DestinationID.Equals("0")) { @("class=color-changed-background") }>@node.Destination</td>
+            <td>@node.StatusDescription</td>
+            <td><a href="@(uri+node.SerialNumber)">@node.SerialNumber</a></td>
+            <td>@node.PurGroup</td>
+        </tr>
+    }
+</table>
+<input type="hidden" value="@Model.Count()" id="node-count">

@@ -1,0 +1,193 @@
+﻿@using Sonluk.UI.Model.HR.SY_DEPTService;
+@using Sonluk.UI.Model.S5.SY_DICTService;
+
+@{
+    ViewBag.Title = "检查点维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    HR_SY_DEPT_SELECT depArr = ViewBag.DEPList;
+    FIVES_SY_DICT[] RES = ViewBag.RES;
+    FIVES_SY_DICT[] JCRES = ViewBag.JCRES;
+}
+<style>
+
+    .layui-form-item .layui-form-checkbox[lay-skin=primary] {
+        margin-top: 0px;
+    }
+</style>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="Tpl_DJ">
+    {{# if(d.DJ == 0){ }}
+    巡检、抽检
+    {{# }else if(d.DJ > 0){ }}
+    点检
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="print">打印</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator>
+    <a>5S系统管理</a>
+    <a><cite>检查点维护</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form layui-form-pane">
+    <input type="hidden" value="@Url.Action("SY_DICT_Read", "System")" id="SY_DICT_Read" />
+    <input type="hidden" value="@Url.Action("CheckDetails_Select", "System")" id="CheckDetails_Select" />
+    <input type="hidden" value="@Url.Action("CheckDetails_Create", "System")" id="CheckDetails_Create" />
+    <input type="hidden" value="@Url.Action("DEPT_SELECT", "System")" id="DEPT_SELECT" />
+    <input type="hidden" value="@Url.Action("CheckPoint_Select", "System")" id="CHECKPOINT_SELECT" />
+    <input type="hidden" value="@Url.Action("CheckPoint_SelectByStaffid", "System")" id="CheckPoint_SelectByStaffid" />
+    <input type="hidden" value="@Url.Action("CheckPoint_Delete", "System")" id="CheckPoint_Delete" />
+    <input type="hidden" value="@Url.Action("CheckPointPrint", "System")" id="CheckPointPrint" />
+    <input type="hidden" value="@Url.Action("POST_CheckPointPrint", "System")" id="POST_CheckPointPrint" />
+    <input type="hidden" value="@Url.Action("SY_DICT_Read", "System")" id="SY_DICT_Read" />
+    <input type="hidden" value="@Url.Action("RELATIONSHIPBIND_Read", "System")" id="RELATIONSHIPBIND_Read" />
+
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_CreatePoint">新增检查点</button>
+        <button class="layui-btn" id="btn_SelectPoint">查询</button>
+        <button class="layui-btn" id="btn_print">多选打印</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门:</label>
+        <div class="layui-input-inline" style="width:220px ">
+            <select id="select_dep_s" lay-filter="select_jcfl" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                @if (depArr.MES_RETURN.TYPE.Equals("S"))
+                {
+                    for (int i = 0; i < depArr.HR_SY_DEPT_LIST.Length; i++)
+                    {
+                        <option value="@depArr.HR_SY_DEPT_LIST[i].DEPTID">@depArr.HR_SY_DEPT_LIST[i].DEPTNAME</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="layui-form-item">
+            <table id="tb_checkPoint" lay-filter="tb_checkPoint"></table>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="layui-form " id="div_Addcheckpoint" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">检验点名称:</label>
+        <div class="layui-input-inline">
+            <input id="input_name" type="text" class="layui-input">
+        </div>
+        <label class="layui-form-label">部门:</label>
+        <div class="layui-input-inline" style="width:220px ">
+            <select id="select_dep" lay-filter="select_jcfl" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                @if (depArr.MES_RETURN.TYPE.Equals("S"))
+                {
+                    for (int i = 0; i < depArr.HR_SY_DEPT_LIST.Length; i++)
+                    {
+                        <option value="@depArr.HR_SY_DEPT_LIST[i].DEPTID">@depArr.HR_SY_DEPT_LIST[i].DEPTNAME</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">检验点备注:</label>
+        <div class="layui-input-inline" style="width:190px">
+            <input id="input_bz" type="text" class="layui-input">
+        </div>
+        <label class="layui-form-label">检查类型:</label>
+        <div class="layui-input-inline" style="width:220px ">
+            <select id="in_dj" xm-select="in_dj">
+                @for (int i = 0; i < JCRES.Length; i++)
+                {
+                    <option value="@JCRES[i].DICID">@JCRES[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">检查频率:</label>
+        <div class="layui-input-inline" style="width:190px ">
+            <select id="select_frequency" lay-filter="select_frequency" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < RES.Length; i++)
+                {
+                    <option value="@RES[i].DICID">@RES[i].DICNAME</option>
+                }
+            </select>
+        </div>
+        <label class="layui-form-label">是否显示点检人员:</label>
+        <div class="layui-input-inline" style="width:220px ">
+            <select id="select_isneed" lay-filter="select_isneed" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                <option value="1">是</option>
+                <option value="2">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序编码:</label>
+        <div class="layui-input-inline" style="width:190px">
+            <input id="input_code" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">是否报表显示:</label>
+        <div class="layui-input-inline" style="width:220px">
+            <input id="ISREPORT" type="checkbox" name="" title="Excel" checked >
+        </div>
+    </div>
+
+
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this" id="tab-checkpoint">检验点维护</li>
+            <li id="tab-gw">岗位维护</li>
+        </ul>
+        <div class="layui-tab-content" style="height: 300px;">
+            <div class="layui-tab-item layui-show" id="defult-tab-content">
+                <table class="layui-hide" id="tb_checkdetail" lay-filter="tb_checkdetail"></table>
+            </div>
+            <div class="layui-tab-item" id="tab-content-other">
+                <table class="layui-hide" id="tb_gw" lay-filter="tb_gw"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-form" hidden id="div_detailtype">
+    <table class="layui-hide" id="tb_detailtype" lay-filter="tb_detailtype"></table>
+</div>
+<div id="div_adddetailMX" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">检查分类:</label>
+            <div class="layui-input-inline" style="width:250px">
+                <select id="select_jcfl_add" lay-filter="select_jcfl" lay-search></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">检查名称:</label>
+        <div class="layui-input-inline">
+            <input id="input_jcmc" type="text" class="layui-input" style="width:250px">
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/System/CHECKPOINT")
+}

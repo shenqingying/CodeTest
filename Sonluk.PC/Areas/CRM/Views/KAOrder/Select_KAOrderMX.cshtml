@@ -1,0 +1,55 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "Select_KAOrderMX";
+    CRM_ORDER_MX[] MXdata = ViewBag.MXdata;
+}
+
+<table lay-filter="result_mx">
+    <thead>
+        <tr>
+            <th lay-data="{field:'username', width:60}">序号</th>
+            <th lay-data="{field:'OrderItem', width:75}">项目号</th>
+            <th lay-data="{field:'FItem', width:90}">上层项目</th>
+            <th lay-data="{field:'ISCF', width:90, templet: '#tpl_iscf'}">拆分标记</th>
+            <th lay-data="{field:'ProdNum', width:100}">货号</th>
+            <th lay-data="{field:'ProdName', width:300}">品名/规格</th>
+            <th lay-data="{field:'CPPH', width:120}">物料编码</th>
+            <th lay-data="{field:'CPMC', width:250}">物料描述</th>
+            <th lay-data="{field:'DDSL', width:80}">订购量</th>
+            <th lay-data="{field:'DDDW', width:90}">订购单位</th>
+            <th lay-data="{field:'KCDDMS', width:120}">库存地点</th>
+            <th lay-data="{field:'ORDERMXID', width:90,hide:true}"></th>
+            <th lay-data="{field:'ORDERTTID', width:90,hide:true}"></th>
+            <th lay-data="{field:'ISCXP', width:90,hide:true}"></th>
+            <th lay-data="{field:'KCDD', width:90,hide:true}"></th>
+            <th lay-data="{fixed: 'right', width: 150, align: 'center', toolbar: '#bar_orderMX'}">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < MXdata.Length; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@MXdata[i].OrderItem</td>
+                <td>@MXdata[i].FItem</td>
+                <td>@(MXdata[i].ISCF)</td>
+                <td>@MXdata[i].ProdNum</td>
+                <td>@(MXdata[i].ProdName)/@(MXdata[i].ProdSpec)</td>
+                <td>@MXdata[i].CPPH</td>
+                <td>@MXdata[i].CPMC</td>
+                <td>@MXdata[i].DDSL</td>
+                <td>@MXdata[i].DDDW</td>
+                <td>@MXdata[i].KCDDMS</td>
+                <td>@MXdata[i].ORDERMXID</td>
+                <td>@MXdata[i].ORDERTTID</td>
+                <td>@MXdata[i].ISCXP</td>
+                <td>@MXdata[i].KCDD</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+<input id="MXresultModel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata)" hidden />

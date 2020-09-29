@@ -1,0 +1,200 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "日常任务拜访";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="shangxiawu">
+    {{# if(d.CCSJLX == 1){ }}
+    上午
+    {{# }else if(d.CCSJLX == 2){ }}
+    下午
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    生效
+    {{# }else if(d.ISACTIVE == 0){ }}
+    过期
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="KHtype_Tpl">
+    {{# if(d.KHLX == 1){ }}
+    经销商
+    {{# }else if(d.KHLX == 2){ }}
+    电商
+    {{# }else if(d.KHLX == 3 && d.MCSX == 1){ }}
+    直营卖场系统
+    {{# }else if(d.KHLX == 3 && d.MCSX == 2){ }}
+    直营卖场门店
+    {{# }else if(d.KHLX == 4){ }}
+    B2B
+    {{# }else if(d.KHLX == 5){ }}
+    网点终端
+    {{# }else if(d.KHLX == 6){ }}
+    批发
+    {{# }else if(d.KHLX == 7 && d.MCSX == 1){ }}
+    LKA系统
+    {{# }else if(d.KHLX == 7 && d.MCSX == 2){ }}
+    LKA门店
+    {{# }else if(d.KHLX == 8){ }}
+    电子锁网点
+    {{# }else if(d.KHLX == 9){ }}
+    直销商
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="set">设置频次</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">取消拜访</a>
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>拜访管理</a>
+    <a><cite>日常任务拜访</cite></a>
+</span>
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="btn_insert">查询</button>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">客户类型：</label>
+        <div class="layui-input-inline">
+            <select id="KHtype" lay-filter="KHtype">
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">客户名称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">客户编号：</label>
+        <div class="layui-input-inline">
+            <input id="crmid" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">SAP编号：</label>
+        <div class="layui-input-inline">
+            <input id="sapsn" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">客户组：</label>
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                    <input id="KHgroup" type="hidden" name="selectID" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="classtree"></ul>*@
+                        <div id="classtree"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <label class="layui-form-label">频次：</label>
+        <div class="layui-input-inline">
+            <select id="cx_pinci" lay-filter="cx_pinci" lay-search>
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">数据类型：</label>
+        <div class="layui-input-inline">
+            <select id="datatype" lay-filter="datatype">
+                <option value="0" selected="selected">全部</option>
+                <option value="1">已设置</option>
+                <option value="2">未设置</option>
+            </select>
+        </div>
+
+
+    </div>
+
+    <table id="CC_title" lay-filter="CC_title"></table>
+
+</div>
+
+<div id="div_pinci" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">频次：</label>
+        <div class="layui-input-inline">
+            <select id="pinci" lay-filter="pinci" lay-search>
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<input id="staffid" hidden />
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/PlanManage")
+}

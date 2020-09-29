@@ -1,0 +1,152 @@
+﻿@using Sonluk.UI.Model.Account.AccessService
+@{
+    ViewBag.Title = "交货计划请求";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string auth = ViewBag.Auth;
+    AuthorizationInfo SAPAuth = (AuthorizationInfo)ViewBag.SAPAuth;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+@Styles.Render("~/Content/sonluk-ui/input-width-po")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/mm/schedule-requisition-index")
+<input type="hidden" id="auth" value="@auth">
+<input type="hidden" id="schedule-requisition-select" value="@Url.Action("_List", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-items-select" value="@Url.Action("_Items", "ScheduleRequisition")">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">采购订单</a>
+        >
+        <a href="#">交货计划申请</a>
+        >
+        <a href="#">查询</a>
+    </div>
+</div>
+<div class="panel-search">
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">序列号</div>
+        <input type="text" class="panel-search-item-input input-width-po-sn" id="SerialNumber" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">销售凭证</div>
+        <input type="text" class="panel-search-item-input input-width-po-so" id="SalesOrder" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">行项目</div>
+        <input type="text" class="panel-search-item-input input-width-po-so-item" id="SOItem" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">物料号</div>
+        <input type="text" class="panel-search-item-input input-width-po-material" id="Material" />
+    </div>
+    @if (SAPAuth.PurchasingGroup.Equals(""))
+    {
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">采购组</div>
+            <input type="text" class="panel-search-item-input  input-width-po-pur-group" id="pur-group" />
+        </div>
+    }
+    else
+    {
+        <input type="hidden" id="pur-group" value="@SAPAuth.PurchasingGroup">
+    }
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">创建日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="Date" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="EndDate" />
+    </div>
+
+    @if ((!auth.Equals("PP")) && (!auth.Equals("OP")))
+    {
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">创建者</div>
+            <input type="text" class="panel-search-item-input" id="Creator" />
+        </div>
+    }
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">同步日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="SyncDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="EndSyncDate" />
+    </div>
+    <div class="panel-search-item">
+        @switch (auth)
+        {
+            case "OP":
+                {
+                    <input type="radio" name="Status" value="PP-Draft" checked /> @("未提交")
+                    break;
+                }
+            case "PP":
+                {
+                    <input type="radio" name="Status" value="PPCtrl-Rejected" /> @("驳回")
+                    <input type="radio" name="Status" value="PP-Draft" checked /> @("未提交")
+                    <input type="radio" name="Status" value="PP-Release" /> @("提交")
+                    <input type="radio" name="Status" value="PPCtrl-Release" /> @("批准")
+                    <input type="radio" name="Status" value="Pur-Rejected" /> @("退回")
+                    <input type="radio" name="Status" value="Pur-Release" /> @("确认")
+                    break;
+                }
+            case "PPCtrl":
+                {
+                    <input type="radio" name="Status" value="PPCtrl-Rejected" /> @("驳回")
+                    <input type="radio" name="Status" value="PP-Release" checked /> @("提交")
+                    <input type="radio" name="Status" value="Pur-Rejected" /> @("退回")
+                    <input type="radio" name="Status" value="PPCtrl-Release" /> @("批准")
+                    <input type="radio" name="Status" value="Pur-Release" /> @("确认")
+                    break;
+                }
+            case "Pur":
+                {
+                    <input type="radio" name="Status" value="Pur-Rejected" /> @("退回")
+                    <input type="radio" name="Status" value="PPCtrl-Release" checked /> @("批准")
+                    <input type="radio" name="Status" value="Pur-Release" /> @("确认")
+                    break;
+                }
+            case "PurCtrl":
+                {
+                    <input type="radio" name="Status" value="Pur-Rejected" /> @("退回")
+                    <input type="radio" name="Status" value="PPCtrl-Release" /> @("批准")
+                    <input type="radio" name="Status" value="Pur-Release" checked /> @("确认")
+                    break;
+                }
+        }
+        <input type="radio" name="Status" value="PurCtrl-Sync" /> 同步
+        <input type="radio" name="Status" value="All" /> 全部
+    </div>
+
+    <div class="panel-search-statistic sonluk-button panel-search-button">汇&nbsp;&nbsp;总</div>
+    <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>    
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="item-select-all sonluk-table-control-button">全选所属行项目</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="export-button purchase-order-set-export sonluk-table-control-button sync-list">导出</div>
+                    <input type="hidden" value="@Url.Action("PrepareExportSetData", "PurchaseOrder" )">
+                    <input type="hidden" value="@Url.Action("ExportSet", "PurchaseOrder", new { type = "PlanExport" })">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="schedule-requisition"></div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/mm/schedule-requisition-index")
+}

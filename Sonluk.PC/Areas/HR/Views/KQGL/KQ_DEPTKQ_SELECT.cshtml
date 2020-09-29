@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "部门考勤查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>部门考勤查询</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_daochu_report_ejkqb">员工考勤表</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">考勤日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_kqrqs" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_kqrqe" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_deptkq" lay-filter="tb_deptkq"></table>
+</div>
+<div class="layui-form" id="div_report_cxtj" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select id="report_find_gs" lay-filter="report_find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="report_find_dept_father">
+                <select id="report_find_dept_child" lay-filter="report_find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" id="report_find_gh" autocomplete="off" class="layui-input" placeholder="5位工号">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">考勤月份：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="report_find_kqmonth" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="report_find_kqmonthe" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_deptkq" lay-filter="tb_deptkq"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_DEPTKQ_SELECT")
+}

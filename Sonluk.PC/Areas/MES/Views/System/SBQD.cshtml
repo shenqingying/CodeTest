@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "二维码打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model List<MODEL_RWQD_PRINT>
+
+
+<div id="wrap" class="main">
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="layui-form" style="width:280px; height:280px;display:inline-block">
+            @{
+        string barcode = "";
+        barcode = Model[i].MES_SY_GZZX_SBH.SBBH;
+            }
+            <img src="@Url.Action("BarCode", "PD", new { area = "MES",code=barcode,format="QRCODE",width=200,height=200,pure=1})">
+            <br />
+            <big>@Model[i].MES_SY_GZZX_SBH.SBBH</big>
+            <br />
+        </div>
+    }
+</div>
+<div id="div_QDimg" class="layui-form" style="vertical-align: middle; text-align: center;" hidden>
+    <img id="img1" />
+</div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/html2canvas.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        //$("#BCQDimg").show();
+
+        var element = document.getElementById('wrap');
+        html2canvas(element).then(function (canvas) {
+            var dataUrl = canvas.toDataURL();
+            $("#img1").attr("src", dataUrl).removeClass("hide");
+            $("#BCQDimg").show();
+        })
+    })
+
+    function BCTP() {
+            var imgscr = $('#img1')[0].src;
+            function downloadImage(imgurl) {
+                //imgurl 图片地址
+                var a = $("<a></a>").attr("href", imgurl).attr("download","批量设备二维码.jpg").appendTo("body");
+                a[0].click();
+                a.remove();
+            }
+            downloadImage(imgscr);
+        }
+    </script>

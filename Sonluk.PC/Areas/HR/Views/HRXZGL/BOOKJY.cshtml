@@ -1,0 +1,244 @@
+﻿@{
+    ViewBag.Title = "图书借阅管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>图书借阅管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_jy">借阅登记</button>
+        <button class="layui-btn" id="btn_gh">归还登记</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+        <button class="layui-btn" id="btn_bbselect">报表查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_bookno" autocomplete="off" class="layui-input" placeholder="（书名/条码）">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_bookgh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">借阅日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_JYRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_JYRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="BOOKTable" lay-filter="BOOKTable"></table>
+    </div>
+</div>
+<div id="div_jydj" class="layui-form" hidden>
+    <br />
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>读者信息</legend>
+    </fieldset>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">姓名：</label>
+            <div class="layui-input-inline" style="width: 180px;">
+                <input type="text" id="dainfo_add_gh" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">姓名：</label>
+            <div class="layui-input-inline" style="width: 180px;">
+                <input type="text" id="dajy_name" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 50px;">性别：</label>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="dajy_xb" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 80px;">在职状态：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <input type="text" id="dajy_zzzt" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">公司：</label>
+            <div class="layui-input-inline" style="width: 365px;">
+                <input type="text" id="dajy_gs" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 80px;">归属部门：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <input type="text" id="dajy_dept" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>图书信息</legend>
+    </fieldset>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">条码：</label>
+        <div class="layui-input-inline" style="width: 200px;">
+            <input type="text" id="bookjy_no" autocomplete="off" class="layui-input" placeholder="（书名/条码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+        </div>
+        <label class="layui-form-label" style="width: 85px;">借阅日期：</label>
+        <div class="layui-input-inline" style="width: 150px;">
+            <input type="text" name="date" id="bookjy_jydate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">书名：</label>
+        <div class="layui-input-inline" style="width: 200px;">
+            <input type="text" id="bookjy_bookname" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 85px;">出版社：</label>
+        <div class="layui-input-inline" style="width: 200px;">
+            <input type="text" id="bookjy_cbs" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">作者：</label>
+        <div class="layui-input-inline" style="width: 200px;">
+            <input type="text" id="bookjy_zz" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 85px;">价格：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" id="bookjy_jg" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <div class="layui-input-inline" style="width: 120px;">
+            <button class="layui-btn" id="btn_jyadd">借阅</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hidden" id="bookinfoTable" lay-filter="bookinfoTable"></table>
+    </div>
+</div>
+<div id="div_ghdj" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">条码：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="ghbookinfo_tm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>读者信息</legend>
+    </fieldset>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">工号：</label>
+            <div class="layui-input-inline" style="width: 180px;">
+                <input type="text" id="dagh_gh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">姓名：</label>
+            <div class="layui-input-inline" style="width: 180px;">
+                <input type="text" id="dagh_name" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 50px;">性别：</label>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="dagh_xb" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 80px;">在职状态：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <input type="text" id="dagh_zzzt" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">公司：</label>
+            <div class="layui-input-inline" style="width: 365px;">
+                <input type="text" id="dagh_gs" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 80px;">归属部门：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <input type="text" id="dagh_dept" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item" id="gh_tb_book">
+            <table class="layui-hidden" id="bookGHTable" lay-filter="bookGHTable"></table>
+        </div>
+    </div>
+</div>
+<div id="div_bbselect" class="layui-form" style="padding:10px" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_book_bb">借阅图书</button>
+        <button class="layui-btn" id="btn_ry_bb">借阅读者</button>
+    </div>
+    <div class="layui-form-item" id="div_dc_book_Table">
+        <button class="layui-btn" id="btn_dc_book">导出</button>
+        <table class="layui-hidden" id="dc_book_Table" lay-filter="dc_book_Table"></table>
+    </div>
+    <div class="layui-form-item" id="div_dc_ry_Table">
+        <button class="layui-btn" id="btn_dc_ry">导出</button>
+        <table class="layui-hidden" id="dc_ry_Table" lay-filter="dc_ry_Table"></table>
+    </div>
+</div>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="logout">注销</a>
+</script>
+<div id="div_daoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_drmb" style="width:150px">导入</button>
+    </div>
+</div>
+<div id="div_dainfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_damx_add_ry" lay-filter="tb_damx_add_ry"></table>
+</div>
+<div id="div_bookinfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_bookmx_add" lay-filter="tb_bookmx_add"></table>
+</div>
+<div hidden>
+    <input type="text" id="bl_ryid" value="">
+    <input type="text" id="bl_bookno" value="">
+</div>
+<style>
+    #dainfo_add_gh {
+        background-color: #FAFFBD;
+    }
+
+    #bookjy_no {
+        background-color: #FAFFBD;
+    }
+
+    #ghbookinfo_tm {
+        background-color: #FAFFBD;
+    }
+    #bookjy_jydate {
+        background-color: #FAFFBD;
+    }
+    th .layui-table-cell {
+        text-align: center;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/HRXZGL/BOOKJY")
+}

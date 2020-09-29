@@ -1,0 +1,98 @@
+﻿@model Sonluk.UI.Model.PS.ComponentMoveService.PS_ZPSFUG_Q_CGDS
+
+
+@if (Model.T_MSG.TYPE == "" || Model.T_MSG.TYPE == null)
+{
+    <div id="div_cginfo">
+        <div class="layui-form-item">
+            <label class="layui-form-label">网络号</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="in_AUFNR" id="in_AUFNR" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.NPLNR" readonly="readonly">*@
+                <label class="layui-form-label" name="in_AUFNR" id="in_AUFNR">@Model.T_OUT.NPLNR</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">网络描述</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.KTEXT" readonly="readonly">*@
+                <label class="layui-form-label">@Model.T_OUT.KTEXT</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">供应商编号</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.LIFNR" readonly="readonly">*@
+                <label class="layui-form-label">@Model.T_OUT.LIFNR</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">供应商描述</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.NAME1" readonly="readonly">*@
+                <label class="layui-form-label">@Model.T_OUT.NAME1</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">采购订单</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.EBELN/@Model.T_OUT.EBELP" id="in_EBELN" readonly="readonly">*@
+                <label class="layui-form-label" name="in_EBELN" id="in_EBELN">@Model.T_OUT.EBELN/@Model.T_OUT.EBELP</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">物料描述</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.TXZ01" readonly="readonly">*@
+                <label class="layui-form-label">@Model.T_OUT.TXZ01</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">采购组</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.EKGRP/@Model.T_OUT.EKNAM" readonly="readonly">*@
+                <label class="layui-form-label">@Model.T_OUT.EKGRP/@Model.T_OUT.EKNAM</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">采购数量</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="in_MENGE" id="in_MENGE" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.MENGE" readonly="readonly">*@
+                <label class="layui-form-label" name="in_MENGE" id="in_MENGE">@Model.T_OUT.MENGE</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">未收货数量</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="in_ERFMG_W" id="in_ERFMG_W" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.ERFMG_W" readonly="readonly">*@
+                <label class="layui-form-label" name="in_ERFMG_W" id="in_ERFMG_W">@Model.T_OUT.ERFMG_W</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">采购单位</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="in_MEINS" id="in_MEINS" placeholder="" autocomplete="off" class="layui-input" value="@Model.T_OUT.MEINS" readonly="readonly">*@
+                <label class="layui-form-label" name="in_MEINS" id="in_MEINS">@Model.T_OUT.MEINS</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">收货数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="in_ERFMG" id="in_ERFMG" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div id="div_wbinfo">
+        @for (int i = 0; i < Model.LINES.Length; i++)
+        {
+            <a>@Model.LINES[i].TDLINE</a><br />
+        }
+    </div>
+    <input type="hidden" id="bl_VORNR" value="@Model.T_OUT.VORNR">
+    <input type="hidden" id="bl_LARNT" value="@Model.T_OUT.LARNT">
+    <input type="hidden" id="bl_ARBPL" value="@Model.T_OUT.ARBPL">
+    <input type="hidden" id="bl_WERKS" value="@Model.T_OUT.WERKS">
+}
+else
+{
+    <a>@Model.T_MSG.MESSAGE</a>
+}

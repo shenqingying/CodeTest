@@ -1,0 +1,117 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    ViewBag.Title = "客户活动";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "客户活动";
+
+    CRM_HG_DICT[] HDCL = ViewBag.HDCL;
+    
+}
+
+<script type="text/html" id="tb_area">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+<style>
+    td {
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+</style>
+
+<h2 id="h1" style="margin:0 10px"></h2>
+<h2 id="h2" style="margin:0 10px"></h2>
+
+
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+<br />
+<hr class="layui-bg-black" />
+<br />
+<div id="004" hidden>
+
+    <h2 class="layui-colla-title" id="htitle">新增活动</h2>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">活动名称：</label>
+        <div class="layui-input-block">
+            <select id="HDname" lay-filter="HDname" lay-ignore>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px;text-align:right;">活动套餐：</label>
+        <div class="layui-input-block">
+            <select id="HDtc" lay-filter="HDtc">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">活动单品：</label>
+        <div class="layui-input-block">
+            <select id="HDcplx" lay-filter="HDcplx" lay-ignore>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+
+    <div id="div_hdcl" class="layui-form-item" hidden>
+        <label class="layui-form-label" style="width:100px;text-align:right;">活动陈列：</label>
+        <div class="layui-input-block">
+            <select id="HDdisplay" lay-filter="HDdisplay">
+                <option value="0" selected="selected"></option>
+                @for (int i = 0; i < HDCL.Length; i++)
+                {
+                    <option value="@HDCL[i].DICID">@HDCL[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item" hidden>
+        <label class="layui-form-label" style="width:100px">销量(盒)：</label>
+        <div class="layui-input-block">
+            <input id="HDxl" class="layui-input">
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px;text-align:right;">备注：</label>
+        <div class="layui-input-block">
+            <input id="HDbeiz" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form" style="width:100%;">
+        <div class="layui-form-item" style="margin:0">
+            <br />
+            <button id="btn_save_huodong" class="layui-btn" lay-filter="btn_save_jinzhan" style="width:49%;">保存</button>
+
+            <button id="btn_nosave_huodong" class="layui-btn layui-btn-danger" lay-filter="btn_nosave_jinzhan" style="width:49%;margin: 0;" hidden>取消</button>
+        </div>
+    </div>
+</div>
+
+<input id="action_status" hidden value="insert" />
+<input id="zibiao_id" hidden />
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/HuoDong")
+}

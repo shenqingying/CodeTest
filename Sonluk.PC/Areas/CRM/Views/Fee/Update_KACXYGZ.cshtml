@@ -1,0 +1,215 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "卖场促销员工资管理";
+
+
+
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tpl_masx">
+    {{# if(d.MCSX == 1){ }}
+    系统
+    {{# }else if(d.MCSX == 2){ }}
+    门店
+    {{# }else { }}
+    {{# } }}
+</script>
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>卖场促销员工资管理</cite></a>
+</span>
+<br />
+<br />
+
+
+<div id="div_jump2" class="layui-form">
+    <div class="layui-form-item">
+        <button id="btn_save" class="layui-btn">保存</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">所属系统：</label>
+            <div class="layui-input-inline" style="width:545px;">
+                <input id="PKHIDDES" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">所属门店：</label>
+            <div class="layui-input-inline" style="width:545px;">
+                <input id="KHID" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">省份：</label>
+            <div class="layui-input-inline">
+                <input id="SF" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">城市：</label>
+            <div class="layui-input-inline">
+                <input id="CS" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">年月：</label>
+            <div class="layui-input-inline">
+                <input id="CXYMONTH" type="text" autocomplete="off" class="layui-input"readonly>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">姓名：</label>
+            <div class="layui-input-inline">
+                <input id="NAME" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">职位类别：</label>
+            <div class="layui-input-inline">
+                <select id="GW" lay-filter="GW" lay-search disabled>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">销售金额：</label>
+            <div class="layui-input-inline">
+                <input id="CXYXHJE" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">岗位工资：</label>
+            <div class="layui-input-inline">
+                <input id="GWGZ" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">提成金额：</label>
+            <div class="layui-input-inline">
+                <input id="TCJE" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">退货超标扣减：</label>
+            <div class="layui-input-inline">
+                <input id="THCBKJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div id="div_day" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:110px;text-align:right;">临时促销员天数：</label>
+                <div class="layui-input-inline">
+                    <input id="DAY" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:110px;text-align:right;">核算工资：</label>
+                <div class="layui-input-inline">
+                    <input id="DAYGZ" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">应发合计：</label>
+            <div class="layui-input-inline">
+                <input id="YFHJ" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">考核基数：</label>
+            <div class="layui-input-inline">
+                <input id="BASE" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">社保个人部分扣除：</label>
+            <div class="layui-input-inline">
+                <input id="SBKC" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">实发工资：</label>
+            <div class="layui-input-inline">
+                <input id="SFGZ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">其他费用：</label>
+            <div class="layui-input-inline">
+                <input id="OTHERFEE" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">开户银行：</label>
+            <div class="layui-input-inline">
+                <input id="BANK" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">卡号：</label>
+            <div class="layui-input-inline">
+                <input id="CARDNUM" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+    @*<div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">备注：</label>
+            <div class="layui-input-inline" tyle="width:540px;">
+                <textarea id="BEIZ" type="text" autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+    </div>*@
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">备注：</label>
+            <div class="layui-input-inline" style="width:545px">
+                <textarea id="BEIZ" type="text" autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Update_KACXYGZ")
+}

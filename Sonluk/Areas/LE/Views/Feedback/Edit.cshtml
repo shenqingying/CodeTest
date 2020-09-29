@@ -1,0 +1,159 @@
+﻿@using Sonluk.UI.Model.LE.TRA.FeedbackService
+@model FeedbackInfo
+@{
+    if (Model.ID > 0)
+    {
+        ViewBag.Title = "反馈-" + Model.ID.ToString() + "-" + Model.Carrier.ShortName;
+    }
+    else
+    {
+        ViewBag.Title = "反馈-新建";
+    }
+    string check = "checked=checked";
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/panel-layout-flow")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/import-bar")
+@Styles.Render("~/Content/sonluk-ui/table")
+<input type="hidden" value="@Url.Action("_ImportList", "Feedback")" id="feedback-import-list-uri" />
+<input type="hidden" value="@Url.Action("_Modify", "Feedback")" id="feedback-modify-uri" />
+<input type="hidden" value="@Url.Action("_Verify", "Feedback")" id="feedback-verify-uri" />
+<input type="hidden" value="@Url.Action("Edit", "Feedback", new { id = UrlParameter.Optional })" id="feedback-edit-uri" />
+<input type="hidden" value="@Url.Action("Edit", "ConsignmentNote")" id="consignment-note-edit" />
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">托运单</a>
+        >
+        <a href="#">反馈</a>
+        >
+        <a href="#">编辑</a>
+    </div>
+</div>
+<div class="panel-layout-flow">
+    <input type="hidden" id="ID" value="@Model.ID" />
+    <div class="panel-layout-flow-line">
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">物流公司</div>
+            <input type="text" class="panel-layout-flow-item-input drop-list-target-carrier input-width-cn-carrier" id="carrier-name" value="@Model.Carrier.ShortName" />
+            <input type="hidden" id="carrier-ID" value="@Model.Carrier.ID" />
+            <input type="hidden" value="@Url.Action("_List", "Carrier")" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">日期</div>
+            <input type="text" class="date-picker-trigger panel-layout-flow-item-input" value="@Model.Date" id="date" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">付款金额</div>
+            <input type="text" class="panel-layout-flow-item-input" id="payment" value="@Model.Payment" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">状态</div>
+            <input type="text" class="panel-layout-flow-item-input" id="status" value="@Model.Status" />
+        </div>
+    </div>
+    <div class="panel-layout-flow-line">
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">说明</div>
+            <input type="text" class="panel-layout-flow-item-input input-width-cn-feedback-remark" id="remark" value="@Model.Remark" />
+        </div>
+    </div>
+    @if (Model.ID <= 0)
+    {
+        <div class="panel-layout-flow-line">
+            <div class="import-bar">
+                <div class="import-bar-content">
+                    <form id="importFile" method="post" action="@Url.Action("_Import", "Feedback")" target="importFileFrame" enctype="multipart/form-data">
+                        <input type="text" class="import-bar-input-text">
+                        <input type="file" class="import-bar-input-file" name="file" />
+                        <div class="import-bar-btn">&nbsp;&nbsp;批量导入&nbsp;&nbsp;</div>
+                    </form>
+                </div>
+                <div class="import-bar-error"></div>
+                <iframe id="importFileFrame" name="importFileFrame" class="importFileFrame"></iframe>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="sonluk-table-control-button item-remove-trigger">移除</div>
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="feedback">
+            @if (Model.Items != null && Model.ID>0)
+            {
+                <input type="hidden" value="@Model.Items.Count()" id="node-count">
+                <table class="data-table">
+                    <tr>
+                        <td class="data-table-header">托运单ID</td>
+                        <td class="data-table-header">发货日期</td>
+                        <td class="data-table-header">到站</td>
+                        <td class="data-table-header">品名</td>
+                        <td class="data-table-header">件数</td>
+                        <td class="data-table-header">重量</td>
+                        <td class="data-table-header">体积</td>
+                        <td class="data-table-header">计费重量</td>
+                        <td class="data-table-header">单价</td>
+                        <td class="data-table-header">运费</td>
+                        <td class="data-table-header">直送费</td>
+                        <td class="data-table-header">装卸费</td>
+                        <td class="data-table-header">其他费用</td>
+                        <td class="data-table-header">费用小计</td>
+                        <td class="data-table-header">实际支付</td>
+                        <td class="data-table-header">确认</td>
+                        <td class="data-table-header">备注</td>
+                    </tr>
+                    @foreach (FeedbackItemInfo node in Model.Items)
+                    {
+                        <tr>
+                            <td class="text-align-right">@node.ConsignmentNote</td>
+                            <td>@node.DepartureDate</td>
+                            <td>@node.Destination</td>
+                            <td class="text-align-left">@node.GoodsType</td>
+                            <td class="text-align-right">@node.WholeQty</td>
+                            <td class="text-align-right">@node.Weight</td>
+                            <td class="text-align-right">@node.Volume</td>
+                            <td class="text-align-right">@node.ChargedWeight</td>
+                            <td class="text-align-right">@node.UnitPrice</td>
+                            <td class="text-align-right">@node.Cost</td>
+                            <td class="text-align-right">@node.DirectCost</td>
+                            <td class="text-align-right">@node.HandlingCost</td>
+                            <td class="text-align-right">@node.OtherCost</td>
+                            <td class="text-align-right">@node.TotalCost</td>
+                            <td class="text-align-right">@node.Payment</td>
+                            <td><input type="checkbox" value="true"  @if (node.Confirmed) { @check }></td>
+                            <td class="text-align-left"><input type="text" value="@node.Remark"></td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+<!--下拉列表-->
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/le/feedback-edit")
+}

@@ -1,0 +1,460 @@
+﻿@{
+    ViewBag.Title = "拣配任务单 ";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>拣配单</a>
+    <a><cite>拣配任务单</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_add_nock">手工新增</button>
+        <button class="layui-btn" id="btn_pldy">批量打印</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_findmx">明细查询</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">仓库编号：</label>
+            <div class="layui-input-inline">
+                <select id="find_ck" lay-filter="find_ck"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">拣配任务单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_jpd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">申请类型：</label>
+            <div class="layui-input-inline">
+                <select id="find_sqlx" lay-filter="find_sqlx"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">参照单据：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_czdj" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">库存地点：</label>
+            <div class="layui-input-inline">
+                <select id="find_kcdd" lay-filter="find_kcdd"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">创建账号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_cjzh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 85px;">创建日期：</label>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_cjrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_cjrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="checkbox" name="" title="未删除" lay-skin="find_readydelete" id="find_readydelete" lay-filter="find_readydelete">
+            </div>
+            <div class="layui-form-mid"></div>
+            <div class="layui-input-inline">
+                <input type="checkbox" name="" title="未打印" lay-skin="find_readyprint" id="find_readyprint" lay-filter="find_readyprint">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_tminfo" lay-filter="tb_tminfo"></table>
+</div>
+<div id="div_addinfo" hidden class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">仓库编号：</label>
+            <div class="layui-input-inline">
+                <select id="add_ck" lay-filter="add_ck"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">参照单据：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_czdj" autocomplete="off" class="layui-input" placeholder="请输入参照单据">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_czdjinfo" lay-filter="tb_czdjinfo"></table>
+</div>
+<script>
+    var all_fy = 1;
+    var all_fysl = 12;
+    var all_limits = [12, 36, 108, 324, 972, 3000];
+    var IV_BOX = "";
+    layui.use(['form', 'laydate', 'element', 'laydate', 'table'], function () {
+        var layer = layui.layer
+            , laydate = layui.laydate;
+        var table = layui.table;
+        var form = layui.form;
+        laydate.render({
+            elem: '#find_cjrq_s'
+        });
+        laydate.render({
+            elem: '#find_cjrq_e'
+        });
+        band_find_ck();
+        $("#btn_tmgl_zh").click(function () {
+            window.open("../BC_TM/RKBS_F_ZH_MANAGE", "_blank");
+        });
+        $("#btn_add").click(function () {
+            layer.open({
+                skin: 'select_out',
+                type: 1,
+                shade: 0,
+                btn: ['保存', '取消'],
+                area: ['700px', '645px'],
+                content: $('#div_addinfo'),
+                title: '新增',
+                moveOut: true,
+                success: function (layero, index) {
+                    $("#add_ck").val("0");
+                    $("#add_czdj").val("");
+
+                    form.render();
+                },
+                yes: function (index, layero) {
+                    banddate_table_tb_czdjinfo([]);
+                },
+                end: function () {
+
+                }
+            });
+        });
+        $("#btn_find").click(function () {
+            banddate();
+        });
+        form.on('select(find_ck)', function (data) {
+            band_find_gc();
+        });
+        form.on('select(find_gc)', function (data) {
+            band_find_kcdd();
+        });
+        $('#add_czdj').bind('keyup', function (event) {
+            if (event.keyCode == "13") {
+                var czdj = $('#add_czdj').val();
+                $('#add_czdj').val("");
+                if (czdj.length != 0) {
+                    if (czdj.length == 8) {
+                        var IV_FCODE = "";
+                        if (czdj.substring(0, 1) == "8") {
+                            IV_FCODE = "R01";
+                        }
+                        else {
+                            IV_FCODE = "R02";
+                        }
+                        var datastring = [
+                            {
+                                VBELN: czdj
+                            }
+                        ];
+                        var APIHEADER = [
+                            {
+                                KEY: "IV_FCODE",
+                                VALUES: IV_FCODE
+                            },
+                            {
+                                KEY: "CKID",
+                                VALUES: $("#add_ck").val()
+                            }
+                        ];
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../BC_TM/API_RETURN_STRING_json",
+                            data: {
+                                apihsm: "SAP/ZBC01/ZBCFUN_JPXX_READ",
+                                body: JSON.stringify(datastring),
+                                APIHEADER: JSON.stringify(APIHEADER)
+                            },
+                            success: function (data) {
+                                var resdata = JSON.parse(data);
+                                if (resdata.success == true) {
+                                    if (resdata.data.ET_MXXX.length > 0) {
+                                        banddate_table_tb_czdjinfo(resdata.data.ET_MXXX);
+                                    }
+                                    else {
+                                        errormsg("交货单无数据");
+                                    }
+                                }
+                                else {
+                                    errormsg(resdata.messages[0].message);
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        errormsg("请输入正确的单据编号");
+                    }
+                }
+            }
+        });
+    });
+    function band_find_ck() {
+        var form = layui.form;
+        $("#find_ck").html("");
+        $("#add_ck").html("");
+        var datastring = {
+            LB: 2,
+            MXBS: 2
+        };
+        var APIHEADER = [];
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../BC_TM/API_RETURN_STRING_json",
+            data: {
+                apihsm: "WMS/SY_WAREHOUSE/READ",
+                body: JSON.stringify(datastring),
+                APIHEADER: JSON.stringify(APIHEADER)
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                if (resdata.success == true) {
+                    if (resdata.data.length === 1) {
+                        $('#find_ck').append(new Option(resdata.data[0].CKNO + "-" + resdata.data[0].CKNAME, resdata.data[0].CKID));
+                        $('#add_ck').append(new Option(resdata.data[0].CKNO + "-" + resdata.data[0].CKNAME, resdata.data[0].CKID));
+                    }
+                    else {
+                        $('#find_ck').append(new Option("请选择", "0"));
+                        $('#add_ck').append(new Option("请选择", "0"));
+                        for (var a = 0; a < resdata.data.length; a++) {
+                            $('#find_ck').append(new Option(resdata.data[a].CKNO + "-" + resdata.data[a].CKNAME, resdata.data[a].CKID));
+                            $('#add_ck').append(new Option(resdata.data[a].CKNO + "-" + resdata.data[a].CKNAME, resdata.data[a].CKID));
+                        }
+                    }
+                    band_find_gc();
+                }
+            }
+        });
+        form.render();
+    }
+    function band_find_gc() {
+        var form = layui.form;
+        $("#find_gc").html("");
+        if ($("#find_ck").val() != "") {
+            var datastring = {
+                LB: 3,
+                CKID: $("#find_ck").val()
+            };
+            var APIHEADER = [];
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../BC_TM/API_RETURN_STRING_json",
+                data: {
+                    apihsm: "WMS/SY_WAREHOUSE/READ_KCDD",
+                    body: JSON.stringify(datastring),
+                    APIHEADER: JSON.stringify(APIHEADER)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.success == true) {
+                        if (resdata.data.length === 1) {
+                            $('#find_gc').append(new Option(resdata.data[0].GC + "-" + resdata.data[0].GCMS, resdata.data[0].GC));
+                        }
+                        else {
+                            $("#find_gc").html("");
+                            $('#find_gc').append(new Option("请选择", ""));
+                            for (var a = 0; a < resdata.data.length; a++) {
+                                $('#find_gc').append(new Option(resdata.data[a].GC + "-" + resdata.data[a].GCMS, resdata.data[a].GC));
+                            }
+                        }
+                        band_find_kcdd();
+                    }
+                }
+            });
+        }
+        form.render();
+    }
+    function band_find_kcdd() {
+        var form = layui.form;
+        $("#find_kcdd").html("");
+        if ($("#find_gc").val() != "") {
+            var datastring = {
+                LB: 2,
+                CKID: $("#find_ck").val(),
+                GC: $('#find_gc').val()
+            };
+            var APIHEADER = [];
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../BC_TM/API_RETURN_STRING_json",
+                data: {
+                    apihsm: "WMS/SY_WAREHOUSE/READ_KCDD",
+                    body: JSON.stringify(datastring),
+                    APIHEADER: JSON.stringify(APIHEADER)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.success == true) {
+                        if (resdata.data.length === 1) {
+                            $('#find_kcdd').append(new Option(resdata.data[0].KCDD + "-" + resdata.data[0].KCDDNAME, resdata.data[0].KCDD));
+                        }
+                        else {
+                            $("#find_kcdd").html("");
+                            $('#find_kcdd').append(new Option("请选择", ""));
+                            for (var a = 0; a < resdata.data.length; a++) {
+                                $('#find_kcdd').append(new Option(resdata.data[a].KCDD + "-" + resdata.data[a].KCDDNAME, resdata.data[a].KCDD));
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        form.render();
+    }
+    function banddate() {
+        var table = layui.table;
+        var CKID = $('#find_ck').val();
+        var JPDNO = $('#find_jpd').val();
+        var SQLB = $('#find_sqlx').val();
+        var DJBILLNO = $('#find_czdj').val();
+        var GC = $('#find_gc').val();
+        var KCDD = $('#find_kcdd').val();
+        var CJRNAME = $('#find_cjzh').val();
+        var CJTIMES = $('#find_cjrq_s').val();
+        var CJTIMEE = $('#find_cjrq_e').val();
+        if (CKID == "") {
+            errormsg("请选择仓库");
+        }
+        else {
+            var datastring = {
+                CKID: CKID,
+                LB: 1,
+                JPDNO: JPDNO,
+                SQLB: SQLB,
+                DJBILLNO: DJBILLNO,
+                GC: GC,
+                KCDD: KCDD,
+                CJRNAME: CJRNAME,
+                CJTIMES: CJTIMES,
+                CJTIMEE: CJTIMEE
+            };
+            var APIHEADER = [];
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../BC_TM/API_RETURN_STRING_json",
+                data: {
+                    apihsm: "WMS/WMS_JPD/READ_JPINFO",
+                    body: JSON.stringify(datastring),
+                    APIHEADER: JSON.stringify(APIHEADER)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.type == "S") {
+                        var fyall = Math.ceil(resdata.data.length / all_fysl);
+                        if (fyall > all_fy - 1) {
+                        }
+                        else {
+                            all_fy = Number(fyall);
+                        }
+
+                        table.render({
+                            done: function (res, curr, count) {
+                                for (var i = 0; i < all_limits.length; i++) {
+                                    if (all_limits[i] >= res.data.length) {
+                                        all_fysl = all_limits[i];
+                                        break;
+                                    }
+                                }
+                                all_fy = curr;
+                            },
+                            height: 'full-' + "350",
+                            elem: '#tb_tminfo',
+                            data: resdata.data,
+                            cols: [[ //表头
+                                { type: 'numbers', title: '序号' },
+                                { field: 'CKNO', title: '仓库编号', width: 120 },
+                                { field: 'JPDNO', title: '拣配任务单', width: 105 },
+                                { field: 'ISACTION', title: '处理标识', width: 120 },
+                                { field: 'JJBS', title: '紧急标识', width: 130 },
+                                { field: 'ISDELETE', title: '删除标识', width: 115 },
+                                { field: 'SDF', title: '送达方', width: 130 },
+                                { field: 'SDFNAME', title: '送达方名称', width: 160 },
+                                { field: 'SDFADDRESS', title: '送达方地址', width: 130 },
+                                { field: 'LXR', title: '联系人', width: 100 },
+                                { field: 'LXRINFO', title: '联系人方式', width: 120 },
+                                { field: 'CJRNAME', title: '创建账号', width: 100 },
+                                { field: 'CJTIME', title: '创建时间', width: 100 },
+                                { field: 'PRINTSTAFFNAME', title: '打印账号', width: 100 },
+                                { field: 'PRINTTIME', title: '打印时间', width: 100 },
+                                { fixed: 'right', width: 120, align: 'center', toolbar: '#barkh', title: '操作' }
+                            ]]
+                            , page: {
+                                limits: all_limits,
+                                limit: all_fysl,
+                                curr: all_fy
+                            },
+                        });
+                    }
+                    else {
+                        layer.msg(resdata.messages[0].message);
+
+                    }
+                }
+            });
+        }
+    }
+    function banddate_table_tb_czdjinfo(data) {
+        var table = layui.table;
+        table.render({
+            height: 300,
+            elem: '#tb_czdjinfo',
+            data: data,
+            cols: [[ //表头
+                { type: 'numbers', title: '序号' },
+                { field: 'VBELN', title: '参照单据', width: 120 },
+                { field: 'POSNR', title: '参照项目', width: 105 },
+                { field: 'MATNR', title: '物料编码', width: 120 },
+                { field: 'MAKTX', title: '物料描述', width: 130 },
+                { field: 'WERKS', title: '工厂', width: 115 },
+                { field: 'LGORT', title: '库存地点', width: 130 },
+                { field: 'STCK_TYPE', title: '库存类别', width: 160 },
+                { field: 'CHARG', title: '批次', width: 130 },
+                { field: 'SOBKZ', title: '特殊库存', width: 100 },
+                { field: 'SONUM', title: '特殊库存编号', width: 120 },
+                { field: 'NSOLM', title: '数量', width: 100 },
+                { field: 'MEINS', title: '单位', width: 100 }
+            ]]
+            , page: false
+            , limit: 9999
+        });
+    }
+    function errormsg(data) {
+        layer.alert(data, {
+            icon: 2,
+            shadeClose: true,
+            skin: 'layer-ext-moon',
+            title: "错误提示"
+        });
+    }
+</script>

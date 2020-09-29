@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "通讯费报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string mypw = "";
+    if (Session["MYPW"] != null)
+    {
+        mypw = Session["MYPW"].ToString();
+    }
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>通讯费报表</cite></a>
+</span>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_hz">汇总表</button>
+        <button class="layui-btn" id="btn_mx">明细表</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司:</label>
+            <div class="layui-input-inline">
+                <select lay-filter="ffjl_gs" id="ffjl_gs"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">年/月:</label>
+            <div class="layui-input-inline">
+                <input type="text" id="ffjl_month" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_mypw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">密钥密码：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="myinfo_mypw" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="bl_mypw" value="@mypw">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_FFJLMX_TXFREPORT")
+}

@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "采购订单-入库标识";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/sonluk-ui/panel-pop-up")
+
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">采购订单</a>
+        >
+        <a href="#">入库标识</a>
+    </div>
+</div>
+<div class="panel-search">
+    <table>
+        <tr>
+            <td align="right">采购订单：</td>
+            <td align="left">
+                @ViewBag.RKBS_PONumber - @ViewBag.RKBS_Number
+                <input type="hidden" id="RKBS_PONumber" name="RKBS_PONumber" value="@ViewBag.RKBS_PONumber">
+                <input type="hidden" id="RKBS_Number" name="RKBS_Number" value="@ViewBag.RKBS_Number">
+            </td>
+        </tr>
+        <tr>
+            <td align="right">物料：</td>
+            <td align="left">@ViewBag.RKBS_Material - @ViewBag.RKBS_MaterialDescription</td>
+        </tr>
+        <tr>
+            <td align="right">需发货数量：</td>
+            <td align="left">@ViewBag.RKBS_NeedQty</td>
+        </tr>
+        <tr>
+            <td align="right">供应商：</td>
+            <td align="left">
+                @ViewBag.RKBS_Vendor
+            <input type="hidden" id="RKBS_Vendor" name="RKBS_Vendor" value="@ViewBag.RKBS_Vendor">
+        </td>
+        </tr>
+        <tr>
+            <td align="right">类型：</td>
+            <td align="left">
+                @ViewBag.RKBS_LTBST
+            <input type="hidden" id="RKBS_LTBS" name="RKBS_LTBS" value="@ViewBag.RKBS_LTBS">
+        </td>
+    </tr>
+    <tr id="tr-tpm">
+        <td align="right">托盘码：</td>
+        <td>
+            <textarea class="panel-search-textarea" name="RKBS_TPM" id="RKBS_TPM" autofocus="autofocus" rows="5"></textarea>
+            @*<input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBS_TPM" id="RKBS_TPM" autofocus="autofocus"  />*@
+        </td>
+    </tr>
+    <tr id="tr-ts">
+        <td align="right">托数：</td>
+        <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBS_TS" id="RKBS_TS" /></td>
+    </tr>
+    <tr id="tr-zpar">
+        <td align="right">箱数/托：</td>
+        <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBS_ZPAR" id="RKBS_ZPAR" value="@ViewBag.RKBS_ZPAR" @ViewBag.RKBS_READONLY/></td>
+    </tr>
+    @*<tr id="tr-zbon">
+            <td>盒/箱</td>
+            <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBS_ZBON" id="RKBS_ZBON" value="@ViewBag.RKBS_ZBON" /></td>
+        </tr>
+        <tr id="tr-zpks">
+            <td>卡/盒</td>
+            <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBS_ZPKS" id="RKBS_ZPKS" value="@ViewBag.RKBS_ZPKS" /></td>
+        </tr>
+        <tr id="tr-zpcs">
+            <td>只/卡</td>
+            <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBS_ZPCS" id="RKBS_ZPCS" value="@ViewBag.RKBS_ZPCS" /></td>
+        </tr>*@
+    <tr id="tr-zsl">
+        <td align="right">数量/托：</td>
+        <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBS_ZSL" id="RKBS_ZSL" value="@ViewBag.RKBS_ZSL" @ViewBag.RKBS_READONLY /></td>
+    </tr>
+</table>
+<div class="panel-search-refresh sonluk-button panel-search-button">查询入库标识</div>
+<input type="hidden" value="@Url.Action("_RKBSList", "Report", new { area = "MM" })">
+<div class="panel-search-submit sonluk-button panel-search-button">生成入库标识</div>
+<input type="hidden" value="@Url.Action("GenerateRKBS", "Report", new { area = "MM" })">
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="print-button rkbs-reprint sonluk-table-control-button">打印</div>
+                    <input type="hidden" value="@Url.Action("PrepareRKBSData", "Report", new { area = "MM" })">
+                    <input type="hidden" value="@Url.Action("RKBSPrint", "Report", new { area = "MM" })">
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="print-button rkbs-delete sonluk-table-control-button">删除</div>
+                    <input type="hidden" value="@Url.Action("DeleteRKBS", "Report", new { area = "MM" })">
+                </div>
+
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="rkbs-list"></div>
+    </div>
+</div>
+
+<!--下拉列表-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/report/purchase-order-rkbs")
+}
+
+

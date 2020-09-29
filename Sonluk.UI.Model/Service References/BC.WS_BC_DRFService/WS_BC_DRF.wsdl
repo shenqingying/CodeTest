@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ZBCFUN_DRFDD_CRT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IS_HEADDATA" type="tns:ZSL_BCS111" />
+            <s:element minOccurs="0" maxOccurs="1" name="IT_ITEMDATA" type="tns:ArrayOfZSL_BCS112" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_BCS111">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AUART" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSTNK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSTDK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VKORG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VTWEG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SPART" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ORDERST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PO_METHOD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBTYP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS112">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS112" nillable="true" type="tns:ZSL_BCS112" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS112">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KWMENG" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="VRKME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSTYV" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UMREZ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UMREN" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FOC" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZBCFUN_DRFDD_CRTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_DRFDD_CRTResult" type="tns:ZBCFUN_DRFDD_CRT_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_DRFDD_CRT_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ES_ORDERDATA" type="tns:ZSL_BCS113" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS113">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERDAT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN_VL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR_VL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LFIMG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VRKME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAMEG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAMER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KNUMV" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HSJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZKRATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZKJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TAXRATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TAXJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HWJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHD" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZBCFUN_DRFDD_CHK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IS_HEADDATA" type="tns:ZSL_BCS111" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_DRFDD_CHKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_DRFDD_CHKResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_DRFDD_DT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IT_ORDERDATA" type="tns:ArrayOfZSL_BCS113" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSL_BCS113">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS113" nillable="true" type="tns:ZSL_BCS113" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZBCFUN_DRFDD_DTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_DRFDD_DTResult" type="tns:ZBCFUN_DRFDD_DT_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_DRFDD_DT_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_ORDERDATA" type="tns:ArrayOfZSL_BCS113" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ZBCFUN_DRFDD_CRTSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_DRFDD_CRT" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_DRFDD_CRTSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_DRFDD_CRTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_DRFDD_CHKSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_DRFDD_CHK" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_DRFDD_CHKSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_DRFDD_CHKResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_DRFDD_DTSoapIn">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_DRFDD_DT" />
+  </wsdl:message>
+  <wsdl:message name="ZBCFUN_DRFDD_DTSoapOut">
+    <wsdl:part name="parameters" element="tns:ZBCFUN_DRFDD_DTResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WS_BC_DRFSoap">
+    <wsdl:operation name="ZBCFUN_DRFDD_CRT">
+      <wsdl:input message="tns:ZBCFUN_DRFDD_CRTSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_DRFDD_CRTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_DRFDD_CHK">
+      <wsdl:input message="tns:ZBCFUN_DRFDD_CHKSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_DRFDD_CHKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_DRFDD_DT">
+      <wsdl:input message="tns:ZBCFUN_DRFDD_DTSoapIn" />
+      <wsdl:output message="tns:ZBCFUN_DRFDD_DTSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WS_BC_DRFHttpGet" />
+  <wsdl:portType name="WS_BC_DRFHttpPost" />
+  <wsdl:binding name="WS_BC_DRFSoap" type="tns:WS_BC_DRFSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZBCFUN_DRFDD_CRT">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_DRFDD_CRT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_DRFDD_CHK">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_DRFDD_CHK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_DRFDD_DT">
+      <soap:operation soapAction="http://tempuri.org/ZBCFUN_DRFDD_DT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_BC_DRFSoap12" type="tns:WS_BC_DRFSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZBCFUN_DRFDD_CRT">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_DRFDD_CRT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_DRFDD_CHK">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_DRFDD_CHK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZBCFUN_DRFDD_DT">
+      <soap12:operation soapAction="http://tempuri.org/ZBCFUN_DRFDD_DT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_BC_DRFHttpGet" type="tns:WS_BC_DRFHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="WS_BC_DRFHttpPost" type="tns:WS_BC_DRFHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="WS_BC_DRF">
+    <wsdl:port name="WS_BC_DRFSoap" binding="tns:WS_BC_DRFSoap">
+      <soap:address location="http://192.168.0.16/API/BC/WS_BC_DRF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_BC_DRFSoap12" binding="tns:WS_BC_DRFSoap12">
+      <soap12:address location="http://192.168.0.16/API/BC/WS_BC_DRF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_BC_DRFHttpGet" binding="tns:WS_BC_DRFHttpGet">
+      <http:address location="http://192.168.0.16/API/BC/WS_BC_DRF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_BC_DRFHttpPost" binding="tns:WS_BC_DRFHttpPost">
+      <http:address location="http://192.168.0.16/API/BC/WS_BC_DRF.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

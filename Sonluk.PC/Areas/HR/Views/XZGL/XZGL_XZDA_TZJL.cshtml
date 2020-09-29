@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "薪资调整记录";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string mypw = "";
+    if (Session["MYPW"] != null)
+    {
+        mypw = Session["MYPW"].ToString();
+    }
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>员工薪资档案</cite></a>
+    <a><cite>薪资调整记录</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_back" onclick="location.href = '@Url.Action("XZGL_XZDA", "XZGL")'">返回</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_dc">全部导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">在职状态：</label>
+            <div class="layui-input-inline">
+                <select xm-select="find_zzzt" id="find_zzzt" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">员工类别：</label>
+            <div class="layui-input-inline">
+                <select xm-select="find_yglb" id="find_yglb" xm-select-height="36px"></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_xzda" lay-filter="tb_xzda"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="select">显示</a>
+    </script>
+</div>
+<div id="div_mypw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">密钥密码：</label>
+            <div class="layui-input-inline1">
+                <input type="password" id="myinfo_mypw" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="bl_mypw" value="@mypw">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_XZDA_TZJL")
+}

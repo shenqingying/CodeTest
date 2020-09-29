@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "模具技术确认";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search">查询</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GC" lay-filter="Term_GC">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_MTC" lay-filter="tb_MTC"></table>
+</div>
+@RenderPage("~/Areas/MES/Views/Shared/MOULD.cshtml")
+@section scripts {
+    <script>
+        layui.use(['MES'], function () {
+            var table = layui.table;
+            var mouldCfm = layui.MES.MOULD.CFM;
+            var myFunc = "TEC";
+
+            mouldCfm.table_init_displayMTC(myFunc);
+            mouldCfm.list_init_GC(myFunc);
+            $("#btn_search").click(function () {
+                mouldCfm.table_init_displayMTC(myFunc);
+            });
+            table.on('tool(tb_MTC)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+
+                if (layEvent === 'OK') mouldCfm.layer_init_submitCFM(data, 1, myFunc);
+                else if (layEvent === 'NG') mouldCfm.layer_init_submitCFM(data, 0, myFunc);
+                else if (layEvent === 'ReadRep') mouldCfm.layer_init_readRep(data.MES_PMM_MTC_REP);
+            });
+        });
+    </script>
+}

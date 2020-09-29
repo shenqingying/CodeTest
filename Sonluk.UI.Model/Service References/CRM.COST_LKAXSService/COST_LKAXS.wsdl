@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAXSTT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_LKAXSTT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LKAXSTTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LKAID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="JXSID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="YWYID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SF" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LKAXSSJLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSSOURCE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKAIDDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKACRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSIDDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSCRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWYIDDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKAXSSJLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSSOURCEDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SFDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CSDES" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateTTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateTTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAXSTT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateTTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadTTByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAXSTT" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadTTByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadTTByParamResult" type="tns:ArrayOfCRM_COST_LKAXSTT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_LKAXSTT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_LKAXSTT" nillable="true" type="tns:CRM_COST_LKAXSTT" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteTT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LKAXSTTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteTTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadKHbasic">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAXSTT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadKHbasicResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadKHbasicResult" type="tns:ArrayOfCRM_COST_LKAXSTT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAXSMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_LKAXSMX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LKAXSMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LKAXSTTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSMONTH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MCXS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateMXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAXSMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateMXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXByTTID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAXSMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXByTTIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadMXByTTIDResult" type="tns:ArrayOfCRM_COST_LKAXSMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_LKAXSMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_LKAXSMX" nillable="true" type="tns:CRM_COST_LKAXSMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LKAXSMXID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteMXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateTTSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateTT" />
+  </wsdl:message>
+  <wsdl:message name="CreateTTSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateTTResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTTSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTT" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTTSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadTTByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadTTByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteTT" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteTTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadKHbasicSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadKHbasic" />
+  </wsdl:message>
+  <wsdl:message name="ReadKHbasicSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadKHbasicResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateMXSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateMX" />
+  </wsdl:message>
+  <wsdl:message name="CreateMXSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMXSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateMX" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMXSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXByTTIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadMXByTTID" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXByTTIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadMXByTTIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteMX" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpGetIn">
+    <wsdl:part name="LKAXSTTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpGetIn">
+    <wsdl:part name="LKAXSMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpPostIn">
+    <wsdl:part name="LKAXSTTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpPostIn">
+    <wsdl:part name="LKAXSMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="COST_LKAXSSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTT">
+      <wsdl:input message="tns:CreateTTSoapIn" />
+      <wsdl:output message="tns:CreateTTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTT">
+      <wsdl:input message="tns:UpdateTTSoapIn" />
+      <wsdl:output message="tns:UpdateTTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTByParam">
+      <wsdl:input message="tns:ReadTTByParamSoapIn" />
+      <wsdl:output message="tns:ReadTTByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <wsdl:input message="tns:DeleteTTSoapIn" />
+      <wsdl:output message="tns:DeleteTTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadKHbasic">
+      <wsdl:input message="tns:ReadKHbasicSoapIn" />
+      <wsdl:output message="tns:ReadKHbasicSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateMX">
+      <wsdl:input message="tns:CreateMXSoapIn" />
+      <wsdl:output message="tns:CreateMXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMX">
+      <wsdl:input message="tns:UpdateMXSoapIn" />
+      <wsdl:output message="tns:UpdateMXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXByTTID">
+      <wsdl:input message="tns:ReadMXByTTIDSoapIn" />
+      <wsdl:output message="tns:ReadMXByTTIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <wsdl:input message="tns:DeleteMXSoapIn" />
+      <wsdl:output message="tns:DeleteMXSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_LKAXSHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <wsdl:input message="tns:DeleteTTHttpGetIn" />
+      <wsdl:output message="tns:DeleteTTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <wsdl:input message="tns:DeleteMXHttpGetIn" />
+      <wsdl:output message="tns:DeleteMXHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_LKAXSHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <wsdl:input message="tns:DeleteTTHttpPostIn" />
+      <wsdl:output message="tns:DeleteTTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <wsdl:input message="tns:DeleteMXHttpPostIn" />
+      <wsdl:output message="tns:DeleteMXHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="COST_LKAXSSoap" type="tns:COST_LKAXSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTT">
+      <soap:operation soapAction="http://tempuri.org/CreateTT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTT">
+      <soap:operation soapAction="http://tempuri.org/UpdateTT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadTTByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <soap:operation soapAction="http://tempuri.org/DeleteTT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadKHbasic">
+      <soap:operation soapAction="http://tempuri.org/ReadKHbasic" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateMX">
+      <soap:operation soapAction="http://tempuri.org/CreateMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMX">
+      <soap:operation soapAction="http://tempuri.org/UpdateMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXByTTID">
+      <soap:operation soapAction="http://tempuri.org/ReadMXByTTID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <soap:operation soapAction="http://tempuri.org/DeleteMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_LKAXSSoap12" type="tns:COST_LKAXSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTT">
+      <soap12:operation soapAction="http://tempuri.org/CreateTT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTT">
+      <soap12:operation soapAction="http://tempuri.org/UpdateTT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadTTByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <soap12:operation soapAction="http://tempuri.org/DeleteTT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadKHbasic">
+      <soap12:operation soapAction="http://tempuri.org/ReadKHbasic" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateMX">
+      <soap12:operation soapAction="http://tempuri.org/CreateMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMX">
+      <soap12:operation soapAction="http://tempuri.org/UpdateMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXByTTID">
+      <soap12:operation soapAction="http://tempuri.org/ReadMXByTTID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <soap12:operation soapAction="http://tempuri.org/DeleteMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_LKAXSHttpGet" type="tns:COST_LKAXSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <http:operation location="/DeleteTT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <http:operation location="/DeleteMX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_LKAXSHttpPost" type="tns:COST_LKAXSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <http:operation location="/DeleteTT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <http:operation location="/DeleteMX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="COST_LKAXS">
+    <wsdl:port name="COST_LKAXSSoap" binding="tns:COST_LKAXSSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/COST_LKAXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_LKAXSSoap12" binding="tns:COST_LKAXSSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/COST_LKAXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_LKAXSHttpGet" binding="tns:COST_LKAXSHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/COST_LKAXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_LKAXSHttpPost" binding="tns:COST_LKAXSHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/COST_LKAXS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

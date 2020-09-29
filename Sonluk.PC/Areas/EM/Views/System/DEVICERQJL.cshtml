@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "设备确认报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<input id="Read_SY_DEVICEQRJL" value="@Url.Action("Read_SY_DEVICEQRJL", "System")" type="hidden" />
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>电子文档系统管理</a>
+    <a><cite>设备确认报表</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            @* <button id="btn_insert" class="layui-btn">新增</button>*@
+            <button id="btn_cx" class="layui-btn">查询</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备编号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_sbbh" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">确认日期：</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="date" id="in_date_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="date" id="in_date_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_sbqr" lay-filter="tb_sbqr"></table>
+    </div>
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/EM/system/DEVICERQJL")
+}
+
+

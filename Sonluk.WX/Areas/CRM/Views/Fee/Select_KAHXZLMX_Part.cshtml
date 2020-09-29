@@ -1,0 +1,321 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KAHXZLMXService;
+@{
+    ViewBag.Title = "Select_KAHXZLMX_Part";
+    CRM_COST_KAHXZLMX[] data = ViewBag.data;
+    string page = ViewBag.page;
+    string type = "";
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+    string isactive = "";
+    switch (data[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 15:
+            isactive = "审核未通过";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 30:
+            isactive = "已审核";
+            break;
+        default:
+            break;
+    }
+    if (data[i].COSTITEMID == 51 || data[i].COSTITEMID == 52 || data[i].COSTITEMID == 55)
+    {
+        //堆头海报活动补损
+        type = "dt";
+
+
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <em class="weui-form-preview__value">@data[i].COSTITEMIDDES</em>
+            </div>
+            <div class="weui-form-preview__bd">
+                <p>
+                    <label class="weui-form-preview__label">促销类型</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].CXLXDES</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">申请费用</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SQJE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">活动门店数量</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].CJHDMDSL</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">活动开始时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].BEGINDATE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">活动结束时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].ENDDATE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">最晚发货时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].FHDATE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">预计活动期间销售</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].YJXS</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">预计费用</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SQJE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">预计费比</label>
+                    <span class="weui-form-preview__value">&nbsp;@(data[i].YJFB)%</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">日常月均销售</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].RCYJXS</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">档期</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].DQ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">促销级别</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].CXJB</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">活动方案说明</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].HDFASM</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">实际销售</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SJXS</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">实际费用</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SJFY</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">实际费比</label>
+                    <span class="weui-form-preview__value">&nbsp;@(data[i].SJFB)%</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">活动结束总结</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].HDJSZJ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">费用核销员核查内容</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].FYHXYHCNR</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">填写日期</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].CJSJ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">备注</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].BEIZ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">审核状态</label>
+                    <span class="weui-form-preview__value">&nbsp;@isactive</span>
+                </p>
+
+            </div>
+            <div class="weui-form-preview__ft">
+                @if (page == "SQ")
+                {
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DTsubmit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">提交</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DTedit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">编辑</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DTfj(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">照片</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_DTdelete(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">删除</button>
+
+                }
+                else if (page == "SH")
+                {
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DTsh(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">审核</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DTback(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">回退</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DTfj(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">照片</button>
+                }
+
+
+            </div>
+        </div>
+    }
+    else if (data[i].COSTITEMID == 60)
+    {
+        //特殊陈列
+        type = "tscl";
+
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <em class="weui-form-preview__value">@data[i].MDMC</em>
+            </div>
+            <div class="weui-form-preview__bd">
+                <p>
+                    <label class="weui-form-preview__label">项目</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].COSTITEMIDDES</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">门店编号</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].MDCRMID</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">开始时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].BEGINDATE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">结束时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].ENDDATE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">陈列方式</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].CLFSDES</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">申请费用</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SQJE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">预计销售</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].YJXS</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">预计费比</label>
+                    <span class="weui-form-preview__value">&nbsp;@(data[i].YJFB)%</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">实际销售</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SJXS</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">实际费用</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SJFY</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">实际费比</label>
+                    <span class="weui-form-preview__value">&nbsp;@(data[i].SJFB)%</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">费用核销员核查内容</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].FYHXYHCNR</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">备注</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].BEIZ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">填写日期</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].CJSJ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">审核状态</label>
+                    <span class="weui-form-preview__value">&nbsp;@isactive</span>
+                </p>
+
+            </div>
+            <div class="weui-form-preview__ft">
+                @if (page == "SQ")
+                {
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_TSCLsubmit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">提交</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_TSCLwatch(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">查看照片</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_TSCLedit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">编辑</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_TSCLdelete(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">删除</button>
+                }
+                else if (page == "SH")
+                {
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_TSCLsh(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">审核</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_TSCLback(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">回退</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_TSCLwatch(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">查看照片</button>
+                }
+
+
+
+            </div>
+        </div>
+    }
+    else if (data[i].COSTITEMID == 53)
+    {
+        //制作费
+        type = "zzf";
+
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <em class="weui-form-preview__value">@data[i].MDMC</em>
+            </div>
+            <div class="weui-form-preview__bd">
+                <p>
+                    <label class="weui-form-preview__label">项目</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].COSTITEMIDDES</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">制作类型</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].ZZLXDES</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">申请金额</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].SQJE</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">费用核销员核查内容</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].FYHXYHCNR</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">填写日期</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].CJSJ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">审核状态</label>
+                    <span class="weui-form-preview__value">&nbsp;@isactive</span>
+                </p>
+
+            </div>
+            <div class="weui-form-preview__ft">
+                @if (page == "SQ")
+                {
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_ZZFsubmit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">提交</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_ZZFfj(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">照片</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_ZZFdelete(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">删除</button>
+
+                }
+                else if (page == "SH")
+                {
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_ZZFfj(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">照片</button>
+                }
+                
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <label class="weui-form-preview__label">没有对应的费用项目</label>
+        <br /><br />
+    }
+
+
+
+
+
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+@if (type == "dt")
+{
+    <input id="resultMXmodel_dt" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />
+}
+else if (type == "tscl")
+{
+    <input id="resultMXmodel_tscl" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />
+}
+else if (type == "zzf")
+{
+    <input id="resultMXmodel_zzf" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />
+}

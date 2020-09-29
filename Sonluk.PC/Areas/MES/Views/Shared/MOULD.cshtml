@@ -1,0 +1,137 @@
+﻿@* 弹框模板 *@
+<div id="div_templet_rep" class="layui-form" hidden style="padding:10px 20px 0 20px">
+    <table class="layui-hide" id="Templet_tb_REP" lay-filter="Templet_tb_REP"></table>
+</div>
+
+<div id="div_templet_cfm" class="layui-form" hidden style="padding:30px 10px 0 10px">
+    <button id="btn_div_templet_cfm" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label">确认人：</label>
+        <div class="layui-input-inline">
+            <select id="Layer_CFMSTAFF" lay-filter="Layer_CFMSTAFF" lay-verify="required">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <textarea id="Layer_NOTES" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+</div>
+
+@* 表格模板 *@
+<script type="text/html" id="tb_operate_CFM">
+    <a class="layui-btn layui-btn-xs" lay-event="OK">确认OK</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="NG">确认NG</a>
+</script>
+<script type="text/html" id="tb_data_RID">
+    {{#  if(d.MES_PMM_MTC_REP === undefined || d.MES_PMM_MTC_REP == null){ }}
+    {{ '无' }}
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-xs" lay-event="ReadRep">查看</a>
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_RID_ALL">
+    {{#
+        var RNAME = '无';
+        if(d.MES_PMM_MTC_REP !== undefined && d.MES_PMM_MTC_REP != null){
+            RNAME = '';
+            $.each(d.MES_PMM_MTC_REP, function (index, item) {
+                if(RNAME == '') RNAME = item.RNAME;
+                else RNAME = RNAME + '、' + item.RNAME;
+            })
+        }
+    }}
+    {{ RNAME }}
+</script>
+<script type="text/html" id="tb_data_CAVE">
+    {{#
+        var CAVE = '无';
+        if(d.MES_PMM_MTC_CAVE !== undefined && d.MES_PMM_MTC_CAVE != null){
+            CAVE = '';
+            $.each(d.MES_PMM_MTC_CAVE, function (index, item) {
+                if(CAVE == '') CAVE = item.CAVENO;
+                else CAVE = CAVE + '、' + item.CAVENO;
+            })
+        }
+    }}
+    {{ CAVE }}
+</script>
+<script type="text/html" id="tb_data_MTCID">
+    {{#
+        var MTCID = d.MTCID.toString();
+        var MTCLEN = MTCID.length;
+        for (var i = 0; i < (8 - MTCLEN); i++) {
+            MTCID = '0' + MTCID;
+        }
+    }}
+    {{ MTCID }}
+</script>
+<script type="text/html" id="tb_data_DATES">
+    {{#  if(d.DATES > '1800-1-1') { }}
+    {{ d.DATES.replace(/T/g," ").slice(0,-3) }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_MMCFM">
+    {{#  if(d.MMCFM == 1) { }}
+    {{ '维修完成' }}
+    {{#  } else if(d.MMCFM == 0 && d.STATUS == '维修中') { }}
+    {{ '正在维修' }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_MMDATE">
+    {{#  if(d.MMDATE > '1800-1-1') { }}
+    {{ d.MMDATE.replace(/T/g," ").slice(0,-3) }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_WTCFM">
+    {{#  if(d.WTCFM == 1) { }}
+    {{ '合格' }}
+    {{#  } else if(d.WTCFM == 2) { }}
+    {{ '无需确认' }}
+    {{#  } else if(d.WTCFM == 0) { }}
+    {{ '不合格' }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_WTDATE">
+    {{#  if(d.WTDATE > '1800-1-1') { }}
+    {{ d.WTDATE.replace(/T/g," ").slice(0,-3) }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_QCCFM">
+    {{#  if(d.QCCFM == 1) { }}
+    {{ '合格' }}
+    {{#  } else if(d.QCCFM == 2) { }}
+    {{ '无需确认' }}
+    {{#  } else if(d.QCCFM == 0) { }}
+    {{ '不合格' }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_QCDATE">
+    {{#  if(d.QCDATE > '1800-1-1') { }}
+    {{ d.QCDATE.replace(/T/g," ").slice(0,-3) }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_TECCFM">
+    {{#  if(d.TECCFM == 2) { }}
+    {{ '无需确认' }}
+    {{#  } else if(d.TECCFM == 1) { }}
+    {{ '合格' }}
+    {{#  } else if(d.TECCFM == 0) { }}
+    {{ '不合格' }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_TECDATE">
+    {{#  if(d.TECDATE > '1800-1-1') { }}
+    {{ d.TECDATE.replace(/T/g," ").slice(0,-3) }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_STATUS">
+    {{#  if(d.STATUS == '全部合格') { }}
+    {{ '合格' }}
+    {{#  } else { }}
+    {{ d.STATUS }}
+    {{#  } }}
+</script>

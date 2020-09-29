@@ -1,0 +1,119 @@
+﻿@using Sonluk.PC.Areas.MES.Models;
+@model List<MODEL_RWQD_PRINT>
+@{
+    ViewBag.Title = "任务打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+}
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    <div id="wrap" class="main">
+        <div class="print-page-header-company-name">@Model[i].MES_PD_SCRW_LIST.GCDYMS</div>
+        <div class="print-page-body-table-header">生产任务单</div>
+        <table class="print-page_table_outside">
+            <tr>
+                <td class="print-page_td_haveborder4">生产任务单</td>
+                <td class="print-page_td_haveborder4">@Model[i].MES_PD_SCRW_LIST.RWBH</td>
+                <td class="print-page_td_haveborder4">派单日期</td>
+                @if (Model[i].MES_PD_SCRW_LIST.BCMS.Trim() == "")
+                {
+                    <td colspan="2" class="print_page_td_haveborder8">@Model[i].MES_PD_SCRW_LIST.ZPRQ</td>
+                }
+                else
+                {
+                    <td colspan="2" class="print_page_td_haveborder8">@Model[i].MES_PD_SCRW_LIST.ZPRQ/@Model[i].MES_PD_SCRW_LIST.BCMS</td>
+                }
+            </tr>
+            <tr>
+                <td class="print-page_td_haveborder4">物料信息</td>
+                @if (Model[i].MES_PD_SCRW_LIST.CHARG != "")
+                {
+                    <td colspan="2" class="print_page_td_haveborder8">@Model[i].MES_PD_SCRW_LIST.WLH/@Model[i].MES_PD_SCRW_LIST.WLMS/@Model[i].MES_PD_SCRW_LIST.CHARG</td>
+                }
+                else
+                {
+                    <td colspan="2" class="print_page_td_haveborder8">@Model[i].MES_PD_SCRW_LIST.WLH/@Model[i].MES_PD_SCRW_LIST.WLMS</td>
+                }
+                <td class="print-page_td_haveborder4">任务数量</td>
+                <td class="print-page_td_haveborder4">@Model[i].MES_PD_SCRW_LIST.SL/@Model[i].MES_PD_SCRW_LIST.UNITSNAME</td>
+            </tr>
+            <tr>
+                <td class="print-page_td_haveborder4">提供方</td>
+                <td colspan="2" class="print_page_td_haveborder8">@Model[i].MES_PD_SCRW_LIST.GC/@Model[i].MES_PD_SCRW_LIST.GZZXBH-@Model[i].MES_PD_SCRW_LIST.GZZXNAME/@Model[i].MES_PD_SCRW_LIST.SBH</td>
+                <td class="print-page_td_haveborder4">参考单据</td>
+                <td class="print-page_td_haveborder4">@Model[i].MES_PD_SCRW_LIST.GDDH/@Model[i].MES_PD_SCRW_LIST.ERPNO</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="print_page_td_haveborder20">
+                    <table>
+                        <tr>
+                            <td class="print_page_td_noborder16" valign="top">
+                                <table>
+                                    <tr>
+                                        <td colspan="4">下层物料信息：</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            序号
+                                        </td>
+                                        <td>
+                                            物料信息
+                                        </td>
+                                        <td>
+                                            物料类别
+                                        </td>
+                                        <td>
+                                            必输标记
+                                        </td>
+                                    </tr>
+                                    @if (Model[i].ZBCFUN_GDJGXX_READ.MES_RETURN.TYPE == "S" && Model[i].ZBCFUN_GDJGXX_READ.ET_BOM.Length > 0)
+                                    {
+                                        for (int j = 0; j < Model[i].ZBCFUN_GDJGXX_READ.ET_BOM.Length; j++)
+                                        {
+                                            string count = (j + 1).ToString();
+                                            <tr>
+                                                <td>@count</td>
+                                                <td>
+                                                    @if (Model[i].ZBCFUN_GDJGXX_READ.ET_BOM[j].IDNRK == "")
+                                                    {
+                                                        <a>&nbsp; &nbsp; &nbsp; &nbsp;</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a>@Model[i].ZBCFUN_GDJGXX_READ.ET_BOM[j].IDNRK/@Model[i].ZBCFUN_GDJGXX_READ.ET_BOM[j].MAKTX &nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @Model[i].ZBCFUN_GDJGXX_READ.ET_BOM[j].WLLBNAME &nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <td>
+                                                    @Model[i].ZBCFUN_GDJGXX_READ.ET_BOM[j].ZSBS
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </table>
+                            </td>
+                            <td align="right" valign="bottom" class="print_page_td_noborder4_tm">
+                                @{
+                                    string barcode = "";
+                                    barcode = Model[i].MES_PD_SCRW_LIST.RWBH;
+                                }
+                                <img src="@Url.Action("BarCode", "PD", new { area = "MES",code=barcode,format="QRCODE",width=70,height=70,pure=1})">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br />
+                                @Model[i].MES_PD_SCRW_LIST.RWBH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="print-page_td_haveborder4">备注：</td>
+                <td colspan="4" class="print_page_td_haveborder16">@Model[i].MES_PD_SCRW_LIST.REMARK</td>
+            </tr>
+        </table>
+    </div>
+}
+

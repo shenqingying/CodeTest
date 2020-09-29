@@ -1,0 +1,258 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DEPTService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "人员列表";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+
+    CRM_HG_DEPT[] DEPTdata = ViewBag.DEPTdata;
+    CRM_HG_DICT[] JOB = ViewBag.JOB;
+    CRM_HG_DICT[] POST = ViewBag.POST;
+    CRM_HG_DICT[] XUELI = ViewBag.XUELI;
+    CRM_HG_DICT[] STAFFTYPE = ViewBag.STAFFTYPE;
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+@*<script type="text/html" id="staff_type_Tpl">
+        {{# if(d.STAFFLX == 1){ }}
+        驻外业务员
+        {{# }else if(d.STAFFLX == 2){ }}
+        办公室人员
+        {{# }else if(d.STAFFLX == 3){ }}
+        直营卖场促销员
+        {{# }else if(d.STAFFLX == 4){ }}
+        客户业务员
+        {{# }else { }}
+        error
+        {{# } }}
+    </script>*@
+
+
+<script type="text/html" id="sex_Tpl">
+    {{# if(d.STAFFSEX == 1){ }}
+    男
+    {{# }else if(d.STAFFSEX== 2){ }}
+    女
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="active_Tpl">
+    {{# if(d.ISACTIVE == 1){ }}
+    启用
+    {{# }else if(d.ISACTIVE == 0){ }}
+    停用
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+@*<script type="text/html" id="marry_Tpl">
+        {{# if(d.STAFFHYZK == 1){ }}
+        未婚
+        {{# }else if(d.STAFFHYZK == 2){ }}
+        已婚
+        {{# }else { }}
+        error
+        {{# } }}
+    </script>*@
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>人员管理</a>
+    <a><cite>人员列表</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            @*<button id="reset" type="reset" class="layui-btn layui-btn-primary">重置</button>*@
+            @*<button id="daochu_list" class="layui-btn">导出列表</button>*@
+            <button id="daochu" class="layui-btn">导出</button>
+            @*<button id="submit_OA" class="layui-btn" style="display:none;">提交OA</button>*@
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">人员类型：</label>
+                        <div class="layui-input-inline" style="width:140px;">
+                            <select id="staff_type" lay-filter="staff_type">
+                                <option value="0" selected="selected"></option>
+                                @for (int i = 0; i < STAFFTYPE.Length; i++)
+                                {
+                                    <option value="@STAFFTYPE[i].DICID">@STAFFTYPE[i].DICNAME</option>
+                                }
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:160px;text-align:right;">姓名：</label>
+                        <div class="layui-input-inline" style="width:140px;">
+                            <input id="name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:120px;text-align:right;">工号：</label>
+                        <div class="layui-input-inline" style="width:120px;">
+                            <input id="workID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">部门：</label>
+                        @*<div class="layui-input-inline" style="width:140px;">
+                                <select id="department" lay-filter="department">
+                                    @for (int i = 0; i < DEPTdata.Length; i++)
+                                    {
+                                        <option value="@DEPTdata[i].DEPID">@DEPTdata[i].DEPNAME</option>
+                                    }
+                                </select>
+                            </div>*@
+                        <div class="layui-input-inline"  style="width:140px;">
+                            <div class="layui-unselect layui-form-select downpanel">
+                                <div class="layui-select-title">
+                                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                                    <input type="hidden" name="selectID" value="0">
+                                    <i class="layui-edge"></i>
+                                </div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd>
+                                        @*<ul id="classtree"></ul>*@
+                                        <div id="classtree"></div>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">性别：</label>
+                        <div class="layui-input-inline" style="width:140px;">
+                            <select id="sex" lay-filter="sex">
+                                <option value="0" selected="selected"></option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:120px;text-align:right;">学历：</label>
+                        <div class="layui-input-inline" style="width:120px;">
+                            <select id="xueli" lay-filter="xueli">
+                                <option value="0" selected="selected"></option>
+                                @for (int i = 0; i < XUELI.Length; i++)
+                                {
+                                    <option value="@XUELI[i].DICID">@XUELI[i].DICNAME</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:160px;text-align:right;">职位：</label>
+                        <div class="layui-input-inline" style="width:140px;">
+                            <select id="job" lay-filter="job">
+                                <option value="0" selected="selected"></option>
+                                @for (int i = 0; i < JOB.Length; i++)
+                                {
+                                    <option value="@JOB[i].DICID">@JOB[i].DICNAME</option>
+                                }
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">岗位：</label>
+                        <div class="layui-input-inline" style="width:140px;">
+                            <select id="post" lay-filter="post">
+                                <option value="0" selected="selected"></option>
+                                @for (int i = 0; i < POST.Length; i++)
+                                {
+                                    <option value="@POST[i].DICID">@POST[i].DICNAME</option>
+                                }
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:120px;text-align:right;">账号状态：</label>
+                        <div class="layui-input-inline" style="width:120px;">
+                            <select id="active" lay-filter="active">
+                                <option value="1" selected="selected">启用</option>
+                                <option value="0">停用</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:160px;text-align:right;">入职开始时间：</label>
+                        <div class="layui-input-inline" style="width:140px;">
+                            <input id="start_time" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">入职结束时间：</label>
+                        <div class="layui-input-inline" style="width:140px;">
+                            <input id="end_time" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+                    @*<label class="layui-form-label">管辖区域：</label>
+                        <div class="layui-input-inline">
+                            <select id="city" lay-filter="city">
+                                <option value="0" selected="selected"></option>
+                                <option value="1">数据</option>
+                                <option value="2">数据</option>
+                                <option value="3">数据</option>
+                            </select>
+                        </div>*@
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+</div>
+<input id="netpath" hidden />
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        //$("#daochu").click(function () {
+        //    //新增区域信息
+        //    return false;
+        //});
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Staff/Select")
+}

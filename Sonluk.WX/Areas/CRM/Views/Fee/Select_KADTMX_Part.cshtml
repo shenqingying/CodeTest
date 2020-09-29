@@ -1,0 +1,85 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KADTMXService;
+@{
+    ViewBag.Title = "Select_KADTMX_Part";
+    CRM_COST_KADTMX[] MXdata = ViewBag.MXdata;
+}
+
+@for (int i = 0; i < MXdata.Length; i++)
+{
+    string isactive = "";
+    string promise = "";
+    switch (MXdata[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 30:
+            isactive = "已审核";
+            break;
+        default:
+            break;
+    }
+    switch (MXdata[i].PROMISE)
+    {
+        case 1:
+            promise = "是";
+            break;
+        case 2:
+            promise = "否";
+            break;
+        default:
+            break;
+    }
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@MXdata[i].COSTITEMIDDES</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">促销类型</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].CXLXDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">促销费用</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].FYJE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">参加活动门店数量</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].CJHDMDSL</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">是否合同约定</label>
+                <span class="weui-form-preview__value">&nbsp;@promise</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">状态</label>
+                <span class="weui-form-preview__value">&nbsp;@isactive</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary MXopinion" onclick="click_FYopinion(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">审批意见</button>
+            @if (MXdata[0].ISACTIVE == 10)
+            {
+                <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_FYedit(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">编辑</button>
+                <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_FYdelete(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">删除</button>
+            }
+
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (MXdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+<input id="FYresultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata)" hidden />

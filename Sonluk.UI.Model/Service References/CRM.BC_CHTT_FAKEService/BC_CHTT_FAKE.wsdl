@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TTCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_CHTT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_BC_CHTT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PMCHTTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WADAT_IST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TTCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TTCreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MXCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_CHMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_BC_CHMX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PMCHMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PMCHTTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NHM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LWEDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QXBS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MXCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MXCreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TTMXDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TTMXDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TTMXDeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="TTCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:TTCreate" />
+  </wsdl:message>
+  <wsdl:message name="TTCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:TTCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="MXCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:MXCreate" />
+  </wsdl:message>
+  <wsdl:message name="MXCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:MXCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="TTMXDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:TTMXDelete" />
+  </wsdl:message>
+  <wsdl:message name="TTMXDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:TTMXDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="TTMXDeleteHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TTMXDeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="TTMXDeleteHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TTMXDeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="BC_CHTT_FAKESoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TTCreate">
+      <wsdl:input message="tns:TTCreateSoapIn" />
+      <wsdl:output message="tns:TTCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MXCreate">
+      <wsdl:input message="tns:MXCreateSoapIn" />
+      <wsdl:output message="tns:MXCreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TTMXDelete">
+      <wsdl:input message="tns:TTMXDeleteSoapIn" />
+      <wsdl:output message="tns:TTMXDeleteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BC_CHTT_FAKEHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TTMXDelete">
+      <wsdl:input message="tns:TTMXDeleteHttpGetIn" />
+      <wsdl:output message="tns:TTMXDeleteHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BC_CHTT_FAKEHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TTMXDelete">
+      <wsdl:input message="tns:TTMXDeleteHttpPostIn" />
+      <wsdl:output message="tns:TTMXDeleteHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BC_CHTT_FAKESoap" type="tns:BC_CHTT_FAKESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TTCreate">
+      <soap:operation soapAction="http://tempuri.org/TTCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MXCreate">
+      <soap:operation soapAction="http://tempuri.org/MXCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TTMXDelete">
+      <soap:operation soapAction="http://tempuri.org/TTMXDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_CHTT_FAKESoap12" type="tns:BC_CHTT_FAKESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TTCreate">
+      <soap12:operation soapAction="http://tempuri.org/TTCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MXCreate">
+      <soap12:operation soapAction="http://tempuri.org/MXCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TTMXDelete">
+      <soap12:operation soapAction="http://tempuri.org/TTMXDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_CHTT_FAKEHttpGet" type="tns:BC_CHTT_FAKEHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TTMXDelete">
+      <http:operation location="/TTMXDelete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_CHTT_FAKEHttpPost" type="tns:BC_CHTT_FAKEHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TTMXDelete">
+      <http:operation location="/TTMXDelete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BC_CHTT_FAKE">
+    <wsdl:port name="BC_CHTT_FAKESoap" binding="tns:BC_CHTT_FAKESoap">
+      <soap:address location="http://192.168.0.135/API/CRM/BC_CHTT_FAKE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_CHTT_FAKESoap12" binding="tns:BC_CHTT_FAKESoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/BC_CHTT_FAKE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_CHTT_FAKEHttpGet" binding="tns:BC_CHTT_FAKEHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/BC_CHTT_FAKE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_CHTT_FAKEHttpPost" binding="tns:BC_CHTT_FAKEHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/BC_CHTT_FAKE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

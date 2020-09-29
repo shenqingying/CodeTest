@@ -1,0 +1,145 @@
+﻿@using Sonluk.UI.Model.Account.AccessService
+@{
+    ViewBag.Title = "交货计划请求编辑";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string auth = ViewBag.Auth;
+    AuthorizationInfo SAPAuth = (AuthorizationInfo)ViewBag.SAPAuth;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+@Styles.Render("~/Content/sonluk-ui/input-width-po")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/mm/schedule-requisition-edit")
+<input type="hidden" id="auth" value="@auth">
+<input type="hidden" id="already-submit" value="0">
+<input type="hidden" id="purchase-order-select" value="@Url.Action("Schedule", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-serial-number" value="@ViewBag.SN">
+<input type="hidden" id="schedule-requisition-change" value="@Url.Action("_Change", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-create" value="@Url.Action("Create", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-submit-status" value="@Url.Action("Status", "ScheduleRequisition")">
+<input type="hidden" id="release-code" value="@SAPAuth.ReleaseCode">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">采购订单</a>
+        >
+        <a href="#">交货计划请求</a>
+        >
+        <a href="#">新建</a>
+    </div>
+</div>
+<div class="panel-search">
+    <div class="panel-search-line">
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">销售订单</div>
+            <input type="text" class="panel-search-item-input input-width-po-sn" id="SONumber" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">行项目</div>
+            <input type="text" class="panel-search-item-input input-width-po-item" id="SOItem" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">物料号</div>
+            <input type="text" class="panel-search-item-input input-width-po-material" id="Material" />
+        </div>
+        <div class="panel-search-item">
+            <img class="panel-search-textarea-toggle" src="@Url.Content("~/Content/sonluk-ui/images/icon_select_h24.png")" alt="" title="批量输入" />
+        </div>
+        <div class="panel-search-submit sonluk-button panel-search-button" id="so-po-schedule">添&nbsp;&nbsp;加</div>
+    </div>
+    <div class="panel-search-line-textarea">
+        <textarea class="panel-search-textarea" id="sales-order-input-textarea"></textarea>
+    </div>
+    <div class="panel-search-line">
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">采购订单</div>
+            <input type="text" class="panel-search-item-input input-width-po-sn" id="PONumber" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">行项目</div>
+            <input type="text" class="panel-search-item-input input-width-po-item" id="POItem" />
+        </div>
+        <div class="panel-search-item">
+            <img class="panel-search-textarea-toggle" src="@Url.Content("~/Content/sonluk-ui/images/icon_select_h24.png")" alt="" title="批量输入" />
+        </div>
+        <div class="panel-search-submit sonluk-button panel-search-button" id="po-schedule">添&nbsp;&nbsp;加</div>
+    </div>
+    <div class="panel-search-line-textarea">
+        <textarea class="panel-search-textarea" id="purchase-order-input-textarea"></textarea>
+    </div>
+</div>
+<div class="schedule-requisition" id="schedule-requisition">
+    <div class="panel-flow">
+        <table class="panel-flow-table">
+            <tr>
+                <td class="panel-flow-table-title">变更原因:</td>
+                <td class="panel-flow-table-content"><input type="text" class="panel-flow-table-input-text" id="remark"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="sonluk-table-layout">
+        <div class="sonluk-table-layout">
+            <div class="sonluk-table">
+                <div class="sonluk-table-control">
+                    <div>
+                        <div class="row-select-all sonluk-table-control-button">全选</div>
+                        <div class="sonluk-table-control-self-adaption-display">
+                            <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                            <div class="row-select-invert sonluk-table-control-button">反选</div>
+                            <div class="sonluk-table-control-space">|</div>
+                            <div class="line-split sonluk-table-control-button">拆分</div>
+                            <div class="line-merge sonluk-table-control-button">合并</div>
+                            <div class="sonluk-table-control-space">|</div>
+                            <div class="po-remove sonluk-table-control-button">移除采购订单行项目</div>
+                            <div class="sonluk-table-control-space">|</div>
+                            <div class="sonluk-table-control-title">地点:</div>
+                            <input type="text" class="sonluk-table-control-text drop-list-target" id="po-modify-destination" />
+                            <input type="hidden" value="0">
+                            <div class="po-modify-des sonluk-table-control-button">批量修改地点</div>
+                            <div class="sonluk-table-control-title">日期:</div>
+                            <input type="text" class="sonluk-table-control-text date-time-picker" id="po-modify-delivry-date" />
+                            <div class="po-modify-date sonluk-table-control-button">批量修改日期</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sonluk-table-content">
+                    <table class="data-table">
+                        <tr>
+                            <td class="data-table-header">序号</td>
+                            <td class="data-table-header">采购凭证</td>
+                            <td class="data-table-header">行项目</td>
+                            <td class="data-table-header">计划行</td>
+                            <td class="data-table-header">物料号</td>
+                            <td class="data-table-header">物料描述</td>
+                            <td class="data-table-header">采购组</td>
+                            <td class="data-table-header">数量</td>
+                            <td class="data-table-header">需求数量</td>
+                            <td class="data-table-header">日期</td>
+                            <td class="data-table-header">需求日期</td>
+                            <td class="data-table-header">交货地点</td>
+                            <td class="data-table-header">销售凭证</td>
+                            <td class="data-table-header">行项目</td>
+                            <td class="data-table-header">供应商</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    <div id="purchase-order-schedule"></div>
+</div>
+
+<!--下拉列表-->
+<input type="hidden" id="drop-list-url" value="@Url.Action("_DeliveryDestination", "ScheduleRequisition")" />
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+@section scripts {
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/mm/schedule-requisition-edit")
+}

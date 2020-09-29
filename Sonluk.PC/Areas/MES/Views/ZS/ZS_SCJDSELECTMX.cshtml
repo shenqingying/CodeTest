@@ -1,0 +1,385 @@
+﻿@{
+    ViewBag.Title = "注塑车间生产进度查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>注塑追溯管理</a>
+    <a><cite>注塑车间生产进度查询</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" onclick="window.close();">返回</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="find_gzzx" lay-filter="find_gzzx"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">班次：</label>
+            <div class="layui-input-inline">
+                <select id="find_bc" lay-filter="find_bc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">物料信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_wlxx" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">模具号：</label>
+            <div class="layui-input-inline">
+                <select id="find_mould" lay-filter="find_mould" lay-search></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">生产日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="find_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="find_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hidden" id="tb_info" lay-filter="tb_info"></table>
+
+</div>
+<script>
+    var all_fy = 1;
+    var all_fysl = 10;
+    var all_limits = [15, 50, 100, 500, 1000, 2000, 3000];
+    layui.use(['form', 'laydate', 'element', 'laydate', 'table', 'jquery', 'upload'], function () {
+        var layer = layui.layer
+        var laydate = layui.laydate;
+        var table = layui.table;
+        var form = layui.form;
+        laydate.render({
+            elem: '#find_scrq_s'
+        });
+        laydate.render({
+            elem: '#find_scrq_e'
+        });
+        band_find_gc();
+        form.on('select(find_gc)', function (data) {
+            band_find_gzzx();
+            band_find_mould();
+            band_find_bc();
+        });
+        banddateINIT();
+        //banddate();
+        $("#btn_mxfind").click(function () {
+            window.open("../ZS/ZS_KCMXSELECT_MANAGE", "_blank");
+        });
+        $("#btn_find").click(function () {
+            banddate();
+        });
+        $('#find_wlxx').bind('keyup', function (event) {
+            if (event.keyCode == "13") {
+                banddate();
+            }
+        });
+        $("#btn_dc").click(function () {
+            var datastring = {
+                LB: 3,
+                GC: $("#find_gc").val(),
+                GZZXBH: $("#find_gzzx").val(),
+                WLMS: $("#find_wlxx").val(),
+                MID: $("#find_mould").val(),
+                SCDATES: $("#find_scrq_s").val(),
+                SCDATEE: $("#find_scrq_e").val(),
+                BC: $("#find_bc").val()
+            };
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../ZS/EXPOST_ZS_SCJDMX",
+                data: {
+                    datastring: JSON.stringify(datastring)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.TYPE === "S") {
+                        window.open("../ZS/EXPORT_DOWNLOAD_Session" + "?filename=" + resdata.MESSAGE + "&sessionname=EXPOST_ZS_SCJDMX", "_self");
+                    }
+                    else {
+                        layer.alert(resdata.MESSAGE);
+                    }
+                }
+            });
+        });
+    });
+    function banddate() {
+        var table = layui.table;
+        if ($("#find_scrq_s").val() === "") {
+            layer.msg("开始日期不能为空");
+        }
+        else if ($("#find_scrq_e").val() === "") {
+            layer.msg("结束日期不能为空");
+        }
+        else if ($("#find_scrq_s").val() > $("#find_scrq_e").val()) {
+            layer.msg("开始时间不能大于结束时间");
+        }
+        else {
+            var jz = layer.open({
+                type: 1,
+                zIndex: 10000,
+                title: "正在加载..."
+            });
+            var datastring = {
+                LB: 3,
+                GC: $("#find_gc").val(),
+                GZZXBH: $("#find_gzzx").val(),
+                WLMS: $("#find_wlxx").val(),
+                MID: $("#find_mould").val(),
+                SCDATES: $("#find_scrq_s").val(),
+                SCDATEE: $("#find_scrq_e").val(),
+                BC: $("#find_bc").val()
+            };
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "../ZS/MES_TM_TMINFO_SELECT_LIST_datatable",
+                data: {
+                    datastring: JSON.stringify(datastring)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.MES_RETURN.TYPE === "S") {
+                        var fyall = Math.ceil(resdata.DATALIST.length / all_fysl);
+                        if (fyall > all_fy - 1) {
+                        }
+                        else {
+                            all_fy = Number(fyall);
+                        }
+                        table.render({
+                            done: function (res, curr, count) {
+                                for (var i = 0; i < all_limits.length; i++) {
+                                    if (all_limits[i] >= res.data.length) {
+                                        all_fysl = all_limits[i];
+                                        break;
+                                    }
+                                }
+                                all_fy = curr;
+                            },
+                            elem: '#tb_info',
+                            data: resdata.DATALIST,
+                            totalRow: true,
+                            cols: [[ //表头
+                                { type: 'numbers', title: '序号' },
+                                { field: 'GC', title: '工厂', width: 90 },
+                                //{ field: 'GZZXBH', title: '工作中心编号', width: 120 },
+                                { field: 'GZZXMS', title: '工作中心', width: 120 },
+                                { field: 'SCDATE', title: '生产日期', width: 120 },
+                                { field: 'BCMS', title: '班次', width: 120 },
+                                { field: 'WLH', title: '物料编码', width: 150 },
+                                { field: 'WLMS', title: '物料描述', width: 170 },
+                                { field: 'MOULD', title: '模具号', width: 120 },
+                                { field: 'WLLBNAME', title: '物料类别', width: 120 },
+                                { field: 'TM', title: '物料LOT表条码', width: 130 },
+                                { field: 'FTM', title: '物料标识卡条码', width: 130 },
+                                { field: 'CPZTNAME', title: '产品状态', width: 120 },
+                                { field: 'CPTYPENAME', title: '类型', width: 120 },
+                                { field: 'SBHMS', title: '设备号', width: 120 },
+                                { field: 'KSTIMESTRING', title: '开始时间', width: 160 },
+                                { field: 'JSTIMESTRING', title: '结束时间', width: 160 },
+                                { field: 'SL', title: '条码数量', width: 120, totalRow: true },
+                                { field: 'UNITSNAME', title: '单位', width: 120 },
+                                { field: 'BFBJ', title: '报废标记', width: 120 },
+                                { field: 'REMARK', title: '备注', width: 120 }
+                            ]]
+                            , page: {
+                                limits: all_limits,
+                                limit: all_fysl,
+                                curr: all_fy
+                            }
+                            , height: 'full-350'
+                        });
+                        layer.close(jz);
+                    }
+                    else {
+                        layer.alert(resdata.MES_RETURN.MESSAGE);
+                        layer.close(jz);
+                        return false;
+                    }
+                }
+            });
+        }
+    }
+    function banddateINIT() {
+        var table = layui.table;
+        var form = layui.form;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../ZS/get_session",
+            data: {
+                sessionname: "ZS_SCJDSELECT"
+            },
+            success: function (data) {
+                if (data != "") {
+                    rst = JSON.parse(data);
+                    $("#find_gc").val(rst.GC);
+                    band_find_gzzx();
+                    band_find_mould();
+                    $("#find_gzzx").val(rst.GZZXBH);
+                    $("#find_wlxx").val(rst.WLMS);
+                    $("#find_wlxx").val(rst.WLXX);
+                    $("#find_mould").val(rst.MID);
+                    $("#find_scrq_s").val(rst.SCDATES);
+                    $("#find_scrq_e").val(rst.SCDATEE);
+                    band_find_bc();
+                    $("#find_bc").val(rst.BC);
+                    form.render();
+                }
+            }
+        });
+        banddate();
+    }
+    function band_find_gc() {
+        var form = layui.form;
+        $("#find_gc").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../System/Data_Select_GC_ROLE",
+            data: {
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                if (data.length === 1) {
+                    $('#find_gc').append(new Option(resdata[0].GC + "-" + resdata[0].GCMS, resdata[0].GC));
+                }
+                else {
+                    $('#find_gc').append(new Option("请选择", ""));
+                    for (var a = 0; a < resdata.length; a++) {
+                        $('#find_gc').append(new Option(resdata[a].GC + "-" + resdata[a].GCMS, resdata[a].GC));
+                    }
+                }
+            }
+        });
+        band_find_gzzx();
+        band_find_mould();
+        band_find_bc();
+        form.render();
+    }
+    function band_find_mould() {
+        var form = layui.form;
+        var GC = $('#find_gc').val();
+        $("#find_mould").html("");
+        if (GC === "") {
+            $('#find_mould').append(new Option("请选择", ""));
+        }
+        else {
+            var datastring = {
+                GC: GC
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../ZS/PMM_MOULD_SELECT",
+                data: {
+                    datastring: JSON.stringify(datastring)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.MES_RETURN.TYPE === "S") {
+                        if (resdata.MES_PMM_MOULD.length === 1) {
+                            $('#find_mould').append(new Option(resdata.MES_PMM_MOULD[0].MID + "-" + resdata.MES_PMM_MOULD[0].MOULD, resdata.MES_PMM_MOULD[0].MID));
+                        }
+                        else {
+                            $('#find_mould').append(new Option("请选择", ""));
+                            for (var a = 0; a < resdata.MES_PMM_MOULD.length; a++) {
+                                $('#find_mould').append(new Option(resdata.MES_PMM_MOULD[a].MID + "-" + resdata.MES_PMM_MOULD[a].MOULD, resdata.MES_PMM_MOULD[a].MID));
+                            }
+                        }
+                    }
+                    else {
+                        layer.alert(resdata.MESSAGE);
+                    }
+                }
+            });
+        }
+        form.render();
+    }
+    function band_find_gzzx() {
+        var form = layui.form;
+        var GC = $('#find_gc').val();
+        $("#find_gzzx").html("");
+        if (GC === "") {
+            $('#find_gzzx').append(new Option("请选择", ""));
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../TMManage/GET_GZZX_BY_ROLE",
+                data: {
+                    GC: GC
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.length === 1) {
+                        $('#find_gzzx').append(new Option(resdata[0].GZZXBH + "-" + resdata[0].GZZXMS, resdata[0].GZZXBH));
+                    }
+                    else {
+                        $('#find_gzzx').append(new Option("请选择", ""));
+                        for (var a = 0; a < resdata.length; a++) {
+                            $('#find_gzzx').append(new Option(resdata[a].GZZXBH + "-" + resdata[a].GZZXMS, resdata[a].GZZXBH));
+                        }
+                    }
+
+                }
+            });
+        }
+        form.render();
+    }
+    function band_find_bc() {
+        var form = layui.form;
+        var GC = $('#find_gc').val();
+        $("#find_bc").html("");
+        if (GC === "") {
+            $('#find_bc').append(new Option("请选择", "0"));
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../MESSelect/GET_TYPEMX",
+                data: {
+                    GC: GC,
+                    TYPEID: 5
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.length === 1) {
+                        $('#find_bc').append(new Option(resdata[0].MXNAME, resdata[0].ID));
+                    }
+                    else {
+                        $('#find_bc').append(new Option("请选择", "0"));
+                        for (var a = 0; a < resdata.length; a++) {
+                            $('#find_bc').append(new Option(resdata[a].MXNAME, resdata[a].ID));
+                        }
+                    }
+
+                }
+            });
+        }
+        form.render();
+    }
+</script>

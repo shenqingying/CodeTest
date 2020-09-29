@@ -1,0 +1,123 @@
+﻿<html>
+<head>
+    <title>管辖区域</title>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <link href="~/Scripts/layui2.2.5/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <div id="form1" class="layui-form">
+
+        <br />
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:90px">销售区域：</label>
+            <div class="layui-input-inline">
+                <input id="area" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:90px">业务员：</label>
+            <div class="layui-input-inline">
+                <input id="staff" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:90px">主管领导：</label>
+            <div class="layui-input-inline">
+                <input id="leader" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:90px">客户业务员：</label>
+            <div class="layui-input-inline">
+                <input id="KHstaff" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:90px">备注：</label>
+            <div class="layui-input-inline">
+                <input id="remark" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button id="btn_save" class="layui-btn" lay-filter="save">保存</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#btn_save").click(function () {
+                var area = $("#area").val();
+                var staff = $("#staff").val();
+                var leader = $("#leader").val();
+                var KHstaff = $("#KHstaff").val();
+                var remark = $("#remark").val();
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+                var list = {
+                    area: area,
+                    staff: staff,
+                    leader: leader,
+                    KHstaff: KHstaff,
+                    remark: remark
+                };
+
+                if(sessionStorage.getItem("area") == null)
+                {
+                    var arr = [];
+                    arr.push(list);
+
+                    sessionStorage.setItem("area", JSON.stringify(arr));
+                }
+                else
+                {
+                    var oldarr = JSON.parse(sessionStorage.getItem("area"));
+                    //var arr = [];
+                    //arr = oldarr;
+                    oldarr.push(list);
+                    sessionStorage.setItem("area", JSON.stringify(oldarr));
+                }
+                parent.layer.close(index);
+
+
+
+
+            });
+        });
+    </script>
+
+
+
+
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/layui2.2.5/layui.js"></script>
+    <script>
+        layui.use(['form', 'layer', 'element','laydate'], function () {
+            var form = layui.form;
+            var element = layui.element;
+            var table = layui.table;
+            var laydate = layui.laydate;
+        
+            laydate.render({
+                elem: '#time'
+            });
+
+
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>

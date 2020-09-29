@@ -1,0 +1,227 @@
+﻿@{
+    ViewBag.Title = "模具人员维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search">查询</button>
+        <button class="layui-btn" id="btn_new">新增</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">职务：</label>
+            <div class="layui-input-inline">
+                <select id="Term_ROLE">
+                    <option value="">请选择</option>
+                    <option value="机修">机修</option>
+                    <option value="班组确认人">班组确认人</option>
+                    <option value="检验员">检验员</option>
+                    <option value="测试员">测试员</option>
+                </select>
+            </div>
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_NAME" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_STAFF" lay-filter="tb_STAFF"></table>
+</div>
+
+<div id="div_modify" class="layui-form layui-form-item-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_div_modify" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">职务：</label>
+        <div class="layui-input-inline">
+            <select lay-verify="required" id="Layer_ROLE">
+                <option value="">请选择</option>
+                <option value="机修">机修</option>
+                <option value="班组确认人">班组确认人</option>
+                <option value="检验员">检验员</option>
+                <option value="测试员">测试员</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">姓名：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="Layer_NAME" class="layui-input" lay-verify="required">
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+@section scripts {
+    <script>
+        var all_fy = 1;
+        var all_fysl = 10;
+        var all_limits = [10, 20, 50];
+        var cacheData = [];
+        layui.use(['table', 'layer', 'form', 'element'], function () {
+            var layer = layui.layer;
+            var table = layui.table;
+            var form = layui.form;
+            var element = layui.element;
+            var assist = sonluk.layui;
+
+            table_init();
+
+            $("#btn_new").click(function () {
+                layer_init();
+            });
+            $("#btn_search").click(function () {
+                table_init();
+            });
+
+            $('#Term_NAME').bind('keyup', function (event) {
+                if (event.keyCode == "13") table_init();
+            });
+
+            table.on('tool(tb_STAFF)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+
+                if (layEvent === 'modify') {
+                    layer_init(layEvent, data);
+                }
+                else if (layEvent === 'delete') {
+                    layer.confirm('确定要删除吗？', function (index) {
+                        var postData = {
+                            SID: data.SID
+                        }
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MT_STAFF_Delete",
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") layer.msg("删除成功！");
+                                else if (rstData.TYPE == "E") layer.alert("删除失败，原因：" + rstData.MESSAGE);
+                                else layer.alert("删除失败，原因未知");
+                                table_init();
+                            }
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+
+            function layer_init(event, data) {
+                event = event || "";
+                data = data || "";
+                var title = "新增";
+                if (event == "modify") title = "修改";
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['保存', '取消'],
+                    area: ['500px', '250px'],
+                    content: $('#div_modify'),
+                    title: title,
+                    moveOut: true,
+                    success: function (layero, index) {
+                        if (event == "modify") {
+                            $("#Layer_ROLE").attr('disabled', '');
+                            $("#Layer_ROLE").val(data.ROLE);
+                            $("#Layer_NAME").val(data.NAME);
+                        }
+                        else {
+                            $("#Layer_ROLE").removeAttr('disabled');
+                            $("#Layer_ROLE").val("");
+                            $("#Layer_NAME").val("");
+                        }
+                        form.render();
+                    },
+                    yes: function (index, layero) {
+                        $("#btn_div_modify")[0].click();
+                        var ROLE = $("#Layer_ROLE").val();
+                        var NAME = $("#Layer_NAME").val();
+                        if (ROLE == "" || NAME == "") return;
+                        var postData = {
+                            SID: data.SID || 0,
+                            ROLE: ROLE,
+                            NAME: NAME
+                        }
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MT_STAFF_Cover",
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg(title + "成功！");
+                                    layer.close(index);
+                                }
+                                else if (rstData.TYPE == "E") layer.alert(title + "失败，原因：" + rstData.MESSAGE);
+                                else layer.alert(title + "失败，原因未知");
+                                table_init();
+                            }
+                        });
+                    }
+                });
+            }
+
+            function table_init() {
+                var postData = {
+                    ROLE: $("#Term_ROLE").val(),
+                    NAME: $("#Term_NAME").val()
+                }
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/MT_STAFF_Search",
+                    data: {
+                        datastring: JSON.stringify(postData)
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            cacheData = rstData.MES_PMM_STAFF;
+                            assist.table.render({
+                                elem: '#tb_STAFF',
+                                data: cacheData,
+                                height: 'full-300',
+                                cols: [[
+                                    { type: 'numbers', title: '序号' },
+                                    { field: 'ROLE', title: '职务', width: 200 },
+                                    { field: 'NAME', title: '姓名', width: 100 },
+                                    { fixed: 'right', toolbar: '#operate', title: '操作', width: 120 }
+                                ]],
+                                page: {
+                                    limits: all_limits,
+                                    limit: all_fysl,
+                                    curr: all_fy,
+                                    currfix: function (curr) { all_fy = curr; }
+                                }
+                            });
+                        }
+                        else if (rstData.MES_RETURN.TYPE == "E") layer.alert("查询失败，原因：" + rstData.MESSAGE);
+                        else layer.alert("查询失败，原因未知");
+                    }
+                });
+            }
+        });
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "个人密钥更改";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="ishavemy_Tpl">
+    {{# if(d.MYSTAFFID > 0){ }}
+    已创建
+    {{# }else{ }}
+    未创建
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR系统设置</a>
+    <a><cite>个人密钥更改</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_update">确认更改</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">原密码：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="myinfo_pwold" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">新密码：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="myinfo_pwnew" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">新密码确认：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="myinfo_pwnew1" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="BL_MYID">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/SYSTEM/MYMANAGE_STAFFID")
+}

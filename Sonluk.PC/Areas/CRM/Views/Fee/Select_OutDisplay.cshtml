@@ -1,0 +1,275 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "合同外陈列费管理";
+
+
+
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>合同外陈列费管理</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lay-filter="formDemo">新增</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;">客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;">客户SAP编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="div_jump" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">月份：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">系统名称：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">系统CRM编号：</label>
+            <div class="layui-input-inline">
+                <input id="lkacrmid" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">系统SAP编号：</label>
+            <div class="layui-input-inline">
+                <input id="lkacrmid" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">门店名称：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">门店CRM编号：</label>
+            <div class="layui-input-inline">
+                <input id="lkacrmid" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">省份：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">城市：</label>
+            <div class="layui-input-inline">
+                <input id="lkacrmid" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">陈列项目：</label>
+            <div class="layui-input-inline">
+                <select id="class1" lay-filter="class1" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+    
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">陈列位置：</label>
+            <div class="layui-input-inline">
+                <select id="class2" lay-filter="class2" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">陈列开始时间：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">陈列结束时间：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">前三月均销售：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">预计费用：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">预计本月销售：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">费比：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">有无促销员：</label>
+            <div class="layui-input-inline">
+                <select id="class1" lay-filter="class1" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">支付方式：</label>
+            <div class="layui-input-inline">
+                <select id="class2" lay-filter="class2" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:110px;text-align:right;">有无形象地堆：</label>
+            <div class="layui-input-inline">
+                <select id="class2" lay-filter="class2" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+
+    <br />
+
+</div>
+
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_OutDisplay")
+}

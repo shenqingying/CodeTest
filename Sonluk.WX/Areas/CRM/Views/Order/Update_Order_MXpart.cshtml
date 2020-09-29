@@ -1,0 +1,153 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "Update_Order_MXpart";
+
+    CRM_ORDER_MX[] MXdata = ViewBag.MXdata;
+    string justwatch = ViewBag.justwatch;
+}
+
+
+@for (int i = 0; i < MXdata.Length; i++)
+{
+    <!-- head 部分 -->
+    <div class="weui-form-preview__hd">
+        <div class="weui-form-preview__item">
+            @*<em class="weui-form-preview__value">@MXdata[i].CPMC</em>*@
+        </div>
+    </div>
+    <!-- body 部分 -->
+    <div class="weui-form-preview__bd" style="padding-right:5px;">
+        <table style="width:100%">
+            <tr>
+                <td>
+                    @*<div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">产品品号</label>
+                            <span class="weui-form-preview__value">@MXdata[i].CPPH</span>
+                        </div>*@
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">产品名称</label>
+                        <span class="weui-form-preview__value">@MXdata[i].CPMC</span>
+                    </div>
+                    @if (justwatch != null && justwatch == "1")          //查看
+                    {
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">订单数量</label>
+                            @{
+                        string ddsl = "";
+                        if (MXdata[i].DDSL == 0)
+                        {
+                            ddsl = "";
+                        }
+                        else
+                        {
+                            ddsl = MXdata[i].DDSL.ToString();
+                        }
+                            }
+
+                            @if (MXdata[i].DDDW == "CTN")
+                            {
+                                <span class="weui-form-preview__value">@ddsl 箱</span>
+                            }
+                            else if (MXdata[i].DDDW == "PCS")
+                            {
+                                <span class="weui-form-preview__value">@ddsl 只</span>
+                            }
+                            else
+                            {
+                                <span class="weui-form-preview__value">@ddsl @MXdata[i].DDDW</span>
+                            }
+
+
+                        </div>
+                    }
+                    else            //编辑
+                    {
+                        <div class="weui-form-preview__item" style="height:35px;">
+                            <label class="weui-form-preview__label" style="margin-top:10px;">订单数量</label>
+                            @{
+                        string ddsl = "";
+                        if (MXdata[i].DDSL == 0)
+                        {
+                            ddsl = "";
+                        }
+                        else
+                        {
+                            ddsl = MXdata[i].DDSL.ToString();
+                        }
+                            }
+
+                            <input id="ddsl_@MXdata[i].ORDERMXID" type="number" value="@ddsl" style="width:50px;text-align:right;height:30px;font-size:20px;padding-right:10px;" onchange="Edit_count(@MXdata[i].ORDERTTID,@MXdata[i].ORDERMXID)">
+
+
+                            @if (MXdata[i].DDDW == "CTN")
+                            {
+                                <span class="weui-form-preview__value" style="display:initial">箱</span>
+                            }
+                            else if (MXdata[i].DDDW == "PCS")
+                            {
+                                <span class="weui-form-preview__value" style="display:initial">只</span>
+                            }
+                            else
+                            {
+                                <span class="weui-form-preview__value">@MXdata[i].DDDW</span>
+                            }
+
+                        </div>
+                    }
+
+                    @*<div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">订单单位</label>
+
+
+                        </div>*@
+                    @*<div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">转换率</label>
+                            <span class="weui-form-preview__value">@MXdata[i].RATE</span>
+                        </div>*@
+                    @*<div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">标准单位</label>
+                            @if (MXdata[i].BZDW == "PCS")
+                            {
+                                <span class="weui-form-preview__value">只</span>
+                            }
+                            else
+                            {
+                                <span class="weui-form-preview__value">@MXdata[i].BZDW</span>
+                            }
+                        </div>*@
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">标准数量</label>
+                        <span class="weui-form-preview__value">@MXdata[i].BZSL</span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">单价</label>
+                        <span class="weui-form-preview__value">@MXdata[i].PRICE</span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">金额</label>
+                        <span class="weui-form-preview__value">@MXdata[i].AMOUNT</span>
+                    </div>
+                </td>
+
+                @if (justwatch == "0")
+                {
+                    <td width="20" style="text-align: center;">
+                        <button href="#" class="layui-btn layui-btn-xs layui-btn-danger" style="margin-left:10px;" onclick="DeleteMX(@MXdata[i].ORDERTTID,@MXdata[i].ORDERMXID)">删除</button>
+                    </td>
+                }
+
+            </tr>
+        </table>
+
+
+
+    </div>
+    <!-- foot 部分 -->
+    <div class="weui-form-preview__ft">
+        @*<a href="#" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="">修改数量</a>*@
+
+
+    </div>
+}
+
+

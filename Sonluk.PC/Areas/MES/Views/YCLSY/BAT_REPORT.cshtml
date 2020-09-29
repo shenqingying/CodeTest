@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "交收检验报告";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES查询</a>
+    <a><cite>交收检验报告</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search_report">查询</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_export_report_zh">导出（中文版）</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_export_report_en">导出（英文版）</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">生产订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="report_po" class="layui-input" placeholder="请填写生产订单号">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">销售订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="report_so" class="layui-input" placeholder="请填写销售订单号">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline" style="width:120px">
+                <input type="text" id="report_so_item" class="layui-input" placeholder="请填写行项目">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="width:800px; margin:0 auto;text-align:center;">
+    <img src="~/IMAGES/zhongyin.png">
+</div>
+<div id="div_report_preview" style="width:800px; margin:0 auto;"></div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/YCLSY/BAT_REPORT")
+}

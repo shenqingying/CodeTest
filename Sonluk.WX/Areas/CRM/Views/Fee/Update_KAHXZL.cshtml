@@ -1,0 +1,375 @@
+﻿@using Sonluk.UI.Model.CRM.COST_ITEMService;
+@using Sonluk.UI.Model.CRM.COST_KAHXZLTTService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    Session["TITLENAME"] = "KA费用效果评估";
+
+    CRM_COST_KAHXZLTT TTdata = ViewBag.TTdata;
+    CRM_COST_ITEM[] ITEM = ViewBag.ITEM;
+
+    string staffid = "";
+    if (Session["STAFFID"] == null)
+    {
+
+    }
+    else
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] == null)
+    {
+
+    }
+    else
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+    }
+}
+<div id="div_form1">
+
+    @*<div class="weui-btn-area">
+            <button class="weui-btn weui-btn_primary" id="btn_save" style="width:100%;display: initial;margin: 0 0;">保存</button>
+        </div>*@
+
+    <div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">合同年份：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="htyear" class="weui-input" type="text" placeholder="" value="@TTdata.HTYEAR" readonly>
+            </div>
+        </div>
+
+
+
+
+        <div id="div_clickkh">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="" class="weui-input" type="text" placeholder="" value="@TTdata.MC" readonly>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="" class="weui-input" type="text" placeholder="" value="@TTdata.CRMID" readonly>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">客户SAP编号：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="" class="weui-input" type="text" placeholder="" value="@TTdata.SAPSN" readonly>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <hr class="layui-bg-black" />
+
+
+        @if (TTdata.MCSX != 2)
+        {
+            <div class="layui-collapse">
+                @*堆头海报*@
+                <div class="layui-colla-item">
+                    <h2 id="h2_haibao" class="layui-colla-title">海报费、堆头费、活动补差</h2>
+                    <div class="layui-colla-content ">
+
+                        <button class="weui-btn weui-btn_primary" id="btn_insert_dt">新增费用</button>
+                        <div id="result_dt">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-collapse">
+                @*特殊陈列*@
+                <div class="layui-colla-item">
+                    <h2 id="h2_SpecialDisplay" class="layui-colla-title">特殊陈列费</h2>
+                    <div class="layui-colla-content ">
+
+                        <button class="weui-btn weui-btn_primary" id="btn_insert_tscl">新增费用</button>
+                        <div id="result_tscl">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+        <div class="layui-collapse">
+            @*制作费*@
+            <div class="layui-colla-item">
+                <h2 id="h2_zhizuo" class="layui-colla-title">制作费</h2>
+                <div class="layui-colla-content ">
+
+                    <button class="weui-btn weui-btn_primary" id="btn_insert_zzf">新增费用</button>
+                    <div id="result_zzf">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <div id="div_insert_haibao" hidden>
+        <div id="div_insert_haibao1">
+            <div class="weui-btn-area">
+                <button class="weui-btn weui-btn_primary" id="btn_back_haibao">返回</button>
+
+            </div>
+
+            <div id="result_insert_haibao">
+
+            </div>
+
+
+        </div>
+
+        <div id="div_insert_haibao2" hidden>
+            <div class="weui-btn-area">
+                <div id="div_insertbtn_haibao" hidden>
+                    <button class="weui-btn weui-btn_primary" id="btn_save_insert_haibao" style="width:50%;display: initial;margin: 0 0;">保存</button>
+                    <button class="weui-btn weui-btn_primary" id="btn_cancel_insert_haibao" style="width:50%;display: initial;margin: 0 0;float:right;">取消</button>
+                </div>
+                <div id="div_updatebtn_haibao" hidden>
+                    <button class="weui-btn weui-btn_primary" id="btn_save_update_haibao" style="width:50%;display: initial;margin: 0 0;">保存</button>
+                    <button class="weui-btn weui-btn_primary" id="btn_cancel_update_haibao" style="width:50%;display: initial;margin: 0 0;float:right;">取消</button>
+                </div>
+
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">实际活动期间销售：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_haibao_sjxs" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">实际费用：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_haibao_sjfy" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">实际费比：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_haibao_sjfb" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">活动结束总结：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_haibao_zj" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">备注：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_haibao_beiz" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <input id="insert_haibao_costHJ" hidden />
+            <input id="insert_haibao_KADTTTID" hidden />
+        </div>
+
+
+        <br />
+
+    </div>
+
+
+
+    <div id="div_insert_SpecialDisplay" hidden>
+        <div id="div_insert_SpecialDisplay1">
+            <div class="weui-btn-area">
+                <button class="weui-btn weui-btn_primary" id="btn_back_SpecialDisplay">返回</button>
+
+            </div>
+
+            <div id="result_insert_SpecialDisplay">
+
+            </div>
+
+
+        </div>
+
+        <div id="div_insert_SpecialDisplay2" hidden>
+            <div class="weui-btn-area">
+                <div id="div_insertbtn_SpecialDisplay" hidden>
+                    <button class="weui-btn weui-btn_primary" id="btn_save_insert_SpecialDisplay" style="width:50%;display: initial;margin: 0 0;">保存</button>
+                    <button class="weui-btn weui-btn_primary" id="btn_cancel_insert_SpecialDisplay" style="width:50%;display: initial;margin: 0 0;float:right;">取消</button>
+                </div>
+                <div id="div_updatebtn_SpecialDisplay" hidden>
+                    <button class="weui-btn weui-btn_primary" id="btn_save_update_SpecialDisplay" style="width:50%;display: initial;margin: 0 0;">保存</button>
+                    <button class="weui-btn weui-btn_primary" id="btn_cancel_update_SpecialDisplay" style="width:50%;display: initial;margin: 0 0;float:right;">取消</button>
+                </div>
+
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">实际销售：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_SpecialDisplay_sjxs" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">实际费用：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_SpecialDisplay_sjfy" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">实际费比：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_SpecialDisplay_sjfb" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">备注：</label></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <input id="insert_SpecialDisplay_beiz" class="weui-input" type="text" placeholder="">
+                </div>
+            </div>
+
+            <input id="insert_SpecialDisplay_apply" hidden />
+        </div>
+
+
+        <br />
+
+    </div>
+
+
+
+    <div id="div_insert_ZZF" hidden>
+        <div id="div_insert_ZZF1">
+            <div class="weui-btn-area">
+                <button class="weui-btn weui-btn_primary" id="btn_back_ZZF">返回</button>
+
+            </div>
+
+            <div id="result_insert_ZZF">
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <br />
+
+    </div>
+
+
+
+
+
+</div>
+<div id="div_opinion" class="layui-form" hidden>
+    <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_primary" id="btn_opinion_back">返回</button>
+    </div>
+
+    <div id="div_OPINIONresult">
+
+    </div>
+
+
+</div>
+
+<div id="div_fujian" class="layui-form" hidden>
+    <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_primary" id="btn_fujian_back">返回</button>
+    </div>
+    <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_primary" id="btn_upload_img_camera" style="width:50%;display: initial;margin: 0 0;">拍照</button>
+        <button class="weui-btn weui-btn_primary" id="btn_upload_img_album" style="width:50%;display: initial;margin: 0 0;float:right;">相册</button>
+    </div>
+
+    <div id="div_IMGresult">
+
+    </div>
+
+
+</div>
+
+@*
+    <div id="div_opinion_edit" class="layui-form" hidden>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">回复内容：</label>
+            <div class="layui-input-block">
+                <textarea id="div_opinion_content" name="desc" placeholder="请输入内容" class="layui-textarea" style="height:250px;"></textarea>
+
+            </div>
+
+        </div>
+
+
+    </div>*@
+
+
+<input id="HXZLTTID" value="@TTdata.HXZLTTID" hidden />
+<input id="isactive" value="@TTdata.ISACTIVE" hidden />
+
+<input id="KAID" value="@TTdata.CRMID" hidden />
+<input id="MXstatus" hidden />
+<input id="KHID" value="@TTdata.KHID" hidden />
+
+<input id="HXZLMXID" hidden />
+<input id="KADTTTID" hidden />
+<input id="MXisactive" hidden />
+<input id="COSTID" hidden />
+
+<input id="staffid" value="@staffid" hidden />
+<input id="state" value="@state" hidden />
+<input id="appid" value="@appid" hidden />
+
+
+<input id="lat" hidden />
+<input id="lon" hidden />
+<input id="province" hidden />
+<input id="city" hidden />
+<input id="address" hidden />
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Update_KAHXZL")
+}

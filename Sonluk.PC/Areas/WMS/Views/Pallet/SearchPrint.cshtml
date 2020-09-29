@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "托盘码打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+}
+
+<style>
+    .print_page_tpmoutside {
+        margin: 0 auto;
+        border: 1px dashed black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    .print_page_td_haveborder_tpm {
+        border: 1px dashed black;
+        margin-right: 30px;
+        margin-left: 30px;
+        width: 7cm;
+        height: 4cm;
+    }
+
+    .bor {
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .bor_father {
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    .bor_father_break {
+        padding-top: 20px;
+        text-align: center;
+        page-break-before: always;
+    }
+</style>
+
+<div id="wrap" class="main">
+    @for (int i = 0; i < ViewBag.TPNOs.Count; i++)
+    {
+        string barcode = ViewBag.TPNOs[i];
+        string borFather = "bor_father";
+        if (i % 6 == 0)
+        {
+            borFather = "bor_father_break";
+        }
+        <div class="@borFather">
+            <table class="print_page_tpmoutside">
+                <tr>
+                    <td class="print_page_td_haveborder_tpm">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block;">
+                            <br />
+                            <img src="@Url.Action("BarCode", "Sessionless", new { area = "WMS", code = barcode, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@barcode</big>
+                            <br />
+                        </div>
+                    </td>
+                    <td class="print_page_td_haveborder_tpm">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block; ">
+                            <br />
+                            <img src="@Url.Action("BarCode", "Sessionless", new { area = "WMS", code = barcode, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@barcode</big>
+                            <br />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>

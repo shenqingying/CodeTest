@@ -1,0 +1,206 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Pinzhong_Select";
+    Session["TITLENAME"] = "销售品种";
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="tb_pinzhong">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<div id="div_pinzhong" class="layui-form-item" style="width:100%;">
+    <h2 class="layui-colla-title">销售品种：</h2>
+    <table id="pinzhong6" lay-filter="pinzhong6"></table>
+    <button id="insert_pinzhong" class="layui-btn">新增</button>
+</div>
+
+<div id="007" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_pinzhong" class="layui-btn" lay-filter="btn_save_pinzhong">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">销售品种：</label>
+        <div class="layui-input-inline" style="width:150px;">
+            <select id="pinzhong007" lay-filter="pinzhong007">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+    //渠道、销售品种、竞品表格数据加载
+    function TableLoad_qudaopinzhongjingpin(khid, xxlb, isactive, elem, title) {
+        var table = layui.table;
+        $.ajax({
+            type: "POST",
+            //async: false,
+            url: "../KeHu/Data_Select_QTXX",
+            data: {
+                khid: khid,
+                xxlb: xxlb,
+                isactive: isactive
+            },
+            success: function (resdata) {
+                //alert(resdata);
+                var data = JSON.parse(resdata);
+                table.render({
+                    elem: '#' + elem,
+                    data: data,
+                    page: true, //开启分页
+                    cols: [[ //表头
+                      { title: '序号', templet: '#indexTpl', width: 70 },
+                      { field: 'XXMC', title: title },
+                     { fixed: 'right', width: 70, align: 'center', toolbar: '#tb_pinzhong' }
+                    ]]
+                });
+
+            },
+            error: function () {
+                //alert("code1011-" + khid + "-" + xxlb + ",请联系管理员");
+            }
+        });
+
+    }
+
+    //渠道、销售品种、竞品保存按钮
+    function SaveBtn_qudao(khid, xxlb, xxmc, isactive) {
+
+        var mydate = new Date();
+        var layer = layui.layer;
+        var QTdata = {
+            KHID: khid,
+            XXLB: xxlb,
+            XXMC: $("#" + xxmc).find("option:selected").text(),
+            //操作人
+            //CZRQ: mydate.toLocaleDateString(),
+            ISACTIVE: isactive
+        };
+        //var url;
+        //if ($("#action_status").val() == "insert")
+        //    url = "../KeHu/Data_Insert_QTXX";
+        //else if ($("#action_status").val() == "edit")
+        //    url = "../KeHu/Data_Update_QTXX";
+        $.ajax({
+            type: "POST",
+            url: "../KeHu/Data_Insert_QTXX",
+            data: {
+                data: JSON.stringify(QTdata)
+            },
+            success: function (sesponseTest) {
+                layer.closeAll();
+                if (sesponseTest > 0)
+                    layer.msg("保存成功！");
+               
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //alert(XMLHttpRequest.status);
+                //alert(XMLHttpRequest.readyState);
+                //alert(textStatus);
+                //alert("code1007-" + khid + "-" + xxlb + ",请联系管理员");
+            }
+        });
+
+    }
+
+
+    $(document).ready(function () {
+        var layer = layui.layer;
+        var table = layui.table;
+        var form = layui.form;
+        var khid;
+        if (sessionStorage.getItem("KHID") == null) {
+            alert("获取客户信息失败，请重试");
+            window.location.href = "../KeHu/Select";
+        }
+        else
+            khid = sessionStorage.getItem("KHID");
+
+        TableLoad_qudaopinzhongjingpin(khid, 2, 1, 'pinzhong6', '销售品种');
+
+
+        $("#insert_pinzhong").click(function () {
+            //$("#action_status").val("insert");
+            layer.open({
+                type: 1,
+                shade: 0,
+                btn: '保存',
+                area: ['350px', '350px'], //宽高
+                content: $('#007'),
+                title: '新增销售品种',
+                moveOut: true,
+                yes: function (index, layero) {
+
+                    SaveBtn_qudao(khid, 2, "pinzhong007", 1);
+
+                },
+                end: function () {
+                    $("#pinzhong007").val("0");
+                    $("#007").hide();
+                    TableLoad_qudaopinzhongjingpin(khid, 2, 1, 'pinzhong6', '销售品种');
+                    form.render();
+                }
+            });
+            return false;
+        });
+
+
+        //监听销售品种工具条
+        table.on('tool(pinzhong6)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            layer.open({
+                title: '提示',
+                type: 0,
+                content: '确定删除?',
+                btn: ['确定', '取消'],
+                yes: function (index, layero) {
+
+                    $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: "../KeHu/Data_Delete_QTXX",
+                        data: { xxid: obj.data.XXID },
+                        success: function (id) {
+                            if (id > 0) {
+                                TableLoad_qudaopinzhongjingpin(khid, 2, 1, 'pinzhong6', '销售品种');
+                                layer.msg("删除成功！");
+                            }
+
+                        },
+                        error: function (err) {
+                            layer.msg("系统错误,请重试！")
+                        }
+                    });
+                    layer.close(index);
+                }
+            });
+
+
+
+        });
+
+
+
+    });
+
+
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/Qudao")
+}

@@ -1,0 +1,214 @@
+﻿@using Sonluk.UI.Model.MES.SY_GCService;
+@{
+    ViewBag.Title = "成品库存标识管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    MES_SY_GC[] GC = ViewBag.GC;
+    string date = DateTime.Now.ToString("yyyy-MM-dd");
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="Tpl_MBLNR">
+    {{d.MBLNR + " / " + d.ZEILE}}
+</script>
+
+<script type="text/html" id="Tpl_VBELN">
+    {{d.MAT_KDAUF + " / " + d.MAT_KDPOS}}
+</script>
+
+
+
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs" lay-event="print">打印</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+
+</div>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>库存管理</a>
+    <a><cite>成品库存标识管理</cite></a>
+</span>
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div id="div_height">
+
+
+        <div class="layui-form-item">
+
+            <button id="btn_conn" class="layui-btn">条码关联</button>
+            <button id="btn_hzprint" class="layui-btn">汇总打印</button>
+            <button id="btn_multiprint" class="layui-btn">批量打印</button>
+            <button id="btn_dc" class="layui-btn">导出</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="GC" lay-filter="GC" lay-search>
+                        <option value="">请选择</option>
+                        @for (int i = 0; i < GC.Length; i++)
+                        {
+                            <option value="@GC[i].GC">@GC[i].GC-@GC[i].GCMS</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">库存地点：</label>
+                <div class="layui-input-inline">
+                    <select id="KCDD" lay-filter="KCDD" lay-search>
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">条码：</label>
+                <div class="layui-input-inline">
+                    <input id="TM" type="text" autocomplete="off" placeholder="" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">创建日期：</label>
+                <div class="layui-input-inline">
+                    <input id="BEGINDATE" type="text" autocomplete="off" placeholder="" class="layui-input" value="@date">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">至：</label>
+                <div class="layui-input-inline">
+                    <input id="ENDDATE" type="text" autocomplete="off" placeholder="" class="layui-input" value="@date">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">物料信息：</label>
+                <div class="layui-input-inline">
+                    <input id="MATNR" type="text" autocomplete="off" placeholder="物料编码/物料描述" class="layui-input">
+                </div>
+
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">物料凭证：</label>
+                <div class="layui-input-inline">
+                    <input id="WLPZ" type="text" autocomplete="off" placeholder="" class="layui-input">
+                </div>
+
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">打印张数：</label>
+                <div class="layui-input-inline">
+                    <input id="COUNT" type="number" autocomplete="off" placeholder="" class="layui-input" value="1">
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <table id="table_WL" lay-filter="table_WL"></table>
+
+
+</div>
+
+
+<div id="div_TM" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="TM_GC" lay-filter="TM_GC" lay-search>
+                    <option value="0">请选择</option>
+                    @for (int i = 0; i < GC.Length; i++)
+                    {
+                        <option value="@GC[i].GC">@GC[i].GC-@GC[i].GCMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">库存地点：</label>
+            <div class="layui-input-inline">
+                <select id="TM_KCDD" lay-filter="TM_KCDD" lay-search>
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">物料凭证：</label>
+            <div class="layui-input-inline">
+                <input id="TM_WLPZ" type="text" autocomplete="off" placeholder="" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">输入日期：</label>
+            <div class="layui-input-inline">
+                <input id="BEGINDATE_SR" type="text" autocomplete="off" placeholder="" class="layui-input" value="@date">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">至：</label>
+            <div class="layui-input-inline">
+                <input id="ENDDATE_SR" type="text" autocomplete="off" placeholder="" class="layui-input" value="@date">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">过账日期：</label>
+            <div class="layui-input-inline">
+                <input id="BEGINDATE_GZ" type="text" autocomplete="off" placeholder="" class="layui-input" value="@date">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">至：</label>
+            <div class="layui-input-inline">
+                <input id="ENDDATE_GZ" type="text" autocomplete="off" placeholder="" class="layui-input" value="@date">
+            </div>
+        </div>
+        <button id="btn_confirm" class="layui-btn">确定</button>
+    </div>
+
+    <table id="table_TMGL" lay-filter="table_TMGL"></table>
+</div>
+
+<div id="div_delete" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input id="GH" type="text" autocomplete="off" placeholder="" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/BC_TM/CPHWBS")
+}

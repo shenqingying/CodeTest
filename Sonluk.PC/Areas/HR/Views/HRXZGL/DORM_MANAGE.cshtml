@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "宿舍房间管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="add_room">新增房间</a>
+    <a class="layui-btn layui-btn-xs" lay-event="update_room">管理房间</a>
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="barkh1">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>宿舍房间管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿舍：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_dormname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_dormnamelist" lay-filter="tb_dormnamelist"></table>
+</div>
+<div id="div_dorminfo" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿舍名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="dorminfo_dormname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿舍地址：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="dorminfo_dormaddress" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">房屋类型：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="dorminfo_dormjg" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿管员：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="dorminfo_dormsgy" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">联系电话：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="dorminfo_dormlxdh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="dorminfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_roominfo" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">房间号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="roominfo_roomname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">房间类型：</label>
+            <div class="layui-input-inline">
+                <select id="roominfo_roomtype" lay-filter="roominfo_roomtype"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">额定人数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="roominfo_roomrycount" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="roominfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_roomlist" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿舍：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="roomlist_dormname" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="roomlist_roomname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_roomlist" lay-filter="tb_roomlist"></table>
+</div>
+<div class="layui-form" hidden>
+    <input type="text" id="bl_dormid" value="">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/HRXZGL/DORM_MANAGE")
+}

@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "物料标识卡关联";
+    Layout = "~/Views/Shared/_Layoutbig.cshtml";
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+}
+@using Sonluk.Mobile.Areas.MES.Models;
+@model Sonluk.Mobile.Areas.MES.Models.MODLE_TPM
+<script type="text/html" id="bar">
+    <a class="layui-btn_table_min layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tp_Tpl">
+    {{# if(d.TPNO != ""){ }}
+    <a style="font-size:x-large;">{{d.TPNO}}</a>
+    {{# } }}
+</script>
+<style>
+    .placeholder {
+        font-style: italic;
+    }
+    /*利用<i>来安放图标*/
+</style>
+<style type="text/css">
+    .layui-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: 8px;
+    }
+</style>
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" id="tm_tpm_sm" placeholder="(请扫描物料LOT表)" autocomplete="off" style="height:50px" class="layui-input">
+                @*<i class="layui-icon" style="top: 5px; font-size: 30px">&#xe615;</i>*@
+            </div>
+        </div>
+    </div>
+    <div id="table_div">
+        <table class="layui-hide" id="tb_INFO" lay-filter="tb_INFO"></table>
+    </div>
+    <br />
+    <div id="div_region" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">汇总：</label>
+                <label id="in_title" class="layui-form-label"></label>
+                <label class="layui-form-label">,条码数：</label>
+                <label id="in_num" class="layui-form-label"></label>
+                <label id="in_address" class="layui-form-label"></label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div id="div_foot" class="layui-footer" align="right" hidden>
+        <div class="layui-form-item">
+            <button id="btn_address" class=" layui-btn layui-btn-normal">库存地点</button>
+            <button id="btn_yes" class="layui-btn layui-btn-normal">确认</button>
+        </div>
+    </div>
+    <div id="div_layer" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="select_factory" type="text" autocomplete="off" class="layui-input"></select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">库存地点：</label>
+                <div class="layui-input-inline">
+                    <select id="select_address" type="text" autocomplete="off" class="layui-input"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_BarCode" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-card-body" id="imgQD" style="width:100%; vertical-align: middle; text-align: center;">
+                <h1 style="font-size: 20px;">
+                    物料标识卡关联成功
+                </h1>
+            </div>
+            <div class="layui-card-body" id="imgQD" style="width:100%; height:100%; vertical-align: middle; text-align: center;">
+                <img id="ImagePic" width="200" height="200" />
+                <h1 id="result" style="font-size: 20px;"></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="staffid" value="@staffid" hidden />
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/ZS_WLBSKGL_MANAGE")
+}

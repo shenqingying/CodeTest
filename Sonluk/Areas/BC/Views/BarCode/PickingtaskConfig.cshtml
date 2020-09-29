@@ -1,0 +1,63 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService
+@model List<ScreenInfo>
+@{
+    ViewBag.Title = "工作任务";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string warhouse = "1";
+    HttpCookie cookie = Request.Cookies.Get("PickingtaskConfig");
+    if (cookie != null)
+    {
+        warhouse = cookie.Value;
+    }
+}
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">拣配</a>
+        >
+        <a href="#">大屏显示</a>
+    </div>
+</div>
+<div class="panel-flow">
+    <input type="hidden" id="bc-config-picking-task" value="@Url.Action("PickingtaskSet", "BarCode", new { area = "BC" })">
+    <input type="hidden" id="bc-picking-task-uri" value="@Url.Action("Pickingtask", "BarCode", new { area = "BC" })">
+    <table class="panel-flow-table">
+        @*<tr>
+            <td class="panel-flow-table-title" colspan="2">显示参数设置</td>
+        </tr>*@
+        <tr>
+            <td class="panel-flow-table-title">显示屏：</td>
+            <td class="panel-flow-table-title">
+                <select id="screendrop">
+                    @foreach (ScreenInfo node in Model)
+                    {
+                        <option value="@node.ScreenID" @if (warhouse.Equals(node.ScreenID.ToString())) { @("selected")   }>@node.ScreenName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+       
+        @*<tr>
+            <td class="panel-flow-table-title">仓库：</td>
+            <td class="panel-flow-table-content">
+                <input type="radio" name="warhouse" value="Z02" @if (warhouse.Equals("Z02")) { @("checked")  }>1104-内销
+            </td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title"></td>
+            <td class="panel-flow-table-content">
+                <input type="radio" name="warhouse" value="W02" @if (warhouse.Equals("W02")) { @("checked")  }>1101-外销
+            </td>
+        </tr>*@
+        <tr>
+            <td class="panel-flow-table-title panel-flow-remark" colspan="3">参数保存于浏览器Cookie中。</td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title"><div class="sonluk-button" id="submit">确定</div></td>
+            <td class="panel-flow-table-content panel-flow-success" id="result"></td>
+        </tr>
+    </table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/bc/picking-task-config")
+}

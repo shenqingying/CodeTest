@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "打卡记录";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>打卡记录</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" onclick="location.href = '@Url.Action("KQ_YSKQJL", "KQGL")'">返回</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">考勤日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_kqrqs" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_kqrqe" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_kq" lay-filter="tb_kq"></table>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_YSKQJL_check")
+}

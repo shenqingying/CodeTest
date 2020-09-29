@@ -1,0 +1,459 @@
+﻿@using Sonluk.UI.Model.MES.TM_TMINFOService;
+@model SELECT_MES_TM_TMINFO_PRINT[]
+@{
+    ViewBag.Title = "入库标识打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+    string barcode = "";
+    string printcount = Request.QueryString["printcount"];
+    if (string.IsNullOrEmpty(printcount))
+    {
+        printcount = "1";
+    }
+    int pcount = Convert.ToInt32(printcount);
+}
+
+@for (int i = 0; i < Model.Length; i++)
+{
+    for (int b = 0; b < pcount; b++)
+    {
+        if (Model[i].MES_TM_TMINFO_LIST.ZHNO == "")
+        {
+            <div id="wrap" class="main">
+                <table>
+                    <tr>
+                        <td class="print_page_td_noborder2"></td>
+                        <td class="print_page_td_noborder2"></td>
+                        <td class="print_page_td_noborder16">
+                            <div class="print-page-header-company-name">@Model[i].MES_TM_TMINFO_LIST.GCDYMS</div>
+                        </td>
+                        @if (Model[i].MES_TM_TMINFO_LIST.NWXBS == 2)
+                        {
+                            <td class="print_page_td_noborder2" bgcolor="#000000"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_noborder2"></td>
+                        }
+                        <td class="print_page_td_noborder2"></td>
+                    </tr>
+                </table>
+                <div class="print-page-body-table-header">成品货物标识</div>
+                <table class="print-page_table_outside">
+                    <tr>
+                        <td class="print-page_td_haveborder4">仓储地点</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.KCDD-@Model[i].MES_TM_TMINFO_LIST.KCDDNAME</td>
+                        <td class="print-page_td_haveborder4">预计进仓</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.JCDATE</td>
+                        <td class="print-page_td_haveborder4">称重</td>
+                        <td class="print-page_td_haveborder4">&nbsp; &nbsp; &nbsp;  KG</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">参考信息</td>
+                        @if (Model[i].MES_TM_TMINFO_LIST.MOVETYPE == "F")
+                        {
+                            <td class="print-page_td_haveborder4" colspan="5">@Model[i].MES_TM_TMINFO_LIST.GZZXBH-@Model[i].MES_TM_TMINFO_LIST.GZZXMS</td>
+                        }
+                        else
+                        {
+                            <td class="print-page_td_haveborder4" colspan="5">@Model[i].MES_TM_TMINFO_LIST.GYS-@Model[i].MES_TM_TMINFO_LIST.GYSMS</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">物料编码</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.WLH</td>
+                        <td class="print-page_td_haveborder4">物料编码</td>
+                        <td class="print-page_td_haveborder4" colspan="3">@Model[i].MES_TM_TMINFO_LIST.WLMS</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">参考单据</td>
+                        @if (Model[i].MES_TM_TMINFO_LIST.MOVETYPE == "F")
+                        {
+                            <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.ERPNO</td>
+                        }
+                        else
+                        {
+                            <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.CGBILL/@Model[i].MES_TM_TMINFO_LIST.CGBILLMX</td>
+                        }
+                        <td class="print-page_td_haveborder4">销售订单/项目</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.NOBILL/@Model[i].MES_TM_TMINFO_LIST.NOBILLMX</td>
+                        <td class="print-page_td_haveborder4">批号</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.PC</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">总数量</td>
+                        <td class="print-page_td_haveborder4" colspan="4">@Model[i].MES_TM_TMINFO_LIST.DCSLBS 箱 @Convert.ToInt32(Model[i].MES_TM_TMINFO_LIST.RESDUESL) 只</td>
+                        <td class="print-page_td_haveborder4" rowspan="3">@Convert.ToInt32(Model[i].MES_TM_TMINFO_LIST.XZS) 只/箱</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">该托数量</td>
+                        <td class="print-page_td_haveborder4" colspan="4">@Model[i].MES_TM_TMINFO_LIST.DCSLBS 箱 @Convert.ToInt32(Model[i].MES_TM_TMINFO_LIST.RESDUESL) 只</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">备注</td>
+                        <td class="print-page_td_haveborder4" colspan="4">【@Model[i].MES_TM_TMINFO_LIST.MCBOXCOUNT 箱*@Model[i].MES_TM_TMINFO_LIST.CBOXCOUNT 层+@Model[i].MES_TM_TMINFO_LIST.DCSLYS 零头箱】 第&nbsp;&nbsp;托，共&nbsp;&nbsp;托</td>
+                    </tr>
+                    <tr>
+                        <td class="print_page_td_noborder16" valign="top" colspan="4"></td>
+                        <td align="right" valign="bottom" class="print_page_td_noborder4_tm" colspan="2">
+                            @{
+                                barcode = "";
+                                barcode = Model[i].MES_TM_TMINFO_LIST.TM;
+                            }
+                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "QRCODE", width = 70, height = 70, pure = 1 })">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br />
+                            @Model[i].MES_TM_TMINFO_LIST.TM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div id="wrap" class="main">
+                <div class="print-page-header-company-name">@Model[i].MES_TM_TMINFO_LIST.GCDYMS</div>
+                <div class="print-page-body-table-header">成品货物标识(组合装)</div>
+                <table class="print-page_table_outside">
+                    <tr>
+                        <td class="print-page_td_haveborder4">仓储地点</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.KCDD-@Model[i].MES_TM_TMINFO_LIST.KCDDNAME</td>
+                        <td class="print-page_td_haveborder4">验货日期</td>
+                        <td class="print-page_td_haveborder4"></td>
+                        <td class="print-page_td_haveborder4">称重</td>
+                        <td class="print-page_td_haveborder4">&nbsp; &nbsp; &nbsp;  KG</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">参考信息</td>
+                        @if (Model[i].MES_TM_TMINFO_LIST.MOVETYPE == "F")
+                        {
+                            <td class="print-page_td_haveborder4" colspan="3">@Model[i].MES_TM_TMINFO_LIST.GZZXBH-@Model[i].MES_TM_TMINFO_LIST.GZZXMS</td>
+                        }
+                        else
+                        {
+                            <td class="print-page_td_haveborder4" colspan="3">@Model[i].MES_TM_TMINFO_LIST.GYS-@Model[i].MES_TM_TMINFO_LIST.GYSMS</td>
+                        }
+                        <td class="print-page_td_haveborder4">预计进仓</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.JCDATE</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page_td_haveborder4">备注</td>
+                        <td class="print-page_td_haveborder4" colspan="3">【@Model[i].MES_TM_TMINFO_LIST.MCBOXCOUNT 箱*@Model[i].MES_TM_TMINFO_LIST.CBOXCOUNT 层+@Model[i].MES_TM_TMINFO_LIST.DCSLYS 零头箱】 第&nbsp;&nbsp;托，共&nbsp;&nbsp;托</td>
+                        <td class="print-page_td_haveborder4">批号</td>
+                        <td class="print-page_td_haveborder4">@Model[i].MES_TM_TMINFO_LIST.PC</td>
+                    </tr>
+                    <tr>
+                        <td class="print_page_td_haveborder12" colspan="3">
+                            <table>
+                                <tr>
+                                    <td class="print_page_td_noborder12" valign="top">
+                                        <table>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    销售订单
+                                                </td>
+                                                <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[0].NOBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[0].NOBILLMX</td>
+                                                <td class="print_page_td_noborder4_tm_middle" valign="top" rowspan="5">
+                                                    @{
+
+                                                        barcode = Model[i].MES_TM_TMINFO_LIST_CHILD[0].TM;
+                                                    }
+                                                    <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "QRCODE", width = 70, height = 70, pure = 1 })">
+                                                    <br />
+                                                    @Model[i].MES_TM_TMINFO_LIST_CHILD[0].TM
+                                                    <br />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    参考单据
+                                                </td>
+                                                @if (Model[i].MES_TM_TMINFO_LIST_CHILD[0].MOVETYPE == "F")
+                                                {
+                                                    <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[0].ERPNO</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[0].CGBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[0].CGBILLMX</td>
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    物料编码
+                                                </td>
+                                                <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[0].WLH</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    总数量
+                                                </td>
+                                                <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[0].ALLBOXCOUNT</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    该托数量
+                                                </td>
+                                                <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[0].RESDUESL</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    物料描述
+                                                </td>
+                                                <td class="print_page_td_noborder4" colspan="2">@Model[i].MES_TM_TMINFO_LIST_CHILD[0].WLMS</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="print_page_td_haveborder12_top" colspan="3" valign="top">
+                            <table>
+                                <tr>
+                                    <td class="print_page_td_noborder12" valign="top">
+                                        <table>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    组合码
+                                                </td>
+                                                <td class="print_page_td_noborder4">
+                                                    @Model[i].MES_TM_TMINFO_LIST.ZHNO
+                                                </td>
+                                                <td class="print_page_td_noborder4_tm_middle" valign="top" rowspan="5">
+                                                    @{
+                                                        barcode = "";
+                                                        barcode = Model[i].MES_TM_TMINFO_LIST_CHILD[0].TM;
+                                                    }
+                                                    <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "QRCODE", width = 70, height = 70, pure = 1 })">
+                                                    <br />
+                                                    @Model[i].MES_TM_TMINFO_LIST_CHILD[0].TM
+                                                    <br />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="print_page_td_noborder4">
+                                                    条码数
+                                                </td>
+                                                <td class="print_page_td_noborder4">
+                                                    @Model[i].MES_TM_TMINFO_LIST_CHILD.Length
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    @{int qftr = 0;
+                    }
+                    @for (int a = 1; a < Model[i].MES_TM_TMINFO_LIST_CHILD.Length; a++)
+                    {
+                        if ((a + 1) < Model[i].MES_TM_TMINFO_LIST_CHILD.Length)
+                        {
+                            <tr>
+                                <td class="print_page_td_haveborder12" colspan="3">
+                                    <table>
+                                        <tr>
+                                            <td class="print_page_td_noborder12" valign="top">
+                                                <table>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            销售订单
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].NOBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[a].NOBILLMX</td>
+                                                        <td class="print_page_td_noborder4_tm_middle" valign="top" rowspan="5">
+                                                            @{
+                                                                barcode = Model[i].MES_TM_TMINFO_LIST_CHILD[a].TM;
+                                                            }
+                                                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "QRCODE", width = 70, height = 70, pure = 1 })">
+                                                            <br />
+                                                            @Model[i].MES_TM_TMINFO_LIST_CHILD[a].TM
+                                                            <br />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            参考单据
+                                                        </td>
+                                                        @if (Model[i].MES_TM_TMINFO_LIST_CHILD[a].MOVETYPE == "F")
+                                                        {
+                                                            <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].ERPNO</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].CGBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[a].CGBILLMX</td>
+                                                        }
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            物料编码
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].WLH</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            总数量
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].ALLBOXCOUNT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            该托数量
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].RESDUESL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            物料描述
+                                                        </td>
+                                                        <td class="print_page_td_noborder4" colspan="2">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].WLMS</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="print_page_td_haveborder12" colspan="3">
+                                    <table>
+                                        <tr>
+                                            <td class="print_page_td_noborder12" valign="top">
+                                                <table>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            销售订单
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].NOBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].NOBILLMX</td>
+                                                        <td class="print_page_td_noborder4_tm_middle" valign="top" rowspan="5">
+                                                            @{
+                                                                barcode = Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].TM;
+                                                            }
+                                                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "QRCODE", width = 70, height = 70, pure = 1 })">
+                                                            <br />
+                                                            @Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].TM
+                                                            <br />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            参考单据
+                                                        </td>
+                                                        @if (Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].MOVETYPE == "F")
+                                                        {
+                                                            <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].ERPNO</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].CGBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].CGBILLMX</td>
+                                                        }
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            物料编码
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].WLH</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            总数量
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].ALLBOXCOUNT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            该托数量
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].RESDUESL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            物料描述
+                                                        </td>
+                                                        <td class="print_page_td_noborder4" colspan="2">@Model[i].MES_TM_TMINFO_LIST_CHILD[a + 1].WLMS</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            a = a + 1;
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="print_page_td_haveborder12" colspan="3">
+                                    <table>
+                                        <tr>
+                                            <td class="print_page_td_noborder12" valign="top">
+                                                <table>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            销售订单
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].NOBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[a].NOBILLMX</td>
+                                                        <td class="print_page_td_noborder4_tm_middle" valign="top" rowspan="5">
+                                                            @{
+                                                                barcode = Model[i].MES_TM_TMINFO_LIST_CHILD[a].TM;
+                                                            }
+                                                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "QRCODE", width = 70, height = 70, pure = 1 })">
+                                                            <br />
+                                                            @Model[i].MES_TM_TMINFO_LIST_CHILD[a].TM
+                                                            <br />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            参考单据
+                                                        </td>
+                                                        @if (Model[i].MES_TM_TMINFO_LIST_CHILD[a].MOVETYPE == "F")
+                                                        {
+                                                            <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].ERPNO</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].CGBILL/@Model[i].MES_TM_TMINFO_LIST_CHILD[a].CGBILLMX</td>
+                                                        }
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            物料编码
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].WLH</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            总数量
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].ALLBOXCOUNT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            该托数量
+                                                        </td>
+                                                        <td class="print_page_td_noborder4">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].RESDUESL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="print_page_td_noborder4">
+                                                            物料描述
+                                                        </td>
+                                                        <td class="print_page_td_noborder4" colspan="2">@Model[i].MES_TM_TMINFO_LIST_CHILD[a].WLMS</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="print_page_td_haveborder12" colspan="3"></td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        }
+    }
+}

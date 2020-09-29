@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "设备信息查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    //string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="print">{{scom.c_gQRcode}}</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="qyzt">
+    {{# if(d.ISACTION == 1){ }}
+    {{scom.c_enable}}
+    {{# }else if(d.ISACTION == 0){ }}
+    {{scom.c_disable}}
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_messet">MES系统设置</a>
+    <a><cite lid="vi_messbxxcx">设备信息查询</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lid="vi_select">查询</button>
+            <button id="btn_plqd" class="layui-btn" lid="vi_plscewm">批量生成二维码</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_gc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gc" lay-filter="cx_gc">
+                    <option value="" selected="selected" lid="vi_option">请选择</option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                    }
+                </select>
+            </div>
+            <label class="layui-form-label" lid="vi_gzzx">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gzzx" lay-filter="cx_gzzx">
+                    <option value="" selected="selected" lid="vi_option">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label" lid="vi_sbh">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="cx_sbh" lay-filter="cx_sbh">
+                    <option value="" selected="selected" lid="vi_option">请选择</option>
+                </select>
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_sb" lay-filter="tb_sb"></table>
+
+    </div>
+</div>
+
+<div id="div_QD" class="layui-form" style="width:300px; height:300px; vertical-align: middle; text-align: center;" hidden>
+    <img id="ImagePic" alt="Base64 encoded image" width="200" height="200" />
+    <br />
+    <h2 id="result"></h2>
+</div>
+
+<div id="div_QDimg" class="layui-form" style="vertical-align: middle; text-align: center;" hidden>
+    <img id="img1" alt="QDCode image" width="400" height="400" />
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/SBSelect")
+}

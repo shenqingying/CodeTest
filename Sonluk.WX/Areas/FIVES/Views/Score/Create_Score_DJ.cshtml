@@ -1,0 +1,91 @@
+﻿
+@using Sonluk.UI.Model.S5.SY_CHECKPOINTService;
+@using Sonluk.UI.Model.S5.SY_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "检查评分";
+    Session["TITLENAME"] = "检查评分";
+    FIVES_SY_CHECKPOINT_CREATE data = ViewBag.data;
+
+    Sonluk.UI.Model.S5.SY_DICTService.FIVES_SY_DICT[] SHOWNAME = ViewBag.SHOWNAME;
+}
+<style>
+
+    .layui-table-cell {
+        height: auto;
+    }
+    .layui-table-cell, .layui-table-tool-panel li {
+        overflow: auto;
+        white-space: normal;
+    }
+</style>
+<div style="position:fixed;top:0;width:100%;background-color:#ffffff;z-index:999">
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_save">提交</a>
+    </div>
+</div>
+<br /><br /><br /><br />
+<div class="page__hd">
+    <h1 class="page__title" style="text-align:center;">@data.FIVES_SY_CHECKPOINT.POINTMS</h1>
+    <div class="weui-cells__title">检查点位置：@data.JydStr</div>
+    @{
+        string GW = data.GWLIST[0].OBJ2NAME;
+        for (int i = 1; i < data.GWLIST.Length; i++)
+        {
+            GW = GW + "、" + data.GWLIST[i].OBJ2NAME;
+        }
+    }
+    <div class="weui-cells__title">岗位负责人：@GW</div>
+    <div class="weui-cells__title">部&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp门：@data.FIVES_STAFF_DEP.DEPTNAME</div>
+    <div class="weui-cells__title" id="div_name" hidden>点&nbsp检&nbsp人&nbsp员：@ViewBag.NAME</div>
+
+    <div id="div_jump" class="weui-cells weui-cells_form" hidden>
+
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">点检人员：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="select_SHOWNAME" class="weui-select">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < SHOWNAME.Length; i++)
+                    {
+                        <option value="@SHOWNAME[i].DICID">@SHOWNAME[i].DICNAME</option>
+                    }
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">当前位置：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="address" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="weui-cells weui-cells_form">
+    <div>
+    </div>
+    <table id="result" lay-filter="result"></table>
+    <div class="weui-cells__title">反馈</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea id="txt_zp" class="weui-textarea" placeholder="请输入反馈" rows="3"></textarea>
+                <div class="weui-textarea-counter"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="appid" value="@ViewBag.AppID" hidden />
+<input id="ISNEED" value="@data.FIVES_SY_CHECKPOINT.ISNEED" hidden />
+<input id="pointid" value="@data.FIVES_SY_CHECKPOINT.POINTID" hidden />
+<input id="DID" value="@data.FIVES_SY_CHECKPOINT.DJ" hidden />
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/Score/Create_Score_DJ")
+}

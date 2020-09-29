@@ -1,0 +1,316 @@
+﻿@{
+    ViewBag.Title = "成品货物标识(生产)组合装";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string mypw = "";
+    if (Session["MYPW"] != null)
+    {
+        mypw = Session["MYPW"].ToString();
+    }
+}
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="ISZJ" value="{{d.AUFNR}}" title="主键" lay-filter="ISZJ" {{ d.ISZJ == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>WMS入库标识</a>
+    <a><cite>成品货物标识(生产) </cite></a>
+    <a><cite>组合装</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" onclick="window.close();">返回</button>
+        <button class="layui-btn" id="btn_find_qr">查询</button>
+        <button class="layui-btn" id="btn_find_qrgl">确认关联</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">销售订单:</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_xsbill" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">托数:</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_ts" autocomplete="off" class="layui-input" value="1">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">条码</label>
+            <div class="layui-input-block" style="width: 435px;">
+                <textarea id="find_erpno" placeholder="请扫描工单" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_tm_zhz" lay-filter="tb_tm_zhz"></table>
+</div>
+<script>
+    var all_fy = 1;
+    var all_fysl = 12;
+    var all_limits = [12, 36, 108, 324, 972, 3000];
+    var IV_BOX = "";
+    layui.use(['form', 'laydate', 'element', 'laydate', 'table'], function () {
+        var layer = layui.layer
+            , laydate = layui.laydate;
+        var table = layui.table;
+        var form = layui.form;
+        laydate.render({
+            elem: '#find_cjrq_s'
+        });
+        laydate.render({
+            elem: '#find_cjrq_e'
+        });
+        band_tb_tm_zhz_data([]);
+        $("#btn_tmgl_zh").click(function () {
+            window.open("../BC_TM/RKBS_F_ZH_MANAGE", "_blank");
+        });
+        $("#btn_find_qr").click(function () {
+            banddate();
+        });
+        $("#btn_find_qrgl").click(function () {
+            var table_tb_tm_zhz = table.cache.tb_tm_zhz;
+            if (isNaN(Number($("#find_ts").val()))) {
+                if (table_tb_tm_zhz[a].LGORT == "") {
+                    errormsg("托数需要为数字");
+                    return false;
+                }
+            }
+            for (var a = 0; a < table_tb_tm_zhz.length; a++) {
+                if (table_tb_tm_zhz[a].GDZT != "REL" && table_tb_tm_zhz[a].GDZT != "") {
+                    errormsg(table_tb_tm_zhz[a].AUFNR + "状态为" + table_tb_tm_zhz[a].GDZT + "不允许关联");
+                    return false;
+                }
+                if (table_tb_tm_zhz[a].LGORT == "") {
+                    errormsg(table_tb_tm_zhz[a].AUFNR + "库存地点不能为空");
+                    return false;
+                }
+                if (table_tb_tm_zhz[a].CHARG == "") {
+                    errormsg(table_tb_tm_zhz[a].AUFNR + "批次不能为空");
+                    return false;
+                }
+                if (isNaN(Number(table_tb_tm_zhz[a].BTSL))) {
+                    errormsg(table_tb_tm_zhz[a].AUFNR + "本托数量需要为数字");
+                    return false;
+                }
+                if (isNaN(Number(table_tb_tm_zhz[a].XZS))) {
+                    errormsg(table_tb_tm_zhz[a].AUFNR + "箱只数需要为数字");
+                    return false;
+                }
+            }
+            var datastring = [];
+            for (var a = 0; a < table_tb_tm_zhz.length; a++) {
+                var dataline = {
+                    ERPNO: table_tb_tm_zhz[a].AUFNR,
+                    SL: table_tb_tm_zhz[a].BTSL,
+                    MOVETYPE: "F",
+                    KCDD: table_tb_tm_zhz[a].LGORT,
+                    PC: table_tb_tm_zhz[a].CHARG,
+                    DCSLMBSL: table_tb_tm_zhz[a].XZS
+
+                };
+                datastring.push(dataline);
+            }
+            var APIHEADER = [
+                {
+                    KEY: "ISZH",
+                    VALUES: "1"
+                },
+                {
+                    KEY: "ZHCOUNT",
+                    VALUES: $("#find_ts").val()
+                }
+            ];
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../BC_TM/API_RETURN_STRING_json",
+                data: {
+                    apihsm: "MES/TM/INSERT_WLKCBS",
+                    body: JSON.stringify(datastring),
+                    APIHEADER: JSON.stringify(APIHEADER)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.success == true) {
+                        layer.msg("生成成功");
+                        layer.close(index);
+                    }
+                    else {
+                        if (resdata.messages.length > 0) {
+                            errormsg(resdata.messages[0].message);
+                        }
+                    }
+                }
+            });
+        });
+        form.on('checkbox(ISZJ)', function (obj) {
+            var aufnr = this.value;
+            var table_tb_tm_zhz = table.cache.tb_tm_zhz;
+            for (var a = 0; a < table_tb_tm_zhz.length; a++) {
+                if (table_tb_tm_zhz[a].AUFNR == aufnr) {
+                    table_tb_tm_zhz[a].ISZJ = 1;
+                }
+                else {
+                    table_tb_tm_zhz[a].ISZJ = 0;
+                }
+            }
+            band_tb_tm_zhz_data(table_tb_tm_zhz);
+        });
+        table.on('tool(tb_tm_zhz)', function (obj) {
+            var dataline = obj.data;
+            var layEvent = obj.event;
+            if (layEvent === 'delete') {
+                //layer.confirm('是否删除？', function (index) {
+
+                //});
+                var table_tb_tm_zhz = table.cache.tb_tm_zhz;
+                var table_tb_tm_zhz_new = [];
+                var issczj = 0;
+                for (var a = 0; a < table_tb_tm_zhz.length; a++) {
+                    if (table_tb_tm_zhz[a].AUFNR != dataline.AUFNR) {
+                        table_tb_tm_zhz_new.push(table_tb_tm_zhz[a]);
+                    }
+                    else {
+                        if (table_tb_tm_zhz[a].ISZJ == 1) {
+                            issczj = 1
+                        }
+                    }
+                }
+                if (table_tb_tm_zhz_new.length > 0 && issczj == 1) {
+                    table_tb_tm_zhz_new[0].ISZJ = 1;
+                }
+                band_tb_tm_zhz_data(table_tb_tm_zhz_new);
+            }
+        });
+
+    });
+
+    function banddate() {
+
+        var NOBILL = $('#find_xsbill').val();
+        var text = "";
+        if (NOBILL == "") {
+            errormsg("请输入销售订单号");
+            return false;
+        }
+        else if ($('#find_erpno').val() != "") {
+            var wbtext = $('#find_erpno').val();
+            var wbtexttmlist = wbtext.split('\n');
+            var datalist = [];
+            for (var a = 0; a < wbtexttmlist.length; a++) {
+                if (wbtexttmlist[a] != "") {
+                    if (wbtexttmlist[a].length != 8) {
+                        errormsg(wbtexttmlist[a] + "工单格式不正确");
+                        return false;
+                    }
+                    for (var b = 0; b < datalist.length; b++) {
+                        if (wbtexttmlist[a] == datalist[b]) {
+                            errormsg(wbtexttmlist[a] + "工单已存在");
+                            return false;
+                        }
+                    }
+                    datalist.push(wbtexttmlist[a]);
+                }
+            }
+            for (var i = 0; i < datalist.length; i++) {
+                if (i = 0) {
+                    text = text + datalist[i];
+                }
+                else {
+                    text = text + "," + datalist[i];
+                }
+            }
+        }
+        else {
+            var datastring = {
+                KDAUF: NOBILL,
+                GDLIST: text,
+                LB: 5
+            };
+            var APIHEADER = [];
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../BC_TM/API_RETURN_STRING_json",
+                data: {
+                    apihsm: "MES/PD/SELECT_GD_SYNC",
+                    body: JSON.stringify(datastring),
+                    APIHEADER: JSON.stringify(APIHEADER)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.type == "S") {
+                        var fyall = Math.ceil(resdata.data.length / all_fysl);
+                        if (fyall > all_fy - 1) {
+                        }
+                        else {
+                            all_fy = Number(fyall);
+                        }
+                        for (var a = 0; a < resdata.data.length; a++) {
+                            if (a == 0) {
+                                resdata.data[a].ISZJ = 1;
+                            }
+                            else {
+                                resdata.data[a].ISZJ = 0;
+                            }
+                        }
+                        band_tb_tm_zhz_data(resdata.data);
+                    }
+                    else {
+                        layer.msg(resdata.messages[0].message);
+                    }
+                }
+            });
+        }
+    }
+    function band_tb_tm_zhz_data(data) {
+        var table = layui.table;
+        table.render({
+            done: function (res, curr, count) {
+                for (var i = 0; i < all_limits.length; i++) {
+                    if (all_limits[i] >= res.data.length) {
+                        all_fysl = all_limits[i];
+                        break;
+                    }
+                }
+                all_fy = curr;
+            },
+            height: 'full-' + "350",
+            elem: '#tb_tm_zhz',
+            data: data,
+            cols: [[ //表头
+                { type: 'numbers', title: '序号' },
+                { field: 'AUFNR', title: 'ERP工单', width: 120 },
+                { field: 'WERKS', title: '工厂', width: 105 },
+                { field: 'MATNR', title: '物料编码', width: 120 },
+                { field: 'MAKTX', title: '物料描述', width: 115 },
+                { field: 'KDAUF', title: '销售订单', width: 160 },
+                { field: 'KDPOS', title: '销售项目', width: 130 },
+                { field: 'PSMNG', title: '订单数量', width: 100 },
+                { field: 'AMEIN', title: '基本单位', width: 120 },
+                { field: 'GLCOUNT', title: '已关联数', width: 100 },
+                { field: 'ISZJ', title: '主键', width: 110, templet: '#checkboxTpl', unresize: true },
+                { field: 'LGORT', title: '库存地点', width: 100, edit: 'text' },
+                { field: 'CHARG', title: '批次', width: 100, edit: 'text' },
+                { field: 'BTSL', title: '本托数量', width: 100, edit: 'text' },
+                { field: 'XZS', title: '箱只数', width: 100, edit: 'text' },
+                { fixed: 'right', width: 120, align: 'center', toolbar: '#barkh', title: '操作' }
+            ]]
+            , page: false
+            , limit: 9999
+        });
+    }
+    function errormsg(data) {
+        layer.alert(data, {
+            icon: 2,
+            shadeClose: true,
+            skin: 'layer-ext-moon',
+            title: "错误提示"
+        });
+    }
+</script>

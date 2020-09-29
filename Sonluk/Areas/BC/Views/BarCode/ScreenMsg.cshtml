@@ -1,0 +1,53 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService
+@model List<ScreenInfo>
+@{
+    ViewBag.Title = "显示屏消息设置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string warhouse = "1";
+    HttpCookie cookie = Request.Cookies.Get("PickingtaskConfig");
+    if (cookie != null)
+    {
+        warhouse = cookie.Value;
+    }
+}
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">拣配</a>
+        >
+        <a href="#">大屏消息</a>
+    </div>
+</div>
+<div class="panel-flow">
+    <input type="hidden" id="bc-config-ScreenInfoSet" value="@Url.Action("ScreenInfoSet", "BarCode", new { area = "BC" })">
+    <input type="hidden" id="bc-config-ScreenInfoGet" value="@Url.Action("ScreenInfoGet", "BarCode", new { area = "BC" })">
+    <table class="panel-flow-table">
+        @*<tr>
+            <td class="panel-flow-table-title" colspan="2">显示屏消息设置</td>
+        </tr>*@
+        <tr>
+            <td class="panel-flow-table-title">显示屏：</td>
+            <td class="panel-flow-table-title">
+                <select id="screendrop">
+                    @foreach (ScreenInfo node in Model)
+                    {
+                        <option value="@node.ScreenID" @if (warhouse.Equals(node.ScreenID.ToString())) { @("selected")  }>@node.ScreenName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title">消息：</td>
+            <td class="panel-flow-table-title">
+                <textarea id="screenmsg" class="panel-search-textarea-target" rows="5" cols="50">@ViewBag.PickingtaskMessage</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title"><div class="sonluk-button" id="submit">确定</div></td>
+            <td class="panel-flow-table-content panel-flow-success" id="result"></td>
+        </tr>
+    </table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/bc/picking-task-screenmsg")
+}

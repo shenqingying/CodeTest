@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "版本信息";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="taiTpl">
+    {{#  if(d.NEWBB == d.LASTNEWBB){ }}
+    
+    {{#  }else { }}
+    <span style="color: #FF0000">版本不同</span>
+    {{#  } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>版本信息</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_DC_all" class="layui-btn">数据导出</button>
+        </div>
+        <table class="layui-hide" id="tb_bbxx" lay-filter="tb_bbxx"></table>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/BBXX")
+}

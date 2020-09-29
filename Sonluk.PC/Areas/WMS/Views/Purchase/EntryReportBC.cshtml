@@ -1,0 +1,371 @@
+﻿@{
+    ViewBag.Title = "包材送检单查询";
+}
+
+@Html.Partial("~/Areas/WMS/Views/Shared/WMSHttp.cshtml")
+
+<span class="layui-breadcrumb"></span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn layui-btn-disabled" onclick="exportER()" lid="c_export">导出</button>
+        <button class="layui-btn" onclick="searchER()" lid="c_search">查询</button>
+    </div>
+    <br />
+    <form id="Form_EntryReportBC">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="c_GC+c_COLON">工厂：</label>
+                <div class="layui-input-inline">
+                    <select name="GC" lay-filter="GC"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="cpzt+c_COLON">产品状态：</label>
+                <div class="layui-input-inline">
+                    <select name="CPZT" lay-filter="CPZT"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="ejzt+c_COLON">二级状态：</label>
+                <div class="layui-input-inline">
+                    <select name="CPMXZT"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="zt+c_COLON">状态：</label>
+                <div class="layui-input-inline">
+                    <select name="GZZT">
+                        <option value="-1" lid="c_selectplz">请选择</option>
+                        <option value="0" lid="cszt">初始状态</option>
+                        <option value="1" lid="yhdj">检验登记</option>
+                        <option value="2" lid="wlsh">物流收货</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="gysxx+c_COLON">供应商信息：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="GYSNAME" class="layui-input" onkeydown="onNLC(event)">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="wlxx+c_COLON">物料信息：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="WLMS" class="layui-input" onkeydown="onNLC(event)">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="sjd+c_COLON">送检单：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="SHNO" class="layui-input" onkeydown="onNLC(event)">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="xsdd+c_COLON">销售订单：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="XSBILLNO" class="layui-input" onkeydown="onNLC(event)">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="xsxm+c_COLON">销售项目：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="XSBILLMXNO" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="cgdd+c_COLON">采购订单：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CGDDNO" class="layui-input" onkeydown="onNLC(event)">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="cgxm+c_COLON">采购项目：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CGDDMXNO" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="shrq+c_COLON">收货日期：</label>
+                <div class="layui-input-inline" style="width:100px;">
+                    <input type="text" name="SHSJKS" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">-</div>
+                <div class="layui-input-inline" style="width:100px;">
+                    <input type="text" name="SHSJJS" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="jyrq+c_COLON">检验日期：</label>
+                <div class="layui-input-inline" style="width:100px;">
+                    <input type="text" name="JYTIMEKS" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">-</div>
+                <div class="layui-input-inline" style="width:100px;">
+                    <input type="text" name="JYTIMEJS" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="layui-hide" id="ERList" lay-filter="ERList"></table>
+</div>
+
+<script type="text/html" id="tpl_GZZT">
+    {{# if(d.GZZT==0){ }}
+    <div>{{slv.cszt}}</div>
+    {{# } else if(d.GZZT==1){ }}
+    <div>{{slv.yhdj}}</div>
+    {{# } else if(d.GZZT==2){ }}
+    <div>{{slv.wlsh}}</div>
+    {{# } else { }}
+    <div>{{slv.wzzt}}</div>
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_WLPZ">
+    {{# if(d.WLPZ){ }}
+    <div>{{d.WLPZ}}/{{d.WLPZYEAR}}/{{d.WLPZMX}}</div>
+    {{# } }}
+</script>
+
+@section scripts {
+    <script>
+        sonluk.global.getResources();
+        sonluk.global.getResources('WMS/Purchase', 'lv');
+        var sc = sonluk.values.global.common;
+        var slv = sonluk.values.global.lv;
+        var cache = {};
+        var subCache = {
+            ERListData: []
+        };
+        layui.use(['table', 'layer', 'form', 'element', 'laydate'], function () {
+            sonluk.layui.breadcrumbefix();
+            sonluk.layuiCatch();
+            var layer = layui.layer;
+            var form = layui.form;
+            var assist = sonluk.layui;
+            var msg = sonluk.msg;
+            var searchForm = $('#Form_EntryReportBC')[0];
+            var ERListCols = [
+                { fixed: 'left', type: 'numbers', title: sc.c_Number },
+                { fixed: 'left', field: 'SHNO', width: 120 },
+                { fixed: 'left', field: 'SHMXNO' },
+                { field: 'WLH', width: 120 },
+                { field: 'WLMS', width: 350, align: 'left' },
+                { field: 'XSBILLNO', width: 100 },
+                { field: 'XSBILLMXNO' },
+                { field: 'CGSL', align: 'right' },
+                { field: 'SJSL', align: 'right' },
+                { field: 'UNITNAME' },
+                { field: 'CPZTNAME' },
+                { field: 'CPMXZTNAME' },
+                { templet: '#tpl_GZZT', title: slv.ERList.GZZT, width: 90 },
+                { field: 'WLPZ', width: 110 },
+                { field: 'WLPZYEAR', width: 65 },
+                { field: 'WLPZMX', width: 65 },
+                { field: 'GZRQ', width: 105 },
+                { field: 'REMARK', align: 'left' },
+                { field: 'CGDDNO', width: 110 },
+                { field: 'CGDDMXNO' },
+                { field: 'GYSNO', width: 90 },
+                { field: 'GYSNAME', width: 200, align: 'left' },
+                { field: 'GC', width: 70 },
+                { field: 'JHDD' },
+                { field: 'CJTIME', width: 170 },
+                { field: 'CJRNAME', width: 90 },
+                { field: 'XGTIME', width: 170 },
+                { field: 'XGRNAME', width: 90 },
+                { field: 'JYTIME', width: 170 },
+                { field: 'JYRNAME', width: 90 },
+                { field: 'SHSJ', width: 170 },
+                { field: 'SHRNAME', width: 90 },
+                { field: 'HEADTEXT', align: 'left' }
+            ]
+
+            initAll();
+
+            function initAll() {
+                assist.laydate.render({ elem: '[name=SHSJKS]' });
+                assist.laydate.render({ elem: '[name=SHSJJS]' });
+                assist.laydate.render({ elem: '[name=JYTIMEKS]' });
+                assist.laydate.render({ elem: '[name=JYTIMEJS]' });
+                assist.layer.hover('[onclick="exportER()"]', slv.msg9, function () { return $('[onclick="exportER()"]').hasClass('layui-btn-disabled'); }, 1);
+                form.on('select(GC)', function (data) {
+                    if (data.value == '') {
+                        $(searchForm['CPMXZT']).empty();
+                        $(searchForm['CPZT']).empty();
+                        form.render();
+                    }
+                    else initSelector(1);
+                });
+                form.on('select(CPZT)', function (data) {
+                    if (data.value == '') {
+                        $(searchForm['CPMXZT']).empty();
+                        form.render();
+                    }
+                    else initSelector(2);
+                });
+                initSelector();
+                //$('[name=SHSJKS]').val(sonluk.date.now());
+                //$('[name=JYTIMEKS]').val(sonluk.date.now());
+            }
+
+            function initSelector(id) {
+                id = id || 0;
+                var loading = layer.load(1);
+                switch (id) {
+                    case 1:
+                        wmshttp.get({
+                            url: 'Helper/Dic/ReadTypemxs',
+                            query: {
+                                factoryCode: searchForm['GC'].value,
+                                typeID: 9
+                            },
+                            success: function (data) {
+                                if (data.success) {
+                                    $(searchForm['CPMXZT']).empty();
+                                    $(searchForm['CPZT']).empty();
+                                    $(searchForm['CPZT']).append(new Option(sc.c_selectplz, ""));
+                                    $.each(data.data, function (index, item) {
+                                        $(searchForm['CPZT']).append(new Option(item.MXNAME, item.ID));
+                                    })
+                                    form.render();
+                                }
+                                else msg.error(data.messages);
+                            },
+                            complete: function () {
+                                layer.close(loading);
+                            }
+                        });
+                        break;
+                    case 2:
+                        wmshttp.get({
+                            url: 'Helper/Dic/ReadTypemxs',
+                            query: {
+                                factoryCode: searchForm['GC'].value,
+                                fid: searchForm['CPZT'].value
+                            },
+                            success: function (data) {
+                                if (data.success) {
+                                    $(searchForm['CPMXZT']).empty();
+                                    $(searchForm['CPMXZT']).append(new Option(sc.c_selectplz, ""));
+                                    $.each(data.data, function (index, item) {
+                                        $(searchForm['CPMXZT']).append(new Option(item.MXNAME, item.ID));
+                                    })
+                                    form.render();
+                                }
+                                else msg.error(data.messages);
+                            },
+                            complete: function () {
+                                layer.close(loading);
+                            }
+                        });
+                        break;
+                    default:
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("GCList", "MOULD", new { area = "MES" })",
+                            success: function (data) {
+                                var rst = JSON.parse(data);
+                                $(searchForm['GC']).empty();
+                                $(searchForm['GC']).append(new Option(sc.c_selectplz, ""));
+                                $.each(rst, function (index, item) {
+                                    $(searchForm['GC']).append(new Option(item.GC + "-" + item.GCMS, item.GC));
+                                })
+                                if (rst.length == 1) {
+                                    $(searchForm['GC']).val(rst[0].GC);
+                                    initSelector(1);
+                                }
+                                form.render();
+                            },
+                            complete: function () {
+                                layer.close(loading);
+                            }
+                        });
+                }
+            }
+
+            function initTable(data) {
+                data = data || subCache.ERListData;
+                data.sort(itemCompare);
+                var fixHeight = searchForm.clientHeight + 250;
+                assist.table.render({
+                    elem: '#ERList',
+                    data: data,
+                    height: 'full-' + fixHeight,
+                    cols: [ERListCols],
+                    page: {
+                        limits: [10, 50, 100, 200, 500],
+                        limit: 10,
+                        curr: 1,
+                    }
+                });
+                if (data && data.length > 0) $('[onclick="exportER()"]').removeClass('layui-btn-disabled');
+                else $('[onclick="exportER()"]').addClass('layui-btn-disabled');
+            }
+
+            function itemCompare(obj1, obj2) {
+                var SJD1 = obj1.SHNO || 0;
+                var SJD2 = obj2.SHNO || 0;
+                var SJDMX1 = obj1.SHMXNO || 0;
+                var SJDMX2 = obj2.SHMXNO || 0;
+                if (SJD1 < SJD2) return -1;
+                else if (SJD1 > SJD2) return 1;
+                else {
+                    if (SJDMX1 < SJDMX2) return -1;
+                    else if (SJDMX1 > SJDMX2) return 1;
+                    else return 0;
+                };
+            }
+
+            window.onNLC = function (event) {
+                if (event.keyCode == "13") searchER();
+            }
+
+            window.exportER = function () {
+                if ($('[onclick="exportER()"]').hasClass('layui-btn-disabled')) return;
+                var titles = [];
+                for (let key in slv.ERList) {
+                    var obj = {};
+                    if (key == 'GZZT') obj.Key = 'GZZTNAME';
+                    else obj.Key = key;
+                    obj.Name = slv.ERList[key];
+                    obj.Width = slv.ERListWidth[key];
+                    obj.Align = slv.ERListAlign[key];
+                    titles.push(obj);
+                }
+                sonluk.http.download({
+                    url: '@Url.Action("ExportEntryReport", "Purchase", new { area = "WMS" })',
+                    get: false,
+                    data: {
+                        input: {
+                            Query: cache,
+                            Title: titles
+                        }
+                    }
+                });
+            }
+
+            window.searchER = function () {
+                cache = sonluk.convert.toObject(searchForm);
+                delete cache[""];
+                cache.LB = 3;
+                var loading = layer.load(1);
+                wmshttp.post({
+                    url: 'WMS/CG_SHNO/READ_ITEM',
+                    data: cache,
+                    success: function (data) {
+                        if (data.success) initTable(data.data);
+                        else msg.error(data.messages);
+                    },
+                    complete: function () {
+                        layer.close(loading);
+                    }
+                });
+            }
+        });
+    </script>
+}

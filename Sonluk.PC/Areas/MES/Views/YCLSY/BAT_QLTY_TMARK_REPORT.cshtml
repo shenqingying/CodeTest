@@ -1,0 +1,311 @@
+﻿@{
+    ViewBag.Title = "质量日报表（商标机）";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES查询</a>
+    <a><cite>质量日报表查询</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_export">预览报表</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_download">导出报表</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">生产线：</label>
+            <div class="layui-input-block">
+                <select name="city" lay-verify="required" id="SDLINE">
+                    <option value="">全部</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-inline">
+                <label class="layui-form-label">具体年月：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="find_data_m" autocomplete="off" class="layui-input" placeholder="请选择">
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_bd" lay-filter="tb_bd"></table>
+</div>
+<script>
+    var cacheData = [];
+    var cacheDataDisplay = [];
+    var cacheDataType = 0;
+
+    layui.use(['form', 'laydate', 'element', 'table', 'layer'], function () {
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        var table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+
+        laydate.render({
+            type: 'month',
+            elem: '#find_data_m'
+        });
+
+        list_init();
+
+        var tip_index = 0;
+        $("#btn_download").mouseenter(function () {
+            if (cacheData.MES_ZLRBB == null || cacheData.MES_ZLRBB.length == 0) tip_index = layui.layer.tips("没有需要导出的数据！", "#btn_download", { tips: [2, '#009688'], time: 0 });
+        }).mouseleave(function () {
+            layui.layer.close(tip_index);
+        });
+
+        $("#btn_export").click(function () {
+            var msdline = $("#SDLINE").val();
+            var mdatem = $("#find_data_m").val();
+            if (mdatem != '') {
+                var datastring = {
+                    SDLINE: msdline,
+                    DATES: '',
+                    DATEE: '',
+                    DATEM: mdatem
+                }
+                var loading = layer.load(1);
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    url: "../YCLSY/BAT_QLTY_TMARK_REPORT_Search",
+                    data: {
+                        datastring: JSON.stringify(datastring)
+                    },
+                    success: function (data) {
+                        cacheData = JSON.parse(data);
+                        cacheDataDisplay = JSON.parse(data).MES_ZLRBB;
+                        if (cacheData.MES_RETURN.TYPE != 'S') layer.msg(cacheData.MES_RETURN.MESSAGE);
+                        if (msdline == '') {
+                            SetMonthTable();
+                            cacheDataType = 1;
+                        }
+                        else {
+                            SetMonthSDTable();
+                            cacheDataType = 2;
+                        }
+                        layer.close(loading);
+                    }
+                });
+            }
+            else {
+                layer.msg("请选择具体年月！");
+            }
+        });
+
+        $("#btn_download").click(function () {
+            if (cacheData.MES_ZLRBB == null || cacheData.MES_ZLRBB.length == 0) { }
+            else {
+                if (cacheDataType == 1) {
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        url: "../YCLSY/BAT_QLTY_TMARK_REPORT_Export",
+                        data: {
+                            datastring: JSON.stringify(cacheData)
+                        },
+                        success: function (data) {
+                            var resdata = JSON.parse(data);
+                            if (resdata.TYPE == "S") {
+                                window.open("../YCLSY/Export_Download" + "?filename=" + resdata.MESSAGE + "&filenameout=1.0V以下不良电统计导出", "_self");
+                            }
+                            else layer.msg(resdata.MESSAGE);
+                        }
+                    });
+                }
+                else if (cacheDataType == 2) {
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        url: "../YCLSY/BAT_QLTY_TMARK_REPORT_Export_S",
+                        data: {
+                            datastring: JSON.stringify(cacheData)
+                        },
+                        success: function (data) {
+                            var resdata = JSON.parse(data);
+                            if (resdata.TYPE == "S") {
+                                window.open("../YCLSY/Export_Download" + "?filename=" + resdata.MESSAGE + "&filenameout=1.0V以下不良电统计导出", "_self");
+                            }
+                            else layer.msg("导出失败：" + resdata.MESSAGE);
+                        },
+                        error: function (XMLHttpResponse, textStatus, errorThrown) {
+                            layer.alert("导出失败：" + errorThrown);
+                        }
+                    });
+                }
+            }
+        });
+
+        function SetMonthTable() {
+            if (cacheData.MES_ZLRBB == null || cacheData.MES_ZLRBB.length == 0) {
+                $("#tb_bd").replaceWith('<table class="layui-hide" id="tb_bd" lay-filter="tb_bd"></table>');
+                $("#btn_download").addClass("layui-btn-disabled");
+            }
+            else {
+                var html = '<table id="tb_bd" border="1" cellpadding="0" cellspacing="0"><thead>'
+                    + '<tr align="center"><td colspan="20">1.0V以下不良电统计</td></tr>'
+                    + '<tr align="center"><td>项目</td><td colspan="6">隔膜纸</td><td colspan="3">锌膏</td><td colspan="4">成型</td><td colspan="4">其它</td><td></td><td></td></tr>'
+                    + '<tr align="center"><td>生产线</td><td>黑点</td><td>烫头不良</td><td>裂口穿孔</td><td>烫头破</td><td>插破</td><td>成型不良</td><td>黑头</td><td>无（缺）<br>锌膏</td><td>溢出</td><td>铜钉斜插</td><td>脱皮拉丝</td><td>刻线不良</td><td>底盖斜</td><td>铜钉脱焊</td><td>热胶注入<br>不良</td><td>外部短路</td><td>原因不明</td><td>其它</td><td>合计</td></tr>'
+                    + '<thead>'
+                ;
+                $.each(cacheDataDisplay, function (index, obj) {
+                    html = html + '<tbody><tr><td>'
+                        + obj.SDLINE + '</td><td>'
+                        + obj.HD + '</td><td>'
+                        + obj.TTBL + '</td><td>'
+                        + obj.LKCK + '</td><td>'
+                        + obj.TTP + '</td><td>'
+                        + obj.CP + '</td><td>'
+                        + obj.CXBL + '</td><td>'
+                        + obj.HT + '</td><td>'
+                        + obj.WXG + '</td><td>'
+                        + obj.YC + '</td><td>'
+                        + obj.TDXC + '</td><td>'
+                        + obj.TPLS + '</td><td>'
+                        + obj.KXBL + '</td><td>'
+                        + obj.DGX + '</td><td>'
+                        + obj.TDTH + '</td><td>'
+                        + obj.RJZRBL + '</td><td>'
+                        + obj.WBDL + '</td><td>'
+                        + obj.YYBM + '</td><td>'
+                        + obj.QT + '</td><td>'
+                        + (obj.HD
+                        + obj.TTBL
+                        + obj.LKCK
+                        + obj.TTP
+                        + obj.CP
+                        + obj.CXBL
+                        + obj.HT
+                        + obj.WXG
+                        + obj.YC
+                        + obj.TDXC
+                        + obj.TPLS
+                        + obj.KXBL
+                        + obj.DGX
+                        + obj.TDTH
+                        + obj.RJZRBL
+                        + obj.WBDL
+                        + obj.YYBM
+                        + obj.QT) + '</td></tr>';
+                });
+                html = html + '</tbody></table>'
+                $("#tb_bd").replaceWith(html);
+                $("#btn_download").removeClass("layui-btn-disabled");
+            }
+        }
+
+        function SetMonthSDTable() {
+            if (cacheData.MES_ZLRBB == null || cacheData.MES_ZLRBB.length == 0) {
+                $("#tb_bd").replaceWith('<table class="layui-hide" id="tb_bd" lay-filter="tb_bd"></table>');
+                $("#btn_download").addClass("layui-btn-disabled");
+            }
+            else {
+                var day = 0;
+                var html62 = '';
+                var html63 = '';
+                var html = '<table id="tb_bd" border="1" cellpadding="0" cellspacing="0"><thead>'
+                    + '<tr align="center"><td colspan="20">1.0V以下不良电统计</td></tr>'
+                    + '<tr align="center"><td rowspan="2">日期</td><td colspan="6">隔膜纸</td><td colspan="3">锌膏</td><td colspan="4">成型</td><td colspan="4">其它</td><td></td><td></td></tr>'
+                    + '<tr align="center"><td>黑点</td><td>烫头不良</td><td>裂口穿孔</td><td>烫头破</td><td>插破</td><td>成型不良</td><td>黑头</td><td>无（缺）<br>锌膏</td><td>溢出</td><td>铜钉斜插</td><td>脱皮拉丝</td><td>刻线不良</td><td>底盖斜</td><td>铜钉脱焊</td><td>热胶注入<br>不良</td><td>外部短路</td><td>原因不明</td><td>其它</td><td>合计</td></tr>'
+                    + '<thead>'
+                ;
+                $.each(cacheDataDisplay, function (index, obj) {
+                    if (index > 0) {
+                        if (obj.HD == 0) obj.HD = '';
+                        if (obj.TTBL == 0) obj.TTBL = '';
+                        if (obj.LKCK == 0) obj.LKCK = '';
+                        if (obj.TTP == 0) obj.TTP = '';
+                        if (obj.CP == 0) obj.CP = '';
+                        if (obj.CXBL == 0) obj.CXBL = '';
+                        if (obj.HT == 0) obj.HT = '';
+                        if (obj.WXG == 0) obj.WXG = '';
+                        if (obj.YC == 0) obj.YC = '';
+                        if (obj.TDXC == 0) obj.TDXC = '';
+                        if (obj.TPLS == 0) obj.TPLS = '';
+                        if (obj.KXBL == 0) obj.KXBL = '';
+                        if (obj.DGX == 0) obj.DGX = '';
+                        if (obj.TDTH == 0) obj.TDTH = '';
+                        if (obj.RJZRBL == 0) obj.RJZRBL = '';
+                        if (obj.WBDL == 0) obj.WBDL = '';
+                        if (obj.YYBM == 0) obj.YYBM = '';
+                        if (obj.QT == 0) obj.QT = '';
+                        day++;
+                        html = html + '<tbody><tr align="center"><td>'
+                        + day + '</td><td>'
+                        + obj.HD + '</td><td>'
+                        + obj.TTBL + '</td><td>'
+                        + obj.LKCK + '</td><td>'
+                        + obj.TTP + '</td><td>'
+                        + obj.CP + '</td><td>'
+                        + obj.CXBL + '</td><td>'
+                        + obj.HT + '</td><td>'
+                        + obj.WXG + '</td><td>'
+                        + obj.YC + '</td><td>'
+                        + obj.TDXC + '</td><td>'
+                        + obj.TPLS + '</td><td>'
+                        + obj.KXBL + '</td><td>'
+                        + obj.DGX + '</td><td>'
+                        + obj.TDTH + '</td><td>'
+                        + obj.RJZRBL + '</td><td>'
+                        + obj.WBDL + '</td><td>'
+                        + obj.YYBM + '</td><td>'
+                        + obj.QT + '</td><td>'
+                        + (obj.HD + obj.TTBL + obj.LKCK + obj.TTP + obj.CP + obj.CXBL + obj.HT + obj.WXG + obj.YC + obj.TDXC + obj.TPLS + obj.KXBL + obj.DGX + obj.TDTH + obj.RJZRBL + obj.WBDL + obj.YYBM + obj.QT) + '</td></tr>';
+                    }
+                    else if (index == 0) {
+                        html1 = '<tr align="center"><td>合计</td><td>'
+                        + obj.HD + '</td><td>'
+                        + obj.TTBL + '</td><td>'
+                        + obj.LKCK + '</td><td>'
+                        + obj.TTP + '</td><td>'
+                        + obj.CP + '</td><td>'
+                        + obj.CXBL + '</td><td>'
+                        + obj.HT + '</td><td>'
+                        + obj.WXG + '</td><td>'
+                        + obj.YC + '</td><td>'
+                        + obj.TDXC + '</td><td>'
+                        + obj.TPLS + '</td><td>'
+                        + obj.KXBL + '</td><td>'
+                        + obj.DGX + '</td><td>'
+                        + obj.TDTH + '</td><td>'
+                        + obj.RJZRBL + '</td><td>'
+                        + obj.WBDL + '</td><td>'
+                        + obj.YYBM + '</td><td>'
+                        + obj.QT + '</td><td>'
+                        + (obj.HD + obj.TTBL + obj.LKCK + obj.TTP + obj.CP + obj.CXBL + obj.HT + obj.WXG + obj.YC + obj.TDXC + obj.TPLS + obj.KXBL + obj.DGX + obj.TDTH + obj.RJZRBL + obj.WBDL + obj.YYBM + obj.QT) + '</td></tr>'
+                        + '</tbody></table>';
+                    }
+                });
+                html = html + html1;
+                $("#tb_bd").replaceWith(html);
+                $("#btn_download").removeClass("layui-btn-disabled");
+            }
+        }
+
+        function list_init() {
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "../YCLSY/BAT_MT_Search",
+                data: {
+                    mt: 1
+                },
+                success: function (data) {
+                    $.each(JSON.parse(data), function (index, item) {
+                        $('#SDLINE').append(new Option(item.DCXH, item.DCXH));
+                    })
+                    form.render();
+                }
+            });
+        }
+    });
+
+</script>

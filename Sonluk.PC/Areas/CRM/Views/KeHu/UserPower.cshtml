@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "UserPower";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Session["TITLENAME"] = "用户权限";
+}
+
+<script type="text/html" id="tb_group">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>用户权限</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">分组：</label>
+        @*<div class="layui-input-inline" style="width:100px;">
+                <select id="group" lay-filter="group">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>*@
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                    <input type="hidden" name="selectID" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="classtree"></ul>*@
+                        <div id="classtree"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <label class="layui-form-label">人员名称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+        </div>
+
+        <button id="btn_select" class="layui-btn" style="width:120px;">查询</button><br />
+
+        <table id="result" lay-filter="result"></table>
+        <button id="insert_to_group" class="layui-btn">新增</button>
+        @*<button id="delete_area" class="layui-btn">删除</button>*@
+    </div>
+
+</div>
+
+
+
+@*新增人员到组的界面*@
+<div id="008" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_group" class="layui-btn" lay-filter="btn_save_group">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">人员：</label>
+        <div class="layui-input-inline">
+            <select id="kehuid" lay-filter="kehuid" lay-search>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分配到组：</label>
+        @*<div class="layui-input-inline" style="width:150px;">
+                <select id="to_group008" lay-filter="to_group008">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>*@
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="insert_treeclass">请选择</span>
+                    <input type="hidden" name="selectID" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="intsert_classtree"></ul>*@
+                        <div id="intsert_classtree"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/StaffPower")
+}

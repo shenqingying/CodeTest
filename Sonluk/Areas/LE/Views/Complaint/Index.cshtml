@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "投诉-查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime date = DateTime.Now;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+<input type="hidden" value="@Url.Action("Edit", "Complaint")" id="complaint-edit" />
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">托运单</a>
+        >
+        <a href="#">投诉</a>
+        >
+        <a href="#">查询</a>
+    </div>
+</div>
+<div class="panel-search">
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">物流公司</div>
+        <input type="text" class="panel-search-item-input drop-list-target-carrier input-width-cn-carrier" />
+        <input type="hidden" class="panel-search-item-input-hidden" id="Carrier-ID" value="" />
+        <input type="hidden" value="@Url.Action("_List", "Carrier")" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">投诉类型</div>
+        <input type="text" class="panel-search-item-input drop-list-target-type input-width-cn-complaint-type" />
+        <input type="hidden" class="panel-search-item-input-hidden"  id="TypeID" value="-1"/>
+        <input type="hidden" value="@Url.Action("_Type", "Complaint")" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">托运单ID</div>
+        <input type="text" class="panel-search-item-input input-width-cn-serial-number" id="ConsignmentNote" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">退回日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="ReturnDate" value="@date.ToString("yyyy-MM-dd")" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="ReturnDateEnd" value="@date.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">应到日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="AppointedDeliveryDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="AppointedDeliveryDateEnd" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">联系函</div>
+        <input type="text" class="panel-search-item-input input-width-cn-serial-number" id="ContactLetter" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">交货单</div>
+        <input type="text" class="panel-search-item-input input-width-cn-delivery" id="Delivery" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">物料编号</div>
+        <input type="text" class="panel-search-item-input input-width-cn-material" id="Material" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">物料描述</div>
+        <input type="text" class="panel-search-item-input" id="MaterialDescription" />
+    </div>
+    <div class="panel-search-item">
+        <input type="radio" name="Status" value="0" checked="checked"/> 未处理
+        <input type="radio" name="Status" value="1" /> 完成
+        <input type="radio" name="Status" value="2" /> 全部
+    </div>
+    <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+    <div class="panel-search-items-submit sonluk-button panel-search-button">汇&nbsp;&nbsp;总</div>
+    <input type="hidden" value="@Url.Action("_Items", "Complaint")">
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+    <input type="hidden" value="@Url.Action("_List", "Complaint")">
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="export-button sonluk-table-control-button complaint-export">导出</div>
+                    <input type="hidden" value="@Url.Action("_PrepareExport", "Complaint")">
+                    <input type="hidden" value="@Url.Action("_Export", "Complaint")">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="complaint"></div>
+    </div>
+</div>
+<!--下拉列表-->
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/le/complaint-index")
+}

@@ -1,0 +1,1385 @@
+﻿@{
+    string lxrnp = System.Configuration.ConfigurationManager.AppSettings["lxr_pic"];  //联系人图片网络地址,不带文件名
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "修改客户";
+
+
+}
+<script>
+    function send(id, value, layero) {
+        var SendValue = $(id, layero.find("iframe")[0].contentWindow.document);
+        SendValue.attr("value", value);
+
+    }
+
+
+</script>
+
+
+
+
+
+<script type="text/html" id="bar_select_jxs">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<script type="text/html" id="bar_select_market">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<script type="text/html" id="bar_select_lka">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+
+@*<script type="text/html" id="tb_partner">
+        <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    </script>*@
+<script type="text/html" id="tb_display">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="img">照片</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="tb_pic_display">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="tb_pic_mentou">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="tb_post">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="tb_contact">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+
+
+@*<script type="text/html" id="tb_wangdian">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </script>
+    <script type="text/html" id="tb_lka">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </script>*@
+
+
+
+
+
+<script type="text/html" id="tb_group">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="tb_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="marry_Tpl">
+    {{# if(d.HYZK == 1){ }}
+    未婚
+    {{# }else if(d.HYZK == 2){ }}
+    已婚
+    {{# }else if(d.HYZK == 3){ }}
+    离婚
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="major_Tpl">
+    {{# if(d.SFZYLXR == 1){ }}
+    是
+    {{# }else if(d.SFZYLXR == 0){ }}
+    否
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="display_Tpl">
+    {{# if(d.CLLX == 1){ }}
+    主陈列
+    {{# }else if(d.CLLX == 2){ }}
+    二次陈列
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="partner_Tpl">
+    {{# if(d.HZHBGN == "WE"){ }}
+    送达方
+    {{# }else if(d.HZHBGN == "RE"){ }}
+    收票房
+    {{# }else if(d.HZHBGN == "RG"){ }}
+    付款方
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+
+
+<div >
+
+    @*保存*@
+    <div id="div8" hidden>
+        <div class="layui-form-item" style="width:100%;background-color: #009688;">
+
+            <button id="btn_save_submit" class="layui-btn" style="width:50%">保存并提交OA</button>
+            <button id="btn_save_only" class="layui-btn" style="width:49%; margin-left:0">保存</button>
+
+        </div>
+
+        <div >
+            <label class="layui-form-label" style="width:130px">客户类型：</label>
+            <div class="layui-input-inline" style="width:580px;">
+                <select id="Insert_KHtype" lay-filter="Insert_KHtype" disabled>
+                    <option value="0" selected="selected">请务必先选一下客户的类型</option>
+                    <option value="1">经销商</option>
+                    <option value="2">电商</option>
+                    <option value="4">B2B</option>
+                    <option value="3">直营卖场</option>
+                    <option value="5">网点终端</option>
+                    <option value="6">批发</option>
+                    <option value="7">LKA终端</option>
+                </select>
+            </div>
+
+            <label class="layui-form-label" style="width:190px;">客户ID：</label>
+            <div class="layui-input-inline" style="width:200px;">
+                <input id="CRMid1" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+
+        </div>
+        <div id="LKAtype"  hidden>
+            <label class="layui-form-label" style="width:130px;">LKA类型：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <select id="Insert_LKAtype" lay-filter="Insert_LKAtype">
+                    <option value="0" selected="selected"></option>
+                    <option value="1">LKA系统</option>
+                    <option value="2">LKA网点</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+<div id="from1" >
+    @* 经销商/电商/B2B *@
+    <div id="div1"  hidden>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">基本信息</h2>
+                <div class="layui-colla-content layui-show">
+                    @* 第一行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户名称：</label>
+                        <div class="layui-input-inline" style="width:600px;">
+                            <input id="name1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+                    @* 第二行 *@
+                    <div >
+                        <label class="layui-form-label" style="width:130px;text-align:right;">开票性质：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <select id="KP_xingzhi1" lay-filter="KP_xingzhi1">
+                                <option value="0" selected="selected"></option>
+                                <option value="1">增值税专用发票</option>
+                                <option value="2">普通发票</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">纳税人识别号：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="nsr1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+                    @* 第三行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">开票地址：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="KP_address1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">开票电话：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="KP_tel1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                    @* 第四行 *@
+                    <div class="layui-form-item">
+
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">公司联系人：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="company_lxr1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">公司联系电话：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="company_tel1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第五行 *@
+                    <div class="layui-form-item">
+
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">公司法人：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="company_faren1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">联系人法人关系：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="company_guanxi1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    @* 第六行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">快递寄送地址：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="KD_address1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">快递联系人：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="KD_staff1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">快递联系电话：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="KD_tel1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                    @* 第七行 *@
+                    <div class="layui-form-item">
+
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">销售任务(万)：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="mission1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">碱性任务(万)：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="JXmission1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第八行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">银行帐号：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="bank_account1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">银行名称：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="bank_name1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+                    @* 第九行 *@
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">销售数据说明：</label>
+                        <div class="layui-input-inline" style="width:600px;">
+                            <input id="data_explain1" type="text" placeholder="说明内容为销售及返利需计入或合并到其他客户(必填)" autocomplete="off" class="layui-input">
+                        </div>
+
+
+
+
+                    </div>
+                    @* 第十行 *@
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">是否出厂价：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <select id="sfccj1" lay-filter="sfccj1">
+                                <option value="1" selected="selected">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">价格说明：</label>
+                        <div class="layui-input-inline" style="width:600px;">
+                            <input id="price_content" type="text" placeholder="不是出厂价则必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    @* 第十一行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户收货地址：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="receive_address1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:190px;text-align:right;">收货联系人：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="receive_staff1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">收货联系电话：</label>
+                        <div class="layui-input-inline" style="width:200px;">
+                            <input id="receive_tel1" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第十二行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">特殊情况说明：</label>
+                        <div class="layui-input-inline" style="width:600px;">
+                            <input id="situation_explain1" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第十三行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:220px;">对现经销商影响：</label>
+                        <div class="layui-input-inline" style="width:110px;">
+                            <select id="haveeffect1" lay-filter="haveeffect1">
+                                <option value="1">是</option>
+                                <option value="0" selected="selected">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">影响说明：</label>
+                        <div class="layui-input-inline" style="width:600px;">
+                            <input id="effect_content" type="text" placeholder="有影响则必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    @*直营卖场*@
+    <div id="div2" class="layui-form" hidden>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">基本信息</h2>
+                <div class="layui-colla-content layui-show">
+
+                    <div id="div_market_up" class="layui-form-item" hidden>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">上级客户名称：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="up_name2" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">上级客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="up_id2" type="text" autocomplete="off" class="layui-input" disabled="disabled">
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户名称：</label>
+                        <div class="layui-input-inline" style="width:560px;">
+                            <input id="name2" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">直营卖场类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="type_maichang2" lay-filter="type_maichang2" required>
+                                <option value="0" selected="selected"></option>
+                                <option value="1">系统</option>
+                                <option value="2">门店</option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 第二行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">付款条件：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="FK_tiaojian2" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">公司联系人：</label>
+                        <div class="layui-input-inline">
+                            <input id="company_lxr2" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">公司联系电话：</label>
+                        <div class="layui-input-inline">
+                            <input id="company_tel2" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第三行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">开票地址：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="KP_address2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">开票电话：</label>
+                        <div class="layui-input-inline">
+                            <input id="KP_tel2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">开票性质：</label>
+                        <div class="layui-input-inline">
+                            <select id="KP_xingzhi2" lay-filter="KP_xingzhi2">
+                                <option value="1">增值税专用发票</option>
+                                <option value="2">普通发票</option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 第四行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">纳税人识别号：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="nsr2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">公司法人：</label>
+                        <div class="layui-input-inline">
+                            <input id="company_faren2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+                    @* 第四行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">快递寄送地址：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="KD_address2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">快递联系人：</label>
+                        <div class="layui-input-inline">
+                            <input id="KD_staff2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">快递联系电话：</label>
+                        <div class="layui-input-inline">
+                            <input id="KD_tel2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第五行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">银行帐号：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="bank_account2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">银行名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="bank_name2" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+    @* 网点终端/批发 *@
+    <div id="div4" class="layui-form" hidden>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">基本信息</h2>
+                <div class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        @*<label class="layui-form-label" style="width:130px;">业务员：</label>
+                            <div class="layui-input-inline" style="width:230px;">
+                                <input id="name4" type="text" autocomplete="off" class="layui-input">
+                            </div>*@
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">省份：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <select id="province4" lay-filter="province4">
+                                <option value="0"></option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">城市：</label>
+                        <div class="layui-input-inline">
+                            <select id="city4" lay-filter="city4" required lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+                    @* 第二行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">经销商名称：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="jxs_name4" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">经销商编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="jxs_id4" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">主控网点名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="name4" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第三行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">地址：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="address4" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">联系人：</label>
+                        <div class="layui-input-inline">
+                            <input id="lxr4" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">联系电话：</label>
+                        <div class="layui-input-inline">
+                            <input id="tel4" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    @* 第四行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">网点类型：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <select id="type_wangdian4" lay-filter="type_wangdian4" required>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">是否标准网点：</label>
+                        <div class="layui-input-inline">
+                            <select id="is_bzwd4" lay-filter="is_bzwd4">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    @*暂时不要这个字段*@
+                    <div class="layui-form-item" hidden>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">是否直销商：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <select id="is_zxs4" lay-filter="is_zxs4">
+                                <option value="1">是</option>
+                                <option value="0" selected="selected">否</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">备注：</label>
+                        <div class="layui-input-inline" style="width:560px;">
+                            <input id="remark4" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">门头照片</h2>
+                <div class="layui-colla-content">
+                    <table id="mentou4" lay-filter="mentou4"></table>
+                    @*next!!!???新增事件没加*@
+                    <button id="insert_pic_mentou" class="layui-btn">新增门头照片</button>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+    @* LKA *@
+    <div id="div5" class="layui-form" hidden>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">基本信息</h2>
+                <div class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        @*<label class="layui-form-label" style="width:130px;">业务员：</label>
+                            <div class="layui-input-inline" style="width:230px;">
+                                <input id="name5" type="text" autocomplete="off" class="layui-input">
+                            </div>*@
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">经销商名称：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="jxs_name5" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">经销商编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="jxs_id5" type="text" autocomplete="off" class="layui-input" disabled="disabled">
+                        </div>
+
+                    </div>
+                    @* 第三行 *@
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">卖场名称：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <input id="maichang_name5" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">门店进场数量：</label>
+                        <div class="layui-input-inline">
+                            <input id="store_jcsl5" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+
+                    </div>
+                    @* 第四行 *@
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">卖场类型：</label>
+                        <div class="layui-input-inline" style="width:230px;">
+                            <select id="maichang_type5" lay-filter="maichang_type5">
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:160px;text-align:right;">卖场总部地址：</label>
+                        <div class="layui-input-inline">
+                            <input id="address5" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+
+
+                    @* 第五行 *@
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">备注：</label>
+                        <div class="layui-input-inline" style="width:590px;">
+                            <input id="remakr5" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+    @* LKA网点 *@
+    <div id="div5p" class="layui-form" hidden>
+
+        @* 第三行 *@
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">卖场名称：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <input id="maichang_name5p" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label" style="width:160px;text-align:right;">卖场编号：</label>
+            <div class="layui-input-inline">
+                <input id="maichang_id5p" type="text" autocomplete="off" class="layui-input" disabled="disabled">
+            </div>
+
+        </div>
+        @* 第四行 *@
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">门店名称：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <input id="store_name5p" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label" style="width:160px;text-align:right;">门店地址：</label>
+            <div class="layui-input-inline">
+                <input id="address5p" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        @* 第五行 *@
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">进场单品数量：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <input id="jcdpsl5p" type="text" autocomplete="off" class="layui-input">
+            </div>
+
+            @*<label class="layui-form-label" style="width:160px;">双鹿销售主要品种：</label>
+                <div class="layui-input-inline">
+                    <input id="slxszypz5p" type="text" autocomplete="off" class="layui-input">
+                </div>*@
+
+
+        </div>
+
+        @* 第五行 *@
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;text-align:right;">备注：</label>
+            <div class="layui-input-inline" style="width:590px;">
+                <input id="remark5p" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+
+    </div>
+
+    @*子表信息*@
+
+
+
+    <div id="div6" class="layui-form" hidden>
+        <div class="layui-collapse">
+
+
+           
+
+            @*合作伙伴管理*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">合作伙伴管理</h2>
+                <div class="layui-colla-content">
+                    <table id="partner6" lay-filter="partner"></table>
+                </div>
+            </div>
+
+            @*客户联系人*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">客户联系人</h2>
+                <div class="layui-colla-content">
+                    <table id="contact6" lay-filter="contact6"></table>
+                    <button id="insert_contact" class="layui-btn">新增</button>
+                </div>
+            </div>
+
+            @*邮寄地址*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">邮寄地址</h2>
+                <div class="layui-colla-content">
+                    <table id="post6" lay-filter="post6"></table>
+                    <button id="insert_post" class="layui-btn">新增</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div id="div_display" class="layui-form" hidden>
+
+        <div class="layui-collapse">
+            @*陈列*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">陈列</h2>
+                <div class="layui-colla-content">
+                    <table id="display6" lay-filter="display6"></table>
+                    <button id="insert_display" class="layui-btn">新增</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div id="div_to_group" class="layui-form" hidden>
+
+        <div class="layui-collapse">
+            @*分配到组*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">分配到组</h2>
+                <div class="layui-colla-content">
+                    <table id="to_group" lay-filter="to_group"></table>
+                    <button id="insert_to_group" class="layui-btn">新增</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    @*附件*@
+    <div id="div_upload" class="layui-form" hidden>
+
+        <div class="layui-collapse">
+            @*附件*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">附件</h2>
+                <div class="layui-colla-content">
+                    <table id="fujian_upload" lay-filter="fujian_upload"></table>
+                    <button id="insert_fujian" class="layui-btn">新增</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <input id="action_status" hidden />
+    <input id="zibiao_id" hidden />
+    <input id="path" hidden />
+    <input id="sapsn" hidden />
+    <input id="displayID" hidden />
+    <input id="netpath" hidden />
+
+</div>
+
+@*检索经销商*@
+<div id="div_select_jxs" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_jxs_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">客户类型：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <select id="select_jxs_type" lay-filter="select_jxs_type">
+                <option value="1">经销商</option>
+                <option value="6">批发</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label" style="width:130px;">上级客户名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_jxs_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_jxs_result" lay-filter="select_jxs_result"></table>
+
+</div>
+
+@*检索直营卖场系统*@
+<div id="div_select_market" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_market_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">系统名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_market_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_market_result" lay-filter="select_market_result"></table>
+
+</div>
+
+@*检索LKA*@
+<div id="div_select_lka" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_lka_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">LKA名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_lka_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_lka_result" lay-filter="select_lka_result"></table>
+
+</div>
+
+@*检索lka经销商*@
+<div id="div_select_lkajxs" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_lkajxs_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">客户类型：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <select id="select_lkajxs_type" lay-filter="select_lkajxs_type">
+                <option value="1">经销商</option>
+                <option value="6">批发</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label" style="width:130px;">上级客户名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_lkajxs_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_lkajxs_result" lay-filter="select_lkajxs_result"></table>
+
+</div>
+
+
+
+
+
+
+@*新增客户联系人*@
+<div id="002" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_contact" class="layui-btn" lay-filter="btn_save_contact">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <table style="border-collapse:separate; border-spacing:0px 10px;">
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">联系人：</label>
+                    <div class="layui-input-inline">
+                        <input id="name002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">性别：</label>
+                    <div class="layui-input-inline">
+                        <select id="sex002" lay-filter="sex002">
+                            <option value="0" selected="selected"></option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </div>
+                </td>
+                <td rowspan="4" align="center">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img id="pic_contact002" style="height:180px;" src="~/Areas/CRM/img/pic.jpg" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">家庭地址：</label>
+                    <div class="layui-input-inline">
+                        <input id="home002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">籍贯：</label>
+                    <div class="layui-input-inline">
+                        <input id="jiguan002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">民族：</label>
+                    <div class="layui-input-inline">
+                        <select id="nation002" lay-filter="nation002">
+                            <option value="0" selected="selected"></option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">职位：</label>
+                    <div class="layui-input-inline">
+                        <select id="job002" lay-filter="job002">
+                            <option value="0" selected="selected"></option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">爱好：</label>
+                    <div class="layui-input-inline">
+                        <input id="hobby002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">婚姻状况：</label>
+                    <div class="layui-input-inline">
+                        <select id="marry002" lay-filter="marry002">
+                            <option value="0" selected="selected"></option>
+                            <option value="1">未婚</option>
+                            <option value="2">已婚</option>
+                            <option value="3">离婚</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">移动电话：</label>
+                    <div class="layui-input-inline">
+                        <input id="mobtel002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">固定电话：</label>
+                    <div class="layui-input-inline">
+                        <input id="tel002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">传真：</label>
+                    <div class="layui-input-inline">
+                        <input id="fax002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">邮箱：</label>
+                    <div class="layui-input-inline">
+                        <input id="mail002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">微信号：</label>
+                    <div class="layui-input-inline">
+                        <input id="weixin002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">生日：</label>
+                    <div class="layui-input-inline">
+                        <input id="birthday002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">通信地址：</label>
+                    <div class="layui-input-inline">
+                        <input id="address002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">邮政编码：</label>
+                    <div class="layui-input-inline">
+                        <input id="postalcode002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">性格：</label>
+                    <div class="layui-input-inline">
+                        <input id="nature002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="layui-form-label" style="width:120px">是否主要联系人：</label>
+                    <div class="layui-input-inline">
+                        <select id="major002" lay-filter="major002">
+                            <option value="0" selected="selected"></option>
+                            <option value="1">是</option>
+                            <option value="2">否</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <label class="layui-form-label">备注：</label>
+                    <div class="layui-input-inline">
+                        <input id="remark002" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline">
+            <button id="btn_upload_contact" class="layui-btn" lay-filter="formDemo">上传照片</button>
+
+
+        </div>
+    </div>
+</div>
+
+@*新增邮寄地址*@
+<div id="003" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_post" class="layui-btn" lay-filter="btn_save_post">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px">客户办公(邮寄)地址：</label>
+        <div class="layui-input-inline">
+            <input id="address003" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px">邮编：</label>
+        <div class="layui-input-inline">
+            <input id="postalcode003" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px">收件人：</label>
+        <div class="layui-input-inline">
+            <input id="name003" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px">收件人联系方式：</label>
+        <div class="layui-input-inline">
+            <input id="tel003" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:150px">备注：</label>
+        <div class="layui-input-inline">
+            <input id="remark003" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+</div>
+
+@*新增陈列*@
+<div id="004" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_display" class="layui-btn" lay-filter="btn_save_display">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">陈列类型：</label>
+        <div class="layui-input-inline">
+            <select id="displaytype004" lay-filter="displaytype004">
+                <option value="1" selected="selected">主陈列</option>
+                <option value="2">二次陈列</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">陈列方式：</label>
+        <div class="layui-input-inline">
+            <select id="displayway004" lay-filter="displayway004">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">陈列归属日期：</label>
+        <div class="layui-input-inline">
+            <input id="display_time004" type="text" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">备注：</label>
+        <div class="layui-input-inline">
+            <input id="remark004" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+</div>
+
+@*新增陈列照片*@
+<div id="004p" class="layui-form" hidden>
+
+
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <table id="pic_display004" lay-filter="pic_display004"></table>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline" style="float:right;">
+            <button id="btn_upload_display" class="layui-btn" lay-filter="btn_upload_display">上传照片</button>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+@*新增分配到组*@
+<div id="008" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_group" class="layui-btn" lay-filter="btn_save_group">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">分配到组：</label>
+        <div class="layui-input-inline" style="width:150px;">
+            <select id="to_group008" lay-filter="to_group008">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+@*<script>
+        //将信息缓存到表格中,作废
+        var arr_area = [];
+        $(document).ready(function () {
+            $("#001").hide();
+            $("#btn_save_area").click(function () {
+
+
+                var arealist = {
+                    area: $("#area001").val(),
+                    staff: $("#staff001").val(),
+                    leader: $("#leader001").val(),
+                    KHstaff: $("#KHstaff001").val(),
+                    remark: $("#remark001").val()
+                };
+                arr_area.push(arealist);
+
+
+                var table = layui.table;
+                table.render({
+                    elem: '#sale_area6'
+              , data: arr_area
+              , page: true //开启分页
+              , cols: [[ //表头
+                  { type: 'checkbox', fixed: 'left' },
+                 { field: 'area', title: '销售区域', width: 90 },
+                 { field: 'remark', title: '备注', width: 300 },
+                 { fixed: 'right', width: 70, align: 'center', toolbar: '#tb_area' }
+              ]]
+                });
+
+
+                layer.closeAll();
+
+
+            });
+        });
+    </script>*@
+
+
+
+
+
+
+
+
+
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#netpath").val("@lxrnp");
+
+    });
+
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/Update")
+}

@@ -1,0 +1,435 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "编辑客户";
+    Session["TITLENAME"] = "编辑客户";
+
+}
+
+<h2 id="h1" style="margin:0 10px"></h2>
+<h2 id="h2" style="margin:0 10px"></h2>
+
+
+<hr class="layui-bg-black" />
+
+<div id="div_basic" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Update", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/basic.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">基本信息</label>
+    </div>
+</div>
+
+<div id="div_qudao" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Qudao_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/qudao.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">渠道</label>
+    </div>
+</div>
+
+<div id="div_pinzhong" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Pinzhong_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/jingpin.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">销售品种</label>
+    </div>
+</div>
+
+<div id="div_area" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Area_Select", "KeHu", new RouteValueDictionary { {"KHID",@ViewBag.KHID}})">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/area.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">管辖区域</label>
+    </div>
+</div>
+
+<div id="div_jingpin" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Jingpin_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/jingpin.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">竞品</label>
+    </div>
+</div>
+
+<div id="div_mentou" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Mentou_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/mentou.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">门头照片</label>
+    </div>
+</div>
+
+<div id="div_partner" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Partner_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/partner.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">合作伙伴</label>
+    </div>
+</div>
+
+<div id="div_contact" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Contact_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/contact.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">联系人</label>
+    </div>
+</div>
+
+<div id="div_zxry" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("ZXRY_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/contact.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">直销人员基本资料</label>
+    </div>
+</div>
+
+<div id="div_post" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Post_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/post.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">邮寄地址</label>
+    </div>
+</div>
+
+<div id="div_display" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Display_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/display.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">陈列</label>
+    </div>
+</div>
+
+<div id="div_songhuo" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("SongHuo", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/post.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">送货数量</label>
+    </div>
+</div>
+
+<div id="div_xiaoshou" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("XiaoShou", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/jingpin.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">直销商销售</label>
+    </div>
+</div>
+
+<div id="div_WDshuliang" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("WDshuliang", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/qudao.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">网点数量</label>
+    </div>
+</div>
+
+<div id="div_chepai" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("ChePai", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/pinzhong.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">汽车或电动车</label>
+    </div>
+</div>
+
+<div id="div_cuxiao" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("CuXiao", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/post.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">促销单品</label>
+    </div>
+</div>
+
+<div id="div_group" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Group_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/power.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">权限分配</label>
+    </div>
+</div>
+
+<div id="div_fujian" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("Fujian_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/fujian.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">附件</label>
+    </div>
+</div>
+
+<div id="div_kaoqin" class="layui-col-xs4 layui-col-sm2 layui-col-md1">
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("KaoQin_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/kaoqinAddress.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">签到地址</label>
+    </div>
+</div>
+
+<div id="div_huodong" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("HuoDong", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/qudao.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">活动</label>
+    </div>
+</div>
+
+<div id="div_jinzhan" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("JinZhan", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/qudao.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">销售业务进展</label>
+    </div>
+</div>
+
+<div id="div_battery" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("BatteryImg_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/mentou.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">电池照片</label>
+    </div>
+</div>
+
+<div id="div_pack" class="layui-col-xs4 layui-col-sm2 layui-col-md1" hidden>
+    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+        <a href="@Url.Action("PackImg_Select", "KeHu")">
+            <img class="layui-nav-img" src="~/Image/kehu/basic/mentou.png" />
+        </a>
+        <br />
+        <label class="layui-form-label-img">包装照片</label>
+    </div>
+</div>
+
+
+<div class="layui-tab" hidden>
+    <ul class="layui-tab-title">
+        <li class="layui-this">拜访计划</li>
+        <li>最近拜访记录</li>
+    </ul>
+
+</div>
+
+<script>
+    function AllHide(){
+        $("#div_basic").hide();
+        $("#div_qudao").hide();
+        $("#div_pinzhong").hide();
+        $("#div_area").hide();
+        $("#div_jingpin").hide();
+        $("#div_mentou").hide();
+        $("#div_partner").hide();
+        $("#div_contact").hide();
+        $("#div_zxry").hide();
+        $("#div_post").hide();
+        $("#div_display").hide();
+        $("#div_group").hide();
+        $("#div_fujian").hide();
+        $("#div_songhuo").hide();
+        $("#div_xiaoshou").hide();
+        $("#div_WDshuliang").hide();
+        $("#div_chepai").hide();
+        $("#div_cuxiao").hide();
+        $("#div_jinzhan").hide();
+        $("#div_huodong").hide();
+        $("#div_battery").hide();
+        $("#div_pack").hide();
+    }
+
+    function ChecckDZS(khid){
+        $.ajax({
+            type: "POST",
+            url: "../KeHu/Data_Select_KHZZ_ByKHID",
+            data: {
+                KHID: khid
+            },
+            success: function (result) {
+                var res = JSON.parse(result);
+                for (var i = 0; i < res.length; i++) {
+                    if (res[i].ZZMCID == 1058) {       //电子锁
+                        $("#div_songhuo").show();
+                    }
+                }
+
+
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        var khid = sessionStorage.getItem("KHID");
+        $("#h1").text("@ViewBag.MC");
+        $("#h2").text("客户编号：@ViewBag.CRMID");
+        sessionStorage.setItem("MC", "@ViewBag.MC");
+        sessionStorage.setItem("CRMID", "@ViewBag.CRMID");
+        sessionStorage.setItem("KHLX", "@ViewBag.KHLX");
+        sessionStorage.setItem("SAPSN", "@ViewBag.SAPSN");
+        if(@ViewBag.KHLX == 1 || @ViewBag.KHLX == 2 || @ViewBag.KHLX ==4)
+        {
+            AllHide();
+            $("#div_basic").show();
+            $("#div_qudao").show();
+            $("#div_area").show();
+            $("#div_partner").show();
+            $("#div_contact").show();
+            $("#div_post").show();
+            $("#div_group").show();
+            if(@ViewBag.KHLX2 == 1064){
+                $("#div_zxry").show();
+                $("#div_chepai").show();
+            }
+        }
+        else if(@ViewBag.KHLX == 3)
+        {
+            AllHide();
+            $("#div_basic").show();
+            $("#div_area").show();
+            $("#div_partner").show();
+            $("#div_contact").show();
+            $("#div_post").show();
+            $("#div_display").show();
+            $("#div_group").show();
+        }
+        else if(@ViewBag.KHLX == 5 || @ViewBag.KHLX == 6)
+        {
+            AllHide();
+            $("#div_basic").show();
+            $("#div_pinzhong").show();
+            $("#div_jingpin").show();
+            $("#div_mentou").show();
+            $("#div_display").show();
+            $("#div_group").show();
+            $("#div_huodong").show();
+            ChecckDZS(khid);
+
+
+
+        }
+        else if(@ViewBag.KHLX == 7)
+        {
+            AllHide();
+            $("#div_basic").show();
+            $("#div_pinzhong").show();
+            $("#div_jingpin").show();
+
+            $("#div_group").show();
+            if(@ViewBag.MCSX == 1){
+                $("#div_contact").show();
+            }
+            else if(@ViewBag.MCSX == 2){
+                $("#div_display").show();
+                $("#div_mentou").show();
+            }
+        }
+        else if(@ViewBag.KHLX == 8)
+        {
+            AllHide();
+            $("#div_basic").show();
+            $("#div_pinzhong").show();
+            $("#div_display").show();
+            $("#div_group").show();
+            $("#div_songhuo").show();
+        }
+        else if(@ViewBag.KHLX == 9)
+        {
+            AllHide();
+            $("#div_basic").show();
+            $("#div_area").show();
+            $("#div_contact").show();
+            $("#div_display").show();
+            $("#div_group").show();
+            $("#div_xiaoshou").show();
+            $("#div_WDshuliang").show();
+            $("#div_chepai").show();
+            $("#div_cuxiao").show();
+        }
+        else if(@ViewBag.KHLX == 10){
+            AllHide();
+            $("#div_basic").show();
+            $("#div_group").show();
+            $("#div_pinzhong").show();
+            $("#div_post").show();
+            $("#div_area").show();
+            $("#div_contact").show();
+            $("#div_jingpin").show();
+            $("#div_mentou").show();
+            $("#div_display").show();
+
+            if(@ViewBag.KHLX2 == 1064){
+                $("#div_zxry").show();
+                $("#div_chepai").show();
+                $("#div_xiaoshou").show();
+                $("#div_WDshuliang").show();
+                $("#div_cuxiao").show();
+            }
+        }
+        else if(@ViewBag.KHLX == 1105){
+            AllHide();
+            $("#div_basic").show();
+            $("#div_contact").show();
+            $("#div_group").show();
+        }
+        else if(@ViewBag.KHLX == 1106){
+            AllHide();
+            $("#div_basic").show();
+            $("#div_group").show();
+            $("#div_mentou").show();
+            $("#div_display").show();
+            $("#div_battery").show();
+            $("#div_pack").show();
+        }
+        else{
+            AllHide();
+        }
+
+
+
+        //潜在客户
+        if(@ViewBag.IsOfficial == 10){
+            $("#div_jinzhan").show();
+        }
+
+
+    });
+</script>
+

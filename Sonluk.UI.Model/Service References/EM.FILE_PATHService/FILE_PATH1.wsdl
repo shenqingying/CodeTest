@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="UploadService">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileData" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Directorys" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UploadServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadServiceResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteFileService">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteFileServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteFileServiceResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetURLByReadID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetURLByReadIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetURLByReadIDResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:EM_FILE_PATH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EM_FILE_PATH">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PATHID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PATH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VIRTUALPATH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IPPATH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="pathid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByIDResult" type="tns:EM_FILE_PATH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="EM_FILE_PATH" nillable="true" type="tns:EM_FILE_PATH" />
+    </s:schema>
+    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="UploadServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadService" />
+  </wsdl:message>
+  <wsdl:message name="UploadServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteFileService" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteFileServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetURLByReadIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetURLByReadID" />
+  </wsdl:message>
+  <wsdl:message name="GetURLByReadIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetURLByReadIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadServiceHttpGetIn">
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="fileData" type="s1:StringArray" />
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="Directorys" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="UploadServiceHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileServiceHttpGetIn">
+    <wsdl:part name="filename" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileServiceHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="GetURLByReadIDHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetURLByReadIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetIn">
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:EM_FILE_PATH" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpGetIn">
+    <wsdl:part name="pathid" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:EM_FILE_PATH" />
+  </wsdl:message>
+  <wsdl:message name="UploadServiceHttpPostIn">
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="fileData" type="s1:StringArray" />
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="Directorys" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="UploadServiceHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileServiceHttpPostIn">
+    <wsdl:part name="filename" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFileServiceHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="GetURLByReadIDHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetURLByReadIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostIn">
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:EM_FILE_PATH" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpPostIn">
+    <wsdl:part name="pathid" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:EM_FILE_PATH" />
+  </wsdl:message>
+  <wsdl:portType name="FILE_PATHSoap">
+    <wsdl:operation name="UploadService">
+      <wsdl:input message="tns:UploadServiceSoapIn" />
+      <wsdl:output message="tns:UploadServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileService">
+      <wsdl:input message="tns:DeleteFileServiceSoapIn" />
+      <wsdl:output message="tns:DeleteFileServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetURLByReadID">
+      <wsdl:input message="tns:GetURLByReadIDSoapIn" />
+      <wsdl:output message="tns:GetURLByReadIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDSoapIn" />
+      <wsdl:output message="tns:ReadByIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FILE_PATHHttpGet">
+    <wsdl:operation name="UploadService">
+      <wsdl:input message="tns:UploadServiceHttpGetIn" />
+      <wsdl:output message="tns:UploadServiceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileService">
+      <wsdl:input message="tns:DeleteFileServiceHttpGetIn" />
+      <wsdl:output message="tns:DeleteFileServiceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetURLByReadID">
+      <wsdl:input message="tns:GetURLByReadIDHttpGetIn" />
+      <wsdl:output message="tns:GetURLByReadIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FILE_PATHHttpPost">
+    <wsdl:operation name="UploadService">
+      <wsdl:input message="tns:UploadServiceHttpPostIn" />
+      <wsdl:output message="tns:UploadServiceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileService">
+      <wsdl:input message="tns:DeleteFileServiceHttpPostIn" />
+      <wsdl:output message="tns:DeleteFileServiceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetURLByReadID">
+      <wsdl:input message="tns:GetURLByReadIDHttpPostIn" />
+      <wsdl:output message="tns:GetURLByReadIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <wsdl:input message="tns:ReadByIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FILE_PATHSoap" type="tns:FILE_PATHSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadService">
+      <soap:operation soapAction="http://tempuri.org/UploadService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileService">
+      <soap:operation soapAction="http://tempuri.org/DeleteFileService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetURLByReadID">
+      <soap:operation soapAction="http://tempuri.org/GetURLByReadID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <soap:operation soapAction="http://tempuri.org/ReadByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FILE_PATHSoap12" type="tns:FILE_PATHSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadService">
+      <soap12:operation soapAction="http://tempuri.org/UploadService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileService">
+      <soap12:operation soapAction="http://tempuri.org/DeleteFileService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetURLByReadID">
+      <soap12:operation soapAction="http://tempuri.org/GetURLByReadID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FILE_PATHHttpGet" type="tns:FILE_PATHHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="UploadService">
+      <http:operation location="/UploadService" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileService">
+      <http:operation location="/DeleteFileService" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetURLByReadID">
+      <http:operation location="/GetURLByReadID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <http:operation location="/ReadByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FILE_PATHHttpPost" type="tns:FILE_PATHHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="UploadService">
+      <http:operation location="/UploadService" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileService">
+      <http:operation location="/DeleteFileService" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetURLByReadID">
+      <http:operation location="/GetURLByReadID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByID">
+      <http:operation location="/ReadByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FILE_PATH">
+    <wsdl:port name="FILE_PATHSoap" binding="tns:FILE_PATHSoap">
+      <soap:address location="http://10.1.22.2/API/EM/FILE_PATH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FILE_PATHSoap12" binding="tns:FILE_PATHSoap12">
+      <soap12:address location="http://10.1.22.2/API/EM/FILE_PATH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FILE_PATHHttpGet" binding="tns:FILE_PATHHttpGet">
+      <http:address location="http://10.1.22.2/API/EM/FILE_PATH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FILE_PATHHttpPost" binding="tns:FILE_PATHHttpPost">
+      <http:address location="http://10.1.22.2/API/EM/FILE_PATH.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

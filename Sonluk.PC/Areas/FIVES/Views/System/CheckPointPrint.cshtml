@@ -1,0 +1,369 @@
+﻿@using Sonluk.UI.Model.S5.SY_CHECKPOINTService;
+@{
+    ViewBag.Title = "任务打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+    List<FIVES_SY_CHECKPOINT_CREATE> nodes = ViewBag.Nodes;
+    string gwStr = "";
+    string tempStr = "";
+}
+<style>
+    .tableCenter {
+        margin: 0 auto;
+        width: 15cm;
+    }
+    .tableCenter_part {
+        margin: 0 auto;
+        /*width: 21cm;*/
+    }
+</style>
+@for (int i = 0; i < nodes.Count; i++)
+{
+    <div id="wrap" class="tableCenter" style="border:1px solid;margin-top:10px">
+        <table width="100%">
+            <tr>
+                <td rowspan="4"  style="text-align:left" width="160px">
+                    <img src="@Url.Action("BarCode", "System", new { area = "FIVES", code = nodes[i].FIVES_SY_CHECKPOINT.POINTID, format = "QRCODE", width = 160, height = 160, pure = 1 })">
+                </td>
+                @if (nodes[i].FIVES_SY_CHECKPOINT.DID == 11)
+                {
+                    tempStr = "安全点检标识";
+                }
+                else if(nodes[i].FIVES_SY_CHECKPOINT.DID == 13)
+                {
+                    tempStr = "总经办食堂点检标识";
+                }
+                else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 33)
+                {
+                    tempStr = "信息管理部安全点检标识";
+                }
+                else
+                {
+                    tempStr = "5s检查点标识";
+                }
+                <td  style="text-align:center;font-size: 22px;font-weight: bold">
+                    @tempStr
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:left">
+                    定制位置: @nodes[i].FIVES_SY_CHECKPOINT.POINTMS
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:left">
+                    检 查 点: @nodes[i].JydStr
+                </td>
+            </tr>
+            <tr>
+                @{
+                gwStr = "";
+                gwStr = nodes[i].GWLIST[0].OBJ2NAME;}
+                @for (int j = 1; j < nodes[i].GWLIST.Length; j++)
+                {
+                    gwStr += "、" + nodes[i].GWLIST[j].OBJ2NAME;
+                }
+                <td style="text-align:left">
+                    负 责 人: @gwStr
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    if (nodes.Count - 1 > i)
+    {
+        i++;
+        <div id="wrap" class="tableCenter" style="border:1px solid;margin-top:10px">
+            <table width="100%">
+                <tr>
+                    <td rowspan="4" width="160px">
+                        <img src="@Url.Action("BarCode", "System", new { area = "FIVES", code = nodes[i].FIVES_SY_CHECKPOINT.POINTID, format = "QRCODE", width = 160, height = 160, pure = 1 })">
+                    </td>
+                    @if (nodes[i].FIVES_SY_CHECKPOINT.DID == 11)
+                    {
+                        tempStr = "安全点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 13)
+                    {
+                        tempStr = "总经办食堂点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 33)
+                    {
+                        tempStr = "信息管理部安全点检标识";
+                    }
+                    else
+                    {
+                        tempStr = "5s检查点标识";
+                    }
+                    <td style="text-align:center;font-size: 22px;font-weight: bold">
+                        @tempStr
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        定制位置：@nodes[i].FIVES_SY_CHECKPOINT.POINTMS
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        检查点:@nodes[i].JydStr
+                    </td>
+
+                </tr>
+
+                <tr>
+                    @{
+                    gwStr = "";
+                    gwStr = nodes[i].GWLIST[0].OBJ2NAME;}
+                    @for (int j = 1; j < nodes[i].GWLIST.Length; j++)
+                    {
+                        gwStr += "、" + nodes[i].GWLIST[j].OBJ2NAME;
+                    }
+                    <td style="text-align:left">
+                        负责人:@gwStr
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    }
+
+    if (nodes.Count - 1 > i)
+    {
+        i++;
+        <div id="wrap" class="tableCenter" style="border:1px solid;margin-top:10px">
+            <table width="100%">
+                <tr>
+                    <td rowspan="4" width="160px">
+                        <img src="@Url.Action("BarCode", "System", new { area = "FIVES", code = nodes[i].FIVES_SY_CHECKPOINT.POINTID, format = "QRCODE", width = 160, height = 160, pure = 1 })">
+                    </td>
+                    @if (nodes[i].FIVES_SY_CHECKPOINT.DID == 11)
+                    {
+                        tempStr = "安全点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 13)
+                    {
+                        tempStr = "总经办食堂点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 33)
+                    {
+                        tempStr = "信息管理部安全点检标识";
+                    }
+                    else
+                    {
+                        tempStr = "5s检查点标识";
+                    }
+                    <td style="text-align:center;font-size: 22px;font-weight: bold">
+                        @tempStr
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        定制位置：@nodes[i].FIVES_SY_CHECKPOINT.POINTMS
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        检查点:@nodes[i].JydStr
+                    </td>
+
+                </tr>
+
+                <tr>
+                    @{
+                    gwStr = "";
+                    gwStr = nodes[i].GWLIST[0].OBJ2NAME;}
+                    @for (int j = 1; j < nodes[i].GWLIST.Length; j++)
+                    {
+                        gwStr += "、" + nodes[i].GWLIST[j].OBJ2NAME;
+                    }
+                    <td style="text-align:left">
+                        负责人:@gwStr
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    }
+
+    if (nodes.Count - 1 > i)
+    {
+        i++;
+        <div id="wrap" class="tableCenter" style="border:1px solid;margin-top:10px">
+            <table width="100%">
+                <tr>
+                    <td rowspan="4" width="160px">
+                        <img src="@Url.Action("BarCode", "System", new { area = "FIVES", code = nodes[i].FIVES_SY_CHECKPOINT.POINTID, format = "QRCODE", width = 160, height = 160, pure = 1 })">
+                    </td>
+                    @if (nodes[i].FIVES_SY_CHECKPOINT.DID == 11)
+                    {
+                        tempStr = "安全点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 13)
+                    {
+                        tempStr = "总经办食堂点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 33)
+                    {
+                        tempStr = "信息管理部安全点检标识";
+                    }
+                    else
+                    {
+                        tempStr = "5s检查点标识";
+                    }
+                    <td style="text-align:center;font-size: 22px;font-weight: bold">
+                        @tempStr
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        定制位置：@nodes[i].FIVES_SY_CHECKPOINT.POINTMS
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        检查点:@nodes[i].JydStr
+                    </td>
+
+                </tr>
+
+                <tr>
+                    @{
+                    gwStr = "";
+                    gwStr = nodes[i].GWLIST[0].OBJ2NAME;}
+                    @for (int j = 1; j < nodes[i].GWLIST.Length; j++)
+                    {
+                        gwStr += "、" + nodes[i].GWLIST[j].OBJ2NAME;
+                    }
+                    <td style="text-align:left">
+                        负责人:@gwStr
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    }
+    if (nodes.Count - 1 > i)
+    {
+        i++;
+        <div id="wrap" class="tableCenter" style="border:1px solid;margin-top:10px">
+            <table width="100%">
+                <tr>
+                    <td rowspan="4" width="160px">
+                        <img src="@Url.Action("BarCode", "System", new { area = "FIVES", code = nodes[i].FIVES_SY_CHECKPOINT.POINTID, format = "QRCODE", width = 160, height = 160, pure = 1 })">
+                    </td>
+                    @if (nodes[i].FIVES_SY_CHECKPOINT.DID == 11)
+                    {
+                        tempStr = "安全点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 13)
+                    {
+                        tempStr = "总经办食堂点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 33)
+                    {
+                        tempStr = "信息管理部安全点检标识";
+                    }
+                    else
+                    {
+                        tempStr = "5s检查点标识";
+                    }
+                    <td style="text-align:center;font-size: 22px;font-weight: bold">
+                        @tempStr
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        定制位置：@nodes[i].FIVES_SY_CHECKPOINT.POINTMS
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        检查点:@nodes[i].JydStr
+                    </td>
+
+                </tr>
+
+                <tr>
+                    @{
+                    gwStr = "";
+                    gwStr = nodes[i].GWLIST[0].OBJ2NAME;}
+                    @for (int j = 1; j < nodes[i].GWLIST.Length; j++)
+                    {
+                        gwStr += "、" + nodes[i].GWLIST[j].OBJ2NAME;
+                    }
+                    <td style="text-align:left">
+                        负责人:@gwStr
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    }
+    @*if (nodes.Count - 1 > i)
+    {
+        i++;
+        <div id="wrap" class="tableCenter" style="border:1px solid;margin-top:10px">
+            <table width="100%">
+                <tr>
+                    <td rowspan="4" width="160px">
+                        <img src="@Url.Action("BarCode", "System", new { area = "FIVES", code = nodes[i].FIVES_SY_CHECKPOINT.POINTID, format = "QRCODE", width = 160, height = 160, pure = 1 })">
+                    </td>
+                    @if (nodes[i].FIVES_SY_CHECKPOINT.DID == 11)
+                    {
+                        tempStr = "安全点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 13)
+                    {
+                        tempStr = "总经办食堂点检标识";
+                    }
+                    else if (nodes[i].FIVES_SY_CHECKPOINT.DID == 33)
+                    {
+                        tempStr = "信息管理部安全点检标识";
+                    }
+                    else
+                    {
+                        tempStr = "5s检查点标识";
+                    }
+                    <td style="text-align:center;font-size: 22px;font-weight: bold">
+                        @tempStr
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        定制位置：@nodes[i].FIVES_SY_CHECKPOINT.POINTMS
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">
+                        检查点:@nodes[i].JydStr
+                    </td>
+
+                </tr>
+
+                <tr>
+                    @{
+                    gwStr = "";
+                    gwStr = nodes[i].GWLIST[0].OBJ2NAME;}
+                    @for (int j = 1; j < nodes[i].GWLIST.Length; j++)
+                    {
+                        gwStr += "、" + nodes[i].GWLIST[j].OBJ2NAME;
+                    }
+                    <td style="text-align:left">
+                        负责人:@gwStr
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    }*@
+
+
+
+
+    <div class="main"></div>
+
+
+
+ 
+
+}

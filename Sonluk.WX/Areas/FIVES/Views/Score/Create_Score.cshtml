@@ -1,0 +1,194 @@
+﻿@using Sonluk.UI.Model.S5.SY_CHECKPOINTService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "检查评分";
+    Session["TITLENAME"] = "检查评分";
+    FIVES_SY_CHECKPOINT_CREATE data = ViewBag.data;
+
+
+}
+
+<style>
+    .layui-table-cell {
+        height: auto;
+    }
+
+    .layui-table-cell, .layui-table-tool-panel li {
+        overflow: auto;
+        white-space: normal;
+    }
+</style>
+
+<div style="position:fixed;top:0;width:100%;background-color:#ffffff;z-index:999">
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_save">提交</a>
+    </div>
+</div>
+
+<br /><br /><br /><br />
+<div class="page__hd">
+    <h1 class="page__title" style="text-align:center;">@data.FIVES_SY_CHECKPOINT.POINTMS</h1>
+    <div class="weui-cells__title">检查点位置：@data.JydStr</div>
+    @{
+        string GW = data.GWLIST[0].OBJ2NAME;
+        for (int i = 1; i < data.GWLIST.Length; i++)
+        {
+            GW = GW + "、" + data.GWLIST[i].OBJ2NAME;
+        }
+    }
+    <div class="weui-cells__title">岗位负责人：@GW</div>
+    <div class="weui-cells__title">部门：@data.FIVES_SY_STAFF_DEPList.DNAME</div>
+    @*<p class="page__desc">表单输入</p>*@
+</div>
+
+<div class="weui-cells__title">检查类型</div>
+<div class="weui-cells weui-cells_radio">
+    @{
+        if (data.FIVES_SY_STAFF_DEPList.XJSTATUS == 1)
+        {
+            <label class="weui-cell weui-check__label" for="radio_xj">
+                <div class="weui-cell__bd">
+                    <p>@data.FIVES_SY_STAFF_DEPList.XNAME</p>
+                </div>
+                <div class="weui-cell__ft">
+                    @if (data.FIVES_SY_STAFF_DEPList.XJSTATUS + data.FIVES_SY_STAFF_DEPList.CJSTATUS == 1)    //加起来为1，表示只有其中一个权限，所以直接勾上
+                    {
+                        <input type="radio" class="weui-check" name="checktype" id="radio_xj" value="@data.FIVES_SY_STAFF_DEPList.XID" checked="checked">
+                    }
+                    else
+                    {
+                        <input type="radio" class="weui-check" name="checktype" id="radio_xj" value="@data.FIVES_SY_STAFF_DEPList.XID">
+                    }
+
+
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+        }
+        if (data.FIVES_SY_STAFF_DEPList.CJSTATUS == 1)
+        {
+            <label class="weui-cell weui-check__label" for="radio_cc">
+
+                <div class="weui-cell__bd">
+                    <p>@data.FIVES_SY_STAFF_DEPList.CNAME</p>
+                </div>
+                <div class="weui-cell__ft">
+                    @if (data.FIVES_SY_STAFF_DEPList.XJSTATUS + data.FIVES_SY_STAFF_DEPList.CJSTATUS == 1)    //加起来为1，表示只有其中一个权限，所以直接勾上
+                    {
+                        <input type="radio" name="checktype" class="weui-check" id="radio_cc" value="@data.FIVES_SY_STAFF_DEPList.CID" checked="checked">
+                    }
+                    else
+                    {
+                        <input type="radio" name="checktype" class="weui-check" id="radio_cc" value="@data.FIVES_SY_STAFF_DEPList.CID">
+                    }
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+        }
+        if (data.FIVES_SY_STAFF_DEPList.XJSTATUS == 0 && data.FIVES_SY_STAFF_DEPList.CJSTATUS == 0)
+        {
+            //没有权限
+        }
+    }
+
+
+</div>
+
+@*<div class="weui-cells__title">评分</div>*@
+
+<div class="weui-cells weui-cells_form">
+
+    <div>
+
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label" style="width:80px;">评分</label></div>
+        <div class="weui-cell__bd" id="div_score">
+        </div>
+    </div>
+
+    <div class="weui-cells__title">总评</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea id="txt_zp" class="weui-textarea" placeholder="请输入总评" rows="3"></textarea>
+                <div class="weui-textarea-counter"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <table id="result" lay-filter="result"></table>
+
+
+    <div hidden>
+
+
+        <!-- 列表组顶部说明文字 -->
+        <div class="weui-cells__title">检查项</div>
+        <!-- 带说明的列表 -->
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>1、门窗</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </div>
+
+
+            <div class="weui-cells__title">点评</div>
+            <div class="weui-cell">
+                @*<div class="weui-cell__hd"><label class="weui-label">点评</label></div>*@
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入文本">
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- 带说明的列表 -->
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>2、过道</p>
+                </div>
+                <div class="weui-cell__ft">说明文字</div>
+            </div>
+
+
+            <div class="weui-cells__title">点评</div>
+            <div class="weui-cell">
+                @*<div class="weui-cell__hd"><label class="weui-label">点评</label></div>*@
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入文本">
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<input id="pointid" value="@data.FIVES_SY_CHECKPOINT.POINTID" hidden />
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/Score/Create_Score")
+}

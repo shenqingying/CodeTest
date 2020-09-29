@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_TL_ERROR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL_ERROR">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JLR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ_KS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ_JS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORINFO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCDATES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCDATEE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:MES_PD_TL_ERROR_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL_ERROR_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_PD_TL_ERROR_LIST" type="tns:ArrayOfMES_PD_TL_ERROR_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_PD_TL_ERROR_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_PD_TL_ERROR_LIST" nillable="true" type="tns:MES_PD_TL_ERROR_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_PD_TL_ERROR_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GCNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZPRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORTM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORWLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORWLNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORINFO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORPC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORJLSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERRORJLR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TLLB" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PD_TL_ERRORSoap">
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PD_TL_ERRORHttpGet" />
+  <wsdl:portType name="PD_TL_ERRORHttpPost" />
+  <wsdl:binding name="PD_TL_ERRORSoap" type="tns:PD_TL_ERRORSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PD_TL_ERRORSoap12" type="tns:PD_TL_ERRORSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PD_TL_ERRORHttpGet" type="tns:PD_TL_ERRORHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="PD_TL_ERRORHttpPost" type="tns:PD_TL_ERRORHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="PD_TL_ERROR">
+    <wsdl:port name="PD_TL_ERRORSoap" binding="tns:PD_TL_ERRORSoap">
+      <soap:address location="http://192.168.0.223/API/MES/PD_TL_ERROR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_TL_ERRORSoap12" binding="tns:PD_TL_ERRORSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/PD_TL_ERROR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_TL_ERRORHttpGet" binding="tns:PD_TL_ERRORHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/PD_TL_ERROR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_TL_ERRORHttpPost" binding="tns:PD_TL_ERRORHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/PD_TL_ERROR.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,145 @@
+﻿@using Sonluk.UI.Model.S5.SY_DICTService;
+@{
+    ViewBag.Title = "人员绑定评分部门";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    FIVES_SY_DICT[] JCRESULT = ViewBag.JCRESULT;
+}
+
+
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+
+<script type="text/html" id="sex_Tpl">
+    {{# if(d.STAFFSEX == 1){ }}
+    男
+    {{# }else if(d.STAFFSEX== 2){ }}
+    女
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+<script type="text/html" id="lock_Tpl">
+    {{# if(d.SISLOCK == true){ }}
+    锁定
+    {{# }else if(d.SISLOCK== false){ }}
+    未锁定
+    {{# }else { }}
+    d.SISLOCK
+    {{# } }}
+</script>
+
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="bingDep">绑定部门</a>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">5S系统管理</a>
+    <a><cite>人员评分部门管理</cite></a>
+</span>
+    <input type="hidden" value="@Url.Action("SY_DEPT_SELECT", "System")" id="SY_DEPT_SELECT" />
+    <input type="hidden" value="@Url.Action("SY_DEPT_SELECTByStaffID", "System")" id="SY_DEPT_SELECTByStaffID" />
+    <input type="hidden" value="@Url.Action("STAFF_DEP_Create", "System")" id="STAFF_DEP_Create" />
+    <input type="hidden" value="@Url.Action("STAFF_DEP_Update", "System")" id="STAFF_DEP_Update" />
+
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<div class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline">
+                <select id="in_bm" lay-filter="in_bm" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.HR_SY_DEPT_LIST.Length; i++)
+                    {
+                        <option value="@Model.HR_SY_DEPT_LIST[i].DEPTID">@Model.HR_SY_DEPT_LIST[i].DEPTNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_xm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_staff" lay-filter="tb_staff"></table>
+
+</div>
+<div class="layui-form" id="div_bingDep" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">账号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_staff" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div style="padding:0 10px 0 10px">
+        <div class="layui-form-item">
+            <button class="layui-btn" id="btn_insert">新增</button>
+        </div>
+    </div>
+    <div style="padding:0 10px 0 10px">
+        <table class="layui-hide" id="tb_dep" lay-filter="tb_dep"></table>
+    </div>
+</div>
+<div class="layui-form" id="div_insert" hidden>
+    <br />
+    <div class="layui-inline">
+        <label class="layui-form-label">部门：</label>
+        <div class="layui-input-inline">
+            <select id="insert_dept" lay-filter="insert_dept" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.HR_SY_DEPT_LIST.Length; i++)
+                {
+                    <option value="@Model.HR_SY_DEPT_LIST[i].DEPTID">@Model.HR_SY_DEPT_LIST[i].DEPTNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    @*<div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father"></div>
+        </div>*@
+    <div class="layui-inline">
+        <label class="layui-form-label">检查类型：</label>
+        <div class="layui-input-inline">
+            <select id="in_jc" xm-select="in_jc">
+                @for (int i = 0; i < JCRESULT.Length; i++)
+                {
+                    <option value="@JCRESULT[i].DICID">@JCRESULT[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/System/STAFF_DEP_ACCESS")
+}
+
+

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_PSF_KAHXDJMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_PSF_KAHXDJMX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HXDJMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PSFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_PSF_KAHXDJMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByParamResult" type="tns:ArrayOfCRM_COST_PSF_KAHXDJMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_PSF_KAHXDJMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_PSF_KAHXDJMX" nillable="true" type="tns:CRM_COST_PSF_KAHXDJMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteByHXDJMXID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="HXDJMXID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteByHXDJMXIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteByHXDJMXIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByHXDJMXIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteByHXDJMXID" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByHXDJMXIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteByHXDJMXIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByHXDJMXIDHttpGetIn">
+    <wsdl:part name="HXDJMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByHXDJMXIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByHXDJMXIDHttpPostIn">
+    <wsdl:part name="HXDJMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByHXDJMXIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="COST_PSF_KAHXDJMXSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <wsdl:input message="tns:ReadByParamSoapIn" />
+      <wsdl:output message="tns:ReadByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByHXDJMXID">
+      <wsdl:input message="tns:DeleteByHXDJMXIDSoapIn" />
+      <wsdl:output message="tns:DeleteByHXDJMXIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_PSF_KAHXDJMXHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByHXDJMXID">
+      <wsdl:input message="tns:DeleteByHXDJMXIDHttpGetIn" />
+      <wsdl:output message="tns:DeleteByHXDJMXIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_PSF_KAHXDJMXHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByHXDJMXID">
+      <wsdl:input message="tns:DeleteByHXDJMXIDHttpPostIn" />
+      <wsdl:output message="tns:DeleteByHXDJMXIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="COST_PSF_KAHXDJMXSoap" type="tns:COST_PSF_KAHXDJMXSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByHXDJMXID">
+      <soap:operation soapAction="http://tempuri.org/DeleteByHXDJMXID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_PSF_KAHXDJMXSoap12" type="tns:COST_PSF_KAHXDJMXSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByHXDJMXID">
+      <soap12:operation soapAction="http://tempuri.org/DeleteByHXDJMXID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_PSF_KAHXDJMXHttpGet" type="tns:COST_PSF_KAHXDJMXHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByHXDJMXID">
+      <http:operation location="/DeleteByHXDJMXID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_PSF_KAHXDJMXHttpPost" type="tns:COST_PSF_KAHXDJMXHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByHXDJMXID">
+      <http:operation location="/DeleteByHXDJMXID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="COST_PSF_KAHXDJMX">
+    <wsdl:port name="COST_PSF_KAHXDJMXSoap" binding="tns:COST_PSF_KAHXDJMXSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/COST_PSF_KAHXDJMX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_PSF_KAHXDJMXSoap12" binding="tns:COST_PSF_KAHXDJMXSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/COST_PSF_KAHXDJMX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_PSF_KAHXDJMXHttpGet" binding="tns:COST_PSF_KAHXDJMXHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/COST_PSF_KAHXDJMX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_PSF_KAHXDJMXHttpPost" binding="tns:COST_PSF_KAHXDJMXHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/COST_PSF_KAHXDJMX.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

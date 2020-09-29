@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "数据字典维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR系统设置</a>
+    <a><cite>数据字典维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">类别：</label>
+            <div class="layui-input-inline">
+                <select id="find_lb" lay-filter="find_lb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs"></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_typemx" lay-filter="tb_typemx"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+<div id="div_typemx" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">类别：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <select id="typemx_lb" lay-filter="typemx_lb"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">公司代码：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <select id="typemx_gs" lay-filter="typemx_gs"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="typemx_mc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">说明：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="typemx_sm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">序号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="typemx_xh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">启用状态：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <select id="typemx_isaction" lay-filter="typemx_isaction">
+                    <option value="0">关闭</option>
+                    <option value="1" selected="selected">启用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">MXID：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="typemx_mxid" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">父节点类型：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <select id="typemx_fidtype" lay-filter="typemx_fidtype"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">父节点明细：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <select id="typemx_fidtypemx" lay-filter="typemx_fidtypemx"></select>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/SYSTEM/SY_TYPEMX")
+}

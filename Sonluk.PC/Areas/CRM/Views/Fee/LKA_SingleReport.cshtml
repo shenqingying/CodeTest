@@ -1,0 +1,78 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "LKA单品报表";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+
+}
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>LKA单品报表</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+            <button id="btn_dc" class="layui-btn" lay-filter="formDemo">导出</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;">LKA名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_lkamc" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px;">经销商名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_jxsmc" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px;">产品描述：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_discription" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;">归属年份：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_kayear" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px;">卖场编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_crmid" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                      
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <table id="result" lay-filter="result"></table>
+
+    </div>
+
+
+
+</div>
+
+
+<input id="netpath" value="@netpath" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/LKA_SingleReport")
+}

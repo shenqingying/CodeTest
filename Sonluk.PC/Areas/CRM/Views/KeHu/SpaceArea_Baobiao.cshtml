@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "空白区域报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>空白区域报表</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">省份：</label>
+        <div class="layui-input-inline" style="width:100px;">
+            <select id="province" lay-filter="province">
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">城市：</label>
+        <div class="layui-input-inline" style="width:100px;">
+            <select id="city" lay-filter="city">
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+
+        <button id="btn_select" class="layui-btn" style="width:120px;">查询</button>
+        <button id="btn_daochu" class="layui-btn" style="width:120px;">导出</button><br />
+        <table id="result" lay-filter="result"></table>
+
+    </div>
+
+</div>
+
+<input id="netpath" hidden />
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/SpaceArea")
+}

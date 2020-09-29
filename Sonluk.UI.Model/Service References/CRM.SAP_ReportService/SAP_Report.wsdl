@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Invoice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:SAP_Invoice_Param" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SAP_Invoice_Param">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="I_TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_YEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_QUAR_LOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_QUAR_HIGH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InvoiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InvoiceResult" type="tns:ArrayOfSAP_Invoice" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSAP_Invoice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_Invoice" nillable="true" type="tns:SAP_Invoice" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_Invoice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VKBUR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEZEI_BU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VKGRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEZEI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME1" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TASK" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TASK1" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JZ" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JZ1" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JZ2" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ACResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ACResult" type="tns:ArrayOfSAP_ReportInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSAP_ReportInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_ReportInfo" nillable="true" type="tns:SAP_ReportInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_ReportInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SalesOrderDiscount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Customer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrder" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrderItem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Delivery" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryItem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Payable" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Receivable" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Balance" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Invoice" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOCustomerText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuantityDelivered" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JE" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Division" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DecreaseDiscount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IncreaseDiscount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableDiscount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentChangeNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SHFH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SHFHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SHFHResult" type="tns:ArrayOfSAP_ReportInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZKMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZKMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZKMXResult" type="tns:ArrayOfSAP_ReportInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_CPFL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="I_MATNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_CPFLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_CPFLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_RWJD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_RWJDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_RWJDResult" type="tns:SAP_RWJDInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SAP_RWJDInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Task1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Task2" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Jz1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Jz2" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SAP_RWXS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_RWXSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_RWXSResult" type="tns:SAP_RWXSInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SAP_RWXSInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Jz1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Jz2" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SAP_RWJD2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SAP_RWJD2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_RWJD2Result" type="tns:SAP_RWJD2Info" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SAP_RWJD2Info">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="YJXS" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="YJSL" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_JXSKP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="STARTDATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:ArrayOfZSD_JXSKP" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSD_JXSKP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSD_JXSKP" nillable="true" type="tns:ZSD_JXSKP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSD_JXSKP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KPSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZHWGG1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPSL_LAST2YEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPJE_LAST2YEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPSL_LASTYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPJE_LASTYEAR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GET_JXSKPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_JXSKPResult" type="tns:ArrayOfZSD_JXSKP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfSAP_ReportInfo" nillable="true" type="tns:ArrayOfSAP_ReportInfo" />
+      <s:element name="SAP_RWJDInfo" nillable="true" type="tns:SAP_RWJDInfo" />
+      <s:element name="SAP_RWXSInfo" nillable="true" type="tns:SAP_RWXSInfo" />
+      <s:element name="SAP_RWJD2Info" nillable="true" type="tns:SAP_RWJD2Info" />
+    </s:schema>
+    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="InvoiceSoapIn">
+    <wsdl:part name="parameters" element="tns:Invoice" />
+  </wsdl:message>
+  <wsdl:message name="InvoiceSoapOut">
+    <wsdl:part name="parameters" element="tns:InvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ACSoapIn">
+    <wsdl:part name="parameters" element="tns:AC" />
+  </wsdl:message>
+  <wsdl:message name="ACSoapOut">
+    <wsdl:part name="parameters" element="tns:ACResponse" />
+  </wsdl:message>
+  <wsdl:message name="SHFHSoapIn">
+    <wsdl:part name="parameters" element="tns:SHFH" />
+  </wsdl:message>
+  <wsdl:message name="SHFHSoapOut">
+    <wsdl:part name="parameters" element="tns:SHFHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZKMXSoapIn">
+    <wsdl:part name="parameters" element="tns:ZKMX" />
+  </wsdl:message>
+  <wsdl:message name="ZKMXSoapOut">
+    <wsdl:part name="parameters" element="tns:ZKMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_CPFLSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_CPFL" />
+  </wsdl:message>
+  <wsdl:message name="SAP_CPFLSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_CPFLResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJDSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_RWJD" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJDSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_RWJDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWXSSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_RWXS" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWXSSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_RWXSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJD2SoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_RWJD2" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJD2SoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_RWJD2Response" />
+  </wsdl:message>
+  <wsdl:message name="GET_JXSKPSoapIn">
+    <wsdl:part name="parameters" element="tns:GET_JXSKP" />
+  </wsdl:message>
+  <wsdl:message name="GET_JXSKPSoapOut">
+    <wsdl:part name="parameters" element="tns:GET_JXSKPResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ACHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ACHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_ReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="SHFHHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SHFHHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_ReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="ZKMXHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZKMXHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_ReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_CPFLHttpGetIn">
+    <wsdl:part name="I_MATNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_CPFLHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJDHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="year" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJDHttpGetOut">
+    <wsdl:part name="Body" element="tns:SAP_RWJDInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWXSHttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWXSHttpGetOut">
+    <wsdl:part name="Body" element="tns:SAP_RWXSInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJD2HttpGetIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="MATNR" type="s1:StringArray" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJD2HttpGetOut">
+    <wsdl:part name="Body" element="tns:SAP_RWJD2Info" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ACHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ACHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_ReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="SHFHHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SHFHHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_ReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="ZKMXHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZKMXHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSAP_ReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_CPFLHttpPostIn">
+    <wsdl:part name="I_MATNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_CPFLHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJDHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="year" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJDHttpPostOut">
+    <wsdl:part name="Body" element="tns:SAP_RWJDInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWXSHttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWXSHttpPostOut">
+    <wsdl:part name="Body" element="tns:SAP_RWXSInfo" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJD2HttpPostIn">
+    <wsdl:part name="customer" type="s:string" />
+    <wsdl:part name="dateStart" type="s:string" />
+    <wsdl:part name="dateEnd" type="s:string" />
+    <wsdl:part name="MATNR" type="s1:StringArray" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_RWJD2HttpPostOut">
+    <wsdl:part name="Body" element="tns:SAP_RWJD2Info" />
+  </wsdl:message>
+  <wsdl:portType name="SAP_ReportSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Invoice">
+      <wsdl:input message="tns:InvoiceSoapIn" />
+      <wsdl:output message="tns:InvoiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AC">
+      <wsdl:input message="tns:ACSoapIn" />
+      <wsdl:output message="tns:ACSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SHFH">
+      <wsdl:input message="tns:SHFHSoapIn" />
+      <wsdl:output message="tns:SHFHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZKMX">
+      <wsdl:input message="tns:ZKMXSoapIn" />
+      <wsdl:output message="tns:ZKMXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_CPFL">
+      <wsdl:input message="tns:SAP_CPFLSoapIn" />
+      <wsdl:output message="tns:SAP_CPFLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD">
+      <wsdl:input message="tns:SAP_RWJDSoapIn" />
+      <wsdl:output message="tns:SAP_RWJDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWXS">
+      <wsdl:input message="tns:SAP_RWXSSoapIn" />
+      <wsdl:output message="tns:SAP_RWXSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD2">
+      <wsdl:input message="tns:SAP_RWJD2SoapIn" />
+      <wsdl:output message="tns:SAP_RWJD2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_JXSKP">
+      <wsdl:input message="tns:GET_JXSKPSoapIn" />
+      <wsdl:output message="tns:GET_JXSKPSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SAP_ReportHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AC">
+      <wsdl:input message="tns:ACHttpGetIn" />
+      <wsdl:output message="tns:ACHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SHFH">
+      <wsdl:input message="tns:SHFHHttpGetIn" />
+      <wsdl:output message="tns:SHFHHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZKMX">
+      <wsdl:input message="tns:ZKMXHttpGetIn" />
+      <wsdl:output message="tns:ZKMXHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_CPFL">
+      <wsdl:input message="tns:SAP_CPFLHttpGetIn" />
+      <wsdl:output message="tns:SAP_CPFLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD">
+      <wsdl:input message="tns:SAP_RWJDHttpGetIn" />
+      <wsdl:output message="tns:SAP_RWJDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWXS">
+      <wsdl:input message="tns:SAP_RWXSHttpGetIn" />
+      <wsdl:output message="tns:SAP_RWXSHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD2">
+      <wsdl:input message="tns:SAP_RWJD2HttpGetIn" />
+      <wsdl:output message="tns:SAP_RWJD2HttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SAP_ReportHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AC">
+      <wsdl:input message="tns:ACHttpPostIn" />
+      <wsdl:output message="tns:ACHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SHFH">
+      <wsdl:input message="tns:SHFHHttpPostIn" />
+      <wsdl:output message="tns:SHFHHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZKMX">
+      <wsdl:input message="tns:ZKMXHttpPostIn" />
+      <wsdl:output message="tns:ZKMXHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_CPFL">
+      <wsdl:input message="tns:SAP_CPFLHttpPostIn" />
+      <wsdl:output message="tns:SAP_CPFLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD">
+      <wsdl:input message="tns:SAP_RWJDHttpPostIn" />
+      <wsdl:output message="tns:SAP_RWJDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWXS">
+      <wsdl:input message="tns:SAP_RWXSHttpPostIn" />
+      <wsdl:output message="tns:SAP_RWXSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD2">
+      <wsdl:input message="tns:SAP_RWJD2HttpPostIn" />
+      <wsdl:output message="tns:SAP_RWJD2HttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SAP_ReportSoap" type="tns:SAP_ReportSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Invoice">
+      <soap:operation soapAction="http://tempuri.org/Invoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AC">
+      <soap:operation soapAction="http://tempuri.org/AC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHFH">
+      <soap:operation soapAction="http://tempuri.org/SHFH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZKMX">
+      <soap:operation soapAction="http://tempuri.org/ZKMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_CPFL">
+      <soap:operation soapAction="http://tempuri.org/SAP_CPFL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD">
+      <soap:operation soapAction="http://tempuri.org/SAP_RWJD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWXS">
+      <soap:operation soapAction="http://tempuri.org/SAP_RWXS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD2">
+      <soap:operation soapAction="http://tempuri.org/SAP_RWJD2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_JXSKP">
+      <soap:operation soapAction="http://tempuri.org/GET_JXSKP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SAP_ReportSoap12" type="tns:SAP_ReportSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Invoice">
+      <soap12:operation soapAction="http://tempuri.org/Invoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AC">
+      <soap12:operation soapAction="http://tempuri.org/AC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHFH">
+      <soap12:operation soapAction="http://tempuri.org/SHFH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZKMX">
+      <soap12:operation soapAction="http://tempuri.org/ZKMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_CPFL">
+      <soap12:operation soapAction="http://tempuri.org/SAP_CPFL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD">
+      <soap12:operation soapAction="http://tempuri.org/SAP_RWJD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWXS">
+      <soap12:operation soapAction="http://tempuri.org/SAP_RWXS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD2">
+      <soap12:operation soapAction="http://tempuri.org/SAP_RWJD2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_JXSKP">
+      <soap12:operation soapAction="http://tempuri.org/GET_JXSKP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SAP_ReportHttpGet" type="tns:SAP_ReportHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AC">
+      <http:operation location="/AC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHFH">
+      <http:operation location="/SHFH" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZKMX">
+      <http:operation location="/ZKMX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_CPFL">
+      <http:operation location="/SAP_CPFL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD">
+      <http:operation location="/SAP_RWJD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWXS">
+      <http:operation location="/SAP_RWXS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD2">
+      <http:operation location="/SAP_RWJD2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SAP_ReportHttpPost" type="tns:SAP_ReportHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AC">
+      <http:operation location="/AC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHFH">
+      <http:operation location="/SHFH" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZKMX">
+      <http:operation location="/ZKMX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_CPFL">
+      <http:operation location="/SAP_CPFL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD">
+      <http:operation location="/SAP_RWJD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWXS">
+      <http:operation location="/SAP_RWXS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_RWJD2">
+      <http:operation location="/SAP_RWJD2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SAP_Report">
+    <wsdl:port name="SAP_ReportSoap" binding="tns:SAP_ReportSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/SAP_Report.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SAP_ReportSoap12" binding="tns:SAP_ReportSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/SAP_Report.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SAP_ReportHttpGet" binding="tns:SAP_ReportHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/SAP_Report.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SAP_ReportHttpPost" binding="tns:SAP_ReportHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/SAP_Report.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

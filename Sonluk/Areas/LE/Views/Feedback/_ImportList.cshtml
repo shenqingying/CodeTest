@@ -1,0 +1,47 @@
+﻿@using Sonluk.UI.Model.LE.TRA.FeedbackService
+@model IEnumerable<FeedbackItemInfo>
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">托运单ID</td>
+        <td class="data-table-header">发货日期</td>
+        <td class="data-table-header">到站</td>
+        <td class="data-table-header">品名</td>
+        <td class="data-table-header">件数</td>
+        <td class="data-table-header">重量</td>
+        <td class="data-table-header">体积</td>
+        <td class="data-table-header">计费重量</td>
+        <td class="data-table-header">单价</td>
+        <td class="data-table-header">运费</td>
+        <td class="data-table-header">直送费</td>
+        <td class="data-table-header">装卸费</td>
+        <td class="data-table-header">其他费用</td>
+        <td class="data-table-header">费用小计</td>
+        <td class="data-table-header">实际支付</td>
+        <td class="data-table-header">确认</td>
+        <td class="data-table-header">备注</td>
+    </tr>
+        @foreach (FeedbackItemInfo node in Model)
+        {
+            <tr>
+                <td class="text-align-right">@node.ConsignmentNote</td>
+                <td>@node.DepartureDate</td>
+                <td>@node.Destination</td>
+                <td class="text-align-left">@node.GoodsType</td>
+                <td class="text-align-right">@node.WholeQty</td>
+                <td class="text-align-right">@node.Weight</td>
+                <td class="text-align-right">@node.Volume</td>
+                <td class="text-align-right">@node.ChargedWeight</td>
+                <td class="text-align-right">@node.UnitPrice</td>
+                <td class="text-align-right">@node.Cost</td>
+                <td class="text-align-right">@node.DirectCost</td>
+                <td class="text-align-right">@node.HandlingCost</td>
+                <td class="text-align-right">@node.OtherCost</td>
+                <td class="text-align-right">@node.TotalCost</td>
+                <td class="text-align-right">@node.Payment</td>
+                <td><input type="checkbox"  value="true" ></td>
+                <td class="text-align-left"><input type="text" value=""></td>
+            </tr>
+
+        }
+</table>
+<input type="hidden" value="@Model.Count()" id="node-count">

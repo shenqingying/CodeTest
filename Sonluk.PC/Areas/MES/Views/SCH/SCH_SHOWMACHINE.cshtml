@@ -1,0 +1,687 @@
+﻿@{
+    ViewBag.Title = "SCH_SHOWMACHINE";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<link href="~/Scripts/layui2.2.5/css/layui.css" rel="stylesheet" />
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script src="~/Scripts/sonlui.min.js"></script>
+<script src="~/Scripts/MES/SCH/SCH_SHOWMACHINE.js"></script>
+<script src="~/Scripts/EM/zwk.js"></script>
+<link href="~/Content/swiper-bundle.min.css" rel="stylesheet" />
+<link href="~/Content/MES/SCH/dw.css" rel="stylesheet" />
+<script src="~/Scripts/echarts.min.js"></script>
+<script src="~/Scripts/swiper-bundle.min.js"></script>
+<style>
+   
+
+    .sbdivLabel {
+        font-size: 22px;
+        color: #ffffff;
+        padding: 3px;
+        line-height:1.2;
+        font-family:KaiTi;
+        /*background:#fafafa*/
+    }
+
+    .a {
+        /*border: 1px solid #33FFCC;*/
+        background-color: #0B0B3B;
+        box-shadow: 2px 2px 2px 2px;
+    }
+
+    
+
+    .test {
+        /*background-image: radial-gradient(ellipse, #00a7e2 5%, rgb(255 255 255 / 0) 100%);*/
+        background-image: radial-gradient(circle at right bottom, #00a7e2 5%, rgb(0 167 226 / 0.5) 40%, rgb(0 167 226 / 0.5) 60%,#00a7e2 100%);
+        border: 1px solid #00a7e2;
+    }
+
+   
+    /* css注释说明： 背景为红色 */
+   
+
+   
+</style>
+
+
+<body>
+    <input type="hidden" value="@Url.Action("ReadSY_GZZX_SBBH", "SCH")" id="ReadSY_GZZX_SBBH" />
+    <input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+    <input type="hidden" value="@Url.Action("ReadDW_MES_SBBH_OUTPUT_DAY", "SCH", new { area = "MES"})" id="ReadDW_MES_SBBH_OUTPUT_DAY" />
+    <input type="hidden" value="@Url.Action("ReadPD_SCRW_SJJL", "SCH")" id="ReadPD_SCRW_SJJL" />
+    <input type="hidden" value="@Url.Action("ReadMES_ERPNO_SUMMARY", "SCH")" id="ReadMES_ERPNO_SUMMARY" />
+
+    <input hidden type="text" value="@ViewBag.ID" id="input_staffid" />
+    <div class="layui-form">
+        <div class="div-a" id="topChoiceDiv">
+            <div style="padding-top:13px"></div>
+            <div class="layui-inline">
+                <label class="layui-form-label " lid="label1" style="margin-left:-40px">工厂：</label>
+                <div class="layui-input-inline" style="width:200px">
+                    <select id="in_gc" lay-filter="in_gc">
+                        @if (Model.MES_SY_GC.Length == 1)
+                        {
+                            <option selected="selected" value="@Model.MES_SY_GC[0].GC">@Model.MES_SY_GC[0].GC-@Model.MES_SY_GC[0].GCMS</option>
+                        }
+                        else
+                        {
+                            <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                            {
+                                <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="label2" style="margin-left:-20px">工作中心：</label>
+                <div class="layui-input-inline">
+                    <select id="in_gzzx" lay-filter="in_gzzx">
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="label3" style="width:100px;margin-left:-20px">刷新（秒）：</label>
+                <div class="layui-input-inline">
+                    <input type="number" autocomplete="off" class="layui-input" id="in_refresh" style="width:100px" value="30">
+                </div>
+            </div>
+            <div class="layui-inline" style="padding-left:25px">
+                <button class="layui-btn" lid="btn1" id="btn1" onclick="StartShow(false)">启动</button>
+            </div>
+            <div style="padding-bottom:13px"></div>
+        </div>
+
+        <div class="div-c" id="TitleDiv" style="background:#0B0B3B">
+            <div style="font-size:26px;text-align:center;padding-top:10px">
+                <h1 style="color:#e0e0e0">
+                    车间生产进度
+                </h1>
+            </div>
+            <div id="sj" style="text-align:right;color:#e0e0e0;font-size:18px;margin-right:20px;margin-top: -10px;">当前时间</div>
+        </div>
+        <div class="swiper-container div-b contentbg" id="ContentDiv" >
+
+            @*<div class="swiper-wrapper"  id="div_UI">
+                    <div class="swiper-slide" style="background:#ff0000">slider1</div>
+                        <div class="swiper-slide" style="background:#ff0">slider2</div>
+                        <div class="swiper-slide" style="background:#0ff">slider3</div>
+                </div>*@
+
+        </div>
+
+    </div>
+
+
+
+</body>
+<script>
+    var init = false;
+    var startLoop = false;
+    var mySwiper;
+    var SBBH_ALL, SBBH_DW, SBBH_PRO, GDDH_SUMMARY;
+    var timer1, timer2, timer3, timer4;
+    var queryData;
+    var flag = true;//定制器标识
+    var refreshTimer;
+    var HistoryData;
+    layui.use([], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+        var layer = layui.layer;
+        var id = document.getElementById('input_staffid').value;
+        Clock('sj',"当前时间：");
+
+        divSetConfig();
+        form.on('select(in_gc)', function (data) {
+            var GC = $('#in_gc').val();
+            if (GC === "") {
+                $("#in_gzzx").html("");
+                $('#in_gzzx').append(new Option(common.c_selectplz, ""));
+                form.render();
+            }
+            else {
+                var url = document.getElementById('url_gzzx').value;
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: url,
+                    data: {
+                        GC: GC
+                    },
+                    success: function (data) {
+                        var resdata = JSON.parse(data);
+                        $("#in_gzzx").html("");
+                        $('#in_gzzx').append(new Option(common.c_selectplz, ""));
+                        var rstcount = resdata.length;
+                        if (rstcount > 0) {
+                            for (var i = 0; i < resdata.length; i++) {
+                                $('#in_gzzx').append(new Option(resdata[i].GZZXBH + "-" + resdata[i].GZZXMS, resdata[i].GZZXBH));
+                            }
+                        }
+                        form.render();
+                    }
+                });
+            }
+        });
+        var refreshValue = localStorage.getItem('in_refresh');
+        if (refreshValue != undefined) {
+            document.getElementById('in_refresh').value = refreshValue;
+        }
+        var in_gc = localStorage.getItem('in_gc');
+        if (in_gc != null || in_gc != undefined) {
+            document.getElementById('in_gc').value = in_gc;
+            var url = document.getElementById('url_gzzx').value;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: url,
+                data: {
+                    GC: in_gc
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    $("#in_gzzx").html("");
+                    $('#in_gzzx').append(new Option(common.c_selectplz, ""));
+                    var rstcount = resdata.length;
+                    if (rstcount > 0) {
+                        for (var i = 0; i < resdata.length; i++) {
+                            $('#in_gzzx').append(new Option(resdata[i].GZZXBH + "-" + resdata[i].GZZXMS, resdata[i].GZZXBH));
+                        }
+                    }
+                    var in_gzzx = localStorage.getItem('in_gzzx');
+                    if (in_gzzx != null || in_gzzx != undefined) {
+                        document.getElementById('in_gzzx').value = in_gzzx;
+                    }
+                    form.render();
+                }
+            });
+        }
+        form.render();
+        $$('topChoiceDiv').classList.add('up');
+    })
+    window.onresize = function () {
+        divSetConfig();
+    }
+
+    function divSetConfig() {
+        var height = document.body.clientHeight;
+        document.getElementById('ContentDiv').style.height = height - 100;
+
+    }
+
+    function StartShow(isUpdate) {
+        flag = true;
+        if (!isUpdate) {
+            var gc = document.getElementById('in_gc').value;
+            var gzzxbh = document.getElementById('in_gzzx').value;
+            var refresh = document.getElementById('in_refresh').value;
+            if (gc == '') {
+                sonluk.msg.warn('工厂不能为空', 0);
+                return;
+            }
+            if (gzzxbh == '') {
+                sonluk.msg.warn('工作中心不能为空', 0);
+                return;
+            }
+            if (refresh <= 0) {
+                sonluk.msg.warn('刷新频率不能为空', 0);
+                return;
+            }
+            refreshTimer = refresh;
+            var data = {
+                GC: gc,
+                GZZXBH: gzzxbh
+            };
+            queryData = data;
+        }
+        
+        var load = layer.load(1);
+        HttpRequest.ReadDW_MES_SBBH_OUTPUT_DAY({
+            data: queryData,
+            success: function (data) {
+
+                layer.close(load);
+                //if (data.length == 0) {
+                //    sonluk.msg.open("查询数据为空",'W',0);
+                //} else {
+                    LoadDataView(data);
+                //}
+                
+            },
+            error: function (msg) {
+                layer.close(load);
+                sonluk.msg.open(msg, 'E', 0);
+            }
+        })      
+        localStorage.setItem('in_refresh', refresh);
+        localStorage.setItem('in_gc', gc);
+        localStorage.setItem('in_gzzx', gzzxbh);
+    }
+
+    var HttpRequest = {
+        ReadDW_MES_SBBH_OUTPUT_DAY: function (input) {
+            var data = {
+                GZZXBH: input.data.GZZXBH,
+                GC: input.data.GC,
+                KSRQ: getNowFormatDay(),
+                JSRQ: getNowFormatDay()
+            }
+            $.ajax({
+                type: 'POST',
+                url: document.getElementById('ReadDW_MES_SBBH_OUTPUT_DAY').value,
+                data: {
+                    data: JSON.stringify(data)
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.success) {
+                        input.success(data.data);
+                    } else {
+                        input.error('获取设备生产信息大数据异常')
+
+                    }
+                },
+                error: function (e) {
+                    input.error('获取设备生产信息大数据异常')
+                }
+            })
+        },
+        ReadPD_SCRW_SJJL: function (input) {
+            var data = {
+                STATUS: 1,
+                GC: input.data.GC,
+                GZZXBH: input.data.GZZXBH
+                //JLKSTIME: getNowFormatDay(),
+                //JLJSTIME: getNowFormatDay()
+            }
+            $.ajax({
+                type: 'POST',
+                url: document.getElementById('ReadPD_SCRW_SJJL').value,
+                data: {
+                    data: JSON.stringify(data)
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.success) {
+                        input.success(data.data);
+                    } else {
+                        input.error('读取设备实时工作状态失败')
+                    }
+                },
+                error: function (e) {
+                    input.error('读取设备实时工作状态失败')
+                }
+            })
+        },
+        ReadMES_ERPNO_SUMMARY: function (input) {
+            $.ajax({
+                type: 'POST',
+                url: document.getElementById('ReadMES_ERPNO_SUMMARY').value,
+                data: {
+                    data: JSON.stringify(input.data)
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    input.success(data.data);
+                },
+                error: function (e) {
+                    input.error('读取设备实时工作状态失败')
+                }
+            })
+        },
+        ReadSY_GZZX_SBBH: function (input) {
+            $.ajax({
+                type: 'Post',
+                url: $('#ReadSY_GZZX_SBBH').val(),
+                data: {
+                    data: JSON.stringify(input.data)
+                },
+                success: function (data) {
+                    data = JSON.parse(data).data;
+                    input.success(data);
+                },
+                error: function () {
+                    //sonluk.msg.open(sonluklv.alert1);
+                    //layer.close(load);
+                }
+            })
+        }
+    }
+
+    function LoadDataView(data) {
+        flag = true;
+        HistoryData = data;
+        clearInterval(timer1);
+        var alldiv = document.getElementById('ContentDiv');
+        alldiv.innerHTML = '';
+        var div = document.createElement('div');
+        div.setAttribute('id', 'div_UI');
+        div.classList.add('swiper-wrapper');
+        alldiv.append(div);
+        var screenWidth = document.getElementById('div_UI').clientWidth;
+        var screenHeight = document.getElementById('div_UI').clientHeight;
+        var rect = {
+            width: 450,
+            height: 200
+        };
+        var rowCount = parseInt((screenWidth - 20) / rect.width);
+        var colCount = parseInt(screenHeight / rect.height);
+        var pageCount = rowCount * colCount;
+        var countPageCount = Math.ceil(data.length / pageCount);
+        var sbBigArr = [];
+        var interval = 0;
+        var subArr = [];
+        for (var i = 0; i < data.length; i++) {
+            if (interval < pageCount) {
+                subArr.push(data[i]);
+                interval++;
+            } else {
+                i--;
+                sbBigArr.push(subArr);
+                subArr = [];
+                interval = 0;;
+            }
+        }
+        sbBigArr.push(subArr);
+        for (var i = 0; i < countPageCount; i++) {
+            var pageDiv = document.createElement('div');
+            pageDiv.classList.add('swiper-slide');
+            var griddiv = document.createElement('div');
+            griddiv.classList.add('grid-a');
+            griddiv.style.position = 'relative';
+            pageDiv.append(griddiv);
+            for (var j = 0; j < sbBigArr[i].length; j++) {
+                var node = sbBigArr[i][j];
+                var subdiv = document.createElement('div');//每块的div
+                subdiv.classList.add('contentDiv');//每块的内容
+                subdiv.setAttribute('id', 'div-' + node.SBBH);
+                subdiv.style.height = rect.height;
+                subdiv.style.width = rect.width;
+                subdiv.classList.add('test');
+                //subdiv.classList.add('a');
+                griddiv.append(subdiv);
+                var currsbStruct;
+                var currdw_data;
+                var exist = false;
+                var existDW = false;
+                var font22height = 29;
+                var defaultleft = 5;
+                var defaluttop = 3;
+                var defalutmargin = 2;
+                var sbbhlabel = document.createElement('label');
+                sbbhlabel.setAttribute('id', 'div-sbms-' + node.SBBH);
+                sbbhlabel.innerHTML = node.SBMS;
+                sbbhlabel.style.textAlign = 'right';
+                sbbhlabel.style.width = '100%';
+                sbbhlabel.style.paddingRight = 5;
+                sbbhlabel.style.display = 'inline-block';
+                sbbhlabel.style.color = '#ffffff';
+                sbbhlabel.style.fontSize = '40px';
+                document.body.append(sbbhlabel);
+                var aheight = sbbhlabel.clientHeight;
+                sbbhlabel.remove();
+                subdiv.append(sbbhlabel);                
+                //if (exist) {
+                var scddlabel = document.createElement('div');
+                scddlabel.setAttribute('id', 'div-scdd-' + node.SBBH);
+                if (node.ERPNO != '') {
+                    scddlabel.innerHTML = '生产订单:' + node.ERPNO;
+                } else {
+                    scddlabel.innerHTML = 'MES订单:' + node.GDDH;
+                }
+                var a = 0 - sbbhlabel.clientHeight;
+                scddlabel.style.marginTop = 0 - aheight;
+                scddlabel.classList.add('sbdivLabel');
+                subdiv.append(scddlabel);
+                var wlhlabel = document.createElement('div');
+                wlhlabel.setAttribute('id', 'div-wlh-' + node.SBBH)
+                wlhlabel.innerHTML = '物料编码:' + node.WLH;
+                wlhlabel.classList.add('sbdivLabel');
+                subdiv.append(wlhlabel);
+                var sssllabel = document.createElement('div');
+                sssllabel.setAttribute('id', 'div-sssl-' + node.SBBH);
+                sssllabel.innerHTML = node.SSSL != 0 ? '今日产量:' + node.SSSL + '(' + node.UNITMS + ')' : '今日产量:暂无数据';
+                sssllabel.classList.add('sbdivLabel');
+                subdiv.append(sssllabel);
+                var ddsllabel = document.createElement('div');
+                ddsllabel.setAttribute('id', 'div-ddsl-' + node.SBBH);
+                ddsllabel.innerHTML = node.DDSL != 0 ? '订单需求数量:' + parseFloat(node.DDSL) + '(' + node.UNITMS + ')' : '订单需求数量:暂无数量';
+                ddsllabel.classList.add('sbdivLabel');
+                subdiv.append(ddsllabel);
+                var ddwcsllabel = document.createElement('div');
+                ddwcsllabel.setAttribute('id', 'div-ddwcsl-' + node.SBBH);
+                ddwcsllabel.innerHTML = node.DDYWCSL != 0 ? '订单完成数量:' + parseFloat(node.DDYWCSL) + '(' + node.UNITMS + ')' : '订单完成数量:暂无数量';
+                ddwcsllabel.classList.add('sbdivLabel');
+                subdiv.append(ddwcsllabel);
+                var sbztlabel = document.createElement('div');
+                sbztlabel.classList.add('class-sbzt');
+                sbztlabel.setAttribute('id', 'div-sbzt-' + node.SBBH);
+                sbztlabel.innerHTML = '设备状态:' + node.SBSTATUS;
+                sbztlabel.classList.add('sbdivLabel');
+                if (node.SBSTATUS == '正常') {
+                    sbztlabel.style.color = '#34da62';
+                } else if (node.SBSTATUS == '故障') {
+                    sbztlabel.style.color = '#e02310';
+                } else {
+                    sbztlabel.style.color = '#33FFCC';
+                }
+                subdiv.append(sbztlabel);
+                var chartdiv = document.createElement('div');
+                chartdiv.style.marginTop = 28 - rect.height;
+                chartdiv.style.height = 200;
+                chartdiv.style.width = 200;               
+                chartdiv.style.marginLeft = 255;
+                chartdiv.classList.add('echart-class');
+                chartdiv.classList.add('div-chart-gddh')
+                chartdiv.setAttribute('id', 'echrat-' + node.SBBH + '-gddh');
+                subdiv.append(chartdiv);
+               
+
+            }
+            div.appendChild(pageDiv);
+        }
+        if (countPageCount > 1) {
+            mySwiper = new Swiper('.swiper-container', {
+                autoplay: {
+                delay: 10000,
+                stopOnLastSlide: false,
+                disableOnInteraction: true,
+                },
+                //effect: 'cube',
+                loop: true,
+                speed: 3000,
+                on: {
+                    slideChangeTransitionStart: function (swiper, event) {
+                        UpdateEchart();
+                    }
+                }
+            })
+
+        } else {
+            UpdateEchart();
+        }
+
+        if (flag) {
+            timer1 = setInterval(IntervalUpdateDataView, refreshTimer * 1000);//查询工作中心设备的信息          
+        }
+
+    }
+    function IntervalUpdateDataView() {
+        if (flag) {
+            flag = false;
+            return;
+        }
+        HttpRequest.ReadDW_MES_SBBH_OUTPUT_DAY({
+            data: queryData,
+            success: function (data) {
+                if (data.length != 0 && data.length != HistoryData.length) {
+                    StartShow(true)
+                } else {
+                    HistoryData = data;
+                    document.querySelectorAll('.test').forEach(function (item, index) {
+                        var sbbh = item.getAttribute('id').split('-')[1];
+                        for (var i = 0; i < data.length; i++) {
+                            if (sbbh == data[i].SBBH) {
+                                var node = data[i];
+                                
+                                document.getElementById('div-sbms-' + sbbh) .innerHTML = node.SBMS;
+                                if (node.ERPNO != '') {
+                                    document.getElementById('div-scdd-' + sbbh).innerHTML = '生产订单:' + node.ERPNO;
+                                } else {
+                                    document.getElementById('div-scdd-' + sbbh).innerHTML = 'MES订单:' + node.GDDH;
+                                }                            
+                                document.getElementById('div-wlh-' + sbbh).innerHTML = '物料编码:' + node.WLH;
+                                document.getElementById('div-sssl-' + sbbh).innerHTML = node.SSSL != 0 ? '累计产量:' + node.SSSL + '(' + node.UNITMS + ')' : '累计产量:暂无数据';
+                                document.getElementById('div-ddsl-' + sbbh).innerHTML = node.DDSL != 0 ? '订单需求数量:' + parseFloat(node.DDSL) + '(' + node.UNITMS + ')' : '订单需求数量:暂无数量';
+                                document.getElementById('div-ddwcsl-' + sbbh).innerHTML = node.DDYWCSL != 0 ? '订单完成数量:' + parseFloat(node.DDYWCSL) + '(' + node.UNITMS + ')' : '订单完成数量:暂无数量';
+                                document.getElementById('div-sbzt-' + sbbh).innerHTML = '设备状态:' + node.SBSTATUS;
+                                if (node.SBSTATUS == '正常') {
+                                    document.getElementById('div-sbzt-' + sbbh).style.color = '#34da62';
+                                } else if (node.SBSTATUS == '故障') {
+                                    document.getElementById('div-sbzt-' + sbbh).style.color = '#e02310';
+                                } else {
+                                    document.getElementById('div-sbzt-' + sbbh).style.color = '#33FFCC';
+                                }                                                             
+                                break;
+                            }
+                        }                                                
+                    })
+                    UpdateEchart();
+                }
+            },
+            error: function (msg) {
+               
+            }
+        })
+
+    }
+
+    document.getElementById('ContentDiv').addEventListener('mousemove', mouseMove)
+    function mouseMove(ev) {
+        ev = ev || window.event;
+        var mousePos = mousePosition(ev);
+        var height = document.documentElement.clientHeight;
+        if (mousePos.y < height/2) {
+            if (document.getElementById('topChoiceDiv').className.indexOf('up') != -1) {
+                document.getElementById('topChoiceDiv').classList.remove('up');
+                document.getElementById('topChoiceDiv').classList.add('down');
+            }
+
+        } else {
+            if (document.getElementById('topChoiceDiv').className.indexOf('down') != -1) {
+                document.getElementById('topChoiceDiv').classList.remove('down');
+            }
+
+            $$('topChoiceDiv').classList.add('up');
+        }
+    }
+    function mousePosition(ev) {
+        if (ev.pageX || ev.pageY) {
+            return { x: ev.pageX, y: ev.pageY };
+        }
+        return {
+            x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y: ev.clientY + document.body.scrollTop - document.body.clientTop
+        };
+    }
+    // Converts canvas to an image
+    function convertCanvasToImage(canvas) {
+        var image = new Image();
+        image.src = canvas.toDataURL("image/png");
+        return image;
+    }
+    function UpdateEchart() {
+        var data = HistoryData;
+        document.querySelectorAll('.echart-class.div-chart-gddh').forEach(function (item) {
+            //SBBH_PRO
+            var sbbhid = item.getAttribute('id').split('-')[1];
+            var mbsl = 0; var yjcsl = 0; var gddh = undefined;
+            for (var i = 0; i < data.length; i++) {
+                if (sbbhid == data[i].SBBH) {
+                    mbsl = data[i].DDSL;
+                    yjcsl = data[i].DDYWCSL;
+                    gddh = data[i].GDDH;
+                    break;
+                }
+            }
+            if (mbsl != 0 && (gddh != undefined || gddh != '')) {
+                if (yjcsl > mbsl) {
+                    yjcsl = mbsl;
+                }
+                var myChart = echarts.init(item);
+                var colors = ['#3ef805', '#f4f4f7'];//['#e02310', '#f4f4f7']//#16b799
+                myChart.clear();//数据先清空
+                var serise = {
+                    name: '订单执行进度',
+                    type: 'pie',
+                    clockWise: true,
+
+                    radius: [50, 70],
+                    itemStyle: {
+                        normal: {
+                            color: colors[0],
+                            shadowColor: colors[0],
+                            shadowBlur: 0,
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                        }
+                    },
+                    animation: false,
+                    hoverAnimation: false,
+                    center: ['50%', '50%'],
+                    data: [{
+                        value: yjcsl,
+                        label: {
+                            normal: {
+                                formatter: function (params) {
+                                    var unit = "%";
+                                    var pre = ((yjcsl / mbsl) * 100).toFixed(2);
+                                    return pre + unit;
+                                },
+                                position: 'center',
+                                show: true,
+                                textStyle: {
+                                    fontSize: '20',
+                                    fontWeight: 'bold',
+                                    color: colors[0]  //跟随其他颜色
+                                }
+                            }
+                        },
+                    }, {
+                        value: mbsl - yjcsl,
+                        name: 'invisible',
+                        itemStyle: {
+                            normal: {
+                                color: colors[1]
+                            },
+                            emphasis: {
+                                color: colors[1]
+                            }
+                        }
+                    }]
+                }
+                var option = {
+                    series: serise
+
+                };
+                myChart.setOption(option);
+            } else {
+                var myChart = echarts.init(item);
+               
+                myChart.clear();//数据先清空
+            }
+
+        })
+    }
+   
+
+</script>

@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "报废零件报工";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-big" id="btn_qrbg">确认报工</button>
+            <button class="layui-btn layui-btn-big" id="btn_qx">取消</button>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" name="in_wlh" placeholder="请扫描网络号或员工号" autocomplete="off" class="layui-input" id="in_wlh" onkeypress="if(window.event.keyCode==13) this.blur()" style="width: 940px;">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">员工号</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" name="in_ygh" placeholder="" autocomplete="off" class="layui-input" readonly="readonly" id="in_ygh">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline" style="width: 400px;">
+                <input type="text" name="in_name" placeholder="" autocomplete="off" class="layui-input" readonly="readonly" id="in_name">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form" id="QualifiedPartlist">
+    </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/PS/ScrapPart")
+}

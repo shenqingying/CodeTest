@@ -1,0 +1,203 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "卖场促销员工资管理";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+    CRM_HG_DICT[] CXYHS = ViewBag.CXYHS;
+    CRM_HG_DICT[] CXYGW = ViewBag.CXYGW;
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="tpl_masx">
+    {{# if(d.MCSX == 1){ }}
+    系统
+    {{# }else if(d.MCSX == 2){ }}
+    门店
+    {{# }else { }}
+    {{# } }}
+</script>
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+    {{# } }}
+</script>
+
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>卖场促销员工资管理</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lay-filter="formDemo">新增</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+            <button id="btn_print" class="layui-btn" lay-filter="formDemo">打印</button>
+            <button id="btn_daochu" class="layui-btn" lay-filter="formDemo">全部导出</button>
+            <button id="btn_douchu_les" class="layui-btn" lay-filter="formDemo">打印导出</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" >开始月份：</label>
+                            <div class="layui-input-inline"style="width:260px;">
+                                <input id="time_begin" type="text" class="layui-input" autocomplete="off" value="@ViewBag.startdate">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" >至：</label>
+                            <div class="layui-input-inline" style="width:260px;">
+                                <input id="time_end" type="text" class="layui-input" autocomplete="off" value="@ViewBag.enddate">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" >促销员名称</label>
+                            <div class="layui-input-inline" style="width:260px;">
+                                <input id="select_name" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">岗位：</label>
+                            <div class="layui-input-inline" style="width:260px;">
+                                <select id="select_gw" xm-select="select_gw">
+                                    @for (int i = 0; i < CXYGW.Length; i++)
+                                    {
+                                        <option value="@CXYGW[i].DICID">@CXYGW[i].DICNAME</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" >系统名称</label>
+                            <div class="layui-input-inline" style="width:260px;">
+                                <input id="select_xtmc" type="text" class="layui-input" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" >门店名称</label>
+                            <div class="layui-input-inline" style="width:260px;">
+                                <input id="select_mdmc" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="result" lay-filter="result"></table>
+
+</div>
+
+
+<div id="div_jump" class="layui-form" hidden>
+
+    <br />
+    <div id="div_first">
+        <div class="layui-form-item">
+            <div id="div_month" class="layui-inline">
+                <label class="layui-form-label" style="width:120px;">年月：</label>
+                <div class="layui-input-inline">
+                    <input id="CXYGZ_MONTH" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="div_jump1" hidden>
+        <div class="layui-form-item">
+            <button id="btn_cxkh" class="layui-btn">查询</button>
+            <button id="btn_all_insert" class="layui-btn" hidden>全部新增</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian1" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">促销员名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="CXY_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">在职状态：</label>
+                            <div class="layui-input-inline">
+                                <select id="CXY_zzzt" lay-filter="CXY_zzzt" lay-search>
+                                    @for (int i = 0; i < CXYHS.Length; i++)
+                                    {
+                                        <option value="@CXYHS[i].DICID">@CXYHS[i].DICNAME</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div id="div_lzsj" hidden>
+                            <div class="layui-inline">
+                                <label class="layui-form-label" style="width:120px;">离职日期：</label>
+                                <div class="layui-input-inline">
+                                    <input id="SELECT_LZSJ" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <table id="tb_kh" lay-filter="tb_kh"></table>
+        </div>
+    </div>
+</div>
+
+
+<div id="div_printformat" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">打印格式：</label>
+            <div class="layui-input-inline">
+                <select id="printformat" lay-filter="printformat" lay-search>
+                    <option value="0" selected="selected"></option>
+                    <option value="1">促销员考核提成表</option>
+                    <option value="2">促销活动费用申请</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<input id="CXYID" hidden />
+<input id="netpath" value="@netpath" hidden />
+
+
+
+@*<script src="~/Scripts/layui2.4.5/layui.all.js"></script>*@
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_KACXYGZ")
+}

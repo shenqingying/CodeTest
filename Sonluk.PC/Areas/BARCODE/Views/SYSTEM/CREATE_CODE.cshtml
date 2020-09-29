@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "条形码新增";
+}
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    正常
+    {{# }else if(d.ISACTIVE == 2){ }}
+    作废
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>商品码管理系统</a>
+    <a><cite>商品条码生成</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form ">
+    <div class="layui-form">
+        <label class="layui-form-label" style="width:130px;text-align:right;">条码类型：</label>
+        <div class="layui-input-inline" style="width:210px;">
+            <select id="TYPE_CODE" lay-filter="TYPE_CODE" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                <option value="1">EAN13</option>
+                <option value="CODE_93">CODE_93</option>
+                <option value="CODE_128">CODE_128</option>
+                <option value="UPC_A">UPC_A</option>
+                <option value="UPC_E">UPC_E</option>
+                <option value="ITF">ITF</option>
+
+            </select>
+        </div>
+    </div>
+
+</div>
+<div id="div_img" hidden>
+    <br />
+    <div class="layui-form-item ">
+        <label class="layui-form-label" style="width:130px;text-align:right;">条码：</label>
+        <div class="layui-input-inline" style="width:210px;">
+            <input id="CODE" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button id="btn_picture" class="layui-btn ">生成图片</button>
+
+        <label class="layui-form-label" style="width:130px;text-align:right;">图片宽：</label>
+        <div class="layui-input-inline" style="width:210px;">
+            <input id="WIDTH" type="text" autocomplete="off" class="layui-input" value="2">
+        </div>
+
+        <label class="layui-form-label" style="width:130px;text-align:right;">图片高：</label>
+        <div class="layui-input-inline" style="width:210px;">
+            <input id="HEIGHT" type="text" autocomplete="off" class="layui-input" value="120">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item layui-form-text" id="div_picture" hidden>
+
+        <div class="layui-input-inline" style="width:130px;text-align:right;">
+            <button id="btn_download" class="layui-btn ">下载</button>
+        </div>
+
+        <div class="layui-input-inline" id="BARCODEImage">
+
+        </div>
+    </div>
+</div>
+
+<div id="div_common" hidden>
+    <br />
+    <div class="layui-form-item ">
+        <label class="layui-form-label" style="width:130px;text-align:right;">条码：</label>
+        <div class="layui-input-inline" style="width:210px;">
+            <input id="COMMON_CODE" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button id="btn_COMMON" class="layui-btn ">生成图片</button>
+
+        <label class="layui-form-label" style="width:130px;text-align:right;">图片宽：</label>
+        <div class="layui-input-inline" style="width:210px;">
+            <input id="COMMON_WIDTH" type="text" autocomplete="off" class="layui-input" value="100">
+        </div>
+
+        <label class="layui-form-label" style="width:130px;text-align:right;">图片高：</label>
+        <div class="layui-input-inline" style="width:210px;">
+            <input id="COMMON_HEIGHT" type="text" autocomplete="off" class="layui-input" value="120">
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:130px;text-align:right;"></label>
+        <img id="COMMON_Image">
+    </div>
+</div>
+
+
+
+
+
+
+<input id="RemoteAddress" value="@ViewBag.RemoteAddress" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+<script src="~/Scripts/html2canvas.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/BARCODE/SYSTEM/CREATE_CODE")
+}
+
+
+

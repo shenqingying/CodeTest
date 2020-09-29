@@ -1,0 +1,75 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    ViewBag.Title = "套标码管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>WMS货物标识管理</a>
+    <a><cite>套标码管理</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_repalce" class="layui-btn" lay-filter="formDemo">套标码替换</button>
+            <button id="btn_dc" class="layui-btn" lay-filter="formDemo">导出</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;text-align:right;">套标码：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_TBM" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="tb_result" lay-filter="tb_result"></table>
+</div>
+
+
+<div id="div_iframe" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px;text-align:right;">源码：</label>
+        <div class="layui-input-inline">
+            <input id="SOURCE_CODE" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px;text-align:right;">目标码：</label>
+        <div class="layui-input-inline">
+            <input id="TARGET_CODE" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    @*<div class="layui-form-item">
+        <button id="btn_right" class="layui-btn" lay-filter="formDemo">确定</button>
+    </div>
+    <table id="iframe" lay-filter="iframe"></table>*@
+</div>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/BC_TM/REPLACE_TBM")
+}
+
+

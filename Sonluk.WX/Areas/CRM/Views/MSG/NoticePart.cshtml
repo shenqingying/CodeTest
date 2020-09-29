@@ -1,0 +1,24 @@
+﻿@using Sonluk.UI.Model.CRM.MSG_NOTICETTService;
+@{
+    ViewBag.Title = "NoticePart";
+    CRM_MSG_NOTICETTList[] data = ViewBag.data;
+}
+
+
+@for (int i = 0; i < data.Length; i++)
+{
+
+    <a href="../MSG/Show_Notice?NOTICETTID=@data[i].NOTICETTID" class="weui-cell weui-cell_access">
+        <div class="weui-cell__bd">
+            <p>@data[i].TITLE</p>
+            <p style="text-align:right;">@data[i].CJSJ.Split(' ')[0]</p>
+        </div>
+        @*<div class="weui-cell__ft">@data[i].CJSJ</div>*@
+    </a>
+}
+@if(data.Length == 0)
+{
+    <br />
+    
+    <label>无数据！</label>
+}

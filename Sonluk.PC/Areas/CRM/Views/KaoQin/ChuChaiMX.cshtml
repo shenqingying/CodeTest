@@ -1,0 +1,172 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "出差申请";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>考勤管理</a>
+    <a><cite>出差申请</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit lay-filter="tijiao1">立即提交</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+
+
+            <label class="layui-form-label" style="width:160px;text-align:right;">出差人：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="name" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">部门：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="department" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:160px;text-align:right;">出差地点：</label>
+            <div class="layui-input-inline" style="width:340px;">
+                <input id="address" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+        @* 第二行 *@
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:160px;text-align:right;">是否本区域出差：</label>
+            <div class="layui-input-inline" style="width:180px;">
+                <input id="local_yes" type="radio" name="local" value="是" title="是">
+                <input id="local_no" type="radio" name="local" value="否" title="否" checked>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:160px;text-align:right;">是否正常业务出差：</label>
+            <div class="layui-input-inline">
+                <input id="normal_yes" type="radio" name="normal" value="是" title="是">
+                <input id="normal_no" type="radio" name="normal" value="否" title="否" checked>
+            </div>
+
+
+        </div>
+
+        @* 第三行 *@
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:160px;text-align:right;">出差时间：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="time_open" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="time_end" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+
+        </div>
+
+        @* 第四行 *@
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:160px;text-align:right;">出行方式：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <select id="way" lay-filter="way">
+                    <option value="0" selected="selected"></option>
+                    <option value="1">数据</option>
+                    <option value="2">数据</option>
+                    <option value="3">数据</option>
+                </select>
+            </div>
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">预计总金额：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="fee" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+
+
+
+        </div>
+
+        @* 第五行 *@
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:160px;text-align:right;">其他出行方式：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <select id="way_other" lay-filter="way_other">
+                    <option value="0" selected="selected"></option>
+                    <option value="1">数据</option>
+                    <option value="2">数据</option>
+                    <option value="3">数据</option>
+                </select>
+            </div>
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">其他方式费用：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="fee_other" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+
+        </div>
+
+        @* 第六行 *@
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:160px;text-align:right;">实际金额：</label>
+            <div class="layui-input-inline" style="width:340px;">
+                <input id="fee_actual" type="text" name="title" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+            </div>
+
+
+        </div>
+
+
+
+
+        @* 第七行 *@
+        <div class="layui-form-item">
+            <table id="CC_detail" lay-filter="CC_detail"></table>
+            <button id="insert_partner1" class="layui-btn">新增</button>
+            <button id="delete_partner1" class="layui-btn">删除</button>
+
+        </div>
+
+        <hr class="layui-bg-black">
+        @* 第八行 *@
+        <div class="layui-form-item">
+            <table id="fujian_upload" lay-filter="fujian_upload"></table>
+            <button type="button" class="layui-btn" id="uploadfile">
+                <i class="layui-icon">&#xe67c;</i>附件上传
+            </button>
+        </div>
+
+
+        <br />
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/ChuChai")
+}

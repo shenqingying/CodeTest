@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "拜访管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="status_Tpl">
+    {{# if(d.KQISACTIVE == 1){ }}
+    是
+    {{# }else if(d.KQISACTIVE == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="juli_Tpl">
+    {{ d.KQJL + "米" }}
+
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="KHtype_Tpl">
+    {{# if(d.KHLX == 1){ }}
+    经销商
+    {{# }else if(d.KHLX == 2){ }}
+    电商
+    {{# }else if(d.KHLX == 3 && d.MCSX == 1){ }}
+    直营卖场系统
+    {{# }else if(d.KHLX == 3 && d.MCSX == 2){ }}
+    直营卖场门店
+    {{# }else if(d.KHLX == 4){ }}
+    B2B
+    {{# }else if(d.KHLX == 5){ }}
+    网点终端
+    {{# }else if(d.KHLX == 6){ }}
+    批发
+    {{# }else if(d.KHLX == 7 && d.MCSX == 1){ }}
+    LKA系统
+    {{# }else if(d.KHLX == 7 && d.MCSX == 2){ }}
+    LKA门店
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="BFtype">
+    {{# if(d.BFLX == 1){ }}
+    客户日常检查
+    {{# }else if(d.BFLX == 2){ }}
+    新客户开发
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="BF_status">
+    {{# if(d.ISACTIVE == 0){ }}
+    未完成
+    {{# }else if(d.ISACTIVE == 1){ }}
+    已完成
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>拜访管理</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+    <button id="btn_cx" class="layui-btn" style="width:120px;">查询</button>
+    <button id="btn_daochu" class="layui-btn" style="width:120px;">导出</button>
+    <br /><br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">拜访人员：</label>
+        <div class="layui-input-inline">
+            <select id="ddl_staff" lay-filter="ddl_staff" lay-search>
+                <option value="0" selected="selected">全部</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">拜访类型：</label>
+        <div class="layui-input-inline">
+            <select id="BF_type" lay-filter="BF_type">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">拜访状态：</label>
+        <div class="layui-input-inline">
+            <select id="status" lay-filter="status">
+                <option value="100" selected="selected">全部</option>
+                <option value="0">未完成</option>
+                <option value="1">已完成</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户名称：</label>
+        <div class="layui-input-inline">
+            <input id="KH_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">客户编号：</label>
+        <div class="layui-input-inline">
+            <input id="KH_crmID" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">客户类型：</label>
+        <div class="layui-input-inline">
+            <select id="KH_type" lay-filter="KH_type">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开始日期：</label>
+        <div class="layui-input-inline">
+            <input id="begin_time" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">结束日期：</label>
+        <div class="layui-input-inline">
+            <input id="end_time" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+        <br />
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级客户名称：</label>
+        <div class="layui-input-inline">
+            <input id="pkhmc" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">上级客户编号：</label>
+        <div class="layui-input-inline">
+            <input id="pkhcrmid" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+    <table id="result" lay-filter="result"></table>
+</div>
+
+<input id="staffid" hidden />
+<input id="netpath" hidden />
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#netpath").val("@netpath");
+    });
+</script>
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/BaiFangManage")
+}

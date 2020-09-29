@@ -1,0 +1,99 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<POItemInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">采购凭证</td>
+        <td class="data-table-header">行项目</td>
+        <td class="data-table-header">计划行</td>
+        <td class="data-table-header">工厂名称</td>
+        <td class="data-table-header">销售凭证</td>
+        <td class="data-table-header">行项目</td>
+        <td class="data-table-header">网络号</td>
+        <td class="data-table-header">供应商编号</td>
+        <td class="data-table-header">供应商</td>
+        <td class="data-table-header">日期</td>
+        <td class="data-table-header">物料号</td>
+        <td class="data-table-header">物料描述</td>
+        <td class="data-table-header">数量</td>
+        <td class="data-table-header">已收货数量</td>
+        <td class="data-table-header">需发货数量</td>
+        <td class="data-table-header">箱只数</td>
+        <td class="data-table-header">托只数</td>
+        <td class="data-table-header">交货日期</td>
+        <td class="data-table-header">交货地点</td>
+        <td class="data-table-header">最后打印时间</td>
+        <td class="data-table-header">库存地点</td>
+        <td class="data-table-header">物料组</td>
+        <td class="data-table-header">采购组</td>
+        <td class="data-table-header">状态</td>
+        <td class="data-table-header">首次收货</td>
+        <td class="data-table-header">首次领料</td>
+        <td class="data-table-header">销售要求</td>
+        <td class="data-table-header">单位</td>
+        <td class="data-table-header">工厂</td>
+        <td class="data-table-header">批次</td>
+        <td class="data-table-header">优化标识</td>
+        <td class="data-table-header">是否启用批次管理</td>
+    </tr>
+    @foreach (POItemInfo node in Model)
+    {
+        <tr>
+            <td>@node.PONumber</td>
+            <td>@node.Number</td>
+            <td>@node.Line</td>
+            <td>@node.PlantName</td>
+
+            <td>@node.SDDoc</td>
+            <td>
+                @{
+                    if (node.SDocItem != 0)
+                    {
+                        @node.SDocItem
+                    }
+                }
+            </td>
+            <td>@node.Aufnr</td>
+            <td>@node.Vendor</td>
+            <td>@node.LNAME</td>
+            <td>@node.Date</td>
+            <td>@node.Material</td>
+            <td class="text-align-left">@node.MaterialDescription</td>
+            <td class="text-align-right">@node.Quantity.ToString("0.###")</td>
+            <td class="text-align-right">@node.DelivQty.ToString("0.###")</td>
+            <td class="text-align-right"><input type="text" value="@((node.Quantity - node.DelivQty).ToString("0.###"))" class="deliv-qty" /></td>
+            <td class="text-align-right"><input type="text" value="@node.PcsInCtn.ToString("0.###")" class="deliv-qty" /></td>
+            <td class="text-align-right"><input type="text" value="@node.PcsInPal.ToString("0.###")" class="deliv-qty" /></td>
+            <td>@node.DelivDate</td>
+            <td>@node.DelivDest</td>
+            <td>@(node.PrintDate + " " + node.PrintTime)</td>
+            <td>@node.StgeLoc</td>
+            <td>@node.MatlGroup</td>
+            <td>@node.PurGroup</td>
+            <td>@node.NoMoreGR</td>
+            <td>@node.PstngDate</td>
+            <td>@node.DocDate</td>
+            <td>@node.ReqDate</td>
+            <td>@node.BaseUOM</td>
+            <td>@node.Plant</td>
+            <td>@node.CHARG</td>
+            <td>@node.YHBS</td>
+            <td>@node.XCHPF</td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,501 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "配送费管理";
+
+    CRM_HG_DICT[] PSFTYPE = ViewBag.PSFTYPE;
+    CRM_HG_DICT[] PSFBL = ViewBag.PSFBL;
+    CRM_HG_DICT[] SF = ViewBag.SF;
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+    
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+
+
+<script type="text/html" id="season_tpl">
+    {{# if(d.SEASON == 1){ }}
+    第一季度
+    {{# }else if(d.SEASON == 2){ }}
+    第二季度
+    {{# }else if(d.SEASON == 3){ }}
+    第三季度
+    {{# }else if(d.SEASON == 4){ }}
+    第四季度
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>配送费管理</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+            <button id="btn_print" class="layui-btn">打印</button>
+            <button id="btn_daochu" class="layui-btn">导出</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">客户名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">客户编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_crmid" type="text" autocomplete="off" class="layui-input">
+
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">客户SAP编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_sapsn" type="text" autocomplete="off" class="layui-input">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">年份：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_year" type="text" autocomplete="off" class="layui-input">
+
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">季度：</label>
+                            <div class="layui-input-inline">
+                                <select id="select_season" lay-filter="select_season">
+                                    <option value="" selected="selected"></option>
+                                    <option value="1">第一季度</option>
+                                    <option value="2">第二季度</option>
+                                    <option value="3">第三季度</option>
+                                    <option value="4">第四季度</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">月份：</label>
+                            <div class="layui-input-inline">
+                                <select id="select_month" lay-filter="select_month">
+                                    <option value="" selected="selected"></option>
+                                    <option value="01">1月</option>
+                                    <option value="02">2月</option>
+                                    <option value="03">3月</option>
+                                    <option value="04">4月</option>
+                                    <option value="05">5月</option>
+                                    <option value="06">6月</option>
+                                    <option value="07">7月</option>
+                                    <option value="08">8月</option>
+                                    <option value="09">9月</option>
+                                    <option value="10">10月</option>
+                                    <option value="11">11月</option>
+                                    <option value="12">12月</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">配送费类别：</label>
+                            <div class="layui-input-inline">
+                                <select id="select_psftype" lay-filter="select_psftype">
+                                    <option value="0" selected="selected">全部</option>
+                                    @for (int i = 0; i < PSFTYPE.Length; i++)
+                                    {
+                                        <option value="@PSFTYPE[i].DICID">@PSFTYPE[i].DICNAME</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="div_jump" class="layui-form" hidden>
+
+    <div id="div_jump1">
+        <div class="layui-form-item">
+            <button id="btn_cxkh" class="layui-btn">查询</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:120px;">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:120px;">客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <table id="tb_kh" lay-filter="tb_kh"></table>
+        </div>
+    </div>
+
+
+    <div id="div_jump2" hidden>
+        <div id="div_jump2_btn" class="layui-form-item">
+            <button id="btn_back" class="layui-btn">返回</button>
+            <button id="btn_save" class="layui-btn">保存</button>
+        </div>
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客户名称：</label>
+                <div class="layui-input-inline">
+                    <input id="mc" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客户编号：</label>
+                <div class="layui-input-inline">
+                    <input id="crmid" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客户SAP编号：</label>
+                <div class="layui-input-inline">
+                    <input id="sapsn" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">配送费类别：</label>
+                <div class="layui-input-inline">
+                    <select id="psftype" lay-filter="psftype">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < PSFTYPE.Length; i++)
+                        {
+                            <option value="@PSFTYPE[i].DICID">@PSFTYPE[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="div_wlgs" hidden>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;">归属日期：</label>
+                    <div class="layui-input-inline">
+                        <input id="time" type="text" autocomplete="off" class="layui-input">
+
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">省份：</label>
+                    <div class="layui-input-inline">
+                        <select id="sf" lay-filter="sf">
+                            <option value="0" selected="selected"></option>
+                            @for (int i = 0; i < SF.Length; i++)
+                            {
+                                <option value="@SF[i].DICID">@SF[i].DICNAME</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">实际开票金额：</label>
+                    <div class="layui-input-inline">
+                        <input id="sjkpje" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">发票中扣减的金额：</label>
+                    <div class="layui-input-inline">
+                        <input id="kjfyje" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">开票金额：</label>
+                    <div class="layui-input-inline">
+                        <input id="kpje" type="text" autocomplete="off" class="layui-input" disabled>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="div_jxs" hidden>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">年份：</label>
+                    <div class="layui-input-inline">
+                        <input id="year" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">季度：</label>
+                    <div class="layui-input-inline">
+                        <select id="season" lay-filter="season">
+                            <option value="0" selected="selected"></option>
+                            <option value="1">第一季度</option>
+                            <option value="2">第二季度</option>
+                            <option value="3">第三季度</option>
+                            <option value="4">第四季度</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">经销商：</label>
+                    <div class="layui-input-inline">
+                        <input id="jxs" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">维护门店数量：</label>
+                    <div class="layui-input-inline">
+                        <input id="mdsl" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">门店进货额：</label>
+                    <div class="layui-input-inline">
+                        <input id="jhje" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">华东华润验收金额：</label>
+                    <div class="layui-input-inline">
+                        <input id="ysje" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">门店配送费比率：</label>
+                <div class="layui-input-inline">
+                    <select id="mdpsfbl" lay-filter="mdpsfbl">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < PSFBL.Length; i++)
+                        {
+                            <option value="@PSFBL[i].DICID">@PSFBL[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">门店配送费：</label>
+                <div class="layui-input-inline">
+                    <input id="mdpsf" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">总仓配送费比率：</label>
+                <div class="layui-input-inline">
+                    <select id="zcpsfbl" lay-filter="zcpsfbl">
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < PSFBL.Length; i++)
+                        {
+                            <option value="@PSFBL[i].DICID">@PSFBL[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">总仓配送费：</label>
+                <div class="layui-input-inline">
+                    <input id="zcpsf" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">其他：</label>
+                <div class="layui-input-inline">
+                    <input id="other" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">配送费合计：</label>
+                <div class="layui-input-inline">
+                    <input id="psfhj" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">单位：</label>
+                <div class="layui-input-inline">
+                    <input id="" type="text" autocomplete="off" class="layui-input" value="元" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="beiz" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+    </div>
+</div>
+
+
+
+@*检索经销商*@
+<div id="div_select_jxs" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_jxs_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">客户编号：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_jxs_crmid" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">客户名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_jxs_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_jxs_result" lay-filter="select_jxs_result"></table>
+
+</div>
+
+
+
+<input id="khid" hidden />
+<input id="jxsid" hidden />
+<input id="netpath" value="@netpath" hidden />
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_PSF")
+}

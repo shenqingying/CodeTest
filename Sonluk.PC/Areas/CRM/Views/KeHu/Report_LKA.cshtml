@@ -1,0 +1,549 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "LKA报表";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="isbz">
+    {{# if(d.ISBZ == 1){ }}
+    是
+    {{# }else if(d.ISBZ == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="isyx">
+    {{# if(d.ISYX != 0){ }}
+    是
+    {{# }else if(d.ISYX == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="dzs">
+    {{# if(d.ISDZS != 0){ }}
+    是
+    {{# }else if(d.ISDZS == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="img">
+    {{ d.DISIMG  }}张
+
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>LKA报表</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            <button id="daochu" class="layui-btn">导出主数据</button>
+            <button id="daochuAll" class="layui-btn">查询并导出全部</button>
+
+        </div>
+
+        <div class="layui-form-item" hidden>
+            <label class="layui-form-label" style="width:110px">报表类型：</label>
+            <div class="layui-input-inline">
+                <select id="report_type" lay-filter="report_type">
+                    <option value="0">请选择报表类型</option>
+                    <option value="1">电子锁报表</option>
+                    <option value="2">终端网点报表</option>
+                    <option value="3" selected="selected">LKA报表</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                    @* 电子锁 *@
+                    <div id="div_cx_dzs" hidden>
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">新建时间：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_KH_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_KH_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">业务员：</label>
+                            <div class="layui-input-inline">
+                                <select id="dzs_staff" lay-filter="dzs_staff" lay-search>
+                                    <option value="0" selected="selected">全部</option>
+                                </select>
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">分管领导：</label>
+                            <div class="layui-input-inline">
+                                <select id="dzs_leader" lay-filter="dzs_leader" lay-search>
+                                    <option value="0" selected="selected">全部</option>
+                                </select>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">省份：</label>
+                            <div class="layui-input-inline">
+                                <select id="dzs_province" lay-filter="dzs_province"></select>
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">城市：</label>
+                            <div class="layui-input-inline">
+                                <select id="dzs_city" lay-filter="dzs_city">
+                                    <option value="0"></option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">经销商编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_jxs_id" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">经销商名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_jxs_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">经销商SAP编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_jxs_sapsn" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">网点名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_KHname" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">网点类型：</label>
+                            <div class="layui-input-inline">
+                                <select id="dzs_WD_type" lay-filter="dzs_WD_type">
+                                    <option value="0">全部</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">送货时间：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_SH_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_SH_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">送货登记日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_CZ_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="dzs_CZ_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    @* 终端网点 *@
+                    <div id="div_cx_zdwd" hidden>
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">新建时间：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_KH_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_KH_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">开发时间：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_KF_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_KF_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">业务员：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_staff" lay-filter="zdwd_staff" lay-search>
+                                    <option value="0" selected="selected">全部</option>
+                                </select>
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">分管领导：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_leader" lay-filter="zdwd_leader" lay-search>
+                                    <option value="0" selected="selected">全部</option>
+                                </select>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">省份：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_province" lay-filter="zdwd_province"></select>
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">城市：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_city" lay-filter="zdwd_city">
+                                    <option value="0"></option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">经销商编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_jxs_id" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">经销商名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_jxs_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">经销商SAP编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_jxs_sapsn" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">网点编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_CRMID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">网点名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_KHname" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">网点类型：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_WD_type" lay-filter="zdwd_WD_type">
+                                    <option value="0">全部</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">直销商名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="zdwd_zxs_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">活动名称：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_HDMC" lay-filter="zdwd_HDMC">
+                                    <option value="0">全部</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            @*<label class="layui-form-label" style="width:150px;text-align: right;">只看有效网点：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_ISYX" lay-filter="zdwd_ISYX">
+                                    <option value="0" selected="selected">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>*@
+
+                            <label class="layui-form-label" style="width:120px;text-align: right;">只看电子锁：</label>
+                            <div class="layui-input-inline">
+                                <select id="zdwd_IsDZS" lay-filter="zdwd_IsDZS">
+                                    <option value="0" selected="selected">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @* LKA *@
+                    <div id="div_cx_lka" >
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">省份：</label>
+                            <div class="layui-input-inline">
+                                <select id="lka_province" lay-filter="lka_province"></select>
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align: right;">城市：</label>
+                            <div class="layui-input-inline">
+                                <select id="lka_city" lay-filter="lka_city">
+                                    <option value="0"></option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">新建时间：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_KH_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align: right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_KH_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">开发时间：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_KF_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align: right;">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_KF_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">业务员：</label>
+                            <div class="layui-input-inline">
+                                <select id="lka_staff" lay-filter="lka_staff" lay-search>
+                                    <option value="0" selected="selected">全部</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">经销商编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_jxs_id" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align: right;">经销商名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_jxs_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">经销商SAP编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_jxs_sapsn" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">卖场编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_pkh_crm" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align: right;">卖场名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_pkh_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">门店进场数量：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_mdjcsl" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align: right;">卖场总部地址：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_jxs_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align: right;">门店编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_CRMID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align: right;">门店名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="lka_KHname" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+
+                        </div>
+
+
+
+                        @*<div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:150px;text-align: right;">只看有效网点：</label>
+                            <div class="layui-input-inline">
+                                <select id="lka_ISYX" lay-filter="lka_ISYX">
+                                    <option value="0" selected="selected">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>
+
+                        </div>*@
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:150px;text-align:right;">陈列照片状态：</label>
+                            <div class="layui-input-inline">
+                                <select id="lka_display_status" lay-filter="lka_display_status">
+                                    <option value="0">全部</option>
+                                    <option value="-1">照片未上传</option>
+                                    <option value="10">未审核</option>
+                                    <option value="15">审核未通过</option>
+                                    <option value="30">审核通过</option>
+                                </select>
+                            </div>
+
+                            <label class="layui-form-label" style="width:130px;text-align:right;">双鹿陈列道具：</label>
+                            <div class="layui-input-inline">
+                                <select id="lka_displayitem" lay-filter="lka_displayitem">
+                                    <option value="-1">全部</option>
+                                    <option value="1">有</option>
+                                    <option value="0">无</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<input id="netpath" hidden />
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/Report_LKA")
+}

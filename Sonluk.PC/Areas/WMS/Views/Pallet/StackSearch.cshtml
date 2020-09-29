@@ -1,0 +1,251 @@
+﻿@{
+    ViewBag.Title = "托盘组合码查询";
+}
+
+@Html.Partial("~/Areas/WMS/Views/Shared/WMSHttp.cshtml")
+
+<style>
+    .layui-btn:not(.layui-btn-disabled) {
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+</style>
+
+<span class="layui-breadcrumb"></span>
+
+<br />
+<br />
+
+<div class="layui-form layui-form-fix">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <button onclick="exportPalletStack()" class="layui-btn layui-btn-disabled">导出</button>
+            <button onclick="printPalletStack(cacheHitTPZHNOs)" class="layui-btn layui-btn-disabled">批量打印</button>
+            <button onclick="searchPalletStack()" class="layui-btn">查询</button>
+        </div>
+    </div>
+    <form class="layui-form-item" id="searchTermForm">
+        <div class="layui-inline">
+            <label class="layui-form-label">组合码：</label>
+            <div class="layui-input-inline">
+                <input name="ZHNO" class="layui-input" onkeydown="javascript: if (event && event.keyCode == 13) searchPalletStack();">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">创建日期：</label>
+            <div class="layui-input-inline">
+                <input name="CJTIMES" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline">
+                <input name="CJTIMEE" class="layui-input">
+            </div>
+        </div>
+    </form>
+    <table class="layui-hide" id="palletStackTable" lay-filter="palletStackTable"></table>
+</div>
+
+<div id="detailLayerTpl" class="layui-form layui-form-modify" hidden style="padding:30px 30px 0 30px">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">组合码：</label>
+            <div class="layui-input-inline">
+                <input id="detailLayerTPZHNO" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">数量：</label>
+            <div class="layui-input-inline">
+                <input id="detailLayerSL" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="palletStackDetailTable"></table>
+</div>
+
+<span id="exportUrl" hidden>@Url.Action("StackSearchExport", "Pallet", new { area = "WMS" })</span>
+<span id="printUrl" hidden>@Url.Action("StackSearchPrint", "Pallet", new { area = "WMS" })</span>
+
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="print">打印</a>
+</script>
+
+@section scripts {
+    <script>
+        const temp = [{
+            TPZHNO: 'T000000001',
+            TPM: [
+                { TPNO: 'T000000008' },
+                { TPNO: 'T000000007' },
+                { TPNO: 'T000000006' },
+                { TPNO: 'T000000005' },
+                { TPNO: 'T000000004' },
+                { TPNO: 'T000000003' },
+                { TPNO: 'T000000002' },
+                { TPNO: 'T000000001' }
+            ]
+        }];
+
+        sonluk.global.getResources();
+        sonluk.global.getResources('WMS/Pallet', 'lv');
+        var cache = [];
+        var cacheTerm = {};
+        var cacheHitTPZHNOs = [];
+        const sc = sonluk.values.global.common;
+        const slv = sonluk.values.global.lv;
+        const colsOfPalletStack = [[
+            { type: 'checkbox', width: 50 },
+            { title: '序号', type: 'numbers' },
+            { field: 'TPZHNO', minWidth: 120 },
+            { field: 'CJRNAME', width: 100 },
+            { field: 'CJTIME', width: 200 },
+            { field: 'SL', templet: '<div>{{d.TPM.length}}</div>', width: 100 },
+            { title: '操作', fixed: 'right', width: 120, toolbar: '#operate' }
+        ]];
+        const colsOfPalletStackDetail = [[
+            { title: '序号', type: 'numbers' },
+            { field: 'TPNO', minWidth: 120 },
+        ]]
+        layui.use(['table', 'layer', 'form', 'element', 'laydate'], function () {
+            const table = layui.table;
+            const layer = layui.layer;
+            const form = layui.form;
+            const assist = sonluk.layui;
+            const msg = sonluk.msg;
+
+            sonluk.layui.breadcrumbefix();
+            initAll();
+
+            function initAll() {
+                assist.laydate.render({ elem: '[name=CJTIMES]' });
+                assist.laydate.render({ elem: '[name=CJTIMEE]' });
+                assist.layer.hover('[onclick="exportPalletStack()"]', '请先查询要导出的数据', function () { return $('[onclick="exportPalletStack()"]').hasClass('layui-btn-disabled'); }, 1);
+                assist.layer.hover('[onclick="printPalletStack(cacheHitTPZHNOs)"]', '请先勾选要打印的数据', function () { return $('[onclick="printPalletStack(cacheHitTPZHNOs)"]').hasClass('layui-btn-disabled'); }, 1);
+                table.on('checkbox(palletStackTable)', function (obj) {
+                    refreshHitZHNOs();
+                });
+                table.on('tool(palletStackTable)', function (obj) {
+                    var data = obj.data;
+                    var layEvent = obj.event;
+                    if (layEvent === 'print') printPalletStack([data]);
+                    else if (layEvent === 'detail') initLayer(data);
+                });
+            }
+
+            function initTable(data) {
+                data = data || cache;
+                refreshHitZHNOs();
+                var fixHeight = 215;
+                $('.layui-form-fix .layui-form-item').each(function (index, elem) {
+                    fixHeight += elem.clientHeight;
+                });
+                assist.table.render({
+                    elem: '#palletStackTable',
+                    height: 'full-' + fixHeight,
+                    data: data,
+                    cols: colsOfPalletStack,
+                    page: {
+                        curr: 1,
+                        limit: 15,
+                        limits: [15, 30, 45, 60, 75, 90],
+                    },
+                });
+                if (data && data.length > 0) $('[onclick="exportPalletStack()"]').removeClass('layui-btn-disabled');
+                else $('[onclick="exportPalletStack()"]').addClass('layui-btn-disabled');
+            }
+
+            function initLayer(data) {
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['关闭'],
+                    area: ['400px', '650px'],
+                    content: $('#detailLayerTpl'),
+                    title: '查看',
+                    moveOut: true,
+                    success: function (layero, index) {
+                        $('#detailLayerTPZHNO').val(data.TPZHNO);
+                        $('#detailLayerSL').val(data.TPM.length);
+                        assist.table.render({
+                            elem: '#palletStackDetailTable',
+                            data: data.TPM,
+                            height:400,
+                            cols: colsOfPalletStackDetail
+                        })
+                        form.render();
+                    }
+                });
+            }
+
+            function refreshHitZHNOs() {
+                cacheHitTPZHNOs = [];
+                cache.forEach(function (item) {
+                    if (item.LAY_CHECKED) cacheHitTPZHNOs.push({
+                        TPZHNO: item.TPZHNO,
+                        TPM: item.TPM
+                    });
+                });
+                if (cacheHitTPZHNOs.length > 0) $('[onclick="printPalletStack(cacheHitTPZHNOs)"]').removeClass('layui-btn-disabled');
+                else $('[onclick="printPalletStack(cacheHitTPZHNOs)"]').addClass('layui-btn-disabled');
+            }
+
+            //TODO:
+            window.searchPalletStack = function (term) {
+                term = term || sonluk.convert.toObject($('#searchTermForm')[0]);
+                term.LB = 2;
+                cacheTerm = term;
+                var loading = layer.load(1);
+                wmshttp.post({
+                    url: 'WMS/BC_TPM/Read',
+                    data: term,
+                    success: function (data) {
+                        if (data.success) {
+                            //cache = data.data;
+                            cache = temp;
+                            initTable();
+                        }
+                        else msg.error(data.messages);
+                    },
+                    complete: function () {
+                        layer.close(loading);
+                    }
+                });
+            }
+
+            //TODO:
+            window.exportPalletStack = function () {
+                if ($('[onclick="exportPallet()"]').hasClass('layui-btn-disabled')) return;
+                var titles = [];
+                for (let key in slv.palletStackTable) {
+                    var obj = {};
+                    obj.Key = key;
+                    obj.Name = slv.palletStackTable[key];
+                    obj.Width = slv.palletStackTableWidth[key];
+                    obj.Align = slv.palletStackTableAlign[key];
+                    titles.push(obj);
+                }
+                sonluk.http.download({
+                    url: $('#exportUrl').html(),
+                    get: false,
+                    data: {
+                        input: {
+                            Query: cacheTerm,
+                            Title: titles
+                        }
+                    }
+                });
+            }
+
+            window.printPalletStack = function (data) {
+                if ($('[onclick="printPallet()"]').hasClass('layui-btn-disabled')) return;
+                sonluk.http.download({
+                    url: $('#printUrl').html(),
+                    get: false,
+                    target: '_blank',
+                    data: { input: data }
+                });
+            }
+        });
+    </script>
+}

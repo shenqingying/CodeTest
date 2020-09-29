@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_CLFMX_CLFHX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_CLFMX_CLFHX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CLFMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CLFHXID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_CLFMX_CLFHX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_CLFMX_CLFHX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByParamResult" type="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_CLFMX_CLFHX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_CLFMX_CLFHX" nillable="true" type="tns:CRM_COST_CLFMX_CLFHX" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadByCLFHXID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CLFHXID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByCLFHXIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByCLFHXIDResult" type="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByCLFMXID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CLFMXID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByCLFMXIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByCLFMXIDResult" type="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_CLFMX_CLFHX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteByCLFHXID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CLFHXID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteByCLFHXIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteByCLFHXIDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfCRM_COST_CLFMX_CLFHX" nillable="true" type="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFHXIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByCLFHXID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFHXIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByCLFHXIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFMXIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByCLFMXID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFMXIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByCLFMXIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByCLFHXIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteByCLFHXID" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByCLFHXIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteByCLFHXIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFHXIDHttpGetIn">
+    <wsdl:part name="CLFHXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFHXIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFMXIDHttpGetIn">
+    <wsdl:part name="CLFMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFMXIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByCLFHXIDHttpGetIn">
+    <wsdl:part name="CLFHXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByCLFHXIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFHXIDHttpPostIn">
+    <wsdl:part name="CLFHXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFHXIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFMXIDHttpPostIn">
+    <wsdl:part name="CLFMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCLFMXIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_COST_CLFMX_CLFHX" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByCLFHXIDHttpPostIn">
+    <wsdl:part name="CLFHXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByCLFHXIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="COST_CLFMX_CLFHXSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <wsdl:input message="tns:ReadByParamSoapIn" />
+      <wsdl:output message="tns:ReadByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFHXID">
+      <wsdl:input message="tns:ReadByCLFHXIDSoapIn" />
+      <wsdl:output message="tns:ReadByCLFHXIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFMXID">
+      <wsdl:input message="tns:ReadByCLFMXIDSoapIn" />
+      <wsdl:output message="tns:ReadByCLFMXIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByCLFHXID">
+      <wsdl:input message="tns:DeleteByCLFHXIDSoapIn" />
+      <wsdl:output message="tns:DeleteByCLFHXIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_CLFMX_CLFHXHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFHXID">
+      <wsdl:input message="tns:ReadByCLFHXIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByCLFHXIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFMXID">
+      <wsdl:input message="tns:ReadByCLFMXIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByCLFMXIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByCLFHXID">
+      <wsdl:input message="tns:DeleteByCLFHXIDHttpGetIn" />
+      <wsdl:output message="tns:DeleteByCLFHXIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_CLFMX_CLFHXHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFHXID">
+      <wsdl:input message="tns:ReadByCLFHXIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByCLFHXIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFMXID">
+      <wsdl:input message="tns:ReadByCLFMXIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByCLFMXIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByCLFHXID">
+      <wsdl:input message="tns:DeleteByCLFHXIDHttpPostIn" />
+      <wsdl:output message="tns:DeleteByCLFHXIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="COST_CLFMX_CLFHXSoap" type="tns:COST_CLFMX_CLFHXSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFHXID">
+      <soap:operation soapAction="http://tempuri.org/ReadByCLFHXID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFMXID">
+      <soap:operation soapAction="http://tempuri.org/ReadByCLFMXID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByCLFHXID">
+      <soap:operation soapAction="http://tempuri.org/DeleteByCLFHXID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_CLFMX_CLFHXSoap12" type="tns:COST_CLFMX_CLFHXSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFHXID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByCLFHXID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFMXID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByCLFMXID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByCLFHXID">
+      <soap12:operation soapAction="http://tempuri.org/DeleteByCLFHXID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_CLFMX_CLFHXHttpGet" type="tns:COST_CLFMX_CLFHXHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFHXID">
+      <http:operation location="/ReadByCLFHXID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFMXID">
+      <http:operation location="/ReadByCLFMXID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByCLFHXID">
+      <http:operation location="/DeleteByCLFHXID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_CLFMX_CLFHXHttpPost" type="tns:COST_CLFMX_CLFHXHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFHXID">
+      <http:operation location="/ReadByCLFHXID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCLFMXID">
+      <http:operation location="/ReadByCLFMXID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByCLFHXID">
+      <http:operation location="/DeleteByCLFHXID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="COST_CLFMX_CLFHX">
+    <wsdl:port name="COST_CLFMX_CLFHXSoap" binding="tns:COST_CLFMX_CLFHXSoap">
+      <soap:address location="http://192.168.0.77/API/CRM/COST_CLFMX_CLFHX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_CLFMX_CLFHXSoap12" binding="tns:COST_CLFMX_CLFHXSoap12">
+      <soap12:address location="http://192.168.0.77/API/CRM/COST_CLFMX_CLFHX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_CLFMX_CLFHXHttpGet" binding="tns:COST_CLFMX_CLFHXHttpGet">
+      <http:address location="http://192.168.0.77/API/CRM/COST_CLFMX_CLFHX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_CLFMX_CLFHXHttpPost" binding="tns:COST_CLFMX_CLFHXHttpPost">
+      <http:address location="http://192.168.0.77/API/CRM/COST_CLFMX_CLFHX.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

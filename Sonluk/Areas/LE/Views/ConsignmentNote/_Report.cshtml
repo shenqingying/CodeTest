@@ -1,0 +1,50 @@
+﻿@using Sonluk.UI.Model.LE.TRA.ConsignmentNoteService
+@model IEnumerable<CNInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">ID</td>
+        <td class="data-table-header">物流公司</td>
+        <td class="data-table-header">托运日期</td>
+        <td class="data-table-header">到达日期</td>
+        <td class="data-table-header">电池件数</td>
+        <td class="data-table-header">促销品件数</td>
+        <td class="data-table-header">材料件数</td>
+        <td class="data-table-header">其他件数</td>
+        <td class="data-table-header">总件数</td>
+        <td class="data-table-header">到站</td>
+        <td class="data-table-header">计费重量</td>
+        <td class="data-table-header">计费体积</td>
+        <td class="data-table-header">特别说明</td>
+        <td class="data-table-header">收货人地址</td>
+        <td class="data-table-header">收货联系人</td>
+        <td class="data-table-header">收货人电话</td>
+        <td class="data-table-header">收货人手机</td>
+        <td class="data-table-header">开单人</td>
+        <td class="data-table-header">交货单</td>
+    </tr>
+    @foreach (CNInfo node in Model)
+    {
+        <tr>
+            <td>@node.ID<input type="hidden" value="@node.ID" /></td>
+            <td>@node.Carrier.Name</td>
+            <td>@node.Date</td>
+            <td>@node.DeliveryDate</td>
+            <td class="text-align-right">@node.Sum[0]</td>
+            <td class="text-align-right">@node.Sum[1]</td>
+            <td class="text-align-right">@node.Sum[2]</td>
+            <td class="text-align-right">@node.Sum[3]</td>
+            <td class="text-align-right">@node.Total</td>
+            <td class="text-align-left">@node.Destination.Name</td>
+            <td class="text-align-right">@node.Weight</td>
+            <td class="text-align-right">@node.Volume</td>
+            <td class="text-align-left">@node.Instruction</td>
+            <td class="text-align-left">@node.Receiver.Address</td>
+            <td class="text-align-left">@node.Receiver.Contact</td>
+            <td class="text-align-left">@node.Receiver.Telephone</td>
+            <td class="text-align-left">@node.Receiver.Cellphone</td>
+            <td>@node.Creator</td>
+            <td class="text-align-left">@node.Delivery</td>
+        </tr>
+    }
+</table>

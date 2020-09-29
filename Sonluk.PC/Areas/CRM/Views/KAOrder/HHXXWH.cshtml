@@ -1,0 +1,260 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    ViewBag.Title = "货号信息维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    CRM_HG_DICT[] SY = ViewBag.SY;
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar3">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+@*<script type="text/html" id="bar4">
+        <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+    </script>*@
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA订单管理</a>
+    <a><cite>货号信息维护</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lay-filter="formDemo">新增</button>
+            <button id="btn_dc" class="layui-btn" lay-filter="formDemo">导出</button>
+            <button id="btn_kb" class="layui-btn" lay-filter="formDemo">快报管理</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;text-align:right;">订单来源：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_SY" lay-filter="select_SY" lay-search>
+                                <option value="0" selected>请选择</option>
+                                @for (int i = 0; i < SY.Length; i++)
+                                {
+                                    <option value="@SY[i].DICID">@SY[i].DICNAME</option>
+                                }
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">货号信息：</label>
+                        <div class="layui-input-inline">
+                            <input id="HHXX" type="text" placeholder="(货号/品名)" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+                        </div>
+                    </div>
+                    @*<div class="layui-form-item">
+
+                            <label class="layui-form-label" style="width:110px;text-align:right;">产品品名：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_ProdName" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="width:110px;text-align:right;">产品规格：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_ProdSpec" type="text" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label" style="width:110px;text-align:right;">订购单位：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_DGDW" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-form-item" id="tb_ka">
+        </div>
+    </div>
+</div>
+<div id="div_jump" class="layui-form" hidden>
+    <br />
+    <div id="div_jump1">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 95px;">订单来源：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <select id="SY" lay-filter="SY" lay-search>
+                        <option value="0" selected>请选择</option>
+                        @for (int i = 0; i < SY.Length; i++)
+                        {
+                            <option value="@SY[i].DICID">@SY[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 95px; ">货号：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <input id="ProdNum" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 95px; ">条码：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <input id="BarCode" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 95px; ">品名：</label>
+                <div class="layui-input-inline" style="width: 240px;">
+                    <input id="ProdName" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 95px; ">规格：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <input id="ProdSpec" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 95px; ">订购单位：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <input id="DGDW" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item" id="div_btn_wh">
+            <button id="btn_wh" class="layui-btn">维护</button>
+        </div>
+        <div class="layui-form-item" id="div_date" hidden>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 95px; ">日期：</label>
+                <div class="layui-input-inline" style="width: 240px;">
+                    <input id="CurrentDate" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" id="tb_wh">
+        </div>
+        <div class="layui-form-item" id="tb_wh2">
+        </div>
+    </div>
+    <br />
+</div>
+
+
+
+<div id="div2" class="layui-form" hidden>
+    <div id="div_jump3">
+        <div class="layui-form-item">
+            <button id="btn_cxwh" class="layui-btn">查询</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian1" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width: 90px;">物料信息：</label>
+                            <div class="layui-input-inline" style="width: 240px; ">
+                                <input id="WL_MS" type="text" name="title" placeholder="(物料编码/物料描述)" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        @*<div class="layui-inline">
+                            <label class="layui-form-label" style="width: 90px;">物料编号：</label>
+                            <div class="layui-input-inline" style="width: 240px; ">
+                                <input id="WL_BM" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div id="div3" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 110px;">物料编码：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <input id="SAP_wlbm" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 70px; text-align: right;">订单单位：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <select id="PRODUCT_HH_DDDW" lay-filter="PRODUCT_HH_DDDW">
+                        <option value="0" selected>请选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 110px;">物料描述：</label>
+                <div class="layui-input-inline" style="width: 605px; ">
+                    <input id="SAP_description" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+            
+        </div>
+        @*<div class="layui-form-item">
+
+                <label class="layui-form-label" style="width: 110px;">订单单位：</label>
+                <div class="layui-input-inline" style="width:200px;">
+                    <select id="PRODUCT_HH_DDDW" lay-filter="PRODUCT_HH_DDDW" lay-search>
+                        <option value="0" selected>请选择</option>
+                    </select>
+                </div>
+
+            </div>*@
+        @*<div class="layui-form-item">
+            
+        </div>*@
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 110px;">有效期开始：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <input id="BEGINDATE" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:110px;">有效期结束：</label>
+                <div class="layui-input-inline" style="width: 240px; ">
+                    <input id="ENDDATE" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div4">
+    <div class="layui-form-item" id="tb_3">
+    </div>
+</div>
+
+
+<input id="List_SY" value="@Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SY)" hidden>
+<input id="HHID" hidden>
+<input id="netpath" value="@netpath" hidden />
+<input id="Maxdate" value="@ViewBag.enddate" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KAOrder/HHXXWH")
+}
+

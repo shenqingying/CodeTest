@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "发放明细";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string mypw = "";
+    if (Session["MYPW"] != null)
+    {
+        mypw = Session["MYPW"].ToString();
+    }
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>发放记录</cite></a>
+    <a><cite>发放明细</cite></a>
+</span>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        @*<button class="layui-btn" onclick="location.href = '@Url.Action("XZGL_FFJLLIST", "XZGL")'">返回</button>*@
+        <button class="layui-btn" onclick="window.close();">返回</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">申报月份:</label>
+            <div class="layui-input-inline">
+                <input type="text" id="ffjl_monthks" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="ffjl_monthjs" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">员工类别：</label>
+            <div class="layui-input-inline">
+                <select xm-select="find_yglb" id="find_yglb" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">来源:</label>
+            <div class="layui-input-inline">
+                <select lay-filter="ffjl_ly" id="ffjl_ly"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">计税方式：</label>
+            <div class="layui-input-inline">
+                <select lay-filter="find_jsfs" id="find_jsfs">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">含税</option>
+                    <option value="2">不含税</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">个税类别：</label>
+            <div class="layui-input-inline">
+                <select lay-filter="find_gslb" id="find_gslb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">工资单模版：</label>
+            <div class="layui-input-inline1">
+                <select xm-select="ffjl_xzflx" id="ffjl_xzflx"></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_ffljmxinfo" lay-filter="tb_ffljmxinfo"></table>
+</div>
+<div id="div_mypw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">密钥密码：</label>
+            <div class="layui-input-inline1">
+                <input type="password" id="myinfo_mypw" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="bl_mypw" value="@mypw">
+    <input type="text" id="bl_FFJLID" value="">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_FFJL_FFMXREPORT")
+}

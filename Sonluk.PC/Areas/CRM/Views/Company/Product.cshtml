@@ -1,0 +1,51 @@
+﻿@using Sonluk.UI.Model.CRM.QYJS_MENUService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "产品中心";
+    CRM_QYJS_MENU[] data = ViewBag.data;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<div class="layui-tab layui-tab-brief" lay-filter="myTab">
+    <ul class="layui-tab-title">
+        <li class="layui-this" lay-id="@data[0].CATALOGID">@data[0].NAME</li>
+        @for (int i = 1; i < data.Length; i++)
+        {
+            <li lay-id="@data[i].CATALOGID">@data[i].NAME</li>
+        }
+    </ul>
+    <div class="layui-tab-content">
+
+        @{
+            string id0 = "div" + data[0].CATALOGID;
+        }
+        <div id="@id0" class="layui-tab-item layui-show"></div>
+        @for (int i = 1; i < data.Length; i++)
+        {
+            string id = "div" + data[i].CATALOGID;
+            <div id="@id" class="layui-tab-item"></div>
+        }
+    </div>
+</div>
+
+
+<input id="firstID" value="@data[0].CATALOGID" hidden />
+
+
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Company/Product")
+}

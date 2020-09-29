@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "订单查询打印";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    //Sonluk.UI.Model.CRM.HG_DICTService.CRM_HG_DICT[] mxList = ViewBag.mxList;
+}
+
+<style type="text/css">
+    .pdf-display-file-body {
+        border: 1px solid #d4d4d4;
+        width: 898px;
+        height: 600px;
+    }
+</style>
+<script type="text/html" id="status">
+    {{# if(d.OrderST == 1){ }}
+    正常
+    {{# }else if(d.OrderST == 2){ }}
+    退货
+    {{# }else if(d.OrderST == 3){ }}
+    异动
+    {{# }else if(d.OrderST == 4){ }}
+    删除
+    {{# }else if(d.OrderST == 5){ }}
+    报错
+    {{# } }}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="bj">标记</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="confirm">确认</a>
+    <a class="layui-btn layui-btn-xs" lay-event="dy">打印</a>
+</script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA订单管理</a>
+    <a><cite>订单查询打印</cite></a>
+</span>
+<input id="SelectKADD" value="@Url.Action("SelectKADD", "KAOrder")" type="hidden" />
+<input id="SelectORDER_TT" value="@Url.Action("SelectORDER_TT", "KAOrder")" type="hidden" />
+<input id="GetFileByContent" value="@Url.Action("GetFileByContent", "KAOrder")" type="hidden" />
+<input id="DownFileByContent" value="@Url.Action("DownFileByContent", "KAOrder")" type="hidden" />
+<input id="KAOrder_PLDY" value="@Url.Action("KAOrder_PLDY", "KAOrder")" type="hidden" />
+<input id="ShowPDF" value="@Url.Action("ShowPDF", "KAOrder")" type="hidden" />
+<input id="DownLoadPDF" value="@Url.Action("DownLoadPDF", "KAOrder")" type="hidden" />
+<input id="KAOrderBJ" value="@Url.Action("KAOrderBJ","KAOrder")" type="hidden">
+<input id="EXPORT_KAORDER_SELECT" value="@Url.Action("EXPORT_KAORDER_SELECT", "KAOrder")" type="hidden">
+<input id="EXPORT_KAORDER" value="@Url.Action("EXPORT_KAORDER", "KAOrder")" type="hidden">
+<input id="Select_DDLY" value="@Url.Action("Select_DDLY", "KAOrder")" ty type="hidden">
+<input id="SelectOrderMX" value="@Url.Action("SelectOrderMX", "KAOrder")" type="hidden">
+<div class="layui-form">
+
+    <div class="layui-form-item">
+        <button type="button" class="layui-btn" id="btn_pldy" onclick="fc_pldy()">批量打印</button>
+        <button type="button" class="layui-btn" id="btn_mxcx">明细查询</button>
+        <button type="button" class="layui-btn" id="btn_dc" onclick="fc_dc()">导出</button>
+        <button type="button" class="layui-btn" id="btn_cx">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订单来源：</label>
+            <div class="layui-input-inline" style="width:250px">
+                @*<select id="in_ddly" lay-filter="in_ddly" lay-search>
+                        @{
+                            if (mxList.Length == 1)
+                            {
+                                <option value="@mxList[0].DICID" selected="selected">@mxList[0].DICNAME</option>
+                            }
+                            else
+                            {
+                                <option value="0" selected="selected">请选择</option>
+                                if (@mxList != null)
+                                {
+                                    for (int i = 0; i < @mxList.Length; i++)
+                                    {
+                                        <option value="@mxList[i].DICID">@mxList[i].DICNAME</option>
+                                    }
+                                }
+                            }
+                        }
+                    </select>*@
+                <select xm-select="in_ddly" id="in_ddly" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">门店信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_mdxx" autocomplete="off" class="layui-input" placeholder="（门店编号/门店名称）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">订单号码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="id_ddhm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">订货日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_dhrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_dhrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订单类别：</label>
+            <div class="layui-input-inline">
+                <div class="layui-input-inline" style="width: 250px;">
+                    <select xm-select="in_ddlb" id="in_ddlb"></select>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-inline" style="margin-left:60px">
+            @*<input type="checkbox" id="in_wsaptb" lay-filter="in_wsaptb" name="" title="未SAP同步" lay-skin="primary" checked>*@
+            <input type="checkbox" id="in_notqr" lay-filter="in_notqr" name="" title="未确认" lay-skin="primary" checked>
+            <input type="checkbox" id="in_ydwbj" lay-filter="in_ydwbj" name="" title="异动未标记" lay-skin="primary">
+        </div>
+
+    </div>
+    <div id="div_orderTT">
+        <table class="layui-hide" id="tb_ordertt" lay-filter="tb_ordertt"></table>
+    </div>
+    @*<embed class="pdf-display-file-body" src="~/Temp/PO/PO_4000102971_T00L8X.pdf" />*@
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KAOrder/DDCXDY")
+}

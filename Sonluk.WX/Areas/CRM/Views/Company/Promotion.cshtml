@@ -1,0 +1,77 @@
+﻿@using Sonluk.UI.Model.CRM.QYJS_MENUService;
+@{
+    ViewBag.Title = "促销品及促销道具";
+    Session["TITLENAME"] = "促销品及促销道具";
+    //Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+
+
+    string state = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+    }
+
+    string NetPath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+
+    CRM_QYJS_MENU[] data = ViewBag.data;
+}
+
+
+
+
+<div class="layui-carousel" id="banner">
+    <div carousel-item>
+        <div>
+            <img src="~/Image/1.jpg" style="width:100%" />
+        </div>
+        <div>
+            <img src="~/Image/2.jpg" style="width:100%" />
+        </div>
+        <div>
+            <img src="~/Image/3.jpg" style="width:100%" />
+        </div>
+    </div>
+</div>
+
+
+<div class="layui-tab layui-tab-brief" lay-filter="myTab">
+    <ul class="layui-tab-title">
+        <li class="layui-this" lay-id="@data[0].CATALOGID">@data[0].NAME</li>
+        @for (int i = 1; i < data.Length; i++)
+        {
+            <li lay-id="@data[i].CATALOGID">@data[i].NAME</li>
+        }
+    </ul>
+    <div class="layui-tab-content">
+
+        @{
+            string id0 = "div" + data[0].CATALOGID;
+        }
+        <div id="@id0" class="layui-tab-item layui-show"></div>
+        @for (int i = 1; i < data.Length; i++)
+        {
+            string id = "div" + data[i].CATALOGID;
+            <div id="@id" class="layui-tab-item"></div>
+        }
+    </div>
+</div>
+
+
+<input id="firstID" value="@data[0].CATALOGID" hidden />
+
+
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Company/Promotion")
+}

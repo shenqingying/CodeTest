@@ -1,0 +1,45 @@
+﻿@using Sonluk.UI.Model.MES.TM_TMINFOService;
+@{
+    ViewBag.Title = "YH_MARK_Part";
+    MES_TM_TMINFO_LIST[] data = ViewBag.data;
+}
+
+<br />
+
+
+<div style="margin:0 10px;">
+    @for (int i = 0; i < data.Length; i++)
+    {
+
+        <table border="0" width="100%">
+            <tr>
+                <td width="50%">
+                    @data[i].TM
+                </td>
+                <td width="30%">
+                    @data[i].SL &nbsp;  @data[i].UNITSNAME
+                </td>
+                <td>
+                    <button class="layui-btn layui-btn-xs layui-btn-danger" style="width:60px;height:30px" onclick="YH_MXdelete('@data[i].TM','@data[i].ZHNO')">删除</button>
+                </td>
+            </tr>
+
+        </table>
+        <hr class="layui-bg-black" />
+
+
+    }
+    @if (data.Length == 0)
+    {
+        <a>暂无数据！</a>
+    }
+    @*<hr class="layui-bg-black" />*@
+
+
+</div>
+
+
+
+
+
+

@@ -1,0 +1,184 @@
+﻿@using Sonluk.UI.Model.CRM.COST_CLFMXService;
+@{
+    ViewBag.Title = "Select_KACXY_Part";
+
+    CRM_COST_CLFMX[] MXdata = ViewBag.MXdata;
+
+}
+@for (int i = 0; i < MXdata.Length; i++)
+{
+    string ZS_SFZYFP = "";
+
+    if (@MXdata[i].ZS_SFZYFP == 1)
+    {
+        ZS_SFZYFP = "是";
+    }
+    else
+    {
+        ZS_SFZYFP = "否";
+    }
+
+    string QT_SFZYFP = "";
+    
+    if (@MXdata[i].ZS_SFZYFP == 1)
+    {
+        QT_SFZYFP = "是";
+    }
+    else
+    {
+        QT_SFZYFP = "否";
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@MXdata[i].BEGINADDRESS - @MXdata[i].ENDADDRESS </em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">出发日期</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BEGINDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">出发地点</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BEGINADDRESS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">到达日期</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ENDDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">到达地点</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ENDADDRESS</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">机票金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].JT_PLANE</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">火车票金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].JT_TRAIN</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">客车票金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].JT_BUS</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">单据张数</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].JT_BILL</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">住宿费</label>
+            </p>    
+            <p>
+                <label class="weui-form-preview__label">天</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ZS_DAYS</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ZS_JE</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">是否专用发票</label>
+                <span class="weui-form-preview__value">&nbsp;@ZS_SFZYFP</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">专票不含税金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ZS_FPBHSJE</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">单据张数</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ZS_BILL</span>
+            </p>  
+            <p>
+                <label class="weui-form-preview__label">差旅补贴</label>
+            </p>  
+            <p>
+                <label class="weui-form-preview__label">天</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BT_DAYS</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">标准</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BT_BZ</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BT_JE</span>
+            </p>  
+            <p>
+                <label class="weui-form-preview__label">其他费用</label>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">项目</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].COSTITEMMC</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_JE</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">是否专用发票</label>
+                <span class="weui-form-preview__value">&nbsp;@QT_SFZYFP</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">专票不含税金额</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_FPBHSJE</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">单据张数</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_BILL</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">出差行驶里程数</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_CCQLC</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">出差回来后行驶里程数</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_CCHLC</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">出差期间里程数</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_CCQJLC</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">酒店（或宾馆）名称</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_JDMC</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">酒店地址</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_JDDZ</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">酒店联系方式</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_JDLXFS</span>
+            </p> 
+            <p>
+                <label class="weui-form-preview__label">酒店联系人</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_JDLXR</span>
+            </p>   
+            <p>
+                <label class="weui-form-preview__label">酒店（或宾馆等）内使用电池品牌</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].QT_PP</span>
+            </p>          
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">查看</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">编辑</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" onclick="Link_Delete(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))" style="color:#E64340;">删除</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" onclick="Link_picture(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))" id="OA">照片</a>
+        </div>
+    </div>
+    <br />
+}
+@if (MXdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}

@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "库存台账";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>注塑追溯管理</a>
+    <a><cite>库存台账</cite></a>
+</span>
+<script type="text/html" id="QJCOUNT_Tpl">
+    {{# if(d.QJCOUNT>0){ }}
+    X
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="ISFIM_Tpl">
+    {{# if(d.ISFIM==1){ }}
+    是
+    {{# }else { }}
+    否
+    {{# } }}
+</script>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_mxfind">明细查询</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">库存地点：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_kcdd" id="find_kcdd" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">物料信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_wlxx" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">批次：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_pc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">模具号：</label>
+            <div class="layui-input-inline">
+                <select id="find_mould" lay-filter="find_mould" lay-search></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="checkbox" name="" title="显示未关联" lay-skin="find_isshow" id="find_isshow" lay-filter="find_isshow">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hidden" id="tb_kc" lay-filter="tb_kc"></table>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/ZS_KCSELECT_MANAGE")
+}

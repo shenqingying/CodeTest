@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "喷码打印";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime date = DateTime.Now;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/sonluk-ui/panel-pop-up")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">拣配</a>
+        >
+        <a href="#">喷码打印</a>
+    </div>
+</div>
+<div class="panel-search">
+  
+    <div class="panel-search-item">
+        <div class="panel-search-item-title color-font-high-light">创建日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="CJRQ1" value="@date.ToString("yyyy-MM-dd")" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="CJRQ2" value="@date.ToString("yyyy-MM-dd")" />
+    </div>
+    
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">拣配单号</div>
+        <input type="text" class="panel-search-item-input input-width-od-type input-width-cn-carrier " id="Jpd" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">仓库号</div>
+        <input type="text" class="panel-search-item-input input-width-od-customer input-width-cn-serial-number" id="Lgnum" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title color-font-high-light">交货单</div>
+        <input type="text" class="panel-search-item-input input-width-cn-carrier" id="Vbeln" />
+    </div>
+    <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+    <input type="hidden" value="@Url.Action("_PickingList", "BarCode")">
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="export-button sonluk-table-control-button picking-print">打印</div>
+                    <input type="hidden" value="@Url.Action("AnalysePrintData", "BarCode")">
+                    <input type="hidden" value="@Url.Action("PickingPrint", "BarCode")">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="picking-list"></div>
+    </div>
+</div>
+<!--弹出窗口-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/bc/picking")
+}
+
+

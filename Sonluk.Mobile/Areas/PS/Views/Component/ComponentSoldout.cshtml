@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "ComponentSoldout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" name="in_bl" placeholder="请扫描领料单或层码" autocomplete="off" class="layui-input" id="in_bl" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div id="allbody">
+        <div id="headdiv">
+            <div class="layui-form-item">
+                <label class="layui-form-label">WBS元素</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_POSID" id="lb_POSID" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_POSID" id="lb_POSID"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">WBS描述</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_POST1" id="lb_POST1" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_POST1" id="lb_POST1"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">物料号</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_MATNR" id="lb_MATNR" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_MATNR" id="lb_MATNR"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">物料描述</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_MAKTX" id="lb_MAKTX" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_MAKTX" id="lb_MAKTX"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">领料数量</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_ACOUNT" id="lb_ACOUNT" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_ACOUNT" id="lb_ACOUNT"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">未过账数量</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_WPCOUNT" id="lb_WPCOUNT" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_WPCOUNT" id="lb_WPCOUNT"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">单位</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_MEINS" id="lb_MEINS" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_MEINS" id="lb_MEINS"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工厂</label>
+                <div class="layui-input-block">
+                    <input type="text" name="lb_WERKS" id="lb_WERKS" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">库存地点</label>
+                <div class="layui-input-block">
+                    <input type="text" name="lb_LGORT" id="lb_LGORT" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div id="tablediv">
+            <table class="layui-table" lay-filter="tb_kc" id="tb_kc"></table>
+        </div>
+        <div id="kcdiv">
+            <div class="layui-form-item">
+                <label class="layui-form-label">发料数量</label>
+                <div class="layui-input-block">
+                    <input type="text" name="lb_MENGE" id="lb_MENGE" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">库存数量</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_VERME" id="lb_VERME" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_VERME" id="lb_VERME"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">仓位</label>
+                <div class="layui-input-block">
+                    @*<input type="text" name="lb_LGPLA" id="lb_LGPLA" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                    <label class="layui-form-label" name="lb_LGPLA" id="lb_LGPLA"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-footer" align="right">
+            <button class="layui-btn" id="btn_save">保存</button>
+            <button class="layui-btn" id="btn_post">过账</button>
+        </div>
+    </div>
+    <div id="NLPLA_btn">
+        <div style="text-align: center;">
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn1" style="height: 100%; width: 45%"></button>
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn2" style="height: 100%; width: 45%"></button>
+        </div>
+        <div style="text-align: center;">
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn3" style="height: 100%; width: 45%"></button>
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn4" style="height: 100%; width: 45%"></button>
+        </div>
+    </div>
+    <div id="lldINFO">
+        <div class="layui-form-item">
+            <label class="layui-form-label">领料单号</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_SENUM" id="lb_SENUM"></label>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="bl_item">
+    <input type="hidden" id="bl_wljy">
+    <input type="hidden" id="bl_cwjy">
+    <input type="hidden" id="bl_RSNUM">
+    <input type="hidden" id="bl_RSPOS">
+    <input type="hidden" id="bl_SENUM">
+    <input type="hidden" id="bl_ZROWSNUM">
+    <input type="hidden" id="bl_LGBER">
+    <input type="hidden" id="bl_LPTYP">
+    <input type="hidden" id="bl_LGNUM">
+    <input type="hidden" id="bl_LGTYP">
+    <input type="hidden" id="bl_NLPLAlist">
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/PS/ComponentSoldout")
+}

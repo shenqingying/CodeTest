@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SELECT_XFPC_BY_XFCD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="XFCD" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_XFPC_BY_XFCDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_XFPC_BY_XFCDResult" type="tns:ZBCFUN_XFPC_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_XFPC_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_CHARG" type="tns:ArrayOfZSL_BCS304" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS304">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS304" nillable="true" type="tns:ZSL_BCS304" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS304">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LICHA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LIFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SORTL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERSDA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CLABS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QPLOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_PC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_PCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_PCResult" type="tns:ZBCFUN_XFPC_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_XFPC_READ" nillable="true" type="tns:ZBCFUN_XFPC_READ" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SELECT_XFPC_BY_XFCDSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_XFPC_BY_XFCD" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_XFPC_BY_XFCDSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_XFPC_BY_XFCDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PCSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_PC" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PCSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_PCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_XFPC_BY_XFCDHttpGetIn">
+    <wsdl:part name="XFCD" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_XFPC_BY_XFCDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_XFPC_READ" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PCHttpGetIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="WLH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PCHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_XFPC_READ" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_XFPC_BY_XFCDHttpPostIn">
+    <wsdl:part name="XFCD" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_XFPC_BY_XFCDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_XFPC_READ" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PCHttpPostIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="WLH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_XFPC_READ" />
+  </wsdl:message>
+  <wsdl:portType name="MES_FJSoap">
+    <wsdl:operation name="SELECT_XFPC_BY_XFCD">
+      <wsdl:input message="tns:SELECT_XFPC_BY_XFCDSoapIn" />
+      <wsdl:output message="tns:SELECT_XFPC_BY_XFCDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PC">
+      <wsdl:input message="tns:SELECT_PCSoapIn" />
+      <wsdl:output message="tns:SELECT_PCSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_FJHttpGet">
+    <wsdl:operation name="SELECT_XFPC_BY_XFCD">
+      <wsdl:input message="tns:SELECT_XFPC_BY_XFCDHttpGetIn" />
+      <wsdl:output message="tns:SELECT_XFPC_BY_XFCDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PC">
+      <wsdl:input message="tns:SELECT_PCHttpGetIn" />
+      <wsdl:output message="tns:SELECT_PCHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_FJHttpPost">
+    <wsdl:operation name="SELECT_XFPC_BY_XFCD">
+      <wsdl:input message="tns:SELECT_XFPC_BY_XFCDHttpPostIn" />
+      <wsdl:output message="tns:SELECT_XFPC_BY_XFCDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PC">
+      <wsdl:input message="tns:SELECT_PCHttpPostIn" />
+      <wsdl:output message="tns:SELECT_PCHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MES_FJSoap" type="tns:MES_FJSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT_XFPC_BY_XFCD">
+      <soap:operation soapAction="http://tempuri.org/SELECT_XFPC_BY_XFCD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PC">
+      <soap:operation soapAction="http://tempuri.org/SELECT_PC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_FJSoap12" type="tns:MES_FJSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT_XFPC_BY_XFCD">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_XFPC_BY_XFCD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PC">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_PC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_FJHttpGet" type="tns:MES_FJHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SELECT_XFPC_BY_XFCD">
+      <http:operation location="/SELECT_XFPC_BY_XFCD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PC">
+      <http:operation location="/SELECT_PC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_FJHttpPost" type="tns:MES_FJHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SELECT_XFPC_BY_XFCD">
+      <http:operation location="/SELECT_XFPC_BY_XFCD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PC">
+      <http:operation location="/SELECT_PC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MES_FJ">
+    <wsdl:port name="MES_FJSoap" binding="tns:MES_FJSoap">
+      <soap:address location="http://192.168.0.223/API/MES/MES_FJ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_FJSoap12" binding="tns:MES_FJSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/MES_FJ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_FJHttpGet" binding="tns:MES_FJHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/MES_FJ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_FJHttpPost" binding="tns:MES_FJHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/MES_FJ.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

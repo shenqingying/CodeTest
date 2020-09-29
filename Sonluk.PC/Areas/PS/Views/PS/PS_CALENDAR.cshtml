@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "加工日历维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>加工产能管理</a>
+    <a><cite>加工日历维护</cite></a>
+</span>
+<input type="hidden" value="@Url.Action("SELECTCALENDAR", "PS")" id="SELECTCALENDAR" />
+<input type="hidden" value="@Url.Action("MODIFYCALENDAR", "PS")" id="MODIFYCALENDAR" />
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="switchTpl1">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="ISWORKDAY" value="{{d.ISWORKDAY}}" lay-skin="switch" lay-text="是|否" lay-filter="workday" {{ d.ISWORKDAY == 'X' ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTpl2">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="ISHOILDAY" value="{{d.ISHOILDAY}}" lay-skin="switch" lay-text="是|否" lay-filter="hoilday" {{ d.ISHOILDAY == 'X' ? 'checked' : '' }}>
+</script>
+<div class="layui-form">
+
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">开始日期：</label>
+        <div class="layui-input-inline">
+            <input id="in_time_ks" type="text" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" readonly>
+        </div>
+
+        <label class="layui-form-label">结束日期：</label>
+        <div class="layui-input-inline">
+            <input id="in_time_js" type="text" class="layui-input" lay-verify="date" placeholder="yyyy-MM-dd" readonly>
+        </div>
+        <button id="btn_workday" class="layui-btn">维护系统工作日</button>
+    </div>
+
+    <table class="layui-hide" id="tb_calendar" lay-filter="tb_calendar"></table>
+
+</div>
+<div class="layui-form" id="div_workday" >
+    <table class="layui-hide" id="tb_workday" lay-filter="tb_workday"></table>
+</div>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/PS/PS_CALENDAR")
+}

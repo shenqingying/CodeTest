@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "税率表维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>税率表维护</cite></a>
+</span>
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <table class="layui-hide" id="tb_sltt" lay-filter="tb_sltt"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+
+<div id="div_taxinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">个税类别：</label>
+            <div class="layui-input-block" style="width: 185px;">
+                <select id="taxinfo_gslb" lay-filter="taxinfo_gslb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">计算方式：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="taxinfo_jsfs" lay-filter="taxinfo_jsfs"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-block" style="width: 185px;">
+                <select id="taxinfo_isaction" lay-filter="taxinfo_isaction">
+                    <option value="0" selected="selected">未启用</option>
+                    <option value="1">已启用</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">备注：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="taxinfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        @*<div class="layui-inline">
+            <label class="layui-form-label">起征点：</label>
+            <div class="layui-input-block">
+                <input type="text" id="taxinfo_qzd" autocomplete="off" class="layui-input">
+            </div>
+        </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label1">专项附加扣除：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="taxinfo_isglzxkc" lay-filter="taxinfo_isglzxkc">
+                    <option value="0" selected="selected">不关联</option>
+                    <option value="1">关联</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    @*<div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">计算公式：</label>
+                <div class="layui-input-block" style="width: 500px;">
+                    <input type="text" id="taxinfo_gs" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>*@
+
+    <button class="layui-btn layui-btn-sm" id="btn_addtaxsl">维护</button>
+    <table class="layui-hide" id="tb_slttmx" lay-filter="tb_slttmx"></table>
+</div>
+<div id="div_addtaxsl" class="layui-form" hidden>
+    <button class="layui-btn layui-btn-sm" id="btn_addtaxsl_line">新增行</button>
+    <table class="layui-hide" id="tb_slttmx_xg" lay-filter="tb_slttmx_xg"></table>
+</div>
+<div id="div_gs" class="layui-form" hidden>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="gs_ms"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段来源：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gs_zdly" lay-filter="gs_zdly">
+                    <option value="0">请选择</option>
+                    <option value="1">工资字段</option>
+                    @*<option value="3">常量字段</option>*@
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gs_zdmc" lay-filter="gs_zdmc"></select>
+            </div>
+        </div>
+        <button class="layui-btn" id="btn_addzd">添加</button>
+    </div>
+    <button class="layui-btn" id="btn_1">+</button>
+    <button class="layui-btn" id="btn_2">-</button>
+    <button class="layui-btn" id="btn_3">*</button>
+    <button class="layui-btn" id="btn_4">/</button>
+    <button class="layui-btn" id="btn_5">IF</button>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/TAX/TAXMANAGE")
+}

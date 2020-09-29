@@ -1,0 +1,71 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService;
+@using Sonluk.UI.Model.CRM.BC_FXCHService;
+@{
+    ViewBag.Title = "ScanFAHUO_JHDPart";
+    MODEL_ZBCFUN_JHD_READ data = ViewBag.data;
+    CRM_BC_FXCHMX[] FXCHdata = ViewBag.FXCHdata;
+}
+
+@if (data.MES_RETURN.TYPE == "S")
+{
+    <div class="layui-form-item">
+        <label class="layui-form-label">交货单号：</label>
+        <label id="lb_vbeln" class="layui-form-label" style="text-align:left;width:60%;">@data.ES_HeadData.VBELN.TrimStart('0')</label>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户：</label>
+        <label id="lb_mc" class="layui-form-label" style="text-align:left;width:60%;">@data.ES_HeadData.KUNAG.TrimStart('0')/@data.ES_HeadData.NAMEG</label>
+    </div>
+}
+
+
+<div style="margin:0 10px;">
+
+    @for (int i = 0; i < data.ET_ItemData.Length; i++)
+    {
+        if (@data.ET_ItemData[i].ZLTBS == "Y")
+        {
+            <hr class="layui-bg-black" />
+            <table border="0" width="100%">
+                <tr>
+                    <td width="40%">
+                        项目：@data.ET_ItemData[i].POSNR - <a id="a_status_@data.ET_ItemData[i].POSNR" style="color:red;">未清</a>
+                    </td>
+                    <td width="45%">
+                        @Convert.ToInt32(data.ET_ItemData[i].LGMNG)
+                        (<a id="a_JHZ_@data.ET_ItemData[i].POSNR">@data.ET_ItemData[i].JHZ</a>)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        物料：@data.ET_ItemData[i].MATNR/@data.ET_ItemData[i].MAKTX
+                    </td>
+                    <td>
+                        <button class="layui-btn layui-btn-xs" style="width:60px;height:30px" onclick="JHD_click(@data.ET_ItemData[i].POSNR)">查看</button>
+                    </td>
+                </tr>
+            </table>
+        }
+
+    }
+
+</div>
+
+
+
+
+<input id="ZZKGGKH" value="@data.ES_HeadData.ZZKGGKH" hidden />
+<input id="JHDdata" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />
+<input id="FXCHdata" value="@Newtonsoft.Json.JsonConvert.SerializeObject(FXCHdata)" hidden />
+<script>
+    @*if ("@data.MES_RETURN.TYPE" != "S") {
+        layer.msg("@data.MES_RETURN.MESSAGE");
+    }*@
+</script>
+
+
+
+
+

@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "新增专项拜访计划";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>拜访管理</a>
+    <a><cite>新增专项拜访计划</cite></a>
+</span>
+<br />
+<br />
+
+<div id="div_jump" class="layui-form layui-form-pane" style="margin-left:10px">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <button id="btn_next" class="layui-btn" style="margin-left: 0px;">下一步</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:130px;">拜访计划名称：</label>
+            <div class="layui-input-inline" style="width:340px;">
+                <input id="name" type="text" class="layui-input">
+            </div>
+        </div>
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px;">开始时间：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="start" type="text" class="layui-input">
+            </div>
+
+            <label class="layui-form-label" style="width:130px;">结束时间：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="end" type="text" class="layui-input">
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<input id="staffid" hidden />
+<input id="bbid" hidden />
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/Insert_ZX")
+}

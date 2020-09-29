@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_HZHB" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KH_HZHB">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FXQD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HZHBGN" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HZHBJSQ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HZHBKHID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SFSAPSJ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SapDataSynchronization">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SapDataSynchronizationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SapDataSynchronizationResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SapFlow">
+        <s:complexType />
+      </s:element>
+      <s:element name="SapFlowResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfCRM_KH_HZHBLIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KH_HZHBLIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KH_HZHBLIST" nillable="true" type="tns:CRM_KH_HZHBLIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KH_HZHBLIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HZHBGN" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HZHBJSQ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="HZHBKHID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHSHDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHSHLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHSHLXDH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CSDES" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadSAPHZHB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="KHLX" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadSAPHZHBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadSAPHZHBResult" type="tns:SAP_HZHBList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SAP_HZHBList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_KH" type="tns:ArrayOfSAP_KH" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_KHHZ" type="tns:ArrayOfSAP_HZHB" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_KHXS" type="tns:ArrayOfSAP_KHXS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSAP_KH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_KH" nillable="true" type="tns:SAP_KH" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_KH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEZEI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ORT01" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STREET" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TEL_NUMBER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STCEG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BANKA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TELF1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHZH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSAP_HZHB">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_HZHB" nillable="true" type="tns:SAP_HZHB" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_HZHB">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VKORG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VTWEG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SPART" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PARVW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PARZA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNN2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSAP_KHXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SAP_KHXS" nillable="true" type="tns:SAP_KHXS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SAP_KHXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KUNNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VKORG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VTWEG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SPART" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BZIRK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VKBUR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VKGRP" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SyncSapRead">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="t_KH" type="tns:ArrayOfSAP_KH" />
+            <s:element minOccurs="1" maxOccurs="1" name="khlx" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncSapReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SyncSapReadResult" type="tns:SAP_HZHBList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySAPSN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySAPSNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadBySAPSNResult" type="tns:CRM_KH_XSQYSJ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KH_XSQYSJ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FXQD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSDQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSBM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_KH_HZHBLIST" nillable="true" type="tns:ArrayOfCRM_KH_HZHBLIST" />
+      <s:element name="SAP_HZHBList" nillable="true" type="tns:SAP_HZHBList" />
+      <s:element name="CRM_KH_XSQYSJ" nillable="true" type="tns:CRM_KH_XSQYSJ" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SapDataSynchronizationSoapIn">
+    <wsdl:part name="parameters" element="tns:SapDataSynchronization" />
+  </wsdl:message>
+  <wsdl:message name="SapDataSynchronizationSoapOut">
+    <wsdl:part name="parameters" element="tns:SapDataSynchronizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="SapFlowSoapIn">
+    <wsdl:part name="parameters" element="tns:SapFlow" />
+  </wsdl:message>
+  <wsdl:message name="SapFlowSoapOut">
+    <wsdl:part name="parameters" element="tns:SapFlowResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSAPHZHBSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadSAPHZHB" />
+  </wsdl:message>
+  <wsdl:message name="ReadSAPHZHBSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadSAPHZHBResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncSapReadSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncSapRead" />
+  </wsdl:message>
+  <wsdl:message name="SyncSapReadSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncSapReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySAPSNSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadBySAPSN" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySAPSNSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadBySAPSNResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SapDataSynchronizationHttpGetIn">
+    <wsdl:part name="CRMID" type="s:string" />
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SapDataSynchronizationHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SapFlowHttpGetIn" />
+  <wsdl:message name="SapFlowHttpGetOut" />
+  <wsdl:message name="ReadHttpGetIn">
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_HZHBLIST" />
+  </wsdl:message>
+  <wsdl:message name="ReadSAPHZHBHttpGetIn">
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="KHLX" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadSAPHZHBHttpGetOut">
+    <wsdl:part name="Body" element="tns:SAP_HZHBList" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySAPSNHttpGetIn">
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySAPSNHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_KH_XSQYSJ" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SapDataSynchronizationHttpPostIn">
+    <wsdl:part name="CRMID" type="s:string" />
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SapDataSynchronizationHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SapFlowHttpPostIn" />
+  <wsdl:message name="SapFlowHttpPostOut" />
+  <wsdl:message name="ReadHttpPostIn">
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_HZHBLIST" />
+  </wsdl:message>
+  <wsdl:message name="ReadSAPHZHBHttpPostIn">
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="KHLX" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadSAPHZHBHttpPostOut">
+    <wsdl:part name="Body" element="tns:SAP_HZHBList" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySAPSNHttpPostIn">
+    <wsdl:part name="SAPSN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySAPSNHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_KH_XSQYSJ" />
+  </wsdl:message>
+  <wsdl:portType name="KH_HZHBSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SapDataSynchronization">
+      <wsdl:input message="tns:SapDataSynchronizationSoapIn" />
+      <wsdl:output message="tns:SapDataSynchronizationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SapFlow">
+      <wsdl:input message="tns:SapFlowSoapIn" />
+      <wsdl:output message="tns:SapFlowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadSAPHZHB">
+      <wsdl:input message="tns:ReadSAPHZHBSoapIn" />
+      <wsdl:output message="tns:ReadSAPHZHBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncSapRead">
+      <wsdl:input message="tns:SyncSapReadSoapIn" />
+      <wsdl:output message="tns:SyncSapReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySAPSN">
+      <wsdl:input message="tns:ReadBySAPSNSoapIn" />
+      <wsdl:output message="tns:ReadBySAPSNSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_HZHBHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SapDataSynchronization">
+      <wsdl:input message="tns:SapDataSynchronizationHttpGetIn" />
+      <wsdl:output message="tns:SapDataSynchronizationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SapFlow">
+      <wsdl:input message="tns:SapFlowHttpGetIn" />
+      <wsdl:output message="tns:SapFlowHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadSAPHZHB">
+      <wsdl:input message="tns:ReadSAPHZHBHttpGetIn" />
+      <wsdl:output message="tns:ReadSAPHZHBHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySAPSN">
+      <wsdl:input message="tns:ReadBySAPSNHttpGetIn" />
+      <wsdl:output message="tns:ReadBySAPSNHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_HZHBHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SapDataSynchronization">
+      <wsdl:input message="tns:SapDataSynchronizationHttpPostIn" />
+      <wsdl:output message="tns:SapDataSynchronizationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SapFlow">
+      <wsdl:input message="tns:SapFlowHttpPostIn" />
+      <wsdl:output message="tns:SapFlowHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadSAPHZHB">
+      <wsdl:input message="tns:ReadSAPHZHBHttpPostIn" />
+      <wsdl:output message="tns:ReadSAPHZHBHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySAPSN">
+      <wsdl:input message="tns:ReadBySAPSNHttpPostIn" />
+      <wsdl:output message="tns:ReadBySAPSNHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KH_HZHBSoap" type="tns:KH_HZHBSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapDataSynchronization">
+      <soap:operation soapAction="http://tempuri.org/SapDataSynchronization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapFlow">
+      <soap:operation soapAction="http://tempuri.org/SapFlow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSAPHZHB">
+      <soap:operation soapAction="http://tempuri.org/ReadSAPHZHB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncSapRead">
+      <soap:operation soapAction="http://tempuri.org/SyncSapRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySAPSN">
+      <soap:operation soapAction="http://tempuri.org/ReadBySAPSN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_HZHBSoap12" type="tns:KH_HZHBSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapDataSynchronization">
+      <soap12:operation soapAction="http://tempuri.org/SapDataSynchronization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapFlow">
+      <soap12:operation soapAction="http://tempuri.org/SapFlow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSAPHZHB">
+      <soap12:operation soapAction="http://tempuri.org/ReadSAPHZHB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncSapRead">
+      <soap12:operation soapAction="http://tempuri.org/SyncSapRead" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySAPSN">
+      <soap12:operation soapAction="http://tempuri.org/ReadBySAPSN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_HZHBHttpGet" type="tns:KH_HZHBHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapDataSynchronization">
+      <http:operation location="/SapDataSynchronization" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapFlow">
+      <http:operation location="/SapFlow" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSAPHZHB">
+      <http:operation location="/ReadSAPHZHB" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySAPSN">
+      <http:operation location="/ReadBySAPSN" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_HZHBHttpPost" type="tns:KH_HZHBHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapDataSynchronization">
+      <http:operation location="/SapDataSynchronization" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapFlow">
+      <http:operation location="/SapFlow" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadSAPHZHB">
+      <http:operation location="/ReadSAPHZHB" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySAPSN">
+      <http:operation location="/ReadBySAPSN" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KH_HZHB">
+    <wsdl:port name="KH_HZHBSoap" binding="tns:KH_HZHBSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/KH_HZHB.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_HZHBSoap12" binding="tns:KH_HZHBSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/KH_HZHB.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_HZHBHttpGet" binding="tns:KH_HZHBHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/KH_HZHB.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_HZHBHttpPost" binding="tns:KH_HZHBHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/KH_HZHB.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

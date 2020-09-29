@@ -1,0 +1,539 @@
+﻿@{
+    ViewBag.Title = "模具维修新建";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_start">发起流程</button>
+        <button class="layui-btn" id="btn_save">保存流程</button>
+        <button id="btn_Term" lay-submit="" hidden></button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GC" lay-filter="Term_GC" lay-verify="required"></select>
+            </div>
+            <label class="layui-form-label1">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GZZXBH" lay-filter="Term_GZZXBH" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1" id="Explain_CFM">确认选择：</label>
+            <div class="layui-input-inline" style="width:300px;">
+                <input type="checkbox" id="Term_WTCFM" lay-filter="Term_WTCFM" title="班组" checked>
+                <input type="checkbox" id="Term_QCCFM" lay-filter="Term_QCCFM" title="品管" checked>
+                <input type="checkbox" id="Term_TECCFM" lay-filter="Term_TECCFM" title="技术部" checked>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">模具号：</label>
+            <div class="layui-input-inline">
+                <select id="Term_MOULD" lay-filter="Term_MOULD" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">责任机修：</label>
+            <div class="layui-input-inline">
+                <select id="Term_MMSTAFF" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space10" style="padding:0px 10px 0px 10px;">
+        <div class="layui-col-md2">
+            <table class="layui-hide" id="tb_CAVE" lay-filter="tb_CAVE"></table>
+        </div>
+        <div class="layui-col-md5">
+            <table class="layui-hide" id="tb_QLTY" lay-filter="tb_QLTY"></table>
+        </div>
+        <div class="layui-col-md5">
+            <table class="layui-hide" id="tb_REP" lay-filter="tb_REP"></table>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+        var all_fy = 1;
+        var all_fysl = 10;
+        var all_limits = [10, 20];
+        var cacheData = {};
+        var QRList = [];
+        var QCheck = 0;
+        var MouldList = [];
+        layui.use(['layer', 'table', 'form', 'element'], function () {
+            var layer = layui.layer;
+            var table = layui.table;
+            var form = layui.form;
+            var element = layui.element;
+            var assist = sonluk.layui;
+
+            cacheData_init();
+            list_init();
+
+            assist.layer.hover("#Explain_CFM", "选择流程发起后需要让哪些人确认", true, 1);
+
+            $("#btn_start").click(function () {
+                $("#btn_Term")[0].click();
+                cacheData.MID = $('#Term_MOULD').val();
+                cacheData.MMSTAFF = $('#Term_MMSTAFF').val();
+                cacheData.MES_PMM_MTC_CAVE = table.checkStatus('tb_CAVE').data;
+                cacheData.WTCFM = $('#Term_WTCFM').prop('checked') ? -1 : 2;
+                cacheData.QCCFM = $('#Term_QCCFM').prop('checked') ? -1 : 2;
+                cacheData.TECCFM = $('#Term_TECCFM').prop('checked') ? -1 : 2;
+                if (cacheData.MID == "" || cacheData.MMSTAFF == "") return;
+                var postCount = 0;
+                var errorCount = 0;
+                var errorMsg = '';
+                for (var i = 0 ; i < QRList.length; i++) {
+                    if (QRList[i].Check) {
+                        cacheData.QID = QRList[i].QID;
+                        cacheData.MES_PMM_MTC_REP = QRList[i].RList;
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/REP_NEW_Add",
+                            data: {
+                                datastring: JSON.stringify(cacheData)
+                            }
+                        }).done(function (data) {
+                            var rstData = JSON.parse(data);
+                            if (rstData.TYPE == "S") {
+                                cacheData.MTCID = rstData.TID;
+                                $.ajax({
+                                    type: "POST",
+                                    async: false,
+                                    url: "../MOULD/REP_NEW_Start",
+                                    data: {
+                                        datastring: JSON.stringify(cacheData)
+                                    },
+                                    success: function (data) {
+                                        var rstData = JSON.parse(data);
+                                        if (rstData.TYPE == "S") postCount++;
+                                        else if (rstData.TYPE == "E") {
+                                            errorMsg = errorMsg + "【第" + (postCount + errorCount) + "条】" + rstData.MESSAGE;
+                                            errorCount++;
+                                        }
+                                        else {
+                                            errorMsg = errorMsg + "【第" + (postCount + errorCount) + "条】在发起时遇到未知错误";
+                                            errorCount++;
+                                        }
+                                    }
+                                })
+                            }
+                            else if (rstData.TYPE == "E") {
+                                errorMsg = errorMsg + "【第" + (postCount + errorCount) + "条】" + rstData.MESSAGE;
+                                errorCount++;
+                            }
+                            else {
+                                errorMsg = errorMsg + "【第" + (postCount + errorCount) + "条】在保存时遇到未知错误";
+                                errorCount++;
+                            }
+                        });
+                    }
+                }
+                if (postCount == 0 && errorCount == 0) {
+                    layer.msg("请至少选择一条质量问题");
+                }
+                else if (postCount != 0 && errorCount == 0) {
+                    layer.msg(postCount + "条流程全部发起成功！");
+                    cacheData_init();
+                }
+                else if (postCount == 0 && errorCount != 0) {
+                    layer.alert(errorCount + "条流程全部发起失败：" + errorMsg);
+                }
+                else if (postCount != 0 && errorCount != 0) {
+                    layer.alert(postCount + "条流程发起成功，" + errorCount + "条流程发起失败：" + errorMsg);
+                }
+            });
+            $("#btn_save").click(function () {
+                $("#btn_Term")[0].click();
+                cacheData.MID = $('#Term_MOULD').val();
+                cacheData.MMSTAFF = $('#Term_MMSTAFF').val();
+                cacheData.MES_PMM_MTC_CAVE = table.checkStatus('tb_CAVE').data;
+                cacheData.WTCFM = $('#Term_WTCFM').prop('checked') ? -1 : 2;
+                cacheData.QCCFM = $('#Term_QCCFM').prop('checked') ? -1 : 2;
+                cacheData.TECCFM = $('#Term_TECCFM').prop('checked') ? -1 : 2;
+                if (cacheData.MID == "" || cacheData.MMSTAFF == "") return;
+                var postCount = 0;
+                var errorCount = 0;
+                var errorMsg = '';
+                for (var i = 0 ; i < QRList.length; i++) {
+                    if (QRList[i].Check) {
+                        cacheData.QID = QRList[i].QID;
+                        cacheData.MES_PMM_MTC_REP = QRList[i].RList;
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/REP_NEW_Add",
+                            data: {
+                                datastring: JSON.stringify(cacheData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") postCount++;
+                                else if (rstData.TYPE == "E") {
+                                    errorCount++;
+                                    errorMsg = errorMsg + "【第" + (postCount + errorCount) + "条】" + rstData.MESSAGE;
+                                }
+                                else {
+                                    errorCount++;
+                                    errorMsg = errorMsg + "【第" + (postCount + errorCount) + "条】在保存时遇到未知错误";
+                                }
+                            }
+                        });
+                    }
+                }
+                if (postCount == 0 && errorCount == 0) {
+                    layer.msg("请至少选择一条质量问题");
+                }
+                else if (postCount != 0 && errorCount == 0) {
+                    layer.msg(postCount + "条流程全部发起成功！");
+                    cacheData_init();
+                }
+                else if (postCount == 0 && errorCount != 0) {
+                    layer.alert(errorCount + "条流程全部发起失败：" + errorMsg);
+                }
+                else if (postCount != 0 && errorCount != 0) {
+                    layer.alert(postCount + "条流程发起成功，" + errorCount + "条流程发起失败：" + errorMsg);
+                }
+            });
+
+            form.on('select(Term_GC)', function (data) {
+                if (data.value != "") list_init('AfterGC');
+                else {
+                    $('#Term_GZZXBH').empty();
+                    $('#Term_GZZXBH').append(new Option("请选择", ""));
+                    $('#Term_MOULD').empty();
+                    $('#Term_MOULD').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+            form.on('select(Term_GZZXBH)', function (data) {
+                if (data.value != "") list_init('AfterGZZX');
+                else {
+                    $('#Term_MOULD').empty();
+                    $('#Term_MOULD').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+            form.on('select(Term_MOULD)', function (data) {
+                table_init_CAVE();
+            });
+
+            table.on('row(tb_QLTY)', function (obj) {
+                var data = obj.data;
+                QCheck = data.QID;
+                table_init_REP();
+                //标注选中样式
+                obj.tr.addClass('layui-bg-green').siblings().removeClass('layui-bg-green');
+            });
+
+            table.on('checkbox(tb_QLTY)', function (obj) {
+                if (obj.type == "one") {
+                    if (obj.checked) {
+                        for (var i = 0 ; i < QRList.length; i++) {
+                            if (QRList[i].QID == obj.data.QID) {
+                                QRList[i].Check = true;
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        for (var i = 0 ; i < QRList.length; i++) {
+                            if (QRList[i].QID == obj.data.QID) {
+                                QRList[i].Check = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if (obj.type == "all") {
+                    if (obj.checked) {
+                        for (var i = 0 ; i < QRList.length; i++) {
+                            QRList[i].Check = true;
+                        }
+                    }
+                    else {
+                        for (var i = 0 ; i < QRList.length; i++) {
+                            QRList[i].Check = false;
+                        }
+                    }
+                }
+            });
+            table.on('checkbox(tb_REP)', function (obj) {
+                for (var i = 0 ; i < QRList.length; i++) {
+                    if (QRList[i].QID == obj.data.QID) {
+                        QRList[i].RList = table.checkStatus('tb_REP').data;
+                        break;
+                    }
+                }
+            });
+
+            function table_init_QLTY() {
+                var postData_QLTY = {
+                    QNAME: "",
+                    QISACTION: 1
+                };
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/MT_QLTY_Search_QLTY",
+                    data: {
+                        datastring: JSON.stringify(postData_QLTY)
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            for (var i = 0 ; i < rstData.MES_PMM_QR.length; i++) {
+                                var child = {
+                                    QID: rstData.MES_PMM_QR[i].QID,
+                                    Check: false,
+                                    RList: []
+                                };
+                                QRList.push(child);
+                            }
+
+                            assist.table.render({
+                                elem: '#tb_QLTY',
+                                data: rstData.MES_PMM_QR,
+                                height: 'full-350',
+                                cols: [[
+                                { type: 'checkbox', title: '选择' },
+                                { field: 'QCODE', title: '质量问题代码' },
+                                { field: 'QNAME', title: '质量问题', minWidth: 200 }
+                                ]]
+                            });
+                        }
+                        else if (rstData.MES_RETURN.TYPE == "E") layer.msg("质量问题列表加载失败，原因：" + rstData.MES_RETURN.MESSAGE);
+                        else layer.msg("质量问题列表加载失败！");
+                    }
+                });
+            }
+
+            function table_init_REP() {
+                if (QCheck == 0) return;
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/MT_QLTY_Search_QR",
+                    data: {
+                        datastring: JSON.stringify(QCheck)
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            for (var i = 0; i < QRList.length; i++) {
+                                if (QRList[i].QID == QCheck) {
+                                    for (var j = 0; j < QRList[i].RList.length; j++) {
+                                        for (var k = 0 ; k < rstData.MES_PMM_QR.length ; k++) {
+                                            if (rstData.MES_PMM_QR[k].RID == QRList[i].RList[j].RID) {
+                                                rstData.MES_PMM_QR[k].LAY_CHECKED = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                            assist.table.render({
+                                elem: '#tb_REP',
+                                data: rstData.MES_PMM_QR,
+                                height: 'full-350',
+                                cols: [[
+                                { type: 'checkbox', title: '选择' },
+                                { field: 'RCODE', title: '维修内容代码' },
+                                { field: 'RNAME', title: '维修内容', minWidth: 200 }
+                                ]]
+                            });
+                        }
+                        else if (rstData.MES_RETURN.TYPE == "E") layer.msg("维修列表加载失败，原因：" + rstData.MES_RETURN.MESSAGE);
+                        else layer.msg("维修列表加载失败！");
+                    }
+                });
+            }
+
+            function table_init_CAVE() {
+                for (var i = 0; i < MouldList.length; i++) {
+                    if (MouldList[i].MID = $('#Term_MOULD').val()) {
+                        var MES_PMM_MTC_CAVE = [];
+                        for (var j = 0; j < MouldList[i].CAVE + 1; j++) MES_PMM_MTC_CAVE.push({ CAVENO: j + 1 });
+                        assist.table.render({
+                            elem: '#tb_CAVE',
+                            data: MES_PMM_MTC_CAVE,
+                            height: 'full-350',
+                            cols: [[
+                            { type: 'checkbox', title: '选择' },
+                            { field: 'CAVENO', title: '腔号', minWidth: 80 }
+                            ]]
+                        });
+                        break;
+                    }
+                }
+            }
+
+            function list_init(order) {
+                order = order || "";
+                switch (order) {
+                    case "AfterGC":
+                        $('#Term_MOULD').empty();
+                        $('#Term_MOULD').append(new Option("请选择", ""));
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GZZXList",
+                            data: {
+                                GC: $('#Term_GC').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GZZXBH').empty();
+                                $('#Term_GZZXBH').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GZZXBH').append(new Option(item.GZZXBH + "-" + item.GZZXMS, item.GZZXBH));
+                                })
+                                if (rstData.length == 1) {
+                                    $('#Term_GZZXBH').val(rstData[0].GZZXBH);
+                                    list_init("AfterGZZX");
+                                }
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterGZZX":
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MOULDList",
+                            data: {
+                                GC: $('#Term_GC').val(),
+                                GZZXBH: $('#Term_GZZXBH').val()
+                            },
+                            success: function (data) {
+                                MouldList = JSON.parse(data);
+                                $('#Term_MOULD').empty();
+                                $('#Term_MOULD').append(new Option("请选择", ""));
+                                $.each(MouldList, function (index, item) {
+                                    $('#Term_MOULD').append(new Option(item.MOULD, item.MID));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                    default:
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GCList",
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GC').empty();
+                                $('#Term_GC').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GC').append(new Option(item.GC + "-" + item.GCMS, item.GC));
+                                })
+                                if (rstData.length == 1) {
+                                    $('#Term_GC').val(rstData[0].GC);
+                                    list_init("AfterGC");
+                                }
+                                form.render();
+                            }
+                        });
+                        var postData_STAFF = {
+                            ROLE: "机修",
+                        };
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MT_STAFF_Search",
+                            data: {
+                                datastring: JSON.stringify(postData_STAFF)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_MMSTAFF').empty();
+                                $('#Term_MMSTAFF').append(new Option("请选择", ""));
+                                $.each(rstData.MES_PMM_STAFF, function (index, item) {
+                                    $('#Term_MMSTAFF').append(new Option(item.NAME, item.SID));
+                                })
+                                form.render();
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GetSYSConfig",
+                            data: {
+                                KEY: "TECCFM"
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.MES_RETURN.TYPE == "S") {
+                                    if (rstData.VALUE == "-1") {
+                                        $("#Display_ISACTION").text("需确认").css("color", "#009688");
+                                    }
+                                    else if (rstData.VALUE == "1") {
+                                        $("#Display_ISACTION").text("无需确认").css("color", "#FF5722");
+                                    }
+                                    else {
+                                        $("#Display_ISACTION").text("未知状态").css("color", "#808080");
+                                    }
+                                }
+                                form.render();
+                            }
+                        });
+                        break;
+                }
+            }
+
+            function cacheData_init() {
+                cacheData = {
+                    MID: 0,
+                    QID: 0,
+                    MMSTAFF: 0,
+                    MES_PMM_MTC_REP: [],
+                    MES_PMM_MTC_CAVE: []
+                };
+                QRList = [];
+                QCheck = 0;
+                $('#Term_GC').val("");
+                $('#Term_GZZXBH').val("");
+                $('#Term_MOULD').val("");
+                $('#Term_MMSTAFF').val("");
+                form.render();
+                assist.table.render({
+                    elem: '#tb_CAVE',
+                    data: [],
+                    cols: [[
+                        { type: 'checkbox' },
+                        { field: 'CAVENO', title: '腔号', minWidth: 80 }
+                    ]]
+                });
+                table_init_QLTY();
+                assist.table.render({
+                    elem: '#tb_REP',
+                    data: [],
+                    cols: [[
+                        { type: 'checkbox' },
+                        { field: 'RCODE', title: '维修内容代码' },
+                        { field: 'RNAME', title: '维修内容', minWidth: 200 }
+                    ]]
+                });
+            }
+        });
+    </script>
+}

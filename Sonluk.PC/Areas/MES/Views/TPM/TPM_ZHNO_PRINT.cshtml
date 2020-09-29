@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "托盘组合码打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model List<MODEL_RWQD_PRINT>
+   @for (int i = 0; i < Model.Count; i++)
+{
+    int tpcount = Model[i].Zsl_bct012.Length;
+    <div class="main_father">
+        <div id="wrap" class="main_tpzhno">
+            <table class="print-page_table_outside_tpzhno">
+                <tr>
+                    <td colspan="4" class="print_page_td_haveborder_tpzhno1">
+                        <table style="width:100%">
+                            <tr style="width:100%">
+                                <td class="print-page-body-table-header" valign="top">托盘组合码</td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="middle" class="print_page_td_noborder4_tpzhno">
+                                    @{
+    string barcode = "";
+    barcode = Model[i].ZSL_BCT011.TPZHNO;
+                                    }
+                                    <img src="@Url.Action("BarCode", "PD", new { area = "MES",code=barcode,format="QRCODE",width=70,height=70,pure=1})">
+                                    <br />
+                                    <big id="TPZHNO">@Model[i].ZSL_BCT011.TPZHNO</big>
+                                    <br />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="print-page_td_haveborder_tpzhno">序号</td>
+                    <td class="print-page_td_haveborder_tpzhno">托盘编号</td>
+                    <td class="print-page_td_haveborder_tpzhno">序号</td>
+                    <td class="print-page_td_haveborder_tpzhno">托盘编号</td>
+                </tr>
+                @for (int j = 0; j < tpcount; j++)
+                {
+
+                    <tr>
+
+                        <td class="print-page_td_haveborder_tpzhno">
+                            <a>@(j + 1)</a>
+                        </td>
+                        <td class="print-page_td_haveborder_tpzhno">@Model[i].Zsl_bct012[j].TPNO</td>
+                        @{
+                    j++;
+                        }
+
+                        @if (j < tpcount)
+                        {
+                            <td class="print-page_td_haveborder_tpzhno">
+                                <a>@(j + 1)</a>
+                            </td>
+                            <td class="print-page_td_haveborder_tpzhno">@Model[i].Zsl_bct012[j].TPNO</td>
+                        }
+                        else
+                        {
+                            <td class="print-page_td_haveborder_tpzhno"></td>
+                            <td class="print-page_td_haveborder_tpzhno"></td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}
+<style>
+    .main_father {
+        padding-top: 20px;
+    }
+</style>

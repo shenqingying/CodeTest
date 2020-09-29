@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "发票回执单";
+    Session["TITLENAME"] = "发票回执单";
+}
+
+
+
+
+
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+    <div class="weui-btn-area" style="margin-top:0.3em;">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_cx">查询</a>
+    </div>
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content" style="padding-right: 0px;">
+
+
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">开始时间：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="KH_ID" class="weui-input" type="date" placeholder="" value="@ViewBag.startdate">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">结束时间：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="KH_name" class="weui-input" type="date" placeholder="" value="@ViewBag.enddate">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<div id="div_result">
+    
+    
+</div>
+
+
+
+
+<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+</script>
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+        @Scripts.Render("~/bundles/CRM/MSG/Invoice")
+    }

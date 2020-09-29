@@ -1,0 +1,68 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "SH_Order_MXPart";
+    CRM_ORDER_MX[] MXdata = ViewBag.MXdata;
+}
+
+@for (int i = 0; i < MXdata.Length; i++)
+{
+    <hr class="layui-bg-black">
+    <table id="table1" border="0" width="100%">
+
+        @*<tr>
+                <td><label class="layui-form-label" style="width:70px;text-align:right;">序号：</label></td>
+                <td>@(i + 1)</td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label" style="width:70px;text-align:right;">产品品号：</label></td>
+                <td>@MXdata[i].CPPH</td>
+            </tr>*@
+        <tr>
+            <td><label class="layui-form-label" style="width:70px;text-align:right;">产品名称：</label></td>
+            <td colspan="2">@MXdata[i].CPMC</td>
+        </tr>
+        @{
+    string DW = "";
+    if (MXdata[i].DDDW == "CTN")
+    {
+        DW = "箱";
+    }
+    else if (MXdata[i].DDDW == "PCS")
+    {
+        DW = "只";
+    }
+    else
+    {
+        DW = MXdata[i].DDDW;
+    }
+        }
+        <tr>
+            <td><label class="layui-form-label" style="width:70px;text-align:right;">订单数量：</label></td>
+            <td colspan="2">@MXdata[i].DDSL    @DW</td>
+        </tr>
+        @*<tr>
+                <td><label class="layui-form-label" style="width:70px;text-align:right;">订单单位：</label></td>
+                <td>@MXdata[i].DDDW</td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label" style="width:70px;text-align:right;">转换率：</label></td>
+                <td>@MXdata[i].RATE</td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label" style="width:70px;text-align:right;">标准单位：</label></td>
+                <td>@MXdata[i].BZDW</td>
+            </tr>*@
+        <tr>
+            <td><label class="layui-form-label" style="width:70px;text-align:right;">标准数量：</label></td>
+            <td>@MXdata[i].BZSL</td>
+        </tr>
+        <tr>
+            <td width="20"><label class="layui-form-label" style="width:70px;text-align:right;">单价：</label></td>
+            <td width="40">@MXdata[i].PRICE</td>
+
+            <td><label class="layui-form-label" style="width:100px;text-align:right;">金额：@MXdata[i].AMOUNT</label></td>
+
+        </tr>
+
+    </table>
+}

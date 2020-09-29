@@ -1,0 +1,326 @@
+﻿@using Sonluk.UI.Model.LE.TRA.ConsignmentNoteService
+@model CNInfo
+@{
+
+    if (Model.ID > 0)
+    {
+        ViewBag.Title = "托运单-" + Model.ID.ToString() + "-" + Model.Destination.Name;
+    }
+    else
+    {
+        ViewBag.Title = "托运单-新建";
+    }
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string check = "checked=checked";
+    string deleted = "已作废";
+    
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/panel-pop-up")
+@Styles.Render("~/Content/le/consignment-note-edit")
+<input type="hidden" value="@Url.Action("Print", "ConsignmentNote")" id="consignment-note-print-uri" />
+<input type="hidden" value="@Url.Action("_Delete", "ConsignmentNote")" id="consignment-note-delete-uri" />
+<input type="hidden" value="@Url.Action("_Delete", "ConsignmentNote")" id="consignment-note-selectdj-uri" />
+<input type="hidden" value="@Url.Action("_SelectDJ", "ConsignmentNote")" id="consignment-note-current-number-uri" />
+<input type="hidden" value="@Url.Action("_ReadZSF", "ConsignmentNote")" id="consignment-note-current-ReadZSF-uri" />
+<input type="hidden" value="@Url.Action("_Read", "Route")" id="transportation-route" />
+<input type="hidden" value="0" id="submitted" />
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">托运单</a>
+        >
+        <a href="#">编辑</a>
+    </div>
+</div>
+<form action="@Url.Action("_Modify", "ConsignmentNote")" method="post" id="consignment-note-form">
+    <input type="hidden" id="quick-print" name="quickPrint" value="@ViewBag.QuickPrint" />
+    <input type="hidden" id="ID" name="node.ID" value="@Model.ID" />
+    <input type="hidden" id="sap" name="node.SAP" value="@Model.SAP" />
+    <div class="consignment-note">
+        <table class="table-logistics-info">
+            <tr>
+                <td class="table-logistics-info-title item-title">物流公司</td>
+                <td class="table-logistics-info-content" colspan="3">
+                    <input type="text" id="carrier" class="drop-list-target-carrier" name="node.Carrier.ShortName" value="@Model.Carrier.ShortName" readonly="readonly" />
+                    <input type="hidden" id="carrier-ID" name="node.Carrier.ID" value="@Model.Carrier.ID" />
+                    <input type="hidden" value="@Url.Action("_List", "Carrier")" />
+                </td>
+                <td class="table-logistics-info-title item-title">托运日期</td>
+                <td class="table-logistics-info-content"><input type="text" class="date-picker-trigger" id="departure-time" name="node.Date" value="@Model.Date" readonly="readonly" /></td>
+                <td class="table-logistics-info-title item-title">送达日期</td>
+                <td class="table-logistics-info-content"><input type="text" class="date-picker-trigger" id="arrival-time" name="node.DeliveryDate" value="@Model.DeliveryDate" readonly="readonly" /></td>
+                <td class="table-width-2 item-title">SN</td>
+                <td class="table-logistics-info-content"><input type="text" class="" id="" name="node.SerialNumber" value="@Model.SerialNumber" /></td>
+            </tr>
+            <tr>
+                <td class="item-title">发站</td>
+                <td>
+                    <input type="hidden" value="@Url.Action("_Single", "Sender")" />
+                    <input type="text" class="drop-list-target-sender-city" id="sender-city" name="node.Source.Name" value="@Model.Source.Name" readonly="readonly" />
+                    <input type="hidden" id="sender-city-ID" name="node.Source.ID" value="@Model.Source.ID" />
+                    <input type="hidden" value="@Url.Action("_List", "Sender")" />
+                </td>
+                <td class="table-logistics-info-title item-title">到站</td>
+                <td>
+                    <input type="text" class="pop-up-target-receiver-city color-font-high-light" id="receiver-city" name="node.Destination.Name" value="@Model.Destination.Name" readonly="readonly" />
+                    <input type="hidden" id="receiver-city-ID" name="node.Destination.ID" value="@Model.Destination.ID" />
+                    <input type="hidden" value="@Url.Action("_List", "City")" />
+                </td>
+                <td class="item-title">由经</td>
+                <td><input type="text" class="" id="" /></td>
+                <td class="item-title">中转至</td>
+                <td><input type="text" class="" id="" /></td>
+                <td class="item-title">单号</td>
+                <td><input type="text" class="" id="Number" name="node.Number" value="@Model.Number" /></td>
+            </tr>
+            <tr>
+                <td class="item-title">托运单位</td>
+                <td colspan="5">
+                    <input type="text" class="" id="" name="node.Sender.Name" value="@Model.Sender.ShortName" />
+                    <input type="hidden" id="sender-ID" name="node.Sender.ID" value="@Model.Sender.ID" />
+                </td>
+                <td class="item-title">联系人</td>
+                <td><input type="text" class="" id="" name="node.Sender.Contact" value="@Model.Sender.Contact" /></td>
+                <td class="item-title">手机</td>
+                <td><input type="text" class="" id="" name="node.Sender.Cellphone" value="@Model.Sender.Cellphone" /></td>
+            </tr>
+            <tr>
+                <td class="item-title">托运地址</td>
+                <td colspan="7"><input type="text" class="" id="" name="node.Sender.Address" value="@Model.Sender.Address" /></td>
+                <td class="item-title">电话</td>
+                <td><input type="text" class="" id="" name="node.Sender.Telephone" value="@Model.Sender.Telephone" /></td>
+            </tr>
+            <tr>
+                <td class="item-title">收货单位</td>
+                <td colspan="5">
+                    <input type="text" class="pop-up-target-receiver color-font-high-light" id="receiver" name="node.Receiver.Name" value="@Model.Receiver.Name" />
+                    <input type="hidden" id="receiver-ID" name="node.Receiver.ID" value="@Model.Receiver.ID" />
+                    <input type="hidden" value="@Url.Action("_List", "Receiver")" />
+                    <input type="hidden" id="receiver-short-name" value="@Model.Receiver.ShortName" />
+                    <input type="hidden" id="receiver-serial-number" value="@Model.Receiver.SerialNumber" />
+                    <input type="hidden" id="receiver-default" value="@Model.Receiver.Default.ToString()" />
+                </td>
+                <td class="item-title">联系人</td>
+                <td><input type="text" class="color-font-high-light" id="receiver-contact" name="node.Receiver.Contact" value="@Model.Receiver.Contact" /></td>
+                <td class="item-title">手机</td>
+                <td><input type="text" class="color-font-high-light" id="receiver-cellphone" name="node.Receiver.Cellphone" value="@Model.Receiver.Cellphone" /></td>
+            </tr>
+            <tr>
+                <td class="item-title">收货地址</td>
+                <td colspan="7"><input type="text" class="color-font-high-light" id="receiver-address" name="node.Receiver.Address" value="@Model.Receiver.Address" /></td>
+                <td class="item-title">电话</td>
+                <td><input type="text" class="color-font-high-light" id="receiver-telephone" name="node.Receiver.Telephone" value="@Model.Receiver.Telephone" /></td>
+            </tr>
+        </table>
+        <table class="table-logistics-cost">
+            <tr>
+                <td class="item-title">货物名</td>
+                <td class="item-title">整件</td>
+                <td class="item-title">零头</td>
+                <td class="item-title">总件数</td>
+                <td class="item-title">包</td>
+                <td class="item-title">重量</td>
+                <td class="item-title">体积</td>
+                <td class="item-title">保价</td>
+                <td class="item-title">运费</td>
+                <td class="item-title">保价费</td>
+                <td class="item-title">直送费</td>
+                <td class="item-title">卸货费</td>
+                <td class="item-title">其他费</td>
+                <td class="item-title">小计</td>
+            </tr>
+            @{
+                int itemIndex = 0;
+            }
+            @foreach (CNItemInfo item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        <input type="text" class="table-logistics-cost-text-align-center drop-list-target-goods-type" id="" name="node.Items[@itemIndex].GoodsType.Type" value="@item.GoodsType.Type" />
+                        <input type="hidden" id="" name="node.Items[@itemIndex].GoodsType.TypeID" value="@item.GoodsType.TypeID" />
+                        <input type="hidden" value="@Url.Action("_Type", "Goods")" />
+                    </td>
+                    <td><input type="text" name="node.Items[@itemIndex].Whole" value="@item.Whole" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].Odd" value="@item.Odd" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].Total" value="@item.Total" /></td>
+                    <td>
+                        <input type="text" class="table-logistics-cost-text-align-center drop-list-target-package-type" id="" name="node.Items[@itemIndex].PackageType.Type" value="@item.PackageType.Type" readonly="readonly" />
+                        <input type="hidden" id="" name="node.Items[@itemIndex].PackageType.TypeID" value="@item.PackageType.TypeID" />
+                        <input type="hidden" value="@Url.Action("_Type", "Package")" />
+                    </td>
+                    <td><input type="text" name="node.Items[@itemIndex].Weight" value="@item.Weight.ToString("#0.######")" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].Volume" value="@item.Volume.ToString("#0.######")" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].UnitInsurance" value="@item.UnitInsurance.ToString("#0.######")" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].Cost" value="@item.Cost.ToString("#0.######")" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].Insurance" value="@item.Insurance" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].DirectCost" value="@item.DirectCost" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].TransitCost" value="@item.TransitCost" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].OtherCost" value="@item.OtherCost" /></td>
+                    <td><input type="text" name="node.Items[@itemIndex].TotalCost" value="@item.TotalCost" /></td>
+                </tr>
+                itemIndex++;
+            }
+
+            @for (int i = itemIndex; i < 3; i++)
+            {
+                <tr>
+                    <td>
+                        <input type="text" class="table-logistics-cost-text-align-center drop-list-target-goods-type" id="" name="node.Items[@itemIndex].GoodsType.Type" />
+                        <input type="hidden" id="" name="node.Items[@itemIndex].GoodsType.TypeID" />
+                        <input type="hidden" value="@Url.Action("_Type", "Goods")" />
+                    </td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].Whole" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].Odd" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].Total" /></td>
+                    <td>
+                        <input type="text" class="table-logistics-cost-text-align-center drop-list-target-package-type" id="" name="node.Items[@itemIndex].PackageType.Type" readonly="readonly" />
+                        <input type="hidden" id="" name="node.Items[@itemIndex].PackageType.TypeID" />
+                        <input type="hidden" value="@Url.Action("_Type", "Package")" />
+                    </td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].Weight" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].Volume" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].UnitInsurance" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].Cost" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].Insurance" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].DirectCost" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].TransitCost" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].OtherCost" /></td>
+                    <td><input type="text" value="" name="node.Items[@itemIndex].TotalCost" /></td>
+                </tr>
+                itemIndex++;
+            }
+            <tr>
+                <td><input type="text" class="table-logistics-cost-text-align-center drop-list-target-goods-type" value="合计" readonly="readonly" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" name="node.Total" value="@Model.Total" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" name="node.Weight" value="@Model.Weight" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" /></td>
+                <td><input type="text" name="node.Cost" value="@Model.Cost" /></td>
+                <td><input type="text" name="node.Insurance" value="@Model.Insurance" /></td>
+                <td><input type="text" name="node.DirectCost" value="@Model.DirectCost" /></td>
+                <td><input type="text" name="node.TransitCost" value="@Model.TransitCost" /></td>
+                <td><input type="text" name="node.OtherCost" value="@Model.OtherCost" /></td>
+                <td><input type="text" name="node.TotalCost" value="@Model.TotalCost" /></td>
+            </tr>
+        </table>
+        <table class="table-logistics-remark">
+            <tr>
+                <td colspan="4">
+                    最高按运费
+                    <input type="text" class="unit-price" name="node.Compensation" value="@Model.Compensation" />
+                    倍赔偿 托运人没有在托运日起
+                    <input type="text" class="unit-price" name="node.DefaultArrivalLimit" value="@Model.DefaultArrivalLimit" />
+                    个月内向承运人提出货物未到通知，视同货物已完好到达
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    附件：
+                    送货单：<input type="text" class="unit-price" name="node.DeliveryCount" value="@Model.DeliveryCount" />份
+                    发票：<input type="text" class="unit-price" name="node.InvoiceCount" value="@Model.InvoiceCount" />份
+                    证明：<input type="text" class="unit-price" name="node.CertificationCount" value="@Model.CertificationCount" />份
+                    运费  <input type="text" class="unit-price" id="unit-price" name="node.UnitPrice" value="@Model.UnitPrice.ToString("0.####")" />元/公斤
+                    直送费<input type="text" class="unit-price" id="direct-cost" name="node.ZSCost" value="@Model.ZSCost.ToString("0.##")" />元/单
+                </td>
+            </tr>
+            <tr>
+                <td class="table-logistics-remark-title item-title">交货单</td>
+                <td colspan="3"><input type="text" name="node.Delivery" value="@Model.Delivery" /></td>
+            </tr>
+            <tr>
+                <td class="item-title">备注</td>
+                <td colspan="3">
+                    <textarea class="table-logistics-remark-textarea" name="node.Remark">@Model.Remark</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="item-title">特别说明</td>
+                <td colspan="3">
+                    <textarea class="table-logistics-remark-textarea" name="node.Instruction">@Model.Instruction</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="item-title">送货方式</td>
+                <td>
+                    <input type="checkbox" id="" value="true" name="node.PickUpByReceiver" @if (Model.PickUpByReceiver) { @check             }> 自提
+                    <input type="checkbox" id="" value="true" name="node.HomeDelivery" @if (Model.HomeDelivery) { @check              }> 送货上门
+                    <input type="checkbox" id="" value="true" name="node.PickUpByCertificate" @if (Model.PickUpByCertificate) { @check              }> 凭证件提
+                    <input type="checkbox" id="" value="true" name="node.PickUpByFax" @if (Model.PickUpByFax) { @check              }> 凭传真提
+                </td>
+                <td class="item-title">回单签收要求</td>
+                <td>
+                    <input type="checkbox" id="" value="true" name="node.Feedback" @if (Model.Feedback) { @check              }> 签托运单回执
+                    <input type="checkbox" id="" value="true" name="node.DeliveryFeedback" @if (Model.DeliveryFeedback) { @check              }> 签客户送货单回执
+                    <input type="checkbox" id="" value="true" name="node.Stamp" @if (Model.Stamp) { @check              }> 收货人必须盖章
+                </td>
+            </tr>
+            <tr>
+                <td class="item-title">急件</td>
+                <td>
+                    <input type="checkbox" value="true" name="node.Dispatch" @if (Model.Dispatch) { @check               }> 是
+                </td>
+                <td class="item-title">其他</td>
+                <td><input type="text" class="" id="" name="node.Requirement" value="@Model.Requirement" /></td>
+            </tr>
+            @if (Model.ID > 0)
+            {
+                <tr>
+                    <td class="item-title">创建</td>
+                    <td>@Model.Creator @Model.CreateDate</td>
+                    <td class="item-title">状态</td>
+                    <td class="consignment-note-status">
+                        @if (Model.Status == 3)
+                        {@deleted }
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td class="item-title">托运类别</td>
+                <td>
+                    @if (Model.ID <= 0)
+                    {
+                        <label for="tylbr1"><input id="tylbr1" type="radio" value="1" name="node.TYLB">民品</label>
+                        <label for="tylbr2"><input id="tylbr2" type="radio" value="2" name="node.TYLB">OEM</label>
+                        <label for="tylbr3"><input id="tylbr3" type="radio" value="3" name="node.TYLB">外销</label>
+                        <label for="tylbr4"><input id="tylbr4" type="radio" value="4" name="node.TYLB">短驳</label>
+                        <label for="tylbr5"><input id="tylbr5" type="radio" value="5" name="node.TYLB">不计运费</label>
+                    }
+                    else
+                    {
+                        <label for="tylbr1"><input id="tylbr1" type="radio" value="1" name="node.TYLB" @if (Model.TYLB == 1 || Model.TYLB == 0) { @check }>民品</label>
+                        <label for="tylbr2"><input id="tylbr2" type="radio" value="2" name="node.TYLB" @if (Model.TYLB == 2) { @check }>OEM</label>
+                        <label for="tylbr3"><input id="tylbr3" type="radio" value="3" name="node.TYLB" @if (Model.TYLB == 3) { @check }>外销</label>
+                        <label for="tylbr4"><input id="tylbr4" type="radio" value="4" name="node.TYLB" @if (Model.TYLB == 4) { @check }>短驳</label>
+                        <label for="tylbr5"><input id="tylbr5" type="radio" value="5" name="node.TYLB" @if (Model.TYLB == 5) { @check }>不计运费</label>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<!--弹出窗口-->
+<div class="panel-pop-up-background background-color-dark"></div>
+<div class="panel-pop-up" id="receiver-select"></div>
+<!--弹出窗口-->
+<!--弹出窗口-->
+<div class="panel-pop-up-background background-color-dark panel-pop-up-background-city-select"></div>
+<div class="panel-pop-up" id="city-select"></div>
+<!--弹出窗口-->
+<!--下拉列表-->
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/le/consignment-note-edit")
+}

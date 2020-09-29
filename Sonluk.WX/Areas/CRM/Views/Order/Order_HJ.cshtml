@@ -1,0 +1,41 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "Order_HJ";
+    CRM_ORDER_TT TTdata = ViewBag.TTdata;
+}
+
+<table class="layui-table">
+    <tr>
+        <td>金额合计</td>
+        <td>@TTdata.TOTAL</td>
+    </tr>
+    @if (TTdata.KHLX != 1105)
+    {
+        <tr>
+            <td>可使用折扣金额</td>
+            <td>@TTdata.DISCOUNT</td>
+        </tr>
+        <tr>
+            <td>本期使用折扣金额</td>
+            <td>@TTdata.DISCOUNT_THIS</td>
+        </tr>
+        <tr>
+            <td>剩余折扣金额</td>
+            <td>@TTdata.DISCOUNT_BALANCE</td>
+        </tr>
+        <tr>
+            <td>本单实际金额</td>
+            <td>@TTdata.ACTUAL</td>
+        </tr>
+        <tr>
+            <td>上期余额</td>
+            <td>@TTdata.PREVIOUS_BALANCE</td>
+        </tr>
+        <tr>
+            <td>本单应付金额</td>
+            <td>@TTdata.PAY</td>
+        </tr>
+    }
+
+
+</table>

@@ -1,0 +1,58 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService;
+@model List<ZSL_BCS107>
+@{
+    ViewBag.Title = "喷码打印";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+
+    int sn = 1;
+    int index = 1;
+    string barcode = "";
+
+    string pageSize = "A4";
+    HttpCookie cookie = Request.Cookies.Get("IQCPMPageSize");
+    if (cookie != null)
+    {
+        pageSize = cookie.Value;
+    }
+}
+@Styles.Render("~/Content/report/incoming-quality-control-packing-material")
+@Styles.Render("~/Content/mm/purchase-order-index")
+<input type="hidden" id="page-size" value="@pageSize">
+
+    <div class="print-page print-page-A4">
+        <div class="print-page-area print-page-area-A4">
+            <div class="print-page-header">
+                <div class="print-page-header-company-name">发货喷码清单</div>
+            </div>
+            <div class="print-page-body print-page-body-A4">
+                <table class="print-page-body-table">
+                    <tr>
+                        <td class="print-page-body-table-header">No.</td>
+                        <td class="print-page-body-table-header">拣配单号</td>
+                        <td class="print-page-body-table-header">托运SN</td>
+                        <td class="print-page-body-table-header">喷印内容</td>
+                        <td class="print-page-body-table-header">二维码</td>
+                    </tr>
+                    @foreach (ZSL_BCS107 node in Model)
+                    {
+                        <tr class="print-page-dashed-line-alpha">
+                            <td>@(sn++)</td>
+                            <td>@node.Jpd</td>
+                            <td>@node.Ywc</td>
+                            <td>@node.Lxfs</td>
+                            
+                            <td>
+                                @{
+                                barcode = "";
+                                barcode = node.Lxfs;
+                                }
+                                @*<img src="@Url.Action("BarCode", "BarCode", new { area = "BC" })?code=@barcode&format=QRCODE&width=70&height=60&pure=1">*@
+                                <img src="@Url.Action("BarCode", "BarCode", new { area = "BC",code=barcode,format="QRCODE",width=70,height=70,pure=1})">
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+

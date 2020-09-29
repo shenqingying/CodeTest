@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/MM" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/MM" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/MM">
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:ScheReqInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ScheReqInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrder" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SOItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Creator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePPCtrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePPCtrlDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePPCtrlTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePur" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePurDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePurTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePurCtrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePurCtrlDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePurCtrlTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodePurCtrlEndDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfScheduleLineInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NodeComments" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfScheduleLineInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ScheduleLineInfo" nillable="true" type="tns:ScheduleLineInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ScheduleLineInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GRQTY" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrevQty" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Item" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Line" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InitialDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="InitialQuantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IssuedQty" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DestinationID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrder" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SOItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Releaser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Delete" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="tns:ScheReqInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectResult" type="tns:ArrayOfScheReqInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfScheReqInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ScheReqInfo" nillable="true" type="tns:ScheReqInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serialNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ScheReqInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:ScheReqInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serialNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="account" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="status" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="releaseCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateStatusResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serialNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemRead">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="tns:ScheReqInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemReadResult" type="tns:ArrayOfScheduleLineInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nodes" type="tns:ArrayOfScheduleLineInfo" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ItemStatusResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeliveryDestination">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeliveryDestinationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeliveryDestinationResult" type="tns:ArrayOfScheDelivDestInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfScheDelivDestInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ScheDelivDestInfo" nillable="true" type="tns:ScheDelivDestInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ScheDelivDestInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ScheReqInfo" nillable="true" type="tns:ScheReqInfo" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfScheDelivDestInfo" nillable="true" type="tns:ArrayOfScheDelivDestInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapIn">
+    <wsdl:part name="parameters" element="tns:Select" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemReadSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemRead" />
+  </wsdl:message>
+  <wsdl:message name="ItemReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemStatus" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeliveryDestinationSoapIn">
+    <wsdl:part name="parameters" element="tns:DeliveryDestination" />
+  </wsdl:message>
+  <wsdl:message name="DeliveryDestinationSoapOut">
+    <wsdl:part name="parameters" element="tns:DeliveryDestinationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:ScheReqInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpGetIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+    <wsdl:part name="account" type="s:string" />
+    <wsdl:part name="status" type="s:string" />
+    <wsdl:part name="releaseCode" type="s:string" />
+    <wsdl:part name="comments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeliveryDestinationHttpGetIn" />
+  <wsdl:message name="DeliveryDestinationHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfScheDelivDestInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:ScheReqInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpPostIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+    <wsdl:part name="account" type="s:string" />
+    <wsdl:part name="status" type="s:string" />
+    <wsdl:part name="releaseCode" type="s:string" />
+    <wsdl:part name="comments" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DeliveryDestinationHttpPostIn" />
+  <wsdl:message name="DeliveryDestinationHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfScheDelivDestInfo" />
+  </wsdl:message>
+  <wsdl:portType name="ScheduleRequisitionSoap">
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <wsdl:input message="tns:SelectSoapIn" />
+      <wsdl:output message="tns:SelectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input message="tns:UpdateStatusSoapIn" />
+      <wsdl:output message="tns:UpdateStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemRead">
+      <wsdl:input message="tns:ItemReadSoapIn" />
+      <wsdl:output message="tns:ItemReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatus">
+      <wsdl:input message="tns:ItemStatusSoapIn" />
+      <wsdl:output message="tns:ItemStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeliveryDestination">
+      <wsdl:input message="tns:DeliveryDestinationSoapIn" />
+      <wsdl:output message="tns:DeliveryDestinationSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ScheduleRequisitionHttpGet">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input message="tns:UpdateStatusHttpGetIn" />
+      <wsdl:output message="tns:UpdateStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeliveryDestination">
+      <wsdl:input message="tns:DeliveryDestinationHttpGetIn" />
+      <wsdl:output message="tns:DeliveryDestinationHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ScheduleRequisitionHttpPost">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input message="tns:UpdateStatusHttpPostIn" />
+      <wsdl:output message="tns:UpdateStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeliveryDestination">
+      <wsdl:input message="tns:DeliveryDestinationHttpPostIn" />
+      <wsdl:output message="tns:DeliveryDestinationHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ScheduleRequisitionSoap" type="tns:ScheduleRequisitionSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/Select" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemRead">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/ItemRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatus">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/ItemStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliveryDestination">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/DeliveryDestination" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ScheduleRequisitionSoap12" type="tns:ScheduleRequisitionSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/Select" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemRead">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/ItemRead" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatus">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/ItemStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliveryDestination">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/DeliveryDestination" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ScheduleRequisitionHttpGet" type="tns:ScheduleRequisitionHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <http:operation location="/UpdateStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliveryDestination">
+      <http:operation location="/DeliveryDestination" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ScheduleRequisitionHttpPost" type="tns:ScheduleRequisitionHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <http:operation location="/UpdateStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeliveryDestination">
+      <http:operation location="/DeliveryDestination" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ScheduleRequisition">
+    <wsdl:port name="ScheduleRequisitionSoap" binding="tns:ScheduleRequisitionSoap">
+      <soap:address location="http://192.168.0.17/API/MM/ScheduleRequisition.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ScheduleRequisitionSoap12" binding="tns:ScheduleRequisitionSoap12">
+      <soap12:address location="http://192.168.0.17/API/MM/ScheduleRequisition.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ScheduleRequisitionHttpGet" binding="tns:ScheduleRequisitionHttpGet">
+      <http:address location="http://192.168.0.17/API/MM/ScheduleRequisition.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ScheduleRequisitionHttpPost" binding="tns:ScheduleRequisitionHttpPost">
+      <http:address location="http://192.168.0.17/API/MM/ScheduleRequisition.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

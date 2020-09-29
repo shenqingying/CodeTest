@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "数量管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>数量管理</cite></a>
+</span>
+
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+        </div>
+
+
+
+        <div class="layui-form-item">
+
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gc" lay-filter="cx_gc">
+                    <option value="" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                    }
+                </select>
+            </div>
+
+        </div>
+
+        <table class="layui-hide" id="tb_sl" lay-filter="tb_sl"></table>
+
+    </div>
+</div>
+
+    <div id="div_sl" class="layui-form" hidden>
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="gc" lay-filter="gc">
+                    <option value="" selected="selected"></option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                    }
+                </select>
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px">电池型号：</label>
+            <div class="layui-input-inline">
+                <select id="dcxh" lay-filter="dcxh">
+                    <option value="" selected="selected"></option>
+                    @*@for (int i = 0; i < Model.Sy_typemxlist.Length; i++)
+                    {
+                        <option value="@Model.Sy_typemxlist[i].ID">@Model.Sy_typemxlist[i].MXNAME</option>
+                    }*@
+                </select>
+
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px">每板数量：</label>
+            <div class="layui-input-inline">
+                <input id="mbsl" type="text" autocomplete="off" maxlength="6" onkeyup="value = value.replace(/[^\d]/g, '')" class="layui-input" placeholder="请输入数字">
+            </div>
+        </div>
+
+    </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/QuantityManage")
+}

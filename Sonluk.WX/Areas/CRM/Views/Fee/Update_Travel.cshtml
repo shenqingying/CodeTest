@@ -1,0 +1,467 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@using Sonluk.UI.Model.CRM.COST_CBZXService;
+@using Sonluk.UI.Model.CRM.COST_CLFTTService;
+@using Sonluk.UI.Model.CRM.COST_ITEMService;
+
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "差旅费报销单申请";
+    Session["TITLENAME"] = "差旅费报销单申请";
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+    CRM_COST_CBZX[] CBZX = ViewBag.CBZX;
+    CRM_HG_DICT[] FGLD = ViewBag.FGLD;
+    CRM_HG_DICT[] SF = ViewBag.SF;
+    CRM_COST_CLFTT TTdata = ViewBag.TTdata;
+
+    CRM_COST_ITEM[] COSTITEMID = ViewBag.COSTITEMID;
+    CRM_COST_ITEM[] COSTITEMMC = ViewBag.COSTITEMMC;
+}
+
+
+
+
+<div class="weui-btn-area">
+
+    <button class="weui-btn weui-btn_primary" id="btn_submit">保存并提交</button>
+    <br />
+    <button class="weui-btn weui-btn_primary" id="btn_save" style="width:49%;display:initial;margin:0 0;">保存</button>
+    <button class="weui-btn weui-btn_primary" id="insert_clfmx" style="width:49%;display:initial;margin:0 0;float:right;">新增明细</button>
+
+</div>
+
+<br />
+
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">申请部门：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="DEPID" class="weui-input" type="text" placeholder="" >
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">申请日期：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="CJSJ" class="weui-input" type="date" placeholder="">
+        </div>
+    </div>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">出差人：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="STAFFID" class="weui-input" type="text" placeholder="" value="@Session["NAME"]">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">报销日期：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BXRQ" class="weui-input" type="date" placeholder="" value="@ViewBag.nowdate">
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">分管领导：</label>
+        </div>
+        <div class="weui-cell__bd">
+
+            <select id="FGLD" class="weui-select">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < FGLD.Length; i++)
+                {
+                    if (@FGLD[i].DICID == TTdata.FGLD)
+                    {
+                        <option value="@FGLD[i].DICID">@FGLD[i].DICNAME</option>
+                    }
+                    else
+                    {
+                        <option value="@FGLD[i].DICID">@FGLD[i].DICNAME</option>
+                    }
+
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">省份：</label>
+        </div>
+        <div class="weui-cell__bd">
+
+            <select id="SF" class="weui-select">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < SF.Length; i++)
+                {
+                    if (@SF[i].DICID == TTdata.SF)
+                    {
+                        <option value="@SF[i].DICID">@SF[i].DICNAME</option>
+                    }
+                    else
+                    {
+                        <option value="@SF[i].DICID">@SF[i].DICNAME</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">成本中心：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="CBZX" class="weui-select">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < CBZX.Length; i++)
+                {
+
+                    <option value="@CBZX[i].CBZXBH">@CBZX[i].CBZXBH @CBZX[i].CBZXMC</option>
+
+                }
+            </select>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">出差事由：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="CCSY" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">备注：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BEIZ" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">合计差旅费：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="HJ" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">报销金额大写：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="HJDX" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">报销金额小写：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="HJXX" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">支票预支：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ZPYZ" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">现金预支：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="XJYZ" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">补领金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BLJE" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">归还金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="GHJE" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+
+<div class="weui-cells weui-cells_form" id="001" hidden>
+
+
+
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">出发日期：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BEGINDATE" class="weui-input" type="date" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">到达日期：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ENDDATE" class="weui-input" type="date" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">出发地点：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BEGINADDRESS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">到达地点：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ENDADDRESS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label" style="text-align: right;">交通费</label></div>
+
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">机票金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="JT_PLANE" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">火车票金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="JT_TRAIN" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客车票金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="JT_BUS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">单据张数：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="JT_BILL" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label" style="text-align: right;">住宿费</label></div>
+
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">天：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ZS_DAYS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ZS_JE" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">是否专用发票：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="ZS_SFZYFP" class="weui-select">
+                <option value="1">是</option>
+                <option value="0" selected="selected">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">专票不含税金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ZS_FPBHSJE" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">单据张数：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ZS_BILL" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label" style="text-align: right;">差旅补贴</label></div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">天：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BT_DAYS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">标准：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BT_BZ" class="weui-input" type="text" placeholder="" value="@ViewBag.number" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="BT_JE" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label" style="text-align: right;">其他费用</label></div>
+    </div>
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">项目：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="QT_ITEM" class="weui-select">
+                <option value="0" selected>请选择</option>
+                @for (int i = 0; i < COSTITEMID.Length; i++)
+                {
+                    if (@COSTITEMID[i].BEIZ != "固定")
+                    {
+                        <option value="@COSTITEMID[i].COSTITEMID">@COSTITEMID[i].COSTITEMMC</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_JE" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">是否专用发票：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="QT_SFZYFP" class="weui-select">
+                <option value="1">是</option>
+                <option value="0" selected="selected">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">专票不含税金额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_FPBHSJE" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">单据张数：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_BILL" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">出差前行驶里程数：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_CCQLC" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">出差回来后行驶里程数：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_CCHLC" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">出差期间行驶里程数：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_CCQJLC" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">酒店（或宾馆等）名称：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_JDMC" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">酒店地址：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_JDDZ" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">酒店联系方式：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_JDLXFS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">酒店联系人：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_JDLXR" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">酒店（或宾馆等）内使用电池品牌：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QT_PP" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<div id="div3" class="weui-cells weui-cells_form" style="margin-top:0;" hidden>
+    <div id="div_IMGresult">
+    </div>
+    <button class="weui-btn weui-btn_primary" id="btn_upload_img_camera" style="width:48%;display: initial;margin: 0 0;">拍照</button>
+    <button class="weui-btn weui-btn_primary" id="btn_upload_img_album" style="width:48%;display: initial;margin: 0 0;">相册</button>
+
+</div>
+
+
+
+
+
+<div id="div_result" style="margin:0 10px">
+</div>
+
+
+
+
+
+
+
+<input id="div_clfttid" value="@TTdata.CLFTTID" hidden />
+
+<input id="staffid_1" value="@staffid" hidden />
+<input id="state" value="@state" hidden />
+<input id="appid" value="@appid" hidden />
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Update_Travel")
+}
+
+
+
+
+
+

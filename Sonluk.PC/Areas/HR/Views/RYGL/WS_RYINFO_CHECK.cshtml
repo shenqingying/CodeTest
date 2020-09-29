@@ -1,0 +1,370 @@
+﻿@{
+    ViewBag.Title = "员工基本信息";
+    Layout = "~/Views/Shared/_Layout_RYXX.cshtml";
+}
+@using Sonluk.PC.Areas.HR.Models;
+@model Sonluk.PC.Areas.HR.Models.MODEL_RYINFO_PRINTF
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<div style="position:fixed;top:0;height:270px;width:100%;padding-left:10px">
+    <div class="layui-form">
+        <div class="layui-input-inline">
+            <fieldset class="layui-elem-field">
+                <div class="layui-upload">
+                    <div class="layui-upload-list" style="margin:0px">
+                        <img id="demo1" style="width:3.5cm;height:4.9cm">
+                    </div>
+                    <button type="button" class="layui-btn" id="test1" style="width:3.5cm;">上传图片</button>
+                    <a id="pic_scr" hidden>@Model.HR_RY_RYINFO_LIST.IMAGEURL</a>
+                </div>
+            </fieldset>
+        </div>
+        <div class="layui-input-inline">
+            <div class="layui-form-item" hidden>
+                <label class="layui-form-label" style="width: 100px;">RYID：</label>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label" id="text_RYID" style="text-align:left;font-size:x-large;">@Model.HR_RY_RYINFO_LIST.RYID</label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">姓名：</label>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label" id="text_name" style="text-align: left; font-size: x-large; width: 200px">@Model.HR_RY_RYINFO_LIST.YGNAME (@Model.HR_RY_RYINFO_LIST.GH)</label>
+                </div>
+            </div>
+            <fieldset class="layui-elem-field layui-field-title">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">部门：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_bm" style="text-align: left;">@Model.HR_RY_RYINFO_LIST.DEPTNAME</label>
+                    </div>
+                    <label class="layui-form-label" style="width: 100px;">归属部门：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_gsbm" style="text-align: left;">@Model.HR_RY_RYINFO_LIST.GSBMNAME</label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    @*<label class="layui-form-label" style="width: 100px;">在职状态：</label>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label" id="text_zzzt" style="text-align: left;">@Model.HR_RY_RYINFO_LIST.ZZZTNAME</label>
+                        </div>*@
+                    @if (Model.HR_RY_RYINFO_LIST.ZZZTNAME == "离职" && Model.LZYY != "")
+                    {
+                        <label class="layui-form-label" style="width: 100px;">在职状态：</label>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label" id="text_zzzt" style="text-align: left;width: 150px;">@(Model.HR_RY_RYINFO_LIST.ZZZTNAME + "(" + Model.LZYY + ")")</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <label class="layui-form-label" style="width: 100px;">在职状态：</label>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label" id="text_zzzt" style="text-align: left;">@Model.HR_RY_RYINFO_LIST.ZZZTNAME</label>
+                        </div>
+                    }
+                    <label class="layui-form-label" style="width: 100px;">职称：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_zc" style="text-align: left; min-width: 100px">@Model.HR_RY_RYINFO_LIST.ZCNAME</label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">入职日期：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_rzrq" style="text-align: left;">@Model.HR_RY_RYINFO_LIST.RZDATE</label>
+                    </div>
+                    @if (Model.HR_RY_RYINFO_LIST.LZRQ != "")
+                    {
+                        <label class="layui-form-label" style="width: 100px;">离职日期：</label>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label" id="text_lzrq" style="text-align: left;">@Model.HR_RY_RYINFO_LIST.LZRQ</label>
+                        </div>
+                    }
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div class="layui-body_ryxx">
+    <fieldset class="layui-elem-field">
+        <div id="div_addinfo" class="layui-form">
+            <br />
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">工号：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_gh" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.GH" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">姓名：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_name" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.YGNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">证照类型：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_zzlb" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.ZZTYPENAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">证照号码：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_zzno" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.ZZNO" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">出生日期：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_birthday" name="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.BIRTHDAT" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">性别：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_sex" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.XB" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">证照有效期：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_sfzdate" name="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.SFZYXRQ" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">职称：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_ygxz" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.ZCNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">学历：</label>
+                <div class="layui-input-inline" style="width: 120px;">
+                    <input type="text" id="addinfo_xxfs" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.STUDEFSNAME" readonly="readonly">
+                </div>
+                <div class="layui-input-inline" style="width:120px">
+                    <input type="text" id="addinfo_xl" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.EDUCACTIONNAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">专业：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_zy" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.ZY" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">员工类别：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_lb" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.YGTYPENAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">在职状态：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_zztype" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.ZZZTNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">入职日期：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" name="date" id="in_DJRQ" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.RZDATE" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">工龄起算日：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" name="date" id="in_GLQSR" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.GLQSR" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">公司：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_gs" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.GSNAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">归属部门：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_gsbm" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.GSBMNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">部门：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_bm" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.DEPTNAME" readonly="readonly">
+                </div>
+
+                <label class="layui-form-label" style="width: 100px;">职务级别：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_zwlevel" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.ZWLEVELNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">当前职务：</label>
+                <div class="layui-input-inline" style="width: 640px;">
+                    <input type="text" id="addinfo_dqzw" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.DUTYNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">旧工号：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_oldgh" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.GHOLD" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">毕业院校：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_byschool" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.EDUCACTIONSCHOOL" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">国籍（地区）：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_gj" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.GJNAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">民族：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_mz" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.MZNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">籍贯：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_jg" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.JG" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">联系电话：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_lxdh" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.PHONENUMBER" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">户籍地址：</label>
+                <div class="layui-input-inline" style="width:640px">
+                    <input type="text" id="addinfo_hjdz" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.HJADDRESS" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">联系地址：</label>
+                <div class="layui-input-inline" style="width:640px">
+                    <input type="text" id="addinfo_lxdz" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.JZADDRESS" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">婚姻状况：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_hyzk" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.HYZKNAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">政治面貌：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_zzmm" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.ZZMMNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">班制：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_bzinfo" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.BZNAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">当前岗位：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_dqgw" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.JOBSNAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">短号：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_phoneshort" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.PHONESHORT" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">户籍类型：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_HJTYPE" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.HJTYPENAME" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">办公地点：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_OFFICEPLACE" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.OFFICEPLACENAME" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 130px;">是否存在以下情形：</label>
+                <div class="layui-input-block">
+                    @if (Model.HR_RY_RYINFO_LIST.ISCJ == 1)
+                    {
+                        <input type="checkbox" name="like[cj]" title="残疾" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="like[cj]" title="残疾">
+                    }
+                    @if (Model.HR_RY_RYINFO_LIST.ISLS == 1)
+                    {
+                        <input type="checkbox" name="like[ls]" title="烈属" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="like[ls]" title="烈属">
+                    }
+                    @if (Model.HR_RY_RYINFO_LIST.ISGL == 1)
+                    {
+                        <input type="checkbox" name="like[gl]" title="孤老" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="like[gl]" title="孤老">
+                    }
+                    @if (Model.HR_RY_RYINFO_LIST.ISJZZ == 1)
+                    {
+                        <input type="checkbox" name="like[jzz]" title="居住证" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="like[jzz]" title="居住证">
+                    }
+                    @if (Model.HR_RY_RYINFO_LIST.ISHY == 1)
+                    {
+                        <input type="checkbox" name="like[hyz]" title="婚育证" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="like[hyz]" title="婚育证">
+                    }
+                    @if (Model.HR_RY_RYINFO_LIST.ISECRZ == 1)
+                    {
+                        <input type="checkbox" name="like[ecrz]" title="二次入职" checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="like[ecrz]" title="二次入职">
+                    }
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">残疾证号：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_cj" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.CJNO" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">烈属证号：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_ls" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.LSNO" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">居住证有效期：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_jzz" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.JZZYYQ" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">婚育证编号：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_hyz" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.HYNO" readonly="readonly">
+                </div>
+                <label class="layui-form-label" style="width: 100px;">有效日期：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <input type="text" id="addinfo_hyyxrq" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.HYYYQ" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">备注：</label>
+                <div class="layui-input-inline" style="width: 640px;">
+                    <input type="text" id="addinfo_bz" autocomplete="off" class="layui-input" value="@Model.HR_RY_RYINFO_LIST.REMARK" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <br />
+        @*<div class="layui-form-item">
+                <div style="width: 650px; text-align: right">
+                    <button class="layui-btn" id="btn_save" style="width:100px">保存</button>
+                    <button class="layui-btn" id="btn_cancel" style="width:100px">取消</button>
+                </div>
+            </div>*@
+    </fieldset>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/RYGL/WS_RYINFO_CHECK")
+}

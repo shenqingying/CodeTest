@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "经销商单品报表";
+    
+
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>经销商单品报表</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;">客户SAP编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_sapsn" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;">物料编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_matnr" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;">归属年份：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_htyear" type="text" autocomplete="off" class="layui-input" readonly>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/JXS_Report")
+}

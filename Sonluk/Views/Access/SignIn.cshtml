@@ -1,0 +1,62 @@
+﻿@using System.Configuration;
+@{
+    Layout = null;
+    string name = "";
+    string errorMessage = "";
+    if (Session["ErrorMessage"] != null)
+    {
+        errorMessage = (string)Session["ErrorMessage"];
+        Session["ErrorMessage"] = null;
+    }
+    string errorMessageDetails = "";
+    if (Session["ErrorMessageDetails"] != null)
+    {
+        errorMessageDetails = (string)Session["ErrorMessageDetails"];
+        Session["ErrorMessageDetails"] = null;
+    }
+    HttpCookie cookie = Request.Cookies.Get("AccountName");
+    if (cookie != null)
+    {
+        name = cookie.Value;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/sonluk.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>双鹿电池</title>
+    @Styles.Render("~/Content/sonluk-ui/sign-in")
+</head>
+<body>
+    <div class="sign-in-background">
+        <div class="sign-in-page">
+            <form action="@Url.Action("Verify", "Access")" method="post" id="sign-in-form">
+                <div class="sign-in-page-content">
+                    <img src="@Url.Content("~/Content/sonluk-ui/images/logo-sign-in.png")" alt="" />
+                    <div class="sign-in-title-name">用户名</div>
+                    <input type="text" class="sign-in-input" id="name" maxlength="32" name="name" value="@name" />
+                    <div class="sign-in-title-password">密　码</div>
+                    <input type="password" class="sign-in-input" id="password" maxlength="32" name="password" />
+                    <div class="sign-in-error-message">@errorMessage</div>
+                    <div class="sign-in-submit">登　录</div>
+                    <div class="sign-in-info">@ViewBag.Message</div>
+                </div>
+            </form>
+
+        </div>
+        
+    </div>
+    <div class="sign-in-footer">
+        <div style="text-align: center;position:absolute;z-index:9999;padding-top:160px;font-size:24px;bottom:0;left:37%;margin-bottom:15px">
+            中银（宁波）电池有限公司 版权所有&nbsp;
+            <a href="http://www.beian.miit.gov.cn">浙ICP备13023860号-3</a>
+
+        </div>
+     @*   <div class="sign-in-footer-body">@ViewBag.UserVersion  中银（宁波）电池有限公司</div>*@
+    </div>
+    <div class="sign-in-error-message-details">@errorMessageDetails</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/sonluk-ui/sign-in")
+</body>
+</html>

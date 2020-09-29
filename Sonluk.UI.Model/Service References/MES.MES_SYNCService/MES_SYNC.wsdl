@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="MES_SYNC_GZZX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SYNC_GZZXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_SYNC_GZZXResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MES_PFDH_SYNC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_PFDH_SYNCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MES_PFDH_SYNCResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_WLGROUP_SYNC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_WLGROUP_SYNCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_WLGROUP_SYNCResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SYNC_WL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WLGROUP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="JLR" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SYNC_WLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_SYNC_WLResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SYNC_KCDD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SYNC_KCDDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_SYNC_KCDDResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SYNC_ALL">
+        <s:complexType />
+      </s:element>
+      <s:element name="MES_SYNC_ALLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_SYNC_ALLResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_PFDH_XFPC_SYNC">
+        <s:complexType />
+      </s:element>
+      <s:element name="MES_PFDH_XFPC_SYNCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_PFDH_XFPC_SYNCResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SY_TPM_SYNC_AUTO">
+        <s:complexType />
+      </s:element>
+      <s:element name="MES_SY_TPM_SYNC_AUTOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_SY_TPM_SYNC_AUTOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SY_TPM_SYNC_AUTO_TIME">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_DATEST" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_DATEED" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_SY_TPM_SYNC_AUTO_TIMEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_SY_TPM_SYNC_AUTO_TIMEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_PD_GD_SYNC_AUTO">
+        <s:complexType />
+      </s:element>
+      <s:element name="MES_PD_GD_SYNC_AUTOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_PD_GD_SYNC_AUTOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_PD_GD_SYNC_AUTO_TIME">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LOW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HIGH" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_PD_GD_SYNC_AUTO_TIMEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MES_PD_GD_SYNC_AUTO_TIMEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="MES_SYNC_GZZXSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_GZZX" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_GZZXSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_GZZXResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_SYNCSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_PFDH_SYNC" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_SYNCSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_PFDH_SYNCResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_WLGROUP_SYNCSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_WLGROUP_SYNC" />
+  </wsdl:message>
+  <wsdl:message name="MES_WLGROUP_SYNCSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_WLGROUP_SYNCResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_WLSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_WL" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_WLSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_WLResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_KCDDSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_KCDD" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_KCDDSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_KCDDResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_ALLSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_ALL" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_ALLSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_SYNC_ALLResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_XFPC_SYNCSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_PFDH_XFPC_SYNC" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_XFPC_SYNCSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_PFDH_XFPC_SYNCResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTOSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_SY_TPM_SYNC_AUTO" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTOSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_SY_TPM_SYNC_AUTOResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTO_TIMESoapIn">
+    <wsdl:part name="parameters" element="tns:MES_SY_TPM_SYNC_AUTO_TIME" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTO_TIMESoapOut">
+    <wsdl:part name="parameters" element="tns:MES_SY_TPM_SYNC_AUTO_TIMEResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTOSoapIn">
+    <wsdl:part name="parameters" element="tns:MES_PD_GD_SYNC_AUTO" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTOSoapOut">
+    <wsdl:part name="parameters" element="tns:MES_PD_GD_SYNC_AUTOResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTO_TIMESoapIn">
+    <wsdl:part name="parameters" element="tns:MES_PD_GD_SYNC_AUTO_TIME" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTO_TIMESoapOut">
+    <wsdl:part name="parameters" element="tns:MES_PD_GD_SYNC_AUTO_TIMEResponse" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_GZZXHttpGetIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_GZZXHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_SYNCHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_SYNCHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="MES_WLGROUP_SYNCHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_WLGROUP_SYNCHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_WLHttpGetIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="WLGROUP" type="s:string" />
+    <wsdl:part name="WLH" type="s:string" />
+    <wsdl:part name="JLR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_WLHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_KCDDHttpGetIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_KCDDHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_ALLHttpGetIn" />
+  <wsdl:message name="MES_SYNC_ALLHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_XFPC_SYNCHttpGetIn" />
+  <wsdl:message name="MES_PFDH_XFPC_SYNCHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTOHttpGetIn" />
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTOHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTO_TIMEHttpGetIn">
+    <wsdl:part name="IV_DATEST" type="s:string" />
+    <wsdl:part name="IV_DATEED" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTO_TIMEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTOHttpGetIn" />
+  <wsdl:message name="MES_PD_GD_SYNC_AUTOHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTO_TIMEHttpGetIn">
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTO_TIMEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_GZZXHttpPostIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_GZZXHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_SYNCHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_SYNCHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="MES_WLGROUP_SYNCHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_WLGROUP_SYNCHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_WLHttpPostIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="WLGROUP" type="s:string" />
+    <wsdl:part name="WLH" type="s:string" />
+    <wsdl:part name="JLR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_WLHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_KCDDHttpPostIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_KCDDHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SYNC_ALLHttpPostIn" />
+  <wsdl:message name="MES_SYNC_ALLHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PFDH_XFPC_SYNCHttpPostIn" />
+  <wsdl:message name="MES_PFDH_XFPC_SYNCHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTOHttpPostIn" />
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTOHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTO_TIMEHttpPostIn">
+    <wsdl:part name="IV_DATEST" type="s:string" />
+    <wsdl:part name="IV_DATEED" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_SY_TPM_SYNC_AUTO_TIMEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTOHttpPostIn" />
+  <wsdl:message name="MES_PD_GD_SYNC_AUTOHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTO_TIMEHttpPostIn">
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MES_PD_GD_SYNC_AUTO_TIMEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="MES_SYNCSoap">
+    <wsdl:operation name="MES_SYNC_GZZX">
+      <wsdl:input message="tns:MES_SYNC_GZZXSoapIn" />
+      <wsdl:output message="tns:MES_SYNC_GZZXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_SYNC">
+      <wsdl:input message="tns:MES_PFDH_SYNCSoapIn" />
+      <wsdl:output message="tns:MES_PFDH_SYNCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_WLGROUP_SYNC">
+      <wsdl:input message="tns:MES_WLGROUP_SYNCSoapIn" />
+      <wsdl:output message="tns:MES_WLGROUP_SYNCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_WL">
+      <wsdl:input message="tns:MES_SYNC_WLSoapIn" />
+      <wsdl:output message="tns:MES_SYNC_WLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_KCDD">
+      <wsdl:input message="tns:MES_SYNC_KCDDSoapIn" />
+      <wsdl:output message="tns:MES_SYNC_KCDDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_ALL">
+      <wsdl:input message="tns:MES_SYNC_ALLSoapIn" />
+      <wsdl:output message="tns:MES_SYNC_ALLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_XFPC_SYNC">
+      <wsdl:input message="tns:MES_PFDH_XFPC_SYNCSoapIn" />
+      <wsdl:output message="tns:MES_PFDH_XFPC_SYNCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO">
+      <wsdl:input message="tns:MES_SY_TPM_SYNC_AUTOSoapIn" />
+      <wsdl:output message="tns:MES_SY_TPM_SYNC_AUTOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO_TIME">
+      <wsdl:input message="tns:MES_SY_TPM_SYNC_AUTO_TIMESoapIn" />
+      <wsdl:output message="tns:MES_SY_TPM_SYNC_AUTO_TIMESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO">
+      <wsdl:input message="tns:MES_PD_GD_SYNC_AUTOSoapIn" />
+      <wsdl:output message="tns:MES_PD_GD_SYNC_AUTOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO_TIME">
+      <wsdl:input message="tns:MES_PD_GD_SYNC_AUTO_TIMESoapIn" />
+      <wsdl:output message="tns:MES_PD_GD_SYNC_AUTO_TIMESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_SYNCHttpGet">
+    <wsdl:operation name="MES_SYNC_GZZX">
+      <wsdl:input message="tns:MES_SYNC_GZZXHttpGetIn" />
+      <wsdl:output message="tns:MES_SYNC_GZZXHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_SYNC">
+      <wsdl:input message="tns:MES_PFDH_SYNCHttpGetIn" />
+      <wsdl:output message="tns:MES_PFDH_SYNCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_WLGROUP_SYNC">
+      <wsdl:input message="tns:MES_WLGROUP_SYNCHttpGetIn" />
+      <wsdl:output message="tns:MES_WLGROUP_SYNCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_WL">
+      <wsdl:input message="tns:MES_SYNC_WLHttpGetIn" />
+      <wsdl:output message="tns:MES_SYNC_WLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_KCDD">
+      <wsdl:input message="tns:MES_SYNC_KCDDHttpGetIn" />
+      <wsdl:output message="tns:MES_SYNC_KCDDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_ALL">
+      <wsdl:input message="tns:MES_SYNC_ALLHttpGetIn" />
+      <wsdl:output message="tns:MES_SYNC_ALLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_XFPC_SYNC">
+      <wsdl:input message="tns:MES_PFDH_XFPC_SYNCHttpGetIn" />
+      <wsdl:output message="tns:MES_PFDH_XFPC_SYNCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO">
+      <wsdl:input message="tns:MES_SY_TPM_SYNC_AUTOHttpGetIn" />
+      <wsdl:output message="tns:MES_SY_TPM_SYNC_AUTOHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO_TIME">
+      <wsdl:input message="tns:MES_SY_TPM_SYNC_AUTO_TIMEHttpGetIn" />
+      <wsdl:output message="tns:MES_SY_TPM_SYNC_AUTO_TIMEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO">
+      <wsdl:input message="tns:MES_PD_GD_SYNC_AUTOHttpGetIn" />
+      <wsdl:output message="tns:MES_PD_GD_SYNC_AUTOHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO_TIME">
+      <wsdl:input message="tns:MES_PD_GD_SYNC_AUTO_TIMEHttpGetIn" />
+      <wsdl:output message="tns:MES_PD_GD_SYNC_AUTO_TIMEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_SYNCHttpPost">
+    <wsdl:operation name="MES_SYNC_GZZX">
+      <wsdl:input message="tns:MES_SYNC_GZZXHttpPostIn" />
+      <wsdl:output message="tns:MES_SYNC_GZZXHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_SYNC">
+      <wsdl:input message="tns:MES_PFDH_SYNCHttpPostIn" />
+      <wsdl:output message="tns:MES_PFDH_SYNCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_WLGROUP_SYNC">
+      <wsdl:input message="tns:MES_WLGROUP_SYNCHttpPostIn" />
+      <wsdl:output message="tns:MES_WLGROUP_SYNCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_WL">
+      <wsdl:input message="tns:MES_SYNC_WLHttpPostIn" />
+      <wsdl:output message="tns:MES_SYNC_WLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_KCDD">
+      <wsdl:input message="tns:MES_SYNC_KCDDHttpPostIn" />
+      <wsdl:output message="tns:MES_SYNC_KCDDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_ALL">
+      <wsdl:input message="tns:MES_SYNC_ALLHttpPostIn" />
+      <wsdl:output message="tns:MES_SYNC_ALLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_XFPC_SYNC">
+      <wsdl:input message="tns:MES_PFDH_XFPC_SYNCHttpPostIn" />
+      <wsdl:output message="tns:MES_PFDH_XFPC_SYNCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO">
+      <wsdl:input message="tns:MES_SY_TPM_SYNC_AUTOHttpPostIn" />
+      <wsdl:output message="tns:MES_SY_TPM_SYNC_AUTOHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO_TIME">
+      <wsdl:input message="tns:MES_SY_TPM_SYNC_AUTO_TIMEHttpPostIn" />
+      <wsdl:output message="tns:MES_SY_TPM_SYNC_AUTO_TIMEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO">
+      <wsdl:input message="tns:MES_PD_GD_SYNC_AUTOHttpPostIn" />
+      <wsdl:output message="tns:MES_PD_GD_SYNC_AUTOHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO_TIME">
+      <wsdl:input message="tns:MES_PD_GD_SYNC_AUTO_TIMEHttpPostIn" />
+      <wsdl:output message="tns:MES_PD_GD_SYNC_AUTO_TIMEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MES_SYNCSoap" type="tns:MES_SYNCSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MES_SYNC_GZZX">
+      <soap:operation soapAction="http://tempuri.org/MES_SYNC_GZZX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_SYNC">
+      <soap:operation soapAction="http://tempuri.org/MES_PFDH_SYNC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_WLGROUP_SYNC">
+      <soap:operation soapAction="http://tempuri.org/MES_WLGROUP_SYNC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_WL">
+      <soap:operation soapAction="http://tempuri.org/MES_SYNC_WL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_KCDD">
+      <soap:operation soapAction="http://tempuri.org/MES_SYNC_KCDD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_ALL">
+      <soap:operation soapAction="http://tempuri.org/MES_SYNC_ALL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_XFPC_SYNC">
+      <soap:operation soapAction="http://tempuri.org/MES_PFDH_XFPC_SYNC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO">
+      <soap:operation soapAction="http://tempuri.org/MES_SY_TPM_SYNC_AUTO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO_TIME">
+      <soap:operation soapAction="http://tempuri.org/MES_SY_TPM_SYNC_AUTO_TIME" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO">
+      <soap:operation soapAction="http://tempuri.org/MES_PD_GD_SYNC_AUTO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO_TIME">
+      <soap:operation soapAction="http://tempuri.org/MES_PD_GD_SYNC_AUTO_TIME" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_SYNCSoap12" type="tns:MES_SYNCSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MES_SYNC_GZZX">
+      <soap12:operation soapAction="http://tempuri.org/MES_SYNC_GZZX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_SYNC">
+      <soap12:operation soapAction="http://tempuri.org/MES_PFDH_SYNC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_WLGROUP_SYNC">
+      <soap12:operation soapAction="http://tempuri.org/MES_WLGROUP_SYNC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_WL">
+      <soap12:operation soapAction="http://tempuri.org/MES_SYNC_WL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_KCDD">
+      <soap12:operation soapAction="http://tempuri.org/MES_SYNC_KCDD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_ALL">
+      <soap12:operation soapAction="http://tempuri.org/MES_SYNC_ALL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_XFPC_SYNC">
+      <soap12:operation soapAction="http://tempuri.org/MES_PFDH_XFPC_SYNC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO">
+      <soap12:operation soapAction="http://tempuri.org/MES_SY_TPM_SYNC_AUTO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO_TIME">
+      <soap12:operation soapAction="http://tempuri.org/MES_SY_TPM_SYNC_AUTO_TIME" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO">
+      <soap12:operation soapAction="http://tempuri.org/MES_PD_GD_SYNC_AUTO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO_TIME">
+      <soap12:operation soapAction="http://tempuri.org/MES_PD_GD_SYNC_AUTO_TIME" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_SYNCHttpGet" type="tns:MES_SYNCHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="MES_SYNC_GZZX">
+      <http:operation location="/MES_SYNC_GZZX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_SYNC">
+      <http:operation location="/MES_PFDH_SYNC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_WLGROUP_SYNC">
+      <http:operation location="/MES_WLGROUP_SYNC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_WL">
+      <http:operation location="/MES_SYNC_WL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_KCDD">
+      <http:operation location="/MES_SYNC_KCDD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_ALL">
+      <http:operation location="/MES_SYNC_ALL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_XFPC_SYNC">
+      <http:operation location="/MES_PFDH_XFPC_SYNC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO">
+      <http:operation location="/MES_SY_TPM_SYNC_AUTO" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO_TIME">
+      <http:operation location="/MES_SY_TPM_SYNC_AUTO_TIME" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO">
+      <http:operation location="/MES_PD_GD_SYNC_AUTO" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO_TIME">
+      <http:operation location="/MES_PD_GD_SYNC_AUTO_TIME" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_SYNCHttpPost" type="tns:MES_SYNCHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="MES_SYNC_GZZX">
+      <http:operation location="/MES_SYNC_GZZX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_SYNC">
+      <http:operation location="/MES_PFDH_SYNC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_WLGROUP_SYNC">
+      <http:operation location="/MES_WLGROUP_SYNC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_WL">
+      <http:operation location="/MES_SYNC_WL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_KCDD">
+      <http:operation location="/MES_SYNC_KCDD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SYNC_ALL">
+      <http:operation location="/MES_SYNC_ALL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PFDH_XFPC_SYNC">
+      <http:operation location="/MES_PFDH_XFPC_SYNC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO">
+      <http:operation location="/MES_SY_TPM_SYNC_AUTO" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_SY_TPM_SYNC_AUTO_TIME">
+      <http:operation location="/MES_SY_TPM_SYNC_AUTO_TIME" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO">
+      <http:operation location="/MES_PD_GD_SYNC_AUTO" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MES_PD_GD_SYNC_AUTO_TIME">
+      <http:operation location="/MES_PD_GD_SYNC_AUTO_TIME" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MES_SYNC">
+    <wsdl:port name="MES_SYNCSoap" binding="tns:MES_SYNCSoap">
+      <soap:address location="http://192.168.0.223/API/MES/MES_SYNC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_SYNCSoap12" binding="tns:MES_SYNCSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/MES_SYNC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_SYNCHttpGet" binding="tns:MES_SYNCHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/MES_SYNC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_SYNCHttpPost" binding="tns:MES_SYNCHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/MES_SYNC.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

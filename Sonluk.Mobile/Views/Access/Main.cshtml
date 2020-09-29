@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "主页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Sonluk.UI.Model.MES.RIGHT_ROLEService.MES_RIGHT_ROLE
+
+<div class="layui-body">
+    <div class="layui-row" id="LAY_demo1">
+        @if (Model.CRM_HG_RIGHT != null)
+        {
+            for (int i = 0; i < Model.CRM_HG_RIGHT.Length; i++)
+            {
+                string image = Model.CRM_HG_RIGHT[i].IMAGELJ + ".png";
+                string[] child = Model.CRM_HG_RIGHT[i].RIGHTADD.Split(',');
+                <div class="layui-col-xs6 layui-col-sm3 layui-col-md1">
+                    <div class="grid-demo grid-demo-bg1" align="center">
+
+                        <a href="@Url.Action(child[0], child[1], new { area = child[2] })">
+                            <img class="layui-nav-img" src="~/Image/@image" />
+                        </a>
+                        <br />
+                        <label class="layui-form-label-img">@Model.CRM_HG_RIGHT[i].RIGHTNAME</label>
+                    </div>
+                </div>
+            }
+        }
+        @if (Model.CRM_HG_RIGHTGROUP != null)
+        {
+            for (int i = 0; i < Model.CRM_HG_RIGHTGROUP.Length; i++)
+            {
+                if (Model.CRM_HG_RIGHTGROUP[i].CRM_HG_RIGHT != null)
+                {
+                    for (int j = 0; j < Model.CRM_HG_RIGHTGROUP[i].CRM_HG_RIGHT.Length; j++)
+                    {
+                        string image = Model.CRM_HG_RIGHTGROUP[i].CRM_HG_RIGHT[j].IMAGELJ + ".png";
+                        string[] child = Model.CRM_HG_RIGHTGROUP[i].CRM_HG_RIGHT[j].RIGHTADD.Split(',');
+                        <div class="layui-col-xs6 layui-col-sm3 layui-col-md1">
+                            <div class="grid-demo grid-demo-bg1" align="center">
+
+                                <a href="@Url.Action(child[0], child[1], new { area = child[2] })">
+                                    <img class="layui-nav-img" src="~/Image/@image" />
+                                </a>
+                                <br />
+                                <label class="layui-form-label-img">@Model.CRM_HG_RIGHTGROUP[i].CRM_HG_RIGHT[j].RIGHTNAME</label>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }
+    </div>
+</div>
+<div class="layui-footer" align="right">
+</div>

@@ -1,0 +1,1211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_HG_ROLE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_HG_ROLE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLENAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLEMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RIGHTNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_HG_ROLE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfCRM_HG_ROLE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_HG_ROLE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_HG_ROLE" nillable="true" type="tns:CRM_HG_ROLE" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_HG_ROLE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByParamResult" type="tns:ArrayOfCRM_HG_ROLE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create_STAFFROLE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create_STAFFROLEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Create_STAFFROLEResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_STAFFROLEbyROLEID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_STAFFROLEbyROLEIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_STAFFROLEbyROLEIDResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Delete_STAFFROLE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_STAFFROLEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Delete_STAFFROLEResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create_ROLERIGHT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RIGHTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create_ROLERIGHTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Create_ROLERIGHTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_ROLERIGHTByRIGHTID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RIGHTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_ROLERIGHTByRIGHTIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_ROLERIGHTByRIGHTIDResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_ROLERIGHT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RIGHTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_ROLERIGHTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Delete_ROLERIGHTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_STAFFROLEbySTAFFID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_STAFFROLEbySTAFFIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_STAFFROLEbySTAFFIDResult" type="tns:ArrayOfCRM_HG_STAFFROLEList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_HG_STAFFROLEList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_HG_STAFFROLEList" nillable="true" type="tns:CRM_HG_STAFFROLEList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_HG_STAFFROLEList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLEIDDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Delete_STAFFROLEByStaffid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_STAFFROLEByStaffidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Delete_STAFFROLEByStaffidResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_ROLERIGHTByROLEID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_ROLERIGHTByROLEIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_ROLERIGHTByROLEIDResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_HG_ROLE" nillable="true" type="tns:ArrayOfCRM_HG_ROLE" />
+      <s:element name="ArrayOfArrayOfString" nillable="true" type="tns:ArrayOfArrayOfString" />
+      <s:element name="ArrayOfCRM_HG_STAFFROLEList" nillable="true" type="tns:ArrayOfCRM_HG_STAFFROLEList" />
+      <s:element name="ArrayOfInt" nillable="true" type="tns:ArrayOfInt" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="Create_STAFFROLESoapIn">
+    <wsdl:part name="parameters" element="tns:Create_STAFFROLE" />
+  </wsdl:message>
+  <wsdl:message name="Create_STAFFROLESoapOut">
+    <wsdl:part name="parameters" element="tns:Create_STAFFROLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbyROLEIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_STAFFROLEbyROLEID" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbyROLEIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_STAFFROLEbyROLEIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLESoapIn">
+    <wsdl:part name="parameters" element="tns:Delete_STAFFROLE" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLESoapOut">
+    <wsdl:part name="parameters" element="tns:Delete_STAFFROLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="Create_ROLERIGHTSoapIn">
+    <wsdl:part name="parameters" element="tns:Create_ROLERIGHT" />
+  </wsdl:message>
+  <wsdl:message name="Create_ROLERIGHTSoapOut">
+    <wsdl:part name="parameters" element="tns:Create_ROLERIGHTResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByRIGHTIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_ROLERIGHTByRIGHTID" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByRIGHTIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_ROLERIGHTByRIGHTIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_ROLERIGHTSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete_ROLERIGHT" />
+  </wsdl:message>
+  <wsdl:message name="Delete_ROLERIGHTSoapOut">
+    <wsdl:part name="parameters" element="tns:Delete_ROLERIGHTResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbySTAFFIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_STAFFROLEbySTAFFID" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbySTAFFIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_STAFFROLEbySTAFFIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEByStaffidSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete_STAFFROLEByStaffid" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEByStaffidSoapOut">
+    <wsdl:part name="parameters" element="tns:Delete_STAFFROLEByStaffidResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByROLEIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_ROLERIGHTByROLEID" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByROLEIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_ROLERIGHTByROLEIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_HG_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="Create_STAFFROLEHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Create_STAFFROLEHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbyROLEIDHttpGetIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbyROLEIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Create_ROLERIGHTHttpGetIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="RIGHTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Create_ROLERIGHTHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByRIGHTIDHttpGetIn">
+    <wsdl:part name="RIGHTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByRIGHTIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="Delete_ROLERIGHTHttpGetIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="RIGHTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_ROLERIGHTHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbySTAFFIDHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbySTAFFIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_HG_STAFFROLEList" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEByStaffidHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEByStaffidHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByROLEIDHttpGetIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByROLEIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfInt" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_HG_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="Create_STAFFROLEHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Create_STAFFROLEHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbyROLEIDHttpPostIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbyROLEIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Create_ROLERIGHTHttpPostIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="RIGHTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Create_ROLERIGHTHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByRIGHTIDHttpPostIn">
+    <wsdl:part name="RIGHTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByRIGHTIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="Delete_ROLERIGHTHttpPostIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="RIGHTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_ROLERIGHTHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbySTAFFIDHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_STAFFROLEbySTAFFIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_HG_STAFFROLEList" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEByStaffidHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_STAFFROLEByStaffidHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByROLEIDHttpPostIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_ROLERIGHTByROLEIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfInt" />
+  </wsdl:message>
+  <wsdl:portType name="HG_ROLESoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <wsdl:input message="tns:ReadByParamSoapIn" />
+      <wsdl:output message="tns:ReadByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_STAFFROLE">
+      <wsdl:input message="tns:Create_STAFFROLESoapIn" />
+      <wsdl:output message="tns:Create_STAFFROLESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbyROLEID">
+      <wsdl:input message="tns:Read_STAFFROLEbyROLEIDSoapIn" />
+      <wsdl:output message="tns:Read_STAFFROLEbyROLEIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLE">
+      <wsdl:input message="tns:Delete_STAFFROLESoapIn" />
+      <wsdl:output message="tns:Delete_STAFFROLESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_ROLERIGHT">
+      <wsdl:input message="tns:Create_ROLERIGHTSoapIn" />
+      <wsdl:output message="tns:Create_ROLERIGHTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByRIGHTID">
+      <wsdl:input message="tns:Read_ROLERIGHTByRIGHTIDSoapIn" />
+      <wsdl:output message="tns:Read_ROLERIGHTByRIGHTIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_ROLERIGHT">
+      <wsdl:input message="tns:Delete_ROLERIGHTSoapIn" />
+      <wsdl:output message="tns:Delete_ROLERIGHTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbySTAFFID">
+      <wsdl:input message="tns:Read_STAFFROLEbySTAFFIDSoapIn" />
+      <wsdl:output message="tns:Read_STAFFROLEbySTAFFIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLEByStaffid">
+      <wsdl:input message="tns:Delete_STAFFROLEByStaffidSoapIn" />
+      <wsdl:output message="tns:Delete_STAFFROLEByStaffidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByROLEID">
+      <wsdl:input message="tns:Read_ROLERIGHTByROLEIDSoapIn" />
+      <wsdl:output message="tns:Read_ROLERIGHTByROLEIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="HG_ROLEHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_STAFFROLE">
+      <wsdl:input message="tns:Create_STAFFROLEHttpGetIn" />
+      <wsdl:output message="tns:Create_STAFFROLEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbyROLEID">
+      <wsdl:input message="tns:Read_STAFFROLEbyROLEIDHttpGetIn" />
+      <wsdl:output message="tns:Read_STAFFROLEbyROLEIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLE">
+      <wsdl:input message="tns:Delete_STAFFROLEHttpGetIn" />
+      <wsdl:output message="tns:Delete_STAFFROLEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_ROLERIGHT">
+      <wsdl:input message="tns:Create_ROLERIGHTHttpGetIn" />
+      <wsdl:output message="tns:Create_ROLERIGHTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByRIGHTID">
+      <wsdl:input message="tns:Read_ROLERIGHTByRIGHTIDHttpGetIn" />
+      <wsdl:output message="tns:Read_ROLERIGHTByRIGHTIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_ROLERIGHT">
+      <wsdl:input message="tns:Delete_ROLERIGHTHttpGetIn" />
+      <wsdl:output message="tns:Delete_ROLERIGHTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbySTAFFID">
+      <wsdl:input message="tns:Read_STAFFROLEbySTAFFIDHttpGetIn" />
+      <wsdl:output message="tns:Read_STAFFROLEbySTAFFIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLEByStaffid">
+      <wsdl:input message="tns:Delete_STAFFROLEByStaffidHttpGetIn" />
+      <wsdl:output message="tns:Delete_STAFFROLEByStaffidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByROLEID">
+      <wsdl:input message="tns:Read_ROLERIGHTByROLEIDHttpGetIn" />
+      <wsdl:output message="tns:Read_ROLERIGHTByROLEIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="HG_ROLEHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_STAFFROLE">
+      <wsdl:input message="tns:Create_STAFFROLEHttpPostIn" />
+      <wsdl:output message="tns:Create_STAFFROLEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbyROLEID">
+      <wsdl:input message="tns:Read_STAFFROLEbyROLEIDHttpPostIn" />
+      <wsdl:output message="tns:Read_STAFFROLEbyROLEIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLE">
+      <wsdl:input message="tns:Delete_STAFFROLEHttpPostIn" />
+      <wsdl:output message="tns:Delete_STAFFROLEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_ROLERIGHT">
+      <wsdl:input message="tns:Create_ROLERIGHTHttpPostIn" />
+      <wsdl:output message="tns:Create_ROLERIGHTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByRIGHTID">
+      <wsdl:input message="tns:Read_ROLERIGHTByRIGHTIDHttpPostIn" />
+      <wsdl:output message="tns:Read_ROLERIGHTByRIGHTIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_ROLERIGHT">
+      <wsdl:input message="tns:Delete_ROLERIGHTHttpPostIn" />
+      <wsdl:output message="tns:Delete_ROLERIGHTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbySTAFFID">
+      <wsdl:input message="tns:Read_STAFFROLEbySTAFFIDHttpPostIn" />
+      <wsdl:output message="tns:Read_STAFFROLEbySTAFFIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLEByStaffid">
+      <wsdl:input message="tns:Delete_STAFFROLEByStaffidHttpPostIn" />
+      <wsdl:output message="tns:Delete_STAFFROLEByStaffidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByROLEID">
+      <wsdl:input message="tns:Read_ROLERIGHTByROLEIDHttpPostIn" />
+      <wsdl:output message="tns:Read_ROLERIGHTByROLEIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HG_ROLESoap" type="tns:HG_ROLESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_STAFFROLE">
+      <soap:operation soapAction="http://tempuri.org/Create_STAFFROLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbyROLEID">
+      <soap:operation soapAction="http://tempuri.org/Read_STAFFROLEbyROLEID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLE">
+      <soap:operation soapAction="http://tempuri.org/Delete_STAFFROLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_ROLERIGHT">
+      <soap:operation soapAction="http://tempuri.org/Create_ROLERIGHT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByRIGHTID">
+      <soap:operation soapAction="http://tempuri.org/Read_ROLERIGHTByRIGHTID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_ROLERIGHT">
+      <soap:operation soapAction="http://tempuri.org/Delete_ROLERIGHT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbySTAFFID">
+      <soap:operation soapAction="http://tempuri.org/Read_STAFFROLEbySTAFFID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLEByStaffid">
+      <soap:operation soapAction="http://tempuri.org/Delete_STAFFROLEByStaffid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByROLEID">
+      <soap:operation soapAction="http://tempuri.org/Read_ROLERIGHTByROLEID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HG_ROLESoap12" type="tns:HG_ROLESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_STAFFROLE">
+      <soap12:operation soapAction="http://tempuri.org/Create_STAFFROLE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbyROLEID">
+      <soap12:operation soapAction="http://tempuri.org/Read_STAFFROLEbyROLEID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLE">
+      <soap12:operation soapAction="http://tempuri.org/Delete_STAFFROLE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_ROLERIGHT">
+      <soap12:operation soapAction="http://tempuri.org/Create_ROLERIGHT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByRIGHTID">
+      <soap12:operation soapAction="http://tempuri.org/Read_ROLERIGHTByRIGHTID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_ROLERIGHT">
+      <soap12:operation soapAction="http://tempuri.org/Delete_ROLERIGHT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbySTAFFID">
+      <soap12:operation soapAction="http://tempuri.org/Read_STAFFROLEbySTAFFID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLEByStaffid">
+      <soap12:operation soapAction="http://tempuri.org/Delete_STAFFROLEByStaffid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByROLEID">
+      <soap12:operation soapAction="http://tempuri.org/Read_ROLERIGHTByROLEID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HG_ROLEHttpGet" type="tns:HG_ROLEHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_STAFFROLE">
+      <http:operation location="/Create_STAFFROLE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbyROLEID">
+      <http:operation location="/Read_STAFFROLEbyROLEID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLE">
+      <http:operation location="/Delete_STAFFROLE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_ROLERIGHT">
+      <http:operation location="/Create_ROLERIGHT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByRIGHTID">
+      <http:operation location="/Read_ROLERIGHTByRIGHTID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_ROLERIGHT">
+      <http:operation location="/Delete_ROLERIGHT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbySTAFFID">
+      <http:operation location="/Read_STAFFROLEbySTAFFID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLEByStaffid">
+      <http:operation location="/Delete_STAFFROLEByStaffid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByROLEID">
+      <http:operation location="/Read_ROLERIGHTByROLEID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HG_ROLEHttpPost" type="tns:HG_ROLEHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_STAFFROLE">
+      <http:operation location="/Create_STAFFROLE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbyROLEID">
+      <http:operation location="/Read_STAFFROLEbyROLEID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLE">
+      <http:operation location="/Delete_STAFFROLE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_ROLERIGHT">
+      <http:operation location="/Create_ROLERIGHT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByRIGHTID">
+      <http:operation location="/Read_ROLERIGHTByRIGHTID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_ROLERIGHT">
+      <http:operation location="/Delete_ROLERIGHT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_STAFFROLEbySTAFFID">
+      <http:operation location="/Read_STAFFROLEbySTAFFID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_STAFFROLEByStaffid">
+      <http:operation location="/Delete_STAFFROLEByStaffid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_ROLERIGHTByROLEID">
+      <http:operation location="/Read_ROLERIGHTByROLEID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HG_ROLE">
+    <wsdl:port name="HG_ROLESoap" binding="tns:HG_ROLESoap">
+      <soap:address location="http://192.168.0.135/API/CRM/HG_ROLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HG_ROLESoap12" binding="tns:HG_ROLESoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/HG_ROLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HG_ROLEHttpGet" binding="tns:HG_ROLEHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/HG_ROLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HG_ROLEHttpPost" binding="tns:HG_ROLEHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/HG_ROLE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

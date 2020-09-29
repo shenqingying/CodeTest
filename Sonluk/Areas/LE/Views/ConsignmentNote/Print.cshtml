@@ -1,0 +1,17 @@
+﻿@using Sonluk.Entities.Print
+@model LayoutInfo
+@{
+    ViewBag.Title = "Print";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+@Styles.Render("~/Content/le/consignment-note-templet-edit")
+<input type="hidden" value="@ViewBag.Data" id="data"/>
+<div class="print-edit-area">
+    @foreach (ControlInfo textBox in Model.Controls)
+    {
+        <div class="move" style="@textBox.Style" name="@textBox.Value"></div>
+    }   
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/le/consignment-note-templet-edit")
+}

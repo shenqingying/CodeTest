@@ -1,0 +1,119 @@
+﻿@{
+    
+    ViewBag.Title = "标准加工负荷维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<style>
+    .layui-form-checkbox span {
+    padding: 0 10px;
+    height: 100%;
+    font-size: 18px;
+    border-radius: 2px 0 0 2px;
+    background-color: #d2d2d2;
+    color: #fff;
+    overflow: hidden;
+
+}
+   
+</style>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script src="~/Scripts/Echarts/echarts.min.js"></script>
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="lock" value="{{d.VLSCH}}" title="计算负荷" lay-filter="lockDemo" {{ d.FLAG == 'X' ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="switchTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="switch" value="{{d.VLSCH}}" lay-skin="switch" lay-text="分钟|天数" lay-filter="sexDemo" {{ d.UNIT != 'DAY' ? 'checked' : '' }}>
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>加工产能预警</a>
+    <a><cite>加工负荷</cite></a>
+</span>
+<div class="layui-form ">
+    <input type="hidden" value="@Url.Action("JGHFMODIFY", "PS")" id="PS_JGHFMOFIDY" />
+    <input type="hidden" value="@Url.Action("SelectFHDATA", "PS")" id="SelectFHDATA" />
+    <input type="hidden" value="@Url.Action("SYNCCNDATA", "PS")" id="SYNCCNDATA" />
+    <input type="hidden" value="@Url.Action("ZPSFUG_Q_GZCNREPORT", "PS")" id="ZPSFUG_Q_GZCNREPORT" />
+    
+    <div class="layui-form-item">
+        @*<button class="layui-btn" id="btn_jgfh">维护工序外协周期</button>*@
+        <button class="layui-btn" id="btn_selectjgfh">查询负荷</button>
+        <button class="layui-btn" id="btn_sync">同步统计数据</button>
+    </div>
+
+    <div class="layui-form-item">
+        @*<label class="layui-form-label" >查询类别：</label>*@
+        <div class="layui-input-inline layui-hide" >
+            <select id="in_fl" lay-filter="in_fl" lay-search xm-select="fl" >
+                @*<option value="0" selected="selected">请选择</option>*@
+                <option value="1" >日</option>
+                <option value="2">周</option>
+                <option value="3">月</option>
+            </select>
+        </div>
+        <div class="layui-inline day layui-hide" >
+            <label class="layui-form-label">选择日期：</label>
+            <div class="layui-input-inline" >
+                <input type="text" name="date" id="in_time_ks" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" >
+                <input type="text" name="date" id="in_time_js" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline">
+                <input  id ="status" type="checkbox" name="flag" lay-skin="primary" title="包含未完成作业" >
+                </div>
+                
+            </div>
+        <div class="layui-inline week layui-hide" >
+            <label class="layui-form-label">选择日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="in_time_week" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label">天数：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="in_ts" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')">
+            </div>
+        </div>
+        <div class="layui-inline month layui-hide" >
+            <label class="layui-form-label">选择月份：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="in_time_month_ks" lay-verify="date" placeholder="yyyy-MM" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="in_time_month_js" lay-verify="date" placeholder="yyyy-MM" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" >
+          
+            <div class="layui-input-block">
+                
+              
+            </div>
+        </div>
+  </div>
+   
+        <div id="main" style="width:100%;height:500px;"></div>
+    
+   
+    
+</div>
+
+<div class="layui-form" hidden id="div_jgfh">
+    <div style="padding:10px">
+        <table class="layui-hide" id="tb_jgfh" lay-filter="tb_jgfh"></table>
+    </div>
+    
+</div>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/PS/jgfh")
+}

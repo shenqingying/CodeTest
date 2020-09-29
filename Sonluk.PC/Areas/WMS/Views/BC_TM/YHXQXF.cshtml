@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "验货需求下发";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="Tpl_VBELN">
+    {{ d.SONUM.substring(0, 7) }}
+</script>
+
+<script type="text/html" id="Tpl_POSNR">
+    {{ d.SONUM.substring(8, 13) }}
+</script>
+
+
+
+<script type="text/html" id="color">
+    {{# if(d.DDSL == 0){ }}
+    <span class="span_color"></span>
+    {{# }else { }}
+    <span class="span_color">{{d.DDSL}}</span>
+    {{# } }}
+
+</script>
+
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_orderMX">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+</div>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>成品验货管理</a>
+    <a><cite>验货需求下发</cite></a>
+</span>
+
+
+
+
+
+
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div id="div_height">
+
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">仓库编码：</label>
+                <div class="layui-input-inline">
+                    <select id="ckno" lay-filter="ckno">
+                        <option value="0">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">验货单：</label>
+                <div class="layui-input-inline" style="width:520px;">
+                    <input id="YHNO" type="text" autocomplete="off" placeholder="请输入验货单号" class="layui-input">
+                </div>
+                <button id="btn_save" class="layui-btn">保存</button>
+            </div>
+
+        </div>
+        <hr class="layui-bg-black" />
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">验货单：</label>
+                <div class="layui-input-inline">
+                    <input id="yhd" type="text" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">客户：</label>
+                <div class="layui-input-inline" style="width:400px;">
+                    <input id="kh" type="text" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">工厂：</label>
+                <div class="layui-input-inline">
+                    <input id="gc" type="text" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">库存地点：</label>
+                <div class="layui-input-inline">
+                    <select id="kcdd" lay-filter="kcdd">
+                        <option value="0">全部</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <table id="table_YH" lay-filter="table_YH"></table>
+
+
+</div>
+
+
+
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/BC_TM/YHXQXF")
+}

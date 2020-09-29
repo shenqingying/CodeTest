@@ -1,0 +1,195 @@
+﻿@using Sonluk.UI.Model.SD.SalesOrderService
+@model IEnumerable<SOItemInfo>
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">销售凭证</td>
+        <td class="data-table-header">行项目</td>
+        <td class="data-table-header change-width-cell">
+            <div class="change-width target-05">物料描述</div>
+        </td>
+        <td class="data-table-header">创建日期</td>        
+        <td class="data-table-header">工厂</td>
+        <td class="data-table-header">首次交货</td>
+        <td class="data-table-header">创建人员</td>        
+        <td class="data-table-header change-width-cell">
+            <div class="change-width target-01">托盘及隔板包装要求</div>
+        </td>
+        <td class="data-table-header change-width-cell">
+            <div class="change-width target-02">特殊采购要求</div>
+        </td>
+        
+        <td class="data-table-header change-width-cell">
+            <div class="change-width target-04">订单备注</div>
+        </td>
+        <td class="data-table-header">供应商</td>
+        <td class="data-table-header">凭证类型</td>
+        <td class="data-table-header">首个生产订单开始日期</td>
+        <td class="data-table-header">采购类型</td>
+        <td class="data-table-header">交货状态</td>
+        <td class="data-table-header">状态</td>
+        <td class="data-table-header">状态描述</td>
+        <td class="data-table-header">更改日期</td>
+        <td class="data-table-header change-width-cell">
+            <div class="change-width target-00">备注</div>
+        </td>
+        <td class="data-table-header change-width-cell">
+            <div class="change-width target-03">热缩膜要求</div>
+        </td>
+    </tr>
+    @foreach (SOItemInfo node in Model)
+    {
+        <tr>
+            <td>@Convert.ToInt64(node.SONumber)</td>
+            <td>@node.Number</td>
+            <td class="text-align-left"><div class="change-width-content target-05-content long-text" title="@node.MatlDesc">@node.MatlDesc</div></td>
+            <td>@node.Date</td>
+            <td>@node.Plant</td>
+            <td>@node.ReqDate</td>
+            <td>@node.Creator</td>
+            <td class="text-align-left"><div class="change-width-content target-01-content long-text" title="@node.RequestPallet">@node.RequestPallet</div></td>
+            <td class="text-align-left"><div class="change-width-content target-02-content long-text" title="@node.RequestSpecific">@node.RequestSpecific</div></td>
+            <td class="text-align-left"><div class="change-width-content target-04-content long-text" title="@node.RequestRemarks">@node.RequestRemarks</div></td>
+            <td>@if (node.Vendor != null && node.Vendor.Length > 0){@Convert.ToInt64(node.Vendor);}</td>
+            <td>@node.Type</td>
+            <td>@node.StartDate</td>
+            <td>@node.ProcType</td>
+            <td>@node.DelivStatus</td>
+            <td>@node.Status</td>
+            <td>@node.StatusDesc</td>
+            <td>@node.ChangedDate</td>
+            <td class="text-align-left"><div class="change-width-content target-00-content long-text" title="@node.Remarks">@node.Remarks</div></td>
+            <td class="text-align-left"><div class="change-width-content target-03-content long-text" title="@node.RequestShrinkFilm">@node.RequestShrinkFilm</div></td>
+        </tr>
+    }
+</table>
+
+<div class="header-title">
+    <table class="header-title-table">
+        <tr>
+            <td class="data-table-header sort-asc">销售凭证</td>
+            <td class="data-table-header sort-asc">行项目</td>
+            <td class="data-table-header change-width-cell">
+                <div class="change-width target-05">
+                    <div class="change-width-content target-05-content">物料描述</div>
+                    <div class="change-width-btn" id="05"></div>
+                </div>
+            </td>
+            <td class="data-table-header sort-asc">创建日期</td>
+            <td class="data-table-header sort-asc">工厂</td>
+            <td class="data-table-header sort-asc">首次交货</td>
+            <td class="data-table-header sort-asc">创建人员</td>
+            <td class="data-table-header change-width-cell">
+                <div class="change-width target-01">
+                    <div class="change-width-content target-01-content">托盘及隔板包装要求</div>
+                    <div class="change-width-btn" id="01"></div>
+                </div>
+            </td>
+            <td class="data-table-header change-width-cell">
+                <div class="change-width target-02">
+                    <div class="change-width-content target-02-content">特殊采购要求</div>
+                    <div class="change-width-btn" id="02"></div>
+                </div>
+            </td>
+            
+            <td class="data-table-header change-width-cell">
+                <div class="change-width target-04">
+                    <div class="change-width-content target-04-content">订单备注</div>
+                    <div class="change-width-btn" id="04"></div>
+                </div>
+            </td>
+            <td class="data-table-header sort-asc">供应商</td>
+            <td class="data-table-header sort-asc">凭证类型</td>
+            <td class="data-table-header sort-asc">首个生产订单开始日期</td>
+            <td class="data-table-header sort-asc">采购类型</td>
+            <td class="data-table-header sort-asc">交货状态</td>
+            <td class="data-table-header sort-asc">状态</td>
+            <td class="data-table-header sort-asc">状态描述</td>
+            <td class="data-table-header sort-asc">更改日期</td>
+            <td class="data-table-header change-width-cell">
+                <div class="change-width target-00">
+                    <div class="change-width-content target-00-content">备注</div>
+                    <div class="change-width-btn" id="00"></div>
+                </div>
+            </td>
+            <td class="data-table-header change-width-cell">
+                <div class="change-width target-03">
+                    <div class="change-width-content target-03-content">热缩膜要求</div>
+                    <div class="change-width-btn" id="03"></div>
+                </div>
+            </td>
+        </tr>
+        @foreach (SOItemInfo node in Model)
+        {
+            <tr>
+                <td>@Convert.ToInt64(node.SONumber)</td>
+                <td>@node.Number</td>
+                <td></td>
+                <td>@node.Date</td>
+                
+                <td>@node.Plant</td>
+                <td>@node.ReqDate</td>
+                <td>@node.Creator</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>@if (node.Vendor != null && node.Vendor.Length > 0){@Convert.ToInt64(node.Vendor);}</td>
+                <td>@node.Type</td>
+                <td>@node.StartDate</td>
+                <td>@node.ProcType</td>
+                <td>@node.DelivStatus</td>
+                <td>@node.Status</td>
+                <td>@node.StatusDesc</td>
+                <td>@node.ChangedDate</td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="left-title">
+    <table class="left-title-table">
+        <tr>
+            <td class="data-table-header">销售凭证</td>
+            <td class="data-table-header">行项目</td>
+        </tr>
+        @foreach (SOItemInfo node in Model)
+        {
+            <tr>
+                <td>@Convert.ToInt64(node.SONumber)</td>
+                <td>@node.Number</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="left-title-header">
+    <table>
+        <tr>
+            <td class="data-table-header  sort-asc">销售凭证</td>
+            <td class="data-table-header  sort-asc">行项目</td>
+        </tr>
+        @foreach (SOItemInfo node in Model)
+        {
+            <tr>
+                <td>@Convert.ToInt64(node.SONumber)</td>
+                <td>@node.Number</td>
+            </tr>
+        }
+    </table>
+</div>
+<input type="hidden" value="@Model.Count()" id="node-count">
+
+
+
+
+
+
+
+
+
+
+
+
+
+

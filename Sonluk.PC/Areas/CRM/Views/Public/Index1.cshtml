@@ -1,0 +1,194 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "首页";
+
+    //string staffid = "";
+
+    //if (Session["STAFFID"] != null)
+    //{
+    //    staffid = Session["STAFFID"].ToString();
+    //}
+    
+    
+    
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<div id="tab_dbsx" class="layui-tab layui-tab-brief" hidden>
+    <ul class="layui-tab-title">
+        <li class="layui-this">OA待办事项</li>
+        <li>OA跟踪事项</li>
+        <li>CRM待办事项</li>
+        @*<li>权限分配</li>
+            <li>商品管理</li>
+            <li>订单管理</li>*@
+    </ul>
+    <div class="layui-tab-content">
+
+        <div class="layui-tab-item layui-show">
+            @*<button id="btn_daiban" class="layui-btn">查询</button>
+                <div class="layui-form">
+                    <label class="layui-form-label" style="width:110px;padding:9px 0;text-align:left;">最大命中数量：</label>
+                    <div class="layui-input-inline">
+                        <input id="txt_daiban" type="text" class="layui-input" placeholder="默认100">
+                    </div>
+                </div>*@
+
+            <table id="tb_daiban" lay-filter="tb_daiban"></table>
+        </div>
+
+        <div class="layui-tab-item">
+            @*<button id="btn_genzong" class="layui-btn">查询</button>
+                <div class="layui-form">
+                    <label class="layui-form-label" style="width:110px;padding:9px 0;text-align:left;">最大命中数量：</label>
+                    <div class="layui-input-inline" >
+                        <input id="txt_genzong" type="text" class="layui-input" placeholder="默认100">
+                    </div>
+                </div>*@
+
+            <table id="tb_genzong" lay-filter="tb_genzong"></table>
+        </div>
+
+        <div class="layui-tab-item">
+            @*<button id="btn_genzong" class="layui-btn">查询</button>
+            <div class="layui-form">
+                <label class="layui-form-label" style="width:110px;padding:9px 0;text-align:left;">最大命中数量：</label>
+                <div class="layui-input-inline" >
+                    <input id="txt_genzong" type="text" class="layui-input" placeholder="默认100">
+                </div>
+            </div>*@
+            <table id="tb_crm_daiban" lay-filter="tb_crm_daiban"></table>
+        </div>
+        @*<div class="layui-tab-item">内容3</div>
+            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item">内容5</div>*@
+    </div>
+</div>
+
+
+<div id="tab_gg" class="layui-tab layui-tab-brief" hidden>
+    <ul class="layui-tab-title">
+        <li class="layui-this">公告</li>
+    </ul>
+    <div class="layui-tab-content">
+
+
+        <div class="layui-tab-item layui-show">
+
+            <table id="tb_gonggao" lay-filter="tb_gonggao"></table>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="tab_fp" class="layui-tab layui-tab-brief" hidden>
+    <ul class="layui-tab-title">
+        <li class="layui-this">发票回执单</li>
+    </ul>
+    <div class="layui-tab-content">
+
+        <div class="layui-tab-item layui-show">
+
+            <table id="tb_fapiao" lay-filter="tb_fapiao"></table>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="div_fp" class="layui-form" hidden>
+    <table class="layui-table">
+        <tr>
+            <td style="width:100px;">
+                <label class="layui-form-label" style="width:inherit;text-align:right;">TO：</label>
+            </td>
+            <td>
+                <label id="lb_to" class="layui-form-label" style="width:inherit"></label>
+
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px;">
+                <label class="layui-form-label" style="width:inherit;text-align:right;">发票号码：</label>
+            </td>
+            <td>
+                <label id="lb_fphm" class="layui-form-label" style="width:inherit"></label>
+
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px;">
+                <label class="layui-form-label" style="width:inherit;text-align:right;">发票数量：</label>
+            </td>
+            <td>
+                <label id="lb_fpsl" class="layui-form-label" style="width:inherit"></label>
+
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px;">
+                <label class="layui-form-label" style="width:inherit;text-align:right;">快递单号：</label>
+            </td>
+            <td>
+                <label id="lb_kddh" class="layui-form-label" style="width:inherit"></label>
+
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px;">
+                <label class="layui-form-label" style="width:inherit;text-align:right;"> 发票寄送日期：</label>
+            </td>
+            <td>
+                <label id="lb_time" class="layui-form-label" style="width:inherit"></label>
+
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px;">
+                <label class="layui-form-label" style="width:inherit;text-align:right;">备注：</label>
+            </td>
+            <td>
+                <label id="lb_bz" class="layui-form-label" style="width:inherit"></label>
+
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="div_gg" class="layui-form">
+    <br />
+    <h1 id="title" style="text-align:center;"></h1>
+    <br />
+    <div id="txt" style="margin:auto 10px;">
+
+    </div>
+
+    <br /><br /><br />
+
+    <hr class="layui-bg-black" />
+    <table id="tb_fujian" lay-filter="tb_fujian" class="layui-table"></table>
+</div>
+
+
+
+
+
+
+@*<script src="~/Scripts/layui2.5.4/layui.all.js"></script>*@
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Public/Index")
+}

@@ -1,0 +1,60 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<ZSL_BCS104>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">物料编码</td>
+        <td class="data-table-header">物料描述</td>        
+        <td class="data-table-header">主键</td>
+        <td class="data-table-header">组合码</td>
+        <td class="data-table-header">托盘码</td>
+        <td class="data-table-header">生成数量</td>
+        <td class="data-table-header">本托数量</td>
+        <td class="data-table-header" width="20px">本托箱数</td>
+        <td class="data-table-header">总箱数</td>
+        <td class="data-table-header">条码数</td>
+        <td class="data-table-header">采购订单</td>
+        <td class="data-table-header">行项目</td>
+        <td class="data-table-header">交货日期</td>
+        <td class="data-table-header">订单数量</td>
+        <td class="data-table-header">未收数量</td>
+        <td class="data-table-header">基本单位</td>
+        <td class="data-table-header">销售订单</td>
+        <td class="data-table-header">销售项目</td>
+        <td class="data-table-header">创建日期</td>
+        <td class="data-table-header">创建时间</td>        
+    </tr>
+    @foreach (ZSL_BCS104 node in Model)
+    {
+        <tr class="data">
+            <td>@node.Matnr</td>
+            <td>@node.Txz01</td>           
+            <td>@node.Zj</td>
+            <td>@node.Zhm</td>
+            <td>@node.Tpm</td>
+            <td>@node.Scsl</td>
+            <td>@node.Sl</td>            
+            <td class="text-align-right" width="20px"><input type="text" value="@node.Zbtxs.ToString("0")" width="5" /></td>
+            <td class="text-align-right" width="20px"><input type="text" value="@node.Zxs.ToString("0")" /></td>
+            <td>@node.Zts</td> 
+            <td>@node.Ebeln</td>
+            <td>@node.Ebelp</td>
+            <td>@node.Eindt</td>  
+            <td>@node.Zsl</td>
+            <td>@node.Wssl</td>
+            <td>@node.Meins</td>
+            <td>@node.Vbeln</td>
+            <td>@node.Vbelp</td>
+            <td>@node.Cjrq</td>
+            <td>@node.Cjsj</td>         
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+
+

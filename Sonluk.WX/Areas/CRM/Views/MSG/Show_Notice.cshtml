@@ -1,0 +1,68 @@
+﻿@using Sonluk.UI.Model.CRM.MSG_NOTICETTService;
+@using Sonluk.UI.Model.CRM.HG_WJJLService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "公告";
+    Session["TITLENAME"] = "公告";
+
+    CRM_MSG_NOTICETTList TTdata = ViewBag.TTdata;
+    CRM_HG_WJJL[] FJdata = ViewBag.FJdata;
+}
+
+
+
+
+
+<div id="from1" class="layui-form" style="margin:auto 10px;">
+    <br />
+    <h1 style="text-align:center;">@TTdata.TITLE</h1>
+    <br />
+    <div id="txt">
+        @*@HttpUtility.HtmlDecode(TTdata.NOTICE)*@
+        @{
+            var html = new MvcHtmlString(TTdata.NOTICE);
+            @html
+        }
+    </div>
+
+
+</div>
+
+<div style="bottom:60px;position: fixed;width:100%;">
+
+    <div class="weui-cells__title">附件</div>
+    <div class="weui-cells">
+        @for (int i = 0; i < FJdata.Length; i++)
+        {
+            <a class="weui-cell weui-cell_access" onclick="window.open('@FJdata[i].ML')">
+                <div class="weui-cell__bd">
+                    <p>@FJdata[i].WJM</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        }
+
+    </div>
+
+    @*<table style="width:100%;">
+            @for (int i = 0; i < FJdata.Length; i++)
+            {
+                <tr>
+                    <td>
+                        附件@(i + 1):
+                    </td>
+                    <td>
+                        <a onclick="window.open('@FJdata[i].ML')">@FJdata[i].WJM</a>
+                    </td>
+                </tr>
+            }
+        </table>*@
+</div>
+
+
+
+
+@*@section scripts {
+        @Scripts.Render("~/bundles/CRM/Test/Select")
+    }*@

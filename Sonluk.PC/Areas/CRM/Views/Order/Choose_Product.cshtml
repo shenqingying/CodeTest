@@ -1,0 +1,197 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_PRODUCTService;
+@{
+    ViewBag.Title = "网上下单";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+    CRM_PRODUCT_PRODUCT[] CPLX = ViewBag.CPLX;
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="shangxiawu">
+    {{# if(d.CCSJLX == 1){ }}
+    上午
+    {{# }else if(d.CCSJLX == 2){ }}
+    下午
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="qiandao">
+    {{# if(d.ISQD == true){ }}
+    已签到
+    {{# }else if(d.ISQD == false){ }}
+    未签到
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="QDWZ_Tpl">
+    {{# if(d.ISQD == true){ }}
+    {{ d.QDWZ }}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_CC">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar_CCMX">
+    @*<a class="layui-btn layui-btn-xs" lay-event="signin">签到</a>*@
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="tb_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>订单管理</a>
+    <a><cite>网上下单</cite></a>
+</span>
+<br />
+<br />
+
+<style>
+    .layui-form-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+</style>
+
+<div id="div_type" class="layui-form">
+    <div class="layui-form-item">
+        @if (CPLX.Length != 0)
+        {
+            for (int i = 0; i < CPLX.Length; i++)
+            {
+                <div class="layui-inline">
+                    <div class="layui-input-inline" style="text-align:center;">
+                        <br /><br />
+                        <img src="@CPLX[i].CPLXML" onclick="CPLX_click(@CPLX[i].CPLX)" style="height:120px;" />
+                        <label class="layui-form-label" style="width:160px;text-align:center;font-size:18px;">@CPLX[i].CPLXDES</label>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <label class="layui-form-label" style="width:130px;text-align:right;">无数据！</label>
+        }
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="div1" class="layui-form" style="margin-left:10px" hidden>
+    <div class="layui-form-item">
+        <button id="btn_back" class="layui-btn">返回订单界面</button>
+        <button id="btn_type" class="layui-btn">选择产品类型</button>
+    </div>
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+
+                <div class="layui-form-item">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">产品名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="cpmc" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                        <button id="btn_cx" class="layui-btn">查询</button>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div id="div_cp" class="layui-form-item">
+
+
+        @*<div class="layui-inline">
+            <div class="layui-input-inline">
+                <br /><br />
+                <img src="~/img/cp1.jpg" />
+                <label class="layui-form-label" style="width:inherit;height:50px;padding-left:0px;padding-right:0px;">双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX双鹿碱性电池蓝骑士XXXXX</label>
+                <button id="btn_add" class="layui-btn" style="width:100%">添加</button>
+            </div>
+        </div>*@
+
+
+    </div>
+
+</div>
+
+<div id="div_count" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="text-align:right;">订单数量：</label>
+            <div class="layui-input-inline">
+                <input id="mx_address" type="text" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<input id="staffid" hidden />
+<input id="cplx" hidden />
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Choose_Product")
+}

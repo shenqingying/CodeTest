@@ -1,0 +1,264 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService
+@using Sonluk.UI.Model.CRM.COST_CXYService
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "KA促销员申请";
+    Session["TITLENAME"] = "KA促销员申请";
+    
+    CRM_HG_DICT[] ZZZT = ViewBag.ZZZT;
+    CRM_HG_DICT[] GW = ViewBag.GW;
+}
+
+
+
+
+<div class="weui-btn-area">
+  
+    <button class="weui-btn weui-btn_primary" id="btn_insert" style="width:49%;display:initial;margin:0 0;">新增</button>
+    <button class="weui-btn weui-btn_primary" id="btn_cx" style="width:49%;display:initial;margin:0 0;float:right;">查询</button>
+   
+</div>
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content" style="padding-right: 0px;">
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">岗位：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="select_GW" class="weui-select">
+                           
+                                <option value="0" selected="selected">请选择</option>
+                                @for (int i = 0; i < GW.Length; i++)
+                                {
+
+                                    <option value="@GW[i].DICID">@GW[i].DICNAME</option>
+
+                                }
+                           
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">姓名：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_NAME" class="weui-input" type="text" placeholder="" >
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">在职状态：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="ZZZT" class="weui-select">
+                            <option value="0" selected="selected">请选择</option>
+                            @for (int i = 0; i < ZZZT.Length; i++)
+                            {
+                                    <option value="@ZZZT[i].DICID">@ZZZT[i].DICNAME</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">状态：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="ISACTIVE" class="weui-select">
+                            <option value="0" selected="selected">全部</option>
+                            <option value="10">未提交 </option>
+                            <option value="20">已提交 </option>
+                            <option value="30">已审核</option>
+                            <option value="60">已完成</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">系统名称：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_XTMC" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">门店名称</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="select_MDMC" class="weui-input" type="text" placeholder="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="div_result" style="margin:0 10px">
+</div>
+
+
+
+
+<div id="div_jump" class="weui-cells weui-cells_form" hidden>
+
+    <div id="div_jump1" class="weui-cells weui-cells_form">
+        <div class="weui-btn-area">
+            @*<a class="weui-btn weui-btn_primary" href="javascript:" id="btn_cxkh">查询</a>*@
+            <button class="weui-btn weui-btn_primary" href="javascript:" id="btn_cxkh">查询</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian1" class="layui-colla-content" style="padding-right: 0px;">
+                    <div class="layui-form-item">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">门店名称：</label></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <input id="KH_name" class="weui-input" type="text" placeholder="">
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">CRM编号：</label></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <input id="KH_ID" type="text" placeholder="" class="weui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tb_kh" class="margin:0 10px"></div>
+    </div>
+   
+
+    <div id="div_jump2" class="weui-cells weui-cells_form"  hidden>
+      
+        <div class="weui-cells weui-cells_form">
+            <button class="weui-btn weui-btn_primary" href="javascript:" id="btn_back" style="width: 49%; display: initial;">返回</button>
+            <button class="weui-btn weui-btn_primary" href="javascript:" id="btn_save" style="width: 49%; display: initial; margin: 0 0;float:right;">保存</button>
+        </div>
+    
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">系统CRM编号：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="CRMID" type="text" placeholder="不能输入" class="weui-input" disabled>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">系统SAP编号：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="SAPSN" type="text" placeholder="不能输入" class="weui-input" disabled>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">门店名称：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="MC" type="text" placeholder="不能输入" class="weui-input" disabled>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">KA门店编号：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="KHID" type="text" placeholder="不能输入" class="weui-input" disabled>
+            </div>
+        </div>
+    
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">省份：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="SF" type="text" placeholder="不能输入" class="weui-input" disabled>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">城市：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="CS" type="text" placeholder="不能输入" class="weui-input" disabled>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">近三月单月销售额一：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="LAST3" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">近三月单月销售额二：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="LAST2" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">近三月单月销售额三：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="LAST1" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">所有电池品牌月均销售总额：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="XSZE" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">资源支持：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="ZYZC" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">岗位：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="GW" class="weui-select">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < GW.Length; i++)
+                    {
+                       
+                            <option value="@GW[i].DICID">@GW[i].DICNAME</option>
+                      
+                    }
+                </select>
+            </div>
+        </div>
+        @*<div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">岗位工资：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="GWGZ" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>*@
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">人员更换：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="ISCHANGE" class="weui-select">
+                    <option value="0" selected="selected">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">月考核基数：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="BASE" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">上岗后预估月销售额：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="YGXSE" type="text" placeholder="" class="weui-input">
+            </div>
+        </div>
+        
+        </div>  
+</div>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_KACXY")
+}

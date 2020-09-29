@@ -1,0 +1,118 @@
+﻿@using Sonluk.UI.Model.LE.OutboundDeliveryService
+@model IEnumerable<DeliveryItemInfo>
+<input type="hidden" value="@Url.Action("_Read", "Goods")" id="goods-read-uri"/>
+<div class="panel-pop-up-header">行项目</div>
+<div class="panel-pop-up-body">
+    <div class="panel-pop-up-content">
+        <table class="panel-pop-up-table">
+            <tr>
+                <td class="data-table-header">交货单</td>
+                <td class="data-table-header">行项目</td>
+                <td class="data-table-header">物料</td>
+                <td class="data-table-header">物料名称</td>
+                <td class="data-table-header">数量</td>
+                <td class="data-table-header">单位</td>
+                <td class="data-table-header">件数</td>
+                <td class="data-table-header">零头</td>
+                <td class="data-table-header">毛重量</td>
+                <td class="data-table-header">净重量</td>
+                <td class="data-table-header">重量单位</td>
+                <td class="data-table-header">参考凭证</td>
+                <td class="data-table-header">行项目</td>
+                <td class="data-table-header">存储地点</td>
+                <td class="data-table-header">客户物料名称</td>
+                <td class="data-table-header">批次</td>
+                <td class="data-table-header">单件数量</td>
+                <td class="data-table-header">单件重量</td>
+                <td class="data-table-header">单件体积</td>
+            </tr>
+            @foreach (DeliveryItemInfo node in Model)
+            {
+                <tr >
+                    <td>@node.SerialNumber</td>
+                    <td>@node.Number</td>
+                    <td>@node.Material</td>
+                    <td class="text-align-left">@node.MatlDescription</td>
+                    <td>@node.Quantity.ToString("0.###")</td>
+                    <td>@node.Unit</td>
+                    <td class="text-align-right">@node.Whole</td>
+                    <td class="text-align-right">@node.Odd</td>
+                    <td class="text-align-right">@node.GrossWeight.ToString("0.###")</td>
+                    <td class="text-align-right">@node.NetWeight.ToString("0.###")</td>
+                    <td>@node.WeightUnit</td>
+                    <td>@node.ReferenceDocument</td>
+                    <td>@node.ReferenceDocumentItem</td>
+                    <td>@node.StgeLoc</td>
+                    <td class="text-align-left">@node.CustomerMatlDesc</td>
+                    <td class="text-align-right">@node.Batch</td>
+                    <td class="text-align-right">@node.SingleQty.ToString("0.###")</td>
+                    <td class="text-align-right">@node.SingleWeight.ToString("0.###")</td>
+                    <td class="text-align-right">@node.SingleVolume.ToString("0.###")</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel-pop-up-edit">
+        <div class="panel-pop-up-edit-receiver">
+            <input type="hidden" id="edit-goods-ID" value="" />
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">货物类别</div>
+                <input type="text" class="panel-pop-up-edit-item-input drop-list-target-goods-type" id="edit-goods-type" value="" />
+                <input type="hidden" id="edit-goods-type-ID" />
+                <input type="hidden" value="@Url.Action("_Type", "Goods")" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">物料编号</div>
+                <input type="text" class="panel-pop-up-edit-item-input" id="edit-goods-material" value="" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">物料描述</div>
+                <input type="text" class="panel-pop-up-edit-item-input" id="edit-goods-name" value="" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">单件数量</div>
+                <input type="text" class="panel-pop-up-edit-item-input" id="edit-goods-quantity" value="" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">数量单位</div>
+                <input type="text" class="panel-pop-up-edit-item-input drop-list-target-unit" id="edit-goods-unit" value="" />
+                <input type="hidden" id="edit-goods-unit-ID" />
+                <input type="hidden" value="@Url.Action("_List", "Unit")" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">单件体积</div>
+                <input type="text" class="panel-pop-up-edit-item-input" id="edit-goods-volume" value="" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">体积单位</div>
+                <input type="text" class="panel-pop-up-edit-item-input drop-list-target-unit" id="edit-goods-volume-unit" value="" />
+                <input type="hidden" id="edit-goods-volume-unit-ID" />
+                <input type="hidden" value="@Url.Action("_List", "Unit")" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">单件毛重</div>
+                <input type="text" class="panel-pop-up-edit-item-input" id="edit-goods-gross-weight" value="" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">单件净重</div>
+                <input type="text" class="panel-pop-up-edit-item-input" id="edit-goods-net-weight" value="" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">重量单位</div>
+                <input type="text" class="panel-pop-up-edit-item-input drop-list-target-unit" id="edit-goods-weight-unit" value="" />
+                <input type="hidden" id="edit-goods-weight-unit-ID" />
+                <input type="hidden" value="@Url.Action("_List", "Unit")" />
+            </div>
+            <div class="panel-pop-up-edit-item">
+                <div class="panel-pop-up-edit-item-title">单件价格</div>
+                <input type="text" class="panel-pop-up-edit-item-input" id="edit-goods" value="" />
+            </div>
+            <div class="panel-pop-up-edit-control">
+                <div class="sonluk-button" id="edit-goods-update-trigger">保存</div>
+                <input type="hidden" value="@Url.Action("_Update", "Goods")" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel-pop-up-footer">
+</div>

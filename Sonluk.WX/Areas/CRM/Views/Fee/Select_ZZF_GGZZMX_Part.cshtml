@@ -1,0 +1,54 @@
+﻿@using Sonluk.UI.Model.CRM.COST_ZZFMXService;
+@{
+    ViewBag.Title = "广告制作明细";
+
+    CRM_COST_ZZFMX[] TTdata = ViewBag.TTdata;
+
+}
+@for (int i = 0; i < TTdata.Length; i++)
+{
+    <div class="weui-form-preview">
+        @*<div class="weui-form-preview__hd">
+                <em class="weui-form-preview__value">@TTdata[i].MC</em>
+            </div>*@
+        <div class="weui-form-preview__bd">
+
+            <p>
+                <label class="weui-form-preview__label">广告项目</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].GGXMIDDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">单价</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].PRICE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">数量</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].QUANTITY</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">金额</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].AMOUNT</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].BEIZ</span>
+            </p>
+
+        </div>
+        <div class="weui-form-preview__ft">
+
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">编辑</a>
+            @*<a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_picture(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">照片</a>*@
+            <a class="weui-form-preview__btn weui-form-preview__btn" onclick="Link_Delete(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))" style="color:#E64340;">删除</a>
+
+        </div>
+    </div>
+    <br />
+}
+
+@if (TTdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+

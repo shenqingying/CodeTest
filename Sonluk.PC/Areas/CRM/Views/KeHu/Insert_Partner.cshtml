@@ -1,0 +1,112 @@
+﻿
+<html>
+<head>
+    <title>合作伙伴</title>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <link href="~/Scripts/layui2.2.5/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <script>
+        $(document).ready(function () {
+            var val = 0;
+            if (sessionStorage.getItem('hzhbValue') != null) {
+                val = parseInt(sessionStorage.getItem('hzhbValue'));
+                $("#type").find("option[value = '" + val + "']").attr("selected", "selected");
+            }
+        });
+    </script>
+
+    <form id="form1" class="layui-form">
+
+        <br />
+        @*第一行*@
+        <div class="layui-form-item">
+            <label class="layui-form-label">合作伙伴ID：</label>
+            <div class="layui-input-inline">
+                <input id="ID" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label">合作伙伴类型：</label>
+            <div class="layui-input-inline">
+                <select id="type" lay-filter="type">
+                    <option value="0"></option>
+                    <option value="1">送达方</option>
+                    <option value="2">售达方</option>
+                    <option value="3">付款方</option>
+                    <option value="4">开票方</option>
+                </select>
+            </div>
+        </div>
+        @*第二行*@
+        <div class="layui-form-item">
+            <label class="layui-form-label">SAP编号：</label>
+            <div class="layui-input-inline">
+                <input id="sap" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label">合作伙伴名称：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        @*第三行*@
+        <div class="layui-form-item">
+            <label class="layui-form-label">收货人地址：</label>
+            <div class="layui-input-inline">
+                <input id="get_address" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label">收货人：</label>
+            <div class="layui-input-inline">
+                <input id="get_name" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        @*第四行*@
+        <div class="layui-form-item">
+            <label class="layui-form-label">收货人联系方式：</label>
+            <div class="layui-input-inline">
+                <input id="get_tel" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-label">销售区域：</label>
+            <div class="layui-input-inline">
+                <input id="area" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+        @*第五行*@
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline">
+                <input id="remark" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+
+
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/layui2.2.5/layui.js"></script>
+    <script>
+        layui.use(['form', 'layer', 'element', 'laydate'], function () {
+            var form = layui.form;
+            var element = layui.element;
+            var table = layui.table;
+            var laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#time'
+            });
+
+
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>

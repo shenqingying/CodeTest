@@ -1,0 +1,132 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "招待费申请查询";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    string name = "";
+    if (Session["NAME"] != null)
+    {
+        name = Session["NAME"].ToString();
+    }
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>活动管理</a>
+    <a><cite>招待费申请查询</cite></a>
+</span>
+<br />
+<br />
+
+
+
+<div id="form1" class="layui-form layui-form-pane">
+
+    <div class="layui-form-item">
+        <button id="btn_cx" class="layui-btn">查询</button>
+        <button id="btn_daochu" class="layui-btn">导出</button>
+        @*<button id="btn_submit" class="layui-btn">提交OA</button>*@
+    </div>
+    @*第一行*@
+    <div class="layui-form-item">
+        <label class="layui-form-label">接待日期：</label>
+        <div class="layui-input-inline" style="width:100px;">
+            <input id="ZDstart" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">至：</label>
+        <div class="layui-input-inline" style="width:100px;">
+            <input id="ZDend" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">客户名称：</label>
+        <div class="layui-input-inline" style="width:200px;">
+            <input id="company" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+
+
+
+
+    </div>
+    @*第二行*@
+    <div class="layui-form-item">
+
+
+        
+
+        <label class="layui-form-label">申请时间：</label>
+        <div class="layui-input-inline" style="width:100px;">
+            <input id="SQstart" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">至：</label>
+        <div class="layui-input-inline" style="width:100px;">
+            <input id="SQend" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">申请人：</label>
+        <div class="layui-input-inline" style="width:200px;">
+            <input id="staff" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户姓名：</label>
+        <div class="layui-input-inline" style="width:320px;">
+            <input id="KH_name" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">部门：</label>
+        <div class="layui-input-inline" style="width:200px;">
+            <select id="department" lay-filter="department"></select>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <table id="result" lay-filter="result"></table>
+
+
+
+</div>
+
+<input id="staffid" hidden />
+<input id="name" hidden />
+<input id="netpath" hidden />
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#name").val("@name");
+        $("#netpath").val("@netpath");
+    });
+</script>
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/HuoDong/SelectFee")
+}

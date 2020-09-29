@@ -1,0 +1,100 @@
+﻿@using Sonluk.UI.Model.SD.SalesOrderService
+@model IEnumerable<SOItemInfo>
+@{
+    ViewBag.Title = "销售订单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/sd/sales-order-index")
+<input type="hidden" value="@Url.Action("ProcessingRecords", "SalesOrder")" id="sales-order-processing-records-uri">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">销售订单</a>
+        >
+        <a href="#">显示</a>
+    </div>
+</div>
+
+<div class="panel-search">
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">订单号</div>
+        <input type="text" class="panel-search-item-input input-name" id="Number" />
+    </div>
+
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">创建日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="StartDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="Date" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">更改日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="StartChangedDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="ChangedDate" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">最后处理日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="StartCurrentDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="CurrentDate" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">创建人</div>
+        <input type="text" class="panel-search-item-input input-name" id="Creator" />
+    </div>
+    <div class="panel-search-item">
+        <input type="radio" name="ProcessingRecordsStatus" value="0" checked> 未处理
+        <input type="radio" name="ProcessingRecordsStatus" value="1"> 已处理
+        <input type="radio" name="ProcessingRecordsStatus" value="2"> 已建采购订单
+    </div>
+    <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+    <input type="hidden" value="@Url.Action("_List", "SalesOrder")">
+</div>
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="sonluk-table-control-title">状态:</div>
+                <input type="text" class="sonluk-table-control-text" value="Z60" />
+                <div class="sonluk-table-control-button select-by-value">全选</div>
+                <input type="hidden" value="15">
+                <div class="sonluk-table-control-title">类型:</div>
+                <input type="text" class="sonluk-table-control-text" value="ZKS1" />
+                <div class="sonluk-table-control-button select-by-value">全选</div>
+                <input type="hidden" value="11">
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="sonluk-table-control-title">标记:</div>
+                    <div class="sonluk-table-control-button processing-records">已处理</div>
+                    <input type="hidden" value="1">
+                    <div class="sonluk-table-control-button processing-records">已建采购订单</div>
+                    <input type="hidden" value="2">
+                    <div class="sonluk-table-control-button processing-records">未处理</div>
+                    <input type="hidden" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="sales-order"></div>
+    </div>
+</div>
+<div class="sonluk-table-pop-up-background background-color-dark"></div>
+<div class="sonluk-table-pop-up" id="sales-order-remark-details">
+    <div class="sonluk-table-pop-up-title"></div>
+    <div class="sonluk-table-pop-up-content">
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/sd/sales-order-index")
+
+}
+

@@ -1,0 +1,290 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "条码关联查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="mescx">MES查询</a>
+    <a><cite lid="tmglcx">条码关联查询</cite></a>
+</span>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="c_search">查询</button>
+        <button class="layui-btn" id="btn_find_gl" lid="zscx">追溯查询</button>
+        <button class="layui-btn" id="btn_find_gl_fz" lid="fzscx">反追查询</button>
+        <button class="layui-btn" id="btn_dc_find" lid="dccx">导出查询</button>
+        <button class="layui-btn" id="btn_DC_gl" lid="dczscx">导出追溯查询</button>
+        <button class="layui-btn" id="btn_DC_gl_fz" lid="dcfzscx">导出反追查询</button>
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title" lid="cxtj">查询条件</h2>
+            <div class="layui-colla-content layui-show" id="zd1">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="c_formGC">工厂：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_pd_gc" lay-filter="in_pd_gc">
+                                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                                {
+                                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="c_formGZZX">工作中心：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_gzzx" lay-filter="in_gzzx" lay-search="">
+                                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="c_formSBBH">设备号：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_sbh" lay-filter="in_sbh">
+                                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="WLLBNAMEc">物料类别：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_wllb" lay-filter="in_wllb">
+                                <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="WLZc">物料组：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_wlgroup" lay-filter="in_wlgroup">
+                                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="KCDDc">库存地点：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_kcdd" lay-filter="in_kcdd">
+                                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="TMc">条码：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_tm" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="SCDATEc">生产日期：</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="date" id="in_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="date" id="in_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="BCMSc">班次：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_bc" lay-filter="in_bc">
+                                <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="RWBHc">任务编号：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_rwbh" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="WLHc">物料号：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_wlh" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="PCc">批次：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_pc" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="CLCJc">材料厂家：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_clcj" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="GYLXc">工艺路线：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_gylx" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="GYSc">供应商：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_gys" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="GYSMSc">供应商描述：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_gysms" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="GYSPCc">供应商批次：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_gyspc" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="GYSSBc">供应商设备：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_gyssbhms" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="CPZTNAMEc">产品状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_cpzt" lay-filter="in_cpzt">
+                                <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="PFDHc">配方单号：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_pfdh" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="PLDHc">配料单号：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_pldh" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="THc">桶号：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_th" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="DCDJc">电池等级：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_dcdj" lay-filter="in_dcdj">
+                                <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="DCXHc">电池型号：</label>
+                        <div class="layui-input-inline">
+                            <select id="in_dcxh" lay-filter="in_dcxh">
+                                <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="ERPNOc">ERP工单：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_erpno" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="NOBILLc">销售订单：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_nobill" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="NOBILLMXc">销售订单明细：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_nobillmx" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="RQMc">日期唛：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_rqm" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="JLRQc">记录日期：</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="date" id="in_jlrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="date" id="in_jlrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="MJMCc">模具名称：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_mould" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="CLPBDMc">材料配比代码：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="in_clpbdm" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label1" lid="find_remark">备注：</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="find_remark" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-collapse" id="div_tbtminfo">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title" lid="cxjg">查询结果</h2>
+            <div class="layui-colla-content" id="zd2">
+                <div class="layui-form-item">
+                    <table class="layui-hide" id="tb_TMINFO" lay-filter="tb_TMINFO"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-collapse" id="div_tbtminfo_gl">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title" lid="zsjg">追溯结果</h2>
+            <div class="layui-colla-content" id="zd3">
+                <div class="layui-form-item">
+                    <table class="layui-hide" id="tb_TMINFO_GL" lay-filter="tb_TMINFO_GL"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-collapse" id="div_tbtminfo_gl_fz">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title" lid="fzjg">反追结果</h2>
+            <div class="layui-colla-content" id="zd4">
+                <div class="layui-form-item">
+                    <table class="layui-hide" id="tb_TMINFO_GL_fz" lay-filter="tb_TMINFO_GL_fz"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/TMGL_SELECT")
+}

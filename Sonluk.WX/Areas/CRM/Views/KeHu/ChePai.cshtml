@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "汽车或电动车";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "汽车或电动车";
+}
+
+<script type="text/html" id="tb_area">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<h2 id="h1" style="margin:0 10px"></h2>
+<h2 id="h2" style="margin:0 10px"></h2>
+
+
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+<br />
+<hr class="layui-bg-black" />
+<br />
+<div id="004" hidden>
+
+    <h2 class="layui-colla-title" id="htitle">新增汽车或电动车</h2>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">车牌：</label>
+        <div class="layui-input-block">
+            <input id="chepai15" type="text" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">车体广告：</label>
+        <div class="layui-input-block">
+            <select id="haveAd15" lay-filter="haveAd15" lay-ignore>
+                <option value="0" selected="selected">无</option>
+                <option value="1">有</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="layui-form" style="width:100%;">
+        <div class="layui-form-item" style="margin:0">
+            <br />
+            <button id="btn_save_display" class="layui-btn" lay-filter="btn_save_display" style="width:49%;">保存</button>
+
+            <button id="btn_nosave_display" class="layui-btn layui-btn-danger" lay-filter="btn_nosave_display" style="width:49%;margin: 0;" hidden>取消</button>
+        </div>
+    </div>
+</div>
+
+<input id="action_status" hidden value="insert" />
+<input id="zibiao_id" hidden />
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/ChePai")
+}

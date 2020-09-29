@@ -1,0 +1,398 @@
+﻿@{
+    ViewBag.Title = "薪资字段维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string mypw = "";
+    if (Session["MYPW"] != null)
+    {
+        mypw = Session["MYPW"].ToString();
+    }
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资字段</a>
+    <a><cite>薪资字段维护</cite></a>
+</span>
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<script type="text/html" id="ISHAVEGS_Tpl">
+    {{# if(d.ISHAVEGS == 0){ }}
+    否
+    {{# }else if(d.ISHAVEGS == 1){ }}
+    是
+    {{# } }}
+</script>
+<script type="text/html" id="ISQTYY_Tpl">
+    {{# if(d.ISQTYY == 0){ }}
+    否
+    {{# }else if(d.ISQTYY == 1){ }}
+    是
+    {{# } }}
+</script>
+<script type="text/html" id="JSORDER_Tpl">
+    {{# if(d.JSORDER == 0){ }}
+
+    {{# }else if(d.JSORDER == 1){ }}
+    税前
+    {{# }else if(d.JSORDER == 2){ }}
+    税后
+    {{# } }}
+</script>
+<script type="text/html" id="ISJJX_Tpl">
+    {{# if(d.ISJJX == 0){ }}
+
+    {{# }else if(d.ISJJX == 1){ }}
+    统计项
+    {{# }else if(d.ISJJX == 2){ }}
+    加项
+    {{# }else if(d.ISJJX == 3){ }}
+    减项
+    {{# } }}
+</script>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">维护类别：</label>
+            <div class="layui-input-block" style="width: 300px;">
+                <select id="in_whlb" lay-filter="in_whlb">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">员工薪资档案字段</option>
+                    <option value="2">工资表字段</option>
+                    @*<option value="3">常量字段</option>*@
+                    @*<option value="4">专项扣除字段设定</option>*@
+                    <option value="5">假情字段</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_ygxzdazdwh" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add_gzlb">新增</button>
+        <button class="layui-btn" id="btn_find_gzlb">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工资类别：</label>
+            <div class="layui-input-inline">
+                <select id="find_gzlb_gzlb" lay-filter="find_gzlb_gzlb" lay-search></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="table_gzlb" lay-filter="table_gzlb"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+<div id="div_gzlbinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工资类别：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="gzlbinfo_gzlbname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工资表字段：</label>
+            <div class="layui-input-inline1">
+                <select id="gzlbinfo_zd" lay-filter="gzlbinfo_zd"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_gzbzdwh" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add_gzzd">新增</button>
+        <button class="layui-btn" id="btn_find_gzzd">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工资字段：</label>
+            <div class="layui-input-inline">
+                <select id="find_gzzd_gzzd" lay-filter="find_gzzd_gzzd" lay-search></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="table_gzzd" lay-filter="table_gzzd"></table>
+</div>
+<div id="div_gzzdinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="gzzdinfo_zdms" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">是否启用：</label>
+            <div class="layui-input-inline1" style="width: 100px;">
+                <select id="gzzdinfo_isaction" lay-filter="gzzdinfo_isaction">
+                    <option value="0">关闭</option>
+                    <option value="1">启用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段类别：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_zdlb" lay-filter="gzzdinfo_zdlb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">项目名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_jjx" lay-filter="gzzdinfo_jjx">
+                    <option value="0">请选择</option>
+                    <option value="1">统计项</option>
+                    <option value="2">加项</option>
+                    <option value="3">减项</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">是否引用：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_isyy" lay-filter="gzzdinfo_isyy">
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">排序字段：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="gzzdinfo_sortno" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">引用表：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_yytable" lay-filter="gzzdinfo_yytable"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">引用字段：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_yytablezd" lay-filter="gzzdinfo_yytablezd"></select>
+            </div>
+        </div>
+    </div>
+    @*<div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">小数保留规则：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_xsblgz" lay-filter="gzzdinfo_xsblgz"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">有效小数位：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_yxws" lay-filter="gzzdinfo_yxws">
+                    <option value="0" selected="selected">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        </div>
+    </div>*@
+    @*<div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">公式输入：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_ishavegs" lay-filter="gzzdinfo_ishavegs">
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+    </div>*@
+    @*<div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">计算顺序：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="gzzdinfo_jslevel" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">税前/税后：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_jsorder" lay-filter="gzzdinfo_jsorder">
+                    <option value="0">请选择</option>
+                    <option value="1">税前</option>
+                    <option value="2">税后</option>
+                </select>
+            </div>
+        </div>
+    </div>*@
+    @*<div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">公式：</label>
+            <div class="layui-input-inline1" style="width: 520px;">
+                <input type="text" id="gzzdinfo_gs" autocomplete="off" class="layui-input" readonly="readonly">
+                <textarea placeholder="" class="layui-textarea" id="gzzdinfo_gs" readonly="readonly"></textarea>
+            </div>
+        </div>
+    </div>*@
+</div>
+<div id="div_gs" class="layui-form" hidden>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="gs_ms"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段来源：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gs_zdly" lay-filter="gs_zdly">
+                    <option value="0">请选择</option>
+                    <option value="1">工资字段</option>
+                    @*<option value="3">常量字段</option>*@
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gs_zdmc" lay-filter="gs_zdmc" lay-search></select>
+            </div>
+        </div>
+        <button class="layui-btn" id="btn_addzd">添加</button>
+    </div>
+    <button class="layui-btn" id="btn_1">+</button>
+    <button class="layui-btn" id="btn_2">-</button>
+    <button class="layui-btn" id="btn_3">*</button>
+    <button class="layui-btn" id="btn_4">/</button>
+    <button class="layui-btn" id="btn_5">CASE WHEN</button>
+</div>
+<div id="div_clzdwh" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add_clzd">新增</button>
+        <button class="layui-btn" id="btn_find_clzd">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">常量字段：</label>
+        </div>
+    </div>
+    <table class="layui-hide" id="table_clzd" lay-filter="table_clzd"></table>
+</div>
+<div id="div_clinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段名：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="clinfo_zdms" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段值：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="clinfo_zdvalue" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_zxfjkc" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add_zxfjkc">新增</button>
+        <button class="layui-btn" id="btn_find_zxfjkc">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">明细：</label>
+        </div>
+    </div>
+    <table class="layui-hide" id="table_zxfjkc" lay-filter="table_zxfjkc"></table>
+</div>
+
+@*<div id="div_jqgl" class="layui-form" hidden>
+        <div class="layui-form-item">
+            <button class="layui-btn" id="btn_add_jqgl">新增</button>
+            <button class="layui-btn" id="btn_find_jqgl">查询</button>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">假请管理：</label>
+            </div>
+        </div>
+        <table class="layui-hide" id="table_jqgl" lay-filter="table_jqgl"></table>
+    </div>*@
+
+<div id="div_zxfjkcmx" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工资表字段：</label>
+            <div class="layui-input-inline1">
+                <select id="zxfjkcmx_zd" lay-filter="zxfjkcmx_zd" lay-search=""></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">公式：</label>
+            <div class="layui-input-inline1">
+                @*<input type="text" id="zxfjkcmx_gs" autocomplete="off" class="layui-input" readonly="readonly">*@
+                <textarea placeholder="" class="layui-textarea" id="zxfjkcmx_gs" readonly="readonly"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_zxfjkcgs" class="layui-form" hidden>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="zxfjkcgs_ms"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="zxfjkcgs_zdmc" lay-filter="zxfjkcgs_zdmc" lay-search=""></select>
+            </div>
+        </div>
+        <button class="layui-btn" id="btn_zxfjkcgs_addzd">添加</button>
+    </div>
+    <button class="layui-btn" id="btn_11">+</button>
+    <button class="layui-btn" id="btn_12">-</button>
+    <button class="layui-btn" id="btn_13">*</button>
+    <button class="layui-btn" id="btn_14">/</button>
+    <button class="layui-btn" id="btn_15">CASE WHEN</button>
+</div>
+
+<div id="div_mypw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">密钥密码：</label>
+            <div class="layui-input-inline1">
+                <input type="password" id="myinfo_mypw" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="bl_mypw" value="@mypw">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_ZDMANAGE")
+}

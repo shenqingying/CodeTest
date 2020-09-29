@@ -1,0 +1,1221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{62EEC10B-4DC8-4FD9-BC72-9BADBF1C26FE}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sonluk.WX</RootNamespace>
+    <AssemblyName>Sonluk.WX</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APPCLASS\AppClass.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\CRM\Controllers\BaiFangController.cs" />
+    <Compile Include="Areas\CRM\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\CRM\Controllers\FCHController.cs" />
+    <Compile Include="Areas\CRM\Controllers\FeeController.cs" />
+    <Compile Include="Areas\CRM\Controllers\HuoDongController.cs" />
+    <Compile Include="Areas\CRM\Controllers\KaoQinController.cs" />
+    <Compile Include="Areas\CRM\Controllers\KeHuController.cs" />
+    <Compile Include="Areas\CRM\Controllers\MSGController.cs" />
+    <Compile Include="Areas\CRM\Controllers\OrderController.cs" />
+    <Compile Include="Areas\CRM\Controllers\PublicController.cs" />
+    <Compile Include="Areas\CRM\Controllers\SAPreportController.cs" />
+    <Compile Include="Areas\CRM\Controllers\StaffController.cs" />
+    <Compile Include="Areas\CRM\Controllers\SystemController.cs" />
+    <Compile Include="Areas\CRM\Controllers\WLController.cs" />
+    <Compile Include="Areas\CRM\Controllers\WXController.cs" />
+    <Compile Include="Areas\CRM\CRMAreaRegistration.cs" />
+    <Compile Include="Areas\FIVES\Controllers\ScoreController.cs" />
+    <Compile Include="Areas\FIVES\Controllers\SystemController.cs" />
+    <Compile Include="Areas\FIVES\FIVESAreaRegistration.cs" />
+    <Compile Include="Areas\WMS\Controllers\BC_TMController.cs" />
+    <Compile Include="Areas\WMS\WMSAreaRegistration.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CRMModels.cs" />
+    <Compile Include="Models\DXM.cs" />
+    <Compile Include="Models\FIVESModels.cs" />
+    <Compile Include="Models\HRModels.cs" />
+    <Compile Include="Models\JsonHelper.cs" />
+    <Compile Include="Models\MESModels.cs" />
+    <Compile Include="Models\PUBLICModels.cs" />
+    <Compile Include="Models\QY\QY_Access_Token.cs" />
+    <Compile Include="Models\QY\QY_Ticket.cs" />
+    <Compile Include="Models\QY\QY_token.cs" />
+    <Compile Include="Models\QY\UserID.cs" />
+    <Compile Include="Models\SSOModels.cs" />
+    <Compile Include="Models\TXaddress.cs" />
+    <Compile Include="Models\WebMSG.cs" />
+    <Compile Include="Models\WebRes.cs" />
+    <Compile Include="Models\WX\Access_token.cs" />
+    <Compile Include="Models\WX\JSApi_Ticket.cs" />
+    <Compile Include="Models\WX\OpenID.cs" />
+    <Compile Include="Models\WX\Signature.cs" />
+    <Compile Include="Models\WX_MSG_nouse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\CRM\img\pic.jpg" />
+    <Content Include="Areas\CRM\img\timg.jpg" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Areas\CRM\Views\Web.config" />
+    <Content Include="Areas\CRM\Views\KeHu\Area_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Insert.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Jingpin_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\KeHuIndex.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Pinzhong_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Qudao_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Update.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\UpdateIndex.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\SignIn.cshtml" />
+    <Content Include="Areas\CRM\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CRM\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Display_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\DisplayImg_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Partner_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Contact_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Post_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Mentou_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Group_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Sap.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\KaoQin_Upload.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\KaoQinIndex.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\QianDao.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\QingJia.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\ChuChai.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\Insert_QingJia.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\Update_QingJia.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\Insert_ChuChai.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\Update_ChuChai.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\bf_log.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Select_KeHu_ToBaiFang.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Insert_BaiFang.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Update_BaiFang.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\BaiFangManage.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\KaoQin_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\CX_BaiFang.cshtml" />
+    <Content Include="Areas\CRM\Views\Staff\StaffIndex.cshtml" />
+    <Content Include="Areas\CRM\Views\Staff\Address_Staff.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\YiChang.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Backlog.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\BacklogMX.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\Index1.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\SongHuo.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\XiaoShou.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\WDshuliang.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\ChePai.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\ChePaiImg.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\CuXiao.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\YiChang_Single.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\Select_Only.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\HeXiao_ChuChai.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\HeXiao_Update_ChuChai.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\BaoBiao_Personal.cshtml" />
+    <Content Include="Areas\CRM\Views\HuoDong\InsertFee.cshtml" />
+    <Content Include="Areas\CRM\Views\HuoDong\SelectFee_Personal.cshtml" />
+    <Content Include="Areas\CRM\Views\HuoDong\UpdateFee.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\test.cshtml" />
+    <Content Include="Areas\CRM\Views\SAPreport\Invoice.cshtml" />
+    <Content Include="Areas\CRM\Views\System\Password.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\BaoBiao.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\ZXManage.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Insert_ZX.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Update_ZX.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\ZPManage.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Insert_ZP.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\Update_ZP.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\JinZhan.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\HuoDong.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\ZXRY_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\Retreat_ChuChai.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\SAPXXTB.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\SelectBarCode.cshtml" />
+    <Content Include="Areas\CRM\Views\BaiFang\BaiFangReportBySTAFF.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\HuoDongImg_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\ScanCH.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\FXCH_Report.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\UpdateScanCH.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\FXCH_CX.cshtml" />
+    <Content Include="Areas\CRM\Views\Shared\_Layout_PDA.cshtml" />
+    <Content Include="Areas\CRM\Views\System\Users.cshtml" />
+    <Content Include="Areas\CRM\Views\KaoQin\CCimg.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\BatteryImg_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\KeHu\PackImg_Select.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\ScanCH_FX.cshtml" />
+    <Content Include="Areas\CRM\Views\Shared\_Layout-weui.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Insert_Order.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Index1.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Choose_Product.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Select_Order.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Update_Order.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Report_Order.cshtml" />
+    <Content Include="Areas\CRM\Views\MSG\Invoice.cshtml" />
+    <Content Include="Areas\CRM\Views\MSG\Notice.cshtml" />
+    <Content Include="Areas\CRM\Views\MSG\Show_Notice.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Select_Order_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\Account.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Update_Order_MXpart.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Order_HJ.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Load_CP.cshtml" />
+    <Content Include="Areas\CRM\Views\System\KHPassword.cshtml" />
+    <Content Include="Areas\CRM\Views\MSG\InvoicePart.cshtml" />
+    <Content Include="Areas\CRM\Views\MSG\NoticePart.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\SH_Order.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\SH_Order_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\SH_Order_MXPart.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Update_Order_CopyPart.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\Basic.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\Product.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\Promotion.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Report_Order_DuiZhangPart.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Report_Order_FaHuoPart.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\Report_Order_ZheKouPart.cshtml" />
+    <Content Include="Areas\FIVES\Views\Web.config" />
+    <Content Include="Areas\FIVES\Views\Score\Create_Score.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Error.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Success.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Select_Score.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Select_Score_Part.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Update_Score.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Select_Score_MXPart.cshtml" />
+    <Content Include="Areas\CRM\Views\Order\WX_SH_Order.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\ScanCH_WX.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\FXCH_CX_WX.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\LoadDownMenu.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\LoadMenuMX.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\MenuMX.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\LoadVideoIMG.cshtml" />
+    <Content Include="Areas\CRM\Views\Company\Video_Play.cshtml" />
+    <Content Include="Areas\CRM\Views\WL\WLIndex.cshtml" />
+    <Content Include="Areas\CRM\Views\WL\FollowWL.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\SelectBarCode_KH.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KACXY.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_MDBS.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KACXY_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\Data_SelectKH_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_KACXY.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_MDBS_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_MDBS.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_MDBS.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\Select_FuJian.cshtml" />
+    <Content Include="Areas\CRM\Views\Public\Select_Opinion.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_MDBS_HX.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_MDBS_HX.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_MDBS_HX2.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_MDBS_HX2.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_MDBS_HX2_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_MDBS_Unconnected_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_MDBS_HX2.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_CXYGL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_Create_Fee.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\GetData_Create_Fee_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_Create_Fee.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_Create_Fee.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_KACXY.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KAyear.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KAyear_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateIndex.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_BaseInfo.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_KAyear.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_KAyear.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KAyearMX_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_GGSJT.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_ZZF_GGSJT_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_GGXGT.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_ZZQZP.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KADT.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_KADT.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KADT_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KADTMX_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KADTDP_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_KADT.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KADTDP_cxPart.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_GGZZMX.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_ZZF_GGZZMX_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_ZWHJZP.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_KATSCL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KATSCL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KATSCL_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KATSCLMX_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_KATSCL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_SPYJ.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_Travel.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_Travel_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_Travel.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Insert_KAHXZL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KAHXZL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KAHXZL_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KAHXZLMX_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KADT_Unconnected_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KATSCL_Unconnected_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_KAZZF_Unconnected_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_KAHXZL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\GetData_CLFTT_STAFF_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_Travel.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_Clfmx_Part.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Select_SH_KAHXZL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\Update_SH_KAHXZL.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_GGZLXY.cshtml" />
+    <Content Include="Areas\CRM\Views\Fee\UpdateZZF_GGWCHM.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Create_Score_DJ.cshtml" />
+    <Content Include="Config\bindings.config" />
+    <Content Include="Config\client.config" />
+    <Content Include="Areas\FIVES\Views\Score\Auto_CreateScore.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\ScanFAHUO.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\ScanFAHUO_JHDPart.cshtml" />
+    <Content Include="Areas\CRM\Views\FCH\ScanFAHUO_JHDMXPart.cshtml" />
+    <Content Include="Areas\FIVES\Views\Score\Select_Score_DJ.cshtml" />
+    <Content Include="Areas\WMS\Views\Web.config" />
+    <Content Include="Areas\WMS\Views\BC_TM\YH_MARK.cshtml" />
+    <Content Include="Areas\WMS\Views\BC_TM\YH_MARK_Part.cshtml" />
+    <None Include="Properties\PublishProfiles\CRMmobile.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Image\1000201.png" />
+    <Content Include="Image\1000202.png" />
+    <Content Include="Image\1000203.png" />
+    <Content Include="Image\1000204.png" />
+    <Content Include="Image\baifang.png" />
+    <Content Include="Image\baifang\chaxun.png" />
+    <Content Include="Image\baifang\qiandao.png" />
+    <Content Include="Image\baifang\guanli.png" />
+    <Content Include="Image\home.png" />
+    <Content Include="Image\huodong.png" />
+    <Content Include="Image\kaoqin.png" />
+    <Content Include="Image\kaoqin\chuchai.png" />
+    <Content Include="Image\kaoqin\yichang.png" />
+    <Content Include="Image\kaoqin\report.png" />
+    <Content Include="Image\kaoqin\qiandao.png" />
+    <Content Include="Image\kaoqin\qingjia.png" />
+    <Content Include="Image\kehu.png" />
+    <Content Include="Image\kehu\basic\fujian.png" />
+    <Content Include="Image\kehu\basic\jingpin.png" />
+    <Content Include="Image\kehu\basic\mentou.png" />
+    <Content Include="Image\kehu\basic\partner.png" />
+    <Content Include="Image\kehu\basic\basic.png" />
+    <Content Include="Image\kehu\basic\pinzhong.png" />
+    <Content Include="Image\kehu\basic\qudao.png" />
+    <Content Include="Image\kehu\basic\power.png" />
+    <Content Include="Image\kehu\basic\area.png" />
+    <Content Include="Image\kehu\basic\kaoqinAddress.png" />
+    <Content Include="Image\kehu\basic\contact.png" />
+    <Content Include="Image\kehu\basic\post.png" />
+    <Content Include="Image\kehu\basic\display.png" />
+    <Content Include="Image\kehu\SAP.png" />
+    <Content Include="Image\kehu\list.png" />
+    <Content Include="Image\kehu\new.png" />
+    <Content Include="Image\kehu\spaceArea.png" />
+    <Content Include="Image\sapbaobiao.png" />
+    <Content Include="Image\staff\AddressUpload.png" />
+    <Content Include="Image\test.jpg" />
+    <Content Include="Image\test1.png" />
+    <Content Include="Image\3.jpg" />
+    <Content Include="Image\1.jpg" />
+    <Content Include="Image\2.jpg" />
+    <Content Include="Image\xitong.png" />
+    <Content Include="Image\yuangong.png" />
+    <Content Include="Scripts\CRM\BaiFang\Backlog.js" />
+    <Content Include="Scripts\CRM\BaiFang\BacklogMX.js" />
+    <Content Include="Scripts\CRM\BaiFang\BaiFangManage.js" />
+    <Content Include="Scripts\CRM\BaiFang\BaiFangReport.js" />
+    <Content Include="Scripts\CRM\BaiFang\BaiFangReportBySTAFF.js" />
+    <Content Include="Scripts\CRM\BaiFang\bf_log.js" />
+    <Content Include="Scripts\CRM\BaiFang\GetKHDZ_Distance.js" />
+    <Content Include="Scripts\CRM\BaiFang\Index.js" />
+    <Content Include="Scripts\CRM\BaiFang\Insert_BaiFang.js" />
+    <Content Include="Scripts\CRM\BaiFang\Insert_ZP.js" />
+    <Content Include="Scripts\CRM\BaiFang\Insert_ZX.js" />
+    <Content Include="Scripts\CRM\BaiFang\Select_KeHu_ToBaiFang.js" />
+    <Content Include="Scripts\CRM\BaiFang\ShowLocationMap.js" />
+    <Content Include="Scripts\CRM\BaiFang\StaffDDLByKHGroup.js" />
+    <Content Include="Scripts\CRM\BaiFang\Update_BaiFang.js" />
+    <Content Include="Scripts\CRM\BaiFang\Update_ZP.js" />
+    <Content Include="Scripts\CRM\BaiFang\Update_ZX.js" />
+    <Content Include="Scripts\CRM\BaiFang\ZPManage.js" />
+    <Content Include="Scripts\CRM\BaiFang\ZXManage.js" />
+    <Content Include="Scripts\CRM\Company\Basic.js" />
+    <Content Include="Scripts\CRM\Company\Product.js" />
+    <Content Include="Scripts\CRM\Company\Promotion.js" />
+    <Content Include="Scripts\CRM\FCH\FXCH_CX.js" />
+    <Content Include="Scripts\CRM\FCH\FXCH_CX_WX.js" />
+    <Content Include="Scripts\CRM\FCH\FXCH_Report.js" />
+    <Content Include="Scripts\CRM\FCH\SAPXXTB.js" />
+    <Content Include="Scripts\CRM\FCH\ScanBarCode.js" />
+    <Content Include="Scripts\CRM\FCH\ScanCH.js" />
+    <Content Include="Scripts\CRM\FCH\ScanCH_FX.js" />
+    <Content Include="Scripts\CRM\FCH\ScanCH_WX.js" />
+    <Content Include="Scripts\CRM\FCH\ScanFAHUO.js" />
+    <Content Include="Scripts\CRM\FCH\SelectBarCode.js" />
+    <Content Include="Scripts\CRM\FCH\SelectBarCode_KH.js" />
+    <Content Include="Scripts\CRM\FCH\UpdateScanCH.js" />
+    <Content Include="Scripts\CRM\FCH\WX_ScanDXMorNHM.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_Create_Fee.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_KACXY.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_KADT.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_KAHXZL.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_KATSCL.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_KAyear.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_MDBS.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_MDBS_HX2.js" />
+    <Content Include="Scripts\CRM\Fee\Insert_Travel.js" />
+    <Content Include="Scripts\CRM\Fee\Select_Create_Fee.js" />
+    <Content Include="Scripts\CRM\Fee\Select_CXYGL.js" />
+    <Content Include="Scripts\CRM\Fee\Select_KACXY.js" />
+    <Content Include="Scripts\CRM\Fee\Select_KADT.js" />
+    <Content Include="Scripts\CRM\Fee\Select_KAHXZL.js" />
+    <Content Include="Scripts\CRM\Fee\Select_KATSCL.js" />
+    <Content Include="Scripts\CRM\Fee\Select_KAyear.js" />
+    <Content Include="Scripts\CRM\Fee\Select_MDBS.js" />
+    <Content Include="Scripts\CRM\Fee\Select_MDBS_HX.js" />
+    <Content Include="Scripts\CRM\Fee\Select_MDBS_HX2.js" />
+    <Content Include="Scripts\CRM\Fee\Select_SH_KAHXZL.js" />
+    <Content Include="Scripts\CRM\Fee\Select_Travel.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_BaseInfo.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_GGSJT.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_GGWCHM.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_GGXGT.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_GGZLXY.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_GGZZMX.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_SPYJ.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_ZWHJZP.js" />
+    <Content Include="Scripts\CRM\Fee\UpdateZZF_ZZQZP.js" />
+    <Content Include="Scripts\CRM\Fee\Update_Create_Fee.js" />
+    <Content Include="Scripts\CRM\Fee\Update_KACXY.js" />
+    <Content Include="Scripts\CRM\Fee\Update_KADT.js" />
+    <Content Include="Scripts\CRM\Fee\Update_KAHXZL.js" />
+    <Content Include="Scripts\CRM\Fee\Update_KATSCL.js" />
+    <Content Include="Scripts\CRM\Fee\Update_KAyear.js" />
+    <Content Include="Scripts\CRM\Fee\Update_MDBS.js" />
+    <Content Include="Scripts\CRM\Fee\Update_MDBS_HX.js" />
+    <Content Include="Scripts\CRM\Fee\Update_MDBS_HX2.js" />
+    <Content Include="Scripts\CRM\Fee\Update_Travel.js" />
+    <Content Include="Scripts\CRM\Fee\Update_SH_KAHXZL.js" />
+    <Content Include="Scripts\CRM\HuoDong\Arabia_to_Chinese.js" />
+    <Content Include="Scripts\CRM\HuoDong\InsertFee.js" />
+    <Content Include="Scripts\CRM\HuoDong\SelectFee_Personal.js" />
+    <Content Include="Scripts\CRM\HuoDong\UpdateFee.js" />
+    <Content Include="Scripts\CRM\KaoQin\BaoBiao.js" />
+    <Content Include="Scripts\CRM\KaoQin\BaoBiao_Personal.js" />
+    <Content Include="Scripts\CRM\KaoQin\CCimg.js" />
+    <Content Include="Scripts\CRM\KaoQin\ChuChai.js" />
+    <Content Include="Scripts\CRM\KaoQin\GetDistance.js" />
+    <Content Include="Scripts\CRM\KaoQin\GetLocationAndAddress.js" />
+    <Content Include="Scripts\CRM\KaoQin\HeXiao_ChuChai.js" />
+    <Content Include="Scripts\CRM\KaoQin\HeXiao_Update_ChuChai.js" />
+    <Content Include="Scripts\CRM\KaoQin\Insert_ChuChai.js" />
+    <Content Include="Scripts\CRM\KaoQin\Insert_QingJia.js" />
+    <Content Include="Scripts\CRM\KaoQin\QianDao.js" />
+    <Content Include="Scripts\CRM\KaoQin\QingJia.js" />
+    <Content Include="Scripts\CRM\KaoQin\Retreat_ChuChai.js" />
+    <Content Include="Scripts\CRM\KaoQin\Update_ChuChai.js" />
+    <Content Include="Scripts\CRM\KaoQin\Update_QingJia.js" />
+    <Content Include="Scripts\CRM\KaoQin\YiChang.js" />
+    <Content Include="Scripts\CRM\KaoQin\YiChang_Single.js" />
+    <Content Include="Scripts\CRM\KeHu\Area.js" />
+    <Content Include="Scripts\CRM\KeHu\BatteryImg.js" />
+    <Content Include="Scripts\CRM\KeHu\ChePai.js" />
+    <Content Include="Scripts\CRM\KeHu\ChePaiImg.js" />
+    <Content Include="Scripts\CRM\KeHu\Contact.js" />
+    <Content Include="Scripts\CRM\KeHu\CuXiao.js" />
+    <Content Include="Scripts\CRM\KeHu\Display.js" />
+    <Content Include="Scripts\CRM\KeHu\DisplayImg.js" />
+    <Content Include="Scripts\CRM\KeHu\DropDownList.js" />
+    <Content Include="Scripts\CRM\KeHu\GetDDLdata.js" />
+    <Content Include="Scripts\CRM\KeHu\getDDL_PKH.js" />
+    <Content Include="Scripts\CRM\KeHu\GetGroupByPower.js" />
+    <Content Include="Scripts\CRM\KeHu\Group.js" />
+    <Content Include="Scripts\CRM\KeHu\HuoDong.js" />
+    <Content Include="Scripts\CRM\KeHu\HuoDongImg.js" />
+    <Content Include="Scripts\CRM\KeHu\Insert.js" />
+    <Content Include="Scripts\CRM\KeHu\Jingpin.js" />
+    <Content Include="Scripts\CRM\KeHu\JinZhan.js" />
+    <Content Include="Scripts\CRM\KeHu\KaoQin.js" />
+    <Content Include="Scripts\CRM\KeHu\KaoQin_Select.js" />
+    <Content Include="Scripts\CRM\KeHu\Mentou.js" />
+    <Content Include="Scripts\CRM\KeHu\PackImg.js" />
+    <Content Include="Scripts\CRM\KeHu\Partner.js" />
+    <Content Include="Scripts\CRM\KeHu\PinZhong.js" />
+    <Content Include="Scripts\CRM\KeHu\Post.js" />
+    <Content Include="Scripts\CRM\KeHu\QuDao.js" />
+    <Content Include="Scripts\CRM\KeHu\SAP.js" />
+    <Content Include="Scripts\CRM\KeHu\Select.js" />
+    <Content Include="Scripts\CRM\KeHu\SelectUpKeHu.js" />
+    <Content Include="Scripts\CRM\KeHu\SongHuo.js" />
+    <Content Include="Scripts\CRM\KeHu\Update.js" />
+    <Content Include="Scripts\CRM\KeHu\UpdateIndex.js" />
+    <Content Include="Scripts\CRM\KeHu\WDshuliang.js" />
+    <Content Include="Scripts\CRM\KeHu\WX_IMG.js" />
+    <Content Include="Scripts\CRM\KeHu\XiaoShou.js" />
+    <Content Include="Scripts\CRM\KeHu\ZXRY.js" />
+    <Content Include="Scripts\CRM\MSG\Invoice.js" />
+    <Content Include="Scripts\CRM\MSG\Notice.js" />
+    <Content Include="Scripts\CRM\Order\Choose_Product.js" />
+    <Content Include="Scripts\CRM\Order\Insert_Order.js" />
+    <Content Include="Scripts\CRM\Order\Report_Order.js" />
+    <Content Include="Scripts\CRM\Order\Select_Order.js" />
+    <Content Include="Scripts\CRM\Order\SH_Order.js" />
+    <Content Include="Scripts\CRM\Order\Update_Order.js" />
+    <Content Include="Scripts\CRM\Public\IMG_OPINION_Load.js" />
+    <Content Include="Scripts\CRM\SAP\Invoice.js" />
+    <Content Include="Scripts\CRM\Staff\Address.js" />
+    <Content Include="Scripts\CRM\System\KHPassword.js" />
+    <Content Include="Scripts\CRM\System\Password.js" />
+    <Content Include="Scripts\CRM\System\Users.js" />
+    <Content Include="Scripts\CRM\WL\FollowWL.js" />
+    <Content Include="Scripts\CRM\WL\WLIndex.js" />
+    <Content Include="Scripts\FIVES\Score\Auto_CreateScore.js" />
+    <Content Include="Scripts\FIVES\Score\Create_Score_DJ.js" />
+    <Content Include="Scripts\FIVES\Score\ScanPF.js" />
+    <Content Include="Scripts\FIVES\Score\Select_Score.js" />
+    <Content Include="Scripts\FIVES\Score\Success.js" />
+    <Content Include="Scripts\FIVES\Score\Update_Score.js" />
+    <Content Include="Scripts\FIVES\System\SY_DICT.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\layui2.2.5\css\layui.css" />
+    <Content Include="Scripts\layui2.2.5\css\layui.mobile.css" />
+    <Content Include="Scripts\layui2.2.5\css\login.css" />
+    <Content Include="Scripts\layui2.2.5\css\modules\code.css" />
+    <Content Include="Scripts\layui2.2.5\css\modules\laydate\default\laydate.css" />
+    <Content Include="Scripts\layui2.2.5\css\modules\layer\default\icon-ext.png" />
+    <Content Include="Scripts\layui2.2.5\css\modules\layer\default\icon.png" />
+    <Content Include="Scripts\layui2.2.5\css\modules\layer\default\layer.css" />
+    <Content Include="Scripts\layui2.2.5\css\modules\layer\default\loading-0.gif" />
+    <Content Include="Scripts\layui2.2.5\css\modules\layer\default\loading-1.gif" />
+    <Content Include="Scripts\layui2.2.5\css\modules\layer\default\loading-2.gif" />
+    <Content Include="Scripts\layui2.2.5\extend\ckplayer.js" />
+    <Content Include="Scripts\layui2.2.5\extend\dltable.js" />
+    <Content Include="Scripts\layui2.2.5\extend\formSelects-v3.js" />
+    <Content Include="Scripts\layui2.2.5\extend\formSelects-v4.js" />
+    <Content Include="Scripts\layui2.2.5\extend\formSelects-v4.min.js" />
+    <Content Include="Scripts\layui2.2.5\extend\treeGrid.js" />
+    <Content Include="Scripts\layui2.2.5\font\iconfont.svg" />
+    <Content Include="Scripts\layui2.2.5\images\face\0.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\1.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\10.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\11.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\12.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\13.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\14.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\15.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\16.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\17.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\18.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\19.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\2.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\20.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\21.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\22.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\23.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\24.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\25.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\26.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\27.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\28.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\29.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\3.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\30.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\31.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\32.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\33.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\34.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\35.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\36.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\37.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\38.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\39.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\4.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\40.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\41.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\42.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\43.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\44.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\45.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\46.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\47.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\48.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\49.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\5.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\50.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\51.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\52.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\53.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\54.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\55.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\56.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\57.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\58.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\59.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\6.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\60.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\61.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\62.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\63.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\64.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\65.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\66.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\67.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\68.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\69.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\7.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\70.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\71.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\8.gif" />
+    <Content Include="Scripts\layui2.2.5\images\face\9.gif" />
+    <Content Include="Scripts\layui2.2.5\layui.all.js" />
+    <Content Include="Scripts\layui2.2.5\layui.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\carousel.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\code.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\element.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\flow.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\form.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\jquery.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\laydate.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\layedit.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\layer.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\laypage.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\laytpl.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\mobile.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\table.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\tree.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\upload.js" />
+    <Content Include="Scripts\layui2.2.5\lay\modules\util.js" />
+    <Content Include="Scripts\layui2.4.5\css\layui.css" />
+    <Content Include="Scripts\layui2.4.5\css\layui.mobile.css" />
+    <Content Include="Scripts\layui2.4.5\css\modules\code.css" />
+    <Content Include="Scripts\layui2.4.5\css\modules\laydate\default\laydate.css" />
+    <Content Include="Scripts\layui2.4.5\css\modules\layer\default\icon-ext.png" />
+    <Content Include="Scripts\layui2.4.5\css\modules\layer\default\icon.png" />
+    <Content Include="Scripts\layui2.4.5\css\modules\layer\default\layer.css" />
+    <Content Include="Scripts\layui2.4.5\css\modules\layer\default\loading-0.gif" />
+    <Content Include="Scripts\layui2.4.5\css\modules\layer\default\loading-1.gif" />
+    <Content Include="Scripts\layui2.4.5\css\modules\layer\default\loading-2.gif" />
+    <Content Include="Scripts\layui2.4.5\font\iconfont.svg" />
+    <Content Include="Scripts\layui2.4.5\images\face\0.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\1.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\10.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\11.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\12.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\13.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\14.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\15.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\16.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\17.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\18.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\19.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\2.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\20.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\21.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\22.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\23.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\24.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\25.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\26.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\27.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\28.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\29.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\3.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\30.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\31.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\32.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\33.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\34.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\35.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\36.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\37.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\38.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\39.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\4.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\40.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\41.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\42.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\43.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\44.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\45.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\46.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\47.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\48.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\49.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\5.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\50.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\51.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\52.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\53.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\54.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\55.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\56.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\57.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\58.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\59.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\6.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\60.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\61.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\62.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\63.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\64.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\65.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\66.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\67.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\68.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\69.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\7.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\70.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\71.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\8.gif" />
+    <Content Include="Scripts\layui2.4.5\images\face\9.gif" />
+    <Content Include="Scripts\layui2.4.5\layui.all.js" />
+    <Content Include="Scripts\layui2.4.5\layui.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\carousel.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\code.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\colorpicker.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\element.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\flow.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\form.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\jquery.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\laydate.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\layedit.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\layer.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\laypage.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\laytpl.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\mobile.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\rate.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\slider.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\table.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\tree.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\upload.js" />
+    <Content Include="Scripts\layui2.4.5\lay\modules\util.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\FIVES\Score\Create_Score.js" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\example.css" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\example.js" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_footer.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_footer_link.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_intro.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_actionSheet.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_article.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_button.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_cell.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_dialog.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_feedback.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_flow.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_form.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_icons.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_layout.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_msg.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_nav.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_panel.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_progress.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_search.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_search_bar.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_special.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_tab.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_toast.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_z-index.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_nav_zindex.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\icon_tabbar.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\layers\content.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\layers\navigation.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\layers\popout.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\layers\transparent.gif" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\logo.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\pic_160.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\pic_article.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\images\vcode.jpg" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\index.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\actionSheet.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\button.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\cell.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\dialog1.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\dialog2.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\grid.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\icons.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\progress.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\qrcode.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\result.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\text.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\toast1.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\snapshot\toast2.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\example\zepto.min.js" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\style\weui.css" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\dist\style\weui.min.css" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\gulpfile.js" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\LICENSE.txt" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\example.js" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\actionsheet.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\article.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\badge.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\button.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\dialog.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\flex.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\footer.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\gallery.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\grid.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\home.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\icons.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\input.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\layers.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\list.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\loadmore.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\msg.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\msg_success.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\msg_warn.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\navbar.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\panel.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\picker.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\preview.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\progress.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\searchbar.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\slider.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\tabbar.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\toast.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\fragment\uploader.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_footer.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_footer_link.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_intro.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_nav_feedback.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_nav_form.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_nav_layout.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_nav_nav.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_nav_search.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_nav_special.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_nav_z-index.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\icon_tabbar.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\layers\content.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\layers\navigation.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\layers\popout.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\layers\transparent.gif" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\logo.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\pic_160.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\pic_article.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\images\vcode.jpg" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\index.html" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\button.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\cell.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\dialog1.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\dialog2.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\grid.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\icons.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\progress.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\qrcode.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\result.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\text.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\toast1.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\snapshot\toast2.png" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\zepto.min.js" />
+    <Content Include="Scripts\weui.js\dist\example\example.js" />
+    <Content Include="Scripts\weui.js\dist\example\index.html" />
+    <Content Include="Scripts\weui.js\dist\weui.js" />
+    <Content Include="Scripts\weui.js\dist\weui.min.js" />
+    <Content Include="Scripts\weui.js\example\example.js" />
+    <Content Include="Scripts\weui.js\example\index.html" />
+    <Content Include="Scripts\weui.js\LICENSE.txt" />
+    <Content Include="Scripts\weui.js\src\actionSheet\actionSheet.html" />
+    <Content Include="Scripts\weui.js\src\actionSheet\actionSheet.js" />
+    <Content Include="Scripts\weui.js\src\alert\alert.js" />
+    <Content Include="Scripts\weui.js\src\confirm\confirm.js" />
+    <Content Include="Scripts\weui.js\src\dialog\dialog.html" />
+    <Content Include="Scripts\weui.js\src\dialog\dialog.js" />
+    <Content Include="Scripts\weui.js\src\form\form.js" />
+    <Content Include="Scripts\weui.js\src\gallery\gallery.html" />
+    <Content Include="Scripts\weui.js\src\gallery\gallery.js" />
+    <Content Include="Scripts\weui.js\src\loading\loading.html" />
+    <Content Include="Scripts\weui.js\src\loading\loading.js" />
+    <Content Include="Scripts\weui.js\src\picker\cron.js" />
+    <Content Include="Scripts\weui.js\src\picker\group.html" />
+    <Content Include="Scripts\weui.js\src\picker\picker.html" />
+    <Content Include="Scripts\weui.js\src\picker\picker.js" />
+    <Content Include="Scripts\weui.js\src\picker\scroll.js" />
+    <Content Include="Scripts\weui.js\src\picker\util.js" />
+    <Content Include="Scripts\weui.js\src\searchBar\searchBar.js" />
+    <Content Include="Scripts\weui.js\src\slider\slider.js" />
+    <Content Include="Scripts\weui.js\src\tab\tab.js" />
+    <Content Include="Scripts\weui.js\src\toast\toast.html" />
+    <Content Include="Scripts\weui.js\src\toast\toast.js" />
+    <Content Include="Scripts\weui.js\src\topTips\topTips.html" />
+    <Content Include="Scripts\weui.js\src\topTips\topTips.js" />
+    <Content Include="Scripts\weui.js\src\uploader\image.js" />
+    <Content Include="Scripts\weui.js\src\uploader\item.html" />
+    <Content Include="Scripts\weui.js\src\uploader\upload.js" />
+    <Content Include="Scripts\weui.js\src\uploader\uploader.js" />
+    <Content Include="Scripts\weui.js\src\util\util.js" />
+    <Content Include="Scripts\weui.js\src\weui.js" />
+    <Content Include="Scripts\weui.js\uploader-server\index.js" />
+    <Content Include="Scripts\weui.js\__tests__\actionsheet.js" />
+    <Content Include="Scripts\weui.js\__tests__\alert.js" />
+    <Content Include="Scripts\weui.js\__tests__\confirm.js" />
+    <Content Include="Scripts\weui.js\__tests__\form.js" />
+    <Content Include="Scripts\weui.js\__tests__\gallery.js" />
+    <Content Include="Scripts\weui.js\__tests__\lib\assert.js" />
+    <Content Include="Scripts\weui.js\__tests__\loading.js" />
+    <Content Include="Scripts\weui.js\__tests__\picker.js" />
+    <Content Include="Scripts\weui.js\__tests__\searchbar.js" />
+    <Content Include="Scripts\weui.js\__tests__\slider.js" />
+    <Content Include="Scripts\weui.js\__tests__\tab.js" />
+    <Content Include="Scripts\weui.js\__tests__\test.html" />
+    <Content Include="Scripts\weui.js\__tests__\toast.js" />
+    <Content Include="Scripts\weui.js\__tests__\toptips.js" />
+    <Content Include="Scripts\weui.js\__tests__\uploader.js" />
+    <Content Include="Scripts\WMS\BC_TM\YH_MARK.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\layui2.2.5\font\iconfont.eot" />
+    <Content Include="Scripts\layui2.2.5\font\iconfont.ttf" />
+    <Content Include="Scripts\layui2.2.5\font\iconfont.woff" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\.gitignore" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\.travis.yml" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\bower.json" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\CHANGELOG.md" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\CONTRIBUTING.md" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\package.json" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\README.md" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\README_cn.md" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\example\example.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\fn.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\mixin\mobile.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\mixin\setArrow.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\mixin\setOnepx.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\mixin\text.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\reset.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\color.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\global.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\weui-button.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\weui-cell.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\weui-dialog.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\weui-grid.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\weui-msg.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\base\variable\weui-progress.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\icon\weui-font.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\icon\weui-icon_font.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\weui.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-agree\weui-agree.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-animate\weui-animate.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-btn_default.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-btn_disabled.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-btn_global.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-btn_loading.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-btn_plain.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-btn_primary.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-btn_warn.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-button\weui-button.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-access.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-cell_global.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-cell_swiped.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-check.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-check\weui-checkbox.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-check\weui-check_common.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-check\weui-radio.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-form.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-form\weui-form-preview.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-form\weui-form_common.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-form\weui-select.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-form\weui-vcode.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-gallery.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-switch.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-cell\weui-uploader.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-flex\weui-flex.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-footer\weui-footer.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-grid\weui-grid.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-loading\weui-loading.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-media-box\weui-media-box.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-page\weui-article.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-page\weui-msg.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-panel\weui-panel.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-picker\weui-picker.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-progress\weui-progress.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-searchbar\weui-searchbar.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-slider\weui-slider.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tab\weui-navbar.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tab\weui-tab.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tab\weui-tabbar.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tips\weui-actionsheet.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tips\weui-badge.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tips\weui-dialog.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tips\weui-loadmore.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tips\weui-mask.less" />
+    <Content Include="Scripts\weui-1.1.3\weui-1.1.3\src\style\widget\weui-tips\weui-toast.less" />
+    <Content Include="Scripts\weui.js\.babelrc" />
+    <Content Include="Scripts\weui.js\.editorconfig" />
+    <Content Include="Scripts\weui.js\.eslintrc" />
+    <Content Include="Scripts\weui.js\.gitignore" />
+    <Content Include="Scripts\weui.js\CHANGELOG.md" />
+    <Content Include="Scripts\weui.js\docs\component\actionSheet.md" />
+    <Content Include="Scripts\weui.js\docs\component\alert.md" />
+    <Content Include="Scripts\weui.js\docs\component\confirm.md" />
+    <Content Include="Scripts\weui.js\docs\component\dialog.md" />
+    <Content Include="Scripts\weui.js\docs\component\form.md" />
+    <Content Include="Scripts\weui.js\docs\component\gallery.md" />
+    <Content Include="Scripts\weui.js\docs\component\loading.md" />
+    <Content Include="Scripts\weui.js\docs\component\picker.md" />
+    <Content Include="Scripts\weui.js\docs\component\searchBar.md" />
+    <Content Include="Scripts\weui.js\docs\component\slider.md" />
+    <Content Include="Scripts\weui.js\docs\component\tab.md" />
+    <Content Include="Scripts\weui.js\docs\component\toast.md" />
+    <Content Include="Scripts\weui.js\docs\component\topTips.md" />
+    <Content Include="Scripts\weui.js\docs\component\uploader.md" />
+    <Content Include="Scripts\weui.js\docs\README.md" />
+    <Content Include="Scripts\weui.js\package.json" />
+    <Content Include="Scripts\weui.js\README.md" />
+    <Content Include="Views\Shared\_Layout-weui.cshtml" />
+    <Content Include="Scripts\layui2.4.5\font\iconfont.eot" />
+    <Content Include="Scripts\layui2.4.5\font\iconfont.ttf" />
+    <Content Include="Scripts\layui2.4.5\font\iconfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\CRM\Models\" />
+    <Folder Include="Areas\FIVES\Models\" />
+    <Folder Include="Areas\FIVES\Views\Shared\" />
+    <Folder Include="Areas\WMS\Models\" />
+    <Folder Include="Areas\WMS\Views\Shared\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sonluk.UI.Model\Sonluk.UI.Model.csproj">
+      <Project>{0d24f0f5-9a65-449b-822c-e602ed36b147}</Project>
+      <Name>Sonluk.UI.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1488</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1478/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

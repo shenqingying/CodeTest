@@ -1,0 +1,247 @@
+﻿@{
+    ViewBag.Title = "配方单号维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">{{scom.c_modify}}</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">{{scom.c_delete}}</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete2">{{scom.c_delete}}</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="qyzt">
+    {{# if(d.ISACTION == 1){ }}
+    {{scom.c_enable}}
+    {{# }else if(d.ISACTION == 0){ }}
+    {{scom.c_disable}}
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+<script type="text/html" id="pf_lb">
+    {{# if(d.LB == 381){ }}
+    {{scom.c_ZINC}}
+    {{# }else if(d.LB == 364){ }}
+    {{scom.c_PPOWDER}}
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_messet">MES系统设置</a>
+    <a><cite lid="vi_meswh">配方单号维护</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lid="vi_insert">新增</button>
+            <button id="btn_cx" class="layui-btn" lid="vi_select">查询</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:130px" lid="vi_gc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gc" lay-filter="cx_gc">
+                    <option value="" selected="selected" lid="vi_option">请选择</option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                    }
+                </select>
+            </div>
+            <label class="layui-form-label" style="width:130px" lid="vi_pfdhlb">配方单号类别：</label>
+            <div class="layui-input-inline">
+                <select id="cx_pfdhlb" lay-filter="cx_pfdhlb">
+                    <option value="0" selected="selected" lid="vi_option">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label" lid="vi_pfdh">配方单号：</label>
+            <div class="layui-input-inline">
+                <input id="cx_pfdh" type="text" class="layui-input">
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_fo" lay-filter="tb_fo"></table>
+    </div>
+</div>
+<div id="div_fo" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_gc">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="gc" lay-filter="gc">
+                <option value="" selected="selected" lid="vi_optioner">请选择（必选）</option>
+                @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                {
+                    <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_pfdhlb">配方单号类别：</label>
+        <div class="layui-input-inline">
+            <select id="pfdhlb" lay-filter="pfdhlb">
+                <option value="" selected="selected" ></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_pfdh">配方单号：</label>
+        <div class="layui-input-inline">
+            <input id="pfdh" type="text" autocomplete="off" class="layui-input" style="text-transform:uppercase;">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_enable">启用状态：</label>
+        <div class="layui-input-inline">
+            <select id="pfzt" lay-filter="pfzt">
+                <option value="open" selected="selected" lid="vi_en">启用</option>
+                <option value="off" lid="vi_close">关闭</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_mark">备注：</label>
+        <div class="layui-input-inline">
+            <input id="bz" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<div id="div_foxg" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px" lid="vi_gc">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="gc_xg" lay-filter="gc_xg" disabled>
+                <option value="" selected="selected" lid="vi_optioner">请选择（必选）</option>
+                @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                {
+                    <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                }
+            </select>
+        </div>
+        @*</div>
+
+            <div class="layui-form-item">*@
+        <label class="layui-form-label" style="width:100px" lid="vi_pfdhlb">配方单号类别：</label>
+        <div class="layui-input-inline">
+            <select id="pfdhlb_xg" lay-filter="pfdhlb_xg" disabled>
+                <option value="0" selected="selected"></option>
+                @for (int i = 0; i < Model.Sy_typemxlist.Length; i++)
+                {
+                    <option value="@Model.Sy_typemxlist[i].ID">@Model.Sy_typemxlist[i].MXNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px" lid="vi_pfdh">配方单号：</label>
+        <div class="layui-input-inline">
+            <input id="pfdh_xg" type="text" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        @*</div>
+
+
+
+            <div class="layui-form-item">*@
+        <label class="layui-form-label" style="width:100px" lid="vi_enable">启用状态：</label>
+        <div class="layui-input-inline">
+            <select id="pfzt_xg" lay-filter="pfzt_xg">
+                <option value="open" selected="selected" lid="vi_en">启用</option>
+                <option value="off" lid="vi_messet">关闭</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px" lid="vi_mark">备注：</label>
+        <div class="layui-input-inline">
+            <input id="bz_xg" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-card">
+        <ul class="layui-tab-title">
+            <li class="layui-this" lid="vi_pfwl">配方物料</li>
+            <li lid="vi_pfzj">配方组件</li>
+        </ul>
+        <div class="layui-tab-content" @*style="height: 200px;"*@>
+            <div class="layui-tab-item layui-show">
+                &nbsp&nbsp&nbsp<button id="btn_wh" class="layui-btn" lid="vi_insert">新增</button>
+                <table class="layui-hide" id="pf_wllb" lay-filter="pf_wllb"></table>
+            </div>
+            <div class="layui-tab-item">
+                &nbsp&nbsp&nbsp<button id="btn_zj" class="layui-btn" lid="vi_insert">新增</button>
+                <table class="layui-hide" id="tb_pfzj" lay-filter="tb_pfzj"></table>
+            </div>
+        </div>
+    </div>
+    @*<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+            <legend>配方物料类别维护</legend>
+        </fieldset>
+        <div class="layui-form-item">
+            &nbsp&nbsp&nbsp<button id="btn_wh" class="layui-btn">维护</button>
+        </div>
+
+        <table id="pf_wllb" lay-filter="pf_wllb"></table>*@
+</div>
+<div id="div_zj" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_gc">工厂：</label>
+        <div class="layui-input-inline" style="width:340px">
+            <select id="zj_gc" lay-filter="zj_gc">
+                <option value="" selected="selected" lid="vi_optioner">请选择（必选）</option>
+                @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                {
+                    <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_wllb">物料类别：</label>
+        <div class="layui-input-inline" style="width:340px">
+            <select id="zj_wllb" lay-filter="zj_wllb" lay-search="">
+                <option value="" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_wlz">物料组：</label>
+        <div class="layui-input-inline" style="width:340px">
+            <select id="zj_wlz" lay-filter="zj_wlz">
+                <option value="" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_zlxx">物料信息：</label>
+        <div class="layui-input-inline" style="width:340px">
+            <select id="zj_wlxx" lay-filter="zj_wlxx">
+                <option value="" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px" lid="vi_mark">备注：</label>
+        <div class="layui-input-inline" style="width:340px">
+            <input id="zj_remark" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<div id="div_wllb" class="layui-form" hidden>
+    <table id="result_pf" lay-filter="result_pf"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/Formula_Order")
+}

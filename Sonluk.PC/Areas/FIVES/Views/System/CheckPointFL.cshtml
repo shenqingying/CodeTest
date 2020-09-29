@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "检查点分类维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<style>
+    .layui-form-item .layui-form-checkbox[lay-skin=primary] {
+        margin-top: 0px;
+    }
+</style>
+<input type="hidden" value="@Url.Action("Dictionary_Select_LB", "System")" id="Select_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Update_LB", "System")" id="Update_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Delete_LB", "System")" id="Delete_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Create_LB", "System")" id="Create_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Select_MX", "System")" id="Select_Dict_mx" />
+<input type="hidden" value="@Url.Action("Dictionary_Update_MX", "System")" id="Update_Dict_mx" />
+<input type="hidden" value="@Url.Action("Dictionary_Delete_MX", "System")" id="Delete_Dict_mx" />
+<input type="hidden" value="@Url.Action("Dictionary_Create_MX", "System")" id="Create_Dict_mx" />
+<input type="hidden" value="@Url.Action("SY_DICT_Read", "System")" id="SY_DICT_Read" />
+<input type="hidden" value="@Url.Action("CheckDetails_Select", "System")" id="CheckDetails_Select" />
+<input type="hidden" value="@Url.Action("CheckDetails_Create", "System")" id="CheckDetails_Create" />
+<input type="hidden" value="@Url.Action("DEPT_SELECT", "System")" id="DEPT_SELECT" />
+<input type="hidden" value="@Url.Action("CheckPoint_Select", "System")" id="CHECKPOINT_SELECT" />
+<input type="hidden" value="@Url.Action("CheckPoint_SelectByStaffid", "System")" id="CheckPoint_SelectByStaffid" />
+<input type="hidden" value="@Url.Action("CheckPoint_Delete", "System")" id="CheckPoint_Delete" />
+<input type="hidden" value="@Url.Action("CheckPointPrint", "System")" id="CheckPointPrint" />
+<input type="hidden" value="@Url.Action("POST_CheckPointPrint", "System")" id="POST_CheckPointPrint" />
+<input type="hidden" value="@Url.Action("SY_DICT_Read", "System")" id="SY_DICT_Read" />
+<input type="hidden" value="@Url.Action("CreateFL_MX", "System")" id="CreateFL_MX" />
+<input type="hidden" value="@Url.Action("SelectFL_MX", "System")" id="SelectFL_MX" />
+<input type="hidden" value="@Url.Action("UpdateFL_MX", "System")" id="UpdateFL_MX" />
+<span class="layui-breadcrumb" lay-separator>
+    <a>5S系统管理</a>
+    <a><cite>检验点分类维护</cite></a>
+</span>
+<br />
+<br />
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<div class="layui-form-item">
+    <button id="btn_xzmx" class="layui-btn">新增</button>
+    <table id="table_mx" lay-filter="table_mx"></table>
+</div>
+<div id="div_mx" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">检验点分类名称：</label>
+        <div class="layui-input-inline">
+            <input id="mx_name" type="text" class="layui-input">
+        </div>
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+
+            <input id="mx_bz" type="text" class="layui-input">
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+        <legend>检查点分类明细维护</legend>
+    </fieldset>
+    <div class="layui-form-item" style="padding:0 0 0 20px">
+        <button class="layui-btn" id="btn_detailtype">选择检查项目分类</button>
+        <table class="layui-hide" id="tb_checkdetail" lay-filter="tb_checkdetail" style="height:260px"></table>
+    </div>
+</div>
+<div class="layui-form" hidden id="div_detailtype">
+    <table class="layui-hide" id="tb_detailtype" lay-filter="tb_detailtype"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/System/CHECKPOINTFL")
+}
+
+
+

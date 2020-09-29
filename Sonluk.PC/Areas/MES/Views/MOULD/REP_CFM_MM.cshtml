@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "模具机修确认";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search">查询</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GC" lay-filter="Term_GC">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_MTC" lay-filter="tb_MTC"></table>
+</div>
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="OK">维修完成</a>
+</script>
+@RenderPage("~/Areas/MES/Views/Shared/MOULD.cshtml")
+@section scripts {
+    <script>
+        var all_fy = 1;
+        var all_fysl = 10;
+        var all_limits = [10, 20, 50, 100, 200];
+        var cacheData = [];
+        layui.use(['table', 'layer', 'form', 'element', 'MES'], function () {
+            var layer = layui.layer;
+            var table = layui.table;
+            var form = layui.form;
+            var assist = sonluk.layui;
+            var mouldCfm = layui.MES.MOULD.CFM;
+            var myFunc = "MM";
+
+            table_init();
+            mouldCfm.list_init_GC(myFunc);
+
+            $("#btn_search").click(function () {
+                table_init();
+            });
+
+            table.on('tool(tb_MTC)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+
+                if (layEvent === 'OK') {
+                    layer.confirm('要确认完成维修吗？', function (index) {
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/REP_CFM_Update_MM",
+                            data: {
+                                datastring: JSON.stringify({ MTCID: data.MTCID })
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg("确认完成维修成功！");
+                                    table_init();
+                                    layer.close(index);
+                                }
+                                else if (rstData.TYPE == "E") layer.alert("确认完成维修失败，原因：" + rstData.MESSAGE);
+                                else layer.alert("确认完成维修失败，原因未知");
+                            }
+                        });
+                    });
+                }
+                else if (layEvent === 'ReadRep') mouldCfm.layer_init_readRep(data.MES_PMM_MTC_REP);
+            });
+
+            function table_init() {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/REP_CFM_Search_MM",
+                    data:{
+                        GC:$('#Term_GC').val()
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            cacheData = rstData.MES_PMM_MTC;
+                            assist.table.render({
+                                elem: '#tb_MTC',
+                                data: cacheData,
+                                height: 'full-300',
+                                cols: [[
+                                { templet: '<div>{{d.MES_PMM_MOULD.GC + "-" + d.MES_PMM_MOULD.GCMS}}</div>', title: '工厂', width: 150 },
+                                { templet: '#tb_data_MTCID', title: '维修序号', width: 100 },
+                                { templet: '<div>{{d.MES_PMM_MOULD.MOULD}}</div>', title: '模具号', width: 100 },
+                                { templet: '#tb_data_CAVE', title: '腔号', width: 100 },
+                                { field: 'QCODE', title: '质量问题代码' },
+                                { field: 'QNAME', title: '质量问题', width: 200 },
+                                { templet: '#tb_data_RID_ALL', title: '维修内容', minWidth: 200 },
+                                { field: 'MMSTAFFNAME', title: '责任机修' },
+                                { templet: '#tb_data_DATES', title: '发起时间', width: 200 },
+                                { field: 'STATUS', fixed: 'right', title: '流程状态', width: 100 },
+                                { fixed: 'right', toolbar: '#operate', title: '操作', width: 100 }
+                                ]],
+                                page: {
+                                    limits: all_limits,
+                                    limit: all_fysl,
+                                    curr: all_fy,
+                                    currfix: function (curr) { all_fy = curr; }
+                                }
+                            });
+                        }
+                        else if (rstData.MES_RETURN.TYPE == "E") layer.alert("列表生成失败，原因：" + rstData.MES_RETURN.MESSAGE);
+                        else layer.alert("列表生成失败，原因未知");
+                    }
+                });
+            }
+        });
+    </script>
+}

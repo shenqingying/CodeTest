@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "个人考勤记录";
+    Session["TITLENAME"] = "个人考勤记录";
+}
+
+<style>
+    .td{
+        height: 30px;
+    }
+</style>
+
+
+
+
+
+
+<div id="from1">
+    <div id="div1">
+
+        <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+            <button id="btn_cx" class="layui-btn" style="width:100%">查询</button>
+            <button id="btn_back" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+            <button id="btn_CCback" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+        </div>
+
+        
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">开始日期：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <input id="opentime" type="date" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">结束日期：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <input id="endtime" type="date" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+            </div>
+
+        </div>
+        <hr class="layui-bg-black" />
+
+        @*<table id="result" lay-filter="result"></table>*@
+
+        <div id="div_result" style="margin:0 10px">
+
+        </div>
+        <div id="div_detail" style="margin:0 10px">
+
+        </div>
+        <div id="div_CCdetail" style="margin:0 10px">
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/BaoBiao_Personal")
+}

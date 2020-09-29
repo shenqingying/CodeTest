@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WMS_JPD_JHD_TQGZ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:WMS_JPD_JHD_TQGZ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WMS_JPD_JHD_TQGZ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="XGTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KFZT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SDFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SDF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSZZNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSZZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHD" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISTQGZ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LB" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="WMS_JPD_JHD_TQGZResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WMS_JPD_JHD_TQGZResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="WMS_JPD_JHD_TQGZSoapIn">
+    <wsdl:part name="parameters" element="tns:WMS_JPD_JHD_TQGZ" />
+  </wsdl:message>
+  <wsdl:message name="WMS_JPD_JHD_TQGZSoapOut">
+    <wsdl:part name="parameters" element="tns:WMS_JPD_JHD_TQGZResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="WMS_JPDSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WMS_JPD_JHD_TQGZ">
+      <wsdl:input message="tns:WMS_JPD_JHD_TQGZSoapIn" />
+      <wsdl:output message="tns:WMS_JPD_JHD_TQGZSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WMS_JPDHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WMS_JPDHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WMS_JPDSoap" type="tns:WMS_JPDSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WMS_JPD_JHD_TQGZ">
+      <soap:operation soapAction="http://tempuri.org/WMS_JPD_JHD_TQGZ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WMS_JPDSoap12" type="tns:WMS_JPDSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WMS_JPD_JHD_TQGZ">
+      <soap12:operation soapAction="http://tempuri.org/WMS_JPD_JHD_TQGZ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WMS_JPDHttpGet" type="tns:WMS_JPDHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WMS_JPDHttpPost" type="tns:WMS_JPDHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WMS_JPD">
+    <wsdl:port name="WMS_JPDSoap" binding="tns:WMS_JPDSoap">
+      <soap:address location="http://localhost/API/WMS/WMS_JPD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WMS_JPDSoap12" binding="tns:WMS_JPDSoap12">
+      <soap12:address location="http://localhost/API/WMS/WMS_JPD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WMS_JPDHttpGet" binding="tns:WMS_JPDHttpGet">
+      <http:address location="http://localhost/API/WMS/WMS_JPD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WMS_JPDHttpPost" binding="tns:WMS_JPDHttpPost">
+      <http:address location="http://localhost/API/WMS/WMS_JPD.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

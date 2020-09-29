@@ -1,0 +1,315 @@
+﻿@using Sonluk.PC.Models;
+@using Sonluk.UI.Model.CRM.COST_ITEMService;
+@{
+    ViewBag.Title = "Print_Clf";
+    Layout = "~/Views/Shared/_Layout_Print_CRM.cshtml";
+    PrintClf[] data = ViewBag.data;
+    CRM_COST_ITEM[] COSTITEMID = ViewBag.COSTITEMID;
+    CRM_COST_ITEM[] COSTITEMMC = ViewBag.COSTITEMMC;
+
+}
+<style>
+    label {
+        text-align: left;
+        width: inherit;
+    }
+</style>
+
+@for (int i = 0; i < data.Length; i++)
+{
+    <br />
+    <div class="main">
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td colspan="7">
+                    <div class="print-page-body-table-header">差旅费报销单</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:left;">
+                    部门
+                </td>
+                <td>
+                    民品部
+                </td>
+                <td>
+                    报销日期
+                </td>
+                <td>
+                    @data[i].TTdata.BXRQ
+                </td>
+                <td>
+                    成本中心
+                </td>
+                <td>
+                    @data[i].TTdata.CBZX
+                </td>
+                <td style="text-align:center;">
+                    金额单位：元
+                </td>
+            </tr>
+        </table>
+
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:10px;font-family:'宋体'">
+            <thead>
+                <tr height="40px">
+                    <th>出差人</th>
+                    <th colspan="7" style="text-align:left" id="div_th">@data[i].TTdata.STAFFNAME (@data[i].TTdata.STAFFNO)</th>
+                    <th colspan="3">出差事由</th>
+                    <th colspan="6" style="text-align:left">@data[i].TTdata.CCSY</th>
+                </tr>
+                <tr>
+                    <th colspan="2">出发</th>
+                    <th colspan="2">到达</th>
+                    <th colspan="4">交通费</th>
+                    <th colspan="3">住宿费</th>
+                    <th colspan="3">差旅补贴</th>
+                    <th colspan="3">其他费用</th>
+                </tr>
+                <tr>
+                    <th>日期</th>
+                    <th>地点</th>
+                    <th>日期</th>
+                    <th>地点</th>
+                    <th>机票金额</th>
+                    <th>火车票金额</th>
+                    <th>客车票金额</th>
+                    <th>单据张数</th>
+                    <th>天</th>
+                    <th>金额</th>
+                    <th>单据张数</th>
+                    <th>天</th>
+                    <th>标准</th>
+                    <th>金额</th>
+                    <th>项目</th>
+                    <th>金额</th>
+                    <th>单据张数</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int j = 0; j < data[i].MXdata.Length; j++)
+                {
+                    <tr height="50px">
+                        <td style="width:2.0cm;" class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].BEGINDATE</td>
+                        <td style="width:1.2cm;" class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].BEGINADDRESS</td>
+                        <td style="width:2.0cm;" class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].ENDDATE</td>
+                        <td style="width:1.2cm;" class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].ENDADDRESS</td>
+                        @if (@data[i].MXdata[j].JT_PLANE == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].JT_PLANE</td>
+                        }
+                        @if (@data[i].MXdata[j].JT_TRAIN == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].JT_TRAIN</td>
+                        }
+                        @if (@data[i].MXdata[j].JT_BUS == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].JT_BUS</td>
+                        }
+                        @if (@data[i].MXdata[j].JT_BILL == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].JT_BILL</td>
+                        }
+                        @if (@data[i].MXdata[j].ZS_DAYS == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].ZS_DAYS</td>
+                        }
+                        @if (@data[i].MXdata[j].ZS_JE == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].ZS_JE</td>
+                        }
+                        @if (@data[i].MXdata[j].ZS_BILL == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].ZS_BILL</td>
+                        }
+                        @if (@data[i].MXdata[j].BT_DAYS == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].BT_DAYS</td>
+                        }
+
+                        <td class="print_page_td_haveborder_zfdc2">100/天</td>
+
+                        @if (@data[i].MXdata[j].BT_JE == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].BT_JE</td>
+                        }
+                        @if (@data[i].MXdata[j].QT_ITEM == 0)
+                        {
+                            <td style="width:1.7cm;" class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td style="width:1.7cm;" class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].COSTITEMMC</td>
+                        }
+                        @if (@data[i].MXdata[j].QT_JE == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].QT_JE</td>
+                        }
+                        @if (@data[i].MXdata[j].QT_BILL == 0)
+                        {
+                            <td class="print_page_td_haveborder_zfdc2"></td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].MXdata[j].QT_BILL</td>
+                        }
+                    </tr>
+                }
+                <tr style="border:2px solid ">
+                    <td colspan="4">合计</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_JT_PLANE</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_JT_TRAIN</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_JT_BUS</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_JT_BILL</td>
+                    <td class="print_page_td_haveborder_zfdc2"></td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_ZS_JE</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_ZS_BILL</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_BT_DAYS</td>
+                    <td class="print_page_td_haveborder_zfdc2" colspan="2" style="text-align:left">@data[i].TTdata.TOTAL_BT_JE</td>
+                    <td class="print_page_td_haveborder_zfdc2" colspan="2" style="text-align:left">@data[i].TTdata.TOTAL_QT_JE</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.TOTAL_QT_BILL</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="1" border="1"  style="font-size:12px;font-family:'Microsoft YaHei';text-align:left;border-top:0 ">
+            <tr>
+                <td rowspan="2" style="width:2cm;">报销金额</td>
+                <td rowspan="2" style="width:1cm;">大写：</td>
+                <td rowspan="2" style="width:4cm;">
+                    @data[i].TTdata.TOTAL_HJ
+                </td>
+                <td rowspan="2" style="width:2cm;">
+                    @data[i].TTdata.JESUM
+                </td>
+                <td rowspan="2" style="width:2cm;">
+                    预支旅费
+                </td>
+                <td style="width:1.5cm;">支票预支</td>
+
+                @if (@data[i].TTdata.ZPYZ == 0)
+                {
+                    <td> </td>
+                }
+                else
+                {
+                    <td>@data[i].TTdata.ZPYZ</td>
+                }
+                <td style="width:1.5cm;">补领金额</td>
+                @if (@data[i].TTdata.BLJE == 0)
+                {
+                    <td> </td>
+                }
+                else
+                {
+                    <td>@data[i].TTdata.BLJE</td>
+                }
+            </tr>
+            <tr>
+                <td style="width:1.5cm;">现金预支</td>
+                @if (@data[i].TTdata.XJYZ == 0)
+                {
+                    <td> </td>
+                }
+                else
+                {
+                    <td>@data[i].TTdata.XJYZ</td>
+                }
+                <td style="width:1.5cm;">归还金额</td>
+                @if (@data[i].TTdata.GHJE == 0)
+                {
+                    <td> </td>
+                }
+                else
+                {
+                    <td>@data[i].TTdata.GHJE</td>
+                }
+            </tr>
+        </table>
+
+
+
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align:left;">总经理审批：</td>
+                <td style="text-align:left;">主管副总：</td>
+                <td style="width:3cm;">部门经理：</td>
+                <td>报销人：@data[i].TTdata.STAFFNAME</td>
+                @*<td style="text-align:right">@data[i].TTdata.STAFFNAME</td>*@
+            </tr>
+        </table>
+
+    </div>
+
+    <input id="div_staffid" hidden value="@data[i].TTdata.STAFFID" />
+}
+
+@*<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "../staff/Data_Select_ByID",
+            data: {
+                id: $("#div_staffid").val()
+            },
+            success: function (result) {
+                var res = JSON.parse(result);
+                if(res.STAFFID > 0)
+                {
+                    $("#div_th").html("");
+                    $("#div_th").html(res.STAFFNAME + "(" + res.STAFFNO + ")")
+                }
+            },
+            error: function () {
+
+            }
+        })
+    })
+</script>*@
+

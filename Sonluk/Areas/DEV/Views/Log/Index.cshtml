@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "日志";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/table")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">日志</a>
+        >
+        <a href="#">显示</a>
+    </div>
+</div>
+
+<div class="panel-search">
+    <div class="panel-search-item">
+        <input type="text" class="panel-search-item-input" id="daysAge"value="0" />
+        <div class="panel-search-item-title">天前</div>
+    </div>
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+    <input type="hidden" value="@Url.Action("_List", "Log")">
+</div>
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div class="sonluk-table-control-response-time"></div>
+            <div class="row-select-all sonluk-table-control-button">全选</div>
+            <div class="sonluk-table-control-self-adaption-display">
+                <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                <div class="row-select-invert sonluk-table-control-button">反选</div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="log"></div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/dev/log-index")
+}
+

@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "日历设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.SFGZR == true ? 'checked' : '' }}>
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>系统管理</a>
+    <a><cite>日历设置</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item" hidden>
+            <button id="btn_insert_type" class="layui-btn">新增日历版本</button>
+
+        </div>
+        <div id="div_tb_bb">
+            <table id="result_bb" lay-filter="result_bb"></table>
+        </div>
+
+    </div>
+    <hr class="layui-bg-black" />
+    <div id="div2" class="layui-form">
+
+        <div id="div_tb_mx" class="layui-form-item" hidden>
+            <button id="btn_back" class="layui-btn">返回</button>
+            <button id="btn_daoru" class="layui-btn">导入工作日历</button>
+            <br /><br />
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始日期：</label>
+                <div class="layui-input-inline">
+                    <input id="start_time" type="text" class="layui-input">
+                </div>
+
+                <label class="layui-form-label">结束日期：</label>
+                <div class="layui-input-inline">
+                    <input id="end_time" type="text" class="layui-input">
+                </div>
+            </div>
+
+            <table id="result_mx" lay-filter="result_mx"></table>
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+<div id="div_mx" class="layui-form" hidden>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">日期：</label>
+        <div class="layui-input-inline">
+            <input id="type_name" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="type_bz" type="text" class="layui-input">
+        </div>
+    </div>
+
+
+</div>
+
+
+<div id="div_daoru" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">年份：</label>
+        <div class="layui-input-inline">
+            <input id="year" type="text" class="layui-input">
+        </div>
+    </div>
+</div>
+
+
+<input id="netpath" hidden />
+<input id="bbid" hidden />
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/System/RiLi")
+}

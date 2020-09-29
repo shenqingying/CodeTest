@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "考勤汇总管理";
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>考勤管理</a>
+    <a><cite>考勤汇总管理</cite></a>
+</span>
+<div id="from1" class="layui-form">
+    <div class="layui-form-item">
+        <button id="btn_daochu" class="layui-btn">导出</button>
+        <button id="btn_cx" class="layui-btn">查询</button>
+        <button class="layui-btn" onclick="location.href = '@Url.Action("KQ_JQGL", "KQGL")'">返回</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">考勤周期：</label>
+            <div class="layui-input-inline">
+                <input id="daochu_start" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">至：</label>
+            <div class="layui-input-inline">
+                <input id="daochu_end" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">报表类型：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <select id="lb" lay-filter="lb">
+                    <option value="1">员工明细</option>
+                    <option value="2">员工汇总</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table id="result" lay-filter="result"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_JQGLREPORT")
+}

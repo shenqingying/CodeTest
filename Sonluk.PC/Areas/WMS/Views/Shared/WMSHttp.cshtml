@@ -1,0 +1,45 @@
+﻿<script>
+    (function () {
+        window.wmshttp = {
+            post: function (input) {
+                return fn("@Url.Action("SApiPost", "Sessionless", new { area = "WMS" })", input);
+            },
+            get: function (input) {
+                return fn("@Url.Action("SApiGet", "Sessionless", new { area = "WMS" })", input);
+            },
+        }
+        function fn(url, input) {
+            input.success = input.success || function () { return false };
+            input.error = input.error || function () { return false };
+            input.complete = input.complete || function () { return false };
+            return sonluk.http.ajax({
+                type: "POST",
+                async: input.async === undefined ? true : input.async,
+                url: url,
+                data: {
+                    url: input.url,
+                    data: input.data === undefined ? undefined : JSON.stringify(input.data),
+                    query: input.query === undefined ? undefined : JSON.stringify(input.query),
+                },
+                success: function (data) {
+                    if (data) input.success(JSON.parse(data));
+                    else input.success(data);
+                },
+                error: function (e) {
+                    e = e || "";
+                    if (input.error(e)) return;
+                    var sc = {};
+                    if (sonluk.values.global.common.c_msg35a) {
+                        sc = sonluk.values.global.common;
+                    }
+                    else {
+                        sonluk.global.getResourcesOnly();
+                        sc = sonluk.values.global.common;
+                    }
+                    sonluk.msg.error(sc.c_msg35a + (e.status || "") + sc.c_msg35b + (e.statusText || "") + sc.c_msg35c);
+                },
+                complete: input.complete
+            });
+        }
+    })();
+</script>

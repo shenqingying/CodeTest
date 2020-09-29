@@ -1,0 +1,469 @@
+﻿@{
+    ViewBag.Title = "Area_Select";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "管辖区域";
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="area_Tpl">
+    {{# if(d.GXQYLX == 1){ }}
+    全国
+    {{# }else if(d.GXQYLX == 2){ }}
+    省份
+    {{# }else if(d.GXQYLX == 3){ }}
+    城市
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="areamc_Tpl">
+    {{# if(d.GXQYLX == 1){ }}
+    全国
+    {{# } }}
+</script>
+
+<script type="text/html" id="tb_area">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<h2 id="h1" style="margin:0 10px"></h2>
+<h2 id="h2" style="margin:0 10px"></h2>
+
+
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+    @*<table id="sale_area6" lay-filter="sale_area"></table>*@
+</div>
+<br />
+<hr class="layui-bg-black" />
+<br />
+<div id="001">
+    <h2 class="layui-colla-title" id="htitle">新增管辖区域</h2>
+    <div class="layui-form-item" id="001_1">
+        <label class="layui-form-label" style="width:130px;">销售区域类型：</label>
+        <div class="layui-input-block">
+            <select id="area_type001" lay-filter="area_type001">
+                <option value="0" selected="selected"></option>
+                <option value="1">全国</option>
+                <option value="2">省份</option>
+                <option value="3">城市</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="001_2" hidden>
+        <label class="layui-form-label" style="width:130px;">省份：</label>
+        <div class="layui-input-block">
+            <select id="province001" lay-filter="province001" required>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item" id="001_3" hidden>
+        <label class="layui-form-label" style="width:130px;">城市：</label>
+        <div class="layui-input-block">
+            <select id="city001" lay-filter="city001" required>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="001_4">
+        <label class="layui-form-label" style="width:130px">备注：</label>
+        <div class="layui-input-block">
+            <input id="remark001" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+
+
+</div>
+<div class="layui-form" style="width:100%;">
+    <div class="layui-form-item" style="margin:0">
+        <br />
+        <button id="btn_save_area" class="layui-btn" lay-filter="btn_save_area" style="width:100%;">保存</button>
+    </div>
+</div>
+<input id="action_status" hidden value="insert" />
+<input id="zibiao_id" hidden />
+
+
+
+<script>
+    function getDropDownData(typeid, fid, selector) {
+        var form = layui.form;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../KeHu/Data_Load_Dropdown",
+            data: {
+                typeid: typeid,
+                fid: fid
+            },
+            success: function (reslist) {
+                var res = JSON.parse(reslist);
+                for (var i = 0; i < res.length; i++) {
+                    $("#" + selector).append("<option value='" + res[i].DICID + "'>" + res[i].DICNAME + "</option>");
+                }
+
+                form.render();
+
+
+            }
+        });
+
+    }
+
+
+
+    //管辖区域表格数据加载
+    function TableLoad_area(khid) {
+        $("#div_result").empty();
+        var data;
+        var table = layui.table;
+        var form = layui.form;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../KeHu/Data_Select_Area",
+            data: {
+                id: khid
+            },
+            success: function (resdata) {
+                //alert(resdata);
+                data = JSON.parse(resdata);
+                for (var i = 0; i < data.length; i++) {
+                    var xuhao = i + 1;
+                    var area_type;
+                    switch (data[i].GXQYLX) {
+                        case 1:
+                            area_type = "全国";
+                            break;
+                        case 2:
+                            area_type = "省份";
+                            break;
+                        case 3:
+                            area_type = "城市";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    $("#div_result").append('<div id="div' + xuhao + '">');
+                    $("#div_result").append('<table border="0" width="90%"><tr><td width="350" colspan="2">序号:' + xuhao + '</td><td width="60"><button id="btn_edit' + xuhao + '" class="layui-btn layui-btn-xs" style="width:100%;height:30px">编辑</button></td></tr><tr><td width="150">区域类型:' + area_type + '</td><td width="200">区域名称:' + data[i].GXQYMCDES + '</td></tr><tr><td colspan="2">备注:' + data[i].BEIZ + '</td><td><button id="btn_delete' + xuhao + '" class="layui-btn layui-btn-xs layui-btn-danger" style="width:100%;height:30px">删除</button></td></tr></table>');
+                    
+                    $("#div_result").append('<hr id="hr' + xuhao + '" class="layui-bg-black">');
+
+
+                    $("#btn_edit" + xuhao).on("click", { count: i }, function (event) {
+
+                        var count = event.data.count;
+
+                        $("#action_status").val("edit");
+                        $("#zibiao_id").val(data[count].GXQYID);
+                        $("#htitle").text("编辑管辖区域");
+
+                        $("#area_type001").val(data[count].GXQYLX);
+                        if (data[count].GXQYLX == 2) {
+                            $("#province001").val(data[count].GXQYMC);
+                            $("#001_2").show();
+                            $("#001_3").hide();
+                        }
+                        else if (data[count].GXQYLX == 3) {
+                            $("#province001").val(data[count].FID);
+                            getDropDownData(2, data[count].FID, "city001");
+                            $("#city001").val(data[count].GXQYMC);
+                            $("#001_2").show();
+                            $("#001_3").show();
+                        }
+                        $("#remark001").val(data[count].BEIZ);
+                        form.render('select');
+                        location.href = "#001";
+
+
+                    });
+
+
+                    $("#btn_delete" + xuhao).on("click", { key: i }, function (event) {
+                        //alert(event.data.key);
+                        var count = event.data.key;
+                        var xuhaoid = count + 1;
+
+                        layer.open({
+                            title: '提示',
+                            type: 0,
+                            content: '确定删除?',
+                            btn: ['确定','取消'],
+                            yes: function (index, layero) {
+
+                                $.ajax({
+                                    type: "POST",
+                                    async: false,
+                                    url: "../KeHu/Data_Delete_Area",
+                                    data: { id: data[count].GXQYID },
+                                    success: function (id) {
+                                        if (id > 0) {
+                                            TableLoad_area(khid);
+                                            layer.msg("删除成功！");
+                                        }
+
+                                    },
+                                    error: function (err) {
+                                        layer.msg("删除失败,请重试！")
+                                    }
+                                });
+                                layer.close(index);
+                            }
+                        });
+
+
+
+                    });
+
+
+
+
+
+                    $("#div_result").append('</div>');
+                }
+
+            },
+            error: function () {
+                alert("code1015,请联系管理员");
+            }
+        });
+
+    }
+
+    $(document).ready(function () {
+
+        var layer = layui.layer;
+        var table = layui.table;
+        var form = layui.form;
+        var khid;
+        if (sessionStorage.getItem("KHID") == null) {
+            alert("获取客户信息失败，请重试");
+            window.location.href = "../KeHu/Select";
+            return false;
+        }
+        else
+            khid = sessionStorage.getItem("KHID");
+
+
+        $("#h1").text(sessionStorage.getItem("MC"));
+        $("#h2").text("客户编号：" + sessionStorage.getItem("CRMID"));
+        TableLoad_area(khid);
+
+
+
+
+
+        $("#btn_save_area").click(function () {
+            var mydate = new Date();
+            var layer = layui.layer;
+
+            var type = parseInt($("#area_type001").val());
+            var name;
+            switch (type) {
+                case 1:
+                    name = 0;
+                    break;
+                case 2:
+                    name = parseInt($("#province001").val());
+                    break;
+                case 3:
+                    name = parseInt($("#city001").val());
+                    break;
+                default:
+                    break;
+            }
+
+            var areadata;
+
+            if ($("#action_status").val() == "insert") {
+
+                areadata = {
+                    KHID: khid,
+                    GXQYLX: type,
+                    GXQYMC: name,
+                    BEIZ: $("#remark001").val(),
+                    ISACTIVE: 1
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "../KeHu/Data_Insert_Area",
+                    data: {
+                        data: JSON.stringify(areadata)
+                    },
+                    success: function (sesponseTest) {
+                        if (sesponseTest > 0) {
+                            $("#area_type001").val("0");
+                            $("#province001").val("0");
+                            $("#city001").empty();
+                            $("#remark001").val("");
+                            $("#001_2").hide();
+                            $("#001_3").hide();
+
+                            TableLoad_area(khid);
+                            form.render();
+
+                            layer.msg("保存成功！");
+                        }
+
+                    },
+                    error: function () {
+                        alert("code1017,请联系管理员");
+                    }
+                });
+
+            }
+            else if ($("#action_status").val() == "edit") {
+                areadata = {
+                    GXQYID: $("#zibiao_id").val(),
+                    KHID: khid,
+                    GXQYLX: type,
+                    GXQYMC: name,
+                    BEIZ: $("#remark001").val(),
+                    ISACTIVE: 1
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "../KeHu/Data_Update_Area",
+                    data: {
+                        data: JSON.stringify(areadata)
+                    },
+                    success: function (sesponseTest) {
+                        if (sesponseTest > 0) {
+                            $("#area_type001").val("");
+                            $("#province001").val("");
+                            $("#city001").val("");
+                            $("#remark001").val("");
+
+                            $("#001_2").hide();
+                            $("#001_3").hide();
+
+
+                            TableLoad_area(khid);
+                            form.render();
+                            $("#action_status").val("insert");
+                            $("#htitle").text("新增管辖区域");
+                            layer.msg("修改成功！");
+                        }
+                    },
+                    error: function () {
+                        alert("code1017,请联系管理员");
+                    }
+                });
+            }
+
+
+            location.href = "javascript:scrollTo(0,0);";   //到顶部
+        });
+
+
+
+        $("#area_type001").change(function () {
+            $("#province001").val("0");
+            $("#city001").empty();
+            switch ($("#area_type001").val()) {
+                case "1":
+                    $("#001_2").hide();
+                    $("#001_3").hide();
+                    break;
+                case "2":
+                    $("#001_2").show();
+                    $("#001_3").hide();
+                    break;
+                case "3":
+                    $("#001_2").show();
+                    $("#001_3").show();
+                    break;
+                default:
+                    $("#001_2").hide();
+                    $("#001_3").hide();
+                    break;
+            }
+        });
+
+        //监听管辖区域工具条
+        table.on('tool(sale_area)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if (obj.event == 'edit') {
+                $("#action_status").val("edit");
+                $("#zibiao_id").val(data.GXQYID);
+                $("#htitle").text("编辑管辖区域");
+
+                $("#area_type001").val(obj.data.GXQYLX);
+                if (obj.data.GXQYLX == 2) {
+                    $("#province001").val(obj.data.GXQYMC);
+                    $("#001_2").show();
+                }
+                else if (obj.data.GXQYLX == 3) {
+                    $("#province001").val(obj.data.FID);
+                    getDropDownData(2, data.FID, "city001");
+                    $("#city001").val(obj.data.GXQYMC);
+                    $("#001_2").show();
+                    $("#001_3").show();
+                }
+                $("#remark001").val(obj.data.BEIZ);
+                form.render('select');
+                location.href = "#001";
+
+            }
+            else if (obj.event == 'delete') {
+
+                layer.open({
+                    title: '提示',
+                    type: 0,
+                    content: '确定删除?',
+                    btn: ['确定', '取消'],
+                    yes: function (index, layero) {
+
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../KeHu/Data_Delete_Area",
+                            data: { id: obj.data.GXQYID },
+                            success: function (id) {
+                                if (id > 0)
+                                    TableLoad_area(khid);
+
+                            },
+                            error: function (err) {
+                                layer.msg("系统错误,请重试！")
+                            }
+                        });
+                        layer.close(index);
+                    }
+                });
+
+            }
+
+        });
+
+
+
+
+
+    });
+
+
+</script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/Area")
+}

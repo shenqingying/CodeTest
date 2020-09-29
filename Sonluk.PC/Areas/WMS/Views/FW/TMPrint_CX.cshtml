@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "箱码数据查询打印";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+
+
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="Tpl_RKZT">
+    {{# if(d.RKZT == 1){ }}
+    车间发出
+    {{# }else if(d.RKZT == 2){ }}
+    物流入库
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="Tpl_ISZC">
+    {{# if(d.ISZC == 0){ }}
+    否
+    {{# }else { }}
+    是
+    {{# } }}
+</script>
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs" lay-event="print">打印</a>
+    </script>
+</div>
+
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<style>
+    .layui-form-label {
+        width: 90px;
+        text-align: right;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>WMS防伪管理</a>
+    <a><cite>箱码数据查询打印</cite></a>
+</span>
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div id="div_height">
+
+
+        <div class="layui-form-item">
+
+            <button id="btn_dc" class="layui-btn">导出</button>
+            <button id="btn_print" class="layui-btn">批量打印</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">工单：</label>
+                            <div class="layui-input-inline">
+                                <input id="ERPNO" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">销售订单：</label>
+                            <div class="layui-input-inline">
+                                <input id="NOBILL" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">销售项目：</label>
+                            <div class="layui-input-inline">
+                                <input id="NOBILLMX" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">物料信息：</label>
+                            <div class="layui-input-inline">
+                                <input id="WLMS" type="text" autocomplete="off" placeholder="物料编码/物料描述" class="layui-input">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">客户物料：</label>
+                            <div class="layui-input-inline">
+                                <input id="KHWLH" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">客户品名：</label>
+                            <div class="layui-input-inline">
+                                <input id="KHWLMS" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">规格：</label>
+                            <div class="layui-input-inline">
+                                <input id="KHWLGG" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">货物标识码：</label>
+                            <div class="layui-input-inline">
+                                <input id="TM" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">箱码：</label>
+                            <div class="layui-input-inline">
+                                <input id="XCTM" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">创建日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="JLKSTIME" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">至：</label>
+                            <div class="layui-input-inline">
+                                <input id="JLJSTIME" type="text" autocomplete="off" placeholder="" class="layui-input">
+                            </div>
+
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">打印份数：</label>
+                            <div class="layui-input-inline">
+                                <input id="COUNT" type="number" autocomplete="off" placeholder="" class="layui-input" value="2">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <table id="table_WL" lay-filter="table_WL"></table>
+
+
+</div>
+
+
+
+@*<script src="~/Scripts/layui2.5.4/layui.all.js"></script>*@
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/FW/TMPrint_CX")
+}

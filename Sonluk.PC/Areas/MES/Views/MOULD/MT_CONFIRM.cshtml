@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "技术确认设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_change">确认更改状态</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label1">当前状态：</label>
+        <div class="layui-input-inline">
+            <label class="layui-form-label" id="Display_ISACTION" style="color:#808080;width:100px;text-align:left;padding-left:10px;">未查询到状态</label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">待生效状态：</label>
+        <div class="layui-input-inline">
+            <input type="checkbox" id="Layer_ISACTION" lay-skin="switch" lay-text="需确认|无需确认">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        layui.use(['layer', 'form', 'element'], function () {
+            var layer = layui.layer;
+            var form = layui.form;
+            var element = layui.element;
+
+            display_init();
+
+            $("#btn_change").click(function () {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/SetSYSConfig",
+                    data: {
+                        KEY: "TECCFM",
+                        VALUE: $('#Layer_ISACTION').prop('checked') ? "-1" : "1"
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.TYPE == "S") layer.msg("修改成功！");
+                        else if (rstData.TYPE == "E") layer.alert("修改失败，原因：" + rstData.MESSAGE);
+                        else layer.alert("修改失败，原因未知");
+                        display_init();
+                    }
+                });
+            });
+
+            function display_init() {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/GetSYSConfig",
+                    data: {
+                        KEY: "TECCFM"
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            if (rstData.VALUE == "-1") {
+                                $("#Display_ISACTION").text("需确认").css("color", "#009688");
+                                $("#Layer_ISACTION").prop('checked', 'true');
+                            }
+                            else if (rstData.VALUE == "1") {
+                                $("#Display_ISACTION").text("无需确认").css("color", "#FF5722");
+                                $("#Layer_ISACTION").removeAttr('checked');
+                            }
+                            else {
+                                $("#Display_ISACTION").text("未知状态").css("color", "#808080");
+                                $("#Layer_ISACTION").removeAttr('checked');
+                            }
+                        }
+                        form.render();
+                    }
+                });
+            }
+        });
+    </script>
+}

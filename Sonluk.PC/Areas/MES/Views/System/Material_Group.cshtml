@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "物料组维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="qyzt">
+    {{# if(d.ISACTION == 1){ }}
+    启用
+    {{# }else if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>物料组维护</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+            <button id="btn_sap" class="layui-btn">ERP同步</button>
+        </div>
+
+        <div class="layui-form-item">
+
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gc" lay-filter="cx_gc">
+                    <option value="" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <table class="layui-hide" id="tb_wlz" lay-filter="tb_wlz"></table>
+    </div>
+</div>
+
+<div id="div_wlz" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="gc" lay-filter="gc">
+                <option value="" selected="selected">请选择（必选）</option>
+                @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                {
+                    <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">物料组：</label>
+        <div class="layui-input-inline">
+            <input id="wlzname" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">物料组描述：</label>
+        <div class="layui-input-inline">
+            <input id="wlzms" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">物料类别：</label>
+        <div class="layui-input-inline">
+            <select id="wllb" lay-filter="wllb">
+                @*<option value="" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.Sy_typemxlist.Length; i++)
+                {
+                    <option value="@Model.Sy_typemxlist[i].ID">@Model.Sy_typemxlist[i].MXNAME</option>
+                }*@
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">启用状态：</label>
+        <div class="layui-input-inline">
+            <select id="wlzt" lay-filter="wlzt">
+                <option value="open" selected="selected">启用</option>
+                <option value="off">关闭</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">备注：</label>
+        <div class="layui-input-inline">
+            <input id="bz" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+</div>
+
+<div id="div_wlzxg" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="gc_xg" lay-filter="gc_xg" disabled>
+                <option value="" selected="selected">请选择（必选）</option>
+                @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                {
+                    <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">物料组：</label>
+        <div class="layui-input-inline">
+            <input id="wlzname_xg" type="text" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">物料组描述：</label>
+        <div class="layui-input-inline">
+            <input id="wlzms_xg" type="text" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">物料类别：</label>
+        <div class="layui-input-inline">
+            <select id="wllb_xg" lay-filter="wllb_xg">
+                @*<option value="" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.Sy_typemxlist.Length; i++)
+                {
+                    <option value="@Model.Sy_typemxlist[i].ID">@Model.Sy_typemxlist[i].MXNAME</option>
+                }*@
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">启用状态：</label>
+        <div class="layui-input-inline">
+            <select id="wlzt_xg" lay-filter="wlzt_xg">
+                <option value="open" selected="selected">启用</option>
+                <option value="off">关闭</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">备注：</label>
+        <div class="layui-input-inline">
+            <input id="bz_xg" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/Material_Group")
+}

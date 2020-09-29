@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "产品组设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>产品管理</a>
+    <a><cite>产品组设置</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn">刷新</button>
+
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<div id="div_jump" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:120px;">产品组名称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:120px;">产品组说明：</label>
+        <div class="layui-input-inline">
+            <input id="shuoming" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <table id="result_toright" lay-filter="result_toright"></table>
+</div>
+
+
+<input id="netpath" hidden />
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+
+    });
+</script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Product/Select_ProductGroup")
+}

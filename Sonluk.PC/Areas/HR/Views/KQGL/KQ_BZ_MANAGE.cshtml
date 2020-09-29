@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "班制维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="ISGLJR_Tpl">
+    {{# if(d.ISGLJR == 0){ }}
+    否
+    {{# }else if(d.ISGLJR == 1){ }}
+    是
+    {{# } }}
+</script>
+<script type="text/html" id="ISMR_Tpl">
+    {{# if(d.ISMR == 0){ }}
+    否
+    {{# }else if(d.ISMR == 1){ }}
+    是
+    {{# } }}
+</script>
+<script type="text/html" id="ISACTION_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<script type="text/html" id="BDSBTIME_Tpl">
+    {{d.BDSBTIMEKS+"-"+d.BDSBTIMEJS}}
+</script>
+<script type="text/html" id="BDXBTIME_Tpl">
+    {{d.BDXBTIMEKS+"-"+d.BDXBTIMEJS}}
+</script>
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>班制维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">班制名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_bzname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_bz" lay-filter="tb_bz"></table>
+</div>
+<div class="layui-form" id="div_bzinfo" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">班制名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bzinfo_bzname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-inline">
+                <select id="bzinfo_isaction" lay-filter="pbfzinfo_isaction">
+                    <option value="0" selected="selected">关闭</option>
+                    <option value="1">启用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">班制说明：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bzinfo_remark" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn layui-btn-sm" id="btn_bdxz">班段选择</button>
+    <table class="layui-hide" id="tb_bzmx" lay-filter="tb_bzmx"></table>
+</div>
+<div id="div_bdinfo" hidden>
+    <table class="layui-hide" id="tb_bd" lay-filter="tb_bd"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_BZ_MANAGE")
+}

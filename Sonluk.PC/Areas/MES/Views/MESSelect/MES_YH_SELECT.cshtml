@@ -1,0 +1,386 @@
+﻿@{
+    ViewBag.Title = "验货清单查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+<script type="text/html" id="TLTH_Tpl">
+    {{# if(d.TLTH>0){ }}
+    {{ d.TLTH }}
+    {{# }else { }}
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES查询</a>
+    <a><cite>验货清单查询</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_DC">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="find_gzzx" lay-filter="find_gzzx" lay-search=""></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">验货日期：</label>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_yhrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_yhrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">验货单号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_yhno" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">销售订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_xsdd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">提交日期：</label>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_tjrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_tjrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="checkbox" name="" title="显示已完成" lay-skin="find_isshowqx" id="find_isshowqx" lay-filter="find_isshowqx">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_yh" lay-filter="tb_yh"></table>
+</div>
+<script>
+    var all_fy = 1;
+    var all_fysl = 12;
+    var all_limits = [12, 36, 108, 324, 972, 3000];
+    var IV_BOX = "";
+    layui.use(['form', 'laydate', 'element', 'laydate', 'table'], function () {
+        var layer = layui.layer
+            , laydate = layui.laydate;
+        var table = layui.table;
+        var form = layui.form;
+        laydate.render({
+            elem: '#find_yhrq_s'
+        });
+        laydate.render({
+            elem: '#find_yhrq_e'
+        });
+        laydate.render({
+            elem: '#find_tjrq_s'
+        });
+        laydate.render({
+            elem: '#find_tjrq_e'
+        });
+        band_find_gc();
+        $("#btn_find").click(function () {
+            banddate();
+        });
+        form.on('checkbox(find_isshowqx)', function (data) {
+            if (data.elem.checked === true) {
+                IV_BOX = "X";
+            }
+            else {
+                IV_BOX = "";
+            }
+        });
+        $("#btn_DC").click(function () {
+            var GC = $('#find_gc').val();
+            var GZZXBH = $('#find_gzzx').val();
+            var IV_YHNO = $('#find_yhno').val();
+            var IV_VBELN = $('#find_xsdd').val();
+            var IS_DATE_LOW = $('#find_yhrq_s').val();
+            var IS_DATE_HIGH = $('#find_yhrq_e').val();
+            var IS_TJDATE_LOW = $('#find_tjrq_s').val();
+            var IS_TJDATE_HIGH = $('#find_tjrq_e').val();
+            if (IV_VBELN != "") {
+                IV_VBELN = "00" + IV_VBELN;
+            }
+            if (GC === "") {
+                layer.msg("请选择工厂");
+                return;
+            }
+            if (IS_DATE_LOW === "") {
+                layer.msg("请选择验货开始日期");
+                return;
+            }
+            if (IS_DATE_HIGH === "") {
+                layer.msg("请选择验货结束日期");
+                return;
+            }
+            if (IS_DATE_LOW > IS_DATE_HIGH) {
+                layer.msg("验货开始日期不能大于结束日期");
+                return;
+            }
+            if (IS_TJDATE_LOW > IS_TJDATE_HIGH) {
+                layer.msg("提交开始日期不能大于结束日期");
+                return;
+            }
+            if (IS_TJDATE_LOW != "" || IS_TJDATE_HIGH != "") {
+                if (IS_TJDATE_LOW == "" || IS_TJDATE_HIGH == "") {
+                    layer.msg("提交开始日期与结束日期不允许只填写一个");
+                    return;
+                }
+            }
+            var datastring = {
+                GC: GC,
+                GZZXBH: GZZXBH,
+                IV_YHNO: IV_YHNO,
+                IV_VBELN: IV_VBELN,
+                IV_BOX: IV_BOX,
+                IS_DATE_LOW: IS_DATE_LOW,
+                IS_DATE_HIGH: IS_DATE_HIGH,
+                IS_TJDATE_LOW: IS_TJDATE_LOW,
+                IS_TJDATE_HIGH: IS_TJDATE_HIGH
+            };
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../MESSelect/EXPOST_YHINFO",
+                data: {
+                    datastring: JSON.stringify(datastring)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.TYPE === "S") {
+                        window.open("../MESSelect/EXPORT_DOWNLOAD" + "?filename=" + resdata.MESSAGE + "&filenameout=验货信息", "_self");
+                    }
+                    else {
+                        layer.msg(resdata.MESSAGE);
+                    }
+                }
+            });
+        });
+        form.on('select(find_gc)', function (data) {
+            band_find_gzzx();
+        });
+    });
+    function band_find_gc() {
+        var form = layui.form;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../System/Data_Select_GC_ROLE",
+            data: {
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                if (resdata.length === 1) {
+                    $('#find_gc').append(new Option(resdata[0].GC + "-" + resdata[0].GCMS, resdata[0].GC));
+                }
+                else {
+                    $("#find_gc").html("");
+                    $('#find_gc').append(new Option("请选择", ""));
+                    for (var a = 0; a < resdata.length; a++) {
+                        $('#find_gc').append(new Option(resdata[a].GC + "-" + resdata[a].GCMS, resdata[a].GC));
+                    }
+                }
+                //band_find_pfdhlb();
+                band_find_gzzx();
+            }
+        });
+        form.render();
+    }
+    function band_find_gzzx() {
+        var form = layui.form;
+        $("#find_gzzx").html("");
+        if ($('#find_gc').val() != "") {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../TMManage/GET_GZZX_BY_ROLE",
+                data: {
+                    GC: $('#find_gc').val()
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    var rstcount = resdata.length;
+                    if (rstcount === 1) {
+                        $('#find_gzzx').append(new Option(resdata[0].GZZXBH + "-" + resdata[0].GZZXMS, resdata[0].GZZXBH));
+                    }
+                    else {
+                        $('#find_gzzx').append(new Option("请选择", ""));
+                        for (var i = 0; i < resdata.length; i++) {
+                            $('#find_gzzx').append(new Option(resdata[i].GZZXBH + "-" + resdata[i].GZZXMS, resdata[i].GZZXBH));
+                        }
+                    }
+                    form.render();
+                }
+            });
+        }
+        else {
+            $('#find_gzzx').append(new Option("请选择", ""));
+        }
+        form.render();
+    }
+
+    function banddate() {
+        var table = layui.table;
+        var GC = $('#find_gc').val();
+        var GZZXBH = $('#find_gzzx').val();
+        var IV_YHNO = $('#find_yhno').val();
+        var IV_VBELN = $('#find_xsdd').val();
+        var IS_DATE_LOW = $('#find_yhrq_s').val();
+        var IS_DATE_HIGH = $('#find_yhrq_e').val();
+        var IS_TJDATE_LOW = $('#find_tjrq_s').val();
+        var IS_TJDATE_HIGH = $('#find_tjrq_e').val();
+        if (IV_VBELN != "") {
+            IV_VBELN = "00" + IV_VBELN;
+        }
+        if (GC === "") {
+            layer.msg("请选择工厂");
+            return;
+        }
+        if (IS_DATE_LOW === "") {
+            layer.msg("请选择验货开始日期");
+            return;
+        }
+        if (IS_DATE_HIGH === "") {
+            layer.msg("请选择验货结束日期");
+            return;
+        }
+        if (IS_DATE_LOW > IS_DATE_HIGH) {
+            layer.msg("验货开始日期不能大于结束日期");
+            return;
+        }
+        if (IS_TJDATE_LOW > IS_TJDATE_HIGH) {
+            layer.msg("提交开始日期不能大于结束日期");
+            return;
+        }
+        if (IS_TJDATE_LOW != "" || IS_TJDATE_HIGH != "") {
+            if (IS_TJDATE_LOW == "" || IS_TJDATE_HIGH == "") {
+                layer.msg("提交开始日期与结束日期不允许只填写一个");
+                return;
+            }
+        }
+        var datastring = {
+            GC: GC,
+            GZZXBH: GZZXBH,
+            IV_YHNO: IV_YHNO,
+            IV_VBELN: IV_VBELN,
+            IV_BOX: IV_BOX,
+            IS_DATE_LOW: IS_DATE_LOW,
+            IS_DATE_HIGH: IS_DATE_HIGH,
+            IS_TJDATE_LOW: IS_TJDATE_LOW,
+            IS_TJDATE_HIGH: IS_TJDATE_HIGH
+        };
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../MESSelect/QM_ZSL_QMFG_RFC_ZSL_QMFM_012",
+            data: {
+                datastring: JSON.stringify(datastring)
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                if (resdata.MES_RETURN.TYPE == "S") {
+                    var fyall = Math.ceil(resdata.ET_YHINFO.length / all_fysl);
+                    if (fyall > all_fy - 1) {
+                    }
+                    else {
+                        all_fy = Number(fyall);
+                    }
+
+                    table.render({
+                        done: function (res, curr, count) {
+                            for (var i = 0; i < all_limits.length; i++) {
+                                if (all_limits[i] >= res.data.length) {
+                                    all_fysl = all_limits[i];
+                                    break;
+                                }
+                            }
+                            all_fy = curr;
+                        },
+                        height: 550,
+                        elem: '#tb_yh',
+                        data: resdata.ET_YHINFO,
+                        cols: [[ //表头
+                            { type: 'numbers', title: '序号' },
+                            { field: 'ZFYDAT', title: '验货开始日期', width: 120 },
+                            { field: 'ZLYDAT', title: '验货结束日期', width: 105 },
+                            { field: 'KTEXT', title: '工作中心', width: 120 },
+                            { field: 'MATNR', title: '物料', width: 130 },
+                            { field: 'BSTKD', title: '客户货号', width: 115 },
+                            { field: 'ARKTX', title: '客户物料描述', width: 130 },
+                            { field: 'MAKTX', title: '公司物料描述', width: 160 },
+                            { field: 'VBELN', title: '销售凭证', width: 130 },
+                            { field: 'POSNR', title: '销售凭证行项目', width: 100 },
+                            { field: 'KWMENG', title: '基本数量', width: 120 },
+                            { field: 'VRKME', title: '单位', width: 100 },
+                            { field: 'I2', title: '卡（缩）数', width: 100 },
+                            { field: 'ZZCAT', title: '箱数', width: 100 },
+                            { field: 'ZBQTY', title: '托数', width: 100 },
+                            { field: 'LGPLA2', title: '仓位', width: 100 },
+                            { field: 'GESME2', title: '仓位数量', width: 100 },
+                            { field: 'I3', title: '仓位箱数', width: 100 },
+                            { field: 'ZNAME', title: '验货人员', width: 100 },
+                            { field: 'ERNAM', title: '创建人员', width: 100 },
+                            { field: 'YHNO', title: '验货单号', width: 100 },
+                            { field: 'ITEM', title: '验货单行项目', width: 100 },
+                            { field: 'KUNNR', title: '客户编号', width: 100 },
+                            { field: 'NAME', title: '客户名称', width: 100 },
+                            { field: 'FLAG', title: '验货信息状态', width: 100 },
+                            { field: 'ZTEXT', title: '备注', width: 100 },
+                            { field: 'ZTEXT1', title: '行项目备注一', width: 100 },
+                            { field: 'ZTEXT2', title: '行项目备注二', width: 100 },
+                            { field: 'ERDAT1', title: '业务员提交日期', width: 100 },
+                            { field: 'ERZET1', title: '业务员提交时间', width: 100 },
+                            { field: 'WERKS', title: '工厂', width: 100 },
+                            { field: 'LIFNR_PO', title: '供应商', width: 100 },
+                            { field: 'CYNO', title: '出运单号', width: 100 },
+                            { field: 'NAME1', title: '销售雇员', width: 100 },
+                            { field: 'NAME2', title: '负责雇员', width: 100 },
+                            { field: 'LABOR', title: '品牌', width: 100 },
+                            { field: 'LBTXT', title: '品牌描述', width: 100 },
+                            { field: 'MVGR1T', title: '包装形式', width: 100 },
+                            { field: 'MVGR2T', title: '包装数量', width: 100 },
+                            { field: 'MVGR4T', title: '产品型号', width: 100 },
+                            { field: 'ZWG', title: '外观', width: 100 },
+                            { field: 'ZSEC', title: '色差', width: 100 },
+                            { field: 'ZDL', title: '跌落', width: 100 },
+                            { field: 'ZDUANL', title: '短路', width: 100 },
+                            { field: 'ZSZYF', title: '三正一反', width: 100 },
+                            { field: 'ZDXN', title: '电性能', width: 100 },
+                            { field: 'AUFNR', title: '生产订单', width: 100 },
+                            { field: 'GLTRP', title: '生产完成日期', width: 100 },
+                            { field: 'KALAB', title: '销售订单库存', width: 100 },
+                            { field: 'ZTEXT3', title: '情况说明', width: 100 },
+                            { field: 'ZTEXT4', title: '验货结果', width: 100 }
+                        ]]
+                       , page: {
+                           limits: all_limits,
+                           limit: all_fysl,
+                           curr: all_fy
+                       },
+                    });
+                }
+                else {
+                    layer.msg(resdata.MES_RETURN.MESSAGE);
+
+                }
+            }
+        });
+    }
+</script>

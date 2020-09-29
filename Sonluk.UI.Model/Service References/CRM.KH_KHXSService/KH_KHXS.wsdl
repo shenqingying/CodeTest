@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_KHXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KH_KHXS">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="XSID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSMC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSSL" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSJE" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CZR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_KHXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_KHXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_KHXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfCRM_KH_KHXSList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KH_KHXSList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KH_KHXSList" nillable="true" type="tns:CRM_KH_KHXSList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KH_KHXSList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KHMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSLBDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSMC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSSL" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSJE" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CZR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DZSreport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_KHXS_DZSreport" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KH_KHXS_DZSreport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CZSJ_BEGIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZSJ_END" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FGLD" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SF" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHSJ_BEGIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHSJ_END" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WDLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRQ_BEGIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRQ_END" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DZSreportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DZSreportResult" type="tns:ArrayOfCRM_KH_KHXS_DZSreportList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KH_KHXS_DZSreportList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KH_KHXS_DZSreportList" nillable="true" type="tns:CRM_KH_KHXS_DZSreportList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KH_KHXS_DZSreportList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FGLDNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SF" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SFDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CSDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXDH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FIDDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CZR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WDLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WDLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XYPP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SH_CS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SH_SL" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SH_SJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRQ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="DZSreportSoapIn">
+    <wsdl:part name="parameters" element="tns:DZSreport" />
+  </wsdl:message>
+  <wsdl:message name="DZSreportSoapOut">
+    <wsdl:part name="parameters" element="tns:DZSreportResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="KH_KHXSSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DZSreport">
+      <wsdl:input message="tns:DZSreportSoapIn" />
+      <wsdl:output message="tns:DZSreportSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_KHXSHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_KHXSHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KH_KHXSSoap" type="tns:KH_KHXSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DZSreport">
+      <soap:operation soapAction="http://tempuri.org/DZSreport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_KHXSSoap12" type="tns:KH_KHXSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DZSreport">
+      <soap12:operation soapAction="http://tempuri.org/DZSreport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_KHXSHttpGet" type="tns:KH_KHXSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_KHXSHttpPost" type="tns:KH_KHXSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KH_KHXS">
+    <wsdl:port name="KH_KHXSSoap" binding="tns:KH_KHXSSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/KH_KHXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_KHXSSoap12" binding="tns:KH_KHXSSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/KH_KHXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_KHXSHttpGet" binding="tns:KH_KHXSHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/KH_KHXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_KHXSHttpPost" binding="tns:KH_KHXSHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/KH_KHXS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

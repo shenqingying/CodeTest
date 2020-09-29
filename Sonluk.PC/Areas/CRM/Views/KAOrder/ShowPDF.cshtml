@@ -1,0 +1,29 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "ShowPDF";
+    Layout = "~/Views/Shared/_Layout_Print_PDF.cshtml";
+    CRM_ORDER_TT[] nodes = ViewBag.TTdata;
+    List<string> pathList = ViewBag.pathList;
+    string outputpath = ViewBag.outputpath;
+}
+<style type="text/css">
+    .pdf-display-file-body {
+        border: 1px solid #d4d4d4;
+        width: 898px;
+        height: 600px;
+    }
+</style>
+<input type="hidden" value="@Url.Action("Delect_PDF", "KAOrder")" id="Delect_PDF" />
+@*@for (int i = 0; i < nodes.Length; i++)
+{
+    string title = nodes[i].OrderSrcDES + nodes[i].StoreNum + "." + nodes[i].KHPO;
+    <div class="pdf-display-file-title">@title</div>
+    <embed class="pdf-display-file-body" src="~/Temp/PO/@pathList[i]" />
+}*@
+
+<embed id="pdf" class="pdf-display-file-body" style="padding-top:20px" src="~/Temp/PO/@outputpath" />
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KAOrder/ShowPDF")
+}

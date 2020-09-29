@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "结账单查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<style type="text/css">
+    .labelwidth {
+        width: 120px
+    }
+
+    .divContent {
+    }
+
+    .inputNum {
+    }
+</style>
+<input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+<input type="hidden" value="@Url.Action("GetSBINFO", "SCH")" id="GetSBINFO" />
+<input type="hidden" value="@Url.Action("GetRWDHINFOByGD_SBBH", "SCH")" id="GetRWDHINFOByGD_SBBH" />
+<input type="hidden" value="@Url.Action("ReadMaterialUnitConversion", "SCH")" id="ReadMaterialUnitConversion" />
+<input type="hidden" value="@Url.Action("ReadSY_TYPEMX", "System",new { area="MES"})" id="GetBCINFO" />
+<input type="hidden" value="@Url.Action("CreateSCH_BILL","SCH")" id="CreateSCH_BILL" />
+<input type="hidden" value="@Url.Action("GetRWDHINFOByRWBH","SCH")" id="GetRWDHINFOByRWBH" />
+<input type="hidden" value="@Url.Action("ReadSCH_BILL_Plus","SCH")" id="ReadSCH_BILL_Plus" />
+<input type="hidden" value="@Url.Action("ReadSCH_BILL","SCH")" id="ReadSCH_BILL" />
+<input type="hidden" value="@Url.Action("UpdateSCH_BILL","SCH")" id="UpdateSCH_BILL" />
+<input type="hidden" value="@Url.Action("DeleteSCH_BILL","SCH")" id="DeleteSCH_BILL" />
+<input type="hidden" value="@Url.Action("ExportSCH_BILL","SCH")" id="ExportSCH_BILL" />
+
+<script type="text/html" id="bar1">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">{{sonluklv.c_detail}}</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="head">MES进度管理</a>
+    <a lid="headsub1"><cite>订单结账查询</cite></a>
+</span>
+<script type="text/html" id="templet_wcsl">
+    {{# if(d.WCSL < d.SL){ }}
+    <span style="color: #FF0000">{{d.WCSL}}</span>
+    {{# }else if(d.WCSL == d.SL) {}}
+    <span style="color: #4DD52B">{{d.WCSL}}</span>
+    {{# } else{}}
+    <span style="color: #ff9900">{{d.WCSL}}</span>
+    {{# } }}
+</script>
+<div id="form1" class="layui-form">
+    <div class="layui-form-item">     
+        <button class="layui-btn" lid="btn2" id="btn2">查询</button>
+        <button class="layui-btn" lid="btn3" id="btn3">导出Excel</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="in_gc" lay-filter="in_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label2">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label3">生产订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" class="layui-input" id="in_erpno">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label4">物料号：</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" class="layui-input" id="in_wlh">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label5">物料描述：</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" class="layui-input" id="in_wlms">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label6">结账日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_jzrq_ks" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly>
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_jzrq_js" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb1" lay-filter="tb1"></table>
+    </div>
+
+</div>
+<div id="div2" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb2" lay-filter="tb2"></table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SCH/BILL_SELECT", "~/bundles/zwk")
+}
+
+

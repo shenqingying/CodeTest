@@ -1,0 +1,80 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "Update_Order_CopyPart";
+    CRM_ORDER_TT[] TTdata = ViewBag.TTdata;
+}
+
+@for (int i = 0; i < TTdata.Length; i++)
+{
+    string isactive = "";
+    switch (TTdata[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "已提交";
+            break;
+        case 30:
+            isactive = "";
+            break;
+        case 40:
+            isactive = "";
+            break;
+        case 50:
+            isactive = "已审核";
+            break;
+        case 60:
+            isactive = "已归档";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+    string iscancel = "";
+    if(TTdata[i].ISCANCEL == 1)
+    {
+        iscancel = "是";
+        
+    }
+    else if(TTdata[i].ISCANCEL == 0)
+    {
+        iscancel = "否"; 
+    }
+    else
+    {
+        iscancel = "";
+    }
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@TTdata[i].SDFNAME</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">发起时间</label>
+                <span class="weui-form-preview__value">@TTdata[i].CJSJ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单类型</label>
+                <span class="weui-form-preview__value">@TTdata[i].DDLXDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单状态</label>
+                <span class="weui-form-preview__value">@isactive</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">是否作废</label>
+                <span class="weui-form-preview__value">@iscancel</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Detail(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">查看</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Copy(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">复制</a>
+        </div>
+    </div>
+    <br />
+}
+
+
+

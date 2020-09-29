@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "部门维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR组织规划</a>
+    <a><cite>部门维护</cite></a>
+</span>
+<style>
+</style>
+<div class="layui-form">
+    <div class="layui-form-item">
+        @*<button class="layui-btn" id="btn_add">新增一级</button>*@
+        <button class="layui-btn" id="btn_dc">导出</button>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="treeTable" lay-filter="treeTable"></table>
+    </div>
+</div>
+<div id="div_deptinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-block" style="width: 250px;">
+                <select id="deptinfo_gs" lay-filter="deptinfo_gs"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门编号：</label>
+            <div class="layui-input-block">
+                <input type="text" id="deptinfo_bmno" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">部门名称：</label>
+            <div class="layui-input-block" style="width: 250px;">
+                <input type="text" id="deptinfo_deptname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">排序：</label>
+            <div class="layui-input-block">
+                <input type="text" id="deptinfo_px" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">负责人：</label>
+            <div class="layui-input-block" style="width: 250px;">
+                <input type="text" id="deptinfo_fzr" autocomplete="off" placeholder="（工号/姓名/证件号码）" class="layui-input" onkeypress="displayResult()" />
+                @*<select id="deptinfo_fzr" lay-filter="deptinfo_fzr" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>*@
+            </div>
+            <div hidden>
+                <input type="text" id="bl_ryid" value="">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">直属编制：</label>
+            <div class="layui-input-block">
+                <input type="text" id="deptinfo_zsbz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">部门类别：</label>
+            <div class="layui-input-block" style="width: 250px;">
+                <select id="deptinfo_bmlb" lay-filter="deptinfo_bmlb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">成本中心：</label>
+            <div class="layui-input-block">
+                <input type="text" id="deptinfo_cbzx" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-block" style="width: 250px;">
+                <select id="deptinfo_isaction" lay-filter="deptinfo_isaction">
+                    <option value="0">关闭</option>
+                    <option value="1" selected="selected">启用</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">排班分组：</label>
+            <div class="layui-input-block">
+                <select id="deptinfo_pbfz" lay-filter="deptinfo_pbfz" lay-search></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">薪资排序：</label>
+            <div class="layui-input-block" style="width: 250px;">
+                <input type="text" id="deptinfo_xzdeptpx" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">备注：</label>
+                <div class="layui-input-block" style="width: 490px;">
+                    <input type="text" id="deptinfo_bz" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_editfid" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">上级部门：</label>
+        <div class="layui-input-inline" style="width: 250px;" id="addinfo_dept_father">
+            @*<div id="addinfo_gsbm" class="layui-form-select select-tree"></div>*@
+        </div>
+    </div>
+</div>
+<div class="layui-form" id="div_ghry" hidden>
+    <table class="layui-hidden" id="ghryTable" lay-filter="ghryTable"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/ZZJG/DEPTMANAGE")
+}

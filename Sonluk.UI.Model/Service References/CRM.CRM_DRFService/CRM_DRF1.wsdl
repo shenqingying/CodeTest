@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="status">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="account" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="statusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="statusResult" type="tns:CRM_DRF_RETURNMSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_DRF_RETURNMSG">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Data" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="setAuth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="auth" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="account" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="setAuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="setAuthResult" type="tns:CRM_DRF_RETURNMSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SYNC_DRFBILL">
+        <s:complexType />
+      </s:element>
+      <s:element name="SYNC_DRFBILLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SYNC_DRFBILLResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="downloadPDF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PDFPATH" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="downloadPDFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="downloadPDFResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SCREENSHOT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="shotlb" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SCREENSHOTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SCREENSHOTResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="latest">
+        <s:complexType />
+      </s:element>
+      <s:element name="latestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="latestResult" type="tns:DRF_LATEST_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DRF_LATEST_RETURN">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:DRF_LATEST_ORDERS" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DRF_LATEST_ORDERS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Orders" type="tns:DRF_LATEST_ORDERS_INFO" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrdersDone" type="tns:DRF_LATEST_ORDERS_INFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DRF_LATEST_ORDERS_INFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RT205165" type="tns:ArrayOfDRF_LATEST_ORDERS_MXINFO" />
+          <s:element minOccurs="0" maxOccurs="1" name="RT36357" type="tns:ArrayOfDRF_LATEST_ORDERS_MXINFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDRF_LATEST_ORDERS_MXINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DRF_LATEST_ORDERS_MXINFO" nillable="true" type="tns:DRF_LATEST_ORDERS_MXINFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DRF_LATEST_ORDERS_MXINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Account" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ordernum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Storenum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_USER_SYNC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_ORDER_DRF_USER" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_ORDER_DRF_USER">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="USERACCOUNT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_USER_SYNCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_USER_SYNCResult" type="tns:CRM_ORDER_DRF_USER_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_ORDER_DRF_USER_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_ORDER_DRF_USER" type="tns:ArrayOfCRM_ORDER_DRF_USER" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_ORDER_DRF_USER">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_ORDER_DRF_USER" nillable="true" type="tns:CRM_ORDER_DRF_USER" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CRM_DRF_RETURNMSG" nillable="true" type="tns:CRM_DRF_RETURNMSG" />
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="base64Binary" nillable="true" type="s:base64Binary" />
+      <s:element name="DRF_LATEST_RETURN" nillable="true" type="tns:DRF_LATEST_RETURN" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="statusSoapIn">
+    <wsdl:part name="parameters" element="tns:status" />
+  </wsdl:message>
+  <wsdl:message name="statusSoapOut">
+    <wsdl:part name="parameters" element="tns:statusResponse" />
+  </wsdl:message>
+  <wsdl:message name="setAuthSoapIn">
+    <wsdl:part name="parameters" element="tns:setAuth" />
+  </wsdl:message>
+  <wsdl:message name="setAuthSoapOut">
+    <wsdl:part name="parameters" element="tns:setAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="SYNC_DRFBILLSoapIn">
+    <wsdl:part name="parameters" element="tns:SYNC_DRFBILL" />
+  </wsdl:message>
+  <wsdl:message name="SYNC_DRFBILLSoapOut">
+    <wsdl:part name="parameters" element="tns:SYNC_DRFBILLResponse" />
+  </wsdl:message>
+  <wsdl:message name="downloadPDFSoapIn">
+    <wsdl:part name="parameters" element="tns:downloadPDF" />
+  </wsdl:message>
+  <wsdl:message name="downloadPDFSoapOut">
+    <wsdl:part name="parameters" element="tns:downloadPDFResponse" />
+  </wsdl:message>
+  <wsdl:message name="SCREENSHOTSoapIn">
+    <wsdl:part name="parameters" element="tns:SCREENSHOT" />
+  </wsdl:message>
+  <wsdl:message name="SCREENSHOTSoapOut">
+    <wsdl:part name="parameters" element="tns:SCREENSHOTResponse" />
+  </wsdl:message>
+  <wsdl:message name="latestSoapIn">
+    <wsdl:part name="parameters" element="tns:latest" />
+  </wsdl:message>
+  <wsdl:message name="latestSoapOut">
+    <wsdl:part name="parameters" element="tns:latestResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_USER_SYNCSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_USER_SYNC" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_USER_SYNCSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_USER_SYNCResponse" />
+  </wsdl:message>
+  <wsdl:message name="statusHttpGetIn">
+    <wsdl:part name="account" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="statusHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_DRF_RETURNMSG" />
+  </wsdl:message>
+  <wsdl:message name="setAuthHttpGetIn">
+    <wsdl:part name="auth" type="s:string" />
+    <wsdl:part name="account" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="setAuthHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_DRF_RETURNMSG" />
+  </wsdl:message>
+  <wsdl:message name="SYNC_DRFBILLHttpGetIn" />
+  <wsdl:message name="SYNC_DRFBILLHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="downloadPDFHttpGetIn">
+    <wsdl:part name="PDFPATH" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="downloadPDFHttpGetOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="SCREENSHOTHttpGetIn">
+    <wsdl:part name="shotlb" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SCREENSHOTHttpGetOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="latestHttpGetIn" />
+  <wsdl:message name="latestHttpGetOut">
+    <wsdl:part name="Body" element="tns:DRF_LATEST_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="statusHttpPostIn">
+    <wsdl:part name="account" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="statusHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_DRF_RETURNMSG" />
+  </wsdl:message>
+  <wsdl:message name="setAuthHttpPostIn">
+    <wsdl:part name="auth" type="s:string" />
+    <wsdl:part name="account" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="setAuthHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_DRF_RETURNMSG" />
+  </wsdl:message>
+  <wsdl:message name="SYNC_DRFBILLHttpPostIn" />
+  <wsdl:message name="SYNC_DRFBILLHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="downloadPDFHttpPostIn">
+    <wsdl:part name="PDFPATH" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="downloadPDFHttpPostOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="SCREENSHOTHttpPostIn">
+    <wsdl:part name="shotlb" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SCREENSHOTHttpPostOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="latestHttpPostIn" />
+  <wsdl:message name="latestHttpPostOut">
+    <wsdl:part name="Body" element="tns:DRF_LATEST_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="CRM_DRFSoap">
+    <wsdl:operation name="status">
+      <wsdl:input message="tns:statusSoapIn" />
+      <wsdl:output message="tns:statusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setAuth">
+      <wsdl:input message="tns:setAuthSoapIn" />
+      <wsdl:output message="tns:setAuthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SYNC_DRFBILL">
+      <wsdl:input message="tns:SYNC_DRFBILLSoapIn" />
+      <wsdl:output message="tns:SYNC_DRFBILLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="downloadPDF">
+      <wsdl:input message="tns:downloadPDFSoapIn" />
+      <wsdl:output message="tns:downloadPDFSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SCREENSHOT">
+      <wsdl:input message="tns:SCREENSHOTSoapIn" />
+      <wsdl:output message="tns:SCREENSHOTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="latest">
+      <wsdl:input message="tns:latestSoapIn" />
+      <wsdl:output message="tns:latestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_USER_SYNC">
+      <wsdl:input message="tns:SELECT_USER_SYNCSoapIn" />
+      <wsdl:output message="tns:SELECT_USER_SYNCSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_DRFHttpGet">
+    <wsdl:operation name="status">
+      <wsdl:input message="tns:statusHttpGetIn" />
+      <wsdl:output message="tns:statusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setAuth">
+      <wsdl:input message="tns:setAuthHttpGetIn" />
+      <wsdl:output message="tns:setAuthHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SYNC_DRFBILL">
+      <wsdl:input message="tns:SYNC_DRFBILLHttpGetIn" />
+      <wsdl:output message="tns:SYNC_DRFBILLHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="downloadPDF">
+      <wsdl:input message="tns:downloadPDFHttpGetIn" />
+      <wsdl:output message="tns:downloadPDFHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SCREENSHOT">
+      <wsdl:input message="tns:SCREENSHOTHttpGetIn" />
+      <wsdl:output message="tns:SCREENSHOTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="latest">
+      <wsdl:input message="tns:latestHttpGetIn" />
+      <wsdl:output message="tns:latestHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_DRFHttpPost">
+    <wsdl:operation name="status">
+      <wsdl:input message="tns:statusHttpPostIn" />
+      <wsdl:output message="tns:statusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setAuth">
+      <wsdl:input message="tns:setAuthHttpPostIn" />
+      <wsdl:output message="tns:setAuthHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SYNC_DRFBILL">
+      <wsdl:input message="tns:SYNC_DRFBILLHttpPostIn" />
+      <wsdl:output message="tns:SYNC_DRFBILLHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="downloadPDF">
+      <wsdl:input message="tns:downloadPDFHttpPostIn" />
+      <wsdl:output message="tns:downloadPDFHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SCREENSHOT">
+      <wsdl:input message="tns:SCREENSHOTHttpPostIn" />
+      <wsdl:output message="tns:SCREENSHOTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="latest">
+      <wsdl:input message="tns:latestHttpPostIn" />
+      <wsdl:output message="tns:latestHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CRM_DRFSoap" type="tns:CRM_DRFSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="status">
+      <soap:operation soapAction="http://tempuri.org/status" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setAuth">
+      <soap:operation soapAction="http://tempuri.org/setAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNC_DRFBILL">
+      <soap:operation soapAction="http://tempuri.org/SYNC_DRFBILL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadPDF">
+      <soap:operation soapAction="http://tempuri.org/downloadPDF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCREENSHOT">
+      <soap:operation soapAction="http://tempuri.org/SCREENSHOT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="latest">
+      <soap:operation soapAction="http://tempuri.org/latest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_USER_SYNC">
+      <soap:operation soapAction="http://tempuri.org/SELECT_USER_SYNC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_DRFSoap12" type="tns:CRM_DRFSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="status">
+      <soap12:operation soapAction="http://tempuri.org/status" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setAuth">
+      <soap12:operation soapAction="http://tempuri.org/setAuth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNC_DRFBILL">
+      <soap12:operation soapAction="http://tempuri.org/SYNC_DRFBILL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadPDF">
+      <soap12:operation soapAction="http://tempuri.org/downloadPDF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCREENSHOT">
+      <soap12:operation soapAction="http://tempuri.org/SCREENSHOT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="latest">
+      <soap12:operation soapAction="http://tempuri.org/latest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_USER_SYNC">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_USER_SYNC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_DRFHttpGet" type="tns:CRM_DRFHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="status">
+      <http:operation location="/status" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setAuth">
+      <http:operation location="/setAuth" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNC_DRFBILL">
+      <http:operation location="/SYNC_DRFBILL" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadPDF">
+      <http:operation location="/downloadPDF" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCREENSHOT">
+      <http:operation location="/SCREENSHOT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="latest">
+      <http:operation location="/latest" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_DRFHttpPost" type="tns:CRM_DRFHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="status">
+      <http:operation location="/status" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setAuth">
+      <http:operation location="/setAuth" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNC_DRFBILL">
+      <http:operation location="/SYNC_DRFBILL" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadPDF">
+      <http:operation location="/downloadPDF" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCREENSHOT">
+      <http:operation location="/SCREENSHOT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="latest">
+      <http:operation location="/latest" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CRM_DRF">
+    <wsdl:port name="CRM_DRFSoap" binding="tns:CRM_DRFSoap">
+      <soap:address location="http://192.168.0.223/API/CRM/CRM_DRF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_DRFSoap12" binding="tns:CRM_DRFSoap12">
+      <soap12:address location="http://192.168.0.223/API/CRM/CRM_DRF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_DRFHttpGet" binding="tns:CRM_DRFHttpGet">
+      <http:address location="http://192.168.0.223/API/CRM/CRM_DRF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_DRFHttpPost" binding="tns:CRM_DRFHttpPost">
+      <http:address location="http://192.168.0.223/API/CRM/CRM_DRF.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

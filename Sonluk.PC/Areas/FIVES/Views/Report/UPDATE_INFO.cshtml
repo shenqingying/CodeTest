@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "维护打分信息";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Sonluk.UI.Model.S5.SY_CHECKPOINTService.FIVES_SY_CHECKPOINT[] CheckPointArr = ViewBag.CheckPointArr;
+    Sonluk.UI.Model.S5.STAFF_DEPService.FIVES_STAFF_DEP[] bmlist = ViewBag.DeptArr;
+
+    Sonluk.UI.Model.MES.SY_STAFFService.MES_SY_STAFF[] staffList = ViewBag.STAFFArr;
+    Sonluk.UI.Model.S5.SY_DICTService.FIVES_SY_DICT[] DFArr = ViewBag.DFArr;
+}
+
+<input type="hidden" value="@Url.Action("CheckInfo_Head", "Report")" id="PF_Select" />
+<input type="hidden" value="@Url.Action("PFMX_Select", "Report")" id="PFMX_Select" />
+<input type="hidden" value="@Url.Action("UPDATE_SHOWTIME", "Report")" id="UPDATE_SHOWTIME" />
+<input type="hidden" value="@Url.Action("UPDATE_SHOWTIME_part", "Report")" id="UPDATE_SHOWTIME_part" />
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="select_MX">不合格明细</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">编辑</a>*@
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>5S查询</a>
+    <a><cite>维护打分信息</cite></a>
+</span>
+
+<div class="layui-form layui-form-pane">
+    <br />
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_select">查询</button>
+        <button class="layui-btn" id="btn_update">批量修改</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门：</label>
+        <div class="layui-input-inline">
+            <select id="in_bm" lay-filter="in_bm">
+                <option value="0">请选择</option>
+                @for (int i = 0; i < bmlist.Length; i++)
+                {
+                    if (bmlist.Length == 1)
+                    {
+                        <option value="@bmlist[i].DEPTID" selected="selected">@bmlist[i].DEPTNAME</option>
+
+                    }
+                    else
+                    {
+                        <option value="@bmlist[i].DEPTID">@bmlist[i].DEPTNAME</option>
+                    }
+                }
+            </select>
+        </div>
+        <label class="layui-form-label">检查类型：</label>
+        <div class="layui-input-inline">
+            <select id="in_CheckTYPE" lay-filter="in_CheckTYPE" lay-search>
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+        <label class="layui-form-label">检查点：</label>
+        <div class="layui-input-inline">
+            <select id="in_CheckPoint" lay-filter="in_CheckPoint" lay-search>
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+
+
+
+    </div>
+    <div class="layui-form-item">
+        @*<label class="layui-form-label">评分人：</label>
+        <div class="layui-input-inline">
+            <select id="in_staff" lay-filter="in_staff" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < @staffList.Length; i++)
+                {
+                    <option value="@staffList[i].STAFFID">@staffList[i].STAFFNAME</option>
+                }
+            </select>
+        </div>*@
+        @*<label class="layui-form-label">评分分数：</label>
+        <div class="layui-input-inline">
+            <select id="in_fs" lay-filter="in_fs" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < @DFArr.Length; i++)
+                {
+                    <option value="@DFArr[i].DICID">@DFArr[i].DICNAME</option>
+                }
+            </select>
+        </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label">评分时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_time_ks" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_time_js" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        @*<div class="layui-form-item">
+                <label class="layui-form-label">合格：</label>
+                <div class="layui-input-inline">
+                    <select id="in_HG" lay-filter="in_HG" lay-search>
+                        <option value="1" selected="selected">不合格</option>
+                        <option value="0">合格</option>
+                        <option value="2">全部</option>
+                    </select>
+                </div>
+            </div>*@
+    </div>
+    <div class="layui-form-item">
+        <table id="table_checkinfo" lay-filter="table_checkinfo"></table>
+    </div>
+</div>
+<div class="layui-form " id="div_checkinfoTable">
+    <div class="layui-form-item">
+        <table id="table_checkinfomx" lay-filter="table_checkinfomx"></table>
+    </div>
+</div>
+
+<div class="layui-form " id="div_time" hidden>
+    <br />
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">修改时间：</label>
+            <div class="layui-input-inline" style="width: 200px;">
+                <input type="text" name="date" id="update_time" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="">
+            </div>
+            @*<label class="layui-form-label" style="width: 8px;text-align:center">—</label>*@
+            <div class="layui-input-inline" style="width: 200px;">
+                <input type="text" name="date" id="update_time2" lay-verify="date" placeholder="hh:mm:ss" autocomplete="off" class="layui-input" value="">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/Report/UPDATE_INFO")
+}
+
+

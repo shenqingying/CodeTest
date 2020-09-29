@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "电池照片";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "电池照片";
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+}
+
+<h2 id="h1" style="margin:0 10px"></h2>
+<h2 id="h2" style="margin:0 10px"></h2>
+
+
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+<br />
+<hr class="layui-bg-black" />
+<br />
+<div>
+
+    <div class="layui-form-item" style="width:100%; margin:0">
+        <div class="layui-input-inline" style="width:100%; margin:0;background-color:#009688;">
+            <button id="btn_upload_img_camera" class="layui-btn" style="width:46%">拍照</button>
+            |
+            <button id="btn_upload_img_album" class="layui-btn" style="width:46%">相册</button>
+        </div>
+    </div>
+
+</div>
+
+<input id="staffid" hidden />
+<input id="state" hidden />
+<input id="appid" hidden />
+
+<input id="lat" hidden />
+<input id="lon" hidden />
+<input id="province" hidden />
+<input id="city" hidden />
+<input id="address" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@staffid");
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/BatteryImg")
+}

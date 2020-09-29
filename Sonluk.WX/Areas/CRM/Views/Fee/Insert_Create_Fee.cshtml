@@ -1,0 +1,354 @@
+﻿@using Sonluk.UI.Model.CRM.COST_GGGSService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "新增制作费";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+
+    CRM_COST_GGGS[] GGGSID = ViewBag.GGGSID;
+    CRM_COST_GGGS[] GGGSMC = ViewBag.GGGSMC;
+
+    CRM_HG_DICT[] ZZLX = ViewBag.ZZLX;
+    CRM_HG_DICT[] SF = ViewBag.SF;
+    CRM_HG_DICT[] CS = ViewBag.CS;
+    CRM_HG_DICT[] KHLX = ViewBag.KHLX;
+}
+
+
+
+
+
+
+
+<div class="weui-btn-area">
+
+    <button class="weui-btn weui-btn_primary" id="btn_save_kehu" style="width:100%;display:initial;margin:0 0;">保存</button>
+
+</div>
+
+
+<div id="div1" class="weui-cells weui-cells_form" style="margin-top:0;">
+
+
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">制作类型：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="ZZLX" class="weui-select">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < ZZLX.Length; i++)
+                {
+                    <option value="@ZZLX[i].DICID">@ZZLX[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    @*<div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">合同年份：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="HTYEAR" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>*@
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">合同年份：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="HTYEAR" class="weui-select">
+                <option value="">请选择</option>
+                @for (int i = @DateTime.Now.Year - 10; i <= @DateTime.Now.Year + 10; i++)
+                {
+                    if (i == DateTime.Now.Year)
+                    {
+                        <option value="@i" selected="selected">@(i)年</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@(i)年</option>
+                    }
+
+                }
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="mendian1" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="CRMID" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">上级客户名称：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="mendian" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">上级客户编号：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="PKHID" class="weui-input" type="text" placeholder="" readonly>
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">省份：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="SF" class="weui-select">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < SF.Length; i++)
+                {
+                    <option value="@SF[i].DICID">@SF[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">城市：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="CS" class="weui-select">
+                <option value="0" selected="selected">请选择</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">广告地址：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="GGADDRESS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">店主联系人：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="LXR" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">店主联系电话：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="LXDH" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">位置评估：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="WZPG" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">制作前月销售额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ZZQYDXS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">制作后预计月销售额：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="ZZHYDXS" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">情况说明：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="QKSM" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+
+    @* 第4行 *@
+    <div id="cuxiaoyuan" class="weui-cells weui-cells_form" hidden>
+
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">是否有促销员支持：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="SFYCXYZC" class="weui-select">
+                    <option value="1">是</option>
+                    <option value="0" selected="selected">否</option>
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">促销员费用：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="CXYFY" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+    </div>
+    @* 第6行 *@
+    <div id="chenliefei" class="weui-cells weui-cells_form" hidden>
+
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">是否产生陈列费用：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="SFCSCLFY" class="weui-select">
+                    <option value="1">是</option>
+                    <option value="0" selected="selected">否</option>
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">陈列费用：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="CLFY" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+
+    </div>
+    <div id="xianqurenkou" class="weui-cells weui-cells_form" hidden>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">县区人口：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="XQRK" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+    </div>
+    <div id="adnum" hidden>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">距最近广告距离：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="GGJL" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">此县区已有广告数量：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="GGSL" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+    </div>
+    <div id="for_jxs" hidden>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">广告制作费小计：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="ZZF" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">申请金额合计：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="SQJE" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">最终确认费用：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="SQJE" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+    </div>
+    <div id="div_date" class="weui-cells weui-cells_form" hidden>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">租赁开始时间：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="ZLSTARTTIME" class="weui-input" type="date" placeholder="">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">租赁结束时间：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="ZLENDTIME" class="weui-input" type="date" placeholder="">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">广告租赁费：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="GGZLF" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">广告公司：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="GGGSID" class="weui-select">
+                <option value="0" selected>请选择</option>
+            </select>
+        </div>
+    </div>
+    @*<div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">审核意见：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="OPINION" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>*@
+
+</div>
+
+@*弹出层*@
+<div id="div_select_jxs" class="weui-cells weui-cells_form" hidden>
+
+    <div class="weui-btn-area">
+
+        <button class="weui-btn weui-btn_primary" id="select_jxs_cx" style="width:100%;display:initial;margin:0 0;">查询</button>
+
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">客户类型：</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select id="select_jxs_type" class="weui-select">
+                <option value="0" selected="selected">请选择客户类型</option>
+                <option value="7">LKA</option>
+                <option value="1">经销商</option>
+                <option value="3">KA</option>
+                <option value="5">终端网点</option>
+                <option value="10">中间商</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="select_jxs_name" class="weui-input" type="text" placeholder="">
+        </div>
+    </div>
+
+    <div id="select_jxs_result">
+    </div>
+
+</div>
+
+
+
+
+<input id="KHLX" hidden />
+<input id="KHID" hidden />
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Insert_Create_Fee")
+}

@@ -1,0 +1,361 @@
+﻿@{
+    ViewBag.Title = "员工福利档案";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string mypw = "";
+    if (Session["MYPW"] != null)
+    {
+        mypw = Session["MYPW"].ToString();
+    }
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tpl_sbstart">
+    {{# if(d.SBKSYEAR != 1900 && d.SBKSYEAR !==""){ }}
+    {{ d.SBKSYEAR + "-" + d.SBKSMOUTH }}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="tpl_sbend">
+    {{# if(d.SBJSYEAR != 9999 && d.SBJSYEAR !==""){ }}
+    {{ d.SBJSYEAR + "-" + d.SBJSMOUTH }}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="tpl_gjjstart">
+    {{# if(d.GJJKSYEAR != 1900  && d.GJJKSYEAR !==""){ }}
+    {{ d.GJJKSYEAR + "-" + d.GJJKSMOUTH }}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="tpl_gjjend">
+    {{# if(d.GJJJSYEAR != 9999  && d.GJJJSYEAR !==""){ }}
+    {{ d.GJJJSYEAR + "-" + d.GJJJSMOUTH }}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_iscacu">
+    {{# if(d.ISJS == 1){ }}
+    是
+    {{# }else if(d.ISJS == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_select">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">确认</a>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资管理</a>
+    <a><cite>员工福利档案</cite></a>
+</span>
+
+
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_insert">新增</button>
+        <button class="layui-btn" id="btn_daoru">导入</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_cx">查询</button>
+        <button class="layui-btn" id="btn_jsdaoru">基数导入</button>
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="cx_company" lay-filter="cx_company"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            @*<div class="layui-input-inline" style="width: 250px;">
+                    <select id="cx_department" xm-select="cx_department" lay-filter="cx_department" style="width:400px;">
+
+                    </select>
+                </div>*@
+            <div class="layui-input-inline" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input id="cx_staffno" type="text" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+
+
+        @*<div class="layui-inline">
+                    <label class="layui-form-label">姓名：</label>
+                    <div class="layui-input-inline">
+                        <input id="name" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                <label class="layui-form-label">员工类别：</label>
+                <div class="layui-input-inline" style="width: 250px;">
+                    <select id="cx_stafftype" xm-select="cx_stafftype" lay-filter="cx_stafftype" style="width:400px;"></select>
+                </div>
+            </div>
+
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">证照号码：</label>
+                    <div class="layui-input-inline">
+                        <input id="zzcode" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">福利方案：</label>
+                    <div class="layui-input-inline" style="width: 250px;">
+                        <select id="department" xm-select="department" lay-filter="department" style="width:400px;">
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">社保帐号：</label>
+                    <div class="layui-input-inline">
+                        <input id="zzcode" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">社保起始：</label>
+                    <div class="layui-input-inline">
+                        <input id="zzcode" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>*@
+
+        <div class="layui-inline">
+            <label class="layui-form-label">在职状态：</label>
+            <div class="layui-input-inline">
+                <select id="status" xm-select="status" lay-filter="status">
+                    @*<option value="0" selected="selected">请选择</option>*@
+                </select>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+    </div>
+
+
+</div>
+
+<div id="div_insert" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">姓名：</label>
+            <div class="layui-input-inline">
+                <input id="staffno" type="text" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">姓名：</label>
+            <div class="layui-input-inline">
+                <input id="name" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">证照类型：</label>
+            <div class="layui-input-inline">
+                <input id="zztype" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">证照号码：</label>
+            <div class="layui-input-inline">
+                <input id="zzcode" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">部门：</label>
+            <div class="layui-input-inline">
+                <input id="dep" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">员工类别：</label>
+            <div class="layui-input-inline">
+                <input id="stafftype" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">福利方案：</label>
+            <div class="layui-input-inline">
+                <select id="flfa" xm-select="flfa" lay-filter="flfa" style="width:400px;"></select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">是否计算福利方案：</label>
+            <div class="layui-input-inline">
+                <input type="checkbox" id="iscacu" name="iscacu" lay-skin="switch" lay-text="是|否" checked="checked">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">社保申报基数：</label>
+            <div class="layui-input-inline">
+                <input id="sbjs" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">公积金申报基数：</label>
+            <div class="layui-input-inline">
+                <input id="gjjjs" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">社保帐号：</label>
+            <div class="layui-input-inline">
+                <input id="sbzh" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">社保卡号：</label>
+            <div class="layui-input-inline">
+                <input id="sbkh" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">社保起始缴纳月：</label>
+            <div class="layui-input-inline">
+                <input id="sb_start" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">社保最后缴纳月：</label>
+            <div class="layui-input-inline">
+                <input id="sb_end" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">公积金帐号：</label>
+            <div class="layui-input-inline">
+                <input id="gjj" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">公积金起始缴纳月：</label>
+            <div class="layui-input-inline">
+                <input id="gjj_start" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">公积金最后缴纳月：</label>
+            <div class="layui-input-inline">
+                <input id="gjj_end" type="text" autocomplete="off" class="layui-input">
+                <input style="display:none;">
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div id="div_daoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_confirm" style="width:150px">导入</button>
+    </div>
+</div>
+<div id="div_jsdaoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_jsdownload" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_jsconfirm" style="width:150px">导入</button>
+    </div>
+</div>
+
+<div id="div_mypw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">密钥密码：</label>
+            <div class="layui-input-inline1">
+                <input type="password" id="myinfo_mypw" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_select" hidden>
+    <table id="result_select" lay-filter="result_select"></table>
+</div>
+
+<div hidden>
+    <input type="text" id="bl_mypw" value="@mypw">
+    <input id="netpath" value="@netpath" />
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_FLDA")
+}

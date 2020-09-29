@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "新增拜访任务指派";
+    Session["TITLENAME"] = "新增拜访任务指派";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+
+
+
+<div id="div_jump" class="layui-form">
+
+    <div class="layui-form-item" style="width:100%">
+        <button id="btn_next" class="layui-btn" style="margin-left: 0px;width:100%" ;">下一步</button>
+
+    </div>
+    <br />
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:110px;">拜访计划名称：</label>
+        <div class="layui-input-block">
+            <input id="name" type="text" class="layui-input">
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px;">开始时间：</label>
+        <div class="layui-input-block">
+            <input id="start" type="date" class="layui-input">
+        </div>
+
+        <label class="layui-form-label" style="width:110px;">结束时间：</label>
+        <div class="layui-input-block">
+            <input id="end" type="date" class="layui-input">
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<input id="staffid" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/Insert_ZP")
+}

@@ -1,0 +1,332 @@
+﻿@using Sonluk.UI.Model.MSG.MSG_TYPEService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "推送系统信息";
+
+    MSG_MSG_TYPE[] MSGTYPE = ViewBag.MSGTYPE;
+    CRM_HG_DICT[] MODE = ViewBag.MODE;
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type=" text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="tpl_isactive">
+    {{# if(d.ISACTIVE == 1){ }}
+    是
+    {{# }else { }}
+    否
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_isactive2">
+    {{# if(d.IFSEND == 1){ }}
+    是
+    {{# }else { }}
+    否
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_LINKWAY">
+    {{# if(d.LINKWAY == 1){ }}
+    API连接
+    {{# }else if(d.LINKWAY == 2) { }}
+    SQL数据库连接
+    {{# }else if(d.LINKWAY == 3) { }}
+    SAP接口
+    {{# }else if(d.LINKWAY == 4) { }}
+    Oracle数据库连接
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>推送管理</a>
+    <a><cite>推送系统信息</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn" lay-filter="formDemo">新增</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+            <button id="btn_jr" class="layui-btn" lay-filter="formDemo">一键假日</button>
+            <button id="btn_sb" class="layui-btn" lay-filter="formDemo">一键上班</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">系统名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_mc" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;">系统代号：</label>
+                            <div class="layui-input-inline">
+                                <input id="select_crmid" type="text" autocomplete="off" class="layui-input">
+
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">消息类型：</label>
+                            <div class="layui-input-inline">
+                                <select id="select_fylb" lay-filter="select_fylb" lay-search>
+                                    <option value="0" selected="selected">请选择</option>
+                                    @for (int i = 0; i < MSGTYPE.Length; i++)
+                                    {
+                                        <option value="@MSGTYPE[i].MSGTYPEID">@MSGTYPE[i].TYPENAME</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="div_jump" class="layui-form" hidden>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">系统名称：</label>
+            <div class="layui-input-inline">
+                <input id="sysname" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">系统代号：</label>
+            <div class="layui-input-inline">
+                <input id="syscode" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">连接方式：</label>
+            <div class="layui-input-inline">
+                <select id="linkway" lay-filter="linkway" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">API连接</option>
+                    <option value="2">SQL数据库连接</option>
+                    <option value="3">SAP接口</option>
+                    <option value="4">Oracle数据库连接</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_database" style="display:none;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">数据库地址：</label>
+                <div class="layui-input-inline">
+                    <input id="datasource" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">数据库名称：</label>
+                <div class="layui-input-inline">
+                    <input id="catalog" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">数据库帐号：</label>
+                <div class="layui-input-inline">
+                    <input id="userid" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">数据库密码：</label>
+                <div class="layui-input-inline">
+                    <input id="password" type="password" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="div_api" style="display:none;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">API地址：</label>
+                <div class="layui-input-inline" style="width:565px;">
+                    <input id="api" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">是否启用预警：</label>
+            <div class="layui-input-inline">
+                <select id="isactive" lay-filter="isactive" lay-search>
+                    <option value="1" selected="selected">是</option>
+                    <option value="2">否</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">消息类型：</label>
+            <div class="layui-input-inline">
+                <select id="msgtype" lay-filter="msgtype" lay-search>
+                    <option value="0" selected="selected"></option>
+                    @for (int i = 0; i < MSGTYPE.Length; i++)
+                    {
+                        <option value="@MSGTYPE[i].MSGTYPEID">@MSGTYPE[i].TYPENAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">运行模式：</label>
+            <div class="layui-input-inline">
+                <select id="mode" lay-filter="mode" lay-search>
+                    <option value="0" selected="selected"></option>
+                    @for (int i = 0; i < MODE.Length; i++)
+                    {
+                        <option value="@MODE[i].DICID">@MODE[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <button id="btn_insert_staff" class="layui-btn">新增负责人</button>
+    </div>
+    <table id="result_staff" lay-filter="result_staff"></table>
+
+    <br />
+
+</div>
+
+<div id="div_jump_staff" class="layui-form" hidden>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">人员姓名：</label>
+            <div class="layui-input-inline">
+                <input id="staffname" type="text" autocomplete="off" class="layui-input" placeholder="（姓名/工号）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">工号：</label>
+            <div class="layui-input-inline">
+                <input id="staffno" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">是否启用预警：</label>
+            <div class="layui-input-inline">
+                <select id="isactive_staff" lay-filter="isactive_staff" lay-search>
+                    <option value="1" selected="selected">是</option>
+                    <option value="2">否</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">消息类型：</label>
+            <div class="layui-input-inline">
+                <select id="msgtype_staff" lay-filter="msgtype_staff" lay-search>
+                    <option value="0" selected="selected"></option>
+                    @for (int i = 0; i < MSGTYPE.Length; i++)
+                    {
+                        <option value="@MSGTYPE[i].MSGTYPEID">@MSGTYPE[i].TYPENAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <br />
+
+</div>
+
+<div id="div_jump_selectstaff" class="layui-form" hidden>
+
+
+
+    <table id="result_selectstaff" lay-filter="result_selectstaff"></table>
+
+    <br />
+
+</div>
+
+
+<input id="staffid" hidden />
+
+
+
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/MSG/SYS/SYS_Info")
+}

@@ -1,0 +1,495 @@
+﻿@{
+    ViewBag.Title = "模具维修管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search">查询</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GC" lay-filter="Term_GC">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GZZXBH" lay-filter="Term_GZZXBH">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">模具号：</label>
+            <div class="layui-input-inline">
+                <select id="Term_MOULD">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">质量问题：</label>
+            <div class="layui-input-inline">
+                <select id="Term_QID" lay-filter="Term_QID">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">维修内容：</label>
+            <div class="layui-input-inline">
+                <select id="Term_RID">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">发起时间：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="Term_DATESS" autocomplete="off" class="layui-input" placeholder="请选择">
+        </div>
+        <div class="layui-form-mid layui-word-aux">-</div>
+        <div class="layui-input-inline">
+            <input type="text" id="Term_DATESE" autocomplete="off" class="layui-input" placeholder="请选择">
+        </div>
+        <label class="layui-form-label1">关闭时间：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="Term_DATEES" autocomplete="off" class="layui-input" placeholder="请选择">
+        </div>
+        <div class="layui-form-mid layui-word-aux">-</div>
+        <div class="layui-input-inline">
+            <input type="text" id="Term_DATEEE" autocomplete="off" class="layui-input" placeholder="请选择">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">流程状态：</label>
+        <div class="layui-input-inline" style="width:450px;">
+            <select id="Term_STATUS" xm-select="Term_STATUS">
+                <option value="维修中">维修中</option>
+                <option value="维修完成">维修完成</option>
+                <option value="审核中">审核中</option>
+                <option value="全部合格">合格</option>
+                <option value="不合格">不合格</option>
+            </select>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_MTC" lay-filter="tb_MTC"></table>
+</div>
+
+<div id="div_modify" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">班组确认状态：</label>
+            <div class="layui-input-inline">
+                <label class="layui-form-label" id="Layer_WTCFM" style="color:#808080;width:100px;text-align:left;padding-left:10px;">未查询到状态</label>
+            </div>
+            <div class="layui-input-inline">
+                <input type="checkbox" id="Back_WTCFM" title="无需撤回" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">品管确认状态：</label>
+            <div class="layui-input-inline">
+                <label class="layui-form-label" id="Layer_QCCFM" style="color:#808080;width:100px;text-align:left;padding-left:10px;">未查询到状态</label>
+            </div>
+            <div class="layui-input-inline">
+                <input type="checkbox" id="Back_QCCFM" title="无需撤回" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">技术确认状态：</label>
+            <div class="layui-input-inline">
+                <label class="layui-form-label" id="Layer_TECCFM" style="color:#808080;width:100px;text-align:left;padding-left:10px;">未查询到状态</label>
+            </div>
+            <div class="layui-input-inline">
+                <input type="checkbox" id="Back_TECCFM" title="无需撤回" disabled>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">撤回</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+@RenderPage("~/Areas/MES/Views/Shared/MOULD.cshtml")
+
+@section scripts {
+    <script>
+        var all_fy = 1;
+        var all_fysl = 10;
+        var all_limits = [10, 20, 50, 100, 200, 500];
+        var cacheData = [];
+        layui.use(['table', 'layer', 'element', 'laydate', 'form', 'MES'], function () {
+            var layer = layui.layer;
+            var laydate = layui.laydate;
+            var table = layui.table;
+            var form = layui.form;
+            var assist = sonluk.layui;
+            var mouldCfm = layui.MES.MOULD.CFM;
+            var formSelects = layui.formSelects;
+
+            //table_init_MTC表头信息
+            var mouldColsMTC = layui.MES.MOULD.COLS.MTC;
+            mouldColsMTC[0][mouldColsMTC[0].length - 1].toolbar = '#operate';
+            
+            formSelects.render("Term_STATUS");
+            formSelects.value('Term_STATUS', ["维修完成", "审核中"]);
+            list_init_Term();
+            table_init_MTC();
+
+            laydate.render({
+                elem: '#Term_DATESS',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#Term_DATESE',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#Term_DATEES',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#Term_DATEEE',
+                type: 'datetime'
+            });
+
+            $("#btn_search").click(function () {
+                table_init_MTC();
+            });
+
+            table.on('tool(tb_MTC)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+
+                if (layEvent === 'modify') {
+                    layer_init(data);
+                }
+                else if (layEvent === 'delete') {
+                    layer.confirm('确定要删除吗？', function (index) {
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/REP_ALTER_CFMS_Delete",
+                            data: {
+                                datastring: JSON.stringify({ MTCID: data.MTCID })
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg("删除成功！");
+                                    table_init_MTC();
+                                    layer.close(index);
+                                }
+                                else if (rstData.TYPE == "E") layer.msg("删除失败，原因：" + rstData.MESSAGE);
+                                else layer.msg("删除失败！");
+                            }
+                        });
+                    });
+                }
+                else if (layEvent === 'ReadRep') mouldCfm.layer_init_readRep(data.MES_PMM_MTC_REP);
+            });
+
+            form.on('select(Term_QID)', function (data) {
+                if (data.value != "0") list_init_Term('AfterQID');
+                else {
+                    $('#Term_RID').empty();
+                    $('#Term_RID').append(new Option("请选择", "0"));
+                    form.render();
+                }
+            });
+            form.on('select(Term_GC)', function (data) {
+                if (data.value != "") list_init_Term('AfterGC');
+                else {
+                    $('#Term_GZZXBH').empty();
+                    $('#Term_GZZXBH').append(new Option("请选择", ""));
+                    $('#Term_MOULD').empty();
+                    $('#Term_MOULD').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+            form.on('select(Term_GZZXBH)', function (data) {
+                if (data.value != "") list_init_Term('AfterGZZX');
+                else {
+                    $('#Term_MOULD').empty();
+                    $('#Term_MOULD').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+
+            function layer_init(data) {
+                data = data || "";
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['保存', '取消'],
+                    area: ['600px', '400px'],
+                    content: $('#div_modify'),
+                    title: "撤回",
+                    moveOut: true,
+                    success: function (layero, index) {
+                        $("#Back_WTCFM").removeAttr('checked');
+                        $("#Back_QCCFM").removeAttr('checked');
+                        $("#Back_TECCFM").removeAttr('checked');
+                        //班组确认状态
+                        if (data.WTCFM == "2") {
+                            $("#Layer_WTCFM").text("无需确认").css("color", "#009688");
+                            $("#Back_WTCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        else if (data.WTCFM == "-1") {
+                            $("#Layer_WTCFM").text("未确认").css("color", "#009688");
+                            $("#Back_WTCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        else if (data.WTCFM == "1" || data.WTCFM == "0") {
+                            $("#Layer_WTCFM").text("已确认").css("color", "#FF5722");
+                            $("#Back_WTCFM").removeAttr('disabled').attr('title', '撤回');
+                        }
+                        else {
+                            $("#Layer_WTCFM").text("未知状态").css("color", "#808080");
+                            $("#Back_WTCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        //品管确认状态
+                        if (data.QCCFM == "2") {
+                            $("#Layer_QCCFM").text("无需确认").css("color", "#009688");
+                            $("#Back_QCCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        else if (data.QCCFM == "-1") {
+                            $("#Layer_QCCFM").text("未确认").css("color", "#009688");
+                            $("#Back_QCCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        else if (data.QCCFM == "1" || data.QCCFM == "0") {
+                            $("#Layer_QCCFM").text("已确认").css("color", "#FF5722");
+                            $("#Back_QCCFM").removeAttr('disabled').attr('title', '撤回');
+                        }
+                        else {
+                            $("#Layer_QCCFM").text("未知状态").css("color", "#808080");
+                            $("#Back_QCCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        //技术部确认状态
+                        if (data.TECCFM == "2") {
+                            $("#Layer_TECCFM").text("无需确认").css("color", "#009688");
+                            $("#Back_TECCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        else if (data.TECCFM == "-1") {
+                            $("#Layer_TECCFM").text("未确认").css("color", "#009688");
+                            $("#Back_TECCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+                        else if (data.TECCFM == "1" || data.TECCFM == "0") {
+                            $("#Layer_TECCFM").text("已确认").css("color", "#FF5722");
+                            $("#Back_TECCFM").removeAttr('disabled').attr('title', '撤回');
+                        }
+                        else {
+                            $("#Layer_TECCFM").text("未知状态").css("color", "#808080");
+                            $("#Back_TECCFM").attr({ 'disabled': '', 'title': '无需撤回' });
+                        }
+
+                        form.render();
+                    },
+                    yes: function (index, layero) {
+                        var postData = {
+                            MTCID: data.MTCID,
+                            WTCFM: $('#Back_WTCFM').prop('checked') ? -1 : 1,
+                            QCCFM: $('#Back_QCCFM').prop('checked') ? -1 : 1,
+                            TECCFM: $('#Back_TECCFM').prop('checked') ? -1 : 1
+                        }
+                        if (data.TECNOTES == "无需确认") postData.TECCFM = 1;
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/REP_ALTER_CFME_Back",
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg("撤回成功！");
+                                    layer.close(index);
+                                    table_init_MTC();
+                                }
+                                else if (rstData.TYPE == "E") layer.msg("撤回失败，原因：" + rstData.MES_RETURN.MESSAGE);
+                                else layer.msg("撤回失败！");
+                            }
+                        });
+                    }
+                });
+            }
+
+            function table_init_MTC() {
+                var GC = $("#Term_GC").val();
+                var DATESS = $("#Term_DATESS").val();
+                var DATESE = $("#Term_DATESE").val();
+                var DATEES = $("#Term_DATEES").val();
+                var DATEEE = $("#Term_DATEEE").val();
+                var postData = {
+                    MES_PMM_MOULD: {
+                        GC: GC,
+                        GZZXBH: $("#Term_GZZXBH").val(),
+                    },
+                    MID: $("#Term_MOULD").val(),
+                    QID: Number($("#Term_QID").val()),
+                    RID: Number($("#Term_RID").val()),
+                    STATUS: formSelects.value('Term_STATUS', 'valStr'),
+                    DATESS: DATESS == "" ? "1800/1/1" : DATESS,
+                    DATESE: DATESE == "" ? "1800/1/1" : DATESE,
+                    DATEES: DATEES == "" ? "1800/1/1" : DATEES,
+                    DATEEE: DATEEE == "" ? "1800/1/1" : DATEEE
+                }
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/REP_ALTER_CFMS_Search",
+                    data: {
+                        datastring: JSON.stringify(postData)
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            cacheData = rstData.MES_PMM_MTC;
+                            assist.table.render({
+                                elem: '#tb_MTC',
+                                data: cacheData,
+                                height: 'full-440',
+                                cols: mouldColsMTC,
+                                page: {
+                                    limits: all_limits,
+                                    limit: all_fysl,
+                                    curr: all_fy,
+                                    currfix: function (curr) { all_fy = curr; }
+                                }
+                            });
+                        }
+                        else if (rstData.MES_RETURN.TYPE == "E") layer.msg("查询失败，原因：" + rstData.MES_RETURN.MESSAGE);
+                        else layer.msg("查询失败！");
+                    }
+                });
+            }
+
+            function list_init_Term(order) {
+                order = order || "";
+                switch (order) {
+                    case "AfterGC":
+                        $('#Term_MOULD').empty();
+                        $('#Term_MOULD').append(new Option("请选择", ""));
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GZZXList",
+                            data: {
+                                GC: $('#Term_GC').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GZZXBH').empty();
+                                $('#Term_GZZXBH').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GZZXBH').append(new Option(item.GZZXBH + "-" + item.GZZXMS, item.GZZXBH));
+                                })
+                                if (rstData.length == 1) {
+                                    $('#Term_GZZXBH').val(rstData[0].GZZXBH);
+                                    list_init_Term("AfterGZZX");
+                                }
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterGZZX":
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MOULDList",
+                            data: {
+                                GC: $('#Term_GC').val(),
+                                GZZXBH: $('#Term_GZZXBH').val()
+                            },
+                            success: function (data) {
+                                MouldList = JSON.parse(data);
+                                $('#Term_MOULD').empty();
+                                $('#Term_MOULD').append(new Option("请选择", ""));
+                                $.each(MouldList, function (index, item) {
+                                    $('#Term_MOULD').append(new Option(item.MOULD, item.MID));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterQID":
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/RCODEList",
+                            data: {
+                                QID: $('#Term_QID').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_RID').empty();
+                                $('#Term_RID').append(new Option("请选择", "0"));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_RID').append(new Option(item.RCODE + "-" + item.RNAME, item.RID));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                    default:
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GCList",
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GC').empty();
+                                $('#Term_GC').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GC').append(new Option(item.GC + "-" + item.GCMS, item.GC));
+                                })
+                                if (rstData.length == 1) {
+                                    $('#Term_GC').val(rstData[0].GC);
+                                    list_init_Term("AfterGC");
+                                }
+                                form.render();
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/QCODEList",
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_QID').empty();
+                                $('#Term_QID').append(new Option("请选择", "0"));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_QID').append(new Option(item.QCODE + "-" + item.QNAME, item.QID));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                }
+            }
+        });
+    </script>
+}

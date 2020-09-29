@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "商标机质量数据";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<style type="text/css">
+    .layui-form-item-modify .layui-form-label1 {
+        width: 150px;
+    }
+
+    .mes-table-disabled {
+        opacity: 0.5;
+    }
+
+        .mes-table-disabled table td div {
+            cursor: not-allowed;
+        }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES条码管理</a>
+    <a><cite>商标机质量数据</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search">查询</button>
+        <button class="layui-btn" id="btn_add_tmark">新增</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">生产线：</label>
+            <div class="layui-input-block">
+                <select lay-verify="required" id="SDLINE">
+                    <option value="">全部</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-inline">
+                <label class="layui-form-label">起始日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="find_data_s" autocomplete="off" class="layui-input" placeholder="请选择">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="find_data_e" autocomplete="off" class="layui-input" placeholder="可不填">
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_bd" lay-filter="tb_bd"></table>
+</div>
+
+<div id="div_modify_tmark" class="layui-form layui-form-item-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_tmark" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">生产线：</label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" id="zlrbb_sdline_tmark">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">填写人：</label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" id="zlrbb_jltxr_tmark">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">素电日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="zlrbb_date_tmark" autocomplete="off" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+    </div>
+    <div><hr class="layui-bg-gray"></div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">1.0V以下：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="zlrbb_vyx_tmark" autocomplete="off" class="layui-input" lay-verify="number" onkeydown="changefocus_onkeyup();">
+            </div>
+            <label class="layui-form-label1">1.0~1.595(1.60)V：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="zlrbb_vz_tmark" autocomplete="off" class="layui-input" lay-verify="number" onkeydown="changefocus_onkeyup();">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">1.595(1.60)V以上：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="zlrbb_vys_tmark" autocomplete="off" class="layui-input" lay-verify="number" onkeydown="changefocus_onkeyup();">
+            </div>
+            <label class="layui-form-label1">外观不良：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="zlrbb_wgbl_tmark" autocomplete="off" class="layui-input" lay-verify="number" onkeydown="changefocus_onkeyup();">
+            </div>
+            @*<label class="layui-form-label1">设定值以下吹出电：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="zlrbb_sdzyxccd_tmark" autocomplete="off" class="layui-input" lay-verify="number">
+            </div>*@
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">备注：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="zlrbb_bz_tmark" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    @*<div><hr class="layui-bg-gray"></div>
+    <div id="tb_tmark" class="mes-table-disabled">
+        <table class="layui-hide" id="tb_tmark1" lay-filter="tb_tmark1"></table>
+        <table class="layui-hide" id="tb_tmark2" lay-filter="tb_tmark2"></table>
+    </div>*@
+</div>
+
+<script type="text/html" id="operate">
+    {{#  if(d.LB == 4){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    {{#  } else { }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs layui-btn-disabled">删除</a>
+    {{#  } }}
+</script>
+
+@*<script type="text/html" id="check_tmark">
+    {{#  if(d.ISACTION == 0){ }}
+    <label style="color: #FF5722;">未审核</label>
+    {{#  } else { }}
+    <label style="color: #009688;">已审核</label>
+    {{#  } }}
+</script>*@
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/YCLSY/BAT_QLTY_TMARK")
+}

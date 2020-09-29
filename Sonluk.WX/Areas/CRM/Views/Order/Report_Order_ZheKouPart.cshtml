@@ -1,0 +1,74 @@
+﻿@using Sonluk.UI.Model.CRM.SAP_ReportService
+@{
+    ViewBag.Title = "Report_Order_ZheKouPart";
+
+    SAP_ReportInfo[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+
+    <div class="weui-form-preview" @*style="margin:0 10px"*@>
+        @*<div class="weui-form-preview__hd">
+                <em class="weui-form-preview__value">网上下单(六安市强盛商贸有限公司 2017-07-25 22:16)</em>
+            </div>*@
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">序号</label>
+                <span class="weui-form-preview__value">@(i + 1)</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Customer</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户名称</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CustomerName</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Date</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">单据编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SalesOrder</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">业务类型</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Type</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">折扣录入金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].IncreaseDiscount</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">折扣发放金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].DecreaseDiscount</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">结余金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].AvailableDiscount</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">文档编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].DocumentChangeNumber</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Remark</span>
+            </p>
+
+
+        </div>
+        @*<div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">查看</a>
+                <a class="weui-form-preview__btn " href="javascript:">提交审核</a>
+                <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;">删除</a>
+            </div>*@
+    </div>
+}
+
+@if (data.Length == 0)
+{
+    <label>无数据！</label>
+}

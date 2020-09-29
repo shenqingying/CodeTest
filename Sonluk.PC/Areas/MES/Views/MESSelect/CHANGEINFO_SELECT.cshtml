@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "信息变更日志";
+    //ViewBag.Title = "数据字典维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vimesselect">MES查询</a>
+    <a><cite lid="vichange">信息变更日志</cite></a>
+</span>
+<div class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="viselect">查询</button>
+        <button class="layui-btn" id="btn_DC" lid="viexport">数据导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="virecord">记录时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_time_ks" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_time_js" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+
+    <table  id="jl_table" lay-filter="jl_table"></table>
+</div>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/CHANGEINFO_SELECT")
+}
+

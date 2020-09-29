@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "生日花名册";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR统计报表</a>
+    <a><cite>生日花名册</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="noselect" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">报表日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_BBRQ_S" lay-verify="date" placeholder="MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_BBRQ_E" lay-verify="date" placeholder="MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="BIRTHTable" lay-filter="BIRTHTable"></table>
+    </div>
+</div>
+<style>
+    th .layui-table-cell {
+        text-align: center;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/TJBB/BIRTH_CXBB")
+}

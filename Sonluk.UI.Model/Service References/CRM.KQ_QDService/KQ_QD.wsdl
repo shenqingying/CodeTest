@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_QD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KQ_QD">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="KQQDID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDGSID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDGSHXMID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SXB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GJ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SF" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDWZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDJD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDWD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KQJL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDRQ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_QD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByKQQDID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KQQDID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByKQQDIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByKQQDIDResult" type="tns:CRM_KQ_QD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByQDLXandQDGSID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="QDLX" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="QDGSID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByQDLXandQDGSIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByQDLXandQDGSIDResult" type="tns:ArrayOfCRM_KQ_QD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_QD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_QD" nillable="true" type="tns:CRM_KQ_QD" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadYCQD_ByDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QDRQ" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SXB" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadYCQD_ByDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadYCQD_ByDATEResult" type="tns:ArrayOfCRM_KQ_QD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KQQDID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Verify_QD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ED" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JD" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="WXRC" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Verify_QDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Verify_QDResult" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadQD_COUNTS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_QD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadQD_COUNTSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadQD_COUNTSResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="CRM_KQ_QD" nillable="true" type="tns:CRM_KQ_QD" />
+      <s:element name="ArrayOfCRM_KQ_QD" nillable="true" type="tns:ArrayOfCRM_KQ_QD" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfArrayOfString" nillable="true" type="tns:ArrayOfArrayOfString" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKQQDIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByKQQDID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKQQDIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByKQQDIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByQDLXandQDGSIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByQDLXandQDGSID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByQDLXandQDGSIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByQDLXandQDGSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadYCQD_ByDATESoapIn">
+    <wsdl:part name="parameters" element="tns:ReadYCQD_ByDATE" />
+  </wsdl:message>
+  <wsdl:message name="ReadYCQD_ByDATESoapOut">
+    <wsdl:part name="parameters" element="tns:ReadYCQD_ByDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QDSoapIn">
+    <wsdl:part name="parameters" element="tns:Verify_QD" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QDSoapOut">
+    <wsdl:part name="parameters" element="tns:Verify_QDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadQD_COUNTSSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadQD_COUNTS" />
+  </wsdl:message>
+  <wsdl:message name="ReadQD_COUNTSSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadQD_COUNTSResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKQQDIDHttpGetIn">
+    <wsdl:part name="KQQDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKQQDIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_KQ_QD" />
+  </wsdl:message>
+  <wsdl:message name="ReadByQDLXandQDGSIDHttpGetIn">
+    <wsdl:part name="QDLX" type="s:string" />
+    <wsdl:part name="QDGSID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByQDLXandQDGSIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QD" />
+  </wsdl:message>
+  <wsdl:message name="ReadYCQD_ByDATEHttpGetIn">
+    <wsdl:part name="QDRQ" type="s:string" />
+    <wsdl:part name="SXB" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadYCQD_ByDATEHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QD" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="KQQDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QDHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ED" type="s:string" />
+    <wsdl:part name="JD" type="s:string" />
+    <wsdl:part name="WXRC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKQQDIDHttpPostIn">
+    <wsdl:part name="KQQDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByKQQDIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_KQ_QD" />
+  </wsdl:message>
+  <wsdl:message name="ReadByQDLXandQDGSIDHttpPostIn">
+    <wsdl:part name="QDLX" type="s:string" />
+    <wsdl:part name="QDGSID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByQDLXandQDGSIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QD" />
+  </wsdl:message>
+  <wsdl:message name="ReadYCQD_ByDATEHttpPostIn">
+    <wsdl:part name="QDRQ" type="s:string" />
+    <wsdl:part name="SXB" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadYCQD_ByDATEHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_QD" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="KQQDID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QDHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ED" type="s:string" />
+    <wsdl:part name="JD" type="s:string" />
+    <wsdl:part name="WXRC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Verify_QDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArrayOfString" />
+  </wsdl:message>
+  <wsdl:portType name="KQ_QDSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKQQDID">
+      <wsdl:input message="tns:ReadByKQQDIDSoapIn" />
+      <wsdl:output message="tns:ReadByKQQDIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByQDLXandQDGSID">
+      <wsdl:input message="tns:ReadByQDLXandQDGSIDSoapIn" />
+      <wsdl:output message="tns:ReadByQDLXandQDGSIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadYCQD_ByDATE">
+      <wsdl:input message="tns:ReadYCQD_ByDATESoapIn" />
+      <wsdl:output message="tns:ReadYCQD_ByDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QD">
+      <wsdl:input message="tns:Verify_QDSoapIn" />
+      <wsdl:output message="tns:Verify_QDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadQD_COUNTS">
+      <wsdl:input message="tns:ReadQD_COUNTSSoapIn" />
+      <wsdl:output message="tns:ReadQD_COUNTSSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KQ_QDHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKQQDID">
+      <wsdl:input message="tns:ReadByKQQDIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByKQQDIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByQDLXandQDGSID">
+      <wsdl:input message="tns:ReadByQDLXandQDGSIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByQDLXandQDGSIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadYCQD_ByDATE">
+      <wsdl:input message="tns:ReadYCQD_ByDATEHttpGetIn" />
+      <wsdl:output message="tns:ReadYCQD_ByDATEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QD">
+      <wsdl:input message="tns:Verify_QDHttpGetIn" />
+      <wsdl:output message="tns:Verify_QDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KQ_QDHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKQQDID">
+      <wsdl:input message="tns:ReadByKQQDIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByKQQDIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByQDLXandQDGSID">
+      <wsdl:input message="tns:ReadByQDLXandQDGSIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByQDLXandQDGSIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadYCQD_ByDATE">
+      <wsdl:input message="tns:ReadYCQD_ByDATEHttpPostIn" />
+      <wsdl:output message="tns:ReadYCQD_ByDATEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QD">
+      <wsdl:input message="tns:Verify_QDHttpPostIn" />
+      <wsdl:output message="tns:Verify_QDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KQ_QDSoap" type="tns:KQ_QDSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKQQDID">
+      <soap:operation soapAction="http://tempuri.org/ReadByKQQDID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByQDLXandQDGSID">
+      <soap:operation soapAction="http://tempuri.org/ReadByQDLXandQDGSID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadYCQD_ByDATE">
+      <soap:operation soapAction="http://tempuri.org/ReadYCQD_ByDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QD">
+      <soap:operation soapAction="http://tempuri.org/Verify_QD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadQD_COUNTS">
+      <soap:operation soapAction="http://tempuri.org/ReadQD_COUNTS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_QDSoap12" type="tns:KQ_QDSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKQQDID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByKQQDID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByQDLXandQDGSID">
+      <soap12:operation soapAction="http://tempuri.org/ReadByQDLXandQDGSID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadYCQD_ByDATE">
+      <soap12:operation soapAction="http://tempuri.org/ReadYCQD_ByDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QD">
+      <soap12:operation soapAction="http://tempuri.org/Verify_QD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadQD_COUNTS">
+      <soap12:operation soapAction="http://tempuri.org/ReadQD_COUNTS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_QDHttpGet" type="tns:KQ_QDHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKQQDID">
+      <http:operation location="/ReadByKQQDID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByQDLXandQDGSID">
+      <http:operation location="/ReadByQDLXandQDGSID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadYCQD_ByDATE">
+      <http:operation location="/ReadYCQD_ByDATE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QD">
+      <http:operation location="/Verify_QD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_QDHttpPost" type="tns:KQ_QDHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByKQQDID">
+      <http:operation location="/ReadByKQQDID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByQDLXandQDGSID">
+      <http:operation location="/ReadByQDLXandQDGSID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadYCQD_ByDATE">
+      <http:operation location="/ReadYCQD_ByDATE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Verify_QD">
+      <http:operation location="/Verify_QD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KQ_QD">
+    <wsdl:port name="KQ_QDSoap" binding="tns:KQ_QDSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/KQ_QD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_QDSoap12" binding="tns:KQ_QDSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/KQ_QD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_QDHttpGet" binding="tns:KQ_QDHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/KQ_QD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_QDHttpPost" binding="tns:KQ_QDHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/KQ_QD.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

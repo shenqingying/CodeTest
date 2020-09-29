@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_ROLE_ASSEMBLE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_ROLE_ASSEMBLE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLENAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ROLELB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_ROLE_ASSEMBLE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_ROLE_ASSEMBLE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:MES_ROLE_ASSEMBLE_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_ROLE_ASSEMBLE_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_ROLE_ASSEMBLE" type="tns:ArrayOfMES_ROLE_ASSEMBLE" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_ROLE_ASSEMBLE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_ROLE_ASSEMBLE" nillable="true" type="tns:MES_ROLE_ASSEMBLE" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_LB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_ROLE_ASSEMBLE" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_LBResult" type="tns:MES_ROLE_ASSEMBLE_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_JS_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_JS_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_JS_LAYResult" type="tns:MES_ROLE_ASSEMBLE_JS_LAY_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_ROLE_ASSEMBLE_JS_LAY_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_ROLE_ASSEMBLE_JS_LAY" type="tns:ArrayOfMES_ROLE_ASSEMBLE_JS_LAY" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_ROLE_ASSEMBLE_JS_LAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_ROLE_ASSEMBLE_JS_LAY" nillable="true" type="tns:MES_ROLE_ASSEMBLE_JS_LAY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_ROLE_ASSEMBLE_JS_LAY">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LAY_CHECKED" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLENAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLEMEMO" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ROLELB" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_LAYResult" type="tns:MES_ROLE_ASSEMBLE_LAY_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_ROLE_ASSEMBLE_LAY_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_ROLE_ASSEMBLE_LAY" type="tns:ArrayOfMES_ROLE_ASSEMBLE_LAY" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_ROLE_ASSEMBLE_LAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_ROLE_ASSEMBLE_LAY" nillable="true" type="tns:MES_ROLE_ASSEMBLE_LAY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_ROLE_ASSEMBLE_LAY">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LAY_CHECKED" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLENAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ROLELB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_JS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ArrayOfMES_ROLE_ASSEMBLE_JS_LAY" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_JSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_JSResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_JS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_JSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_JSResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="MES_ROLE_ASSEMBLE_JS_LAY_SELECT" nillable="true" type="tns:MES_ROLE_ASSEMBLE_JS_LAY_SELECT" />
+      <s:element name="MES_ROLE_ASSEMBLE_LAY_SELECT" nillable="true" type="tns:MES_ROLE_ASSEMBLE_LAY_SELECT" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LBSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_LB" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LBSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_LBResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_JS_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_JS_LAY" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_JS_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_JS_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_LAY" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_JSSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_JS" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_JSSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_JSResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_JSSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_JS" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_JSSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_JSResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_JS_LAYHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_JS_LAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_ROLE_ASSEMBLE_JS_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ROLELB" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_ROLE_ASSEMBLE_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_JSHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_JSHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_JS_LAYHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_JS_LAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_ROLE_ASSEMBLE_JS_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ROLELB" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_ROLE_ASSEMBLE_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_JSHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_JSHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="ROLE_ASSEMBLESoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LB">
+      <wsdl:input message="tns:SELECT_LBSoapIn" />
+      <wsdl:output message="tns:SELECT_LBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_JS_LAY">
+      <wsdl:input message="tns:SELECT_JS_LAYSoapIn" />
+      <wsdl:output message="tns:SELECT_JS_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <wsdl:input message="tns:SELECT_LAYSoapIn" />
+      <wsdl:output message="tns:SELECT_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_JS">
+      <wsdl:input message="tns:INSERT_JSSoapIn" />
+      <wsdl:output message="tns:INSERT_JSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_JS">
+      <wsdl:input message="tns:DELETE_JSSoapIn" />
+      <wsdl:output message="tns:DELETE_JSSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ROLE_ASSEMBLEHttpGet">
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpGetIn" />
+      <wsdl:output message="tns:DELETEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_JS_LAY">
+      <wsdl:input message="tns:SELECT_JS_LAYHttpGetIn" />
+      <wsdl:output message="tns:SELECT_JS_LAYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <wsdl:input message="tns:SELECT_LAYHttpGetIn" />
+      <wsdl:output message="tns:SELECT_LAYHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_JS">
+      <wsdl:input message="tns:DELETE_JSHttpGetIn" />
+      <wsdl:output message="tns:DELETE_JSHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ROLE_ASSEMBLEHttpPost">
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpPostIn" />
+      <wsdl:output message="tns:DELETEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_JS_LAY">
+      <wsdl:input message="tns:SELECT_JS_LAYHttpPostIn" />
+      <wsdl:output message="tns:SELECT_JS_LAYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <wsdl:input message="tns:SELECT_LAYHttpPostIn" />
+      <wsdl:output message="tns:SELECT_LAYHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_JS">
+      <wsdl:input message="tns:DELETE_JSHttpPostIn" />
+      <wsdl:output message="tns:DELETE_JSHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ROLE_ASSEMBLESoap" type="tns:ROLE_ASSEMBLESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LB">
+      <soap:operation soapAction="http://tempuri.org/SELECT_LB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_JS_LAY">
+      <soap:operation soapAction="http://tempuri.org/SELECT_JS_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <soap:operation soapAction="http://tempuri.org/SELECT_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_JS">
+      <soap:operation soapAction="http://tempuri.org/INSERT_JS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_JS">
+      <soap:operation soapAction="http://tempuri.org/DELETE_JS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ROLE_ASSEMBLESoap12" type="tns:ROLE_ASSEMBLESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LB">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_LB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_JS_LAY">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_JS_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_JS">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_JS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_JS">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_JS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ROLE_ASSEMBLEHttpGet" type="tns:ROLE_ASSEMBLEHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_JS_LAY">
+      <http:operation location="/SELECT_JS_LAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <http:operation location="/SELECT_LAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_JS">
+      <http:operation location="/DELETE_JS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ROLE_ASSEMBLEHttpPost" type="tns:ROLE_ASSEMBLEHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_JS_LAY">
+      <http:operation location="/SELECT_JS_LAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <http:operation location="/SELECT_LAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_JS">
+      <http:operation location="/DELETE_JS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ROLE_ASSEMBLE">
+    <wsdl:port name="ROLE_ASSEMBLESoap" binding="tns:ROLE_ASSEMBLESoap">
+      <soap:address location="http://192.168.0.223/API/MES/ROLE_ASSEMBLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ROLE_ASSEMBLESoap12" binding="tns:ROLE_ASSEMBLESoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/ROLE_ASSEMBLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ROLE_ASSEMBLEHttpGet" binding="tns:ROLE_ASSEMBLEHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/ROLE_ASSEMBLE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ROLE_ASSEMBLEHttpPost" binding="tns:ROLE_ASSEMBLEHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/ROLE_ASSEMBLE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

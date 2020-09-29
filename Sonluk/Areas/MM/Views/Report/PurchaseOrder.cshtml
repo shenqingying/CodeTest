@@ -1,0 +1,247 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<PageInfoOfPOInfo>
+@{
+    ViewBag.Title = "采购订单";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+    string prevSDTextID = "";
+}
+@Styles.Render("~/Content/report/purchase-order")
+@foreach (PageInfoOfPOInfo page in Model)
+{
+    POInfo node = page.Children[0];
+    <div class="print-page print-page-A4">
+        <div class="print-page-area print-page-area-A4">
+            <div class="print-page-header">
+                <div class="purchase-order-header-logo">
+                    <div class="purchase-order-header-logo-custom-number">@node.CustomText[0].Content</div>
+                    <img class="purchase-order-header-logo-img" src="@Url.Content("~/Content/sonluk-ui/images/logo-po.png")" alt="" />
+                </div>
+                <div class="purchase-order-header-title">
+                    <div class="print-page-header-report-name">采&nbsp;购&nbsp;订&nbsp;单</div>
+                </div>
+                <div class="purchase-order-header-table-company">
+                    <table>
+                        <tr>
+                            <td class="doc-type">编号：CG4010A</td>
+                        </tr>
+                        <tr>
+                            <td>@node.Company.Name</td>
+                        </tr>
+                        <tr>
+                            <td>中国浙江宁波市高新区星光路128号</td>
+                        </tr>
+                        <tr>
+                            <td>联系电话：0574-87916666</td>
+                        </tr>
+                        <tr>
+                            <td>邮政编码：@node.Company.PostCode</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="purchase-order-header-table-vendor">
+                    <table>
+                        <tr>
+                            <td class="purchase-order-header-table-vendor-title">订单编号：</td>
+                            <td>@node.Header.Number</td>
+                        </tr>
+                        <tr>
+                            <td>供应商：</td>
+                            <td>@Convert.ToInt32(node.Vendor.SerialNumber)/@node.Vendor.Name</td>
+                        </tr>
+                        <tr>
+                            <td>联系人：</td>
+                            <td>@node.Header.VendorSales</td>
+                        </tr>
+                        <tr>
+                            <td>联系方式：</td>
+                            <td>@node.Header.VendorTelephone</td>
+                        </tr>
+                        <tr>
+                            @if (page.Status > 1)
+                            {
+                                <td>订单币种：</td>
+                                <td>@node.Header.Currency</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="purchase-order-header-table-purchaser">
+                    <table>
+                        <tr>
+                            <td class="purchase-order-header-table-purchaser-title">订单日期：</td>
+                            <td>@node.Header.Date</td>
+                        </tr>
+                        <tr>
+                            <td>采购员：</td>
+                            <td>@node.PurGroup.Description</td>
+                        </tr>
+                        <tr>
+                            <td>联系方式：</td>
+                            <td>@node.PurGroup.TelephoneDiallingCode</td>
+                        </tr>
+                        <tr>
+                            <td>交货地点：</td>
+                            <td>宁波市高新区星光路128号</td>
+                        </tr>
+                        <tr>
+                            <td>页码：</td>
+                            <td>第@(page.Index)页/共@(page.TotalPage)页</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="print-page-body print-page-body-A4">
+                <table class="print-page-body-table">
+                    <tr>
+                        <td class="print-page-body-table-header purchase-order-sn">序号</td>
+                        <td class="print-page-body-table-header purchase-order-material">物料编号</td>
+                        <td class="print-page-body-table-header">物料描述</td>
+                        <td class="print-page-body-table-header purchase-order-uom">单位</td>
+                        <td class="print-page-body-table-header purchase-order-quantity">数量</td>
+                        @if (page.Status > 1)
+                        {
+                            if (page.Status == 2)
+                            {
+                                <td class="print-page-body-table-header purchase-order-quantity">不含税单价</td>
+                            }
+                            else
+                            {
+                                <td class="print-page-body-table-header purchase-order-quantity">含税单价</td>
+                            }
+                            <td class="print-page-body-table-header purchase-order-quantity">不含税金额</td>
+                            <td class="print-page-body-table-header purchase-order-quantity">税额</td>
+                        }
+                        <td class="print-page-body-table-header purchase-order-date">交货日期</td>
+                        <td class="print-page-body-table-header purchase-order-remark">备注</td>
+                    </tr>
+                    @foreach (POItemInfo item in node.Items)
+                    {
+                        prevSDTextID = "";
+                        if (item.Number > 0)
+                        {
+                            <tr>
+                                <td>@item.Number</td>
+                                <td>@Convert.ToInt64(item.Material)</td>
+                                <td class="print-page-text-align-left">@item.MaterialDescription</td>
+                                <td>@item.BaseUOM</td>
+                                <td class="print-page-text-align-right">@item.Quantity.ToString("###,###,###,##0.###")</td>
+                                @if (page.Status > 1)
+                                {
+                                    if (page.Status == 2)
+                                    {
+                                        <td class="print-page-text-align-right">@item.UnitPrice.ToString("###,###,###,##0.000000")</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="print-page-text-align-right">@item.UnitPriceWidthTax.ToString("###,###,###,##0.000000")</td>
+                                    }
+                                    <td class="print-page-text-align-right">@item.NetValue.ToString("###,###,###,##0.00")</td>
+                                    <td class="print-page-text-align-right">@item.Tax.ToString("###,###,###,##0.00")</td>
+                                }
+                                <td>@item.Schedule[0].Date</td>
+                                <td></td>
+                            </tr>
+
+                        }
+
+                        <tr>
+                            <td colspan="@if (page.Status > 1){@(10)}else{@(7)}">
+                                <table class="purchase-order-request">
+                                    @if (item.Number > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                作业单：@{if (item.SDocItem != 0)
+                                                {@(Convert.ToInt64(item.SDDoc) + "/" + item.SDocItem)}}&nbsp;&nbsp;&nbsp;&nbsp;要求：
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    @foreach (CustomTextInfo text in item.SDCustomText)
+                                    {
+                                        if (text.Content.Length > 0)
+                                        {
+                                            if (!prevSDTextID.Equals(text.ID))
+                                            {
+                                                prevSDTextID = text.ID;
+                                                <tr><td>【@text.Title】</td></tr>
+                                            }
+                                            <tr><td>@text.Content</td></tr>
+                                        }
+                                    }
+                                    <tr><td></td></tr>
+                                    @foreach (CustomTextInfo text in item.CustomText)
+                                    {
+                                        if (text.Content.Length > 0)
+                                        {
+                                            <tr><td>@text.Content</td></tr>
+                                        }
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                    }
+
+                    @if (page.Index == page.TotalPage)
+                    {
+                        if (page.Status > 1)
+                        {
+                            <tr>
+                                <td colspan="2" class="print-page-text-align-left">不含税金额合计：</td>
+                                <td colspan="8">@node.Header.AmountWithoutTax.ToString("###,###,###,##0.00")</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="print-page-text-align-left">税额合计：</td>
+                                <td colspan="8">@node.Header.Tax.ToString("###,###,###,##0.00")</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="print-page-text-align-left">总计：</td>
+                                <td colspan="8">@node.Header.Amount.ToString("###,###,###,##0.00")</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="@if (page.Status > 1){@(10)}else{@(7)}">
+                                <table class="purchase-order-notice">
+                                    <tr><td></td></tr>
+                                    <tr><td>1.以上订单内容参照相关合同或协议执行；</td></tr>
+                                    <tr><td>2.请按交货日期及时交货，若无法及时交货请提前与本公司取得联系，否则造成损失由供方承担；</td></tr>
+                                    <tr><td>3.交货检验时须提供交货单，交货信息满足本公司需求，如质量检验不合格则拒收；</td></tr>
+                                    <tr><td>4.备注：@node.CustomText[1].Content</td></tr>
+                                    <tr><td></td></tr>
+                                    <tr><td>供应商收到订单后请确认签字并回传，谢谢！</td></tr>
+                                    <tr><td></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            @if (page.Index == page.TotalPage)
+            {
+                <div class="print-page-footer">
+                    <table class="print-page-footer-table">
+                        <tr>
+                            <td class="print-page-footer-table-title">采购工程师:</td>
+                            <td class="print-page-footer-table-content"></td>
+                            <td class="print-page-footer-table-title">供应商:</td>
+                            <td class="print-page-footer-table-content"></td>
+                        </tr>
+                        <tr>
+                            <td class="print-page-footer-table-title">日期:</td>
+                            <td class="print-page-footer-table-content"></td>
+                            <td class="print-page-footer-table-title">日期:</td>
+                            <td class="print-page-footer-table-content"></td>
+                        </tr>
+                    </table>
+                </div>
+            }
+
+        </div>
+    </div>
+}

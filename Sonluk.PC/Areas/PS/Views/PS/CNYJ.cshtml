@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "产能预警查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>加工产能预警</a>
+    <a><cite>任务预警</cite></a>
+</span>
+<script type="text/html" id="sexTpl">
+    {{#  if(d.REMAINING < 0){ }}
+    <span style="color: #F581B1;">{{ d.REMAINING }}</span>
+    {{#  } else { }}
+    {{ d.REMAINING }}
+    {{#  } }}
+</script>
+<div class="layui-form ">
+    <input type="hidden" value="@Url.Action("SelectCNYJ", "PS")" id="SelectCNYJ" />
+    <input type="hidden" value="@Url.Action("CNYJEXPORT", "PS")" id="CNYJEXPORT" />
+   
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_select">查询</button>
+        <button class="layui-btn" id="btn_export">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">查询条数</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" id="in_rows"  placeholder="" autocomplete="off" class="layui-input" value="500">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_network" lay-filter="tb_network"></table>
+    </div>
+
+
+
+    
+</div>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/PS/CNYJ")
+}

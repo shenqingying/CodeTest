@@ -1,0 +1,177 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "异常考勤";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="QQbar">
+    <a class="layui-btn layui-btn-xs" lay-event="do">情况说明</a>
+</script>
+<script type="text/html" id="YCQDbar">
+    <a class="layui-btn layui-btn-xs" lay-event="yes">确定</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核    
+    {{# }else if(d.ISACTIVE == 31){ }}
+    已审核(缺勤)
+    {{# }else { }}
+    
+    {{# } }}
+</script>
+
+<script type="text/html" id="shangban">
+    {{# if(d.SBQD == 1){ }}
+    正常
+    {{# }else if(d.SBQD == 0){ }}
+    无
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="xiaban">
+    {{# if(d.XBQD == 1){ }}
+    正常
+    {{# }else if(d.XBQD == 0){ }}
+    无
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="shangxiaban">
+    {{# if(d.SMSXB == 1){ }}
+    上班
+    {{# }else if(d.SMSXB == 2){ }}
+    下班
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>考勤管理</a>
+    <a><cite>异常考勤</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_change_qq" class="layui-btn">缺勤记录</button>
+            <button id="btn_change_yc" class="layui-btn">异常说明记录</button>
+
+        </div>
+
+        <hr class="layui-bg-black" />
+
+
+        <div class="layui-form-item" id="div_yc" hidden>
+            @*<button id="btn_yichang" class="layui-btn">异常考勤说明</button>*@
+            <button id="btn_submit" class="layui-btn">提交OA</button>
+            <table id="content" lay-filter="content"></table>
+        </div>
+
+        <div class="layui-form-item" id="div_qq">
+            <table id="tb_QQ" lay-filter="tb_QQ"></table>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="div_jump" class="layui-form" hidden>
+
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">日期：</label>
+        <div class="layui-input-inline" style="width:110px">
+            <input id="time" type="text" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">上下班：</label>
+        <div class="layui-input-inline" style="width:110px">
+            <select id="sxb" lay-filter="sxb">
+                <option value="0" selected="selected"></option>
+                <option value="1">上班</option>
+                <option value="2">下班</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">情况说明：</label>
+        <div class="layui-input-inline" style="width:340px">
+            <textarea id="smsx" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+
+    </div>
+
+    <div id="div_jump2" class="layui-form" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label">时间：</label>
+            <div class="layui-input-inline" style="width:340px">
+                <input id="qdsj" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">地点：</label>
+            <div class="layui-input-inline" style="width:340px">
+                <input id="qdwz" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">距离(米)：</label>
+            <div class="layui-input-inline" style="width:340px">
+                <input id="kqjl" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<div id="div_YCQD" class="layui-form" hidden>
+    <table id="tb_YCQD" lay-filter="tb_YCQD"></table>
+</div>
+
+<input id="staffid" hidden />
+<input id="staffname" hidden />
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/YiChang")
+}
+

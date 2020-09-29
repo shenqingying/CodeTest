@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "托盘组合码新增";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tp_Tpl">
+    {{# if(d.TPNO != ""){ }}
+    <a style="font-size:x-large;">{{d.TPNO}}</a>
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>托盘</a>
+    <a><cite>托盘组合码新增</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div class="layui-form-item" style="width:100%">
+        <div class="layui-inline" style="width:100%">
+            <div class="layui-input-inline" style="width:100%">
+                <input type="text" id="tm_tpm_sm" placeholder="请扫描托盘编号" autocomplete="off" style="height:50px" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div id="table_div" hidden>
+        <table class="layui-hide" id="tb_TPINFO" lay-filter="tb_TPINFO"></table>
+    </div>
+    <div class="layui-form-item">
+        <button id="btn_sc" class="layui-btn">生成</button>
+        <button id="btn_qx" class="layui-btn">取消</button>
+    </div>
+
+</div>
+
+
+<script src="~/Scripts/MES/TPM/TPM_ZHMADD.js"></script>

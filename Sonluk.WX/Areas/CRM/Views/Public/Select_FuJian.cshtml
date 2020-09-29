@@ -1,0 +1,164 @@
+﻿@using Sonluk.UI.Model.CRM.HG_WJJLService;
+@{
+    ViewBag.Title = "Select_FuJian";
+    CRM_HG_WJJL[] fujian = ViewBag.fujian;
+
+
+    int GSDX = ViewBag.GSDX;
+    int GSDXID = ViewBag.GSDXID;
+    int ReadOnly = ViewBag.ReadOnly;
+
+
+
+
+
+}
+
+@for (int i = 0; i < fujian.Length; i++)
+{
+    string spzt = "";
+    switch (fujian[i].SPZT)
+    {
+        case 10:
+            spzt = "未审核";
+            break;
+        case 15:
+            spzt = "审核未通过";
+            break;
+        case 30:
+            spzt = "审核通过";
+            break;
+        default:
+            spzt = "";
+            break;
+    }
+
+    <div class="weui-form-preview">
+        @*<div class="weui-form-preview__hd">
+                <em class="weui-form-preview__value">@fujian[i].MDMC</em>
+            </div>*@
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">序号@(i + 1)</label>
+                <span class="weui-form-preview__value">&nbsp;<img style="width:100px;" src="@fujian[i].ML" onclick="window.location.href='@fujian[i].ML'"></span>
+
+            </p>
+            <div id="div_show">
+                <p>
+                   <label class="weui-form-preview__label">审核状态</label>
+                   <span class="weui-form-preview__value">&nbsp;@spzt</span>
+                </p>
+                <p>
+                   <label class="weui-form-preview__label">审核人</label>
+                   <span class="weui-form-preview__value">&nbsp;@fujian[i].SPRNAME</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">审核时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@fujian[i].SPSJ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">审核意见</label>
+                    <span class="weui-form-preview__value">&nbsp;@fujian[i].OPINION</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">回复人</label>
+                    <span class="weui-form-preview__value">&nbsp;@fujian[i].HFRNAME</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">回复时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@fujian[i].HFSJ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">回复意见</label>
+                    <span class="weui-form-preview__value">&nbsp;@fujian[i].HFYJ</span>
+                </p>
+            </div>
+            @*<p>
+                    <label class="weui-form-preview__label">上传时间</label>
+                    <span class="weui-form-preview__value">&nbsp;@fujian[i].CZSJ</span>
+                </p>
+                <p>
+                    <label class="weui-form-preview__label">照片来源</label>
+                    <span class="weui-form-preview__value">&nbsp;@fujian[i].IMGSOURCE</span>
+                </p>*@
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="img_watch('@fujian[i].ML')">查看</a>
+            @if (ReadOnly == 0)
+            {
+                <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="img_delete(@fujian[i].ID)">删除</a>
+            }
+            
+        </div>
+    </div>
+    <br />
+}
+@if (fujian.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无图片</label>
+    <br /><br />
+}
+
+<input id="GSDX" value="@GSDX" hidden />
+
+<script>
+    $(document).ready(function () {
+        if ($("#GSDX").val() == 36)
+        {
+            $("#div_show").show();
+        }
+        else {
+            $("#div_show").hide();
+        }
+    })
+</script>
+
+
+<script>
+    function img_watch(ML) {
+        window.open(ML);
+    }
+    function img_delete(ID) {
+        layer.open({
+            title: '提示',
+            type: 0,
+            content: '确定删除?',
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../KeHu/Data_Delete_WJJL",
+                    data: {
+                        id: ID
+                    },
+                    success: function (id) {
+
+
+
+                        if (id > 0) {
+                            IMGLoad(@GSDX, @GSDXID , @ReadOnly);
+
+                            layer.msg("删除成功！");
+
+                        }
+                        else {
+
+                            layer.msg("删除失败！");
+
+                        }
+
+
+                    },
+                    error: function (err) {
+                        layer.msg("系统错误！");
+
+                    }
+                });
+                layer.close(index);
+            }
+        });
+
+    }
+</script>

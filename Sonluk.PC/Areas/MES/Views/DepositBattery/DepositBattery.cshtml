@@ -1,0 +1,259 @@
+﻿@{
+    ViewBag.Title = "暂放素电查询打印";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_mescode">MES条码管理</a>
+    <a><cite lid="vi_zfsddy">暂放素电查询打印</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="vi_cx">查询</button>
+        <button class="layui-btn" id="btn_DC" lid="vi_dc">导出</button>
+        <button class="layui-btn" id="btn_print_pl" lid="vi_pldy">批量打印</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    <option value="" selected="selected" lid="vi_option">请选择</option>
+                    @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                    {
+                        <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gzzx">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="" selected="selected" lid="vi_option">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_sbh">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="in_sbbh" lay-filter="in_sbbh">
+                    <option value="" selected="selected" lid="vi_option">请选择</option>
+                </select>
+            </div>
+        </div>
+        @*<div class="layui-inline">
+                <label class="layui-form-label" lid="vi_scrq">生产日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="in_scrq" autocomplete="off" class="layui-input">
+                </div>
+            </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_scrq">生产日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_tl">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_tm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="WLHc">物料编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_wlh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="PCc">批次：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_pc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="CPZTNAMEc">产品状态：</label>
+            <div class="layui-input-inline">
+                <select id="in_cpzt" lay-filter="in_cpzt"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_zflb">暂放类别：</label>
+            <div class="layui-input-inline">
+                <select id="in_zflb" lay-filter="in_zflb">
+                    <option value="0" selected="selected" lid="vi_option">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_zfdc" lay-filter="tb_zfdc"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">{{scom.c_modify}}</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+        <a class="layui-btn layui-btn-xs" lay-event="print">{{scom.c_print}}</a>
+    </script>
+</div>
+
+<div id="div_add_zfsd" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_scx">生产线：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_scx" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_dcxx">电池信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_dcxx" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_zflb">暂放类别：</label>
+            <div class="layui-input-inline">
+                <select id="add_zfsd_zflb" lay-filter="add_zfsd_zflb">
+                    <option value="0" selected="selected" lid="vi_option">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_sdzs">素电总数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_sdzh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_dh">幢号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_zh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_cfts">存放天数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_cfts" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_scrq">生产日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_scrq" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_scqj">生产区间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="add_zfsd_scqjs" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="add_zfsd_scqje" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="vi_mark">备注：</label>
+        <div class="layui-input-inline" style="width: 840px;">
+            <input type="text" id="add_zfsd_remark" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn layui-btn-xs" id="btn_add_zfsd_xz" lid="vi_insert">新增</button>
+    </div>
+    <table class="layui-hide" id="tb_zfsd" lay-filter="tb_zfsd"></table>
+    <script type="text/html" id="barkh_zfsd">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete_zfsd">{{scom.c_delete}}</a>
+    </script>
+</div>
+
+
+<div id="div_add_zfsd_mx" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_ksrq">开始日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_mx_ksrq" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_jsrq">结束日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_mx_jsrq" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_sl">数量：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_zfsd_mx_sl" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_tm_delete" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_qsm">请扫描：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_sm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_tm">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_tm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlh">物料号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_wlh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlms">物料描述：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_wlms" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_ygh">员工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_ygh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_ygxm">员工姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tm_delete_ygxm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/DepositBattery/DepositBattery")
+}

@@ -1,0 +1,111 @@
+﻿@using Sonluk.UI.Model.CRM.CRM_LoginService;
+@{
+    CRM_JURISDICTION_GROUP[] MenuInfo = null;
+    if (Session["MENUINFO"] != null)
+    {
+        MenuInfo = (CRM_JURISDICTION_GROUP[])Session["MENUINFO"];
+    }
+
+    int loca = 0;
+    if (Session["location"] != null)
+    {
+        loca = Convert.ToInt32(Session["location"]);
+    }
+
+    string name = "";
+    if (Session["NAME"] != null)
+    {
+        name = Session["NAME"].ToString();
+    }
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/CRM/css/layui")
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <link href="~/Scripts/layui2.2.5/css/layui2.css" rel="stylesheet" />
+
+</head>
+<body class="layui-layout-body">
+
+
+
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo"><a href="@Url.Action("Index1","Public")" class="layui-logo"><img src="~/Content/MES/IMAGES/logo.png" /></a></div>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        @*<img src="http://t.cn/RCzsdCq" class="layui-nav-img">*@
+                        @name
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="../System/Password" lid="c_changepw">修改密码</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="~/CRM/Public/SignIn" lid="c_logout">退出</a></li>
+            </ul>
+        </div>
+        <div class="layui-body_noleft">
+            <div id="detail" style="padding: 15px;">
+                <script src="~/Scripts/layui2.2.5/layui.js"></script>
+                <script src="~/Scripts/sonlui.js"></script>
+                @RenderBody()
+
+            </div>
+        </div>
+
+        <div class="layui-footer" lid="c_copyright">
+            © copyright by 双鹿电池
+        </div>
+    </div>
+
+    <script>
+        sonluk.global.getResourcesOnly("title", "title");
+        @{
+            string sonlukArea = "";
+            string sonlukController = "";
+            string sonlukAction = "";
+            if (ViewContext.RouteData.DataTokens["Area"] != null)
+            {
+                sonlukArea = ViewContext.RouteData.DataTokens["Area"].ToString();
+            }
+            if (ViewContext.RouteData.Values["Controller"] != null)
+            {
+                sonlukController = ViewContext.RouteData.Values["Controller"].ToString();
+            }
+            if (ViewContext.RouteData.Values["Action"] != null)
+            {
+                sonlukAction = ViewContext.RouteData.Values["Action"].ToString();
+            }
+        }
+        sonluk.value.url.area = "@(sonlukArea)";
+        sonluk.value.url.controller = "@(sonlukController)";
+        sonluk.value.url.action = "@(sonlukAction)";
+        $(document).ready(function () {
+            layui.use('element', function () {
+                var element = layui.element;
+
+            });
+            if ("@name" == "") {
+                alert(sonluk.value.global.common.c_msg19 || "由于长时间未操作,登录信息已过期,请重新登录");
+                window.location.href = "../Public/SignIn";
+
+                return false;
+            }
+            $("head > title").html(sonluk.value.global.title[sonluk.value.url.area + "_" + sonluk.value.url.controller + "_" + sonluk.value.url.action]);
+        });
+
+    </script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

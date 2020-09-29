@@ -1,0 +1,140 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "评分查询";
+    Session["TITLENAME"] = "评分查询";
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+
+
+    Sonluk.UI.Model.S5.SY_DICTService.FIVES_SY_DICT[] RMODEL = ViewBag.RMODEL;
+    //   Sonluk.UI.Model.S5.SY_STAFF_DEPService.FIVES_SY_STAFF_DEPList[] STAFF_DEP = ViewBag.STAFF_DEP;
+}
+
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" id="btn_scan">扫码评分</a>
+    <a class="weui-btn weui-btn_primary" id="btn_cx">查询</a>
+    <a class="weui-btn weui-btn_primary" id="btn_back" style="display:none;">返回</a>
+</div>
+
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content" style="padding-right: 0px;">
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">评分类型：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="jclx" class="weui-select">
+                            <option value="0" selected="selected">请选择</option>
+                            @for (int i = 0; i < RMODEL.Length; i++)
+                            {
+                                if (RMODEL.Length == 1)
+                                {
+                                    <option value="@RMODEL[i].DICID" selected="selected">@RMODEL[i].DICNAME</option>
+                                }
+                                else
+                                {
+                                    <option value="@RMODEL[i].DICID">@RMODEL[i].DICNAME</option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">部门：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="department" class="weui-select">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">检查点：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="checkpoint" class="weui-select">
+                            <option value="0" selected="selected">全部</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_active weui-cell_access" id="showDatePicker1">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label" style="text-align:left">日期：</label>
+                    </div>
+                    <div class="weui-cell__bd" id="time_begin">@ViewBag.startdate</div>
+                    <div class="weui-cell__ft"></div>
+                </div>
+                <div class="weui-cell weui-cell_active weui-cell_access" id="showDatePicker2">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label" style="text-align:left">至：</label>
+                    </div>
+                    <div class="weui-cell__bd" id="time_end"></div>
+                    <div class="weui-cell__ft"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+
+<div id="div_MXresult" style="margin:0 10px" hidden>
+
+</div>
+
+
+
+
+
+
+
+
+<input id="state" hidden />
+<input id="appid" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+    });
+</script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/Score/Select_Score")
+}

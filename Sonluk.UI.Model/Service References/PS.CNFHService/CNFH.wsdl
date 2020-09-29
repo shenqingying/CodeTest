@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ModifyCNFH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZSL_GXCNList" type="tns:ArrayOfZSL_GXCN" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSL_GXCN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_GXCN" nillable="true" type="tns:ZSL_GXCN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_GXCN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VLSCH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FLAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UNIT" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModifyCNFHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModifyCNFHResult" type="tns:CNFHLIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CNFHLIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_GXCN" type="tns:ArrayOfZSL_GXCN" />
+          <s:element minOccurs="0" maxOccurs="1" name="PS_MSG" type="tns:PS_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PS_MSG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadWBSPARMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadWBSPARMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadWBSPARMSResult" type="tns:WBSPARMS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WBSPARMS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_PRPS" type="tns:ArrayOfET_PRPS" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_TCNRFPT" type="tns:ArrayOfET_TCNRFPT" />
+          <s:element minOccurs="0" maxOccurs="1" name="PS_MSG" type="tns:PS_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfET_PRPS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ET_PRPS" nillable="true" type="tns:ET_PRPS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ET_PRPS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PSPNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POST1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfET_TCNRFPT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ET_TCNRFPT" nillable="true" type="tns:ET_TCNRFPT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ET_TCNRFPT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RFPNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTEXT" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECTJGNETWORK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="I_PSPNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IT_RFPNT" type="tns:ArrayOfET_TCNRFPT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTJGNETWORKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTJGNETWORKResult" type="tns:ZSL_NetworkList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_NetworkList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_NETWORK" type="tns:ArrayOfZSL_NETWORK" />
+          <s:element minOccurs="0" maxOccurs="1" name="PS_MSG" type="tns:PS_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_NETWORK">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_NETWORK" nillable="true" type="tns:ZSL_NETWORK" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_NETWORK">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTEXT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZMATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GLTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OBJNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSPID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POST1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POST2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LTXA1" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CYCLE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="REMAINING" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZMAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZMEINS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZMENGE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="YJ" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateNetwork">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nodes" type="tns:ArrayOfZSL_NETWORK" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateNetworkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateNetworkResult" type="tns:PS_MSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GXFHTABLE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parslist" type="tns:PS_CXFHCS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PS_CXFHCS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="I_BASEDATA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_TEMPDATA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_DAYDATA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_WEEKDATA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_MONTHDATA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_DAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="I_DAY1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GXFHTABLEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GXFHTABLEResult" type="tns:ZSL_GXFHTABLE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_GXFHTABLE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_GXCN" type="tns:ArrayOfZSL_GXCN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_ACTIVITY" type="tns:ArrayOfZSL_ACTIVITY" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_ACTIVITY_T" type="tns:ArrayOfZSL_ACTIVITY_T" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_GXCN_DAY" type="tns:ArrayOfZSL_GXCN_DAY" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_GXCN_WEEK" type="tns:ArrayOfZSL_GXCN_WEEK" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_GXCN_MONTH" type="tns:ArrayOfZSL_GXCN_MONTH" />
+          <s:element minOccurs="0" maxOccurs="1" name="PS_MSG" type="tns:PS_MSG" />
+          <s:element minOccurs="0" maxOccurs="1" name="E_DAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="E_DAY1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_ACTIVITY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_ACTIVITY" nillable="true" type="tns:ZSL_ACTIVITY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_ACTIVITY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUPFL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="APLZL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KSRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TOTAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AVERAGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTSCH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_ACTIVITY_T">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_ACTIVITY_T" nillable="true" type="tns:ZSL_ACTIVITY_T" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_ACTIVITY_T">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUPFL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="APLZL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KSRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TOTAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AVERAGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_GXCN_DAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_GXCN_DAY" nillable="true" type="tns:ZSL_GXCN_DAY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_GXCN_DAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTSCH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GXRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TOTAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_GXCN_WEEK">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_GXCN_WEEK" nillable="true" type="tns:ZSL_GXCN_WEEK" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_GXCN_WEEK">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTSCH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CWEEK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TOTAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_GXCN_MONTH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_GXCN_MONTH" nillable="true" type="tns:ZSL_GXCN_MONTH" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_GXCN_MONTH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTSCH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GXMONTH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TOTAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CYEAR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SYNCCNDATA">
+        <s:complexType />
+      </s:element>
+      <s:element name="SYNCCNDATAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SYNCCNDATAResult" type="tns:PS_MSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NETWORKWARNING">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="I_ROWS" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NETWORKWARNINGResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NETWORKWARNINGResult" type="tns:ZSL_NetworkList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZPSFUG_M_GZCN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="I_GZCN" type="tns:ZSL_GZCN" />
+            <s:element minOccurs="0" maxOccurs="1" name="relationList" type="tns:ArrayOfZSL_GZ_VLSCH" />
+            <s:element minOccurs="0" maxOccurs="1" name="flag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_GZCN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GZMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UNIT" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_GZ_VLSCH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_GZ_VLSCH" nillable="true" type="tns:ZSL_GZ_VLSCH" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_GZ_VLSCH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GZMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VLSCH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZPSFUG_M_GZCNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZPSFUG_M_GZCNResult" type="tns:PS_MSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZPSFUG_Q_GZCN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GZMS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZPSFUG_Q_GZCNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZPSFUG_Q_GZCNResult" type="tns:ZSL_GZCNList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_GZCNList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_T435T" type="tns:ArrayOfT435T" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_GZ_VLSCH" type="tns:ArrayOfZSL_GZ_VLSCH" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_GZCN" type="tns:ArrayOfZSL_GZCN" />
+          <s:element minOccurs="0" maxOccurs="1" name="PS_MSG" type="tns:PS_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfT435T">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="T435T" nillable="true" type="tns:T435T" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="T435T">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MANDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SPRAS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VLSCH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXT" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_GZCN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_GZCN" nillable="true" type="tns:ZSL_GZCN" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZPSFUG_M_CALENDAR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nodes" type="tns:ZSL_CALENDARList" />
+            <s:element minOccurs="0" maxOccurs="1" name="I_CALENDAY" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="I_WORKDAY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_CALENDARList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_WORKDAY" type="tns:ArrayOfZSL_WORKDAY" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSL_CALENDAR" type="tns:ArrayOfZSL_CALENDAR" />
+          <s:element minOccurs="0" maxOccurs="1" name="T_MSG" type="tns:PS_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_WORKDAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_WORKDAY" nillable="true" type="tns:ZSL_WORKDAY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_WORKDAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WEEKNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEEKMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISWORKDAY" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_CALENDAR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_CALENDAR" nillable="true" type="tns:ZSL_CALENDAR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_CALENDAR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEEKNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISHOILDAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISWORKDAY" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZPSFUG_M_CALENDARResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZPSFUG_M_CALENDARResult" type="tns:PS_MSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZPSFUG_Q_CALENDAR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ksdate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsdate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZPSFUG_Q_CALENDARResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZPSFUG_Q_CALENDARResult" type="tns:ZSL_CALENDARList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZPSFUG_Q_GZCNREPORT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ksdate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsdate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="flag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZPSFUG_Q_GZCNREPORTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZPSFUG_Q_GZCNREPORTResult" type="tns:GZCNREPORT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GZCNREPORT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_GZCN_PAST" type="tns:ArrayOfZSL_GZCN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_GZCN_ED" type="tns:ArrayOfZSL_GZCN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_GZCN_SJ" type="tns:ArrayOfZSL_GZCN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ES_DATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ES_INTERVAL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PS_MSG" type="tns:PS_MSG" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="WBSPARMS" nillable="true" type="tns:WBSPARMS" />
+      <s:element name="PS_MSG" nillable="true" type="tns:PS_MSG" />
+      <s:element name="ZSL_NetworkList" nillable="true" type="tns:ZSL_NetworkList" />
+      <s:element name="ZSL_GZCNList" nillable="true" type="tns:ZSL_GZCNList" />
+      <s:element name="ZSL_CALENDARList" nillable="true" type="tns:ZSL_CALENDARList" />
+      <s:element name="GZCNREPORT" nillable="true" type="tns:GZCNREPORT" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ModifyCNFHSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyCNFH" />
+  </wsdl:message>
+  <wsdl:message name="ModifyCNFHSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyCNFHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadWBSPARMSSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadWBSPARMS" />
+  </wsdl:message>
+  <wsdl:message name="ReadWBSPARMSSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadWBSPARMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTJGNETWORKSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECTJGNETWORK" />
+  </wsdl:message>
+  <wsdl:message name="SELECTJGNETWORKSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTJGNETWORKResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateNetworkSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateNetwork" />
+  </wsdl:message>
+  <wsdl:message name="UpdateNetworkSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateNetworkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GXFHTABLESoapIn">
+    <wsdl:part name="parameters" element="tns:GXFHTABLE" />
+  </wsdl:message>
+  <wsdl:message name="GXFHTABLESoapOut">
+    <wsdl:part name="parameters" element="tns:GXFHTABLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SYNCCNDATASoapIn">
+    <wsdl:part name="parameters" element="tns:SYNCCNDATA" />
+  </wsdl:message>
+  <wsdl:message name="SYNCCNDATASoapOut">
+    <wsdl:part name="parameters" element="tns:SYNCCNDATAResponse" />
+  </wsdl:message>
+  <wsdl:message name="NETWORKWARNINGSoapIn">
+    <wsdl:part name="parameters" element="tns:NETWORKWARNING" />
+  </wsdl:message>
+  <wsdl:message name="NETWORKWARNINGSoapOut">
+    <wsdl:part name="parameters" element="tns:NETWORKWARNINGResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_M_GZCNSoapIn">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_M_GZCN" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_M_GZCNSoapOut">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_M_GZCNResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNSoapIn">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_Q_GZCN" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNSoapOut">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_Q_GZCNResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_M_CALENDARSoapIn">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_M_CALENDAR" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_M_CALENDARSoapOut">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_M_CALENDARResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_CALENDARSoapIn">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_Q_CALENDAR" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_CALENDARSoapOut">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_Q_CALENDARResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNREPORTSoapIn">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_Q_GZCNREPORT" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNREPORTSoapOut">
+    <wsdl:part name="parameters" element="tns:ZPSFUG_Q_GZCNREPORTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadWBSPARMSHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadWBSPARMSHttpGetOut">
+    <wsdl:part name="Body" element="tns:WBSPARMS" />
+  </wsdl:message>
+  <wsdl:message name="SYNCCNDATAHttpGetIn" />
+  <wsdl:message name="SYNCCNDATAHttpGetOut">
+    <wsdl:part name="Body" element="tns:PS_MSG" />
+  </wsdl:message>
+  <wsdl:message name="NETWORKWARNINGHttpGetIn">
+    <wsdl:part name="I_ROWS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NETWORKWARNINGHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZSL_NetworkList" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNHttpGetIn">
+    <wsdl:part name="GZMS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZSL_GZCNList" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_CALENDARHttpGetIn">
+    <wsdl:part name="ksdate" type="s:string" />
+    <wsdl:part name="jsdate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_CALENDARHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZSL_CALENDARList" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNREPORTHttpGetIn">
+    <wsdl:part name="ksdate" type="s:string" />
+    <wsdl:part name="jsdate" type="s:string" />
+    <wsdl:part name="flag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNREPORTHttpGetOut">
+    <wsdl:part name="Body" element="tns:GZCNREPORT" />
+  </wsdl:message>
+  <wsdl:message name="ReadWBSPARMSHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadWBSPARMSHttpPostOut">
+    <wsdl:part name="Body" element="tns:WBSPARMS" />
+  </wsdl:message>
+  <wsdl:message name="SYNCCNDATAHttpPostIn" />
+  <wsdl:message name="SYNCCNDATAHttpPostOut">
+    <wsdl:part name="Body" element="tns:PS_MSG" />
+  </wsdl:message>
+  <wsdl:message name="NETWORKWARNINGHttpPostIn">
+    <wsdl:part name="I_ROWS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NETWORKWARNINGHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZSL_NetworkList" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNHttpPostIn">
+    <wsdl:part name="GZMS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZSL_GZCNList" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_CALENDARHttpPostIn">
+    <wsdl:part name="ksdate" type="s:string" />
+    <wsdl:part name="jsdate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_CALENDARHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZSL_CALENDARList" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNREPORTHttpPostIn">
+    <wsdl:part name="ksdate" type="s:string" />
+    <wsdl:part name="jsdate" type="s:string" />
+    <wsdl:part name="flag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ZPSFUG_Q_GZCNREPORTHttpPostOut">
+    <wsdl:part name="Body" element="tns:GZCNREPORT" />
+  </wsdl:message>
+  <wsdl:portType name="CNFHSoap">
+    <wsdl:operation name="ModifyCNFH">
+      <wsdl:input message="tns:ModifyCNFHSoapIn" />
+      <wsdl:output message="tns:ModifyCNFHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadWBSPARMS">
+      <wsdl:input message="tns:ReadWBSPARMSSoapIn" />
+      <wsdl:output message="tns:ReadWBSPARMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECTJGNETWORK">
+      <wsdl:input message="tns:SELECTJGNETWORKSoapIn" />
+      <wsdl:output message="tns:SELECTJGNETWORKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNetwork">
+      <wsdl:input message="tns:UpdateNetworkSoapIn" />
+      <wsdl:output message="tns:UpdateNetworkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GXFHTABLE">
+      <wsdl:input message="tns:GXFHTABLESoapIn" />
+      <wsdl:output message="tns:GXFHTABLESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SYNCCNDATA">
+      <wsdl:input message="tns:SYNCCNDATASoapIn" />
+      <wsdl:output message="tns:SYNCCNDATASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NETWORKWARNING">
+      <wsdl:input message="tns:NETWORKWARNINGSoapIn" />
+      <wsdl:output message="tns:NETWORKWARNINGSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_M_GZCN">
+      <wsdl:input message="tns:ZPSFUG_M_GZCNSoapIn" />
+      <wsdl:output message="tns:ZPSFUG_M_GZCNSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCN">
+      <wsdl:input message="tns:ZPSFUG_Q_GZCNSoapIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_GZCNSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_M_CALENDAR">
+      <wsdl:input message="tns:ZPSFUG_M_CALENDARSoapIn" />
+      <wsdl:output message="tns:ZPSFUG_M_CALENDARSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_CALENDAR">
+      <wsdl:input message="tns:ZPSFUG_Q_CALENDARSoapIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_CALENDARSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCNREPORT">
+      <wsdl:input message="tns:ZPSFUG_Q_GZCNREPORTSoapIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_GZCNREPORTSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CNFHHttpGet">
+    <wsdl:operation name="ReadWBSPARMS">
+      <wsdl:input message="tns:ReadWBSPARMSHttpGetIn" />
+      <wsdl:output message="tns:ReadWBSPARMSHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SYNCCNDATA">
+      <wsdl:input message="tns:SYNCCNDATAHttpGetIn" />
+      <wsdl:output message="tns:SYNCCNDATAHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NETWORKWARNING">
+      <wsdl:input message="tns:NETWORKWARNINGHttpGetIn" />
+      <wsdl:output message="tns:NETWORKWARNINGHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCN">
+      <wsdl:input message="tns:ZPSFUG_Q_GZCNHttpGetIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_GZCNHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_CALENDAR">
+      <wsdl:input message="tns:ZPSFUG_Q_CALENDARHttpGetIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_CALENDARHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCNREPORT">
+      <wsdl:input message="tns:ZPSFUG_Q_GZCNREPORTHttpGetIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_GZCNREPORTHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CNFHHttpPost">
+    <wsdl:operation name="ReadWBSPARMS">
+      <wsdl:input message="tns:ReadWBSPARMSHttpPostIn" />
+      <wsdl:output message="tns:ReadWBSPARMSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SYNCCNDATA">
+      <wsdl:input message="tns:SYNCCNDATAHttpPostIn" />
+      <wsdl:output message="tns:SYNCCNDATAHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NETWORKWARNING">
+      <wsdl:input message="tns:NETWORKWARNINGHttpPostIn" />
+      <wsdl:output message="tns:NETWORKWARNINGHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCN">
+      <wsdl:input message="tns:ZPSFUG_Q_GZCNHttpPostIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_GZCNHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_CALENDAR">
+      <wsdl:input message="tns:ZPSFUG_Q_CALENDARHttpPostIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_CALENDARHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCNREPORT">
+      <wsdl:input message="tns:ZPSFUG_Q_GZCNREPORTHttpPostIn" />
+      <wsdl:output message="tns:ZPSFUG_Q_GZCNREPORTHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CNFHSoap" type="tns:CNFHSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ModifyCNFH">
+      <soap:operation soapAction="http://tempuri.org/ModifyCNFH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadWBSPARMS">
+      <soap:operation soapAction="http://tempuri.org/ReadWBSPARMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECTJGNETWORK">
+      <soap:operation soapAction="http://tempuri.org/SELECTJGNETWORK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNetwork">
+      <soap:operation soapAction="http://tempuri.org/UpdateNetwork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GXFHTABLE">
+      <soap:operation soapAction="http://tempuri.org/GXFHTABLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNCCNDATA">
+      <soap:operation soapAction="http://tempuri.org/SYNCCNDATA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NETWORKWARNING">
+      <soap:operation soapAction="http://tempuri.org/NETWORKWARNING" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_M_GZCN">
+      <soap:operation soapAction="http://tempuri.org/ZPSFUG_M_GZCN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCN">
+      <soap:operation soapAction="http://tempuri.org/ZPSFUG_Q_GZCN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_M_CALENDAR">
+      <soap:operation soapAction="http://tempuri.org/ZPSFUG_M_CALENDAR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_CALENDAR">
+      <soap:operation soapAction="http://tempuri.org/ZPSFUG_Q_CALENDAR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCNREPORT">
+      <soap:operation soapAction="http://tempuri.org/ZPSFUG_Q_GZCNREPORT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CNFHSoap12" type="tns:CNFHSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ModifyCNFH">
+      <soap12:operation soapAction="http://tempuri.org/ModifyCNFH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadWBSPARMS">
+      <soap12:operation soapAction="http://tempuri.org/ReadWBSPARMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECTJGNETWORK">
+      <soap12:operation soapAction="http://tempuri.org/SELECTJGNETWORK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateNetwork">
+      <soap12:operation soapAction="http://tempuri.org/UpdateNetwork" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GXFHTABLE">
+      <soap12:operation soapAction="http://tempuri.org/GXFHTABLE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNCCNDATA">
+      <soap12:operation soapAction="http://tempuri.org/SYNCCNDATA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NETWORKWARNING">
+      <soap12:operation soapAction="http://tempuri.org/NETWORKWARNING" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_M_GZCN">
+      <soap12:operation soapAction="http://tempuri.org/ZPSFUG_M_GZCN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCN">
+      <soap12:operation soapAction="http://tempuri.org/ZPSFUG_Q_GZCN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_M_CALENDAR">
+      <soap12:operation soapAction="http://tempuri.org/ZPSFUG_M_CALENDAR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_CALENDAR">
+      <soap12:operation soapAction="http://tempuri.org/ZPSFUG_Q_CALENDAR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCNREPORT">
+      <soap12:operation soapAction="http://tempuri.org/ZPSFUG_Q_GZCNREPORT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CNFHHttpGet" type="tns:CNFHHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ReadWBSPARMS">
+      <http:operation location="/ReadWBSPARMS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNCCNDATA">
+      <http:operation location="/SYNCCNDATA" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NETWORKWARNING">
+      <http:operation location="/NETWORKWARNING" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCN">
+      <http:operation location="/ZPSFUG_Q_GZCN" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_CALENDAR">
+      <http:operation location="/ZPSFUG_Q_CALENDAR" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCNREPORT">
+      <http:operation location="/ZPSFUG_Q_GZCNREPORT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CNFHHttpPost" type="tns:CNFHHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ReadWBSPARMS">
+      <http:operation location="/ReadWBSPARMS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SYNCCNDATA">
+      <http:operation location="/SYNCCNDATA" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NETWORKWARNING">
+      <http:operation location="/NETWORKWARNING" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCN">
+      <http:operation location="/ZPSFUG_Q_GZCN" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_CALENDAR">
+      <http:operation location="/ZPSFUG_Q_CALENDAR" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ZPSFUG_Q_GZCNREPORT">
+      <http:operation location="/ZPSFUG_Q_GZCNREPORT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CNFH">
+    <wsdl:port name="CNFHSoap" binding="tns:CNFHSoap">
+      <soap:address location="http://192.168.0.107/test/PS/CNFH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CNFHSoap12" binding="tns:CNFHSoap12">
+      <soap12:address location="http://192.168.0.107/test/PS/CNFH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CNFHHttpGet" binding="tns:CNFHHttpGet">
+      <http:address location="http://192.168.0.107/test/PS/CNFH.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CNFHHttpPost" binding="tns:CNFHHttpPost">
+      <http:address location="http://192.168.0.107/test/PS/CNFH.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

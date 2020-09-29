@@ -1,0 +1,259 @@
+﻿@using Sonluk.UI.Model.MES.ZSL_PP_RFCService
+@model Sonluk.UI.Model.MES.ZSL_PP_RFCService.ZPP_BZZYD_READ_RESULT[]
+@{
+    ViewBag.Title = "包装作业单打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+    int pageCount = 1;
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 20cm;
+        margin-left: 10px;
+    }
+    /*table {
+        border-collapse: collapse;
+    }*/
+    .tb1 td {
+        border: 1px solid #000;
+    }
+
+    .tb1 td {
+        font-size: 12px;
+        
+    }
+    .td_contentleft{
+        text-align:left
+    }
+    .td_contentright{
+        text-align:right
+    }
+    table.tb2 {
+        font-size: 14px;
+        margin-left:10px;
+        
+    }
+</style>
+
+@foreach (ZPP_BZZYD_READ_RESULT node in Model)
+{
+
+    <div class="main">
+        @*<div>@node.ZSL_PP01.AUFNR</div>*@
+        <table >
+            <tr>
+                <td style="width:2cm;">
+                    <img style="margin-left:-1.2cm;" src="@Url.Action("BarCode", "PD", new { area = "MES", code = @node.ZSL_PP01.AUFNR, format = "CODE128", width = 160, height = 30, pure = 1 })">
+                @*    <img style="margin-left:-2.0cm" src="@Url.Action("BarCode", "BarCode", new { area = "BC", code = @node.ZSL_PP01.AUFNR, format = "QRCODE", width = 100, height = 100, pure = 1 })">*@
+                </td>
+                <td style="width:17cm;height:1.7cm">
+                    <span style="font-size:30px;font-weight:bold">@node.ZSL_PP01.BUTXT</span>
+                </td>
+                <td style="width:2cm">
+                    <div style="margin-top:-0.2cm;margin-right:-2cm">页码:@pageCount</div>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:7cm;text-align:left;font-size:13px;vertical-align:bottom">编号:</td>
+                <td style="width:15cm;font-size:30px;font-weight:bold">包装作业单</td>
+                <td class="td_contentright" style="width:7cm;font-size:13px">
+                   打印日期:@DateTime.Now.ToString("yyyy-MM-dd")<br />
+                   建立日期:@node.ZSL_PP01.ERDAT
+                </td>
+            </tr>
+        </table>
+        <table class="tb1">
+            <tr>
+                <td class="td_contentleft">成品编码</td>
+                <td class="td_contentleft">@node.ZSL_PP01.PLNBEZ.TrimStart('0')</td>
+                <td class="td_contentleft">成品描述</td>
+                <td class="td_contentleft" colspan="4">@node.ZSL_PP01.MAKTX</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="td_contentleft" style="width:2cm">销售订单号</td>
+                @{
+                    string xsdd = node.ZSL_PP01.KDAUF.TrimStart('0') + "-" + node.ZSL_PP01.KDPOS.TrimStart('0');
+                    <td  class="td_contentleft" style="width:2.5cm">@xsdd</td>
+                }
+                <td class="td_contentleft" style="width:2.5cm">销售订单数量</td>
+                @{
+                    string xsddsl = Convert.ToDecimal(node.ZSL_PP01.KWMENG).ToString("0.##") + " " + node.ZSL_PP01.VRKME;
+                    <td class="td_contentright" style="width:3cm">@xsddsl</td>
+                }
+                <td class="td_contentleft" style="width:2.5cm">成品完成日期</td>
+                <td style="width:2.5cm">@node.ZSL_PP01.EDATU</td>
+                <td class="td_contentleft"style="width:2.3cm">销售业务员</td>
+                <td class="td_contentleft" style="width:2.7cm">@node.ZSL_PP01.USNAME</td>
+            </tr>
+            <tr>
+                <td class="td_contentleft">生产订单号</td>
+                <td class="td_contentleft">@node.ZSL_PP01.AUFNR</td>
+                <td class="td_contentleft">生产开始日期</td>
+                <td>@node.ZSL_PP01.GSTRP</td>
+                <td class="td_contentleft">生产完成日期</td>
+                <td>@node.ZSL_PP01.GLTRP</td>
+                <td class="td_contentleft">订单数量</td>
+                @{
+                    string ddsl = Convert.ToDecimal(node.ZSL_PP01.GAMNG).ToString("0.##") + " " + node.ZSL_PP01.GMEIN;
+                    <td class="td_contentright">@ddsl</td>
+                }
+
+            </tr>
+            <tr>
+                <td class="td_contentleft">工作中心</td>
+                <td class="td_contentleft">@node.ZSL_PP01.KTEXT</td>
+                <td class="td_contentleft">下道工作中心</td>
+                <td class="td_contentleft">@node.ZSL_PP01.KTEXT1</td>
+                <td class="td_contentleft">商检批号</td>
+                <td class="td_contentleft">@node.ZSL_PP01.CHARG</td>
+                <td class="td_contentleft">商检数量</td>
+                @{
+                    string sjsl = Convert.ToDecimal(node.ZSL_PP01.GAMNG).ToString("0.##") + " " + node.ZSL_PP01.VRKME;
+                    if (string.IsNullOrEmpty(node.ZSL_PP01.CHARG))
+                    {
+                        <td class="td_contentright">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td class="td_contentright">@sjsl</td>
+                    }
+
+                }
+            </tr>
+            @for (int i = 0; i < node.ZSL_PP02List.Length; i++)
+            {
+                ZSL_PP02 item = node.ZSL_PP02List[i];
+                <tr>
+                    @if (i == 0)
+                    {
+                        int rowCount = node.ZSL_PP02List.Length;
+                        <td rowspan="@rowCount" style="width:2cm;text-align:left;vertical-align:top">包装材料</td>
+                    }
+                    <td class="td_contentleft" style="width:2.5cm">@item.MATNR.TrimStart('0')</td>
+                    <td class="td_contentleft" style="width:12.8cm" colspan="5">@item.MAKTX</td>
+                    @{
+                        string bomsl = item.QTY + " " + item.MEINS;
+                        <td style="width:2.7cm">@bomsl</td>
+                    }
+
+                </tr>
+            }
+            @{
+                string[] title1Arr = new string[] { "<素电池要求>" + node.ZSL_PP01.PPTXT, "素电生产线",
+                "<单电日期唛>","<热缩膜>","<商标采购要求>","<卡片>","<不干胶>","<激光喷码>","<单PACK包装>","<内盒包装>",
+                "<中盒包装>","<外箱包装>","<展示架包装>","<托盘及隔板包装>","<内盒正侧唛>","<中盒正侧唛>","<外箱正唛>",
+                "<外箱侧唛>","<展示架（盒）正侧唛>","<验货要求>","<特殊采购要求>","<备注>"};
+                string[] format = new string[] {"02",node.ZSL_PP01.WEMPF,"00","04","01","05","06","18","03","08","10","15"
+            ,"12","16","07","09","13","14","11","17","19","20"};
+
+                string sdcyq = "<素电池要求>" + node.ZSL_PP01.PPTXT;
+            }
+            @for (int i = 0; i < title1Arr.Length; i++)
+            {
+                <tr>
+                    <td style="width:10cm" colspan="4">@title1Arr[i++]</td>
+                    <td style="width:10cm" colspan="4">@title1Arr[i--]</td>
+                </tr>
+                <tr>
+                    <td class="td_contentleft" colspan="4">
+                        @{TLINE[] items = node.TLINEList.Where(p => p.TDFORMAT.Equals(format[i])).ToArray();
+                            for (int j = 0; j < items.Length; j++)
+                            {
+                                @items[j].TDLINE;
+                                if (j != items.Length - 1)
+                                { <br />}
+
+                            }
+                        }
+                        &nbsp;
+                    </td>
+                    @{ i++;}
+                    @if (format[i] == "18")
+                    {
+                        if (node.ZSL_PP01.ZNUM1 != "")
+                        {
+                            <td class="td_contentleft" colspan="4">node.ZSL_PP01.ZNUM1 &nbsp;</td>
+                        }
+                        else
+                        {
+                            <td class="td_contentleft" colspan="4">
+                                @{TLINE[] items1 = node.TLINEList.Where(p => p.TDFORMAT.Equals(format[i])).ToArray(); }
+                                @for (int j = 0; j < items1.Length; j++)
+                                {
+                                    @items1[j].TDLINE;
+                                    if (j != items1.Length - 1)
+                                    { <br />}
+                                }
+                                &nbsp;
+                            </td>
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        <td class="td_contentleft" colspan="4">@format[i] &nbsp;</td>
+                    }
+                    else
+                    {
+                        <td class="td_contentleft" colspan="4">
+                            @{TLINE[] items1 = node.TLINEList.Where(p => p.TDFORMAT.Equals(format[i])).ToArray(); }
+                            @for (int j = 0; j < items1.Length; j++)
+                            {
+                                @items1[j].TDLINE;
+                                if (j != items1.Length - 1)
+                                { <br />}
+                            }
+                            &nbsp;
+                        </td>
+                    }
+
+                </tr>
+            }
+            <tr>
+                <td class="td_contentleft">班长确认</td>
+                <td colspan="2">&nbsp;</td>
+                <td>检验员确认</td>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="td_contentleft">操作工签字</td>
+                <td colspan="7">&nbsp;</td>
+            </tr>
+        </table>
+
+
+
+
+        <table class="tb2">
+            <tr>
+                <td class="td_contentleft" style="width:8cm">
+                    @for (int j = 0; j < node.TLINEList.Where(p => p.TDFORMAT.Equals("00")).ToList().Count; j++)
+                    {
+                        @node.TLINEList.Where(p => p.TDFORMAT.Equals("00")).ToList()[j].TDLINE;
+                        if (j != node.TLINEList.Length - 1)
+                        { <br />}
+                    }
+                    &nbsp;
+                </td>
+                <td class="td_contentleft" style="width:12cm;vertical-align:top">包标电池贴商标（喷有字码）</td>
+            </tr>
+        </table>
+
+
+    </div>
+   
+     pageCount++; 
+}
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SCH/BZYZDPrint")
+}
+
+

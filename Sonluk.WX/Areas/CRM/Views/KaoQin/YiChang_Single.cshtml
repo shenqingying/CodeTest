@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "异常考勤说明";
+    Session["TITLENAME"] = "异常考勤说明";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+
+
+
+
+<div id="div_jump" class="layui-form">
+
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">日期：</label>
+        <div class="layui-input-block" style="margin-left:110px;">
+            <input id="time" type="date" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">上下班：</label>
+        <div class="layui-input-block" style="margin-left:110px;">
+            <select id="sxb" lay-filter="sxb" lay-ignore>
+                <option value="0" selected="selected"></option>
+                <option value="1">上班</option>
+                <option value="2">下班</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">情况说明：</label>
+        <div class="layui-input-block" style="margin-left:110px;">
+            <textarea id="smsx" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">时间：</label>
+        <div class="layui-input-block" style="margin-left:110px;">
+            <input id="qdsj" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地点：</label>
+        <div class="layui-input-block" style="margin-left:110px;">
+            <input id="qdwz" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">距离(米)：</label>
+        <div class="layui-input-block" style="margin-left:110px;">
+            <input id="kqjl" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+
+
+
+    <div class="layui-footer" style="left:0;background: none;padding: 0;background-color:#009688">
+        <div id="div8" class="layui-form">
+
+            <div class="layui-input-inline" style="width:100%;margin:0">
+                <button id="btn_save" class="layui-btn" style="width:47%">保存</button>
+                |
+                <button id="btn_submit" class="layui-btn" style="width:47%;margin-left:0;">保存并提交OA</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<input id="staffid" hidden />
+<input id="staffname" hidden />
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/YiChang_Single")
+}
+

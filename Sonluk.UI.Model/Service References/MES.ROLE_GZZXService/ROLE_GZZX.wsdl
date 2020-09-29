@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ArrayOfMES_SY_GZZX_LAY" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMES_SY_GZZX_LAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_GZZX_LAY" nillable="true" type="tns:MES_SY_GZZX_LAY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_SY_GZZX_LAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CXID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GWJSID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PXM" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LAY_CHECKED" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BYROLEID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BYROLEIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BYROLEIDResult" type="tns:MES_ROLE_GZZX_SELECT_BYROLEID" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_ROLE_GZZX_SELECT_BYROLEID">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_GZZX_LAY" type="tns:ArrayOfMES_SY_GZZX_LAY" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="MES_ROLE_GZZX_SELECT_BYROLEID" nillable="true" type="tns:MES_ROLE_GZZX_SELECT_BYROLEID" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BYROLEIDSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BYROLEID" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BYROLEIDSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BYROLEIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BYROLEIDHttpGetIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BYROLEIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_ROLE_GZZX_SELECT_BYROLEID" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BYROLEIDHttpPostIn">
+    <wsdl:part name="ROLEID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BYROLEIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_ROLE_GZZX_SELECT_BYROLEID" />
+  </wsdl:message>
+  <wsdl:portType name="ROLE_GZZXSoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BYROLEID">
+      <wsdl:input message="tns:SELECT_BYROLEIDSoapIn" />
+      <wsdl:output message="tns:SELECT_BYROLEIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ROLE_GZZXHttpGet">
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpGetIn" />
+      <wsdl:output message="tns:DELETEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BYROLEID">
+      <wsdl:input message="tns:SELECT_BYROLEIDHttpGetIn" />
+      <wsdl:output message="tns:SELECT_BYROLEIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ROLE_GZZXHttpPost">
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpPostIn" />
+      <wsdl:output message="tns:DELETEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BYROLEID">
+      <wsdl:input message="tns:SELECT_BYROLEIDHttpPostIn" />
+      <wsdl:output message="tns:SELECT_BYROLEIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ROLE_GZZXSoap" type="tns:ROLE_GZZXSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BYROLEID">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BYROLEID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ROLE_GZZXSoap12" type="tns:ROLE_GZZXSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BYROLEID">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BYROLEID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ROLE_GZZXHttpGet" type="tns:ROLE_GZZXHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BYROLEID">
+      <http:operation location="/SELECT_BYROLEID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ROLE_GZZXHttpPost" type="tns:ROLE_GZZXHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BYROLEID">
+      <http:operation location="/SELECT_BYROLEID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ROLE_GZZX">
+    <wsdl:port name="ROLE_GZZXSoap" binding="tns:ROLE_GZZXSoap">
+      <soap:address location="http://192.168.0.223/API/MES/ROLE_GZZX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ROLE_GZZXSoap12" binding="tns:ROLE_GZZXSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/ROLE_GZZX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ROLE_GZZXHttpGet" binding="tns:ROLE_GZZXHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/ROLE_GZZX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ROLE_GZZXHttpPost" binding="tns:ROLE_GZZXHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/ROLE_GZZX.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "销售业务进展";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "销售业务进展";
+}
+
+<script type="text/html" id="tb_area">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+<style>
+    td{
+        word-wrap:break-word;
+        word-break:break-all;
+    }
+</style>
+
+<h2 id="h1" style="margin:0 10px"></h2>
+<h2 id="h2" style="margin:0 10px"></h2>
+
+<button id="turn_official" class="layui-btn" style="position: absolute;top: 70px;right: 10px;">转正</button>
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+<br />
+<hr class="layui-bg-black" />
+<br />
+<div id="004" hidden>
+
+    <h2 class="layui-colla-title" id="htitle">新增销售业务进展</h2>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">阶段名：</label>
+        <div class="layui-input-block">
+            <select id="jieduan17" lay-filter="jieduan17" lay-ignore>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:100px">信息：</label>
+        <div class="layui-input-block">
+            <textarea id="info17" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+
+    </div>
+    <div class="layui-form" style="width:100%;">
+        <div class="layui-form-item" style="margin:0">
+            <br />
+            <button id="btn_save_jinzhan" class="layui-btn" lay-filter="btn_save_jinzhan" style="width:49%;">保存</button>
+
+            <button id="btn_nosave_jinzhan" class="layui-btn layui-btn-danger" lay-filter="btn_nosave_jinzhan" style="width:49%;margin: 0;" hidden>取消</button>
+        </div>
+    </div>
+</div>
+
+<input id="action_status" hidden value="insert" />
+<input id="zibiao_id" hidden />
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/JinZhan")
+}

@@ -1,0 +1,200 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DEPTService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+@using Sonluk.UI.Model.CRM.HG_STAFFService;
+@{
+    ViewBag.Title = "拜访查询(按人员)";
+    Session["TITLENAME"] = "拜访查询(按人员)";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+
+    CRM_HG_DEPT[] DepartModel = ViewBag.Department;
+    CRM_HG_STAFF[] STAFFmodel = ViewBag.STAFF;
+    CRM_HG_DICT[] STAFFLX = ViewBag.STAFFLX;
+
+}
+
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+<script type="text/html" id="status">
+    {{# if(d.KQISACTIVE == 1){ }}
+    是
+    {{# }else if(d.KQISACTIVE == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="juli">
+    {{ d.KQJL + "米" }}
+
+</script>
+
+<script type="text/html" id="imgTpl">
+    <img src="{{d.ML}}" />
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看图片</a>
+</script>
+
+<script type="text/html" id="picbar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">放大查看</a>
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+
+    .laytable-cell-1-WJM, .laytable-cell-2-WJM, .laytable-cell-3-WJM, .laytable-cell-4-WJM, .laytable-cell-5-WJM, .laytable-cell-6-WJM, .laytable-cell-7-WJM, .laytable-cell-8-WJM, .laytable-cell-9-WJM, .laytable-cell-10-WJM { /*最后的pic为字段的field*/
+        height: auto;
+        max-width: 100%;
+    }
+</style>
+
+
+
+
+
+<div id="form1">
+    @*<button id="btn_cx" class="layui-btn">查询</button>
+    <button id="btn_back" class="layui-btn" style="display:none;width:100%">返回</button>
+    <button id="btn_MXback" class="layui-btn" style="display:none;width:100%">返回</button>*@
+    <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+        <button id="btn_cx" class="layui-btn" style="width:100%">查询</button>
+        <button id="btn_back" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+        <button id="btn_MXback" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+        <button id="btn_imgback" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+    </div>
+    
+
+    
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show" style="padding-right: 0px;">
+
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label" style="width:80px">开始日期：</label>
+                    <div class="layui-input-block" style=" margin-left: 110px;">
+                        <input id="date_start" type="date" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label" style="width:80px">结束日期：</label>
+                    <div class="layui-input-block" style=" margin-left: 110px;">
+                        <input id="date_end" type="date" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:80px">部门：</label>
+                    <div class="layui-input-block" style=" margin-left: 110px;">
+                        <select id="department" lay-filter="department" lay-search>
+                            @for (int i = 0; i < DepartModel.Length; i++)
+                            {
+                                <option value="@DepartModel[i].DEPID">@DepartModel[i].DEPNAME</option>
+                            }
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:80px">人员姓名：</label>
+                    <div class="layui-input-block" style=" margin-left: 110px;">
+                        <select id="staff_name" lay-filter="staff_name" lay-search>
+                            <option value="0" selected="selected">全部</option>
+                            @for (int i = 0; i < STAFFmodel.Length; i++)
+                            {
+                                <option value="@STAFFmodel[i].STAFFID">@STAFFmodel[i].STAFFNO   @STAFFmodel[i].STAFFNAME</option>
+                            }
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:80px">人员类型：</label>
+                    <div class="layui-input-block" style=" margin-left: 110px;">
+                        <select id="staff_type" lay-filter="staff_type" lay-search>
+                            <option value="0">全部</option>
+                            @for (int i = 0; i < STAFFLX.Length; i++)
+                            {
+                                <option value="@STAFFLX[i].DICID">@STAFFLX[i].DICNAME</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <hr class="layui-bg-black" />
+
+    <div id="div_total" style="margin:0 10px">
+    </div>
+    <div id="div_total2" style="margin:0 10px">
+    </div>
+    <div id="div_mx" style="margin:0 10px">
+    </div>
+    <div id="div_img" style="margin:0 10px">
+
+    </div>
+
+</div>
+<br /><br /><br />
+
+
+<div id="dic_pic" class="layui-form" hidden>
+
+
+    <br />
+
+
+    <table id="pic" lay-filter="pic"></table>
+
+
+
+
+</div>
+
+
+<input id="staffid" hidden />
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#staff_type").val("578");
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/BaiFangReportBySTAFF")
+}
+
+

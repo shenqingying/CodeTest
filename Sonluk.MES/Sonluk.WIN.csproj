@@ -1,0 +1,940 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4FE55F51-1F1F-4985-8491-42EF5D3F9983}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sonluk.MES</RootNamespace>
+    <AssemblyName>Sonluk.MES</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>E:\Winform发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>253B39234FCCFF4861E199769AA1146691531FFD</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Sonluk.WIN_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NAppUpdate.Framework, Version=0.5.1.0, Culture=neutral, PublicKeyToken=d1f1d1f19f9e5a56, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NAppupdate\NAppUpdate.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\Base\basefactory.cs" />
+    <Compile Include="MES\Base\basefrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\Base\basefrm.Designer.cs">
+      <DependentUpon>basefrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\Base\baseview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\Base\baseview.Designer.cs">
+      <DependentUpon>baseview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\Base\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\Base\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmAction.Designer.cs">
+      <DependentUpon>frmAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBaozhuang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBaozhuang.Designer.cs">
+      <DependentUpon>frmBaozhuang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBindPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBindPrint.Designer.cs">
+      <DependentUpon>frmBindPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBindPrint_1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBindPrint_1.Designer.cs">
+      <DependentUpon>frmBindPrint_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBindXCM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBindXCM.Designer.cs">
+      <DependentUpon>frmBindXCM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBZ.Designer.cs">
+      <DependentUpon>frmBZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBBprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBBprint.Designer.cs">
+      <DependentUpon>frmBBprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBind_Machine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBind_Machine.Designer.cs">
+      <DependentUpon>frmBind_Machine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmChangePLDH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmChangePLDH.Designer.cs">
+      <DependentUpon>frmChangePLDH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmChange_GD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmChange_GD.Designer.cs">
+      <DependentUpon>frmChange_GD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmConfigView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmConfigView.Designer.cs">
+      <DependentUpon>frmConfigView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmDefaultconfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmDefaultconfiguration.Designer.cs">
+      <DependentUpon>frmDefaultconfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmDeleteTM_TMINFO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmDeleteTM_TMINFO.Designer.cs">
+      <DependentUpon>frmDeleteTM_TMINFO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmDeleteTM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmDeleteTM.Designer.cs">
+      <DependentUpon>frmDeleteTM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFindGZZX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFindGZZX.Designer.cs">
+      <DependentUpon>frmFindGZZX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFindSBH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFindSBH.Designer.cs">
+      <DependentUpon>frmFindSBH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFind_GD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFind_GD.Designer.cs">
+      <DependentUpon>frmFind_GD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFJprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFJprint.Designer.cs">
+      <DependentUpon>frmFJprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFujiCC_NN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFujiCC_NN.Designer.cs">
+      <DependentUpon>frmFujiCC_NN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFujiCC_N.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFujiCC_N.Designer.cs">
+      <DependentUpon>frmFujiCC_N.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFujiCC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFujiCC.Designer.cs">
+      <DependentUpon>frmFujiCC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFujiTL_NN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFujiTL_NN.Designer.cs">
+      <DependentUpon>frmFujiTL_NN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFujiTL_N.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFujiTL_N.Designer.cs">
+      <DependentUpon>frmFujiTL_N.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmFujiTL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmFujiTL.Designer.cs">
+      <DependentUpon>frmFujiTL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmGW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmGW.Designer.cs">
+      <DependentUpon>frmGW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmLotLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmLotLog.Designer.cs">
+      <DependentUpon>frmLotLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmManagerRY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmManagerRY.Designer.cs">
+      <DependentUpon>frmManagerRY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmMessageBox.Designer.cs">
+      <DependentUpon>frmMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmModifyMX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmModifyMX.Designer.cs">
+      <DependentUpon>frmModifyMX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmModifyPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmModifyPwd.Designer.cs">
+      <DependentUpon>frmModifyPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmNearDateRW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmNearDateRW.Designer.cs">
+      <DependentUpon>frmNearDateRW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmPrint_N .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmPrint_N .Designer.cs">
+      <DependentUpon>frmPrint_N .cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmPrint.Designer.cs">
+      <DependentUpon>frmPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmPrintList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmPrintList.Designer.cs">
+      <DependentUpon>frmPrintList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmPrintTM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmPrintTM.Designer.cs">
+      <DependentUpon>frmPrintTM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmRWDSCAN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmRWDSCAN.Designer.cs">
+      <DependentUpon>frmRWDSCAN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmSelectRWList_N.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmSelectRWList_N.Designer.cs">
+      <DependentUpon>frmSelectRWList_N.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmSelectRWList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmSelectRWList.Designer.cs">
+      <DependentUpon>frmSelectRWList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmBaobiao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmBaobiao.Designer.cs">
+      <DependentUpon>frmBaobiao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmSGSMsub_sudian.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmSGSMsub_sudian.Designer.cs">
+      <DependentUpon>frmSGSMsub_sudian.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmSGSM_Puls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmSGSM_Puls.Designer.cs">
+      <DependentUpon>frmSGSM_Puls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmSGSM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmSGSM.Designer.cs">
+      <DependentUpon>frmSGSM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmSGSMsub.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmSGSMsub.Designer.cs">
+      <DependentUpon>frmSGSMsub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmTL2_2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmTL2_2.Designer.cs">
+      <DependentUpon>frmTL2_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmTL2_1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmTL2_1.Designer.cs">
+      <DependentUpon>frmTL2_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmTL2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmTL2.Designer.cs">
+      <DependentUpon>frmTL2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmTM_bdLimit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmTM_bdLimit.Designer.cs">
+      <DependentUpon>frmTM_bdLimit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmTM_bd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmTM_bd.Designer.cs">
+      <DependentUpon>frmTM_bd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmTM_INFO_UPDATE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmTM_INFO_UPDATE.Designer.cs">
+      <DependentUpon>frmTM_INFO_UPDATE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmUpdateTM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmUpdateTM.Designer.cs">
+      <DependentUpon>frmUpdateTM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmWLKC_N.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmWLKC_N.Designer.cs">
+      <DependentUpon>frmWLKC_N.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmWLKC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmWLKC.Designer.cs">
+      <DependentUpon>frmWLKC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZFSDprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZFSDprint.Designer.cs">
+      <DependentUpon>frmZFSDprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZJprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZJprint.Designer.cs">
+      <DependentUpon>frmZJprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZJ_CC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZJ_CC.Designer.cs">
+      <DependentUpon>frmZJ_CC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZJ_Find_GD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZJ_Find_GD.Designer.cs">
+      <DependentUpon>frmZJ_Find_GD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZJ_Product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZJ_Product.Designer.cs">
+      <DependentUpon>frmZJ_Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZSLotprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZSLotprint.Designer.cs">
+      <DependentUpon>frmZSLotprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZSLotSub.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZSLotSub.Designer.cs">
+      <DependentUpon>frmZSLotSub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZXprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZXprint.Designer.cs">
+      <DependentUpon>frmZXprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZX_CC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZX_CC.Designer.cs">
+      <DependentUpon>frmZX_CC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZX_SBH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZX_SBH.Designer.cs">
+      <DependentUpon>frmZX_SBH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\main\frmZX_TL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MES\main\frmZX_TL.Designer.cs">
+      <DependentUpon>frmZX_TL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\publics\AppUpdate.cs" />
+    <Compile Include="MES\publics\CodeAnalysis.cs" />
+    <Compile Include="MES\publics\Common.cs" />
+    <Compile Include="MES\publics\DeviceInfo.cs" />
+    <Compile Include="MES\publics\IniFile.cs" />
+    <Compile Include="MES\publics\Judge.cs" />
+    <Compile Include="MES\publics\LanguageHelper.cs" />
+    <Compile Include="MES\publics\OperationConfig.cs" />
+    <Compile Include="MES\publics\PrintPublic.cs" />
+    <Compile Include="MES\publics\ServcieModel.cs" />
+    <Compile Include="MES\publics\String_Vi.cs" />
+    <Compile Include="MES\publics\String_Zh.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MES\Base\basefrm.resx">
+      <DependentUpon>basefrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\Base\baseview.resx">
+      <DependentUpon>baseview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\Base\baseview.vi-VN.resx">
+      <DependentUpon>baseview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\Base\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\Base\frmLogin.vi-VN.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmAction.resx">
+      <DependentUpon>frmAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmAction.vi-VN.resx">
+      <DependentUpon>frmAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBaobiao.vi-VN.resx">
+      <DependentUpon>frmBaobiao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBaozhuang.resx">
+      <DependentUpon>frmBaozhuang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBaozhuang.vi-VN.resx">
+      <DependentUpon>frmBaozhuang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBBprint.vi-VN.resx">
+      <DependentUpon>frmBBprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBindPrint.resx">
+      <DependentUpon>frmBindPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBindPrint.vi-VN.resx">
+      <DependentUpon>frmBindPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBindPrint_1.resx">
+      <DependentUpon>frmBindPrint_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBindPrint_1.vi-VN.resx">
+      <DependentUpon>frmBindPrint_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBindXCM.resx">
+      <DependentUpon>frmBindXCM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBindXCM.vi-VN.resx">
+      <DependentUpon>frmBindXCM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBind_Machine.vi-VN.resx">
+      <DependentUpon>frmBind_Machine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBZ.resx">
+      <DependentUpon>frmBZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBBprint.resx">
+      <DependentUpon>frmBBprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBind_Machine.resx">
+      <DependentUpon>frmBind_Machine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmChangePLDH.resx">
+      <DependentUpon>frmChangePLDH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmChangePLDH.vi-VN.resx">
+      <DependentUpon>frmChangePLDH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmChange_GD.resx">
+      <DependentUpon>frmChange_GD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmChange_GD.vi-VN.resx">
+      <DependentUpon>frmChange_GD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmConfigView.resx">
+      <DependentUpon>frmConfigView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmConfigView.vi-VN.resx">
+      <DependentUpon>frmConfigView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmDefaultconfiguration.resx">
+      <DependentUpon>frmDefaultconfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmDefaultconfiguration.vi-VN.resx">
+      <DependentUpon>frmDefaultconfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmDeleteTM.vi-VN.resx">
+      <DependentUpon>frmDeleteTM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmDeleteTM_TMINFO.resx">
+      <DependentUpon>frmDeleteTM_TMINFO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmDeleteTM.resx">
+      <DependentUpon>frmDeleteTM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmDeleteTM_TMINFO.vi-VN.resx">
+      <DependentUpon>frmDeleteTM_TMINFO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFindGZZX.resx">
+      <DependentUpon>frmFindGZZX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFindGZZX.vi-VN.resx">
+      <DependentUpon>frmFindGZZX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFindSBH.resx">
+      <DependentUpon>frmFindSBH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFindSBH.vi-VN.resx">
+      <DependentUpon>frmFindSBH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFind_GD.resx">
+      <DependentUpon>frmFind_GD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFJprint.resx">
+      <DependentUpon>frmFJprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFJprint.vi-VN.resx">
+      <DependentUpon>frmFJprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiCC_N.vi-VN.resx">
+      <DependentUpon>frmFujiCC_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiCC_NN.resx">
+      <DependentUpon>frmFujiCC_NN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiCC_N.resx">
+      <DependentUpon>frmFujiCC_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiCC.resx">
+      <DependentUpon>frmFujiCC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiTL_N.vi-VN.resx">
+      <DependentUpon>frmFujiTL_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiTL_NN.resx">
+      <DependentUpon>frmFujiTL_NN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiTL_N.resx">
+      <DependentUpon>frmFujiTL_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmFujiTL.resx">
+      <DependentUpon>frmFujiTL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmGW.resx">
+      <DependentUpon>frmGW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmGW.vi-VN.resx">
+      <DependentUpon>frmGW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmLotLog.resx">
+      <DependentUpon>frmLotLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmLotLog.vi-VN.resx">
+      <DependentUpon>frmLotLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmManagerRY.resx">
+      <DependentUpon>frmManagerRY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmManagerRY.vi-VN.resx">
+      <DependentUpon>frmManagerRY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmMessageBox.resx">
+      <DependentUpon>frmMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmModifyMX.resx">
+      <DependentUpon>frmModifyMX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmModifyMX.vi-VN.resx">
+      <DependentUpon>frmModifyMX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmModifyPwd.resx">
+      <DependentUpon>frmModifyPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmModifyPwd.vi-VN.resx">
+      <DependentUpon>frmModifyPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmNearDateRW.resx">
+      <DependentUpon>frmNearDateRW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmNearDateRW.vi-VN.resx">
+      <DependentUpon>frmNearDateRW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmPrintList.vi-VN.resx">
+      <DependentUpon>frmPrintList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmPrintTM.vi-VN.resx">
+      <DependentUpon>frmPrintTM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmPrint_N .resx">
+      <DependentUpon>frmPrint_N .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmPrint.resx">
+      <DependentUpon>frmPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmPrintList.resx">
+      <DependentUpon>frmPrintList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmPrintTM.resx">
+      <DependentUpon>frmPrintTM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmPrint_N .vi-VN.resx">
+      <DependentUpon>frmPrint_N .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmRWDSCAN.resx">
+      <DependentUpon>frmRWDSCAN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmRWDSCAN.vi-VN.resx">
+      <DependentUpon>frmRWDSCAN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSelectRWList.vi-VN.resx">
+      <DependentUpon>frmSelectRWList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSelectRWList_N.resx">
+      <DependentUpon>frmSelectRWList_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSelectRWList.resx">
+      <DependentUpon>frmSelectRWList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmBaobiao.resx">
+      <DependentUpon>frmBaobiao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSelectRWList_N.vi-VN.resx">
+      <DependentUpon>frmSelectRWList_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSM.vi-VN.resx">
+      <DependentUpon>frmSGSM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSMsub.vi-VN.resx">
+      <DependentUpon>frmSGSMsub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSMsub_sudian.resx">
+      <DependentUpon>frmSGSMsub_sudian.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSMsub_sudian.vi-VN.resx">
+      <DependentUpon>frmSGSMsub_sudian.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSM_Puls.resx">
+      <DependentUpon>frmSGSM_Puls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSM.resx">
+      <DependentUpon>frmSGSM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSMsub.resx">
+      <DependentUpon>frmSGSMsub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmSGSM_Puls.vi-VN.resx">
+      <DependentUpon>frmSGSM_Puls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTL2_1.vi-VN.resx">
+      <DependentUpon>frmTL2_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTL2_2.resx">
+      <DependentUpon>frmTL2_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTL2_1.resx">
+      <DependentUpon>frmTL2_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTL2.resx">
+      <DependentUpon>frmTL2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTL2_2.vi-VN.resx">
+      <DependentUpon>frmTL2_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTM_bd.vi-VN.resx">
+      <DependentUpon>frmTM_bd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTM_bdLimit.resx">
+      <DependentUpon>frmTM_bdLimit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTM_bd.resx">
+      <DependentUpon>frmTM_bd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTM_bdLimit.vi-VN.resx">
+      <DependentUpon>frmTM_bdLimit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTM_INFO_UPDATE.resx">
+      <DependentUpon>frmTM_INFO_UPDATE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmTM_INFO_UPDATE.vi-VN.resx">
+      <DependentUpon>frmTM_INFO_UPDATE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmUpdateTM.resx">
+      <DependentUpon>frmUpdateTM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmUpdateTM.vi-VN.resx">
+      <DependentUpon>frmUpdateTM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmWLKC_N.resx">
+      <DependentUpon>frmWLKC_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmWLKC.resx">
+      <DependentUpon>frmWLKC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmWLKC_N.vi-VN.resx">
+      <DependentUpon>frmWLKC_N.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZFSDprint.resx">
+      <DependentUpon>frmZFSDprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZJprint.resx">
+      <DependentUpon>frmZJprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZJprint.vi-VN.resx">
+      <DependentUpon>frmZJprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZJ_CC.resx">
+      <DependentUpon>frmZJ_CC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZJ_CC.vi-VN.resx">
+      <DependentUpon>frmZJ_CC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZJ_Find_GD.resx">
+      <DependentUpon>frmZJ_Find_GD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZJ_Find_GD.vi-VN.resx">
+      <DependentUpon>frmZJ_Find_GD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZJ_Product.resx">
+      <DependentUpon>frmZJ_Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZSLotprint.resx">
+      <DependentUpon>frmZSLotprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZSLotSub.resx">
+      <DependentUpon>frmZSLotSub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZXprint.resx">
+      <DependentUpon>frmZXprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZXprint.vi-VN.resx">
+      <DependentUpon>frmZXprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZX_CC.resx">
+      <DependentUpon>frmZX_CC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZX_CC.vi-VN.resx">
+      <DependentUpon>frmZX_CC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZX_SBH.resx">
+      <DependentUpon>frmZX_SBH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZX_TL.resx">
+      <DependentUpon>frmZX_TL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\main\frmZX_TL.vi-VN.resx">
+      <DependentUpon>frmZX_TL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="book1.xls" />
+    <None Include="EXCEL\查询打印导出模版分公司.xlsx" />
+    <None Include="EXCEL\查询打印导出模版.xlsx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sonluk.UI.Model\Sonluk.UI.Model.csproj">
+      <Project>{0d24f0f5-9a65-449b-822c-e602ed36b147}</Project>
+      <Name>Sonluk.UI.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MES\IMAGE\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MES\IMAGE\logo10.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MES\IMAGE\箭头3-2 %284%29.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,117 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    ViewBag.Title = "权限组管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+
+    CRM_HG_DICT[] CPLX = ViewBag.CPLX;
+        
+}
+<style>
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+</style>
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>权限组管理</cite></a>
+</span>
+<br /><br />
+@*<button id="btn_sx" class="layui-btn" lay-filter="btn_insert">刷新</button>*@
+<button id="btn_insert" class="layui-btn" lay-filter="btn_insert">新增</button>
+<button id="btn_edit" class="layui-btn" lay-filter="btn_edit">编辑</button>
+<button id="btn_delete" class="layui-btn" lay-filter="btn_delete">删除</button>
+
+@*<ul id="power_list"></ul>*@
+<div id="power_list"></div>
+
+<br /><br /><br />
+
+<div id="div_power" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <label id="lb_group_id" class="layui-form-label" style="width:130px;text-align:right;display:none">分组ID：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="group_id" type="text" placeholder="" autocomplete="off" class="layui-input" style="display:none" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">分组名称：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="group_name" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">销售区域ID：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <select id="saale_area_id" lay-filter="saale_area_id" lay-search>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">上级分组ID：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="pgroup_id" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">上级分组：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="pgroup_name" type="text" placeholder="必填" autocomplete="off" class="layui-input" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">客户经理ID：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <select id="manager_id" lay-filter="manager_id" lay-search>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">分管领导ID：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <select id="leader_id" lay-filter="leader_id" lay-search>
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">说明：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="bz" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">产品类型：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <select id="cplx" lay-filter="cplx" lay-search>
+                <option value="0">请选择</option>
+                @for (int i = 0; i < CPLX.Length; i++)
+                {
+                    <option value="@CPLX[i].DICID">@CPLX[i].DICNAME</option>
+                }
+
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;text-align:right;">序号：</label>
+        <div class="layui-input-inline" style="width:220px;">
+            <input id="sort" type="text" class="layui-input" value="0">
+        </div>
+    </div>
+</div>
+
+<input id="gid" hidden />
+<input id="gname" hidden />
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/Power")
+}

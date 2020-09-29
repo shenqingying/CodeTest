@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/LE/TRA/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/LE/TRA/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/LE/TRA/">
+      <s:element name="Type">
+        <s:complexType />
+      </s:element>
+      <s:element name="TypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TypeResult" type="tns:ArrayOfPackageInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPackageInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PackageInfo" nillable="true" type="tns:PackageInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PackageInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfPackageInfo" nillable="true" type="tns:ArrayOfPackageInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TypeSoapIn">
+    <wsdl:part name="parameters" element="tns:Type" />
+  </wsdl:message>
+  <wsdl:message name="TypeSoapOut">
+    <wsdl:part name="parameters" element="tns:TypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="TypeHttpGetIn" />
+  <wsdl:message name="TypeHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPackageInfo" />
+  </wsdl:message>
+  <wsdl:message name="TypeHttpPostIn" />
+  <wsdl:message name="TypeHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPackageInfo" />
+  </wsdl:message>
+  <wsdl:portType name="PackageSoap">
+    <wsdl:operation name="Type">
+      <wsdl:input message="tns:TypeSoapIn" />
+      <wsdl:output message="tns:TypeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PackageHttpGet">
+    <wsdl:operation name="Type">
+      <wsdl:input message="tns:TypeHttpGetIn" />
+      <wsdl:output message="tns:TypeHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PackageHttpPost">
+    <wsdl:operation name="Type">
+      <wsdl:input message="tns:TypeHttpPostIn" />
+      <wsdl:output message="tns:TypeHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PackageSoap" type="tns:PackageSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Type">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Type" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PackageSoap12" type="tns:PackageSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Type">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Type" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PackageHttpGet" type="tns:PackageHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Type">
+      <http:operation location="/Type" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PackageHttpPost" type="tns:PackageHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Type">
+      <http:operation location="/Type" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Package">
+    <wsdl:port name="PackageSoap" binding="tns:PackageSoap">
+      <soap:address location="http://192.168.0.132/API/LE/TRA/Package.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PackageSoap12" binding="tns:PackageSoap12">
+      <soap12:address location="http://192.168.0.132/API/LE/TRA/Package.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PackageHttpGet" binding="tns:PackageHttpGet">
+      <http:address location="http://192.168.0.132/API/LE/TRA/Package.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PackageHttpPost" binding="tns:PackageHttpPost">
+      <http:address location="http://192.168.0.132/API/LE/TRA/Package.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

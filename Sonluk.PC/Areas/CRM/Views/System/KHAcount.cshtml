@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "客户账户";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="new">开通</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="lock">
+    {{# if(d.SISLOCK == true){ }}
+    是
+    {{# }else if(d.SISLOCK == false){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.USERCOUNT == 0){ }}
+    未开通
+    {{# }else { }}
+    已开通
+    {{# } }}
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>系统管理</a>
+    <a><cite>客户账户</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            @*<button id="btn_insert" class="layui-btn">新增</button>*@
+            <button id="btn_cx" class="layui-btn">查询</button>
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户性质：</label>
+                        <div class="layui-input-inline">
+                            <select id="isofficial" lay-filter="isofficial">
+                                <option value="0">请选择</option>
+                                <option value="20">签约客户 </option>
+                                <option value="30">非签约客户 </option>
+                                <option value="10">潜在客户</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="KHtype" lay-filter="KHtype">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">SAP编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="sap" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户组：</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-unselect layui-form-select downpanel">
+                                <div class="layui-select-title">
+                                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                                    <input type="hidden" name="selectID" value="0">
+                                    <i class="layui-edge"></i>
+                                </div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd>
+                                        @*<ul id="classtree"></ul>*@
+                                        <div id="classtree"></div>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">上级客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="PKH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">上级客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="PCRMID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<div id="div_users" class="layui-form" hidden>
+    <br />
+    
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px;">登录名：</label>
+        <div class="layui-input-inline">
+            <input id="loginname" type="text" class="layui-input">
+        </div>
+    </div>
+    <input hidden style="display:none">
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px;">密码：</label>
+        <div class="layui-input-inline">
+            <input id="password" type="text" class="layui-input" placeholder="" value="sonluk2018">
+        </div>
+    </div>
+
+    @*<div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px;">是否锁定：</label>
+        <div class="layui-input-inline">
+            <select id="islock" lay-filter="islock">
+                <option value="1">是</option>
+                <option value="0" selected="selected">否</option>
+            </select>
+        </div>
+    </div>*@
+
+    
+
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">角色列表</li>
+            @*<li>职务列表</li>*@
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table id="result_role" lay-filter="result_role"></table>
+            </div>
+            @*<div class="layui-tab-item">
+                <table id="result_duty" lay-filter="result_duty"></table>
+            </div>*@
+        </div>
+    </div>
+
+</div>
+
+
+<input id="netpath" hidden />
+
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/System/KHAcount")
+}

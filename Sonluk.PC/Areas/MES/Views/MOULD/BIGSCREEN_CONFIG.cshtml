@@ -1,0 +1,352 @@
+﻿@{
+    ViewBag.Title = "大屏显示设定";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <a class="layui-btn" id="btn_open" href="@Url.Action("BIGSCREEN","MOULD")" target="_blank">打开窗口</a>
+        <button class="layui-btn" id="btn_save" lay-submit="">保存设置</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GC" lay-filter="Term_GC" lay-verify="required"></select>
+            </div>
+            <label class="layui-form-label1">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GZZXBH" lay-filter="Term_GZZXBH">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">模具号：</label>
+            <div class="layui-input-inline">
+                <select id="Term_MOULD">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">质量问题：</label>
+            <div class="layui-input-inline">
+                <select id="Term_QID" lay-filter="Term_QID">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">维修内容：</label>
+            <div class="layui-input-inline">
+                <select id="Term_RID">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">发起时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_DATESS" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_DATESE" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+            <label class="layui-form-label1">关闭时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_DATEES" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_DATEEE" autocomplete="off" class="layui-input" placeholder="请选择">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">流程状态：</label>
+            <div class="layui-input-inline" style="width:450px;">
+                <select id="Term_STATUS" xm-select="Term_STATUS">
+                    <option value="维修中">维修中</option>
+                    <option value="维修完成">维修完成</option>
+                    <option value="审核中">审核中</option>
+                    <option value="全部合格">合格</option>
+                    <option value="不合格">不合格</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">每页最大行数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_TableRows" autocomplete="off" class="layui-input" placeholder="请填最大行数" value="20">
+            </div>
+            <div class="layui-form-mid layui-word-aux">行</div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var all_fy = 1;
+        var all_fysl = 10;
+        var all_limits = [10, 20];
+        var cacheData = [];
+        layui.use(['laydate', 'form', 'MES'], function () {
+            var layer = layui.layer;
+            var laydate = layui.laydate;
+            var form = layui.form;
+            var formSelects = layui.formSelects;
+
+            list_init_Term();
+            laydate.render({
+                elem: '#Term_DATESS',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#Term_DATESE',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#Term_DATEES',
+                type: 'datetime'
+            });
+            laydate.render({
+                elem: '#Term_DATEEE',
+                type: 'datetime'
+            });
+            formSelects.render("Term_STATUS");
+            config_init();
+
+            $("#btn_save").click(function () {
+                var GC = $("#Term_GC").val();
+                var DATESS = $("#Term_DATESS").val();
+                var DATESE = $("#Term_DATESE").val();
+                var DATEES = $("#Term_DATEES").val();
+                var DATEEE = $("#Term_DATEEE").val();
+                if (GC == "") return;
+                var postData = {
+                    MES_PMM_MOULD: {
+                        GC: GC,
+                        GZZXBH: $("#Term_GZZXBH").val(),
+                    },
+                    MID: $("#Term_MOULD").val(),
+                    QID: Number($("#Term_QID").val()),
+                    RID: Number($("#Term_RID").val()),
+                    STATUS: formSelects.value('Term_STATUS', 'valStr'),
+                    DATESS: DATESS == "" ? "1800/1/1" : DATESS,
+                    DATESE: DATESE == "" ? "1800/1/1" : DATESE,
+                    DATEES: DATEES == "" ? "1800/1/1" : DATEES,
+                    DATEEE: DATEEE == "" ? "1800/1/1" : DATEEE
+                }
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/BIGSCREEN_Set",
+                    data: {
+                        datastring: JSON.stringify(postData),
+                        TableRows: $("#Term_TableRows").val()
+                    },
+                    success: function (data) {
+                        layer.msg("设置完毕");
+                    }
+                });
+            });
+
+            form.on('select(Term_QID)', function (data) {
+                if (data.value != "0") list_init_Term('AfterQID');
+                else {
+                    $('#Term_RID').empty();
+                    $('#Term_RID').append(new Option("请选择", "0"));
+                    form.render();
+                }
+            });
+            form.on('select(Term_GC)', function (data) {
+                if (data.value != "") list_init_Term('AfterGC');
+                else {
+                    $('#Term_GZZXBH').empty();
+                    $('#Term_GZZXBH').append(new Option("请选择", ""));
+                    $('#Term_MOULD').empty();
+                    $('#Term_MOULD').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+            form.on('select(Term_GZZXBH)', function (data) {
+                if (data.value != "") list_init_Term('AfterGZZX');
+                else {
+                    $('#Term_MOULD').empty();
+                    $('#Term_MOULD').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+
+            function list_init_Term(order) {
+                order = order || "";
+                switch (order) {
+                    case "AfterGC":
+                        $('#Term_MOULD').empty();
+                        $('#Term_MOULD').append(new Option("请选择", ""));
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GZZXList",
+                            data: {
+                                GC: $('#Term_GC').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GZZXBH').empty();
+                                $('#Term_GZZXBH').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GZZXBH').append(new Option(item.GZZXBH + "-" + item.GZZXMS, item.GZZXBH));
+                                });
+                                if (rstData.length == 1) {
+                                    $('#Term_GZZXBH').val(rstData[0].GZZXBH);
+                                    list_init_Term("AfterGZZX");
+                                }
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterGZZX":
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MOULDList",
+                            data: {
+                                GC: $('#Term_GC').val(),
+                                GZZXBH: $('#Term_GZZXBH').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_MOULD').empty();
+                                $('#Term_MOULD').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_MOULD').append(new Option(item.MOULD, item.MID));
+                                });
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterQID":
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/RCODEList",
+                            data: {
+                                QID: $('#Term_QID').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_RID').empty();
+                                $('#Term_RID').append(new Option("请选择", "0"));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_RID').append(new Option(item.RCODE + "-" + item.RNAME, item.RID));
+                                });
+                                form.render();
+                            }
+                        });
+                        break;
+                    default:
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GCList",
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GC').empty();
+                                $('#Term_GC').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GC').append(new Option(item.GC + "-" + item.GCMS, item.GC));
+                                });
+                                if (rstData.length == 1) {
+                                    $('#Term_GC').val(rstData[0].GC);
+                                    list_init_Term("AfterGC");
+                                }
+                                form.render();
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/QCODEList",
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_QID').empty();
+                                $('#Term_QID').append(new Option("请选择", "0"));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_QID').append(new Option(item.QCODE + "-" + item.QNAME, item.QID));
+                                });
+                                form.render();
+                            }
+                        });
+                        break;
+                }
+            }
+
+            function config_init() {
+                var loading = layer.load(1);
+                var ajax1 = $.ajax({
+                    type: "POST",
+                    async: true,
+                    url: "../MOULD/GetCookie",
+                    data: {
+                        KEY: "BIGSCREEN"
+                    },
+                    success: function (data) {
+                        if (data != null && data != "") {
+                            var rstData = JSON.parse(data);
+                            if (rstData.MES_PMM_MOULD !== undefined && rstData.MES_PMM_MOULD != null) {
+                                $('#Term_GC').val(rstData.MES_PMM_MOULD.GC || "");
+                                if ($('#Term_GC').val() != "") list_init_Term("AfterGC");
+                                $('#Term_GZZXBH').val(rstData.MES_PMM_MOULD.GZZXBH || "");
+                                if ($('#Term_GZZXBH').val() != "") list_init_Term("AfterGZZX");
+                            }
+                            $('#Term_MOULD').val(rstData.MID || "");
+                            $('#Term_QID').val(rstData.QID || "");
+                            if ($('#Term_QID').val() != "") list_init_Term("AfterQID");
+                            $('#Term_RID').val(rstData.RID || "");
+                            formSelects.value('Term_STATUS', rstData.STATUS.split(','));
+                            $("#Term_DATESS").val(rstData.DATESS > "1800/1/1" ? rstData.DATESS.split("T")[0] : "");
+                            $("#Term_DATESE").val(rstData.DATESE > "1800/1/1" ? rstData.DATESE.split("T")[0] : "");
+                            $("#Term_DATEES").val(rstData.DATEES > "1800/1/1" ? rstData.DATEES.split("T")[0] : "");
+                            $("#Term_DATEEE").val(rstData.DATEEE > "1800/1/1" ? rstData.DATEEE.split("T")[0] : "");
+                        }
+                        else formSelects.value('Term_STATUS', ["维修中", "维修完成", "审核中", "全部合格", "不合格"]);
+                    }
+                });
+                var ajax2 = $.ajax({
+                    type: "POST",
+                    async: true,
+                    url: "../MOULD/GetCookie",
+                    data: {
+                        KEY: "BIGSCREEN_TableRows"
+                    },
+                    success: function (data) {
+                        if (data != null && data != "") {
+                            $("#Term_TableRows").val(data);
+                        }
+                    }
+                });
+                $.when(ajax1, ajax2)
+                    .fail(function (xhr, status, error) {
+                        layer.msg("服务器出错了：" + error);
+                    })
+                    .always(function () {
+                        layer.close(loading);
+                    });
+            }
+        });
+    </script>
+}

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "系统版本管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Sonluk.UI.Model.MES.SY_TYPEMXService.MES_SY_TYPEMXLIST[] mxList = ViewBag.mxList;
+}
+<span class="layui-breadcrumb" lay-separator>
+    <a>电子文档系统管理</a>
+    <a><cite>系统版本管理</cite></a>
+
+</span>
+<div class="layui-form ">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_select">查询</button>
+        <button class="layui-btn" id="btn_insert">新增</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">系统分类：</label>
+        <div class="layui-input-inline">
+            <select id="in_CheckPoint" lay-filter="in_CheckPoint" lay-search>
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < @mxList.Length; i++)
+                {
+                    <option value="@mxList[i].ID">@mxList[i].MXNAME</option>
+                }
+            </select>
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/EM/system/XTBB")
+}
+

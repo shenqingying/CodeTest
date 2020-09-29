@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "ComponentMoving";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" name="in_bl" placeholder="请扫描网络号" autocomplete="off" class="layui-input" id="in_bl" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div id="bodydiv">
+        <div class="layui-form-item">
+            <label class="layui-form-label">物料号</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="lb_ZMATNR" id="lb_ZMATNR" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                <label class="layui-form-label" name="lb_ZMATNR" id="lb_ZMATNR"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">物料描述</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="lb_MAKTX" id="lb_MAKTX" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                <label class="layui-form-label" name="lb_MAKTX" id="lb_MAKTX"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">WBS元素</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="lb_POSID" id="lb_POSID" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                <label class="layui-form-label" name="lb_POSID" id="lb_POSID"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">WBS描述</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="lb_POST1" id="lb_POST1" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                <label class="layui-form-label" name="lb_POST1" id="lb_POST1"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">移出仓位</label>
+            <div class="layui-input-block">
+                <input type="text" name="lb_VLPLA" id="lb_VLPLA" placeholder="请扫描层码" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">移入仓位</label>
+            <div class="layui-input-block">
+                <input type="text" name="lb_NLPLA" id="lb_NLPLA" placeholder="请扫描层码" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form">
+            <label class="layui-form-label">库存类别</label>
+            <div class="layui-input-block">
+                <select name="select_kclb" lay-filter="" id="select_kclb">
+                    <option value=""></option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">移仓数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="lb_ANFME" id="lb_ANFME" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">单位</label>
+            <div class="layui-input-block">
+                @*<input type="text" name="lb_ZMEINS" id="lb_ZMEINS" placeholder="" autocomplete="off" class="layui-input" readonly="readonly">*@
+                <label class="layui-form-label" name="lb_ZMEINS" id="lb_ZMEINS"></label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">批次</label>
+            <div class="layui-input-block">
+                <input type="text" name="lb_CHARG" id="lb_CHARG" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工厂</label>
+            <div class="layui-input-block">
+                <input type="text" name="lb_WERKS" id="lb_WERKS" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">库存地点</label>
+            <div class="layui-input-block">
+                <input type="text" name="lb_LGORT" id="lb_LGORT" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div id="NLPLA_btn">
+        <div style="text-align: center;">
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn1" style="height: 100%; width: 45%"></button>
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn2" style="height: 100%; width: 45%"></button>
+        </div>
+        <div style="text-align: center;">
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn3" style="height: 100%; width: 45%"></button>
+            <button class="layui-btn layui-btn-big-LGPLA" id="NLPLA_btn4" style="height: 100%; width: 45%"></button>
+        </div>
+    </div>
+    <div class="layui-footer" align="right">
+        <button class="layui-btn" id="save">保存</button>
+        <button class="layui-btn" id="clear">取消</button>
+    </div>
+    <input type="hidden" id="bl_iscr">
+    <input type="hidden" id="bl_LGNUM">
+    <input type="hidden" id="bl_LPTYP">
+    <input type="hidden" id="bl_NLTYP">
+    <input type="hidden" id="bl_NLBER">
+    <input type="hidden" id="bl_VLTYP">
+    <input type="hidden" id="bl_VLBER">
+    <input type="hidden" id="bl_NLPLAlist">
+
+
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/PS/ComponentMoving")
+}

@@ -1,0 +1,65 @@
+﻿@using Sonluk.UI.Model.LE.TRA.ComplaintService
+@model IEnumerable<ComplaintInfo>
+@{ string select = "●";}
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">ID</td>
+        <td class="data-table-header">物流公司</td>
+        <td class="data-table-header">托运单</td>
+        <td class="data-table-header">联系函</td>
+        <td class="data-table-header">收货人</td>
+        <td class="data-table-header">退回日期</td>
+        <td class="data-table-header">应到日期</td>
+        <td class="data-table-header">实到日期</td>
+        <td class="data-table-header">延迟天数</td>
+        <td class="data-table-header">投诉方式</td>
+        <td class="data-table-header">包装破损</td>
+        <td class="data-table-header">货物淋湿</td>
+        <td class="data-table-header">包装污染</td>
+        <td class="data-table-header">物料损坏</td>
+        <td class="data-table-header">物料短缺</td>
+        <td class="data-table-header">损坏金额合计</td>
+        <td class="data-table-header">重供费合计</td>
+        <td class="data-table-header">赔偿合计</td>
+        <td class="data-table-header">需要赔偿</td>
+        <td class="data-table-header">处理完成</td>
+        <td class="data-table-header">填写人</td>
+        <td class="data-table-header">填写时间</td>
+    </tr>
+    @foreach (ComplaintInfo node in Model)
+    {
+        <tr>
+            <td class="text-align-right">@node.ID</td>
+            <td class="text-align-left">@node.Carrier.ShortName</td>
+            <td class="text-align-right">@node.ConsignmentNote</td>
+            <td class="text-align-right">@node.ContactLetter</td>
+            <td class="text-align-left">@node.Receiver.ShortName</td>
+            <td>@node.ReturnDate</td>
+            <td>@node.AppointedDeliveryDate</td>
+            <td>@node.DeliveryDate</td>
+            <td class="text-align-right">@node.DelayDays</td>
+            <td>@node.Type</td>
+            <td>@if (node.PackageDamage) { @select}</td>
+            <td>@if (node.GoodsGetWet) { @select}</td>
+            <td>@if (node.PackagePollution) { @select}</td>
+            <td>@if (node.GoodsDamage) { @select}</td>
+            <td>@if (node.GoodsShortage) { @select}</td>
+            <td class="text-align-right">@node.DamageValue</td>
+            <td class="text-align-right">@node.ReworkValue</td>
+            <td class="text-align-right">@node.Compensation</td>
+            <td>@if (node.Compensable) { @select}</td>
+            <td>@if (node.Completed) { @select}</td>
+            <td>@node.Creator</td>
+            <td>@node.CreateDate</td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+
+

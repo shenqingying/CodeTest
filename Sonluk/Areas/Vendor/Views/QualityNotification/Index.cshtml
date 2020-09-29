@@ -1,0 +1,62 @@
+﻿@using Sonluk.UI.Model.OA.PendingService
+@model IEnumerable<PendingInfo>
+@{
+    ViewBag.Title = "质量通知单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 1;
+}
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/vendor/quality-notification-index")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">质量通知单</a>
+        >
+        <a href="#">查询</a>
+    </div>
+</div>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-title">待办事项：@Model.Count()</div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="purchase-order">
+            <table class="data-table">
+                <tr>
+                    <td class="data-table-header">No</td>
+                    <td class="data-table-header">标题</td>
+                    <td class="data-table-header">日期</td>
+                    <td class="data-table-header">类型</td>
+                    <td class="data-table-header">创建者</td>
+                    <td class="data-table-header">重要程度</td>
+                    <td class="data-table-header">超期</td>
+                </tr>
+                @foreach (PendingInfo node in Model)
+                {
+                    <tr>
+                        <td>@(index++)</td>
+                        <td class="text-align-left"><a target="_blank" href="@(node.Link)" class="link">@node.Subject</a></td>
+                        <td>@node.CreateDate</td>
+                        <td>@node.ApplicationCategory</td>
+                        <td>@node.Creator</td>
+                        <td>@node.ImportantLevel</td>
+                        @if (node.Distinct.Equals("false"))
+                        {
+                            <td>否</td>
+                        }
+                        else
+                        {
+                            <td>是</td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/vendor/quality-notification-index")
+}

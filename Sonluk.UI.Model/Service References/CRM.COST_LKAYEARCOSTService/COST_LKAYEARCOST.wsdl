@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAYEARCOST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_LKAYEARCOST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="COSTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LKAYEARTTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HXZLMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="COSTITEMID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="COSTITEMYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LASTHTTKNR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LASTFYYGE" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="THISHTTKNR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="THISFYYGE" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="THISFYYGEXG" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TBZJ" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYZJYY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HTTKSFTX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHRDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="COSTITEMMC" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAYEARCOST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAYEARCOST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateAllResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSPJE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAYEARCOST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSPJEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateSPJEResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_LKAYEARCOST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByParamResult" type="tns:ArrayOfCRM_COST_LKAYEARCOST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_LKAYEARCOST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_LKAYEARCOST" nillable="true" type="tns:CRM_COST_LKAYEARCOST" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="COSTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadCOSTByKHID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="YEAR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadCOSTByKHIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadCOSTByKHIDResult" type="tns:ArrayOfCRM_COST_LKAYEARCOST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCost">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LKAID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="HTYEAR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCostResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCostResult" type="tns:CRM_COST_GETCOST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_GETCOST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HB_SP" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="HB_SQ" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DT_SP" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DT_SQ" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TSCL_SP" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TSCL_SQ" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZZF_SP" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZZF_SQ" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OTHER_SP" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OTHER_SQ" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_COST_LKAYEARCOST" nillable="true" type="tns:ArrayOfCRM_COST_LKAYEARCOST" />
+      <s:element name="CRM_COST_GETCOST" nillable="true" type="tns:CRM_COST_GETCOST" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAllSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAll" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAllSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSPJESoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSPJE" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSPJESoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSPJEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadCOSTByKHIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadCOSTByKHID" />
+  </wsdl:message>
+  <wsdl:message name="ReadCOSTByKHIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadCOSTByKHIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCostSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCost" />
+  </wsdl:message>
+  <wsdl:message name="GetCostSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCostResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="COSTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadCOSTByKHIDHttpGetIn">
+    <wsdl:part name="KHID" type="s:string" />
+    <wsdl:part name="YEAR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadCOSTByKHIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_COST_LKAYEARCOST" />
+  </wsdl:message>
+  <wsdl:message name="GetCostHttpGetIn">
+    <wsdl:part name="LKAID" type="s:string" />
+    <wsdl:part name="HTYEAR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCostHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_COST_GETCOST" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="COSTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadCOSTByKHIDHttpPostIn">
+    <wsdl:part name="KHID" type="s:string" />
+    <wsdl:part name="YEAR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadCOSTByKHIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_COST_LKAYEARCOST" />
+  </wsdl:message>
+  <wsdl:message name="GetCostHttpPostIn">
+    <wsdl:part name="LKAID" type="s:string" />
+    <wsdl:part name="HTYEAR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCostHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_COST_GETCOST" />
+  </wsdl:message>
+  <wsdl:portType name="COST_LKAYEARCOSTSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAll">
+      <wsdl:input message="tns:UpdateAllSoapIn" />
+      <wsdl:output message="tns:UpdateAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSPJE">
+      <wsdl:input message="tns:UpdateSPJESoapIn" />
+      <wsdl:output message="tns:UpdateSPJESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <wsdl:input message="tns:ReadByParamSoapIn" />
+      <wsdl:output message="tns:ReadByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCOSTByKHID">
+      <wsdl:input message="tns:ReadCOSTByKHIDSoapIn" />
+      <wsdl:output message="tns:ReadCOSTByKHIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCost">
+      <wsdl:input message="tns:GetCostSoapIn" />
+      <wsdl:output message="tns:GetCostSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_LKAYEARCOSTHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCOSTByKHID">
+      <wsdl:input message="tns:ReadCOSTByKHIDHttpGetIn" />
+      <wsdl:output message="tns:ReadCOSTByKHIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCost">
+      <wsdl:input message="tns:GetCostHttpGetIn" />
+      <wsdl:output message="tns:GetCostHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_LKAYEARCOSTHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCOSTByKHID">
+      <wsdl:input message="tns:ReadCOSTByKHIDHttpPostIn" />
+      <wsdl:output message="tns:ReadCOSTByKHIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCost">
+      <wsdl:input message="tns:GetCostHttpPostIn" />
+      <wsdl:output message="tns:GetCostHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="COST_LKAYEARCOSTSoap" type="tns:COST_LKAYEARCOSTSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAll">
+      <soap:operation soapAction="http://tempuri.org/UpdateAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSPJE">
+      <soap:operation soapAction="http://tempuri.org/UpdateSPJE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCOSTByKHID">
+      <soap:operation soapAction="http://tempuri.org/ReadCOSTByKHID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCost">
+      <soap:operation soapAction="http://tempuri.org/GetCost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_LKAYEARCOSTSoap12" type="tns:COST_LKAYEARCOSTSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAll">
+      <soap12:operation soapAction="http://tempuri.org/UpdateAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSPJE">
+      <soap12:operation soapAction="http://tempuri.org/UpdateSPJE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCOSTByKHID">
+      <soap12:operation soapAction="http://tempuri.org/ReadCOSTByKHID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCost">
+      <soap12:operation soapAction="http://tempuri.org/GetCost" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_LKAYEARCOSTHttpGet" type="tns:COST_LKAYEARCOSTHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCOSTByKHID">
+      <http:operation location="/ReadCOSTByKHID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCost">
+      <http:operation location="/GetCost" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_LKAYEARCOSTHttpPost" type="tns:COST_LKAYEARCOSTHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCOSTByKHID">
+      <http:operation location="/ReadCOSTByKHID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCost">
+      <http:operation location="/GetCost" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="COST_LKAYEARCOST">
+    <wsdl:port name="COST_LKAYEARCOSTSoap" binding="tns:COST_LKAYEARCOSTSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/COST_LKAYEARCOST.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_LKAYEARCOSTSoap12" binding="tns:COST_LKAYEARCOSTSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/COST_LKAYEARCOST.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_LKAYEARCOSTHttpGet" binding="tns:COST_LKAYEARCOSTHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/COST_LKAYEARCOST.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_LKAYEARCOSTHttpPost" binding="tns:COST_LKAYEARCOSTHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/COST_LKAYEARCOST.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "专项活动";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="shangxiawu">
+    {{# if(d.CCSJLX == 1){ }}
+    上午
+    {{# }else if(d.CCSJLX == 2){ }}
+    下午
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    生效
+    {{# }else if(d.ISACTIVE == 0){ }}
+    过期
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_CC">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="tb_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>拜访管理</a>
+    <a><cite>专项活动</cite></a>
+</span>
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_insert" class="layui-btn" lay-submit lay-filter="btn_insert">新增</button>
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="btn_insert">查询</button>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:110px">拜访计划名称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label" style="width:110px">拜访人员：</label>
+        <div class="layui-input-inline">
+            <select id="ddl_staff" lay-filter="ddl_staff" lay-search>
+                <option value="0" selected="selected">全部</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px">开始时间：</label>
+        <div class="layui-input-inline">
+            <input id="start" type="text" class="layui-input" value="@ViewBag.startdate">
+        </div>
+
+        <label class="layui-form-label" style="width:110px">结束时间：</label>
+        <div class="layui-input-inline">
+            <input id="end" type="text" class="layui-input" value="@ViewBag.enddate">
+        </div>
+
+    </div>
+
+    <table id="CC_title" lay-filter="CC_title"></table>
+
+</div>
+
+
+
+
+
+
+<input id="staffid" hidden />
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/ZXManage")
+}

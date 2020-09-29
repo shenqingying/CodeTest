@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "交货单-回单确认";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/sonluk-ui/panel-pop-up")
+
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">交货单</a>
+        >
+        <a href="#">回单确认</a>
+    </div>
+</div>
+<div class="panel-flow">
+    <table>
+        <tr>
+            <td>交货单</td>
+            <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="serialnumber" id="serialnumber" autofocus="autofocus" /></td>
+        </tr>
+    </table>
+    <div class="panel-search-submit sonluk-button panel-search-button">确&nbsp;&nbsp;认</div>
+    <input type="hidden" value="@Url.Action("_CNDeliveryList", "OutboundDelivery")">
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="consignment-delivery"></div>
+    </div>
+</div>
+
+<!--下拉列表-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/le/outbound-delivery-update")
+}

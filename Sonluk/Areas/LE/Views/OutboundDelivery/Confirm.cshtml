@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "交货单-回单确认";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string result = "";
+    if (Session["UpdateResult"] != null)
+    {
+        result = (string)Session["UpdateResult"];
+        Session["UpdateResult"] = null;
+        if (result == "")
+        {
+            result = "确认成功！";
+        }
+        else
+        {
+            result = "交货单：" + result + "确认失败！";
+        }
+    }
+}
+
+@Styles.Render("~/Content/access/update-password")
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">交货单</a>
+        >
+        <a href="#">回单确认</a>
+    </div>
+</div>
+<form action="@Url.Action("Confirm", "OutboundDelivery")" me method="post" enctype="multipart/form-data" id="confirm-form">
+    <div class="panel-flow">
+        <table>
+            <tr>
+                <td>交货单</td>
+                <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="serialnumber" id="serialnumber" autofocus="autofocus" /></td>
+                <td>@result</td>
+            </tr>
+        </table>
+        <div class="sonluk-button submit">确认</div>
+    </div>
+</form>
+    <!--下拉列表-->
+    @section scripts {
+        @Scripts.Render("~/bundles/le/outbound-delivery-update")
+    }

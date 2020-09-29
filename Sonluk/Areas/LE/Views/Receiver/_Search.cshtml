@@ -1,0 +1,36 @@
+﻿@using Sonluk.UI.Model.LE.TRA.ReceiverService
+@model IEnumerable<CompanyInfo>
+@foreach (CompanyInfo shipToParty in Model)
+{
+    <div class="panel-pop-up-node panel-pop-up-children-trigger-receiver">
+        <div class="panel-pop-up-node-serial-number">@shipToParty.SerialNumber</div>
+        <div class="panel-pop-up-node-name">@shipToParty.Name</div>
+        <input type="hidden" value="@shipToParty.ID" />
+        <input type="hidden" value="@shipToParty.SerialNumber" />
+        <input type="hidden" value="@shipToParty.ShortName" />
+        <input type="hidden" value="@shipToParty.Name" />
+        <input type="hidden" value="@shipToParty.Default.ToString()" />
+    </div>
+    <div class="panel-pop-up-children">
+        @foreach (CompanyInfo destination in shipToParty.Children)
+        {
+            <div class="panel-pop-up-child">
+                <div class="panel-pop-up-child-content receiver-selected">@destination.Address</div>
+                <input type="hidden" value="@destination.ID" />
+                <input type="hidden" value="@destination.Contact" />
+                <input type="hidden" value="@destination.Cellphone" />
+                <input type="hidden" value="@destination.Address" />
+                <input type="hidden" value="@destination.Telephone" />
+                <input type="hidden" value="@destination.City" />
+                <input type="hidden" value="@destination.CityID" />
+                <input type="hidden" value="@destination.Default.ToString()" />
+            </div>
+        }
+    </div>
+}
+
+
+
+
+
+

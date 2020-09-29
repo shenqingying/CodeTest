@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "收货报告";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Sonluk.UI.Model.CRM.HG_DICTService.CRM_HG_DICT[] mxList = ViewBag.mxList;
+}
+<input type="hidden" value="@Url.Action("DR_SHBG", "KAOrder")"  id="DR_SHBG" />
+<input id="SHBGMX" value="@Url.Action("SHBGMX", "KAOrder")" type="hidden">
+<input id="SELECT_ORDERSH_TT" value="@Url.Action("SELECT_ORDERSH_TT", "KAOrder")" type="hidden">
+
+<input id="EXPORT_KAORDER_SELECT" value="@Url.Action("EXPORT_KAORDER_SELECT", "KAOrder")" type="hidden">
+<input id="EXPORT_KAORDER" value="@Url.Action("EXPORT_KAORDER", "KAOrder")" type="hidden">
+<input id="ddlylist" value="@mxList.Length" type="hidden">
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA订单管理</a>
+    <a><cite>收货报告</cite></a>
+</span>
+<br />
+<br />
+<div id="form1" class="layui-form">
+     
+     <div class="layui-form-item">
+         <button type="button" class="layui-btn" id="btn_dr" >导入</button>
+         <button type="button" class="layui-btn" id="btn_dc" >导出</button>
+         <button type="button" class="layui-btn" id="btn_mxcx">明细查询</button>
+         <button type="button" class="layui-btn" id="btn_cx">查询</button>
+     </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订单来源：</label>
+            <div class="layui-input-inline">
+                <select id="in_ddly" lay-filter="in_ddly" lay-search>
+                    @{
+                        if (mxList.Length == 1)
+                        {
+                            <option value="@mxList[0].DICID" selected="selected">@mxList[0].DICNAME</option>
+                        }
+                        else
+                        {
+                            <option value="0" selected="selected">请选择</option>
+                            if (@mxList != null)
+                            {
+                                for (int i = 0; i < @mxList.Length; i++)
+                                {
+                                    <option value="@mxList[i].DICID">@mxList[i].DICNAME</option>
+                                }
+                            }
+                        }
+
+
+}
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">门店信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_mdxx" autocomplete="off" class="layui-input" placeholder="（门店编号/门店名称）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">订单号码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="id_ddhm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <input type="checkbox" id="in_cysj" lay-filter="in_cysj" name="" title="只显示差异数据" lay-skin="primary" checked>
+        </div>
+        <div class="layui-inline" id="div_rc">
+            
+            <label class="layui-form-label">容差(元)：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="id_rc" autocomplete="off" class="layui-input" value="1.00">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订货日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_dhrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_dhrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">交货日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_jhrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_jhrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">导入日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_drrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_drrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="div_orderTT">
+        <table class="layui-hide" id="tb_shbgtable" lay-filter="tb_shbgtable"></table>
+    </div>
+
+
+    @*<div class="layui-form-item">
+        <button id="btn_dr" class="layui-btn" style="width:120px;">导入</button><br />
+    </div>*@
+
+</div>
+<div class="layui-upload layui-form" id="div_SC" hidden>
+    <div class="layui-form-item" style="padding-top:10px">
+        <label class="layui-form-label">订单来源：</label>
+        <div class="layui-input-inline">
+            <select id="in_ddly_sc" lay-filter="in_ddly_sc" lay-search>
+                @{
+                    if (mxList.Length == 1)
+                    {
+                        <option value="@mxList[0].DICID" selected="selected">@mxList[0].DICNAME</option>
+                    }
+                    else
+                    {
+                        <option value="0" selected="selected">请选择</option>
+                        if (@mxList != null)
+                        {
+                            for (int i = 0; i < @mxList.Length; i++)
+                            {
+                                <option value="@mxList[i].DICID">@mxList[i].DICNAME</option>
+                            }
+                        }
+                    }
+
+
+}
+            </select>
+        </div>
+       
+    </div>
+    <div class="layui-form-item" style="padding-left:20px">
+        <button type="button" class="layui-btn" id="btn_dr_sc">导入文件</button>
+    </div>
+
+
+
+</div> 
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KAOrder/SHBG")
+}
+
+

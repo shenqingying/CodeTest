@@ -1,0 +1,51 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_HHService;
+@{
+    ViewBag.Title = "HHXXWH_PART";
+    CRM_PRODUCT_HH[] Data = ViewBag.Data;
+
+    //var data = JSON.parse(HHdata);
+}
+
+
+<table class="layui-table" lay-filter="result_ka">
+    <thead>
+        <tr>
+            <th lay-data="{ title: '序号', templet: '#indexTpl', width: 60 }">序号</th>
+            <th lay-data="{field:'HHID', width:134,hide:true}">货号ID</th>
+            <th lay-data="{field:'SY', width:134,hide:true}">所属系统数字</th>
+            <th lay-data="{field:'ISACTIVE', width:134,hide:true}">状态</th>
+            <th lay-data="{field:'SYDES', width:171}">订单来源</th>
+            <th lay-data="{field:'ProdNum', width:119}">货号</th>
+            <th lay-data="{field:'NameSpec',width:287,}">品名/规格</th>
+            <th lay-data="{field:'BarCode', width:180,}">条码</th>
+            <th lay-data="{field:'ProdName', width:134,hide:true}">品名</th>
+            <th lay-data="{field:'ProdSpec', width:134,hide:true}">规格</th>
+            
+            <th lay-data="{field:'DGDW',width:90,}">订购单位</th>
+            <th lay-data="{field:'SAPBM',width:320,}">物料编码</th>
+            <th lay-data="{ fixed: 'right', width: 138,  toolbar: '#bar2', }">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Data.Length; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Data[i].HHID</td>
+                <td>@Data[i].SY</td>
+                <td>@Data[i].ISACTIVE</td>
+                <td>@Data[i].SYDES</td>
+                <td>@Data[i].ProdNum</td>
+                <td>@Data[i].NameSpec</td>
+                <td>@Data[i].BarCode</td>
+                <td>@Data[i].ProdName</td>
+                <td>@Data[i].ProdSpec</td>
+                @*<td>@Data[i].ProdSpec</td>*@
+                <td>@Data[i].DGDW</td>
+                <td>@Data[i].SAPBM</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+

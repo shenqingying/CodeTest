@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "产能标准值管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<style type="text/css">
+    .labelwidth {
+        width: 120px
+    }
+
+    .divContent {
+    }
+</style>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">{{common.c_modify}}</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">{{common.c_delete}}</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="head">MES系统设置</a>
+    <a lid="headsub"><cite>产能标准值管理</cite></a>
+</span>
+<input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+<input type="hidden" value="@Url.Action("ExportByExcel")" id="ExportSY_CN" />
+<input type="hidden" value="@Url.Action("CreateSY_CN")" id="CreateSY_CN" />
+<input type="hidden" value="@Url.Action("UpdateSY_CN")" id="UpdateSY_CN" />
+<input type="hidden" value="@Url.Action("ReadSY_CN")" id="ReadSY_CN" />
+<input type="hidden" value="@Url.Action("DeleteSY_CN")" id="DeleteSY_CN" />
+<input type="hidden" value="@Url.Action("ReadSY_TYPEMX")" id="ReadSY_TYPEMX" />
+
+
+
+<div id="form1" class="layui-form">
+    <br />
+    <div class="layui-form-item">
+        <button class="layui-btn" lid="btn1" id="btn1">新增</button>
+        <button class="layui-btn" lid="btn2" id="btn2">查询</button>
+        <button class="layui-btn" lid="btn3" id="btn3">导出Excel</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="in_gc" lay-filter="in_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label2">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb1" lay-filter="tb1"></table>
+    </div>
+</div>
+
+<div id="div1" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label1">工厂：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_gc" lay-filter="div_gc">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <label class="layui-form-label labelwidth" lid="label2">工作中心：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_gzzx" lay-filter="div_gzzx">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label3">标准产量：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_bzcl">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label4">标准产量单位：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_bzcldw" lay-filter="div_bzcldw">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label5">标准时间：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_bzsj">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label6">标准时间单位：</label>
+        <div class="layui-input-inline">
+            <select class="divContent" id="div_bzsjdw" lay-filter="div_bzsjdw">
+                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label labelwidth" lid="label7">标准人数：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_bzrs">
+        </div>
+        <label class="layui-form-label labelwidth" lid="label9">备注：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input divContent" id="div_bz">
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SYSTEM/SY_CN_MANAGE", "~/bundles/zwk")
+}
+

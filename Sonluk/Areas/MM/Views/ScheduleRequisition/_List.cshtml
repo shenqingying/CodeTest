@@ -1,0 +1,71 @@
+﻿@using Sonluk.UI.Model.MM.ScheduleRequisitionService
+@model IEnumerable<ScheReqInfo>
+@{
+    int index = 1;
+    string auth = ViewBag.Auth;
+    string uri = "";
+    switch (auth)
+    {
+        case "OP":
+        case "PP":
+            {
+                uri = Url.Action("Edit", "ScheduleRequisition", new { Auth = auth }) + "&";
+                break;
+            }
+        case "PPCtrl":
+        case "Pur":
+        case "PurCtrl":
+            {
+                uri = Url.Action("Release", "ScheduleRequisition", new { Auth = auth }) + "&";
+                break;
+            }
+    }
+    uri = uri + "SN=";
+}
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">No</td>
+        <td class="data-table-header">序列号</td>
+        <td class="data-table-header min-width">状态</td>
+        <td class="data-table-header min-width">创建</td>
+        <td class="data-table-header min-width">日期</td>
+        <td class="data-table-header min-width">批准</td>
+        <td class="data-table-header min-width">日期</td>
+        <td class="data-table-header min-width">同步</td>
+        <td class="data-table-header min-width">日期</td>
+        <td class="data-table-header schedule-requisition-td-remark">更改原因</td>
+        <td class="data-table-header schedule-requisition-td-remark">意见</td>
+    </tr>
+    @{index = 1;}
+    @foreach (ScheReqInfo node in Model)
+    {
+        <tr>
+            <td>@(index++)</td>
+            <td><a href="@(uri + node.SerialNumber)">@node.SerialNumber</a></td>
+            <td>@node.StatusDescription</td>
+            <td>@node.Creator</td>
+            <td>@node.Date</td>
+            <td>@node.NodePPCtrl</td>
+            <td>@node.NodePPCtrlDate</td>
+            <td>@node.NodePurCtrl</td>
+            <td>@node.NodePurCtrlDate</td>
+            <td class="text-align-left">@node.Remark</td>
+            <td class="text-align-left">@node.NodeComments</td>
+        </tr>
+    }
+</table>
+<input type="hidden" value="@Model.Count()" id="node-count">
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,243 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@using Sonluk.UI.Model.CRM.COST_FIService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "卖场销售数据管理";
+
+    CRM_HG_DICT[] CLASS1 = ViewBag.CLASS1;
+    CRM_HG_DICT[] CLASS2 = ViewBag.CLASS2;
+    CRM_HG_DICT[] CLASS3 = ViewBag.CLASS3;
+    CRM_HG_DICT[] CLASS4 = ViewBag.CLASS4;
+    CRM_COST_FI[] CWBH = ViewBag.CWBH;
+
+}
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>卖场销售数据管理</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn">查询</button>
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_daoru" class="layui-btn">导入</button>
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;">销售类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_cwbh" lay-filter="select_cwbh" lay-search>
+                                <option value="0" selected="selected"></option>
+                                <option value="0">POS数据</option>
+                                <option value="0">发货数据</option>
+                                <option value="0">开票数据</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px;">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px;">客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;">开始月：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px;">结束月：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+
+                        </div>
+                    </div>
+                   
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="div_jump" class="layui-form" hidden>
+    <div id="div_jump1">
+        <div class="layui-form-item">
+            <button id="btn_cxkh" class="layui-btn">查询</button>
+
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian2" class="layui-colla-content layui-show">
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">门店名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">门店CRM编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <table id="tb_kh" lay-filter="tb_kh"></table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_jump2" hidden>
+        <button id="btn_back" class="layui-btn">返回</button>
+        <button id="btn_save" class="layui-btn">保存</button>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客户名称：</label>
+                <div class="layui-input-inline">
+                    <input id="name" type="text" autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">销售类型：</label>
+                <div class="layui-input-inline">
+                    <select id="class1" lay-filter="class1" lay-search>
+                        <option value="0" selected="selected"></option>
+                        <option value="0">POS数据</option>
+                        <option value="0">发货数据</option>
+                        <option value="0">开票数据</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">年月：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_time" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">门店CRM编号：</label>
+                <div class="layui-input-inline">
+                    <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">碱性销售：</label>
+                <div class="layui-input-inline">
+                    <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">碳性销售：</label>
+                <div class="layui-input-inline">
+                    <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;">合计销售：</label>
+                <div class="layui-input-inline">
+                    <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <br />
+
+</div>
+
+
+
+<input id="khid" hidden />
+
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_NKAXS")
+}

@@ -1,0 +1,243 @@
+﻿@using Sonluk.UI.Model.CRM.CRM_LoginService;
+@{
+    ViewBag.Title = "首页";
+    Session["TITLENAME"] = "首页";
+    //Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    CRM_JURISDICTION_GROUP[] MenuInfo = null;
+    if (Session["MENUINFO"] != null)
+    {
+        MenuInfo = (CRM_JURISDICTION_GROUP[])Session["MENUINFO"];
+    }
+
+    string state = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+    }
+
+    string NetPath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+<div class="layui-carousel" id="banner">
+    <div carousel-item>
+        <div>
+            <img src="~/Image/1.jpg" style="width:100%" />
+        </div>
+        <div>
+            <img src="~/Image/2.jpg" style="width:100%" />
+        </div>
+        <div>
+            <img src="~/Image/3.jpg" style="width:100%" />
+        </div>
+    </div>
+</div>
+
+@*@if (MenuInfo != null)
+    {
+        for (int i = 0; i < MenuInfo.Length; i++)
+        {
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>@MenuInfo[i].CRM_HG_RIGHTGROUP.RGROUPNAME</legend>
+                <div class="layui-field-box">
+                    @if (MenuInfo[i].CRM_HG_RIGHTList.Length > 0)
+                    {
+                        CRM_HG_RIGHT[] child = MenuInfo[i].CRM_HG_RIGHTList;
+                        for (int j = 0; j < child.Length; j++)
+                        {
+                            if (string.IsNullOrEmpty(child[j].RIGHTADD) == false)
+                            {
+                                string[] childurl = child[j].RIGHTADD.Split(',');
+                                string src = NetPath + "ico/" + child[j].IMAGELJ;
+                                <div class="layui-col-xs4 layui-col-sm2 layui-col-md1" style="width:">
+                                    <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+                                        <a href="@Url.Action(childurl[0], childurl[1], new { area = childurl[2]})">
+                                            <img class="layui-nav-img" src="@src" />
+                                        </a>
+                                        <br />
+                                        <label class="layui-form-label-img">@child[j].RIGHTNAME</label>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+
+                </div>
+            </fieldset>
+
+
+
+        }
+
+
+    }*@
+
+
+@*<fieldset class="layui-elem-field layui-field-title">
+        <legend>客户管理weui样式</legend>
+        <div class="layui-field-box">
+            <div class="layui-col-xs4 layui-col-sm2 layui-col-md1" style="width:">
+                <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+                    <a href="../Test/KH_Insert">
+                        <img class="layui-nav-img" src="/CRMmobile/CRMupload/upload/ico/kehu/new.png">
+                    </a>
+                    <br>
+                    <label class="layui-form-label-img">新增客户</label>
+                </div>
+            </div>
+            <div class="layui-col-xs4 layui-col-sm2 layui-col-md1" style="width:">
+                <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+                    <a href="../Test/KH_Select">
+                        <img class="layui-nav-img" src="/CRMmobile/CRMupload/upload/ico/kehu/list.png">
+                    </a>
+                    <br>
+                    <label class="layui-form-label-img">客户查询</label>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>网上下单weui样式</legend>
+        <div class="layui-field-box">
+            <div class="layui-col-xs4 layui-col-sm2 layui-col-md1" style="width:">
+                <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+                    <a href="../Order/Insert_Order">
+                        <img class="layui-nav-img" src="/CRMmobile/CRMupload/upload/ico/kehu/new.png">
+                    </a>
+                    <br>
+                    <label class="layui-form-label-img">网上下单</label>
+                </div>
+            </div>
+            <div class="layui-col-xs4 layui-col-sm2 layui-col-md1" style="width:">
+                <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+                    <a href="../Order/Select_Order">
+                        <img class="layui-nav-img" src="/CRMmobile/CRMupload/upload/ico/kehu/list.png">
+                    </a>
+                    <br>
+                    <label class="layui-form-label-img">订单查询</label>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>客户管理bootstrap样式</legend>
+        <div class="layui-field-box">
+            <div class="layui-col-xs4 layui-col-sm2 layui-col-md1" style="width:">
+                <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+                    <a href="../Test/KH_Insert_bootstrap">
+                        <img class="layui-nav-img" src="/CRMmobile/CRMupload/upload/ico/kehu/new.png">
+                    </a>
+                    <br>
+                    <label class="layui-form-label-img">新增客户</label>
+                </div>
+            </div>
+            <div class="layui-col-xs4 layui-col-sm2 layui-col-md1" style="width:">
+                <div class="grid-demo grid-demo-bg1" align="center" style="margin:10px auto;">
+                    <a href="../Test/KH_Select_bootstrap">
+                        <img class="layui-nav-img" src="/CRMmobile/CRMupload/upload/ico/kehu/list.png">
+                    </a>
+                    <br>
+                    <label class="layui-form-label-img">客户查询</label>
+                </div>
+            </div>
+
+        </div>
+    </fieldset>*@
+
+
+
+
+<div class="weui-grids">
+
+
+    @for (int i = 0; i < MenuInfo.Length; i++)
+    {
+        if (MenuInfo[i].CRM_HG_RIGHTList.Length > 0)
+        {
+            CRM_HG_RIGHT[] child = MenuInfo[i].CRM_HG_RIGHTList;
+            for (int j = 0; j < child.Length; j++)
+            {
+                if (string.IsNullOrEmpty(child[j].RIGHTADD) == false)
+                {
+                    string[] childurl = child[j].RIGHTADD.Split(',');
+                    string src = NetPath + "ico/" + child[j].IMAGELJ;
+                    <a href="@Url.Action(childurl[0], childurl[1], new { area = childurl[2]})" class="weui-grid">
+                        <!-- 图标 -->
+                        <div class="weui-grid__icon">
+                            <img src="@src" alt="">
+                        </div>
+                        <!-- 标签文字 -->
+                        <p class="weui-grid__label">@child[j].RIGHTNAME</p>
+                    </a>
+
+                }
+
+            }
+
+        }
+
+    }
+
+    @*<!-- 第1个宫格 -->
+        <a href="../Order/Insert_Order" class="weui-grid">
+            <!-- 图标 -->
+            <div class="weui-grid__icon">
+                <img src="/CRMmobile/CRMupload/upload/ico/kehu/new.png" alt="">
+            </div>
+            <!-- 标签文字 -->
+            <p class="weui-grid__label">网上下单</p>
+        </a>
+
+        <!-- 第2个宫格 -->
+        <a href="../Order/Select_Order" class="weui-grid">
+            <!-- 图标 -->
+            <div class="weui-grid__icon">
+                <img src="/CRMmobile/CRMupload/upload/ico/kehu/list.png" alt="">
+            </div>
+            <!-- 标签文字 -->
+            <p class="weui-grid__label">订单查询</p>
+        </a>
+
+        <!-- 第3个宫格 -->
+        <a href="" class="weui-grid">
+            <!-- 图标 -->
+            <div class="weui-grid__icon">
+                <img src="/CRMmobile/CRMupload/upload/ico/kehu/list.png" alt="">
+            </div>
+            <!-- 标签文字 -->
+            <p class="weui-grid__label">订单报表</p>
+        </a>*@
+</div>
+
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#history").hide();
+        localStorage.setItem("place", "@state");
+    });
+    layui.use(['carousel', 'element'], function () {
+        var carousel = layui.carousel;
+        var element = layui.element;
+        //建造实例
+        carousel.render({
+            elem: '#banner',
+            width: '100%', //设置容器宽度
+            height: '150px',
+            arrow: 'always', //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+            indicator: 'none'
+        });
+    });
+</script>

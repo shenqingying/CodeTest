@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "人员班制维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>人员班制维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_rybz" lay-filter="tb_rybz"></table>
+</div>
+<div class="layui-form" id="div_rybzinfo" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="rybzinfo_gh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="rybzinfo_ygname" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">班制：</label>
+            <div class="layui-input-inline">
+                <select id="rybzinfo_bz" lay-filter="rybzinfo_bz" lay-search></select>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_RY_MANAGE")
+}

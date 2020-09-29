@@ -1,0 +1,55 @@
+﻿@{
+    
+    Sonluk.UI.Model.EM.SY_MANUALPATHService.EM_SY_MANUALPATH_SELECT EM_SY_MANUALPATH_SELECT = ViewBag.EM_SY_MANUALPATH_SELECT;
+}
+
+
+
+@if (EM_SY_MANUALPATH_SELECT.MES_RETURN.TYPE == "S")
+{
+    <div class="layui-form-item">
+        <label class="layui-form-label">条码</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="in_wlh" placeholder="" autocomplete="off" class="layui-input" value="@EM_SY_MANUALPATH_SELECT.EM_SY_MANUALBB.TM" readonly="readonly" id="lb_tm">
+        </div>
+
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-inline" style="width: 600px;">
+            <input type="text" name="in_wlh" placeholder="" autocomplete="off" class="layui-input" value="@EM_SY_MANUALPATH_SELECT.EM_SY_MANUAL.MANUALMS" readonly="readonly" id="lb_ms">
+        </div>
+    </div>
+    <table class="layui-table" id="table_empath" lay-filter="table_empath">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>文件名</th>
+                <th>大小</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < @EM_SY_MANUALPATH_SELECT.EM_SY_MANUALPATH.Length; i++)
+            {
+                <tr>
+                    <th>@(i+1)</th>
+                    <th>@EM_SY_MANUALPATH_SELECT.EM_SY_MANUALPATH[i].FILENAME</th>
+                    <th>@EM_SY_MANUALPATH_SELECT.EM_SY_MANUALPATH[i].FILESIZE</th>
+                    <th><button class="layui-btn layui-btn-xs download " onclick="previewphoto(@EM_SY_MANUALPATH_SELECT.EM_SY_MANUALPATH[i].ID)">预览</button>
+                        <button class="layui-btn layui-btn-xs download " onclick="downloadphoto(@EM_SY_MANUALPATH_SELECT.EM_SY_MANUALPATH[i].ID)">下载</button></th>
+                    
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+}
+else
+{
+    @EM_SY_MANUALPATH_SELECT.MES_RETURN.MESSAGE
+}
+
+

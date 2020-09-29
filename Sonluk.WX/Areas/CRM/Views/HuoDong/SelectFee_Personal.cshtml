@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "招待费用记录查询";
+    Session["TITLENAME"] = "招待费用记录查询";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    string name = "";
+    if (Session["NAME"] != null)
+    {
+        name = Session["NAME"].ToString();
+    }
+}
+
+
+
+
+
+<div id="form1">
+
+    <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+        <button id="btn_insert" class="layui-btn" style="width:48%">新增</button>
+        <button id="btn_cx" class="layui-btn" style="width:48%;margin-left:0">查询</button>
+    </div>
+    <br />
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show" style="padding-right: 0px;">
+
+                @*第一行*@
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:100px; text-align:right;">接待日期：</label>
+                    <div class="layui-input-block">
+                        <input id="ZDstart" type="date" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">至：</label>
+                    <div class="layui-input-block">
+                        <input id="ZDend" type="date" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">客户名称：</label>
+                    <div class="layui-input-block">
+                        <input id="company" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+
+
+
+
+                </div>
+                @*第二行*@
+                <div class="layui-form-item">
+
+
+
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">申请时间：</label>
+                    <div class="layui-input-block">
+                        <input id="SQstart" type="date" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">至：</label>
+                    <div class="layui-input-block">
+                        <input id="SQend" type="date" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                    <label class="layui-form-label" style="width:100px; text-align:right;">客户姓名：</label>
+                    <div class="layui-input-block">
+                        <input id="KH_name" type="text" required lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:100px; text-align:right;">状态：</label>
+                    <div class="layui-input-block">
+                        <select id="status" lay-filter="status" lay-ignore>
+                            <option value="0" selected="selected">全部</option>
+                            <option value="1">未提交</option>
+                            <option value="2">审核中</option>
+                            <option value="3">已审核</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br /><br />
+    <div id="div_result" style="margin:0 10px">
+
+    </div>
+
+
+
+
+
+</div>
+
+<input id="staffid" hidden />
+<input id="name" hidden />
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#name").val("@name");
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/HuoDong/SelectFee_Personal")
+}

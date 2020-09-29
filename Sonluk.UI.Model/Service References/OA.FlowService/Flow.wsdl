@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/OA/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/OA/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/OA/">
+      <s:element name="Pull">
+        <s:complexType />
+      </s:element>
+      <s:element name="PullResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PullResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Push">
+        <s:complexType />
+      </s:element>
+      <s:element name="PushResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PushResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Log">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="startDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="endDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LogResult" type="tns:ArrayOfFlowLogInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFlowLogInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FlowLogInfo" nillable="true" type="tns:FlowLogInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FlowLogInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QualityNotification" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemplateID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Template" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exception" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfFlowLogInfo" nillable="true" type="tns:ArrayOfFlowLogInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PullSoapIn">
+    <wsdl:part name="parameters" element="tns:Pull" />
+  </wsdl:message>
+  <wsdl:message name="PullSoapOut">
+    <wsdl:part name="parameters" element="tns:PullResponse" />
+  </wsdl:message>
+  <wsdl:message name="PushSoapIn">
+    <wsdl:part name="parameters" element="tns:Push" />
+  </wsdl:message>
+  <wsdl:message name="PushSoapOut">
+    <wsdl:part name="parameters" element="tns:PushResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogSoapIn">
+    <wsdl:part name="parameters" element="tns:Log" />
+  </wsdl:message>
+  <wsdl:message name="LogSoapOut">
+    <wsdl:part name="parameters" element="tns:LogResponse" />
+  </wsdl:message>
+  <wsdl:message name="PullHttpGetIn" />
+  <wsdl:message name="PullHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="PushHttpGetIn" />
+  <wsdl:message name="PushHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LogHttpGetIn">
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+    <wsdl:part name="keyword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfFlowLogInfo" />
+  </wsdl:message>
+  <wsdl:message name="PullHttpPostIn" />
+  <wsdl:message name="PullHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="PushHttpPostIn" />
+  <wsdl:message name="PushHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LogHttpPostIn">
+    <wsdl:part name="startDate" type="s:string" />
+    <wsdl:part name="endDate" type="s:string" />
+    <wsdl:part name="keyword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfFlowLogInfo" />
+  </wsdl:message>
+  <wsdl:portType name="FlowSoap">
+    <wsdl:operation name="Pull">
+      <wsdl:input message="tns:PullSoapIn" />
+      <wsdl:output message="tns:PullSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Push">
+      <wsdl:input message="tns:PushSoapIn" />
+      <wsdl:output message="tns:PushSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Log">
+      <wsdl:input message="tns:LogSoapIn" />
+      <wsdl:output message="tns:LogSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FlowHttpGet">
+    <wsdl:operation name="Pull">
+      <wsdl:input message="tns:PullHttpGetIn" />
+      <wsdl:output message="tns:PullHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Push">
+      <wsdl:input message="tns:PushHttpGetIn" />
+      <wsdl:output message="tns:PushHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Log">
+      <wsdl:input message="tns:LogHttpGetIn" />
+      <wsdl:output message="tns:LogHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FlowHttpPost">
+    <wsdl:operation name="Pull">
+      <wsdl:input message="tns:PullHttpPostIn" />
+      <wsdl:output message="tns:PullHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Push">
+      <wsdl:input message="tns:PushHttpPostIn" />
+      <wsdl:output message="tns:PushHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Log">
+      <wsdl:input message="tns:LogHttpPostIn" />
+      <wsdl:output message="tns:LogHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FlowSoap" type="tns:FlowSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Pull">
+      <soap:operation soapAction="http://Sonluk.com/API/OA/Pull" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Push">
+      <soap:operation soapAction="http://Sonluk.com/API/OA/Push" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Log">
+      <soap:operation soapAction="http://Sonluk.com/API/OA/Log" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FlowSoap12" type="tns:FlowSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Pull">
+      <soap12:operation soapAction="http://Sonluk.com/API/OA/Pull" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Push">
+      <soap12:operation soapAction="http://Sonluk.com/API/OA/Push" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Log">
+      <soap12:operation soapAction="http://Sonluk.com/API/OA/Log" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FlowHttpGet" type="tns:FlowHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Pull">
+      <http:operation location="/Pull" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Push">
+      <http:operation location="/Push" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Log">
+      <http:operation location="/Log" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FlowHttpPost" type="tns:FlowHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Pull">
+      <http:operation location="/Pull" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Push">
+      <http:operation location="/Push" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Log">
+      <http:operation location="/Log" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Flow">
+    <wsdl:port name="FlowSoap" binding="tns:FlowSoap">
+      <soap:address location="http://192.168.0.132/API/OA/Flow.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FlowSoap12" binding="tns:FlowSoap12">
+      <soap12:address location="http://192.168.0.132/API/OA/Flow.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FlowHttpGet" binding="tns:FlowHttpGet">
+      <http:address location="http://192.168.0.132/API/OA/Flow.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FlowHttpPost" binding="tns:FlowHttpPost">
+      <http:address location="http://192.168.0.132/API/OA/Flow.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,81 @@
+﻿@using Sonluk.UI.Model.LE.TRA.RouteService
+@model RouteInfo
+<div class="panel-pop-up-header">线路</div>
+<div class="panel-pop-up-body">
+    <div class="panel-pop-up-content edit-route" id="receiver-list">
+        <input type="hidden" value="@Model.ID" id="edit-route-ID" />
+        <div class="panel-pop-up-edit-item">
+            <div class="panel-pop-up-edit-item-title">发站</div>
+            <input type="text" class="panel-pop-up-edit-item-input pop-up-target-receiver-city" id="edit-route-source" value="@Model.Source" readonly="readonly" />
+            <input type="hidden" id="edit-route-source-ID" value="@Model.SourceID" />
+            <input type="hidden" value="@Url.Action("_List", "City")" />
+        </div>
+        <div class="panel-pop-up-edit-item">
+            <div class="panel-pop-up-edit-item-title">到站</div>
+            <input type="text" class="panel-pop-up-edit-item-input pop-up-target-receiver-city" id="edit-route-destination" value="@Model.Destination" readonly="readonly" />
+            <input type="hidden" id="edit-route-destination-ID" value="@Model.DestinationID" />
+            <input type="hidden" value="@Url.Action("_List", "City")" />
+        </div>
+        <div class="panel-pop-up-edit-item">
+            <div class="panel-pop-up-edit-item-title">里程</div>
+            <input type="text" class="panel-pop-up-edit-item-input" id="edit-route-distance" value="@Model.Distance" />
+        </div>
+        <div class="panel-pop-up-edit-item">
+            <div class="panel-pop-up-edit-item-title">时限</div>
+            <input type="text" class="panel-pop-up-edit-item-input" id="edit-route-time-limit" value="@Model.TimeLimit" />
+        </div>
+        <div class="panel-pop-up-edit-item">
+            <div class="panel-pop-up-edit-item-title">默认物流公司</div>
+            <input type="text" class="panel-pop-up-edit-item-input drop-list-target-carrier" id="edit-route-carrier" value="@Model.Carrier" readonly="readonly" />
+            <input type="hidden" id="edit-route-carrier-ID" name="node.Carrier.ID" value="@Model.CarrierID" />
+            <input type="hidden" value="@Url.Action("_List", "Carrier")" />
+        </div>
+        <div class="panel-pop-up-edit-item">
+            <div class="panel-pop-up-edit-item-title">直送费</div>
+            <input type="text" class="panel-pop-up-edit-item-input" id="edit-route-ZSF" value="@Model.Zsf" />
+        </div>
+        <div class="edit-price">
+            <table class="edit-price-table">
+                <tr>
+                    <td class="edit-price-col-ID">编号</td>
+                    <td class="edit-price-col">重量左区间(kg)</td>
+                    <td class="edit-price-col">重量右区间(kg)</td>
+                    <td class="edit-price-col">单价(RMB/kg)</td>
+                    <td class="edit-price-col-remove"></td>
+                </tr>
+                @foreach (PriceInfo price in Model.Prices)
+                {
+                    <tr>
+                        <td>@price.ID</td>
+                        <td><input type="text" value="@price.LowerWeightLimit"></td>
+                        <td><input type="text" value="@price.UpperWeightLimit"></td>
+                        <td><input type="text" value="@price.Value"></td>
+                        <td><img class="glyph edit-price-delete" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt="" /></td>
+                    </tr>
+                }
+
+                <tr>
+                    <td><img class="glyph edit-price-add" src="@Url.Content("~/Content/sonluk-ui/images/icon_plus_h24.png")" alt="" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="edit-price-new">
+                    <td></td>
+                    <td><input type="text" value=""></td>
+                    <td><input type="text" value=""></td>
+                    <td><input type="text" value=""></td>
+                    <td><img class="glyph edit-price-delete" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt="" /></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel-pop-up-edit-control">
+            <div class="sonluk-button edit-route-update-trigger">保存</div>
+            <input type="hidden" value="@Url.Action("_Update", "Route")" />
+        </div>
+    </div>
+</div>
+<div class="panel-pop-up-footer">
+</div>

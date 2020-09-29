@@ -1,0 +1,216 @@
+﻿@{
+    ViewBag.Title = "合同记录管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="qdht">签订合同</a>
+    <a class="layui-btn layui-btn-xs" lay-event="xq">详情</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR人员管理</a>
+    <a><cite>合同记录管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">归属部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father"></div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="noselect" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">到期日：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_DQR_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_DQR_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">在职状态：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_zzzt" id="find_zzzt"></select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">员工类别：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_yglb" id="find_yglb"></select>
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="ryTable" lay-filter="ryTable"></table>
+    </div>
+</div>
+<div id="div_htgl" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">合同状态：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="htinfo_zt" lay-filter="htinfo_zt">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">合同公司：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="htinfo_gs" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">合同期限类型：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="htinfo_qxlx" lay-filter="htinfo_qxlx">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">期限：</label>
+        <div class="layui-input-inline" style="width: 60px;">
+            <input type="text" id="htinfo_qxN" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+        </div>
+        <div class="layui-form-mid">年</div>
+        <div class="layui-input-inline" style="width: 60px;">
+            <input type="text" id="htinfo_qxM" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+        </div>
+        <div class="layui-form-mid">月</div>
+        <div class="layui-input-inline" style="width: 60px;">
+            <input type="text" id="htinfo_qxD" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+        </div>
+        <div class="layui-form-mid">日</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">签订日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="htinfo_qdrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">合同生效日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="htinfo_sxrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">到期日：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="htinfo_dqr" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">试用期到期日：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="htinfo_syqdqr" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item" id="hide_jcdate">
+        <label class="layui-form-label" style="width: 100px;">解除日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="htinfo_jcrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item" id="hide_qdcs">
+        <label class="layui-form-label" style="width: 100px;">签订次数：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="htinfo_qdcs" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="htinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<div id="div_htxq" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">工号：</label>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" id="htxq_yggh" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 60px;">姓名：</label>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" id="htxq_ygname" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label">员工类别：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="htxq_yglb" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label">签订次数：</label>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" id="htxq_qdcs" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">公司：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" id="htxq_gs" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label">归属部门：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="htxq_gsbm" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div hidden>
+        <input type="text" id="bl_ryid" value="">
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="ht_Table" lay-filter="ht_Table"></table>
+    </div>
+</div>
+<script type="text/html" id="htbar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<style>
+    #htinfo_zt + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #htinfo_qxlx + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #htinfo_qdrq {
+        background-color: #FAFFBD;
+    }
+
+    #htinfo_sxrq {
+        background-color: #FAFFBD;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/RYGL/RYINFO_HTGL")
+}

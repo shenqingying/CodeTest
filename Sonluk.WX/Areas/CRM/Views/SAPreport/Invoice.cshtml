@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "销售开票";
+    Session["TITLENAME"] = "销售开票";
+}
+
+
+
+
+<div id="div1">
+
+    <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688;">
+        <button id="btn_cx" class="layui-btn" style="width:100%">查询</button>
+
+    </div>
+
+
+    <br />
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show" style="padding-right: 0px;">
+
+                @*第一行*@
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">统计选项：</label>
+                    <div class="layui-input-block">
+                        <select id="option" lay-filter="option" lay-ignore>
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">年度：</label>
+                    <div class="layui-input-block">
+                        <select id="year" lay-filter="year" lay-ignore>
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+
+
+                </div>
+                @*第二行*@
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">季度：</label>
+                    <div class="layui-input-block">
+                        <select id="jidu_start" lay-filter="jidu_start" lay-ignore>
+                            <option value="0" selected="selected">请选择</option>
+                            <option value="01">第一季度</option>
+                            <option value="02">第二季度</option>
+                            <option value="03">第三季度</option>
+                            <option value="04">第四季度</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label" style="width:100px; text-align:right;">至：</label>
+                    <div class="layui-input-block">
+                        <select id="jidu_end" lay-filter="jidu_end" lay-ignore>
+                            <option value="0" selected="selected">请选择</option>
+                            <option value="01">第一季度</option>
+                            <option value="02">第二季度</option>
+                            <option value="03">第三季度</option>
+                            <option value="04">第四季度</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div id="div_result" style="margin:0 10px">
+
+    </div>
+
+
+
+
+</div>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/SAP/Invoice")
+}
+
+

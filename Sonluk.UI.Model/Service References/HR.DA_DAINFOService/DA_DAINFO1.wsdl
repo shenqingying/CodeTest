@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT_DADM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DADM" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_DA_DADM">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DADMID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DADM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DALB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DALBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DADMNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_DADMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_DADMResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_DADM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DADM" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_DADMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_DADMResult" type="tns:HR_DA_DADM_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_DA_DADM_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_DA_DADM_LIST" type="tns:ArrayOfHR_DA_DADM_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_DA_DADM_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_DA_DADM_LIST" nillable="true" type="tns:HR_DA_DADM_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_DA_DADM_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DADMID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DADM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DALB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DALBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DADMNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_DADM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DADM" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_DADMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_DADMResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_DADM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DADMID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_DADMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_DADMResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_DAINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DAINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_DA_DAINFO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DAID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DADM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DALB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DADMID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DANO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAJSRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BGQX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BGQXNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AJNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAXS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAXSNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAMJ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAMJNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TZCOUNT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="WJCOUNT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALLCOUNT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LYNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAZT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAJSRQKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAJSRQJS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_DAINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_DAINFOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_DAINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DAINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_DAINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_DAINFOResult" type="tns:HR_DA_DAINFO_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_DA_DAINFO_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_DA_DAINFO_LIST" type="tns:ArrayOfHR_DA_DAINFO_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_DA_DAINFO_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_DA_DAINFO_LIST" nillable="true" type="tns:HR_DA_DAINFO_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_DA_DAINFO_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DAID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DADMID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DANO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAJSRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BGQX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BGQXNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AJNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAXS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAXSNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAMJ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAMJNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TZCOUNT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="WJCOUNT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALLCOUNT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LYNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAZT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DADM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DALB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DALBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DADMNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_DAINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DAINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_DAINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_DAINFOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_DAINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DAID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_DAINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_DAINFOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_DAJYJL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DAJYJL" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_DA_DAJYJL">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DAJYJL" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RYID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GHRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYMD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JYZT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJGHRQ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_DAJYJLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_DAJYJLResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_DAJYJL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DAJYJL" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_DAJYJLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_DAJYJLResult" type="tns:HR_DA_DAJYJL_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_DA_DAJYJL_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_DA_DAJYJL_LIST" type="tns:ArrayOfHR_DA_DAJYJL_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_DA_DAJYJL_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_DA_DAJYJL_LIST" nillable="true" type="tns:HR_DA_DAJYJL_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_DA_DAJYJL_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DAJYJL" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DAID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RYID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GHRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYMD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JYZT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJGHRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YGNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZZTNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_DAJYJL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_DA_DAJYJL" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_DAJYJLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_DAJYJLResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERT_DADMSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_DADM" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_DADMSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_DADMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_DADMSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_DADM" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_DADMSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_DADMResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_DADMSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_DADM" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_DADMSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_DADMResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DADMSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_DADM" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DADMSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_DADMResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_DAINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_DAINFO" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_DAINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_DAINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_DAINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_DAINFO" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_DAINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_DAINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_DAINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_DAINFO" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_DAINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_DAINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DAINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_DAINFO" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DAINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_DAINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_DAJYJLSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_DAJYJL" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_DAJYJLSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_DAJYJLResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_DAJYJLSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_DAJYJL" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_DAJYJLSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_DAJYJLResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_DAJYJLSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_DAJYJL" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_DAJYJLSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_DAJYJLResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DADMHttpGetIn">
+    <wsdl:part name="DADMID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DADMHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DAINFOHttpGetIn">
+    <wsdl:part name="DAID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DAINFOHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DADMHttpPostIn">
+    <wsdl:part name="DADMID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DADMHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DAINFOHttpPostIn">
+    <wsdl:part name="DAID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_DAINFOHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="DA_DAINFOSoap">
+    <wsdl:operation name="INSERT_DADM">
+      <wsdl:input message="tns:INSERT_DADMSoapIn" />
+      <wsdl:output message="tns:INSERT_DADMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DADM">
+      <wsdl:input message="tns:SELECT_DADMSoapIn" />
+      <wsdl:output message="tns:SELECT_DADMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DADM">
+      <wsdl:input message="tns:UPDATE_DADMSoapIn" />
+      <wsdl:output message="tns:UPDATE_DADMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DADM">
+      <wsdl:input message="tns:DELETE_DADMSoapIn" />
+      <wsdl:output message="tns:DELETE_DADMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_DAINFO">
+      <wsdl:input message="tns:INSERT_DAINFOSoapIn" />
+      <wsdl:output message="tns:INSERT_DAINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DAINFO">
+      <wsdl:input message="tns:SELECT_DAINFOSoapIn" />
+      <wsdl:output message="tns:SELECT_DAINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DAINFO">
+      <wsdl:input message="tns:UPDATE_DAINFOSoapIn" />
+      <wsdl:output message="tns:UPDATE_DAINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DAINFO">
+      <wsdl:input message="tns:DELETE_DAINFOSoapIn" />
+      <wsdl:output message="tns:DELETE_DAINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_DAJYJL">
+      <wsdl:input message="tns:INSERT_DAJYJLSoapIn" />
+      <wsdl:output message="tns:INSERT_DAJYJLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DAJYJL">
+      <wsdl:input message="tns:SELECT_DAJYJLSoapIn" />
+      <wsdl:output message="tns:SELECT_DAJYJLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DAJYJL">
+      <wsdl:input message="tns:UPDATE_DAJYJLSoapIn" />
+      <wsdl:output message="tns:UPDATE_DAJYJLSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DA_DAINFOHttpGet">
+    <wsdl:operation name="DELETE_DADM">
+      <wsdl:input message="tns:DELETE_DADMHttpGetIn" />
+      <wsdl:output message="tns:DELETE_DADMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DAINFO">
+      <wsdl:input message="tns:DELETE_DAINFOHttpGetIn" />
+      <wsdl:output message="tns:DELETE_DAINFOHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DA_DAINFOHttpPost">
+    <wsdl:operation name="DELETE_DADM">
+      <wsdl:input message="tns:DELETE_DADMHttpPostIn" />
+      <wsdl:output message="tns:DELETE_DADMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DAINFO">
+      <wsdl:input message="tns:DELETE_DAINFOHttpPostIn" />
+      <wsdl:output message="tns:DELETE_DAINFOHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DA_DAINFOSoap" type="tns:DA_DAINFOSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT_DADM">
+      <soap:operation soapAction="http://tempuri.org/INSERT_DADM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DADM">
+      <soap:operation soapAction="http://tempuri.org/SELECT_DADM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DADM">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_DADM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DADM">
+      <soap:operation soapAction="http://tempuri.org/DELETE_DADM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_DAINFO">
+      <soap:operation soapAction="http://tempuri.org/INSERT_DAINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DAINFO">
+      <soap:operation soapAction="http://tempuri.org/SELECT_DAINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DAINFO">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_DAINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DAINFO">
+      <soap:operation soapAction="http://tempuri.org/DELETE_DAINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_DAJYJL">
+      <soap:operation soapAction="http://tempuri.org/INSERT_DAJYJL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DAJYJL">
+      <soap:operation soapAction="http://tempuri.org/SELECT_DAJYJL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DAJYJL">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_DAJYJL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DA_DAINFOSoap12" type="tns:DA_DAINFOSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT_DADM">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_DADM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DADM">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_DADM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DADM">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_DADM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DADM">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_DADM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_DAINFO">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_DAINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DAINFO">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_DAINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DAINFO">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_DAINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DAINFO">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_DAINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_DAJYJL">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_DAJYJL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_DAJYJL">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_DAJYJL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_DAJYJL">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_DAJYJL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DA_DAINFOHttpGet" type="tns:DA_DAINFOHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DELETE_DADM">
+      <http:operation location="/DELETE_DADM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DAINFO">
+      <http:operation location="/DELETE_DAINFO" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DA_DAINFOHttpPost" type="tns:DA_DAINFOHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DELETE_DADM">
+      <http:operation location="/DELETE_DADM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_DAINFO">
+      <http:operation location="/DELETE_DAINFO" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DA_DAINFO">
+    <wsdl:port name="DA_DAINFOSoap" binding="tns:DA_DAINFOSoap">
+      <soap:address location="http://192.168.0.223/API/HR/DA_DAINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DA_DAINFOSoap12" binding="tns:DA_DAINFOSoap12">
+      <soap12:address location="http://192.168.0.223/API/HR/DA_DAINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DA_DAINFOHttpGet" binding="tns:DA_DAINFOHttpGet">
+      <http:address location="http://192.168.0.223/API/HR/DA_DAINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DA_DAINFOHttpPost" binding="tns:DA_DAINFOHttpPost">
+      <http:address location="http://192.168.0.223/API/HR/DA_DAINFO.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

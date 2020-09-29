@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "数据字典";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>系统管理</a>
+    <a><cite>数据字典</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert_type" class="layui-btn">新增类别</button>
+        </div>
+     
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+
+                        <div class="demoTable">
+                            类别ID：
+                            <div class="layui-inline">
+                                <input class="layui-input" name="SELECT_TYPEID" id="SELECT_TYPEID" autocomplete="off">
+                            </div>
+                            类别名称：
+                            <div class="layui-inline">
+                                <input class="layui-input" name="SELECT_TYPENAME" id="SELECT_TYPENAME" autocomplete="off">
+                            </div>
+                            <button class="layui-btn" data-type="reload" id="reload">查询</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <table id="result_type" lay-filter="result_type"></table>
+
+
+    </div>
+    <hr class="layui-bg-black" />
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert_dic" class="layui-btn">新增数据</button>
+
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+
+                        <div class="demoTable">
+                            类别名称：
+                            <div class="layui-inline">
+                                <input class="layui-input" name="SELECT_DICTNAME" id="SELECT_DICTNAME" autocomplete="off">
+                            </div>
+                            <button class="layui-btn" data-type="mxload" id="mxload">查询</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <table id="result_dic" lay-filter="result_dic"></table>
+
+
+    </div>
+
+
+
+
+</div>
+
+<div id="div_type" class="layui-form" hidden>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">类别名称：</label>
+        <div class="layui-input-inline">
+            <input id="type_name" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="type_bz" type="text" class="layui-input">
+        </div>
+    </div>
+
+
+</div>
+
+<div id="div_dic" class="layui-form" hidden>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据名称：</label>
+        <div class="layui-input-inline">
+            <input id="dic_name" type="text" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">品牌：</label>
+        <div class="layui-input-inline">
+            <input id="dic_pp" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="dic_bz" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级数据：</label>
+        <div class="layui-input-inline">
+            <input id="dic_fid" type="text" class="layui-input" value="0">
+        </div>
+    </div>
+
+</div>
+
+
+<input id="netpath" hidden />
+<input id="typeid" hidden />
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/System/Data")
+}

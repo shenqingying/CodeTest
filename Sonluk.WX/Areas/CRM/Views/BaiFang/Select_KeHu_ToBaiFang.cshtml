@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "拜访登记";
+    Session["TITLENAME"] = "拜访登记";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+    int staffid = 0;
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Convert.ToInt32(Session["STAFFID"]);
+    }
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="baifang">拜访登记</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="KHtype_Tpl">
+    {{# if(d.KHLX == 1){ }}
+    经销商
+    {{# }else if(d.KHLX == 2){ }}
+    电商
+    {{# }else if(d.KHLX == 3 && d.MCSX == 1){ }}
+    直营卖场系统
+    {{# }else if(d.KHLX == 3 && d.MCSX == 2){ }}
+    直营卖场门店
+    {{# }else if(d.KHLX == 4){ }}
+    B2B
+    {{# }else if(d.KHLX == 5){ }}
+    网点终端
+    {{# }else if(d.KHLX == 6){ }}
+    批发
+    {{# }else if(d.KHLX == 7 && d.MCSX == 1){ }}
+    LKA系统
+    {{# }else if(d.KHLX == 7 && d.MCSX == 2){ }}
+    LKA门店
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+
+
+
+
+<div id="div1">
+
+    <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+        <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo" style="width:47%;margin-left:0;">查询</button>
+        |
+        <button id="btn_new" class="layui-btn" style="width:47%;margin-left:0;">新客户拜访</button>
+
+    </div>
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">客户类型：</label>
+                    <div class="layui-input-block">
+                        <select id="KHtype" lay-filter="KHtype">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户编号：</label>
+                    <div class="layui-input-block">
+                        <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户名称：</label>
+                    <div class="layui-input-block">
+                        <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">SAP编号：</label>
+                    <div class="layui-input-block">
+                        <input id="sap" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">门店编号：</label>
+                    <div class="layui-input-block">
+                        <input id="mdbh" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<br />
+<div id="div_result" style="margin:0 10px">
+
+</div>
+
+
+
+
+
+
+<input id="netpath" hidden />
+
+<input id="staffid" hidden />
+<input id="state" hidden />
+<input id="appid" hidden />
+
+<input id="lat" hidden />
+<input id="lon" hidden />
+<input id="address" hidden />
+<input id="province" hidden />
+<input id="city" hidden />
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@staffid");
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+        $("#netpath").val("@netpath");
+
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/Select_KeHu_ToBaiFang")
+}

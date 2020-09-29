@@ -1,0 +1,115 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    ViewBag.Title = "快报管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    CRM_HG_DICT[] SY = ViewBag.SY;
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+@*<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>*@
+<script type="text/html" id="bar3">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA订单管理</a>
+    <a><cite>快报管理</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_back" class="layui-btn" lay-filter="formDemo" onclick="window.close()">返回</button>
+            <button id="btn_dr" class="layui-btn" lay-filter="formDemo">导入</button>
+            <button id="btn_cx" class="layui-btn" lay-filter="formDemo">查询</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;text-align:right;">订单来源：</label>
+                        <div class="layui-input-inline">
+                            <select id="select_SY" lay-filter="select_SY" lay-search>
+                                <option value="0" selected>请选择</option>
+                                @for (int i = 0; i < SY.Length; i++)
+                                {
+                                    <option value="@SY[i].DICID">@SY[i].DICNAME</option>
+                                }
+                            </select>
+
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">快报：</label>
+                        <div class="layui-input-inline">
+                            <input id="select_KBMC" type="text" placeholder="" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-form-item" id="tb_ka">
+        </div>
+    </div>
+</div>
+<div id="div_jump" class="layui-form" hidden>
+    <br />
+
+    <div class="layui-form-item">
+        <button id="btn_down" class="layui-btn" lay-filter="formDemo">下载模板</button>
+        <button id="btn_template" class="layui-btn" lay-filter="formDemo">导入</button>
+    </div>
+
+    @*<div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 95px;">订单来源：</label>
+            <div class="layui-input-inline" style="width: 240px; ">
+                <select id="OrderSrc" lay-filter="OrderSrc" lay-search>
+                    <option value="0" selected>请选择</option>
+                    @for (int i = 0; i < SY.Length; i++)
+                    {
+                        <option value="@SY[i].DICID">@SY[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>*@
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 95px; ">快报：</label>
+            <div class="layui-input-inline" style="width: 240px; ">
+                <input id="KBMC" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+
+
+
+
+<input id="List_SY" value="@Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SY)" hidden>
+<input id="HHID" hidden>
+<input id="netpath" value="@netpath" hidden />
+<input id="Maxdate" value="@ViewBag.enddate" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KAOrder/HHXXWH_KB")
+}
+
+
+

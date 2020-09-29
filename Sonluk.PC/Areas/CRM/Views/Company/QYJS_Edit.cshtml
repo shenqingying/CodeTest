@@ -1,0 +1,284 @@
+﻿@{
+    ViewBag.Title = "企业介绍编辑";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+<style>
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+</style>
+
+<script type="text/html" id="bar_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="PC_Tpl">
+    <input type="checkbox" name="pc" value="{{d.RIGHTID}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.PC == 1 ? 'checked' : '' }}>
+</script>
+
+<script type="text/html" id="MOBILE_Tpl">
+    <input type="checkbox" name="mobile" value="{{d.RIGHTID}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.MOBILE == 1 ? 'checked' : '' }}>
+</script>
+
+<script type="text/html" id="DOWNLOAD_Tpl">
+    <input type="checkbox" name="download" value="{{d.RIGHTID}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.DOWNLOAD == 1 ? 'checked' : '' }}>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="imgTpl">
+    <img class="mytableimg" src="{{d.ML}}" />
+</script>
+
+<script type="text/html" id="fmTpl">
+    <img class="mytableimg" src="{{d.COVER}}" />
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>企业介绍</a>
+    <a><cite>企业介绍编辑</cite></a>
+</span>
+<br /><br />
+@*<button id="btn_sx" class="layui-btn" lay-filter="btn_insert">刷新</button>*@
+<button id="btn_insert" class="layui-btn" lay-filter="btn_insert">新增</button>
+<button id="btn_edit" class="layui-btn" lay-filter="btn_edit">编辑</button>
+<button id="btn_delete" class="layui-btn" lay-filter="btn_delete">删除</button>
+
+@*<ul id="power_list"></ul>*@
+<div id="power_list"></div>
+
+<br /><br /><br />
+
+<div id="div_insert" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="btn_img_fm_insert" class="layui-btn">上传封面图片</button>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">上级目录名称：</label>
+        <div class="layui-input-inline">
+            <input id="pname_insert" type="text" class="layui-input" disabled>
+        </div>
+
+        <label class="layui-form-label">上级目录ID：</label>
+        <div class="layui-input-inline">
+            <input id="plogid_insert" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">目录名称：</label>
+        <div class="layui-input-inline">
+            <input id="name_insert" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">目录ID：</label>
+        <div class="layui-input-inline">
+            <input id="logid_insert" type="text" class="layui-input" disabled>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">目录内容：</label>
+        <div class="layui-input-inline">
+            <textarea id="notice_insert" type="text" class="layui-textarea" style="width:500px;"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="beiz_insert" type="text" class="layui-input">
+        </div>
+
+
+
+        <label class="layui-form-label">序号：</label>
+        <div class="layui-input-inline">
+            <input id="sort_insert" type="text" class="layui-input" value="0">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">封面图片：</label>
+            <div class="layui-input-inline">
+
+                <img id="menuimg_insert" src="" style="width:200px;" hidden />
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div id="div_update" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="btn_img_fm" class="layui-btn">上传封面图片</button>
+        
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">上级目录名称：</label>
+        <div class="layui-input-inline">
+            <input id="pname" type="text" class="layui-input" disabled>
+        </div>
+
+        <label class="layui-form-label">上级目录ID：</label>
+        <div class="layui-input-inline">
+            <input id="plogid" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">目录名称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">目录ID：</label>
+        <div class="layui-input-inline">
+            <input id="logid" type="text" class="layui-input" disabled>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">目录内容：</label>
+        <div class="layui-input-inline">
+            <textarea id="notice" type="text" class="layui-textarea" style="width:500px;"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="beiz" type="text" class="layui-input">
+        </div>
+
+
+
+        <label class="layui-form-label">序号：</label>
+        <div class="layui-input-inline">
+            <input id="sort" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">封面图片：</label>
+            <div class="layui-input-inline">
+
+                <img id="menuimg" src="" style="width:200px;" hidden />
+            </div>
+
+        </div>
+    </div>
+
+    <hr class="layui-bg-black" />
+    <button id="btn_video_nr" class="layui-btn">上传视频</button>
+    <button id="btn_img_nr" class="layui-btn">上传内容</button>
+    <table id="tb_result" lay-filter="tb_result"></table>
+</div>
+
+
+<div id="div_video_insert" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="btn_video_fm_insert" class="layui-btn">上传封面图片</button>
+        <button id="btn_video_insert" class="layui-btn">上传视频文件并保存</button>
+    </div>
+
+
+    
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">标题：</label>
+        <div class="layui-input-inline">
+            <input id="title_video" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">描述：</label>
+        <div class="layui-input-inline">
+            <input id="ms_video" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否允许下载</label>
+        <div class="layui-input-inline">
+            <input id="download_video" type="checkbox" name="download" lay-skin="switch" lay-text="允许|不允许">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">PC端展示</label>
+        <div class="layui-input-inline">
+            <input id="pc_video" type="checkbox" name="pc" lay-skin="switch" lay-text="是|否">
+        </div>
+
+        <label class="layui-form-label">手机端展示</label>
+        <div class="layui-input-inline">
+            <input id="mobile_video" type="checkbox" name="mobile" lay-skin="switch" lay-text="是|否">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="beiz_video" type="text" class="layui-input">
+        </div>
+
+
+
+        <label class="layui-form-label">序号：</label>
+        <div class="layui-input-inline">
+            <input id="sort_video" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">封面图片：</label>
+            <div class="layui-input-inline">
+
+                <img id="fmimg_video" src="" style="width:200px;" hidden />
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<input id="gid" hidden />
+<input id="gname" hidden />
+<input id="path" hidden />
+<input id="netpath" value="@netpath" hidden />
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Company/QYJS_Edit")
+}

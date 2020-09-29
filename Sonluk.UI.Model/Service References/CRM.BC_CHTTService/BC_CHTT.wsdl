@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Modify">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectMXIDbyDXM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectMXIDbyDXMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SelectMXIDbyDXMResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKUNAGbyTTID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PMCHTTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKUNAGbyTTIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectKUNAGbyTTIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TongBuSAP_CH">
+        <s:complexType />
+      </s:element>
+      <s:element name="TongBuSAP_CHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TongBuSAP_CHResult" type="tns:CRM_WebMSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_WebMSG">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SUCCESS" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSG" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelectCHMXbyDXM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectCHMXbyDXMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectCHMXbyDXMResult" type="tns:ArrayOfCRM_BC_CHMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_BC_CHMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_BC_CHMX" nillable="true" type="tns:CRM_BC_CHMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_BC_CHMX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PMCHMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PMCHTTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NHM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LWEDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QXBS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KUNAG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadMXbyParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_CHMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXbyParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadMXbyParamResult" type="tns:ArrayOfCRM_BC_CHMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadDXMbyTPM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadDXMbyTPMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadDXMbyTPMResult" type="tns:ArrayOfCRM_BC_CHMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="CRM_WebMSG" nillable="true" type="tns:CRM_WebMSG" />
+      <s:element name="ArrayOfCRM_BC_CHMX" nillable="true" type="tns:ArrayOfCRM_BC_CHMX" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifySoapIn">
+    <wsdl:part name="parameters" element="tns:Modify" />
+  </wsdl:message>
+  <wsdl:message name="ModifySoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectMXIDbyDXMSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectMXIDbyDXM" />
+  </wsdl:message>
+  <wsdl:message name="SelectMXIDbyDXMSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectMXIDbyDXMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectKUNAGbyTTIDSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectKUNAGbyTTID" />
+  </wsdl:message>
+  <wsdl:message name="SelectKUNAGbyTTIDSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectKUNAGbyTTIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="TongBuSAP_CHSoapIn">
+    <wsdl:part name="parameters" element="tns:TongBuSAP_CH" />
+  </wsdl:message>
+  <wsdl:message name="TongBuSAP_CHSoapOut">
+    <wsdl:part name="parameters" element="tns:TongBuSAP_CHResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectCHMXbyDXMSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectCHMXbyDXM" />
+  </wsdl:message>
+  <wsdl:message name="SelectCHMXbyDXMSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectCHMXbyDXMResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadMXbyParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadMXbyParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadDXMbyTPMSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadDXMbyTPM" />
+  </wsdl:message>
+  <wsdl:message name="ReadDXMbyTPMSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadDXMbyTPMResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SelectMXIDbyDXMHttpGetIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectMXIDbyDXMHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SelectKUNAGbyTTIDHttpGetIn">
+    <wsdl:part name="PMCHTTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectKUNAGbyTTIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="TongBuSAP_CHHttpGetIn" />
+  <wsdl:message name="TongBuSAP_CHHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_WebMSG" />
+  </wsdl:message>
+  <wsdl:message name="SelectCHMXbyDXMHttpGetIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="TPM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectCHMXbyDXMHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_CHMX" />
+  </wsdl:message>
+  <wsdl:message name="ReadDXMbyTPMHttpGetIn">
+    <wsdl:part name="TPM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadDXMbyTPMHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_CHMX" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SelectMXIDbyDXMHttpPostIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectMXIDbyDXMHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SelectKUNAGbyTTIDHttpPostIn">
+    <wsdl:part name="PMCHTTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectKUNAGbyTTIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="TongBuSAP_CHHttpPostIn" />
+  <wsdl:message name="TongBuSAP_CHHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_WebMSG" />
+  </wsdl:message>
+  <wsdl:message name="SelectCHMXbyDXMHttpPostIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="TPM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectCHMXbyDXMHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_CHMX" />
+  </wsdl:message>
+  <wsdl:message name="ReadDXMbyTPMHttpPostIn">
+    <wsdl:part name="TPM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadDXMbyTPMHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_CHMX" />
+  </wsdl:message>
+  <wsdl:portType name="BC_CHTTSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Modify">
+      <wsdl:input message="tns:ModifySoapIn" />
+      <wsdl:output message="tns:ModifySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectMXIDbyDXM">
+      <wsdl:input message="tns:SelectMXIDbyDXMSoapIn" />
+      <wsdl:output message="tns:SelectMXIDbyDXMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKUNAGbyTTID">
+      <wsdl:input message="tns:SelectKUNAGbyTTIDSoapIn" />
+      <wsdl:output message="tns:SelectKUNAGbyTTIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TongBuSAP_CH">
+      <wsdl:input message="tns:TongBuSAP_CHSoapIn" />
+      <wsdl:output message="tns:TongBuSAP_CHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectCHMXbyDXM">
+      <wsdl:input message="tns:SelectCHMXbyDXMSoapIn" />
+      <wsdl:output message="tns:SelectCHMXbyDXMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyParam">
+      <wsdl:input message="tns:ReadMXbyParamSoapIn" />
+      <wsdl:output message="tns:ReadMXbyParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDXMbyTPM">
+      <wsdl:input message="tns:ReadDXMbyTPMSoapIn" />
+      <wsdl:output message="tns:ReadDXMbyTPMSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BC_CHTTHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Modify">
+      <wsdl:input message="tns:ModifyHttpGetIn" />
+      <wsdl:output message="tns:ModifyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectMXIDbyDXM">
+      <wsdl:input message="tns:SelectMXIDbyDXMHttpGetIn" />
+      <wsdl:output message="tns:SelectMXIDbyDXMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKUNAGbyTTID">
+      <wsdl:input message="tns:SelectKUNAGbyTTIDHttpGetIn" />
+      <wsdl:output message="tns:SelectKUNAGbyTTIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TongBuSAP_CH">
+      <wsdl:input message="tns:TongBuSAP_CHHttpGetIn" />
+      <wsdl:output message="tns:TongBuSAP_CHHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectCHMXbyDXM">
+      <wsdl:input message="tns:SelectCHMXbyDXMHttpGetIn" />
+      <wsdl:output message="tns:SelectCHMXbyDXMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDXMbyTPM">
+      <wsdl:input message="tns:ReadDXMbyTPMHttpGetIn" />
+      <wsdl:output message="tns:ReadDXMbyTPMHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BC_CHTTHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Modify">
+      <wsdl:input message="tns:ModifyHttpPostIn" />
+      <wsdl:output message="tns:ModifyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectMXIDbyDXM">
+      <wsdl:input message="tns:SelectMXIDbyDXMHttpPostIn" />
+      <wsdl:output message="tns:SelectMXIDbyDXMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKUNAGbyTTID">
+      <wsdl:input message="tns:SelectKUNAGbyTTIDHttpPostIn" />
+      <wsdl:output message="tns:SelectKUNAGbyTTIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TongBuSAP_CH">
+      <wsdl:input message="tns:TongBuSAP_CHHttpPostIn" />
+      <wsdl:output message="tns:TongBuSAP_CHHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectCHMXbyDXM">
+      <wsdl:input message="tns:SelectCHMXbyDXMHttpPostIn" />
+      <wsdl:output message="tns:SelectCHMXbyDXMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDXMbyTPM">
+      <wsdl:input message="tns:ReadDXMbyTPMHttpPostIn" />
+      <wsdl:output message="tns:ReadDXMbyTPMHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BC_CHTTSoap" type="tns:BC_CHTTSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify">
+      <soap:operation soapAction="http://tempuri.org/Modify" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMXIDbyDXM">
+      <soap:operation soapAction="http://tempuri.org/SelectMXIDbyDXM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKUNAGbyTTID">
+      <soap:operation soapAction="http://tempuri.org/SelectKUNAGbyTTID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TongBuSAP_CH">
+      <soap:operation soapAction="http://tempuri.org/TongBuSAP_CH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectCHMXbyDXM">
+      <soap:operation soapAction="http://tempuri.org/SelectCHMXbyDXM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyParam">
+      <soap:operation soapAction="http://tempuri.org/ReadMXbyParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDXMbyTPM">
+      <soap:operation soapAction="http://tempuri.org/ReadDXMbyTPM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_CHTTSoap12" type="tns:BC_CHTTSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify">
+      <soap12:operation soapAction="http://tempuri.org/Modify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMXIDbyDXM">
+      <soap12:operation soapAction="http://tempuri.org/SelectMXIDbyDXM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKUNAGbyTTID">
+      <soap12:operation soapAction="http://tempuri.org/SelectKUNAGbyTTID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TongBuSAP_CH">
+      <soap12:operation soapAction="http://tempuri.org/TongBuSAP_CH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectCHMXbyDXM">
+      <soap12:operation soapAction="http://tempuri.org/SelectCHMXbyDXM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadMXbyParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDXMbyTPM">
+      <soap12:operation soapAction="http://tempuri.org/ReadDXMbyTPM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_CHTTHttpGet" type="tns:BC_CHTTHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify">
+      <http:operation location="/Modify" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMXIDbyDXM">
+      <http:operation location="/SelectMXIDbyDXM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKUNAGbyTTID">
+      <http:operation location="/SelectKUNAGbyTTID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TongBuSAP_CH">
+      <http:operation location="/TongBuSAP_CH" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectCHMXbyDXM">
+      <http:operation location="/SelectCHMXbyDXM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDXMbyTPM">
+      <http:operation location="/ReadDXMbyTPM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_CHTTHttpPost" type="tns:BC_CHTTHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify">
+      <http:operation location="/Modify" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMXIDbyDXM">
+      <http:operation location="/SelectMXIDbyDXM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKUNAGbyTTID">
+      <http:operation location="/SelectKUNAGbyTTID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TongBuSAP_CH">
+      <http:operation location="/TongBuSAP_CH" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectCHMXbyDXM">
+      <http:operation location="/SelectCHMXbyDXM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDXMbyTPM">
+      <http:operation location="/ReadDXMbyTPM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BC_CHTT">
+    <wsdl:port name="BC_CHTTSoap" binding="tns:BC_CHTTSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/BC_CHTT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_CHTTSoap12" binding="tns:BC_CHTTSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/BC_CHTT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_CHTTHttpGet" binding="tns:BC_CHTTHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/BC_CHTT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_CHTTHttpPost" binding="tns:BC_CHTTHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/BC_CHTT.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

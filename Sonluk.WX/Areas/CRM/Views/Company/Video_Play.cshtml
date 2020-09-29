@@ -1,0 +1,59 @@
+﻿@using Sonluk.UI.Model.CRM.QYJS_FILEService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    CRM_QYJS_FILE data = ViewBag.data;
+    ViewBag.Title = data.TITLE;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+<div id="video" style="width: 100%;"></div>
+
+
+
+
+@if (data.DOWNLOAD == 1)
+{
+    <br /><br />
+    <a id="btn_download" class="layui-btn" href="@data.ML" download="" style="width:100%;">下载</a>
+    
+}
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+<script src="~/Scripts/layui2.2.5/extend/ckplayer.js"></script>
+<script type="text/javascript">
+    var videoObject = {
+        container: '#video', //容器的ID或className
+        variable: 'player',
+        flashplayer: false, //是否需要强制使用flashplayer
+        //loaded: 'loadedHandler', //当播放器加载后执行的函数
+        video: "@data.ML"
+    };
+    var player = new ckplayer(videoObject);
+
+    function loadedHandler() {
+        player.addListener('loadedmetadata', loadedMetaDataHandler); //监听元数据
+    }
+
+    function loadedMetaDataHandler() {
+        var metaData = player.getMetaDate();
+        var html = ''
+        html += '总时间：' + metaData['duration'] + '秒，';
+        html += '音量：' + metaData['volume'] + '（范围0-1），';
+        html += '播放器的宽度：' + metaData['width'] + 'px，';
+        html += '播放器的高度：' + metaData['height'] + 'px，';
+        html += '视频宽度：' + metaData['videoWidth'] + 'px，';
+        html += '视频高度：' + metaData['videoHeight'] + 'px，';
+        html += '视频原始宽度：' + metaData['streamWidth'] + 'px，';
+        html += '视频原始高度：' + metaData['streamHeight'] + 'px，';
+        html += '是否暂停状态：' + metaData['paused'];
+        console.log(html);
+    }
+
+    @*$("#btn_download").click(function(){
+        window.open("@data.ML");
+    });*@
+</script>

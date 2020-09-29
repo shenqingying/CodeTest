@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "托盘移动";
+    Layout = "~/Views/Shared/_Layoutbig.cshtml";
+}
+
+@using Sonluk.Mobile.Areas.MES.Models;
+@model Sonluk.Mobile.Areas.MES.Models.MODLE_TPM
+
+<script type="text/html" id="bar">
+    <a class="layui-btn_table_min layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+@*<script type="text/html" id="tp_Tpl">
+    {{# if(d.TPNO != ""){ }}
+    <a style="font-size:x-large;">{{d.TPNO}}</a>
+    {{# } }}
+</script>
+<script type="text/html" id="tp_Tpl_ZH">
+    {{# if(d.TPZHNO != ""){ }}
+    <a style="font-size:x-large;">{{d.TPZHNO}}</a>
+    {{# } }}
+</script>*@
+
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" id="tm_tpm_sm" placeholder="请扫描托盘编号或者托盘组合编号" autocomplete="off" style="height:50px" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div id="bodydiv">
+        <label class="layui-form-label">移动到：</label>
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:120px">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="gc" lay-filter="gc" style="width:150px">
+                    <option value="">请选择</option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        if (Model.Sy_gc.Length == 1)
+                        {
+                            <option value="@Model.Sy_gc[0].GC" selected="selected">@Model.Sy_gc[0].GC</option>
+                        }
+                        else
+                        {
+                            <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC</option>
+                        }
+                    }
+                </select>
+            </div>
+            <label class="layui-form-label" style="width:120px">库存地点：</label>
+            <div class="layui-input-inline">
+                <select id="kcdd" lay-filter="kcdd" style="width:150px">
+                    <option value="" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.MES_MM_CK_SELECT.MES_MM_CK.Length; i++)
+                    {
+                        <option value="@Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKDM">@Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKDM - @Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="table_div" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label">已扫描数据：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="count" id="count"></label>
+            </div>
+        </div>
+        <div>
+            <table class="layui-hide" id="tb_TPYD" lay-filter="tb_TPYD"></table>
+        </div>
+    </div>
+    <div id="div_foot" class="layui-footer" align="right">
+        <button id="btn_Y" class="layui-btn">确认移动</button>
+    </div>
+
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/TPM/TP_TPYD")
+}

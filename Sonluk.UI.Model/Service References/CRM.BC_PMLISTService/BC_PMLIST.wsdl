@@ -1,0 +1,1496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_PMLIST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_BC_PMLIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PMID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PMTYPE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZBON" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZPKS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRQ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectByModel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_PMLIST" />
+            <s:element minOccurs="0" maxOccurs="1" name="BEGIN_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="END_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectByModelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectByModelResult" type="tns:ArrayOfCRM_BC_PMLIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_BC_PMLIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_BC_PMLIST" nillable="true" type="tns:CRM_BC_PMLIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelectGD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_PMLIST" />
+            <s:element minOccurs="0" maxOccurs="1" name="BEGIN_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="END_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectGDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectGDResult" type="tns:ArrayOfCRM_BC_PMLISTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_BC_PMLISTList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_BC_PMLISTList" nillable="true" type="tns:CRM_BC_PMLISTList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_BC_PMLISTList">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CRM_BC_PMLIST">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CJRDES" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SUOSHU" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SelectByGD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectByGDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectByGDResult" type="tns:ArrayOfCRM_BC_PMLISTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectByGDandParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_PMLIST" />
+            <s:element minOccurs="0" maxOccurs="1" name="BEGIN_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="END_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectByGDandParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectByGDandParamResult" type="tns:ArrayOfCRM_BC_PMLISTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectByDXM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectByDXMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectByDXMResult" type="tns:CRM_BC_PMLISTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectOtherBigByDXM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectOtherBigByDXMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectOtherBigByDXMResult" type="tns:ArrayOfCRM_BC_PMLISTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PMID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteByGD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteByGDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteByGDResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdatePMResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectMATNRbyCHARGandPM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_PMLIST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectMATNRbyCHARGandPMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectMATNRbyCHARGandPMResult" type="tns:ArrayOfCRM_BC_PMLIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectMATNRbyCHARGandPM2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="charg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectMATNRbyCHARGandPM2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectMATNRbyCHARGandPM2Result" type="tns:ArrayOfCRM_BC_PMLIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKHbyMCP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_PMLIST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKHbyMCPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectKHbyMCPResult" type="tns:ArrayOfCRM_BC_KH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_BC_KH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_BC_KH" nillable="true" type="tns:CRM_BC_KH" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_BC_KH">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WADAT_IST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AREA" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelectKHbyMCP2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="charg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pm" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="matnr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKHbyMCP2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectKHbyMCP2Result" type="tns:ArrayOfCRM_BC_KH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKHbyDXM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_PMLIST" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKHbyDXMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectKHbyDXMResult" type="tns:ArrayOfCRM_BC_KH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectKHbyNHM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_CHMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_BC_CHMX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PMCHMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PMCHTTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DXM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NHM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LWEDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QXBS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelectKHbyNHMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectKHbyNHMResult" type="tns:ArrayOfCRM_BC_KH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create_WLM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_BC_WLM_TEMP" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_BC_WLM_TEMP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MANDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TGWLM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SRWLM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create_WLMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Create_WLMResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_WLM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_WLMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Delete_WLMResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Modify_WLM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Modify_WLMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Modify_WLMResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewWLM">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetNewWLMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewWLMResult" type="tns:CRM_WebMSG" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_WebMSG">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SUCCESS" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSG" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfCRM_BC_PMLISTList" nillable="true" type="tns:ArrayOfCRM_BC_PMLISTList" />
+      <s:element name="CRM_BC_PMLISTList" nillable="true" type="tns:CRM_BC_PMLISTList" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_BC_PMLIST" nillable="true" type="tns:ArrayOfCRM_BC_PMLIST" />
+      <s:element name="ArrayOfCRM_BC_KH" nillable="true" type="tns:ArrayOfCRM_BC_KH" />
+      <s:element name="CRM_WebMSG" nillable="true" type="tns:CRM_WebMSG" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectByModelSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectByModel" />
+  </wsdl:message>
+  <wsdl:message name="SelectByModelSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectByModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectGDSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectGD" />
+  </wsdl:message>
+  <wsdl:message name="SelectGDSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectGDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectByGD" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectByGDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDandParamSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectByGDandParam" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDandParamSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectByGDandParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectByDXMSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectByDXM" />
+  </wsdl:message>
+  <wsdl:message name="SelectByDXMSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectByDXMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectOtherBigByDXMSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectOtherBigByDXM" />
+  </wsdl:message>
+  <wsdl:message name="SelectOtherBigByDXMSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectOtherBigByDXMResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByGDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteByGD" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByGDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteByGDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePMSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePM" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePMSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPMSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectMATNRbyCHARGandPM" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPMSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectMATNRbyCHARGandPMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPM2SoapIn">
+    <wsdl:part name="parameters" element="tns:SelectMATNRbyCHARGandPM2" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPM2SoapOut">
+    <wsdl:part name="parameters" element="tns:SelectMATNRbyCHARGandPM2Response" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCPSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectKHbyMCP" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCPSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectKHbyMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCP2SoapIn">
+    <wsdl:part name="parameters" element="tns:SelectKHbyMCP2" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCP2SoapOut">
+    <wsdl:part name="parameters" element="tns:SelectKHbyMCP2Response" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyDXMSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectKHbyDXM" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyDXMSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectKHbyDXMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyNHMSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectKHbyNHM" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyNHMSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectKHbyNHMResponse" />
+  </wsdl:message>
+  <wsdl:message name="Create_WLMSoapIn">
+    <wsdl:part name="parameters" element="tns:Create_WLM" />
+  </wsdl:message>
+  <wsdl:message name="Create_WLMSoapOut">
+    <wsdl:part name="parameters" element="tns:Create_WLMResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_WLMSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete_WLM" />
+  </wsdl:message>
+  <wsdl:message name="Delete_WLMSoapOut">
+    <wsdl:part name="parameters" element="tns:Delete_WLMResponse" />
+  </wsdl:message>
+  <wsdl:message name="Modify_WLMSoapIn">
+    <wsdl:part name="parameters" element="tns:Modify_WLM" />
+  </wsdl:message>
+  <wsdl:message name="Modify_WLMSoapOut">
+    <wsdl:part name="parameters" element="tns:Modify_WLMResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWLMSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewWLM" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWLMSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewWLMResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDHttpGetIn">
+    <wsdl:part name="AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_PMLISTList" />
+  </wsdl:message>
+  <wsdl:message name="SelectByDXMHttpGetIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectByDXMHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_BC_PMLISTList" />
+  </wsdl:message>
+  <wsdl:message name="SelectOtherBigByDXMHttpGetIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectOtherBigByDXMHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_PMLISTList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="PMID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByGDHttpGetIn">
+    <wsdl:part name="AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByGDHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePMHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePMHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPM2HttpGetIn">
+    <wsdl:part name="charg" type="s:string" />
+    <wsdl:part name="pm" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPM2HttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_PMLIST" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCP2HttpGetIn">
+    <wsdl:part name="charg" type="s:string" />
+    <wsdl:part name="pm" type="s:string" />
+    <wsdl:part name="matnr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCP2HttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_KH" />
+  </wsdl:message>
+  <wsdl:message name="Delete_WLMHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_WLMHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Modify_WLMHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Modify_WLMHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWLMHttpGetIn" />
+  <wsdl:message name="GetNewWLMHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_WebMSG" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDHttpPostIn">
+    <wsdl:part name="AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectByGDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_PMLISTList" />
+  </wsdl:message>
+  <wsdl:message name="SelectByDXMHttpPostIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectByDXMHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_BC_PMLISTList" />
+  </wsdl:message>
+  <wsdl:message name="SelectOtherBigByDXMHttpPostIn">
+    <wsdl:part name="DXM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectOtherBigByDXMHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_PMLISTList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="PMID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByGDHttpPostIn">
+    <wsdl:part name="AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteByGDHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePMHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePMHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPM2HttpPostIn">
+    <wsdl:part name="charg" type="s:string" />
+    <wsdl:part name="pm" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectMATNRbyCHARGandPM2HttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_PMLIST" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCP2HttpPostIn">
+    <wsdl:part name="charg" type="s:string" />
+    <wsdl:part name="pm" type="s:string" />
+    <wsdl:part name="matnr" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectKHbyMCP2HttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_BC_KH" />
+  </wsdl:message>
+  <wsdl:message name="Delete_WLMHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_WLMHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Modify_WLMHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Modify_WLMHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWLMHttpPostIn" />
+  <wsdl:message name="GetNewWLMHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_WebMSG" />
+  </wsdl:message>
+  <wsdl:portType name="BC_PMLISTSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByModel">
+      <wsdl:input message="tns:SelectByModelSoapIn" />
+      <wsdl:output message="tns:SelectByModelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectGD">
+      <wsdl:input message="tns:SelectGDSoapIn" />
+      <wsdl:output message="tns:SelectGDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGD">
+      <wsdl:input message="tns:SelectByGDSoapIn" />
+      <wsdl:output message="tns:SelectByGDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGDandParam">
+      <wsdl:input message="tns:SelectByGDandParamSoapIn" />
+      <wsdl:output message="tns:SelectByGDandParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByDXM">
+      <wsdl:input message="tns:SelectByDXMSoapIn" />
+      <wsdl:output message="tns:SelectByDXMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectOtherBigByDXM">
+      <wsdl:input message="tns:SelectOtherBigByDXMSoapIn" />
+      <wsdl:output message="tns:SelectOtherBigByDXMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByGD">
+      <wsdl:input message="tns:DeleteByGDSoapIn" />
+      <wsdl:output message="tns:DeleteByGDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePM">
+      <wsdl:input message="tns:UpdatePMSoapIn" />
+      <wsdl:output message="tns:UpdatePMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM">
+      <wsdl:input message="tns:SelectMATNRbyCHARGandPMSoapIn" />
+      <wsdl:output message="tns:SelectMATNRbyCHARGandPMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM2">
+      <wsdl:input message="tns:SelectMATNRbyCHARGandPM2SoapIn" />
+      <wsdl:output message="tns:SelectMATNRbyCHARGandPM2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP">
+      <wsdl:input message="tns:SelectKHbyMCPSoapIn" />
+      <wsdl:output message="tns:SelectKHbyMCPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP2">
+      <wsdl:input message="tns:SelectKHbyMCP2SoapIn" />
+      <wsdl:output message="tns:SelectKHbyMCP2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyDXM">
+      <wsdl:input message="tns:SelectKHbyDXMSoapIn" />
+      <wsdl:output message="tns:SelectKHbyDXMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyNHM">
+      <wsdl:input message="tns:SelectKHbyNHMSoapIn" />
+      <wsdl:output message="tns:SelectKHbyNHMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_WLM">
+      <wsdl:input message="tns:Create_WLMSoapIn" />
+      <wsdl:output message="tns:Create_WLMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_WLM">
+      <wsdl:input message="tns:Delete_WLMSoapIn" />
+      <wsdl:output message="tns:Delete_WLMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Modify_WLM">
+      <wsdl:input message="tns:Modify_WLMSoapIn" />
+      <wsdl:output message="tns:Modify_WLMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWLM">
+      <wsdl:input message="tns:GetNewWLMSoapIn" />
+      <wsdl:output message="tns:GetNewWLMSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BC_PMLISTHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGD">
+      <wsdl:input message="tns:SelectByGDHttpGetIn" />
+      <wsdl:output message="tns:SelectByGDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByDXM">
+      <wsdl:input message="tns:SelectByDXMHttpGetIn" />
+      <wsdl:output message="tns:SelectByDXMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectOtherBigByDXM">
+      <wsdl:input message="tns:SelectOtherBigByDXMHttpGetIn" />
+      <wsdl:output message="tns:SelectOtherBigByDXMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByGD">
+      <wsdl:input message="tns:DeleteByGDHttpGetIn" />
+      <wsdl:output message="tns:DeleteByGDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePM">
+      <wsdl:input message="tns:UpdatePMHttpGetIn" />
+      <wsdl:output message="tns:UpdatePMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM2">
+      <wsdl:input message="tns:SelectMATNRbyCHARGandPM2HttpGetIn" />
+      <wsdl:output message="tns:SelectMATNRbyCHARGandPM2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP2">
+      <wsdl:input message="tns:SelectKHbyMCP2HttpGetIn" />
+      <wsdl:output message="tns:SelectKHbyMCP2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_WLM">
+      <wsdl:input message="tns:Delete_WLMHttpGetIn" />
+      <wsdl:output message="tns:Delete_WLMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Modify_WLM">
+      <wsdl:input message="tns:Modify_WLMHttpGetIn" />
+      <wsdl:output message="tns:Modify_WLMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWLM">
+      <wsdl:input message="tns:GetNewWLMHttpGetIn" />
+      <wsdl:output message="tns:GetNewWLMHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BC_PMLISTHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGD">
+      <wsdl:input message="tns:SelectByGDHttpPostIn" />
+      <wsdl:output message="tns:SelectByGDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectByDXM">
+      <wsdl:input message="tns:SelectByDXMHttpPostIn" />
+      <wsdl:output message="tns:SelectByDXMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectOtherBigByDXM">
+      <wsdl:input message="tns:SelectOtherBigByDXMHttpPostIn" />
+      <wsdl:output message="tns:SelectOtherBigByDXMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByGD">
+      <wsdl:input message="tns:DeleteByGDHttpPostIn" />
+      <wsdl:output message="tns:DeleteByGDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePM">
+      <wsdl:input message="tns:UpdatePMHttpPostIn" />
+      <wsdl:output message="tns:UpdatePMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM2">
+      <wsdl:input message="tns:SelectMATNRbyCHARGandPM2HttpPostIn" />
+      <wsdl:output message="tns:SelectMATNRbyCHARGandPM2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP2">
+      <wsdl:input message="tns:SelectKHbyMCP2HttpPostIn" />
+      <wsdl:output message="tns:SelectKHbyMCP2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_WLM">
+      <wsdl:input message="tns:Delete_WLMHttpPostIn" />
+      <wsdl:output message="tns:Delete_WLMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Modify_WLM">
+      <wsdl:input message="tns:Modify_WLMHttpPostIn" />
+      <wsdl:output message="tns:Modify_WLMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWLM">
+      <wsdl:input message="tns:GetNewWLMHttpPostIn" />
+      <wsdl:output message="tns:GetNewWLMHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BC_PMLISTSoap" type="tns:BC_PMLISTSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByModel">
+      <soap:operation soapAction="http://tempuri.org/SelectByModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectGD">
+      <soap:operation soapAction="http://tempuri.org/SelectGD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGD">
+      <soap:operation soapAction="http://tempuri.org/SelectByGD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGDandParam">
+      <soap:operation soapAction="http://tempuri.org/SelectByGDandParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByDXM">
+      <soap:operation soapAction="http://tempuri.org/SelectByDXM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectOtherBigByDXM">
+      <soap:operation soapAction="http://tempuri.org/SelectOtherBigByDXM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByGD">
+      <soap:operation soapAction="http://tempuri.org/DeleteByGD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePM">
+      <soap:operation soapAction="http://tempuri.org/UpdatePM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM">
+      <soap:operation soapAction="http://tempuri.org/SelectMATNRbyCHARGandPM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM2">
+      <soap:operation soapAction="http://tempuri.org/SelectMATNRbyCHARGandPM2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP">
+      <soap:operation soapAction="http://tempuri.org/SelectKHbyMCP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP2">
+      <soap:operation soapAction="http://tempuri.org/SelectKHbyMCP2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyDXM">
+      <soap:operation soapAction="http://tempuri.org/SelectKHbyDXM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyNHM">
+      <soap:operation soapAction="http://tempuri.org/SelectKHbyNHM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_WLM">
+      <soap:operation soapAction="http://tempuri.org/Create_WLM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_WLM">
+      <soap:operation soapAction="http://tempuri.org/Delete_WLM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify_WLM">
+      <soap:operation soapAction="http://tempuri.org/Modify_WLM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWLM">
+      <soap:operation soapAction="http://tempuri.org/GetNewWLM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_PMLISTSoap12" type="tns:BC_PMLISTSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByModel">
+      <soap12:operation soapAction="http://tempuri.org/SelectByModel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectGD">
+      <soap12:operation soapAction="http://tempuri.org/SelectGD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGD">
+      <soap12:operation soapAction="http://tempuri.org/SelectByGD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGDandParam">
+      <soap12:operation soapAction="http://tempuri.org/SelectByGDandParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByDXM">
+      <soap12:operation soapAction="http://tempuri.org/SelectByDXM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectOtherBigByDXM">
+      <soap12:operation soapAction="http://tempuri.org/SelectOtherBigByDXM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByGD">
+      <soap12:operation soapAction="http://tempuri.org/DeleteByGD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePM">
+      <soap12:operation soapAction="http://tempuri.org/UpdatePM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM">
+      <soap12:operation soapAction="http://tempuri.org/SelectMATNRbyCHARGandPM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM2">
+      <soap12:operation soapAction="http://tempuri.org/SelectMATNRbyCHARGandPM2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP">
+      <soap12:operation soapAction="http://tempuri.org/SelectKHbyMCP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP2">
+      <soap12:operation soapAction="http://tempuri.org/SelectKHbyMCP2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyDXM">
+      <soap12:operation soapAction="http://tempuri.org/SelectKHbyDXM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyNHM">
+      <soap12:operation soapAction="http://tempuri.org/SelectKHbyNHM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_WLM">
+      <soap12:operation soapAction="http://tempuri.org/Create_WLM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_WLM">
+      <soap12:operation soapAction="http://tempuri.org/Delete_WLM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify_WLM">
+      <soap12:operation soapAction="http://tempuri.org/Modify_WLM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWLM">
+      <soap12:operation soapAction="http://tempuri.org/GetNewWLM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_PMLISTHttpGet" type="tns:BC_PMLISTHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGD">
+      <http:operation location="/SelectByGD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByDXM">
+      <http:operation location="/SelectByDXM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectOtherBigByDXM">
+      <http:operation location="/SelectOtherBigByDXM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByGD">
+      <http:operation location="/DeleteByGD" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePM">
+      <http:operation location="/UpdatePM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM2">
+      <http:operation location="/SelectMATNRbyCHARGandPM2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP2">
+      <http:operation location="/SelectKHbyMCP2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_WLM">
+      <http:operation location="/Delete_WLM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify_WLM">
+      <http:operation location="/Modify_WLM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWLM">
+      <http:operation location="/GetNewWLM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BC_PMLISTHttpPost" type="tns:BC_PMLISTHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByGD">
+      <http:operation location="/SelectByGD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectByDXM">
+      <http:operation location="/SelectByDXM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectOtherBigByDXM">
+      <http:operation location="/SelectOtherBigByDXM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByGD">
+      <http:operation location="/DeleteByGD" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePM">
+      <http:operation location="/UpdatePM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectMATNRbyCHARGandPM2">
+      <http:operation location="/SelectMATNRbyCHARGandPM2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectKHbyMCP2">
+      <http:operation location="/SelectKHbyMCP2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_WLM">
+      <http:operation location="/Delete_WLM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Modify_WLM">
+      <http:operation location="/Modify_WLM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWLM">
+      <http:operation location="/GetNewWLM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BC_PMLIST">
+    <wsdl:port name="BC_PMLISTSoap" binding="tns:BC_PMLISTSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/BC_PMLIST.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_PMLISTSoap12" binding="tns:BC_PMLISTSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/BC_PMLIST.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_PMLISTHttpGet" binding="tns:BC_PMLISTHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/BC_PMLIST.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BC_PMLISTHttpPost" binding="tns:BC_PMLISTHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/BC_PMLIST.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

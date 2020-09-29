@@ -1,0 +1,1613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_GD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GDDH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GDLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KSDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SL" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UNITSID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UNITSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLGROUP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLGROUPNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISOPEN" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCXH" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXHNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCDJ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILLMX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JLR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PFLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PFDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VDATU" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SAP_GET_GDLIST">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WERKS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_GZZX" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WLDL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LOW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HIGH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_GET_GDLISTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_GET_GDLISTResult" type="tns:ZBCFUN_GDLIST_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_GDLIST_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_POLIST" type="tns:ArrayOfZSL_BCST024_PO" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_BOM" type="tns:ArrayOfZSL_BCS302_B" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RT" type="tns:ArrayOfZSL_BCST302_R" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCST024_PO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCST024_PO" nillable="true" type="tns:ZSL_BCST024_PO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCST024_PO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SBHMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATKL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLDL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AMEIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDAUF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GLTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARBPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LTXA1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSTDK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RSNUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OBJNR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JRL" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEMPF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VDATU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TMSL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCS302_B">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCS302_B" nillable="true" type="tns:ZSL_BCS302_B" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS302_B">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RSNUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RSPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSTP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STLTY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STLNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STLKN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STPOZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IDNRK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MENGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATKL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLDL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSBS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOBKZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDAUF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCST302_R">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCST302_R" nillable="true" type="tns:ZSL_BCST302_R" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCST302_R">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AUFPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VORNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARBPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LTXA1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SAP_GET_GDLIST1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WERKS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_GZZX" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WLDL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LOW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HIGH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_GET_GDLIST1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_GET_GDLIST1Result" type="tns:ZBCFUN_GDLIST_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_GET_GDJGXX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZPRQ" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SAP_GET_GDJGXXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SAP_GET_GDJGXXResult" type="tns:ZBCFUN_GDJGXX_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_GDJGXX_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ES_HEADER" type="tns:ES_HEADER" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_BOM" type="tns:ArrayOfET_BOM" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RT" type="tns:ArrayOfZSL_BCST302_R" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ES_HEADER">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATKL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLDL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AMEIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEMNG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDAUF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GLTRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARBPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LTXA1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BSTDK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RSNUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OBJNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEMPF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VDATU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TMSL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfET_BOM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ET_BOM" nillable="true" type="tns:ET_BOM" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ET_BOM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RSNUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RSPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSTP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STLTY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STLNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STLKN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STPOZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IDNRK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MENGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATKL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCXH" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXHNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCDJ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSBS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOBKZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDAUF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDPOS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISWCJY" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:SELECT_MES_PD_GD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SELECT_MES_PD_GD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_PD_GD_LIST" type="tns:ArrayOfMES_PD_GD_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_PD_GD_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_PD_GD_LIST" nillable="true" type="tns:MES_PD_GD_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_PD_GD_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GDLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GDDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KSDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SL" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UNITSID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UNITSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLGROUP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLGROUPNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISOPEN" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCXH" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXHNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCDJ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GDPDSL" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="GDWPDSL" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="YPRWDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISPD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_FROM_SAP_GD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ArrayOfZSL_BCST024_PO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_FROM_SAP_GDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_FROM_SAP_GDResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_MES">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_MESResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_BY_MESResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_MES_OLD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="YEAR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_MES_OLDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_BY_MES_OLDResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_SAPGDLIST">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WERKS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_GZZX" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LOW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HIGH" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="JRL" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_SAPGDLISTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_BY_SAPGDLISTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_SAPGDLIST_1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WERKS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_GZZX" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LOW" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HIGH" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="JRL" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="YEAR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_BY_SAPGDLIST_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_BY_SAPGDLIST_1Result" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_PFDH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD_SELECT_BY_PFDH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_GD_SELECT_BY_PFDH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PFDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZXXBH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_BY_PFDHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BY_PFDHResult" type="tns:SELECT_MES_PD_GD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_GDJGXX_BYERPNO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_GDJGXX_BYERPNOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_GDJGXX_BYERPNOResult" type="tns:ZBCFUN_GDJGXX_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_GDJGXX_BYERPNO_GC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WERKS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_GDJGXX_BYERPNO_GCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_GDJGXX_BYERPNO_GCResult" type="tns:ZBCFUN_GDJGXX_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_CPBZ_READ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_TPM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_CPBZ_READResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_CPBZ_READResult" type="tns:ZBCFUN_CPBZ_READ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_CPBZ_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ES_HEADER" type="tns:ZSL_BCS003" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_BOM" type="tns:ArrayOfZSL_BCS302_B" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RT" type="tns:ArrayOfZSL_BCST302_R" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCS003">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGPLA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERFME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CKDJH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TMZT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVT_IND" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MOVE_TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FCODE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NLPLA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TANUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SONUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOBKZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BESTQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGNUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDAUF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLDL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_BY_STAFFID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_STAFFIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BY_STAFFIDResult" type="tns:SELECT_MES_PD_GD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_GDJD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD_GDJD_IMPORT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_GD_GDJD_IMPORT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GDDATE_BEGIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GDDATE_END" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISGD" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCDATE_BEGIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCDATE_END" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILLMX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_GDJDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_GDJDResult" type="tns:MES_PD_GD_GDJD_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_GD_GDJD_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_PD_GD_GDJD_EXPORT" type="tns:ArrayOfMES_PD_GD_GDJD_EXPORT" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZBCFUN_GDRKS_READ" type="tns:ZBCFUN_GDRKS_READ" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_PD_GD_GDJD_EXPORT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_PD_GD_GDJD_EXPORT" nillable="true" type="tns:MES_PD_GD_GDJD_EXPORT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_PD_GD_GDJD_EXPORT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBHMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UNITSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILLMX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GDCOUNT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="FINISHCOUNT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CYCOUNT" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZBCFUN_GDRKS_READ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_POLIST" type="tns:ArrayOfZSL_BCST024_PO" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_BY_ERPNO_SYNC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ERPNO_SYNCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BY_ERPNO_SYNCResult" type="tns:SELECT_MES_PD_GD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ZBCFUN_GDLIST_READ" nillable="true" type="tns:ZBCFUN_GDLIST_READ" />
+      <s:element name="ZBCFUN_GDJGXX_READ" nillable="true" type="tns:ZBCFUN_GDJGXX_READ" />
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="ZBCFUN_CPBZ_READ" nillable="true" type="tns:ZBCFUN_CPBZ_READ" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLISTSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_GET_GDLIST" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLISTSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_GET_GDLISTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLIST1SoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_GET_GDLIST1" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLIST1SoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_GET_GDLIST1Response" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDJGXXSoapIn">
+    <wsdl:part name="parameters" element="tns:SAP_GET_GDJGXX" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDJGXXSoapOut">
+    <wsdl:part name="parameters" element="tns:SAP_GET_GDJGXXResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_FROM_SAP_GDSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_FROM_SAP_GD" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_FROM_SAP_GDSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_FROM_SAP_GDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_MESSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_MES" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_MESSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_MESResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_MES_OLDSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_MES_OLD" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_MES_OLDSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_MES_OLDResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLISTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_SAPGDLIST" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLISTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_SAPGDLISTResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLIST_1SoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_SAPGDLIST_1" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLIST_1SoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_BY_SAPGDLIST_1Response" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_PFDHSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_PFDH" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_PFDHSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_PFDHResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNOSoapIn">
+    <wsdl:part name="parameters" element="tns:get_GDJGXX_BYERPNO" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNOSoapOut">
+    <wsdl:part name="parameters" element="tns:get_GDJGXX_BYERPNOResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNO_GCSoapIn">
+    <wsdl:part name="parameters" element="tns:get_GDJGXX_BYERPNO_GC" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNO_GCSoapOut">
+    <wsdl:part name="parameters" element="tns:get_GDJGXX_BYERPNO_GCResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_CPBZ_READSoapIn">
+    <wsdl:part name="parameters" element="tns:get_CPBZ_READ" />
+  </wsdl:message>
+  <wsdl:message name="get_CPBZ_READSoapOut">
+    <wsdl:part name="parameters" element="tns:get_CPBZ_READResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_STAFFIDSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_STAFFID" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_STAFFIDSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_STAFFIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_GDJDSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_GDJD" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_GDJDSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_GDJDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ERPNO_SYNCSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ERPNO_SYNC" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ERPNO_SYNCSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ERPNO_SYNCResponse" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLISTHttpGetIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="IV_WLDL" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLISTHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDLIST_READ" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLIST1HttpGetIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="IV_WLDL" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLIST1HttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDLIST_READ" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDJGXXHttpGetIn">
+    <wsdl:part name="RWBH" type="s:string" />
+    <wsdl:part name="ZPRQ" type="s:string" />
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDJGXXHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDJGXX_READ" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLISTHttpGetIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="JRL" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLISTHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLIST_1HttpGetIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="JRL" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="YEAR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLIST_1HttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNOHttpGetIn">
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNOHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDJGXX_READ" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNO_GCHttpGetIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNO_GCHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDJGXX_READ" />
+  </wsdl:message>
+  <wsdl:message name="get_CPBZ_READHttpGetIn">
+    <wsdl:part name="IV_TPM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="get_CPBZ_READHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_CPBZ_READ" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLISTHttpPostIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="IV_WLDL" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLISTHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDLIST_READ" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLIST1HttpPostIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="IV_WLDL" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDLIST1HttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDLIST_READ" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDJGXXHttpPostIn">
+    <wsdl:part name="RWBH" type="s:string" />
+    <wsdl:part name="ZPRQ" type="s:string" />
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SAP_GET_GDJGXXHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDJGXX_READ" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLISTHttpPostIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="JRL" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLISTHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLIST_1HttpPostIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_GZZX" type="s:string" />
+    <wsdl:part name="LOW" type="s:string" />
+    <wsdl:part name="HIGH" type="s:string" />
+    <wsdl:part name="JRL" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="YEAR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BY_SAPGDLIST_1HttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNOHttpPostIn">
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNOHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDJGXX_READ" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNO_GCHttpPostIn">
+    <wsdl:part name="IV_WERKS" type="s:string" />
+    <wsdl:part name="IV_AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="get_GDJGXX_BYERPNO_GCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_GDJGXX_READ" />
+  </wsdl:message>
+  <wsdl:message name="get_CPBZ_READHttpPostIn">
+    <wsdl:part name="IV_TPM" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="get_CPBZ_READHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_CPBZ_READ" />
+  </wsdl:message>
+  <wsdl:portType name="PD_GDSoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST">
+      <wsdl:input message="tns:SAP_GET_GDLISTSoapIn" />
+      <wsdl:output message="tns:SAP_GET_GDLISTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST1">
+      <wsdl:input message="tns:SAP_GET_GDLIST1SoapIn" />
+      <wsdl:output message="tns:SAP_GET_GDLIST1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDJGXX">
+      <wsdl:input message="tns:SAP_GET_GDJGXXSoapIn" />
+      <wsdl:output message="tns:SAP_GET_GDJGXXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_FROM_SAP_GD">
+      <wsdl:input message="tns:INSERT_FROM_SAP_GDSoapIn" />
+      <wsdl:output message="tns:INSERT_FROM_SAP_GDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_MES">
+      <wsdl:input message="tns:INSERT_BY_MESSoapIn" />
+      <wsdl:output message="tns:INSERT_BY_MESSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_MES_OLD">
+      <wsdl:input message="tns:INSERT_BY_MES_OLDSoapIn" />
+      <wsdl:output message="tns:INSERT_BY_MES_OLDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST">
+      <wsdl:input message="tns:INSERT_BY_SAPGDLISTSoapIn" />
+      <wsdl:output message="tns:INSERT_BY_SAPGDLISTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST_1">
+      <wsdl:input message="tns:INSERT_BY_SAPGDLIST_1SoapIn" />
+      <wsdl:output message="tns:INSERT_BY_SAPGDLIST_1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_PFDH">
+      <wsdl:input message="tns:SELECT_BY_PFDHSoapIn" />
+      <wsdl:output message="tns:SELECT_BY_PFDHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO">
+      <wsdl:input message="tns:get_GDJGXX_BYERPNOSoapIn" />
+      <wsdl:output message="tns:get_GDJGXX_BYERPNOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO_GC">
+      <wsdl:input message="tns:get_GDJGXX_BYERPNO_GCSoapIn" />
+      <wsdl:output message="tns:get_GDJGXX_BYERPNO_GCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_CPBZ_READ">
+      <wsdl:input message="tns:get_CPBZ_READSoapIn" />
+      <wsdl:output message="tns:get_CPBZ_READSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_STAFFID">
+      <wsdl:input message="tns:SELECT_BY_STAFFIDSoapIn" />
+      <wsdl:output message="tns:SELECT_BY_STAFFIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_GDJD">
+      <wsdl:input message="tns:SELECT_GDJDSoapIn" />
+      <wsdl:output message="tns:SELECT_GDJDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ERPNO_SYNC">
+      <wsdl:input message="tns:SELECT_BY_ERPNO_SYNCSoapIn" />
+      <wsdl:output message="tns:SELECT_BY_ERPNO_SYNCSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PD_GDHttpGet">
+    <wsdl:operation name="SAP_GET_GDLIST">
+      <wsdl:input message="tns:SAP_GET_GDLISTHttpGetIn" />
+      <wsdl:output message="tns:SAP_GET_GDLISTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST1">
+      <wsdl:input message="tns:SAP_GET_GDLIST1HttpGetIn" />
+      <wsdl:output message="tns:SAP_GET_GDLIST1HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDJGXX">
+      <wsdl:input message="tns:SAP_GET_GDJGXXHttpGetIn" />
+      <wsdl:output message="tns:SAP_GET_GDJGXXHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST">
+      <wsdl:input message="tns:INSERT_BY_SAPGDLISTHttpGetIn" />
+      <wsdl:output message="tns:INSERT_BY_SAPGDLISTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST_1">
+      <wsdl:input message="tns:INSERT_BY_SAPGDLIST_1HttpGetIn" />
+      <wsdl:output message="tns:INSERT_BY_SAPGDLIST_1HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO">
+      <wsdl:input message="tns:get_GDJGXX_BYERPNOHttpGetIn" />
+      <wsdl:output message="tns:get_GDJGXX_BYERPNOHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO_GC">
+      <wsdl:input message="tns:get_GDJGXX_BYERPNO_GCHttpGetIn" />
+      <wsdl:output message="tns:get_GDJGXX_BYERPNO_GCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_CPBZ_READ">
+      <wsdl:input message="tns:get_CPBZ_READHttpGetIn" />
+      <wsdl:output message="tns:get_CPBZ_READHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PD_GDHttpPost">
+    <wsdl:operation name="SAP_GET_GDLIST">
+      <wsdl:input message="tns:SAP_GET_GDLISTHttpPostIn" />
+      <wsdl:output message="tns:SAP_GET_GDLISTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST1">
+      <wsdl:input message="tns:SAP_GET_GDLIST1HttpPostIn" />
+      <wsdl:output message="tns:SAP_GET_GDLIST1HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDJGXX">
+      <wsdl:input message="tns:SAP_GET_GDJGXXHttpPostIn" />
+      <wsdl:output message="tns:SAP_GET_GDJGXXHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST">
+      <wsdl:input message="tns:INSERT_BY_SAPGDLISTHttpPostIn" />
+      <wsdl:output message="tns:INSERT_BY_SAPGDLISTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST_1">
+      <wsdl:input message="tns:INSERT_BY_SAPGDLIST_1HttpPostIn" />
+      <wsdl:output message="tns:INSERT_BY_SAPGDLIST_1HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO">
+      <wsdl:input message="tns:get_GDJGXX_BYERPNOHttpPostIn" />
+      <wsdl:output message="tns:get_GDJGXX_BYERPNOHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO_GC">
+      <wsdl:input message="tns:get_GDJGXX_BYERPNO_GCHttpPostIn" />
+      <wsdl:output message="tns:get_GDJGXX_BYERPNO_GCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_CPBZ_READ">
+      <wsdl:input message="tns:get_CPBZ_READHttpPostIn" />
+      <wsdl:output message="tns:get_CPBZ_READHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PD_GDSoap" type="tns:PD_GDSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST">
+      <soap:operation soapAction="http://tempuri.org/SAP_GET_GDLIST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST1">
+      <soap:operation soapAction="http://tempuri.org/SAP_GET_GDLIST1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDJGXX">
+      <soap:operation soapAction="http://tempuri.org/SAP_GET_GDJGXX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_FROM_SAP_GD">
+      <soap:operation soapAction="http://tempuri.org/INSERT_FROM_SAP_GD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_MES">
+      <soap:operation soapAction="http://tempuri.org/INSERT_BY_MES" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_MES_OLD">
+      <soap:operation soapAction="http://tempuri.org/INSERT_BY_MES_OLD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST">
+      <soap:operation soapAction="http://tempuri.org/INSERT_BY_SAPGDLIST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST_1">
+      <soap:operation soapAction="http://tempuri.org/INSERT_BY_SAPGDLIST_1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_PFDH">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BY_PFDH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO">
+      <soap:operation soapAction="http://tempuri.org/get_GDJGXX_BYERPNO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO_GC">
+      <soap:operation soapAction="http://tempuri.org/get_GDJGXX_BYERPNO_GC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_CPBZ_READ">
+      <soap:operation soapAction="http://tempuri.org/get_CPBZ_READ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_STAFFID">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BY_STAFFID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_GDJD">
+      <soap:operation soapAction="http://tempuri.org/SELECT_GDJD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ERPNO_SYNC">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BY_ERPNO_SYNC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PD_GDSoap12" type="tns:PD_GDSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST">
+      <soap12:operation soapAction="http://tempuri.org/SAP_GET_GDLIST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST1">
+      <soap12:operation soapAction="http://tempuri.org/SAP_GET_GDLIST1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDJGXX">
+      <soap12:operation soapAction="http://tempuri.org/SAP_GET_GDJGXX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_FROM_SAP_GD">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_FROM_SAP_GD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_MES">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_BY_MES" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_MES_OLD">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_BY_MES_OLD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_BY_SAPGDLIST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST_1">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_BY_SAPGDLIST_1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_PFDH">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BY_PFDH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO">
+      <soap12:operation soapAction="http://tempuri.org/get_GDJGXX_BYERPNO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO_GC">
+      <soap12:operation soapAction="http://tempuri.org/get_GDJGXX_BYERPNO_GC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_CPBZ_READ">
+      <soap12:operation soapAction="http://tempuri.org/get_CPBZ_READ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_STAFFID">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BY_STAFFID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_GDJD">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_GDJD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ERPNO_SYNC">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BY_ERPNO_SYNC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PD_GDHttpGet" type="tns:PD_GDHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SAP_GET_GDLIST">
+      <http:operation location="/SAP_GET_GDLIST" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST1">
+      <http:operation location="/SAP_GET_GDLIST1" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDJGXX">
+      <http:operation location="/SAP_GET_GDJGXX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST">
+      <http:operation location="/INSERT_BY_SAPGDLIST" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST_1">
+      <http:operation location="/INSERT_BY_SAPGDLIST_1" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO">
+      <http:operation location="/get_GDJGXX_BYERPNO" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO_GC">
+      <http:operation location="/get_GDJGXX_BYERPNO_GC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_CPBZ_READ">
+      <http:operation location="/get_CPBZ_READ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PD_GDHttpPost" type="tns:PD_GDHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SAP_GET_GDLIST">
+      <http:operation location="/SAP_GET_GDLIST" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDLIST1">
+      <http:operation location="/SAP_GET_GDLIST1" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SAP_GET_GDJGXX">
+      <http:operation location="/SAP_GET_GDJGXX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST">
+      <http:operation location="/INSERT_BY_SAPGDLIST" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_BY_SAPGDLIST_1">
+      <http:operation location="/INSERT_BY_SAPGDLIST_1" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO">
+      <http:operation location="/get_GDJGXX_BYERPNO" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_GDJGXX_BYERPNO_GC">
+      <http:operation location="/get_GDJGXX_BYERPNO_GC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_CPBZ_READ">
+      <http:operation location="/get_CPBZ_READ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PD_GD">
+    <wsdl:port name="PD_GDSoap" binding="tns:PD_GDSoap">
+      <soap:address location="http://192.168.0.223/API/MES/PD_GD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_GDSoap12" binding="tns:PD_GDSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/PD_GD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_GDHttpGet" binding="tns:PD_GDHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/PD_GD.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_GDHttpPost" binding="tns:PD_GDHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/PD_GD.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

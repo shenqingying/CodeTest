@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "班段维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="BDSBTIME_Tpl">
+    {{d.BDSBTIMEKS+"-"+d.BDSBTIMEJS}}
+</script>
+<script type="text/html" id="BDXBTIME_Tpl">
+    {{d.BDXBTIMEKS+"-"+d.BDXBTIMEJS}}
+</script>
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>班段维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">班段名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_bdname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_bd" lay-filter="tb_bd"></table>
+</div>
+<div id="div_bdinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">班段名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bdinfo_bdname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-inline">
+                <select id="bdinfo_isaction" lay-filter="taxinfo_isaction">
+                    <option value="0" selected="selected">关闭</option>
+                    <option value="1">启用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">班段说明：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bdinfo_remark" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">是否跨天：</label>
+            <div class="layui-input-inline">
+                <select id="bdinfo_iskt" lay-filter="bdinfo_iskt">
+                    <option value="0" selected="selected">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">上班时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bdinfo_sbsj" autocomplete="off" class="layui-input" placeholder="4位小数">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">下班时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bdinfo_xbsj" autocomplete="off" class="layui-input" placeholder="4位小数">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">上班随机区间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="bdinfo_sbsjks" placeholder="4位小数" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="bdinfo_sbsjjs" placeholder="4位小数" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">下班随机区间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="bdinfo_xbsjks" placeholder="4位小数" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="bdinfo_xbsjjs" placeholder="4位小数" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">休息时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bdinfo_freetime" placeholder="分钟" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>法定节假日特殊设置</legend>
+    </fieldset>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">上班延后：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bdinfo_sbyh" autocomplete="off" class="layui-input" placeholder="分钟">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">下班提前：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="bdinfo_xbtq" autocomplete="off" class="layui-input" placeholder="分钟">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_BDMANAGE")
+}

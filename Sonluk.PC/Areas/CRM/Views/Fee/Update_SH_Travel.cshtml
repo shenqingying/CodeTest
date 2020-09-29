@@ -1,0 +1,411 @@
+﻿@using Sonluk.UI.Model.CRM.COST_FIService;
+@using Sonluk.UI.Model.CRM.COST_CBZXService;
+@using Sonluk.UI.Model.CRM.COST_ITEMService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "差旅费核销编辑";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    CRM_COST_ITEM[] COSTITEMID = ViewBag.COSTITEMID;
+    CRM_COST_ITEM[] COSTITEMMC = ViewBag.COSTITEMMC;
+
+    CRM_COST_FI[] CWBH = ViewBag.CWBH;
+    CRM_COST_CBZX[] CBZX = ViewBag.CBZX;
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>差旅费核销登记编辑</cite></a>
+</span>
+<br />
+<br />
+<div id="div1" class="layui-form ">
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_save" class="layui-btn" lay-submit="">保存</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px; text-align:right;">人员名称：</label>
+                <div class="layui-input-inline">
+                    <input id="STAFFID" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px; text-align:right;">分管领导：</label>
+                <div class="layui-input-inline">
+                    <select id="FGLD" lay-filter="FGLD">
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">省份：</label>
+                <div class="layui-input-inline">
+                    <select id="SF" lay-filter="SF">
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;  text-align:right;">财务核算项目：</label>
+                <div class="layui-input-inline">
+                    <select id="CWHSBH" lay-filter="CWHSBH" lay-search>
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < CWBH.Length; i++)
+                        {
+                            <option value="@CWBH[i].CWHSBH">@CWBH[i].CWHSBH @CWBH[i].CWHSBHDES</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;  text-align:right;">成本中心：</label>
+                <div class="layui-input-inline" style="width:565px">
+                    <select id="CBZX" lay-filter="CBZX" lay-search>
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < CBZX.Length; i++)
+                        {
+                            <option value="@CBZX[i].CBZXBH">@CBZX[i].CBZXBH @CBZX[i].CBZXMC</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">机票金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_JPJE" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">报销方式：</label>
+                <div class="layui-input-inline">
+                    <select id="BXFS" lay-filter="BXFS" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">机场建设费：</label>
+                <div class="layui-input-inline">
+                    <input id="JCJSF" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">票面价格：</label>
+                <div class="layui-input-inline">
+                    <input id="PMJG" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">票价：</label>
+                <div class="layui-input-inline">
+                    <input id="PJ" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">机票税率：</label>
+                <div class="layui-input-inline">
+                    <select id="JT_JPSL" lay-filter="JT_JPSL" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">机票调整金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_JPTZJE" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">机票未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_JPWSJE" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <hr class="layui-bg-black" />
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">火车票金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_HCPJE" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">火车票税率：</label>
+                <div class="layui-input-inline">
+                    <select id="JT_HCPSL" lay-filter="JT_HCPSL" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">火车票未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_HCPWSJE" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">火车票金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_HCPJE2" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">火车票税率：</label>
+                <div class="layui-input-inline">
+                    <select id="JT_HCPSL2" lay-filter="JT_HCPSL2" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">火车票未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_HCPWSJE2" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <hr class="layui-bg-black" />
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客车票票金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_KCPJE" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客车票票税率：</label>
+                <div class="layui-input-inline">
+                    <select id="JT_KCPSL" lay-filter="JT_KCPSL" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客车票未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_KCPWSJE" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客车票票金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_KCPJE2" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客车票票税率：</label>
+                <div class="layui-input-inline">
+                    <select id="JT_KCPSL2" lay-filter="JT_KCPSL2" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">客车票未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="JT_KCPWSJE2" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <hr class="layui-bg-black" />
+        <div class="layui-form-item">
+            @*<div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">交通费金额：</label>
+                    <div class="layui-input-inline">
+                        <input id="JT_JE" type="text" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>*@
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px; text-align:right;">住宿_天数：</label>
+                <div class="layui-input-inline">
+                    <input id="ZS_DAYS" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">住宿_金额：</label>
+                <div class="layui-input-inline">
+                    <input id="ZS_JE" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px; text-align:right;">住宿税率：</label>
+                <div class="layui-input-inline">
+                    <select id="ZS_SL" lay-filter="ZS_SL" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">住宿未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="ZS_WSJE" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px; text-align:right;">住宿_天数：</label>
+                <div class="layui-input-inline">
+                    <input id="ZS_DAYS2" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">住宿_金额：</label>
+                <div class="layui-input-inline">
+                    <input id="ZS_JE2" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px; text-align:right;">住宿税率：</label>
+                <div class="layui-input-inline">
+                    <select id="ZS_SL2" lay-filter="ZS_SL2" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">住宿未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="ZS_WSJE2" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <hr class="layui-bg-black" />
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">补贴_天数：</label>
+                <div class="layui-input-inline">
+                    <input id="BT_DAYS" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">补贴_金额：</label>
+                <div class="layui-input-inline">
+                    <input id="BT_JE" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">其他_项目：</label>
+                <div class="layui-input-inline">
+                    @*<input id="QT_ITEM" type="text" autocomplete="off" class="layui-input" disabled>*@
+                    <select id="QT_ITEM" lay-filter="QT_ITEM" lay-search>
+                        <option value="0" selected>请选择</option>
+                        @for (int i = 0; i < COSTITEMID.Length; i++)
+                        {
+                            if (@COSTITEMID[i].BEIZ != "固定")
+                            {
+                                <option value="@COSTITEMID[i].COSTITEMID">@COSTITEMID[i].COSTITEMMC</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">其他_金额：</label>
+                <div class="layui-input-inline">
+                    <input id="QT_JE" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px; text-align:right;">其他_税率：</label>
+                <div class="layui-input-inline">
+                    <select id="QT_SL" lay-filter="QT_SL" lay-search>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">其他_未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="QT_WSJE" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            @*<div class="layui-inline">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">税率：</label>
+                    <div class="layui-input-inline">
+                        <select id="SL" lay-filter="SL" lay-search>
+                            <option value="0" selected="selected"></option>
+                        </select>
+                    </div>
+                </div>*@
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">合计未税金额：</label>
+                <div class="layui-input-inline">
+                    <input id="WSJE" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">核销金额：</label>
+                <div class="layui-input-inline">
+                    <input id="HXJE" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">归属年月：</label>
+                <div class="layui-input-inline">
+                    <input id="GSNY" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">核销时间：</label>
+                <div class="layui-input-inline">
+                    <input id="XSSJ" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="BEIZ" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="info" value="@Newtonsoft.Json.JsonConvert.SerializeObject(CWBH)" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Update_SH_Travel")
+}

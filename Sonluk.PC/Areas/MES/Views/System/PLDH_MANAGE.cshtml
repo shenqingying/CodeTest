@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "配料单号维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">{{scom.c_modify}}</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+</script>
+<script type="text/html" id="barkh1">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+</script>
+<script type="text/html" id="barkh2">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">{{scom.c_select}}</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_messet">MES系统设置</a>
+    <a><cite lid="vi_pldhwh">配料单号维护</cite></a>
+</span>
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_add" class="layui-btn" lid="vi_insert">新增</button>
+            <button id="btn_find" class="layui-btn" lid="vi_select">查询</button>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="vi_gc">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="find_gc" lay-filter="find_gc"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="vi_wllb">配方类别：</label>
+                <div class="layui-input-inline">
+                    <select id="find_pfdhlb" lay-filter="find_pfdhlb"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="vi_pfdh">配方单号：</label>
+                <div class="layui-input-inline">
+                    <input id="find_pfdh" type="text" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="vi_pldh">配料单号：</label>
+                <div class="layui-input-inline">
+                    <input id="find_pldh" type="text" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="vi_yxrq">有效日期：</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" id="find_yxrqs" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" id="find_yxrqe" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_pldh" lay-filter="tb_pldh"></table>
+    </div>
+</div>
+<div id="div_pldhinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="messcgl">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="pldh_gc" lay-filter="pldh_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline" id="div_pldh_pldh">
+            <label class="layui-form-label" lid="vi_pldh">配料单号：</label>
+            <div class="layui-input-inline">
+                <input id="pldh_pldh" type="text" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_pflb">配方类别：</label>
+            <div class="layui-input-inline">
+                <select id="pldh_pfdhlb" lay-filter="pldh_pfdhlb"></select>
+            </div>
+        </div>
+        <div class="layui-inline" id="div_pldh_pfdh">
+            <label class="layui-form-label" lid="vi_pfdh">配方单号：</label>
+            <div class="layui-input-inline">
+                @*<input id="pldh_pfdh" type="text" class="layui-input">*@
+                <select id="pldh_pfdh" lay-filter="pldh_pfdh" lay-search=""></select>
+            </div>
+        </div>
+        <div class="layui-inline" id="div_pldh_pfdh_text">
+            <label class="layui-form-label" lid="vi_pfdh">配方单号：</label>
+            <div class="layui-input-inline">
+                <input id="pldh_pfdh_text" type="text" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_yxrq">启用日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="pldh_yxrqs" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_jsrq">结束日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="pldh_yxrqe" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_mark">备注：</label>
+            <div class="layui-input-inline" style="width: 515px;">
+                <input id="pldh_remark" type="text" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-card" lay-filter="demo">
+        <ul class="layui-tab-title">
+            <li lid="vi_yych">应用车号</li>
+            <li class="layui-this" lid="vi_xczj">下层组件</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item">
+                <button id="btn_addch" class="layui-btn" lid="vi_insert">新增</button>
+                <table class="layui-hide" id="pldh_ch" lay-filter="pldh_ch"></table>
+            </div>
+            <div class="layui-tab-item layui-show">
+                <table class="layui-hide" id="pldh_zj" lay-filter="pldh_zj"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_pldh_ch" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gc">工厂：</label>
+            <div class="layui-input-inline">
+                <input id="pldh_ch_gc" type="text" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gzzx">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="pldh_ch_gzzx" lay-filter="pldh_ch_gzzx" lay-search></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="pldh_ch_chinfo" lay-filter="pldh_ch_chinfo"></table>
+</div>
+<div hidden>
+    <input id="pldh_ch_gc_values" type="text" value="">
+</div>
+<div id="div_pldh_zj_zjinfo" class="layui-form" hidden>
+    <table class="layui-hide" id="pldh_zj_zjinfo" lay-filter="pldh_zj_zjinfo"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/PLDH_MANAGE")
+}

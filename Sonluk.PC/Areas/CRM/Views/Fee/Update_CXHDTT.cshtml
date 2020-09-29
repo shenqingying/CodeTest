@@ -1,0 +1,738 @@
+﻿@using Sonluk.UI.Model.CRM.COST_CXHDService;
+@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "经销商区域促销活动编辑";
+
+    CRM_COST_CXHD TTdata = ViewBag.TTdata;
+    CRM_HG_DICT[] FYZCFS = ViewBag.FYZCFS;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="last_Tpl">
+    {{ d.FYL_LAST + '%' }}
+</script>
+
+<script type="text/html" id="this_Tpl">
+    {{ d.FYL_THIS + '%' }}
+</script>
+
+<script type="text/html" id="HXM_Tpl">
+    {{ '套餐' + d.HXM }}
+</script>
+
+<script type="text/html" id="FYZC_Tpl">
+    {{# if(d.FYZCFS == 2064){ }}
+    {{d.FYZC + "%"}}
+    {{# }else{ }}
+    {{d.FYZC + "元/只"}}
+    {{# } }}
+</script>
+
+<script type="text/html" id="fb_tpl">
+    {{ d.FB + '%' }}
+</script>
+
+<script type="text/html" id="color">
+    {{# if(d.TCSL == 0){ }}
+    <span class="span_color"></span>
+    {{# }else { }}
+    <span class="span_color">{{d.TCSL}}</span>
+    {{# } }}
+
+</script>
+
+<script type="text/html" id="baifenbi">
+    {{# if(d.FYZCFS == 2064){ }}
+    {{d.FYZC + "%"}}
+    {{# }else{ }}
+    {{d.FYZC + "元/只"}}
+    {{# } }}
+</script>
+
+<div id="temp">
+    <script type="text/html" id="bar_tool">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_tool2">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_fujian">
+        <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_fujian2">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        @*<a class="layui-btn layui-btn-xs" lay-event="img">照片</a>*@
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_opinion">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">回复</a>
+    </script>
+</div>
+
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>经销商区域促销活动编辑</cite></a>
+</span>
+<br />
+<br />
+<div id="div_formmain" class="layui-form">
+
+    <div class="layui-form-item">
+        @if (TTdata.ISACTIVE != 20 && TTdata.ISACTIVE != 50)
+        {
+            <button id="btn_save" class="layui-btn" lay-submit="">保存并提交</button>
+        }
+
+        @if (TTdata.ISACTIVE == 40)
+        {
+            <button id="btn_daoru" class="layui-btn" lay-submit="">导入实际费用</button>
+            <button id="btn_empty" class="layui-btn" lay-submit="">清空导入数据</button>
+        }
+
+
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">归属年份：</label>
+            <div class="layui-input-inline">
+                <input id="gsyear" type="text" autocomplete="off" class="layui-input" value="@TTdata.GSYEAR" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">活动名称：</label>
+            <div class="layui-input-inline">
+                <input id="hdmc" type="text" autocomplete="off" class="layui-input" value="@TTdata.HDMC">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">活动编号：</label>
+            <div class="layui-input-inline">
+                <input id="hdmc" type="text" autocomplete="off" class="layui-input" value="@TTdata.HDBH" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销商名称：</label>
+            <div class="layui-input-inline">
+                <input id="" type="text" placeholder="" autocomplete="off" class="layui-input" value="@TTdata.MC" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销商CRM编号：</label>
+            <div class="layui-input-inline">
+                <input id="jxscrmid" type="text" placeholder="" autocomplete="off" class="layui-input" value="@TTdata.CRMID" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销商SAP编号：</label>
+            <div class="layui-input-inline">
+                <input id="jxssapsn" type="text" placeholder="" autocomplete="off" class="layui-input" value="@TTdata.SAPSN" disabled>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">促销活动开始日期：</label>
+            <div class="layui-input-inline">
+                <input id="hdbegin" type="text" autocomplete="off" class="layui-input" value="@TTdata.HDBEGINDATE">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">促销活动结束日期：</label>
+            <div class="layui-input-inline">
+                <input id="hdend" type="text" autocomplete="off" class="layui-input" value="@TTdata.HDENDDATE">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">提货开始日期：</label>
+            <div class="layui-input-inline">
+                <input id="thbegin" type="text" autocomplete="off" class="layui-input" value="@TTdata.THBEGINDATE">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">提货结束日期：</label>
+            <div class="layui-input-inline">
+                <input id="thend" type="text" autocomplete="off" class="layui-input" value="@TTdata.THENDDATE">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">活动对象：</label>
+            <div class="layui-input-inline">
+                <input id="hddx" type="text" placeholder="" autocomplete="off" class="layui-input" value="@TTdata.HDDX">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">单位：</label>
+            <div class="layui-input-inline">
+                <input id="" type="text" placeholder="" autocomplete="off" class="layui-input" value="元" disabled>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">促销活动费比：</label>
+            <div class="layui-input-inline">
+                <input id="cxhdfb" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销商承担费用(元)：</label>
+            <div class="layui-input-inline">
+                <input id="jxscdfy" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">预计活动网点参加数量（家）：</label>
+            <div class="layui-input-inline">
+                <input id="cjhdwdsl" type="text" placeholder="" autocomplete="off" class="layui-input" value="@TTdata.CJHDWDSL">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">已经在CRM备案的网点数量：</label>
+            <div class="layui-input-inline">
+                <input id="ybawdsl" type="text" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.BAWDSL" disabled>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销商本年度销售任务(元)：</label>
+            <div class="layui-input-inline">
+                <input id="" type="text" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.BNDXSRW" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销商本年度A类任务(元)：</label>
+            <div class="layui-input-inline">
+                <input id="" type="text" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.BNDALRW" disabled>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:100%;text-align:left;">备注：所有促销活动支持不得重复享受！</label>
+
+    </div>
+
+    <div id="div_pg">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px">区域负责人评估：</label>
+                <div class="layui-input-inline" style="width:560px">
+                    @if (TTdata.ISACTIVE == 30)
+                    {
+                        <textarea id="pg" name="desc" placeholder="请输入内容" class="layui-textarea">@TTdata.PG</textarea>
+                    }
+                    else
+                    {
+                        <textarea id="pg" name="desc" placeholder="请输入内容" class="layui-textarea" disabled>@TTdata.PG</textarea>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div id="div_colla_hdnr" class="layui-collapse">
+        @*活动内容*@
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">经销商开展的活动内容</h2>
+            <div id="div_show_hdnr" class="layui-colla-content">
+
+                <label class="layui-form-label" style="width:120px;text-align:right;">活动目的和内容：</label>
+                <div class="layui-input-block" style="margin-left: 150px;">
+                    <input id="hdmd" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+
+                <table id="result_tc" lay-filter="result_tc"></table>
+                <button id="btn_insert_tc" class="layui-btn" lay-submit="">新增活动内容</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_colla_zcfs" class="layui-collapse">
+        @*支持方式*@
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">公司支持方式（申请）</h2>
+            <div id="div_show_zcfs" class="layui-colla-content">
+
+                <label class="layui-form-label" style="width:100px;text-align:right;">公司支持说明：</label>
+                <div class="layui-input-block" style="margin-left: 130px;">
+                    <input id="gszcsm" type="text" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+
+                <table id="result_zcfs" lay-filter="result_zcfs"></table>
+                <button id="btn_insert_zcfs" class="layui-btn">新增</button>
+            </div>
+        </div>
+    </div>
+
+    @if (TTdata.ISACTIVE >= 30)
+    {
+        <div id="div_colla_cjhdwd" class="layui-collapse">
+            @*参加活动的网点*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">参加活动的网点</h2>
+                <div id="div_show_cjhdwd" class="layui-colla-content">
+
+                    <label class="layui-form-label" style="width:140px;text-align:right;">参加活动的网点数量：</label>
+                    <div class="layui-input-block" style="margin-left: 170px;">
+                        <input id="wdsl" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+                    </div>
+
+                    <table id="result_cjhdwd" lay-filter="result_cjhdwd"></table>
+                    <button id="btn_insert_cjhdwd" class="layui-btn">新增</button>
+                </div>
+            </div>
+        </div>
+    }
+    @if (TTdata.ISACTIVE >= 40)
+    {
+        <div id="div_colla_sjfy" class="layui-collapse">
+            @*实际提货和费用支持*@
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">实际提货和费用支持</h2>
+                <div id="div_show_sjfy" class="layui-colla-content">
+
+
+                    <table id="result_sjfy" lay-filter="result_sjfy"></table>
+                    @*<button id="btn_insert_sjfy" class="layui-btn">新增</button>*@
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
+    <div class="layui-collapse">
+        @*附件*@
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">附件</h2>
+            <div class="layui-colla-content">
+                <button id="insert_fujian" class="layui-btn">新增</button>
+                <table id="table_fujian" lay-filter="table_fujian"></table>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-collapse">
+        @*审批意见*@
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">审批意见</h2>
+            <div class="layui-colla-content">
+                <table id="tb_opinion" lay-filter="tb_opinion"></table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div id="div_tc" class="layui-form" hidden>
+
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">套餐内容：</label>
+            <div class="layui-input-inline">
+                <input id="tc_tcnr" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">套餐金额（出厂价，元/套）：</label>
+            <div class="layui-input-inline">
+                <input id="tc_tcje" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">赠送礼品：</label>
+            <div class="layui-input-inline">
+                <input id="tc_zslp" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">单套礼品金额（采购价，元/套）：</label>
+            <div class="layui-input-inline">
+                <input id="tc_dtlpje" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">预计套餐数量：</label>
+            <div class="layui-input-inline">
+                <input id="tc_yjtcsl" type="number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">预计活动销售：</label>
+            <div class="layui-input-inline">
+                <input id="tc_yjhdxs" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">预计礼品金额(元）：</label>
+            <div class="layui-input-inline">
+                <input id="tc_yjlpje" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">费比：</label>
+            <div class="layui-input-inline">
+                <input id="tc_fb" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:180px;text-align:right;">备注：</label>
+            <div class="layui-input-inline">
+                <input id="tc_beiz" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div id="div_zcfs" class="layui-form" hidden>
+    <div id="div_zcfs1">
+        <div class="layui-form-item">
+            <button id="btn_cxdp" class="layui-btn">查询</button>
+
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:120px;">产品分类：</label>
+                        <div class="layui-input-inline">
+                            <input id="cx_cplx" type="text" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:120px;">单品名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="cx_dp" type="text" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <table id="tb_dp" lay-filter="tb_dp"></table>
+
+
+        </div>
+    </div>
+
+    <div id="div_zcfs2" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">产品分类：</label>
+                <div class="layui-input-inline">
+                    <input id="zcfs_cpfl" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">单品名称：</label>
+                <div class="layui-input-inline">
+                    <input id="zcfs_dp" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">预计活动数量(只)：</label>
+                <div class="layui-input-inline">
+                    <input id="zcfs_yjhdsl" type="number" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">预计活动销售：</label>
+                <div class="layui-input-inline">
+                    <input id="zcfs_yjxs" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">费用支持方式：</label>
+                <div class="layui-input-inline">
+                    <select id="zcfs_fyzcfs" lay-filter="zcfs_fyzcfs" disabled>
+                        <option value="0" selected="selected"></option>
+                        @for (int i = 0; i < FYZCFS.Length; i++)
+                        {
+                            <option value="@FYZCFS[i].DICID">@FYZCFS[i].DICNAME</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">费用支持额度：</label>
+                <div class="layui-input-inline">
+                    <input id="zcfs_fyzc" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">费用支持金额：</label>
+                <div class="layui-input-inline">
+                    <input id="zcfs_fyzcje" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:180px;text-align:right;">上年活动单品月均销售：</label>
+                    <div class="layui-input-inline">
+                        <input id="" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:180px;text-align:right;">上年活动单品月均数量：</label>
+                    <div class="layui-input-inline">
+                        <input id="" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:180px;text-align:right;">备注：</label>
+                <div class="layui-input-inline">
+                    <input id="zcfs_beiz" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+<div id="div_cjhdwd" class="layui-form" hidden>
+    <br />
+    <div id="div_kh">
+
+
+        <div class="layui-form-item">
+            <button id="btn_cxkh" class="layui-btn">查询</button>
+
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian2" class="layui-colla-content layui-show">
+
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:120px;">网点名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_name" type="text" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:120px;">网点CRM编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_ID" type="text" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <table id="tb_kh" lay-filter="tb_kh"></table>
+
+
+        </div>
+    </div>
+
+    <div id="div_wdtc" hidden>
+        <div id="div_wdtc_btn" class="layui-form-item">
+            <button id="btn_back_tc" class="layui-btn">返回</button>
+            <button id="btn_save_tc" class="layui-btn">保存</button>
+
+        </div>
+
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:120px;">网点名称：</label>
+            <div class="layui-input-inline">
+                <input id="wdmc" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+            </div>
+
+            <label class="layui-form-label" style="width:120px;">网点CRM编号：</label>
+            <div class="layui-input-inline">
+                <input id="wdbh" type="text" placeholder="" autocomplete="off" class="layui-input" disabled>
+            </div>
+
+
+        </div>
+
+        <table id="tb_khtc" lay-filter="tb_khtc"></table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+<div id="div_wdtc_edit" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">套餐数量：</label>
+            <div class="layui-input-inline">
+                <input id="div_wdtc_edit_tcsl" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline">
+                <input id="div_wdtc_edit_beiz" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@* 审批意见回复 *@
+<div id="div_opinion_edit" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">回复内容：</label>
+            <div class="layui-input-inline" style="width:400px">
+                <textarea id="div_opinion_content" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<input id="CXHDID" value="@TTdata.CXHDID" hidden />
+<input id="TTdata" value="@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata)" hidden />
+<input id="khid" value="@TTdata.KHID" hidden />
+<input id="isactive" value="@TTdata.ISACTIVE" hidden />
+<input id="YJXS_HJ" hidden />
+<input id="FYJE_HJ" hidden />
+<input id="CPLXID" hidden />
+<input id="WDID" hidden />
+<input id="YJLPJE" hidden />
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Update_CXHDTT")
+}

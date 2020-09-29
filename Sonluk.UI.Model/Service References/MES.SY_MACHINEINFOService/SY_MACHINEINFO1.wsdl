@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="insert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_MACHINEINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_MACHINEINFO">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MNUMBER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WKINFO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="insertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="insertResult" type="tns:MES_SY_MACHINEINFO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_MACHINEINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:MES_SY_MACHINEINFO_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_MACHINEINFO_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_MACHINEINFO" type="tns:ArrayOfMES_SY_MACHINEINFO" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_MACHINEINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_MACHINEINFO" nillable="true" type="tns:MES_SY_MACHINEINFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_BBXX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_MACHINEINFO_BBXX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_MACHINEINFO_BBXX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MNUMBER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WKINFO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PBID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SYID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NEWBB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LASTNEWBB" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_BBXXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BBXXResult" type="tns:MES_SY_MACHINEINFO_SELECTBBXX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_MACHINEINFO_SELECTBBXX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_MACHINEINFO_BBXX" type="tns:ArrayOfMES_SY_MACHINEINFO_BBXX" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_MACHINEINFO_BBXX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_MACHINEINFO_BBXX" nillable="true" type="tns:MES_SY_MACHINEINFO_BBXX" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="insertSoapIn">
+    <wsdl:part name="parameters" element="tns:insert" />
+  </wsdl:message>
+  <wsdl:message name="insertSoapOut">
+    <wsdl:part name="parameters" element="tns:insertResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BBXXSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BBXX" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BBXXSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BBXXResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SY_MACHINEINFOSoap">
+    <wsdl:operation name="insert">
+      <wsdl:input message="tns:insertSoapIn" />
+      <wsdl:output message="tns:insertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BBXX">
+      <wsdl:input message="tns:SELECT_BBXXSoapIn" />
+      <wsdl:output message="tns:SELECT_BBXXSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_MACHINEINFOHttpGet" />
+  <wsdl:portType name="SY_MACHINEINFOHttpPost" />
+  <wsdl:binding name="SY_MACHINEINFOSoap" type="tns:SY_MACHINEINFOSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="insert">
+      <soap:operation soapAction="http://tempuri.org/insert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BBXX">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BBXX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_MACHINEINFOSoap12" type="tns:SY_MACHINEINFOSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="insert">
+      <soap12:operation soapAction="http://tempuri.org/insert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BBXX">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BBXX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_MACHINEINFOHttpGet" type="tns:SY_MACHINEINFOHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="SY_MACHINEINFOHttpPost" type="tns:SY_MACHINEINFOHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="SY_MACHINEINFO">
+    <wsdl:port name="SY_MACHINEINFOSoap" binding="tns:SY_MACHINEINFOSoap">
+      <soap:address location="http://192.168.0.223/API/MES/SY_MACHINEINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_MACHINEINFOSoap12" binding="tns:SY_MACHINEINFOSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/SY_MACHINEINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_MACHINEINFOHttpGet" binding="tns:SY_MACHINEINFOHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/SY_MACHINEINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_MACHINEINFOHttpPost" binding="tns:SY_MACHINEINFOHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/SY_MACHINEINFO.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

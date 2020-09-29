@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create_MX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_CCMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KQ_CCMX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ISQD" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZMB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MBWCQK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCSJLX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create_MXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Create_MXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update_MX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_CCMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update_MXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Update_MXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_MX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_MXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Delete_MXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_MXbyCCID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_MXbyCCIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_MXbyCCIDResult" type="tns:ArrayOfCRM_KQ_CCMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_CCMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_CCMX" nillable="true" type="tns:CRM_KQ_CCMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Read_MXQDbyCCID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_MXQDbyCCIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_MXQDbyCCIDResult" type="tns:ArrayOfCRM_KQ_CCMXList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_CCMXList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_CCMXList" nillable="true" type="tns:CRM_KQ_CCMXList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_CCMXList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ISQD" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZMB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MBWCQK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCSJLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KQQDID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDGSID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDGSHXMID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SXB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GJ" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SF" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SFDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CSDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDWZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDJD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDWD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KQJL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QDISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create_TT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_CCTT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KQ_CCTT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCRBM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCDD" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BQYCC" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZCYWCC" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JHCCTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CXFS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="YJJE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="QTCXFS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QTCXFSJE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJJE" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJCCJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJCCTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSQR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSQSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create_TTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Create_TTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update_TT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_CCTT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update_TTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Update_TTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_TT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete_TTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Delete_TTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_TTbySTAFFID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_TTbySTAFFIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_TTbySTAFFIDResult" type="tns:ArrayOfCRM_KQ_CCTTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KQ_CCTTList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KQ_CCTTList" nillable="true" type="tns:CRM_KQ_CCTTList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KQ_CCTTList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCRBM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCDD" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BQYCC" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZCYWCC" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JHCCTS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="CXFS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="YJJE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="QTCXFS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QTCXFSJE" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJJE" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJCCJSSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJCCTS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSQR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSQSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXFSDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QTCXFSDES" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Read_TTbyCCID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CCID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_TTbyCCIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_TTbyCCIDResult" type="tns:CRM_KQ_CCTT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_TTbyParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KQ_CCTT" />
+            <s:element minOccurs="1" maxOccurs="1" name="STATUS" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read_TTbyParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Read_TTbyParamResult" type="tns:ArrayOfCRM_KQ_CCTTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_KQ_CCMX" nillable="true" type="tns:ArrayOfCRM_KQ_CCMX" />
+      <s:element name="ArrayOfCRM_KQ_CCMXList" nillable="true" type="tns:ArrayOfCRM_KQ_CCMXList" />
+      <s:element name="ArrayOfCRM_KQ_CCTTList" nillable="true" type="tns:ArrayOfCRM_KQ_CCTTList" />
+      <s:element name="CRM_KQ_CCTT" nillable="true" type="tns:CRM_KQ_CCTT" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="Create_MXSoapIn">
+    <wsdl:part name="parameters" element="tns:Create_MX" />
+  </wsdl:message>
+  <wsdl:message name="Create_MXSoapOut">
+    <wsdl:part name="parameters" element="tns:Create_MXResponse" />
+  </wsdl:message>
+  <wsdl:message name="Update_MXSoapIn">
+    <wsdl:part name="parameters" element="tns:Update_MX" />
+  </wsdl:message>
+  <wsdl:message name="Update_MXSoapOut">
+    <wsdl:part name="parameters" element="tns:Update_MXResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_MXSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete_MX" />
+  </wsdl:message>
+  <wsdl:message name="Delete_MXSoapOut">
+    <wsdl:part name="parameters" element="tns:Delete_MXResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXbyCCIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_MXbyCCID" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXbyCCIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_MXbyCCIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXQDbyCCIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_MXQDbyCCID" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXQDbyCCIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_MXQDbyCCIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Create_TTSoapIn">
+    <wsdl:part name="parameters" element="tns:Create_TT" />
+  </wsdl:message>
+  <wsdl:message name="Create_TTSoapOut">
+    <wsdl:part name="parameters" element="tns:Create_TTResponse" />
+  </wsdl:message>
+  <wsdl:message name="Update_TTSoapIn">
+    <wsdl:part name="parameters" element="tns:Update_TT" />
+  </wsdl:message>
+  <wsdl:message name="Update_TTSoapOut">
+    <wsdl:part name="parameters" element="tns:Update_TTResponse" />
+  </wsdl:message>
+  <wsdl:message name="Delete_TTSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete_TT" />
+  </wsdl:message>
+  <wsdl:message name="Delete_TTSoapOut">
+    <wsdl:part name="parameters" element="tns:Delete_TTResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbySTAFFIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_TTbySTAFFID" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbySTAFFIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_TTbySTAFFIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyCCIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_TTbyCCID" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyCCIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_TTbyCCIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyParamSoapIn">
+    <wsdl:part name="parameters" element="tns:Read_TTbyParam" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyParamSoapOut">
+    <wsdl:part name="parameters" element="tns:Read_TTbyParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_MXHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_MXHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXbyCCIDHttpGetIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXbyCCIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCMX" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXQDbyCCIDHttpGetIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXQDbyCCIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCMXList" />
+  </wsdl:message>
+  <wsdl:message name="Delete_TTHttpGetIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_TTHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbySTAFFIDHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbySTAFFIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCTTList" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyCCIDHttpGetIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyCCIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_KQ_CCTT" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_MXHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_MXHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXbyCCIDHttpPostIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXbyCCIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCMX" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXQDbyCCIDHttpPostIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_MXQDbyCCIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCMXList" />
+  </wsdl:message>
+  <wsdl:message name="Delete_TTHttpPostIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Delete_TTHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbySTAFFIDHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbySTAFFIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KQ_CCTTList" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyCCIDHttpPostIn">
+    <wsdl:part name="CCID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Read_TTbyCCIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_KQ_CCTT" />
+  </wsdl:message>
+  <wsdl:portType name="KQ_CCSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_MX">
+      <wsdl:input message="tns:Create_MXSoapIn" />
+      <wsdl:output message="tns:Create_MXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_MX">
+      <wsdl:input message="tns:Update_MXSoapIn" />
+      <wsdl:output message="tns:Update_MXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_MX">
+      <wsdl:input message="tns:Delete_MXSoapIn" />
+      <wsdl:output message="tns:Delete_MXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXbyCCID">
+      <wsdl:input message="tns:Read_MXbyCCIDSoapIn" />
+      <wsdl:output message="tns:Read_MXbyCCIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXQDbyCCID">
+      <wsdl:input message="tns:Read_MXQDbyCCIDSoapIn" />
+      <wsdl:output message="tns:Read_MXQDbyCCIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create_TT">
+      <wsdl:input message="tns:Create_TTSoapIn" />
+      <wsdl:output message="tns:Create_TTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_TT">
+      <wsdl:input message="tns:Update_TTSoapIn" />
+      <wsdl:output message="tns:Update_TTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_TT">
+      <wsdl:input message="tns:Delete_TTSoapIn" />
+      <wsdl:output message="tns:Delete_TTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbySTAFFID">
+      <wsdl:input message="tns:Read_TTbySTAFFIDSoapIn" />
+      <wsdl:output message="tns:Read_TTbySTAFFIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyCCID">
+      <wsdl:input message="tns:Read_TTbyCCIDSoapIn" />
+      <wsdl:output message="tns:Read_TTbyCCIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyParam">
+      <wsdl:input message="tns:Read_TTbyParamSoapIn" />
+      <wsdl:output message="tns:Read_TTbyParamSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KQ_CCHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_MX">
+      <wsdl:input message="tns:Delete_MXHttpGetIn" />
+      <wsdl:output message="tns:Delete_MXHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXbyCCID">
+      <wsdl:input message="tns:Read_MXbyCCIDHttpGetIn" />
+      <wsdl:output message="tns:Read_MXbyCCIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXQDbyCCID">
+      <wsdl:input message="tns:Read_MXQDbyCCIDHttpGetIn" />
+      <wsdl:output message="tns:Read_MXQDbyCCIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_TT">
+      <wsdl:input message="tns:Delete_TTHttpGetIn" />
+      <wsdl:output message="tns:Delete_TTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbySTAFFID">
+      <wsdl:input message="tns:Read_TTbySTAFFIDHttpGetIn" />
+      <wsdl:output message="tns:Read_TTbySTAFFIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyCCID">
+      <wsdl:input message="tns:Read_TTbyCCIDHttpGetIn" />
+      <wsdl:output message="tns:Read_TTbyCCIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KQ_CCHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_MX">
+      <wsdl:input message="tns:Delete_MXHttpPostIn" />
+      <wsdl:output message="tns:Delete_MXHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXbyCCID">
+      <wsdl:input message="tns:Read_MXbyCCIDHttpPostIn" />
+      <wsdl:output message="tns:Read_MXbyCCIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXQDbyCCID">
+      <wsdl:input message="tns:Read_MXQDbyCCIDHttpPostIn" />
+      <wsdl:output message="tns:Read_MXQDbyCCIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_TT">
+      <wsdl:input message="tns:Delete_TTHttpPostIn" />
+      <wsdl:output message="tns:Delete_TTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbySTAFFID">
+      <wsdl:input message="tns:Read_TTbySTAFFIDHttpPostIn" />
+      <wsdl:output message="tns:Read_TTbySTAFFIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyCCID">
+      <wsdl:input message="tns:Read_TTbyCCIDHttpPostIn" />
+      <wsdl:output message="tns:Read_TTbyCCIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KQ_CCSoap" type="tns:KQ_CCSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_MX">
+      <soap:operation soapAction="http://tempuri.org/Create_MX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_MX">
+      <soap:operation soapAction="http://tempuri.org/Update_MX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_MX">
+      <soap:operation soapAction="http://tempuri.org/Delete_MX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXbyCCID">
+      <soap:operation soapAction="http://tempuri.org/Read_MXbyCCID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXQDbyCCID">
+      <soap:operation soapAction="http://tempuri.org/Read_MXQDbyCCID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_TT">
+      <soap:operation soapAction="http://tempuri.org/Create_TT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_TT">
+      <soap:operation soapAction="http://tempuri.org/Update_TT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_TT">
+      <soap:operation soapAction="http://tempuri.org/Delete_TT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbySTAFFID">
+      <soap:operation soapAction="http://tempuri.org/Read_TTbySTAFFID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyCCID">
+      <soap:operation soapAction="http://tempuri.org/Read_TTbyCCID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyParam">
+      <soap:operation soapAction="http://tempuri.org/Read_TTbyParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_CCSoap12" type="tns:KQ_CCSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_MX">
+      <soap12:operation soapAction="http://tempuri.org/Create_MX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_MX">
+      <soap12:operation soapAction="http://tempuri.org/Update_MX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_MX">
+      <soap12:operation soapAction="http://tempuri.org/Delete_MX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXbyCCID">
+      <soap12:operation soapAction="http://tempuri.org/Read_MXbyCCID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXQDbyCCID">
+      <soap12:operation soapAction="http://tempuri.org/Read_MXQDbyCCID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create_TT">
+      <soap12:operation soapAction="http://tempuri.org/Create_TT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_TT">
+      <soap12:operation soapAction="http://tempuri.org/Update_TT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_TT">
+      <soap12:operation soapAction="http://tempuri.org/Delete_TT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbySTAFFID">
+      <soap12:operation soapAction="http://tempuri.org/Read_TTbySTAFFID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyCCID">
+      <soap12:operation soapAction="http://tempuri.org/Read_TTbyCCID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyParam">
+      <soap12:operation soapAction="http://tempuri.org/Read_TTbyParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_CCHttpGet" type="tns:KQ_CCHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_MX">
+      <http:operation location="/Delete_MX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXbyCCID">
+      <http:operation location="/Read_MXbyCCID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXQDbyCCID">
+      <http:operation location="/Read_MXQDbyCCID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_TT">
+      <http:operation location="/Delete_TT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbySTAFFID">
+      <http:operation location="/Read_TTbySTAFFID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyCCID">
+      <http:operation location="/Read_TTbyCCID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KQ_CCHttpPost" type="tns:KQ_CCHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_MX">
+      <http:operation location="/Delete_MX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXbyCCID">
+      <http:operation location="/Read_MXbyCCID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_MXQDbyCCID">
+      <http:operation location="/Read_MXQDbyCCID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_TT">
+      <http:operation location="/Delete_TT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbySTAFFID">
+      <http:operation location="/Read_TTbySTAFFID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read_TTbyCCID">
+      <http:operation location="/Read_TTbyCCID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KQ_CC">
+    <wsdl:port name="KQ_CCSoap" binding="tns:KQ_CCSoap">
+      <soap:address location="http://192.168.0.16/API/CRM/KQ_CC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_CCSoap12" binding="tns:KQ_CCSoap12">
+      <soap12:address location="http://192.168.0.16/API/CRM/KQ_CC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_CCHttpGet" binding="tns:KQ_CCHttpGet">
+      <http:address location="http://192.168.0.16/API/CRM/KQ_CC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KQ_CCHttpPost" binding="tns:KQ_CCHttpPost">
+      <http:address location="http://192.168.0.16/API/CRM/KQ_CC.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

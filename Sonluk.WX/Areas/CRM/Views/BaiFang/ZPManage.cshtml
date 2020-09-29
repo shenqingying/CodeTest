@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "拜访任务指派";
+    Session["TITLENAME"] = "拜访任务指派";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+
+
+
+<div class="layui-form">
+
+
+    <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+        <button id="btn_cx" class="layui-btn" style="width:47%;margin-left:0;">查询</button>
+        |
+        <button id="btn_insert" class="layui-btn" style="width:47%;margin-left:0;">新增</button>
+
+    </div>
+
+    <div class="layui-form-item">
+        <br />
+        <label class="layui-form-label" style="width:110px">拜访计划名称：</label>
+        <div class="layui-input-block">
+            <input id="name" type="text" class="layui-input">
+        </div>
+
+        <label class="layui-form-label" style="width:110px">开始时间：</label>
+        <div class="layui-input-block">
+            <input id="start" type="date" class="layui-input" value="@ViewBag.startdate">
+        </div>
+
+        <label class="layui-form-label" style="width:110px">结束时间：</label>
+        <div class="layui-input-block">
+            <input id="end" type="date" class="layui-input" value="@ViewBag.enddate">
+        </div>
+
+
+
+        <label class="layui-form-label" style="width:110px; text-align:right;">拜访人员：</label>
+        <div class="layui-input-block">
+            <select id="ddl_staff" lay-filter="ddl_staff" lay-ignore>
+                <option value="0" selected="selected">全部</option>
+            </select>
+        </div>
+
+        <br />
+    </div>
+
+    @*<table id="CC_title" lay-filter="CC_title"></table>*@
+    <hr class="layui-bg-black" />
+    <div id="div_result" style="margin:0 10px;"></div>
+</div>
+
+
+
+
+
+
+<input id="staffid" hidden />
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/ZPManage")
+}

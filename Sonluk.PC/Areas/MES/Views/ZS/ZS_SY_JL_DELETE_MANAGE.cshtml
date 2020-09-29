@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "登记记录删除";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="ISQX_titleTpl">
+    {{# if(d.ISQX == 0){ }}
+    {{# }else if(d.ISOPEN == 1){ }}
+    X
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>注塑追溯管理</a>
+    <a><cite>登记记录删除</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">记录ID：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_jlid" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <button class="layui-btn" id="btn_save">保存</button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hidden" id="tb_jl" lay-filter="tb_jl"></table>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="BL_JLID" value="">
+</div>
+<script>
+    var role_ck = [];
+    var role_gc = [];
+    layui.use(['form', 'laydate', 'element', 'laydate', 'table', 'jquery', 'upload'], function () {
+        var layer = layui.layer
+        var laydate = layui.laydate;
+        var table = layui.table;
+        var form = layui.form;
+        var formSelects = layui.formSelects;
+        $('#find_jlid').bind('keyup', function (event) {
+            if (event.keyCode == "13") {
+                banddate();
+            }
+        });
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../System/Data_Select_GC_ROLE",
+            data: {
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                role_gc = resdata;
+            }
+        });
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../ZS/Data_Select_CK_ROLE",
+            data: {
+                GC: ""
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                if (resdata.MES_RETURN.TYPE !== "S") {
+                    layer.alert(resdata.MES_RETURN.MESSAGE);
+                    return false;
+                }
+                else {
+                    role_ck = resdata.MES_MM_CK;
+                }
+            }
+        });
+        $("#btn_save").click(function () {
+            if ($("#find_jlid").val() != "") {
+                banddate();
+            }
+            if ($("#BL_JLID").val() !== "") {
+                layer.confirm('是否删除？', function (index) {
+                    var jz = layer.open({
+                        type: 1,
+                        zIndex: 10000,
+                        title: "正在加载..."
+                    });
+                    var datastring = {
+                        JLID: $("#BL_JLID").val(),
+                        LB: 2
+                    };
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        url: "../ZS/ZS_SY_JL_UPDATE",
+                        data: {
+                            datastring: JSON.stringify(datastring),
+                        },
+                        success: function (data) {
+                            var resdata = JSON.parse(data);
+                            if (resdata.TYPE === "S") {
+                                layer.close(jz);
+                                layer.msg("删除成功！");
+                                band_table([]);
+                                $("#BL_JLID").val("");
+                            }
+                            else {
+                                layer.close(jz);
+                                layer.alert(resdata.MESSAGE);
+                            }
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+    function banddate() {
+        var table = layui.table;
+        var formSelects = layui.formSelects;
+        var datastring = {
+            LB: 3,
+            JLID: $("#find_jlid").val()
+        };
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../ZS/ZS_SY_JLMX_SELECT",
+            data: {
+                datastring: JSON.stringify(datastring)
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                if (resdata.MES_RETURN.TYPE === "S") {
+                    if (resdata.MES_ZS_SY_JL_MX.length > 0) {
+                        if (resdata.MES_ZS_SY_JL_MX[0].ISQX === 1) {
+                            layer.msg("不能重复取消");
+                            $("#BL_JLID").val("");
+                            return;
+                        }
+                        if (resdata.MES_ZS_SY_JL_MX[0].JLLB > 3 && resdata.MES_ZS_SY_JL_MX[0].JLLB < 7) {
+                            if (resdata.MES_ZS_SY_JL_MX[0].JLLB === 4 || resdata.MES_ZS_SY_JL_MX[0].JLLB === 6) {
+                                for (var a = 0; a < resdata.MES_ZS_SY_JL_MX.length; a++) {
+                                    var jlcount = 0;
+                                    for (var b = 0; b < role_ck.length; b++) {
+                                        if (resdata.MES_ZS_SY_JL_MX[a].KCDDGC === role_ck[b].GC && resdata.MES_ZS_SY_JL_MX[a].KCDD === role_ck[b].CKDM) {
+                                            jlcount = jlcount + 1;
+                                            break;
+                                        }
+                                    }
+                                    if (jlcount === 0) {
+                                        layer.msg("无工厂" + resdata.MES_ZS_SY_JL_MX[a].KCDDGC + ",库存地点" + resdata.MES_ZS_SY_JL_MX[a].KCDD + "的权限");
+                                        $("#BL_JLID").val("");
+                                        return;
+                                    }
+                                }
+                            }
+                            else {
+                                for (var a = 0; a < resdata.MES_ZS_SY_JL_MX.length; a++) {
+                                    var jlcount = 0;
+                                    for (var b = 0; b < role_gc.length; b++) {
+                                        if (resdata.MES_ZS_SY_JL_MX[a].GC === role_gc[b].GC) {
+                                            jlcount = jlcount + 1;
+                                            break;
+                                        }
+                                    }
+                                    if (jlcount === 0) {
+                                        layer.msg("无工厂" + resdata.MES_ZS_SY_JL_MX[a].GC + "的权限");
+                                        $("#BL_JLID").val("");
+                                        return;
+                                    }
+                                }
+                            }
+                            band_table(resdata.MES_ZS_SY_JL_MX);
+                            $("#BL_JLID").val($("#find_jlid").val());
+                        }
+                        else if (resdata.MES_ZS_SY_JL_MX[0].JLLB === 1) {
+                            for (var a = 0; a < resdata.MES_ZS_SY_JL_MX.length; a++) {
+                                var jlcount = 0;
+                                for (var b = 0; b < role_gc.length; b++) {
+                                    if (resdata.MES_ZS_SY_JL_MX[a].GC === role_gc[b].GC) {
+                                        jlcount = jlcount + 1;
+                                        break;
+                                    }
+                                }
+                                if (jlcount === 0) {
+                                    layer.msg("无工厂" + resdata.MES_ZS_SY_JL_MX[a].GC + "的权限");
+                                    $("#BL_JLID").val("");
+                                    return;
+                                }
+                            }
+                            band_table(resdata.MES_ZS_SY_JL_MX);
+                            $("#BL_JLID").val($("#find_jlid").val());
+                        }
+                        else {
+                            //if (resdata.MES_ZS_SY_JL_MX[0].JLLB === 1) {
+                            //    layer.msg("全检不允许删除");
+                            //}
+                            if (resdata.MES_ZS_SY_JL_MX[0].JLLB === 2) {
+                                layer.msg("关联不允许删除");
+                            }
+                            else if (resdata.MES_ZS_SY_JL_MX[0].JLLB === 3) {
+                                layer.msg("入库不允许删除");
+                            }
+                            else if (resdata.MES_ZS_SY_JL_MX[0].JLLB === 7) {
+                                layer.msg("报废不允许删除");
+                            }
+                            else {
+                                layer.msg("类别不允许删除");
+                            }
+                        }
+                    }
+                    else {
+                        layer.msg("非有效的记录！");
+                        $("#BL_JLID").val("");
+                    }
+                    $("#find_jlid").val("");
+                }
+                else {
+                    layer.alert(resdata.MES_RETURN.MESSAGE);
+                    return false;
+                }
+            }
+        });
+    }
+    function band_table(data) {
+        var table = layui.table;
+        table.render({
+            elem: '#tb_jl',
+            data: data,
+            cols: [[ //表头
+                { type: 'numbers', title: '序号' },
+                { field: 'JLID', title: '记录ID', width: 120 },
+                { field: 'JLMXID', title: '明细ID', width: 120 },
+                { field: 'JLMS', title: '抬头文本', width: 120 },
+                { field: 'JLMXLBNAME', title: '类别', width: 120 },
+                { field: 'ISQX', title: '取消标识', width: 120, templet: '#ISQX_titleTpl' }
+            ]]
+            , page: false
+            , limit: 999
+        });
+    }
+</script>

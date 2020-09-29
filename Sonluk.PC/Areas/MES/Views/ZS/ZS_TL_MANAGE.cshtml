@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "投料管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>注塑追溯管理</a>
+    <a><cite>投料管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">投料物料：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_tlwl" autocomplete="off" class="layui-input" placeholder="(物料编码/物料描述)">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">投料批次：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_tlpc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">投料时间：</label>
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="text" id="find_tlsjsrq" placeholder="日期" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 150px;">
+                <input type="text" id="find_tlsjerq" placeholder="日期" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_tlinfo" lay-filter="tb_tlinfo"></table>
+</div>
+<div id="div_tlinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline" style="width: 350px;">
+                <select id="tlinfo_gc" lay-filter="tlinfo_gc"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">投料物料：</label>
+            <div class="layui-input-inline" style="width: 350px;">
+                <select id="tlinfo_tlwl" lay-filter="taxinfo_isaction" lay-search></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">投料批次：</label>
+            <div class="layui-input-inline" style="width: 350px;">
+                <input type="text" id="tlinfo_tlpc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">投料时间：</label>
+            <div class="layui-input-inline" style="width: 350px;">
+                <input type="text" id="tlinfo_tlsjrq" placeholder="日期" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline" style="width: 350px;">
+                <input type="text" id="tlinfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/ZS_TL_MANAGE")
+}

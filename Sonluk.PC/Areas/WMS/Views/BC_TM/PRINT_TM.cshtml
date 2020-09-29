@@ -1,0 +1,206 @@
+﻿@using Sonluk.PC.Models.WMS;
+@{
+    ViewBag.Title = "PRINT_TM";
+    Layout = "~/Views/Shared/_Layout_Print_CRM.cshtml";
+    List<PrintTM> data = ViewBag.data;
+
+}
+
+<style>
+    /*label {
+        text-align: left;
+        width: inherit;
+    }*/
+    td {
+        text-align: left;
+        /*border-right:1px solid;*/
+    }
+
+    .print_page_table_noborder_zfdc_0 {
+        width: 100%;
+    }
+</style>
+
+@for (int i = 0; i < data.Count; i++)
+{
+    for (int k = 0; k < ViewBag.Count; k++)
+    {
+        <div class="main">
+            <table class="print_page_table_noborder_zfdc" cellpadding="10">
+                <tr>
+                    <td>
+                        <div class="print-page-body-table-header">@data[i].TMTT.GCDYMS</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="print-page-header-company-name2">成品货物标识(物料凭证)</div>
+                    </td>
+                </tr>
+            </table>
+            <table class="print_page_table_noborder_zfdc" border="1" style="border-bottom:0">
+                <tr>
+                    <td class="print_page_td_nohaveborder_left" width="90px;">
+                        物料凭证
+                    </td>
+                    <td style="text-align:left" width="35%">
+                        @data[i].TMTT.WLPZBH
+                    </td>
+                    <td class="print_page_td_nohaveborder_left" width="90px;">
+                        进仓日期
+                    </td>
+                    <td style="text-align:left" width="35%">
+                        @data[i].TMTT.JLTIME.Substring(0,10)
+                    </td>
+                </tr>
+            </table>
+
+
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+                @if (data[i].TMMX.Count == 0)
+                {
+                    <tr>
+                        <td class="print_page_table_noborder_zfdc_0">
+                            <label>无数据！</label>
+                        </td>
+                    </tr>
+
+                }
+                @for (int j = 0; j < data[i].TMMX.Count; j++)
+                {
+                    <tr>
+                        <td width="50%">
+                            <table class="print_page_table_noborder_zfdc_0">
+                                <tr>
+                                    <td class="print_page_td_nohaveborder_left" width="90px;">
+                                        @*<div class="print-page-body-table-header">@data[i].TMTT.GCDYMS</div>*@
+                                        销售订单：
+                                    </td>
+                                    <td colspan="2">
+                                        @*<div class="print-page-header-company-name2">成品货物标识(物料凭证)</div>*@
+                                        @(data[i].TMMX[j].NOBILL + " / " + data[i].TMMX[j].NOBILLMX)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="print_page_td_nohaveborder_left">
+                                        参考单据：
+                                    </td>
+                                    <td>
+                                        @(data[i].TMMX[j].CKDJH)
+                                    </td>
+                                    <td rowspan="4" width="30%" style="text-align:center;">
+                                        <img style="" src="@Url.Action("BarCode", "PD", new { area = "MES", code = data[i].TMMX[j].TM, format = "CODE128", width = 160, height = 30, pure = 1 })">
+                                        <label>@data[i].TMMX[j].TM</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="print_page_td_nohaveborder_left">
+                                        物料编码：
+                                    </td>
+                                    <td>
+                                        @(data[i].TMMX[j].WLH)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="print_page_td_nohaveborder_left">
+                                        总数量：
+                                    </td>
+                                    <td style="text-align: right;">
+                                        @(data[i].TMMX[j].SL)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="print_page_td_nohaveborder_left">
+                                        该托数量：
+                                    </td>
+                                    <td style="text-align: right;">
+                                        @(data[i].TMMX[j].RESDUESL)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="print_page_td_nohaveborder_left">
+                                        物料描述：
+                                    </td>
+                                    <td colspan="2" style="text-align: left;">
+                                        @(data[i].TMMX[j].WLMS)
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="50%">
+                            @if (j == data[i].TMMX.Count - 1)
+                            {
+                                <table class="print_page_table_noborder_zfdc_0"></table>
+                            }
+                            else
+                            {
+                                j++;
+                                <table class="print_page_table_noborder_zfdc_0">
+                                    <tr>
+                                        <td class="print_page_td_nohaveborder_left" width="90px;">
+                                            @*<div class="print-page-body-table-header">@data[i].TMTT.GCDYMS</div>*@
+                                            销售订单：
+                                        </td>
+                                        <td colspan="2">
+                                            @*<div class="print-page-header-company-name2">成品货物标识(物料凭证)</div>*@
+                                            @(data[i].TMMX[j].NOBILL + " / " + data[i].TMMX[j].NOBILLMX)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="print_page_td_nohaveborder_left">
+                                            参考单据：
+                                        </td>
+                                        <td>
+                                            @(data[i].TMMX[j].CKDJH)
+                                        </td>
+                                        <td rowspan="4" width="30%" style="text-align:center;">
+                                            <img style="" src="@Url.Action("BarCode", "PD", new { area = "MES", code = data[i].TMMX[j].TM, format = "CODE128", width = 160, height = 30, pure = 1 })">
+                                            <label>@data[i].TMMX[j].TM</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="print_page_td_nohaveborder_left">
+                                            物料编码：
+                                        </td>
+                                        <td>
+                                            @(data[i].TMMX[j].WLH)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="print_page_td_nohaveborder_left">
+                                            总数量：
+                                        </td>
+                                        <td style="text-align: right;">
+                                            @(data[i].TMMX[j].SL)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="print_page_td_nohaveborder_left">
+                                            该托数量：
+                                        </td>
+                                        <td style="text-align: right;">
+                                            @(data[i].TMMX[j].RESDUESL)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="print_page_td_nohaveborder_left">
+                                            物料描述：
+                                        </td>
+                                        <td colspan="2" style="text-align: left;">
+                                            @(data[i].TMMX[j].WLMS)
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+
+
+        </div>
+    }
+
+}

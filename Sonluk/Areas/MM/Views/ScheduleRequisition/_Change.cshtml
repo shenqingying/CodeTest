@@ -1,0 +1,122 @@
+﻿@using Sonluk.UI.Model.MM.ScheduleRequisitionService
+@model ScheReqInfo
+@{
+    string status = Model.Status;
+}
+<input type="hidden" id="schedule-requisition-update" value="@Url.Action("Update", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-delete" value="@Url.Action("Delete", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-complete" value="@Url.Action("Index", "ScheduleRequisition", new { Auth = ViewBag.Auth })">
+<input type="hidden" id="status" value="@status">
+<div class="panel-flow">
+    <table class="panel-flow-table">
+        <tr>
+            <td class="panel-flow-table-title">序列号:</td>
+            <td class="panel-flow-table-content">@Model.SerialNumber</td>
+            <td class="panel-flow-table-title">状态:</td>
+            <td class="panel-flow-table-content" id="schedule-requisition-status">@Model.StatusDescription</td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title">日期:</td>
+            <td class="panel-flow-table-content">@Model.Date @Model.Time</td>
+            <td class="panel-flow-table-title"></td>
+            <td class="panel-flow-table-content"></td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title">批准:</td>
+            <td class="panel-flow-table-content">@Model.NodePPCtrlDate @Model.NodePPCtrlTime @Model.NodePPCtrl</td>
+            <td class="panel-flow-table-title">同步:</td>
+            <td class="panel-flow-table-content">@Model.NodePurCtrlDate @Model.NodePurCtrlTime @Model.NodePurCtrl</td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title">变更原因:</td>
+            <td class="panel-flow-table-content" colspan="3"><input type="text" class="panel-flow-table-input-text" id="remark" value="@Model.Remark"></td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title">意见:</td>
+            <td class="panel-flow-table-content" colspan="3">@Model.NodeComments</td>
+        </tr>
+    </table>
+</div>
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    @if (status.Equals("PP-Draft") || status.Equals("PPCtrl-Rejected"))
+                    {
+                        <div class="sonluk-table-control-space">|</div>
+                        <div class="line-split sonluk-table-control-button">拆分</div>
+                        <div class="line-merge sonluk-table-control-button">合并</div>
+                        <div class="sonluk-table-control-space">|</div>
+                        <div class="po-remove sonluk-table-control-button">移除采购订单行项目</div>
+                        <div class="sonluk-table-control-space">|</div>
+                        <div class="sonluk-table-control-title">日期:</div>
+                        <input type="text" class="sonluk-table-control-text date-time-picker" id="po-modify-delivry-date" />
+                        <div class="sonluk-table-control-title">地点:</div>
+                        <input type="text" class="sonluk-table-control-text drop-list-target" id="po-modify-destination" />
+                        <input type="hidden" value="0">
+                        <div class="po-modify sonluk-table-control-button">批量修改</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content">
+            <table class="data-table">
+                <tr>
+                    <td class="data-table-header">序号</td>
+                    <td class="data-table-header">采购凭证</td>
+                    <td class="data-table-header">行项目</td>
+                    <td class="data-table-header">计划行</td>
+                    <td class="data-table-header">物料号</td>
+                    <td class="data-table-header">物料描述</td>
+                    <td class="data-table-header">采购组</td>
+                    <td class="data-table-header">数量</td>
+                    <td class="data-table-header">需求数量</td>
+                    <td class="data-table-header">日期</td>
+                    <td class="data-table-header">需求日期</td>
+                    <td class="data-table-header">交货点</td>
+                    <td class="data-table-header">销售凭证</td>
+                    <td class="data-table-header">行项目</td>
+                    <td class="data-table-header">供应商</td>
+                    @if (!status.Equals("PP-Draft") )
+                    {
+                        <td class="data-table-header">确认</td>
+                        <td class="data-table-header">时间</td>
+                        <td class="data-table-header">状态</td>
+                    }
+                </tr>
+                @{int index = 1;}
+                @foreach (ScheduleLineInfo node in Model.Items)
+                {
+                    <tr>
+                        <td>@(index++)</td>
+                        <td>@node.Number</td>
+                        <td>@node.Item</td>
+                        <td>@node.Line</td>
+                        <td>@node.Material</td>
+                        <td class="text-align-left">@node.MaterialDescription</td>
+                        <td>@node.PurGroup</td>
+                        <td class="text-align-right">@node.InitialQuantity.ToString("0.###")</td>
+                        <td><input type="text" value="@node.Quantity.ToString("0.###")" class="deliv-qty" /> </td>
+                        <td>@node.InitialDate</td>
+                        <td><input type="text" value="@node.Date" class="date-time-picker deliv-date"></td>
+                        <td><input type="text" value="@node.Destination" class="deliv-dest drop-list-target"><input type="hidden" value="@node.DestinationID"></td>
+                        <td>@node.SalesOrder</td>
+                        <td>@node.SOItem</td>
+                        <td>@node.Vendor</td>
+                        @if (!status.Equals("PP-Draft"))
+                        {
+                            <td>@node.Releaser</td>
+                            <td>@node.ReleaseDate</td>
+                            <td>@node.StatusDescription</td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/sonluk-ui/table-resize")

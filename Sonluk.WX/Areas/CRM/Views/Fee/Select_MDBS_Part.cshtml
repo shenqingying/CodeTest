@@ -1,0 +1,126 @@
+﻿@using Sonluk.UI.Model.CRM.COST_MDBSService;
+@{
+    ViewBag.Title = "Select_MDBS_Part";
+    CRM_COST_MDBS[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+    string FYLB = "";
+    string isactive = "";
+    switch(data[i].FYLB){
+        case 1:
+            FYLB = "欧尚、大润发";
+            break;
+        case 2:
+            FYLB = "除欧尚、大润发";
+            break;
+        default:
+            break;
+    }
+    switch (data[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 30:
+            isactive = "已审核";
+            break;
+        case 40:
+            isactive = "核销未提交";
+            break;
+        case 50:
+            isactive = "核销审核中";
+            break;
+        case 60:
+            isactive = "已核销";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+  
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MDMC</em>
+            <em class="weui-form-preview__value">@data[i].CRMID</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">年月</label>
+                <span class="weui-form-preview__value">&nbsp;@(data[i].HTYEAR)-@(data[i].HTMONTH)</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">费用类别</label>
+                <span class="weui-form-preview__value">&nbsp;@FYLB</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户名称</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].MC</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户SAP编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SAPSN</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">陈列项目</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].DISPLAYITEM</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">陈列位置</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].DISPLAYPOSITION</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">陈列开始时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].BEGINDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">陈列结束时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].ENDDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].BEIZ</span>
+            </p>
+            @if (ViewBag.type == 2)
+            {
+                <p>
+                    <label class="weui-form-preview__label">备注2</label>
+                    <span class="weui-form-preview__value">&nbsp;@data[i].BEIZ2</span>
+                </p>
+            }
+            <p>
+                <label class="weui-form-preview__label">状态</label>
+                <span class="weui-form-preview__value">&nbsp;@isactive</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">查看</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">编辑</a>
+            @if (ViewBag.type == 1)
+            {
+                <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="Delete_MDBS(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">删除</a>
+            }
+            
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Submit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">提交OA</a>
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />

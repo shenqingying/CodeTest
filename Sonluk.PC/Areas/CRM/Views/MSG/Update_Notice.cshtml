@@ -1,0 +1,351 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "编辑公告";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+
+    .xm-select-parent .xm-select{
+        height: 30px;
+    }
+</style>
+
+<div id="div_temp">
+    <script type="text/html" id="bar">
+        @*<a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>*@
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="imgbar">
+        <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+</div>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="official">
+    {{# if(d.IsOfficial == 10){ }}
+    潜在客户
+    {{# }else if(d.IsOfficial == 20){ }}
+    签约客户
+    {{# }else if(d.IsOfficial == 30){ }}
+    非签约客户
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="havepower">
+    {{# if(d.GIDSTATUS == 1){ }}
+    是
+    {{# }else if(d.GIDSTATUS == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>消息管理</a>
+    <a><cite>编辑公告</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_save" class="layui-btn">保存</button>
+
+            <button id="btn_submit" class="layui-btn">提交</button>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-block">
+                <label class="layui-form-label" style="text-align:right;">公告标题：</label>
+                <div class="layui-input-block">
+                    <input id="title" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        @*<div class="layui-form-item">
+            <label class="layui-form-label" style="text-align:right;">公告内容：</label>*@
+
+            <textarea id="content" style="display:none;width:500px;"></textarea>
+
+
+        @*</div>*@
+
+
+    </div>
+
+    <hr class="layui-bg-black" />
+    <div id="div_fujian" class="layui-form">
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">附件</h2>
+                <div class="layui-colla-content layui-show">
+                    <button id="btn_fujian" class="layui-btn">添加附件</button>
+                    <table id="tb_fujian" lay-filter="tb_fujian"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_kh" class="layui-form">
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">可见客户</h2>
+                <div class="layui-colla-content">
+                    <button id="btn_kehu" class="layui-btn">添加现有客户</button>
+                    <button id="btn_allJXS" class="layui-btn">添加全部经销商</button>
+                    <table id="tb_kehu" lay-filter="tb_kehu"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_staff" class="layui-form">
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">可见员工</h2>
+                <div class="layui-colla-content">
+                    <button id="btn_staff" class="layui-btn">添加现有员工</button>
+                    <table id="tb_staff" lay-filter="tb_staff"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div id="div_cx_kehu" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item layui-input-inline">
+        <button id="btn_cx_kehu" class="layui-btn">查询</button>
+
+        <button id="btn_add_kehu" class="layui-btn" style="display:none;">添加</button>
+
+
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian_kehu" class="layui-colla-content layui-show">
+
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">客户类型：</label>
+                    <div class="layui-input-inline">
+                        <select id="KHtype" lay-filter="KHtype">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label">客户编号：</label>
+                    <div class="layui-input-inline">
+                        <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户名称：</label>
+                    <div class="layui-input-inline">
+                        <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label">SAP编号：</label>
+                    <div class="layui-input-inline">
+                        <input id="sap" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户组：</label>
+                    <div class="layui-input-inline">
+                        <div class="layui-unselect layui-form-select downpanel">
+                            <div class="layui-select-title">
+                                <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                                <input type="hidden" name="selectID" value="0">
+                                <i class="layui-edge"></i>
+                            </div>
+                            <dl class="layui-anim layui-anim-upbit">
+                                <dd>
+                                    @*<ul id="classtree"></ul>*@
+                                    <div id="classtree"></div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item" hidden>
+
+                    <label class="layui-form-label">省份：</label>
+                    <div class="layui-input-inline">
+                        <select id="province" lay-filter="province" lay-search>
+                            <option value="0" selected></option>
+                        </select>
+                    </div>
+                    <label class="layui-form-label">城市：</label>
+                    <div class="layui-input-inline">
+                        <select id="city" lay-filter="city" lay-search>
+                            <option value="0" selected></option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        @*<button id="btn_insert_tomx" class="layui-btn">添加</button>*@
+        <table id="tb_kh_cx" lay-filter="tb_kh_cx"></table>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+<div id="div_cx_staff" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item layui-input-inline">
+        <button id="btn_cx_staff" class="layui-btn">查询</button>
+
+        <button id="btn_add_staff" class="layui-btn" style="display:none;">添加</button>
+
+
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian_staff" class="layui-colla-content layui-show">
+
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">人员类型：</label>
+                    <div class="layui-input-inline">
+                        <select id="STAFFtype" lay-filter="STAFFtype">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+
+                    <label class="layui-form-label">人员工号：</label>
+                    <div class="layui-input-inline">
+                        <input id="STAFF_NO" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">人员名称：</label>
+                    <div class="layui-input-inline">
+                        <input id="STAFF_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label">部门：</label>
+                    <div class="layui-input-inline" style="width:400px;">
+                        <select id="department" xm-select="department" lay-filter="department" style="width:400px;">
+                            @*<option value="0" selected="selected">请选择</option>*@
+                        </select>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        @*<button id="btn_insert_tomx" class="layui-btn">添加</button>*@
+        <table id="tb_staff_cx" lay-filter="tb_staff_cx"></table>
+
+
+    </div>
+
+
+
+
+</div>
+
+<input id="netpath" hidden />
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+    });
+</script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/MSG/Update_Notice")
+}

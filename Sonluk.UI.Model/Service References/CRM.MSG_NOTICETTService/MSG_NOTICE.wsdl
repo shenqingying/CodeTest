@@ -1,0 +1,1141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_MSG_NOTICETT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_MSG_NOTICETT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TITLE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOTICE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateTTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateTTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_MSG_NOTICEMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_MSG_NOTICEMX">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="NOTICEMXID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CKCS" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateMXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadTT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_MSG_NOTICETTParam" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_MSG_NOTICETTParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TITLE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOTICE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ_BEGIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ_END" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadTTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadTTResult" type="tns:ArrayOfCRM_MSG_NOTICETTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_MSG_NOTICETTList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_MSG_NOTICETTList" nillable="true" type="tns:CRM_MSG_NOTICETTList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_MSG_NOTICETTList">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CRM_MSG_NOTICETT">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CJRDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="XGRDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DEPIDDES" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ReadTTbyTTID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadTTbyTTIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadTTbyTTIDResult" type="tns:CRM_MSG_NOTICETTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXbyTTID_KH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXbyTTID_KHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadMXbyTTID_KHResult" type="tns:ArrayOfCRM_MSG_NOTICEMXList_KH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_MSG_NOTICEMXList_KH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_MSG_NOTICEMXList_KH" nillable="true" type="tns:CRM_MSG_NOTICEMXList_KH" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_MSG_NOTICEMXList_KH">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CRM_MSG_NOTICEMX">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="KHLX" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="KHLXDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PKHID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SAPSN" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="USERLXDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PKHIDDES" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ReadMXbyTTID_STAFF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXbyTTID_STAFFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadMXbyTTID_STAFFResult" type="tns:ArrayOfCRM_MSG_NOTICEMXList_STAFF" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_MSG_NOTICEMXList_STAFF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_MSG_NOTICEMXList_STAFF" nillable="true" type="tns:CRM_MSG_NOTICEMXList_STAFF" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_MSG_NOTICEMXList_STAFF">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CRM_MSG_NOTICEMX">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="STAFFLX" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DEPID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="USERLXDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="STAFFLXDES" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DEPIDDES" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UpdateTT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_MSG_NOTICETT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateTTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateIsactive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateIsactiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateIsactiveResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_MSG_NOTICEMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateMXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteTTResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NOTICEMXID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteMXResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySTAFFID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="USERLX" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySTAFFIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadBySTAFFIDResult" type="tns:ArrayOfCRM_MSG_NOTICETTList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NOTICETTID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="USERID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXbyParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_MSG_NOTICEMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadMXbyParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadMXbyParamResult" type="tns:ArrayOfCRM_MSG_NOTICEMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_MSG_NOTICEMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_MSG_NOTICEMX" nillable="true" type="tns:CRM_MSG_NOTICEMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="CRM_MSG_NOTICETTList" nillable="true" type="tns:CRM_MSG_NOTICETTList" />
+      <s:element name="ArrayOfCRM_MSG_NOTICEMXList_KH" nillable="true" type="tns:ArrayOfCRM_MSG_NOTICEMXList_KH" />
+      <s:element name="ArrayOfCRM_MSG_NOTICEMXList_STAFF" nillable="true" type="tns:ArrayOfCRM_MSG_NOTICEMXList_STAFF" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_MSG_NOTICETTList" nillable="true" type="tns:ArrayOfCRM_MSG_NOTICETTList" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateTTSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateTT" />
+  </wsdl:message>
+  <wsdl:message name="CreateTTSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateTTResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateMXSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateMX" />
+  </wsdl:message>
+  <wsdl:message name="CreateMXSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadTT" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadTTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTbyTTIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadTTbyTTID" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTbyTTIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadTTbyTTIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_KHSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadMXbyTTID_KH" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_KHSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadMXbyTTID_KHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_STAFFSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadMXbyTTID_STAFF" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_STAFFSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadMXbyTTID_STAFFResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTTSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTT" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTTSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTTResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIsactiveSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateIsactive" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIsactiveSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateIsactiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMXSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateMX" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMXSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteTT" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteTTResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteMX" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteMXResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadBySTAFFID" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadBySTAFFIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddCountSoapIn">
+    <wsdl:part name="parameters" element="tns:AddCount" />
+  </wsdl:message>
+  <wsdl:message name="AddCountSoapOut">
+    <wsdl:part name="parameters" element="tns:AddCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadMXbyParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadMXbyParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTbyTTIDHttpGetIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTbyTTIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_MSG_NOTICETTList" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_KHHttpGetIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_KHHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_MSG_NOTICEMXList_KH" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_STAFFHttpGetIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_STAFFHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_MSG_NOTICEMXList_STAFF" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIsactiveHttpGetIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ISACTIVE" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIsactiveHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpGetIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpGetIn">
+    <wsdl:part name="NOTICEMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="USERLX" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_MSG_NOTICETTList" />
+  </wsdl:message>
+  <wsdl:message name="AddCountHttpGetIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="USERID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddCountHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTbyTTIDHttpPostIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadTTbyTTIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_MSG_NOTICETTList" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_KHHttpPostIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_KHHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_MSG_NOTICEMXList_KH" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_STAFFHttpPostIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadMXbyTTID_STAFFHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_MSG_NOTICEMXList_STAFF" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIsactiveHttpPostIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ISACTIVE" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIsactiveHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpPostIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTTHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpPostIn">
+    <wsdl:part name="NOTICEMXID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMXHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="USERLX" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_MSG_NOTICETTList" />
+  </wsdl:message>
+  <wsdl:message name="AddCountHttpPostIn">
+    <wsdl:part name="NOTICETTID" type="s:string" />
+    <wsdl:part name="USERID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddCountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="MSG_NOTICESoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTT">
+      <wsdl:input message="tns:CreateTTSoapIn" />
+      <wsdl:output message="tns:CreateTTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateMX">
+      <wsdl:input message="tns:CreateMXSoapIn" />
+      <wsdl:output message="tns:CreateMXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadTT">
+      <wsdl:input message="tns:ReadTTSoapIn" />
+      <wsdl:output message="tns:ReadTTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTbyTTID">
+      <wsdl:input message="tns:ReadTTbyTTIDSoapIn" />
+      <wsdl:output message="tns:ReadTTbyTTIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_KH">
+      <wsdl:input message="tns:ReadMXbyTTID_KHSoapIn" />
+      <wsdl:output message="tns:ReadMXbyTTID_KHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_STAFF">
+      <wsdl:input message="tns:ReadMXbyTTID_STAFFSoapIn" />
+      <wsdl:output message="tns:ReadMXbyTTID_STAFFSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTT">
+      <wsdl:input message="tns:UpdateTTSoapIn" />
+      <wsdl:output message="tns:UpdateTTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIsactive">
+      <wsdl:input message="tns:UpdateIsactiveSoapIn" />
+      <wsdl:output message="tns:UpdateIsactiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMX">
+      <wsdl:input message="tns:UpdateMXSoapIn" />
+      <wsdl:output message="tns:UpdateMXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <wsdl:input message="tns:DeleteTTSoapIn" />
+      <wsdl:output message="tns:DeleteTTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <wsdl:input message="tns:DeleteMXSoapIn" />
+      <wsdl:output message="tns:DeleteMXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDSoapIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCount">
+      <wsdl:input message="tns:AddCountSoapIn" />
+      <wsdl:output message="tns:AddCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyParam">
+      <wsdl:input message="tns:ReadMXbyParamSoapIn" />
+      <wsdl:output message="tns:ReadMXbyParamSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MSG_NOTICEHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTbyTTID">
+      <wsdl:input message="tns:ReadTTbyTTIDHttpGetIn" />
+      <wsdl:output message="tns:ReadTTbyTTIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_KH">
+      <wsdl:input message="tns:ReadMXbyTTID_KHHttpGetIn" />
+      <wsdl:output message="tns:ReadMXbyTTID_KHHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_STAFF">
+      <wsdl:input message="tns:ReadMXbyTTID_STAFFHttpGetIn" />
+      <wsdl:output message="tns:ReadMXbyTTID_STAFFHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIsactive">
+      <wsdl:input message="tns:UpdateIsactiveHttpGetIn" />
+      <wsdl:output message="tns:UpdateIsactiveHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <wsdl:input message="tns:DeleteTTHttpGetIn" />
+      <wsdl:output message="tns:DeleteTTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <wsdl:input message="tns:DeleteMXHttpGetIn" />
+      <wsdl:output message="tns:DeleteMXHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDHttpGetIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCount">
+      <wsdl:input message="tns:AddCountHttpGetIn" />
+      <wsdl:output message="tns:AddCountHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MSG_NOTICEHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTbyTTID">
+      <wsdl:input message="tns:ReadTTbyTTIDHttpPostIn" />
+      <wsdl:output message="tns:ReadTTbyTTIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_KH">
+      <wsdl:input message="tns:ReadMXbyTTID_KHHttpPostIn" />
+      <wsdl:output message="tns:ReadMXbyTTID_KHHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_STAFF">
+      <wsdl:input message="tns:ReadMXbyTTID_STAFFHttpPostIn" />
+      <wsdl:output message="tns:ReadMXbyTTID_STAFFHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIsactive">
+      <wsdl:input message="tns:UpdateIsactiveHttpPostIn" />
+      <wsdl:output message="tns:UpdateIsactiveHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <wsdl:input message="tns:DeleteTTHttpPostIn" />
+      <wsdl:output message="tns:DeleteTTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <wsdl:input message="tns:DeleteMXHttpPostIn" />
+      <wsdl:output message="tns:DeleteMXHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDHttpPostIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCount">
+      <wsdl:input message="tns:AddCountHttpPostIn" />
+      <wsdl:output message="tns:AddCountHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MSG_NOTICESoap" type="tns:MSG_NOTICESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTT">
+      <soap:operation soapAction="http://tempuri.org/CreateTT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateMX">
+      <soap:operation soapAction="http://tempuri.org/CreateMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTT">
+      <soap:operation soapAction="http://tempuri.org/ReadTT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTbyTTID">
+      <soap:operation soapAction="http://tempuri.org/ReadTTbyTTID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_KH">
+      <soap:operation soapAction="http://tempuri.org/ReadMXbyTTID_KH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_STAFF">
+      <soap:operation soapAction="http://tempuri.org/ReadMXbyTTID_STAFF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTT">
+      <soap:operation soapAction="http://tempuri.org/UpdateTT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIsactive">
+      <soap:operation soapAction="http://tempuri.org/UpdateIsactive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMX">
+      <soap:operation soapAction="http://tempuri.org/UpdateMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <soap:operation soapAction="http://tempuri.org/DeleteTT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <soap:operation soapAction="http://tempuri.org/DeleteMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <soap:operation soapAction="http://tempuri.org/ReadBySTAFFID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCount">
+      <soap:operation soapAction="http://tempuri.org/AddCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyParam">
+      <soap:operation soapAction="http://tempuri.org/ReadMXbyParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MSG_NOTICESoap12" type="tns:MSG_NOTICESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTT">
+      <soap12:operation soapAction="http://tempuri.org/CreateTT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateMX">
+      <soap12:operation soapAction="http://tempuri.org/CreateMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTT">
+      <soap12:operation soapAction="http://tempuri.org/ReadTT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTbyTTID">
+      <soap12:operation soapAction="http://tempuri.org/ReadTTbyTTID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_KH">
+      <soap12:operation soapAction="http://tempuri.org/ReadMXbyTTID_KH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_STAFF">
+      <soap12:operation soapAction="http://tempuri.org/ReadMXbyTTID_STAFF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTT">
+      <soap12:operation soapAction="http://tempuri.org/UpdateTT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIsactive">
+      <soap12:operation soapAction="http://tempuri.org/UpdateIsactive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMX">
+      <soap12:operation soapAction="http://tempuri.org/UpdateMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <soap12:operation soapAction="http://tempuri.org/DeleteTT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <soap12:operation soapAction="http://tempuri.org/DeleteMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <soap12:operation soapAction="http://tempuri.org/ReadBySTAFFID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCount">
+      <soap12:operation soapAction="http://tempuri.org/AddCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadMXbyParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MSG_NOTICEHttpGet" type="tns:MSG_NOTICEHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTbyTTID">
+      <http:operation location="/ReadTTbyTTID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_KH">
+      <http:operation location="/ReadMXbyTTID_KH" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_STAFF">
+      <http:operation location="/ReadMXbyTTID_STAFF" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIsactive">
+      <http:operation location="/UpdateIsactive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <http:operation location="/DeleteTT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <http:operation location="/DeleteMX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <http:operation location="/ReadBySTAFFID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCount">
+      <http:operation location="/AddCount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MSG_NOTICEHttpPost" type="tns:MSG_NOTICEHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadTTbyTTID">
+      <http:operation location="/ReadTTbyTTID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_KH">
+      <http:operation location="/ReadMXbyTTID_KH" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadMXbyTTID_STAFF">
+      <http:operation location="/ReadMXbyTTID_STAFF" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIsactive">
+      <http:operation location="/UpdateIsactive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTT">
+      <http:operation location="/DeleteTT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMX">
+      <http:operation location="/DeleteMX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <http:operation location="/ReadBySTAFFID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCount">
+      <http:operation location="/AddCount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MSG_NOTICE">
+    <wsdl:port name="MSG_NOTICESoap" binding="tns:MSG_NOTICESoap">
+      <soap:address location="http://192.168.0.135/API/CRM/MSG_NOTICE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MSG_NOTICESoap12" binding="tns:MSG_NOTICESoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/MSG_NOTICE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MSG_NOTICEHttpGet" binding="tns:MSG_NOTICEHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/MSG_NOTICE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MSG_NOTICEHttpPost" binding="tns:MSG_NOTICEHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/MSG_NOTICE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

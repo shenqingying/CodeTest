@@ -1,0 +1,440 @@
+﻿@{
+    ViewBag.Title = "成品包装未关联查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+<script type="text/html" id="TLTH_Tpl">
+    {{# if(d.TLTH>0){ }}
+    {{ d.TLTH }}
+    {{# }else { }}
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_mescx">MES查询</a>
+    <a><cite lid="vi_cpbz">成品包装未关联查询报表</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="vi_cx">查询</button>
+        <button class="layui-btn" id="btn_DC" lid="vi_dc">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gzzx">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="find_gzzx" lay-filter="find_gzzx" lay-search=""></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wldl">物料大类：</label>
+            <div class="layui-input-inline">
+                <select id="find_wldl" lay-filter="find_wldl"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlz">物料组：</label>
+            <div class="layui-input-inline">
+                <select id="find_wlz" lay-filter="find_wlz"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlbm">物料编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_wlh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_pc">批次：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_pc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_xsdd">销售订单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_xsdd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_xsxm">销售项目：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_xsxm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_bbrq">报表日期：</label>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_bbrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 130px;">
+                <input type="text" name="date" id="find_bbrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_tpm" lay-filter="tb_tpm"></table>
+</div>
+@section scripts {
+    <script>
+        //sqy
+        sonluk.global.getResources();
+        sonluk.global.getResources("MES/MESSelect/MES_NOSM_TPM_SELECT", "lv");
+        var scom = sonluk.value.global.common;
+        var slv = sonluk.value.global.lv;
+        var stable = sonluk.layui.table;
+        var slaydate = sonluk.layui.laydate;
+
+
+        var all_fy = 1;
+        var all_fysl = 12;
+        var all_limits = [12, 36, 108, 324, 972, 3000];
+        layui.use(['form', 'laydate', 'element', 'laydate', 'table'], function () {
+            sonluk.global.replaceLayui();//覆盖layui（xur）
+            var layer = layui.layer
+                , laydate = layui.laydate;
+            var table = layui.table;
+            var form = layui.form;
+            laydate.render({
+                elem: '#find_bbrq_s'
+            });
+            laydate.render({
+                elem: '#find_bbrq_e'
+            });
+            band_find_gc();
+            $("#btn_find").click(function () {
+                banddate();
+            });
+            $("#btn_DC").click(function () {
+                var GC = $('#find_gc').val();
+                var GZZXBH = $('#find_gzzx').val();
+
+                var WLDL = "";
+                if ($('#find_wldl').val() !== "0") {
+                    WLDL = $("#find_wldl option:checked").text()
+                }
+                var WLGROUP = $('#find_wlz').val();
+                var WLH = $('#find_wlh').val();
+                var PC = $('#find_pc').val();
+                var NOBILL = $('#find_xsdd').val();
+                var NOBILLMX = $('#find_xsxm').val();
+                var KSTIME = $('#find_bbrq_s').val();
+                var JSTIME = $('#find_bbrq_e').val();
+                if (GC === "") {
+                    layer.msg(scom.c_msg20);
+                    return;
+                }
+                if (KSTIME === "") {
+                    layer.msg(slv.msg0);
+                    return;
+                }
+                if (JSTIME === "") {
+                    layer.msg(slv.msg1);
+                    return;
+                }
+                if (KSTIME > JSTIME) {
+                    layer.msg(slv.msg2);
+                    return;
+                }
+                var datastring = {
+                    LB: 2,
+                    GC: GC,
+                    GZZXBH: GZZXBH,
+                    WLDL: WLDL,
+                    WLGROUP: WLGROUP,
+                    WLH: WLH,
+                    PC: PC,
+                    NOBILL: NOBILL,
+                    NOBILLMX: NOBILLMX,
+                    KSTIME: KSTIME,
+                    JSTIME: JSTIME
+                };
+
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MESSelect/EXPOST_NOSM_TPM",
+                    data: {
+                        datastring: JSON.stringify(datastring)
+                    },
+                    success: function (data) {
+                        var resdata = JSON.parse(data);
+                        if (resdata.TYPE === "S") {
+                            window.open("../MESSelect/EXPORT_DOWNLOAD" + "?filename=" + resdata.MESSAGE + "&filenameout=" + slv.msg5 + "", "_self");
+                        }
+                        else {
+                            layer.msg(resdata.MESSAGE);
+                        }
+                    }
+                });
+            });
+            form.on('select(find_gc)', function (data) {
+                band_find_gzzx();
+                band_find_wldl();
+            });
+            form.on('select(find_wldl)', function (data) {
+                band_find_wlz();
+            });
+            $('#in_tm').on('blur', function () {
+                var in_tm = $("#in_tm").val();
+                if (in_tm.length !== 12 && tm_delete_sm !== "") {
+                    layer.msg(slv.msg3);
+                }
+                if (in_tm !== "") {
+                    banddate();
+                }
+            });
+        });
+        function band_find_gc() {
+            var form = layui.form;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../System/Data_Select_GC_ROLE",
+                data: {
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.length === 1) {
+                        $('#find_gc').append(new Option(resdata[0].GC + "-" + resdata[0].GCMS, resdata[0].GC));
+                    }
+                    else {
+                        $("#find_gc").html("");
+                        $('#find_gc').append(new Option(scom.c_selectplz, ""));
+                        for (var a = 0; a < resdata.length; a++) {
+                            $('#find_gc').append(new Option(resdata[a].GC + "-" + resdata[a].GCMS, resdata[a].GC));
+                        }
+                    }
+                    //band_find_pfdhlb();
+                    band_find_gzzx();
+                    band_find_wldl();
+                }
+            });
+            form.render();
+        }
+        function band_find_gzzx() {
+            var form = layui.form;
+            $("#find_gzzx").html("");
+            if ($('#find_gc').val() != "") {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../TMManage/GET_GZZX_BY_ROLE",
+                    data: {
+                        GC: $('#find_gc').val()
+                    },
+                    success: function (data) {
+                        var resdata = JSON.parse(data);
+                        var rstcount = resdata.length;
+                        if (rstcount === 1) {
+                            $('#find_gzzx').append(new Option(resdata[0].GZZXBH + "-" + resdata[0].GZZXMS, resdata[0].GZZXBH));
+                        }
+                        else {
+                            $('#find_gzzx').append(new Option(scom.c_selectplz, ""));
+                            for (var i = 0; i < resdata.length; i++) {
+                                $('#find_gzzx').append(new Option(resdata[i].GZZXBH + "-" + resdata[i].GZZXMS, resdata[i].GZZXBH));
+                            }
+                        }
+                        form.render();
+                    }
+                });
+            }
+            else {
+                $('#find_gzzx').append(new Option(scom.c_selectplz, ""));
+            }
+            form.render();
+        }
+        function band_find_wldl() {
+            var form = layui.form;
+            $("#find_wldl").html("");
+            if ($('#find_gc').val() != "") {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MESSelect/GET_TYPEMX",
+                    data: {
+                        GC: $('#find_gc').val(),
+                        TYPEID: 4
+                    },
+                    success: function (data) {
+                        var resdata = JSON.parse(data);
+                        var rstcount = resdata.length;
+                        if (rstcount === 1) {
+                            $('#find_wldl').append(new Option(resdata[0].MXNAME, resdata[0].ID));
+                        }
+                        else {
+                            $('#find_wldl').append(new Option(scom.c_selectplz, "0"));
+                            for (var i = 0; i < resdata.length; i++) {
+                                $('#find_wldl').append(new Option(resdata[i].MXNAME, resdata[i].ID));
+                            }
+                        }
+                        form.render();
+                        for (var i = 0; i < resdata.length; i++) {
+                            if (resdata[i].MXNAME === slv.msg4) {
+                                $('#find_wldl').val(resdata[i].ID);
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                $('#find_wldl').append(new Option(scom.c_selectplz, "0"));
+            }
+            form.render();
+            band_find_wlz();
+        }
+        function band_find_wlz() {
+            var form = layui.form;
+            $("#find_wlz").html("");
+            if ($('#find_wldl').val() != "0") {
+                var datastring = {
+                    GC: $('#find_gc').val(),
+                    WLLB: $('#find_wldl').val()
+                }
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MESSelect/GET_WLGROUP_datastring",
+                    data: {
+                        datastring: JSON.stringify(datastring)
+                    },
+                    success: function (data) {
+                        var resdata = JSON.parse(data);
+                        if (resdata.MES_RETURN.TYPE === "S") {
+                            var rstcount = resdata.MES_SY_MATERIAL_GROUP.length;
+                            if (rstcount === 0) {
+                                $('#find_wlz').append(new Option(resdata.MES_SY_MATERIAL_GROUP[0].WLGROUP + "-" + resdata.MES_SY_MATERIAL_GROUP[0].WLGROUPNAME, resdata.MES_SY_MATERIAL_GROUP[0].WLGROUP));
+                            }
+                            else {
+                                $('#find_wlz').append(new Option(scom.c_selectplz, ""));
+                                for (var i = 0; i < resdata.MES_SY_MATERIAL_GROUP.length; i++) {
+                                    $('#find_wlz').append(new Option(resdata.MES_SY_MATERIAL_GROUP[i].WLGROUP + "-" + resdata.MES_SY_MATERIAL_GROUP[i].WLGROUPNAME, resdata.MES_SY_MATERIAL_GROUP[i].WLGROUP));
+                                }
+                            }
+                            for (var i = 0; i < resdata.MES_SY_MATERIAL_GROUP.length; i++) {
+                                if (resdata.MES_SY_MATERIAL_GROUP[i].WLGROUP === "10000000") {
+                                    $('#find_wlz').val(resdata.MES_SY_MATERIAL_GROUP[i].WLGROUP);
+                                }
+                            }
+                        }
+                        form.render();
+                    }
+                });
+            }
+            else {
+                $('#find_wlz').append(new Option(scom.c_selectplz, ""));
+            }
+            form.render();
+        }
+        function banddate() {
+            var table = layui.table;
+            var GC = $('#find_gc').val();
+            var GZZXBH = $('#find_gzzx').val();
+
+            var WLDL = "";
+            if ($('#find_wldl').val() !== "0") {
+                WLDL = $("#find_wldl option:checked").text()
+            }
+            var WLGROUP = $('#find_wlz').val();
+            var WLH = $('#find_wlh').val();
+            var PC = $('#find_pc').val();
+            var NOBILL = $('#find_xsdd').val();
+            var NOBILLMX = $('#find_xsxm').val();
+            var KSTIME = $('#find_bbrq_s').val();
+            var JSTIME = $('#find_bbrq_e').val();
+            if (GC === "") {
+                layer.msg(scom.c_msg20);
+                return;
+            }
+            if (KSTIME === "") {
+                layer.msg(slv.msg0);
+                return;
+            }
+            if (JSTIME === "") {
+                layer.msg(slv.msg1);
+                return;
+            }
+            if (KSTIME > JSTIME) {
+                layer.msg(slv.msg2);
+                return;
+            }
+            var datastring = {
+                LB: 2,
+                GC: GC,
+                GZZXBH: GZZXBH,
+                WLDL: WLDL,
+                WLGROUP: WLGROUP,
+                WLH: WLH,
+                PC: PC,
+                NOBILL: NOBILL,
+                NOBILLMX: NOBILLMX,
+                KSTIME: KSTIME,
+                JSTIME: JSTIME
+            };
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../MESSelect/MES_TPM_SELECT_TPM_SYNC",
+                data: {
+                    datastring: JSON.stringify(datastring)
+                },
+                success: function (data) {
+                    var resdata = JSON.parse(data);
+                    if (resdata.MES_RETURN.TYPE = "S") {
+                        var fyall = Math.ceil(resdata.MES_SY_TPM_SYNC.length / all_fysl);
+                        if (fyall > all_fy - 1) {
+                        }
+                        else {
+                            all_fy = Number(fyall);
+                        }
+
+                        stable.render({
+                            done: function (res, curr, count) {
+                                for (var i = 0; i < all_limits.length; i++) {
+                                    if (all_limits[i] >= res.data.length) {
+                                        all_fysl = all_limits[i];
+                                        break;
+                                    }
+                                }
+                                all_fy = curr;
+                            },
+                            height: 550,
+                            elem: '#tb_tpm',
+                            data: resdata.MES_SY_TPM_SYNC,
+                            cols: [[ //表头
+                                { type: 'numbers', title: scom.c_Number },
+                                { field: 'WERKS', width: 120 },
+                                { field: 'ARBPL', width: 105 },
+                                { field: 'LTXA1', width: 120 },
+                                { field: 'TPM', width: 130 },
+                                { field: 'LGORT', width: 115 },
+                                { field: 'LGPLA', width: 130 },
+                                { field: 'MATNR', width: 160, sort: true },
+                                { field: 'MAKTX', width: 130 },
+                                { field: 'CHARG', width: 100 },
+                                { field: 'KDAUF', width: 120 },
+                                { field: 'KDPOS', width: 100 },
+                                { field: 'AUFNR', width: 100 }
+                            ]]
+                           , page: {
+                               limits: all_limits,
+                               limit: all_fysl,
+                               curr: all_fy
+                           },
+                        });
+                    }
+                    else {
+                        layer.msg(resdata.MES_RETURN.MESSAGE);
+
+                    }
+                }
+            });
+        }
+    </script>
+}

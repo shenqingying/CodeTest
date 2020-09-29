@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "角色设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="bar_confirm">
+    <a class="layui-btn layui-btn-xs" lay-event="click">选择</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>系统管理</a>
+    <a><cite>角色设置</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">角色名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="cx_rolename" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">权限名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="cx_rightname" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <table id="result" lay-filter="result"></table>
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<div id="div_role" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色名称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色说明：</label>
+        <div class="layui-input-inline">
+            <input id="shuoming" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <table id="result_toright" lay-filter="result_toright"></table>
+</div>
+
+
+<div id="div_right" class="layui-form" hidden>
+    <button id="btn_cx_right" class="layui-btn">查询</button>
+    <div class="layui-form-item">
+        @*<div class="layui-inline">
+                <label class="layui-form-label">权限ID：</label>
+                <div class="layui-input-inline">
+                    <input id="rightid" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;">权限名称：</label>
+            <div class="layui-input-inline">
+                <input id="rightname" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        @*</div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">权限组ID：</label>
+                    <div class="layui-input-inline">
+                        <input id="groupid" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;">权限组名称：</label>
+            <div class="layui-input-inline">
+                <input id="groupname" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <table id="table_right" lay-filter="table_right"></table>
+</div>
+
+
+<input id="netpath" hidden />
+
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/System/Role")
+}

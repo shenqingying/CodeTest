@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "HR来源管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    未启用
+    {{# }else if(d.ISACTION == 1){ }}
+    已启用
+    {{# } }}
+</script>
+<script type="text/html" id="ISMRTpl">
+    <input type="checkbox" name="ismr" value="{{d.ISMR}}" lay-skin="switch" lay-text="是|否" lay-filter="cb_ismr" {{ d.ISMR == 1 ? 'checked' : '' }}>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR系统设置</a>
+    <a><cite>HR来源管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">组名称：</label>
+            <div class="layui-input-inline">
+                <input id="find_zname" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_hrz" lay-filter="tb_hrz"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+
+<div id="div_add" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">公司：</label>
+        <div class="layui-input-inline">
+            <select id="add_gs" lay-filter="add_gs">
+                <option value="" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">组名称：</label>
+        <div class="layui-input-inline">
+            <input id="add_zname" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">启用状态：</label>
+        <div class="layui-input-inline">
+            <select id="add_isaction" lay-filter="add_isaction">
+                <option value="1" selected="selected">启用</option>
+                <option value="0">关闭</option>
+            </select>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_ly" lay-filter="tb_ly"></table>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/HR/SYSTEM/SY_ZJH")
+}

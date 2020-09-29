@@ -1,0 +1,699 @@
+﻿@{
+    ViewBag.Title = "托盘管理";
+}
+
+@Html.Partial("~/Areas/WMS/Views/Shared/WMSHttp.cshtml")
+
+<style>
+    #createLayerForm .layui-input-inline,
+    #editLayerForm .layui-input-inline {
+        width: 280px;
+    }
+
+    .layui-btn:not(.layui-btn-disabled) {
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+</style>
+
+<span class="layui-breadcrumb"></span>
+
+<br />
+<br />
+
+<div class="layui-form layui-form-fix">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <button onclick="createPallet()" class="layui-btn">新增</button>
+            <button onclick="deletePallet(cacheHitTPNOs)" class="layui-btn layui-btn-disabled">批量删除</button>
+            <button onclick="exportPallet()" class="layui-btn layui-btn-disabled">导出</button>
+            <button onclick="printPallet()" class="layui-btn layui-btn-disabled">批量打印</button>
+            <button onclick="searchPallet()" class="layui-btn">查询</button>
+        </div>
+    </div>
+    <form class="layui-form-item" id="searchTermForm">
+        <div class="layui-inline">
+            <label class="layui-form-label">托盘码：</label>
+            <div class="layui-input-inline">
+                <input name="TPNO" class="layui-input" onkeydown="javascript: if (event && event.keyCode == 13) searchPallet();">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select name="WERKS">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">库存地点：</label>
+            <div class="layui-input-inline">
+                <select name="LGORT">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">物料信息：</label>
+            <div class="layui-input-inline">
+                <input name="WLMS" class="layui-input" onkeydown="javascript: if (event && event.keyCode == 13) searchPallet();">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">组托状态：</label>
+            <div class="layui-input-inline">
+                <select name="ISFREE">
+                    <option value="" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">托盘属性：</label>
+            <div class="layui-input-inline">
+                <select name="TPTYPE">
+                    <option value="" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">创建人：</label>
+            <div class="layui-input-inline">
+                <input name="CJR" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">创建日期：</label>
+            <div class="layui-input-inline">
+                <input name="CJTIMES" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">-</div>
+            <div class="layui-input-inline">
+                <input name="CJTIMEE" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">已删除：</label>
+            <div class="layui-input-inline">
+                <input name="ISDELETE" value="0" type="checkbox" lay-skin="switch" lay-filter="TermISDELETE" lay-text="显示|不显示">
+            </div>
+        </div>
+    </form>
+    <table class="layui-hide" id="palletTable" lay-filter="palletTable"></table>
+</div>
+
+<div id="createLayerTpl" class="layui-form layui-form-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="createLayerCheck" lay-submit="" hidden></button>
+    <form id="createLayerForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select name="WERKS" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">库存地点：</label>
+            <div class="layui-input-inline">
+                <select name="LGORT" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">物料信息：</label>
+            <div class="layui-input-inline">
+                <select name="WLH" lay-filter="createLayerWLH" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘规格：</label>
+            <div class="layui-input-inline">
+                <input name="TPGGNAME" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新增数量：</label>
+            <div class="layui-input-inline">
+                <input name="CJSL" class="layui-input" lay-verify="required|CJSL" type="number">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘来源：</label>
+            <div class="layui-input-inline">
+                <select name="TPLY" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘属性：</label>
+            <div class="layui-input-inline">
+                <select name="TPTYPE" lay-verify="required">
+                    <option value="" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="editLayerTpl" class="layui-form layui-form-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="editLayerCheck" lay-submit="" hidden></button>
+    <form id="editLayerForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘码：</label>
+            <div class="layui-input-inline">
+                <input name="TPNO" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select name="WERKS" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">库存地点：</label>
+            <div class="layui-input-inline">
+                <select name="LGORT" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">物料信息：</label>
+            <div class="layui-input-inline">
+                <select name="WLH" lay-filter="editLayerWLH" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘规格：</label>
+            <div class="layui-input-inline">
+                <input name="TPGGNAME" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">归属工厂：</label>
+            <div class="layui-input-inline">
+                <select name="GSGC" disabled>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘来源：</label>
+            <div class="layui-input-inline">
+                <select name="TPLY" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">组托状态：</label>
+            <div class="layui-input-inline">
+                <select name="ISFREE" disabled>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘属性：</label>
+            <div class="layui-input-inline">
+                <select name="TPTYPE" lay-verify="required">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<span id="exportUrl" hidden>@Url.Action("SearchExport", "Pallet", new { area = "WMS" })</span>
+<span id="printUrl" hidden>@Url.Action("SearchPrint", "Pallet", new { area = "WMS" })</span>
+
+<script type="text/html" id="operate">
+    {{# if(d.ISDELETE == 0){}}
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+    {{# }else{ }}
+    <a class="layui-btn layui-btn-xs layui-btn-disabled">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-disabled">删除</a>
+    {{# } }}
+</script>
+
+<script type="text/html" id="ISDELETE">
+    {{# if(d.ISDELETE == 0){}}
+    未删除
+    {{# }else if(d.ISDELETE == 1){ }}
+    已删除
+    {{# }else{ }}
+    未知状态
+    {{# } }}
+</script>
+
+<script type="text/html" id="ISFREE">
+    {{# if(d.ISFREE == 1){}}
+    未组托
+    {{# }else if(d.ISFREE == 2){ }}
+    组托
+    {{# }else{ }}
+    未知状态
+    {{# } }}
+</script>
+
+<script type="text/html" id="ZHTIME">
+    {{# if(!d.ZHTIME.startsWith('0001')){}}
+    {{d.ZHTIME.replace("T"," ").split(".")[0]}}
+    {{# } }}
+</script>
+
+@section scripts {
+    <script src="~/Scripts/Helper/multirights.js"></script>
+    <script>
+        sonluk.global.getResources();
+        sonluk.global.getResources('WMS/Pallet', 'lv');
+        var cache = [];
+        var cacheTerm = {};
+        var cacheHitTPNOs = [];
+        var cacheSelector = {};
+        const sc = sonluk.values.global.common;
+        const slv = sonluk.values.global.lv;
+        const selectorISFREE = [
+            { label: '未组托', value: 1 },
+            { label: '组托', value: 2 }
+        ];
+        const selectorTPTYPE = [
+            { label: '租赁', value: 1 },
+            { label: '自购', value: 2 }
+        ];
+        const colsOfPallet = [[
+            { type: 'checkbox', width: 50 },
+            { title: '序号', type: 'numbers' },
+            { field: 'TPNO', width: 120 },
+            { field: 'WERKS', width: 180, templet: '<div>{{d.WERKS + " - " + d.WERKSNAME}}</div>' },
+            { field: 'LGORT' },
+            { field: 'LGORTNAME', width: 150 },
+            { field: 'WLH' },
+            { field: 'WLMS', width: 120 },
+            { field: 'TPGGNAME', width: 140 },
+            { field: 'ISFREE', templet: '#ISFREE' },
+            { field: 'ISDELETE', templet: '#ISDELETE' },
+            { field: 'TPLYNAME', width: 140 },
+            { field: 'TPTYPENAME' },
+            { field: 'ZHRNAME', width: 100 },
+            { field: 'ZHTIME', width: 200, templet: '#ZHTIME' },
+            { field: 'CJRNAME', width: 100 },
+            { field: 'CJTIME', width: 200, templet: '<div>{{d.CJTIME.replace("T"," ").split(".")[0]}}</div>' },
+            { field: 'XGRNAME', width: 100 },
+            { field: 'XGTIME', width: 200, templet: '<div>{{d.XGTIME.replace("T"," ").split(".")[0]}}</div>' },
+            { title: '操作', fixed: 'right', width: 120, toolbar: '#operate' }
+        ]];
+        layui.use(['table', 'layer', 'form', 'element', 'laydate'], function () {
+            const table = layui.table;
+            const layer = layui.layer;
+            const form = layui.form;
+            const assist = sonluk.layui;
+            const msg = sonluk.msg;
+
+            sonluk.layui.breadcrumbefix();
+            initAll();
+
+            function initAll() {
+                var loading = layer.load(1);
+                assist.laydate.render({ elem: '[name=CJTIMES]' });
+                assist.laydate.render({ elem: '[name=CJTIMEE]' });
+                assist.layer.hover('[onclick="deletePallet(cacheHitTPNOs)"]', '请先勾选要删除的数据', function () { return $('[onclick="deletePallet(cacheHitTPNOs)"]').hasClass('layui-btn-disabled'); }, 1);
+                assist.layer.hover('[onclick="exportPallet()"]', '请先查询要导出的数据', function () { return $('[onclick="exportPallet()"]').hasClass('layui-btn-disabled'); }, 1);
+                assist.layer.hover('[onclick="printPallet()"]', '请先勾选要打印的数据', function () { return $('[onclick="printPallet()"]').hasClass('layui-btn-disabled'); }, 1);
+                form.on('switch(TermISDELETE)', function (data) {
+                    if (data.elem.checked) data.elem.value = 1;
+                    else data.elem.value = 0;
+                });
+                form.verify({
+                    CJSL: function (value, item) {
+                        if (value <= 0) return '新增数量必须大于0';
+                        if (!/^\d+$/.test(value)) return '新增数量必须为整数';
+                    }
+                });
+                table.on('checkbox(palletTable)', function (obj) {
+                    refreshHitTPNOs();
+                });
+                table.on('tool(palletTable)', function (obj) {
+                    var data = obj.data;
+                    var layEvent = obj.event;
+                    if (layEvent === 'del') {
+                        deletePallet([data.TPNO]);
+                        initTable();
+                    }
+                    else if (layEvent === 'edit') {
+                        initLayer(layEvent, data);
+                    }
+                });
+                cacheSelector = initRightList({
+                    query: [
+                        {
+                            GC: '#searchTermForm [name=WERKS]',
+                            KCDD: '#searchTermForm [name=LGORT]'
+                        },
+                        {
+                            GC: '#createLayerForm [name=WERKS]',
+                            KCDD: '#createLayerForm [name=LGORT]'
+                        },
+                        {
+                            GC: '#editLayerForm [name=WERKS]',
+                            KCDD: '#editLayerForm [name=LGORT]'
+                        },
+                        {
+                            GC: '#editLayerForm [name=GSGC]'
+                        }
+                    ],
+                    request: wmshttp,
+                    layui: layui,
+                    done: function () {
+                        initList(function () {
+                            layer.close(loading);
+                        });
+                    }
+                });
+            }
+
+            function initList(callback) {
+                //初始化
+                var cindex = 0;
+                var sindex = 0;
+                const cFunc = function () {
+                    cindex++;
+                    if (cindex == 1 && cindex == sindex) callback(true);
+                    else if (cindex == 1) callback(false);
+                }
+
+                //请求
+                //-物料信息
+                wmshttp.post({
+                    url: 'WMS/BC_TPM/ReadTPMWL',
+                    success: function (data) {
+                        if (data.success) {
+                            sindex++;
+                            initWLH($('#createLayerForm [name=WLH]'), data.data, { filter: 'createLayerWLH', form: '#createLayerForm' });
+                            initWLH($('#editLayerForm [name=WLH]'), data.data, { filter: 'editLayerWLH', form: '#editLayerForm' });
+                        }
+                        else msg.error(data.messages);
+                    },
+                    complete: cFunc
+                });
+                //-托盘来源
+                wmshttp.post({
+                    url: 'Helper/Dic/ReadTypemxs',
+                    data: { TYPEID: 21 },
+                    success: function (data) {
+                        if (data.success) {
+                            sindex++;
+                            initTPLY($('#createLayerForm [name=TPLY]'), data.data);
+                            initTPLY($('#editLayerForm [name=TPLY]'), data.data);
+                        }
+                        else msg.error(data.messages);
+                    },
+                    complete: cFunc
+                });
+                //-托盘属性
+                initTPTYPE($('#searchTermForm [name=TPTYPE]'), selectorTPTYPE);
+                initTPTYPE($('#createLayerForm [name=TPTYPE]'), selectorTPTYPE);
+                initTPTYPE($('#editLayerForm [name=TPTYPE]'), selectorTPTYPE);
+                //-组托状态
+                initISFREE($('#searchTermForm [name=ISFREE]'), selectorISFREE);
+                initISFREE($('#editLayerForm [name=ISFREE]'), selectorISFREE);
+
+                //填充和监听下拉框
+                function initISFREE(selector, data) {
+                    selector.empty();
+                    selector.append(new Option("请选择", ""));
+                    data.forEach(function (item) {
+                        selector.append(new Option(item.label, item.value));
+                    });
+                    form.render();
+                }
+                function initTPTYPE(selector, data) {
+                    selector.empty();
+                    selector.append(new Option("请选择", ""));
+                    data.forEach(function (item) {
+                        selector.append(new Option(item.label, item.value));
+                    });
+                    form.render();
+                }
+                function initTPLY(selector, data) {
+                    selector.empty();
+                    selector.append(new Option("请选择", ""));
+                    data.forEach(function (item) {
+                        selector.append(new Option(item.MXNAME, item.ID));
+                    });
+                    form.render();
+                }
+                function initWLH(selector, data, listener) {
+                    selector.empty();
+                    selector.append(new Option("请选择", ""));
+                    data.forEach(function (item) {
+                        selector.append(new Option(item.WLH + '-' + item.WLMS, item.WLH));
+                    });
+                    form.render();
+                    if (listener) {
+                        form.on('select(' + listener.filter + ')', function (hitData) {
+                            for (var i = 0; i < data.length; i++) {
+                                if (hitData.value = data[i].WLH) {
+                                    $(listener.form + ' [name=TPGGNAME]').val(data[i].TPGGNAME);
+                                    break;
+                                }
+                            }
+                            form.render();
+                        });
+                    }
+                }
+            }
+
+            function initTable(data) {
+                data = data || cache;
+                refreshHitTPNOs();
+                var fixHeight = 215;
+                $('.layui-form-fix .layui-form-item').each(function (index, elem) {
+                    fixHeight += elem.clientHeight;
+                });
+                assist.table.render({
+                    elem: '#palletTable',
+                    height: 'full-' + fixHeight,
+                    data: data,
+                    cols: colsOfPallet,
+                    page: {
+                        curr: 1,
+                        limit: 15,
+                        limits: [15, 30, 45, 60, 75, 90],
+                    },
+                });
+                if (data && data.length > 0) $('[onclick="exportPallet()"]').removeClass('layui-btn-disabled');
+                else $('[onclick="exportPallet()"]').addClass('layui-btn-disabled');
+            }
+
+            function initLayer(event, data) {
+                event = event || '';
+                data = data || {};
+                const openParams = { title: '', func: '', tpl: '', form: {}, area: [] };
+                if (event == "edit") {
+                    openParams.title = '修改';
+                    openParams.url = 'WMS/BC_TPM/Update';
+                    openParams.tpl = '#editLayerTpl';
+                    openParams.form = $('#editLayerForm')[0];
+                    openParams.area = ['500px', '600px'];
+                }
+                else {
+                    openParams.title = '新增';
+                    openParams.url = 'WMS/BC_TPM/Create';
+                    openParams.tpl = '#createLayerTpl';
+                    openParams.form = $('#createLayerForm')[0];
+                    openParams.area = ['500px', '500px'];
+                }
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['保存', '取消'],
+                    area: openParams.area,
+                    content: $(openParams.tpl),
+                    title: openParams.title,
+                    moveOut: true,
+                    success: function (layero, index) {
+                        if (event == 'edit') {
+                            cacheSelector.changeGC(data.WERKS, '#editLayerForm [name=WERKS]');
+                            for (let key in data) {
+                                if (openParams.form[key]) openParams.form[key].value = data[key];
+                            }
+                        }
+                        else {
+                            if (cacheSelector.cache.GC.GC0.length == 1) cacheSelector.changeGC(cacheSelector.cache.GC.GC0[0].GC, '#createLayerForm [name=WERKS]');
+                            else cacheSelector.changeGC('', '#createLayerForm [name=WERKS]');
+                            for (var i = 0; i < form.length; i++) {
+                                openParams.form[i].value = '';
+                            }
+                        }
+                        form.render();
+                    },
+                    yes: function (index, layero) {
+                        var postData = sonluk.convert.toObject(openParams.form);
+                        for (var i = 0; i < selectorTPTYPE.length; i++) {
+                            if (selectorTPTYPE[i].value == postData.TPTYPE) {
+                                postData.TPTYPENAME = selectorTPTYPE[i].label;
+                                break;
+                            }
+                        }
+                        if (event == 'edit') {
+                            $("#editLayerCheck")[0].click();
+                            postData.LB = 1;
+                        }
+                        else {
+                            $("#createLayerCheck")[0].click();
+                            postData.GSGC = postData.WERKS;
+                            //校验
+                            if (!/^\d+$/.test(postData.CJSL) || postData.CJSL <= 0) return;
+                        }
+                        //公共校验
+                        if (!postData.WERKS || !postData.LGORT || !postData.WLH || !postData.TPLY || !postData.TPTYPE) return;
+                        var loading = layer.load(1);
+                        wmshttp.post({
+                            url: openParams.url,
+                            data: postData,
+                            success: function (data) {
+                                if (data.success) {
+                                    msg.success(openParams.title + '成功');
+                                    searchPallet(cacheTerm);
+                                    layer.close(index);
+                                }
+                                else msg.error(data.messages);
+                            },
+                            complete: function () {
+                                layer.close(loading);
+                            }
+                        });
+                    }
+                });
+            }
+
+            function refreshHitTPNOs() {
+                cacheHitTPNOs = [];
+                cache.forEach(function (item) {
+                    if (item.LAY_CHECKED) cacheHitTPNOs.push(item.TPNO);
+                });
+                if (cacheHitTPNOs.length > 0) {
+                    $('[onclick="deletePallet(cacheHitTPNOs)"]').removeClass('layui-btn-disabled');
+                    $('[onclick="printPallet()"]').removeClass('layui-btn-disabled');
+                }
+                else {
+                    $('[onclick="deletePallet(cacheHitTPNOs)"]').addClass('layui-btn-disabled');
+                    $('[onclick="printPallet()"]').addClass('layui-btn-disabled');
+                }
+            }
+
+            window.searchPallet = function (term) {
+                term = term || sonluk.convert.toObject($('#searchTermForm')[0]);
+                term.LB = 2;
+                cacheTerm = term;
+                var loading = layer.load(1);
+                wmshttp.post({
+                    url: 'WMS/BC_TPM/Read',
+                    data: term,
+                    success: function (data) {
+                        if (data.success) {
+                            cache = data.data;
+                            initTable();
+                        }
+                        else msg.error(data.messages);
+                    },
+                    complete: function () {
+                        layer.close(loading);
+                    }
+                });
+            }
+
+            window.createPallet = function () {
+                initLayer();
+            }
+
+            window.deletePallet = function (TPNOs) {
+                if (!TPNOs || TPNOs.length == 0) return;
+                var deleted = true;
+                TPNOs.forEach(function (item) {
+                    for (var i = 0; i < cache.length; i++) {
+                        if (item == cache[i].TPNO && !cache[i].ISDELETE) {
+                            deleted = false;
+                            break;
+                        }
+                    }
+                });
+                if (deleted) {
+                    msg.error('所选数据均为已删除');
+                    return;
+                }
+                layer.confirm('确定删除？', function (index) {
+                    var postData = {
+                        TPNOS: TPNOs,
+                        LB: 2
+                    }
+                    var loading = layer.load(1);
+                    wmshttp.post({
+                        url: 'WMS/BC_TPM/Update',
+                        data: postData,
+                        success: function (data) {
+                            if (data.success) {
+                                msg.success('删除成功');
+                                searchPallet(cacheTerm);
+                            }
+                            else msg.error(data.messages);
+                        },
+                        complete: function () {
+                            layer.close(loading);
+                            layer.close(index);
+                        }
+                    });
+                });
+            }
+
+            window.exportPallet = function () {
+                if ($('[onclick="exportPallet()"]').hasClass('layui-btn-disabled')) return;
+                var titles = [];
+                for (let key in slv.palletTable) {
+                    var obj = {};
+                    if (key == 'ISDELETE') obj.Key = 'ISDELETEMS';
+                    else if (key == 'ISFREE') obj.Key = 'ISFREEMS';
+                    else obj.Key = key;
+                    obj.Name = slv.palletTable[key];
+                    obj.Width = slv.palletTableWidth[key];
+                    obj.Align = slv.palletTableAlign[key];
+                    titles.push(obj);
+                }
+                sonluk.http.download({
+                    url: $('#exportUrl').html(),
+                    get: false,
+                    data: {
+                        input: {
+                            Query: cacheTerm,
+                            Title: titles
+                        }
+                    }
+                });
+            }
+
+            window.printPallet = function () {
+                if ($('[onclick="printPallet()"]').hasClass('layui-btn-disabled')) return;
+                sonluk.http.download({
+                    url: $('#printUrl').html(),
+                    get: false,
+                    target: '_blank',
+                    data: {
+                        input:cacheHitTPNOs
+                    }
+                });
+            }
+        });
+    </script>
+}

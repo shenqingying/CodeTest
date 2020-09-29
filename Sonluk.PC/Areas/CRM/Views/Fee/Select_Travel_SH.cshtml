@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "查询";
+}
+<script type="text/html" id="manage">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 10){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 20){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 30){ }}
+    已审核
+    {{# }else if(d.ISACTIVE == 60){ }}
+    已审批
+    {{# }else { }}
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">首页</a>
+    <a>差旅费</a>
+    <a><cite>差率费报销单审核</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div class="layui-form" id="div1">
+        <div class="layui-form-item">
+           @*<button id="btn_insert" class="layui-btn">新增</button>*@
+            @*<button id="btn_update" class="layui-btn">更新</button>*@
+            <button id="btn_select" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            <button id="btn_shenhe" class="layui-btn">审核</button>
+            <button id="btn_back" class="layui-btn">回退</button>
+            <button id="btn_print" class="layui-btn">打印</button>
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:110px;text-align:right;">状态：</label>
+                            <div class="layui-input-inline">
+                                <select id="ISACTIVE" lay-filter="ISACTIVE" lay-search>
+                                    <option value="0">全部</option>
+                                    <option value="10">未提交</option>
+                                    <option value="20" selected="selected">审核中</option>
+                                    <option value="30">已审核</option>
+                                    <option value="60">已审批</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">开始时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_begin" type="text" class="layui-input" value="@ViewBag.startdate">
+                        </div>
+                        <label class="layui-form-label" style="width:110px;text-align:right;">结束时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_end" type="text" class="layui-input" value="@ViewBag.enddate">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;text-align:right;">人员：</label>
+                        <div class="layui-input-inline">
+                            <input id="Select_name" type="text" class="layui-input">
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <table id="result" lay-filter="result"></table>
+    </div>
+</div>
+
+
+
+<input id="courrentid" value="@Session["STAFFID"]" hidden />
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_Travel_SH")
+}

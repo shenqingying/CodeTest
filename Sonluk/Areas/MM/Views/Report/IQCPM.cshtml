@@ -1,0 +1,285 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<PageInfoOfPOInfo>
+@{
+    ViewBag.Title = "采购入库送检单(包材类)";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+    int sn = 1;
+    int index = 1;
+
+    string pageSize = "A4";
+    HttpCookie cookie = Request.Cookies.Get("IQCPMPageSize");
+    if (cookie != null)
+    {
+        pageSize = cookie.Value;
+    }
+}
+@Styles.Render("~/Content/report/incoming-quality-control-packing-material")
+<style>
+    /*条码增加部分*/
+    .print-page-code {
+        height: 1.8cm;
+        width: 3.8cm;
+        margin: 0 0 -1.8cm 0.2cm;
+    }
+
+        .print-page-code > img {
+            padding-top: 0.4cm;
+            height: 1cm;
+            width: 3.8cm;
+        }
+
+        .print-page-code > div {
+            font-size: 0.317cm;
+            letter-spacing: 0.1cm;
+        }
+
+    /*虚线修改部分*/
+    table {
+        border-collapse: separate;
+    }
+
+    td.print-page-body-table-header {
+        border-top: 0px;
+        border-right: 0px;
+    }
+
+    tr.print-page-header-top-fix > td.print-page-body-table-header {
+        border-top: 1px solid;
+    }
+
+    td.print-page-header-right-fix {
+        border-right: 1px solid;
+    }
+
+    tr.report-iqcpm-line-po-number > td {
+        border-top: 0px;
+    }
+
+    tr.print-page-dashed-line-alpha > td {
+        border-top: 0px;
+        border-right: 0px;
+        border-bottom: 0px;
+    }
+
+        tr.print-page-dashed-line-alpha > td:first-child {
+            border-left: 1px solid;
+        }
+
+        tr.print-page-dashed-line-alpha > td:last-child {
+            border-right: 1px solid;
+        }
+
+    tr.print-page-dashed-line-beta > td {
+        border-top: 1px dotted;
+        border-right: 0px;
+        border-bottom: 0px;
+    }
+
+        tr.print-page-dashed-line-beta > td:first-child {
+            border-left: 1px solid;
+        }
+
+        tr.print-page-dashed-line-beta > td:last-child {
+            border-right: 1px solid;
+        }
+
+    tr.print-page-dashed-line-gamma > td {
+        border-top: 1px dotted;
+        border-right: 0px;
+        border-bottom: 1px solid;
+    }
+
+        tr.print-page-dashed-line-gamma > td:first-child {
+            border-left: 1px solid;
+        }
+
+    tr > td.cell-qm-content {
+        border-bottom: 1px solid;
+    }
+</style>
+<input type="hidden" id="page-size" value="@pageSize">
+@foreach (PageInfoOfPOInfo page in Model)
+{
+    bool isSB = false;
+
+    foreach (POInfo nodes in page.Children)
+    {
+        foreach (POItemInfo node in nodes.Items)
+        {
+            if (node.MatlGroup == "20000000")
+            {
+                if (isSB == false)
+                {
+                    isSB = true;
+                    break;
+                }
+            }
+        }
+        if (isSB == true)
+        {
+            break;
+        }
+    }
+
+    string SHNO = "";
+    string CompanyName = "";
+    string VendorNumber = "";
+    string VendorName = "";
+    if (page.Children.Length > 0)
+    {
+        SHNO = page.Children[0].Header.SHNO ?? "";
+        CompanyName = page.Children[0].Header.CompanyName ?? "";
+        if (page.Children[0].Items.Length > 0)
+        {
+            VendorNumber = page.Children[0].Items[0].Vendor ?? "";
+            VendorName = page.Children[0].Items[0].LNAME ?? "";
+        }
+    }
+
+    <div class="print-page print-page-A4">
+        <div class="print-page-area print-page-area-A4">
+            <div class="print-page-code">
+                @{
+                    if (SHNO != "")
+                    {
+                        <img src="@Url.Action("BarCode", "BarCode", new { area = "BC", code = SHNO, format = "CODE_128", width = 380, height = 100, pure = 1})" />
+                        <div>@SHNO</div>
+                    }
+                }
+            </div>
+            <div class="print-page-header">
+                <div class="print-page-header-company-name">@CompanyName</div>
+                <div class="print-page-header-report-name">采购入库送检单(包材类)</div>
+                <table>
+                    <tr>
+                        <td class="print-page-header-table-title">供应商:</td>
+                        <td class="print-page-header-table-po-number">@VendorName</td>
+                        <td class="print-page-header-table-check">合格供方□</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page-header-table-title">供应商编号:</td>
+                        <td class="print-page-header-table-content">@VendorNumber</td>
+                        <td class="print-page-header-table-check">特殊供方□</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="print-page-body print-page-body-A4">
+                <table class="print-page-body-table">
+                    <tr class="print-page-header-top-fix">
+                        <td class="print-page-body-table-header">No.</td>
+                        <td class="print-page-body-table-header cell-item">行</td>
+                        <td class="print-page-body-table-header">物料编号</td>
+                        <td class="print-page-body-table-header">销售订单</td>
+                        <td class="print-page-body-table-header cell-qty">送货数量</td>
+                        <td class="print-page-body-table-header cell-qty">点收数量</td>
+                        @if (isSB == true)
+                        {
+                            <td class="print-page-body-table-header" colspan="3">主要检验项目</td>
+                        }
+                        else
+                        {
+                            <td class="print-page-body-table-header" colspan="2">主要检验项目</td>
+                        }
+                        <td class="print-page-body-table-header cell-size print-page-header-right-fix">尺寸/mm</td>
+                    </tr>
+                    <tr>
+                        <td class="print-page-body-table-header" colspan="4">物料描述</td>
+                        <td class="print-page-body-table-header">箱(包)数</td>
+                        <td class="print-page-body-table-header">开箱数</td>
+                        <td class="print-page-body-table-header cell-qm" rowspan="2">文字及标识:版本\唛头\日期唛\箱数\品名\品号\作业单\版本号\质保书</td>
+                        <td class="print-page-body-table-header cell-qm" rowspan="2">外观:材质\结构\排版\印刷\模切\颜色\条码\光油区\撕裂线</td>
+                        @if (isSB == true)
+                        {
+                            <td class="print-page-body-table-header" rowspan="2">商标附着力</td>
+                        }
+                        <td class="print-page-body-table-header print-page-header-right-fix" rowspan="2">检验结果</td>
+                    </tr>
+                    <tr class="xx">
+                        <td class="print-page-body-table-header cell-unit">单位</td>
+                        <td class="print-page-body-table-header" colspan="2">交货地点</td>
+                        <td class="print-page-body-table-header">交货日期</td>
+                        <td class="print-page-body-table-header" colspan="2">备注</td>
+                    </tr>
+                    @foreach (POInfo nodes in page.Children)
+                    {
+                        <tr class="report-iqcpm-line-po-number">
+                            @if (isSB == true)
+                            {
+                                <td colspan="10">采购订单：@nodes.Header.Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单日期：@nodes.Header.Date</td>
+                            }
+                            else
+                            {
+                                <td colspan="9">采购订单：@nodes.Header.Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单日期：@nodes.Header.Date</td>
+                            }
+                        </tr>
+                        foreach (POItemInfo node in nodes.Items)
+                        {
+                            <tr class="print-page-dashed-line-alpha">
+                                <td>@(sn++)</td>
+                                <td>@node.Number</td>
+                                <td class="print-page-body-table-header">@node.Material</td>
+                                <td class="print-page-body-table-header">
+                                    @{if (node.SDocItem != 0)
+                                        {@(node.SDDoc + "/" + node.SDocItem)}}
+                                </td>
+                                <td class="print-page-body-table-header">@node.DelivQty</td>
+                                <td></td>
+                                <td rowspan="3" class="cell-qm-content"></td>
+                                <td rowspan="3" class="cell-qm-content"></td>
+                                @if (isSB == true)
+                                {
+                                    <td rowspan="3" class="cell-qm-content"></td>
+                                }
+                                <td></td>
+                            </tr>
+                            <tr class="print-page-dashed-line-beta">
+                                <td colspan="4" class="print-page-text-align-left print-page-body-table-header">@node.MaterialDescription</td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="2" class="cell-qm-content">合格□&nbsp;&nbsp;不合格□</td>
+                            </tr>
+                            <tr class="print-page-dashed-line-gamma">
+                                <td>@node.BaseUOM</td>
+                                <td colspan="2">@node.DelivDest</td>
+                                <td class="print-page-body-table-header">@node.DelivDate</td>
+                                <td colspan="2">@node.StgeLoc</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+            <div class="print-page-footer">
+                <table class="print-page-footer-table">
+                    <tr>
+                        <td class="print-page-footer-table-title">打印:</td>
+                        <td class="print-page-footer-table-content">@ViewBag.Printer</td>
+                        <td class="print-page-footer-table-title">检验员:</td>
+                        <td class="print-page-footer-table-content"></td>
+                        <td class="print-page-footer-table-title">审核:</td>
+                        <td class="print-page-footer-table-content"></td>
+                        <td class="print-page-footer-table-title">仓管:</td>
+                        <td class="print-page-footer-table-content"></td>
+                    </tr>
+                    <tr>
+                        <td class="print-page-footer-table-title">日期:</td>
+                        <td>@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td class="print-page-footer-table-title">日期:</td>
+                        <td></td>
+                        <td class="print-page-footer-table-title">日期:</td>
+                        <td></td>
+                        <td class="print-page-footer-table-title">日期:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="print-page-footer-table-title"><b>注:</b>&nbsp;&nbsp;&nbsp;&nbsp;送货数量以实际点收数量为准</td>
+                        <td class="print-page-footer-table-index">第@(index++)页</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+@section scripts {
+
+    @Scripts.Render("~/bundles/report/incoming-quality-control-packing-material")
+}

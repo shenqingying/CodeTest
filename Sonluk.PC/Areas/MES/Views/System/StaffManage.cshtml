@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "账号管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEK_StaffManage
+
+<script type="text/html" id="sex_Tpl">
+    {{# if(d.STAFFSEX == 1){ }}
+    男
+    {{# }else if(d.STAFFSEX== 2){ }}
+    女
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="lock_Tpl">
+    {{# if(d.SISLOCK == true){ }}
+    锁定
+    {{# }else if(d.SISLOCK== false){ }}
+    未锁定
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="SCANCEL_Tpl">
+    {{# if(d.ISACTIVE == 0){ }}
+    停用
+    {{# }else if(d.ISACTIVE== 1){ }}
+    未停用
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<link rel="stylesheet" href="~/Scripts/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">MES系统设置</a>
+    <a><cite>账号管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_add">新建人员</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline">
+                <select id="in_bm" lay-filter="in_bm">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.CRM_HG_DEPT.Length; i++)
+                    {
+                        <option value="@Model.CRM_HG_DEPT[i].DEPID">@Model.CRM_HG_DEPT[i].DEPNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_xm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">用户类型：</label>
+            <div class="layui-input-inline">
+                <select id="find_yhlx" lay-filter="find_yhlx"></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_staff" lay-filter="tb_staff"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+<div id="staff_div" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline">
+                <select id="add_bm" lay-filter="add_bm">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.CRM_HG_DEPT.Length; i++)
+                    {
+                        <option value="@Model.CRM_HG_DEPT[i].DEPID">@Model.CRM_HG_DEPT[i].DEPNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_xm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">性别：</label>
+            <div class="layui-input-inline">
+                <select id="add_xb" lay-filter="add_xb">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">用户名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_yhm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">密码：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="add_mm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">手机：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_sj" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">固定电话：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="add_gddh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">锁定：</label>
+            <div class="layui-input-inline">
+                <select id="add_issd" lay-filter="add_issd">
+                    <option value="false">未锁定</option>
+                    <option value="true">已锁定</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">停用：</label>
+            <div class="layui-input-inline">
+                <select id="add_isty" lay-filter="add_isty">
+                    <option value="1">未停用</option>
+                    <option value="0">已停用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">用户类型：</label>
+            <div class="layui-input-inline">
+                <select id="add_yhlx" lay-filter="add_yhlx"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-card">
+        <ul class="layui-tab-title">
+            <li class="layui-this">角色权限</li>
+            <li>工厂权限</li>
+            <li>工作中心权限</li>
+            <li>库存地点权限</li>
+            <li>HR组集合</li>
+            <li>公司权限</li>
+            <li>部门权限</li>
+            <li>电子指导书权限</li>
+            <li>仓库权限</li>
+        </ul>
+        <div class="layui-tab-content" style="height: 200px;">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-hide" id="tb_jsqx" lay-filter="tb_jsqx"></table>
+            </div>
+            <div class="layui-tab-item">
+                <table class="layui-hide" id="tb_gcqx" lay-filter="tb_gcqx"></table>
+            </div>
+            <div class="layui-tab-item">
+                <table class="layui-hide" id="tb_gzzxqx" lay-filter="tb_gzzxqx"></table>
+            </div>
+            <div class="layui-tab-item">
+                <table class="layui-hide" id="tb_ckqx" lay-filter="tb_ckqx"></table>
+            </div>
+            <div class="layui-tab-item">
+                <table class="layui-hide" id="tb_hrz" lay-filter="tb_hrz"></table>
+            </div>
+            <div class="layui-tab-item">
+                <table class="layui-hide" id="tb_gsqx" lay-filter="tb_gsqx"></table>
+            </div>
+            <div class="layui-tab-item">
+                @*<table class="layui-hide" id="tb_deptqx" lay-filter="tb_deptqx"></table>*@
+                <ul id="treeDemo" class="ztree" style="height:200px;overflow-y:scroll"></ul>
+            </div>
+            <div class="layui-tab-item">
+                <table class="layui-hide" id="tb_emtype" lay-filter="tb_emtype"></table>
+            </div>
+            <div class="layui-tab-item">
+                <table class="layui-hide" id="tb_ckidqx" lay-filter="tb_ckidqx"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/StaffManage")
+}

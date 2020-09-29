@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "GYtest";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+
+}
+
+
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_orderMX">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </script>
+</div>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA</a>
+    <a><cite>订单创建</cite></a>
+</span>
+<br />
+<br />
+
+
+
+
+
+
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div class="layui-form-item">
+        <button id="btn_save" class="layui-btn">click</button>
+
+
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">开始时间：</label>
+            <div class="layui-input-inline">
+                <input id="begin" type="text" class="layui-input">
+            </div>
+        </div>
+
+    
+        <div class="layui-inline">
+            <label class="layui-form-label">结束时间：</label>
+            <div class="layui-input-inline">
+                <input id="end" type="text" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">平台单号：</label>
+            <div class="layui-input-inline">
+                <input id="platform_code" type="number" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">命中数量：</label>
+            <div class="layui-input-inline">
+                <input id="count" type="number" value="10" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var laydate = layui.laydate;
+        var layer = layui.layer;
+        laydate.render({
+            elem: '#begin',
+            type: 'datetime'
+        });
+
+        laydate.render({
+            elem: '#end',
+            type: 'datetime'
+        });
+
+
+        $("#btn_save").click(function () {
+            var layerindex = layer.load();
+            $.ajax({
+                type: "POST",
+                async: true,
+                url: "../KAOrder/GY_ReadOrder",
+                data: {
+                    start_date: $("#begin").val(),
+                    end_date: $("#end").val(),
+                    page_size: $("#count").val(),
+                    platform_code: $("#platform_code").val()
+                },
+                success: function (list) {
+                    var resdata = JSON.parse(list);
+                    console.log(resdata);
+                    layer.close(layerindex);
+                },
+                error: function () {
+                    alert("加载失败");
+                    layer.close(layerindex);
+                }
+            });
+        });
+
+
+    });
+
+</script>

@@ -1,0 +1,65 @@
+﻿@using Sonluk.UI.Model.Print.LayoutService
+@model IEnumerable<LayoutInfo>
+@{
+    ViewBag.Title = "打印布局";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int no = 1;
+}
+@Styles.Render("~/Content/sonluk-ui/content-tree")
+@Styles.Render("~/Content/print/layout-index")
+<input type="hidden" value="@Url.Action("Delete", "Layout")" id="print-layout-delete-uri" />
+<input type="hidden" value="@Url.Action("Edit", "Layout",new { ID = 0 })" id="print-layout-edit-uri" />
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">打印</a>
+        >
+        <a href="#">布局</a>
+    </div>
+</div>
+<!--Root节点-->
+<div class="root">
+    <!--Root节点信息-->
+    @*<div class="root-title-without-bg">
+        <font class="root-title-item-without-bg float-left"></font>
+    </div>*@
+    <!--/Root节点信息-->
+    <!--Alpha节点-->
+    <div class="alpha color-content-background">
+        <!--Beta节点集合-->
+        <div class="beta-set">
+            @foreach (LayoutInfo node in Model)
+            {
+                <!--Beta节点-->
+                <div class="beta beta-@node.ID">
+                    <!--Beta节点信息-->
+                    <input type="hidden" value="@node.ID" />
+                    <div class="beta-title">
+                        <div class="beta-title-item-fixed-width float-left">@string.Format("{0:D2}.", no++)@node.Name</div>
+                        <div class="beta-title-item float-left">凭证：@node.Doc</div>
+                        <div class="beta-title-item float-left">MAC：@node.Mac</div>
+                        <span class="beta-title-button float-right" title="删除">
+                            <a href="javascript:void(0)" onclick="messageDialogWarning('确认删除该布局?', function (){$.post($('input#print-layout-delete-uri').val(), { ID: @node.ID }, function (data, status) { if (status == 'success') {$('div.beta-'+data).slideUp();}});});">
+                                <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt=" " />
+                            </a>
+                        </span>
+                        <span class="beta-title-button float-right beta-action-edit" title="编辑">
+                            <a href="@Url.Action("Edit", "Layout", new { ID = node.ID })">
+                                <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_edit_h24.png")" alt=" " />
+                            </a>
+                        </span>
+
+                    </div>
+                    <!--/Beta节点信息-->
+                </div>
+                <!--/Beta节点-->
+            }
+        </div>
+        <!--/Beta节点集合-->
+    </div>
+    <!--/Alpha节点-->
+    <div class="hr"></div>
+</div>
+<!--/Root节点-->
+@section scripts {
+    @Scripts.Render("~/bundles/print/layout-index")
+}

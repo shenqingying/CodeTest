@@ -1,0 +1,59 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KADTDPService;
+@{
+    ViewBag.Title = "Select_KADTDP_Part";
+    CRM_COST_KADTDP[] MXdata = ViewBag.MXdata;
+}
+
+@for (int i = 0; i < MXdata.Length; i++)
+{
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@MXdata[i].CPMC</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">SAP产品编号</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].SAPCP</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">正常供价</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ZCGJ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">促销供价</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].CXGJ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">正常售价</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].ZCSJ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">促销售价</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].CXSJ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备货数量</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BHSL</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@MXdata[i].BEIZ</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_DPedit(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">编辑</button>
+            <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_DPdelete(@Newtonsoft.Json.JsonConvert.SerializeObject(MXdata[i]))">删除</button>
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (MXdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+

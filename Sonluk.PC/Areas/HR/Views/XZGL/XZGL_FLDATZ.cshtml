@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "员工福利台账";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string mypw = "";
+    if (Session["MYPW"] != null)
+    {
+        mypw = Session["MYPW"].ToString();
+    }
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="Tpl_time">
+    {{ d.TZYEAR + "-" + d.TZMONTH }}
+</script>
+<script type="text/html" id="ISUSE_Tpl">
+    {{# if(d.ISUSE == 0){ }}
+    未引用
+    {{# }else if(d.ISUSE == 1){ }}
+    引用
+    {{# } }}
+</script>
+<script type="text/html" id="bar_select">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">确认</a>
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="barMX">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资管理</a>
+    <a><cite>员工福利台账</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_insert">新增</button>
+        <button class="layui-btn" id="btn_cx">查询</button>
+        @*<button class="layui-btn" onclick="location.href = '@Url.Action("XZGL_FLDATZMX", "XZGL")'">台账明细数据</button>*@
+        <button class="layui-btn" id="XZGL_FLDATZMX">台账明细数据</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">账单月份：</label>
+            <div class="layui-input-inline">
+                <input id="find_zdyf" type="text" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs"></select>
+            </div>
+        </div>
+    </div>
+    <table id="result" lay-filter="result"></table>
+    <table id="resultMX" lay-filter="resultMX"></table>
+</div>
+<div id="div_insert" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">账单月份：</label>
+            <div class="layui-input-inline">
+                <input id="time_insert" type="text" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="company_insert" lay-filter="department"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_updateMX" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">工号：</label>
+            <div class="layui-input-inline">
+                <input id="staffno_updateMX" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">姓名：</label>
+            <div class="layui-input-inline">
+                <input id="name_updateMX" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">部门：</label>
+            <div class="layui-input-inline">
+                <input id="dep_updateMX" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">社保基数：</label>
+            <div class="layui-input-inline">
+                <input id="sbjs_updateMX" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 130px;">公积金基数：</label>
+            <div class="layui-input-inline">
+                <input id="gjjjs_updateMX" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+    <table id="resultMXupdate" lay-filter="resultMXupdate"></table>
+</div>
+<div id="div_mypw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">密钥密码：</label>
+            <div class="layui-input-inline1">
+                <input type="password" id="myinfo_mypw" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="bl_mypw" value="@mypw">
+    <input id="netpath" value="@netpath" />
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_FLDATZ")
+}

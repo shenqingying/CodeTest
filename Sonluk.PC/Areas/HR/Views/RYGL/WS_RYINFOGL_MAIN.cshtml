@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "员工基本信息管理（部门）";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="ISECRZ">
+    {{# if(d.ISECRZ == 0){ }}
+    否
+    {{# }else if(d.ISECRZ == 1){ }}
+    是
+    {{# } }}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="SEE">查看</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR人员管理</a>
+    <a><cite>员工管理（部门）</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_select">查询</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father"></div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">归属部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_gsbm_father"></div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="noselect" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">在职状态：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_zzzt" id="find_zzzt"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">员工类别：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_yglb" id="find_yglb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">职务级别：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_zwlevel" id="find_zwlevel" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">办公地点：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_officeplace" id="find_officeplace" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">入职日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="RZRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="RZRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">离职日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="LZRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="LZRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px">出生日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="CSRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="CSRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="ryTable" lay-filter="ryTable"></table>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/RYGL/WS_RYINFOGL_MAIN")
+}

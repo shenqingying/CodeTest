@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "职务管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="isaction">
+    {{# if(d.ISACTION == 1){ }}
+    启用
+    {{# }else if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR组织规划</a>
+    <a><cite>职务管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="zwTable" lay-filter="zwTable"></table>
+    </div>
+</div>
+<div id="div_addinfo" class="layui-form"  hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">职务名称：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="addinfo_zwms" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">职务分类：</label>
+        <div class="layui-input-inline">
+            <select id="addinfo_zwfl" lay-filter="addinfo_zwfl">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">职级：</label>
+        <div class="layui-input-inline">
+            <select id="addinfo_zwlevel" lay-filter="addinfo_zwlevel">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">启用状态：</label>
+        <div class="layui-input-inline">
+            <select id="addinfo_isaction" lay-filter="addinfo_isaction">
+                <option value="1" selected="selected">启用</option>
+                <option value="0">关闭</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">序号：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="addinfo_px" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="3">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="addinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<style>
+    th .layui-table-cell {
+        text-align: center;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/ZZJG/DUTYMANAGE")
+}

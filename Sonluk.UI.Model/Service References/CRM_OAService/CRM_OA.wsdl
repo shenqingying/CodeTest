@@ -1,0 +1,3032 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuthority">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAuthorityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAuthorityResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Launch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="basic" type="tns:CRM_OA_BASIC" />
+            <s:element minOccurs="0" maxOccurs="1" name="model" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_BASIC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TemplateCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MessageInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LaunchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LaunchResult" type="tns:MessageInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFlowState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFlowStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetFlowStateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Pending">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ticketId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="firstNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_INFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SUBJECT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SENDNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_INFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_INFO" nillable="true" type="tns:CRM_OA_INFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PendingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PendingResult" type="tns:ArrayOfCRM_OA_INFO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Track">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ticketId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="firstNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TrackResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TrackResult" type="tns:ArrayOfCRM_OA_INFO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ticketID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogoutResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRM_OA_FLOW">
+        <s:complexType />
+      </s:element>
+      <s:element name="CRM_OA_FLOWResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CRM_OA_FLOW_DaoFa">
+        <s:complexType />
+      </s:element>
+      <s:element name="CRM_OA_FLOW_DaoFaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructQJ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_QJList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_QJList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="OAID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SEX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QJLB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAYS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructQJResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructCC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_CC" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_CC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SJCCTS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QTCXFSDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QTCXFSJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSQSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCDD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BQYCCDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCYWCCDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCKSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHCCJSSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXFS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TITLE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_OA_CC_SUBList" type="tns:ArrayOfCRM_OA_CC_SUB" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_CC_SUB">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_CC_SUB" nillable="true" type="tns:CRM_OA_CC_SUB" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_CC_SUB">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="QDWZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MBWCQK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCSJLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZMB" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructCCResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructKH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_KH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_KH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JPXZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NSRSBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHZH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSFRGX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDJSDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDLXDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXSRW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTJXXSRW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSSJSM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FLSJSM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SFCCJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHSHDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHSHLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHSHLXDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TSQKSM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GXQY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSYX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YXSM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHSOURCE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHLX2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHJS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TITLE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FIRSTAMOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JOINACTIVITY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_OA_KH_subWDList" type="tns:ArrayOfCRM_OA_KH_WD" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_OA_KH_LKAList" type="tns:ArrayOfCRM_OA_KH_LKA" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_OA_KH_ZXS" type="tns:CRM_OA_KH_ZXS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KH_WD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KH_WD" nillable="true" type="tns:CRM_OA_KH_WD" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KH_WD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WDLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSPZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JPMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SFBZWD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CLZP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHZZSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YOUXIAO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISDZS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XYPP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SHSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_KH_WD_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KH_WD_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KH_WD_IMG" nillable="true" type="tns:CRM_OA_KH_WD_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KH_WD_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MTZP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MTZPMC" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KH_LKA">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KH_LKA" nillable="true" type="tns:CRM_OA_KH_LKA" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KH_LKA">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PKHMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDJCSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZBDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCLC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JCDPSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSSJSM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ECCL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CLZP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHZZSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YOUXIAO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SM" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KH_ZXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AREA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDDZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MBWDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TABLE1List" type="tns:ArrayOfTABLE1" />
+          <s:element minOccurs="0" maxOccurs="1" name="TABLE2List" type="tns:ArrayOfTABLE2" />
+          <s:element minOccurs="0" maxOccurs="1" name="TABLE3List" type="tns:ArrayOfTABLE3" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTABLE1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TABLE1" nillable="true" type="tns:TABLE1" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TABLE1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CHEPAI" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZP" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTABLE2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TABLE2" nillable="true" type="tns:TABLE2" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TABLE2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KHSTAFF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTABLE3">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TABLE3" nillable="true" type="tns:TABLE3" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TABLE3">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DPMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CD" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructKHResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructKH_WD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_KH_WD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StructKH_WDResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructYCKQSM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_YCKQSM" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_YCKQSM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QDWZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KQJL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMTABLEList" type="tns:ArrayOfSMTABLE" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSMTABLE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SMTABLE" nillable="true" type="tns:SMTABLE" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SMTABLE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SMRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMSXB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SMSX" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructYCKQSMResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructZDF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_ZDF" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_ZDF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SQSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STAFFNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZDRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHMX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JDRS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PKRS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZDLY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJJE_CN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructZDFResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Upload">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadOAFinishStatus">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReadOAFinishStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadOAFinishStatusResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Auto_UPDATE_All">
+        <s:complexType />
+      </s:element>
+      <s:element name="Auto_UPDATE_AllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructLKAYEAR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_LKAYEAR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_LKAYEAR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HTYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SQR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SQSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKACRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SUBMITCOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKAMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MONTHCOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FIRSTTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSQK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FSFW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MANAGEWAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PAYWAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JZPP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NFGHS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NFCLFS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NFCLZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXRZW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSLXRDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SUPPORTOTHER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISNEW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PACT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BELONGKA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHANGEREASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCXSSOURCE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCFYSOURCE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WEBSITE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ACCOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FL_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XX_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JC_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XP_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTXQ_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DJQ_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XDKY_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialDISPLAY_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DuiTou_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OTHER2_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_LAST_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_LAST_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_THIS_NR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_THIS_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_HISTORY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_TBZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_SHOW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="A_XS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="A_ZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="B_XS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="B_ZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="C_XS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="C_ZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCXS_LS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCXS_GJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MLZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MLL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSSJLR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXZFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCJ_HT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCJ_GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSZC_HT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSZC_GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXS_RW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXS_JD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="A_JXS_RW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="A_JXS_JD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FINALCOST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDQK" type="tns:ArrayOfCRM_OA_LKAYEAR_MDQK" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPLR" type="tns:ArrayOfCRM_OA_LKAYEAR_CPLR" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKALIST" type="tns:ArrayOfCRM_OA_LKAYEAR_LKALIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXS" type="tns:ArrayOfCRM_OA_LKAYEAR_JXS" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCXS" type="tns:ArrayOfCRM_OA_LKAYEAR_MCXS" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_LKAYEAR_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_LKAYEAR_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_LKAYEAR_MDQK">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_LKAYEAR_MDQK" nillable="true" type="tns:CRM_OA_LKAYEAR_MDQK" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_LKAYEAR_MDQK">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MDLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XYMDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJCMDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DPJCSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BASL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY_ZB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BNYJXZMDSL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_LKAYEAR_CPLR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_LKAYEAR_CPLR" nillable="true" type="tns:CRM_OA_LKAYEAR_CPLR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_LKAYEAR_CPLR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CPMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCGJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MCSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XL_LAST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XL_THIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS_LAST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS_THIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ML" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_LKAYEAR_LKALIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_LKAYEAR_LKALIST" nillable="true" type="tns:CRM_OA_LKAYEAR_LKALIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_LKAYEAR_LKALIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LAST_HT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LAST_GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THIS_HT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THIS_GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCJ_HT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCJ_GS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_LKAYEAR_JXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_LKAYEAR_JXS" nillable="true" type="tns:CRM_OA_LKAYEAR_JXS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_LKAYEAR_JXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="YEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSRW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJXS_JX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKA_HT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKA_GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FB_GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SPSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHX_GS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_LKAYEAR_MCXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_LKAYEAR_MCXS" nillable="true" type="tns:CRM_OA_LKAYEAR_MCXS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_LKAYEAR_MCXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LAST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TBZJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_LKAYEAR_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_LKAYEAR_OPINION" nillable="true" type="tns:CRM_OA_LKAYEAR_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_LKAYEAR_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_LKAYEAR_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_LKAYEAR_IMG" nillable="true" type="tns:CRM_OA_LKAYEAR_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_LKAYEAR_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructLKAYEARResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructHaiBao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_HaiBao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_HaiBao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TITLE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKANAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKACRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YSPFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LJSPFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHXFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJHDMDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDBEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHTHBEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHTHENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DP1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DP2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCGJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXGJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DPYJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJHDQJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDFASM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BELONGKA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_MX" type="tns:ArrayOfCRM_OA_HaiBao_MX" />
+          <s:element minOccurs="0" maxOccurs="1" name="HaiBao_DP" type="tns:ArrayOfCRM_OA_HaiBao_DP" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_HaiBao_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_HaiBao_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_HaiBao_MX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_HaiBao_MX" nillable="true" type="tns:CRM_OA_HaiBao_MX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_HaiBao_MX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FYLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_HaiBao_DP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_HaiBao_DP" nillable="true" type="tns:CRM_OA_HaiBao_DP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_HaiBao_DP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CPMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCGJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXGJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISCXZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISCXZCOUNT" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_HaiBao_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_HaiBao_OPINION" nillable="true" type="tns:CRM_OA_HaiBao_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_HaiBao_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_HaiBao_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_HaiBao_IMG" nillable="true" type="tns:CRM_OA_HaiBao_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_HaiBao_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructHaiBaoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructTSCL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_TSCL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_TSCL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HTYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKANAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LKACRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YSPFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LJSPFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHXFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BELONGKA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TSCL_MX" type="tns:ArrayOfCRM_OA_TSCL_MX" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJ" type="tns:ArrayOfCRM_OA_XJ" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_TSCL_IMG" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_TSCL_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHXFY2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BDLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LCLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_TSCL_MX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_TSCL_MX" nillable="true" type="tns:CRM_OA_TSCL_MX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_TSCL_MX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SQFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RCYJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDCRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDJSZJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_XJ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_XJ" nillable="true" type="tns:CRM_OA_XJ" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_XJ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="XJ1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJ3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJ4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJ5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJ6" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_TSCL_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_TSCL_IMG" nillable="true" type="tns:CRM_OA_TSCL_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_TSCL_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_TSCL_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_TSCL_OPINION" nillable="true" type="tns:CRM_OA_TSCL_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_TSCL_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructTSCLResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructZZF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_ZZF" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_ZZF">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZZLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHXZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PKHMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LXR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LXDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QKSM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WZPG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SALE_BEFORE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SALE_AFTER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXYFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HAVEDISPLAYCOST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAYCOST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POPULATION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISCOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ADVER_COUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZFXJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZLF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SQJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GGGSMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZF_MX" type="tns:ArrayOfCRM_OA_ZZF_MX" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_ZZF_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_ZZF_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_ZZF_MX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_ZZF_MX" nillable="true" type="tns:CRM_OA_ZZF_MX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_ZZF_MX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ITEM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRICE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_ZZF_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_ZZF_OPINION" nillable="true" type="tns:CRM_OA_ZZF_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_ZZF_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_ZZF_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_ZZF_IMG" nillable="true" type="tns:CRM_OA_ZZF_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_ZZF_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructZZFResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructKHTS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_KHTS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_KHTS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LCLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TSLY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TSXX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DAMAGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRICE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REASON" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FGLD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHYQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FCSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLXX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TSSFYX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TSJG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOURCE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHTSMX" type="tns:ArrayOfCRM_OA_KHTSMX" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_KHTS_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KHTSMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KHTSMX" nillable="true" type="tns:CRM_OA_KHTSMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KHTSMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CPMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BZGG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BLPSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RQM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REASON" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KHTS_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KHTS_IMG" nillable="true" type="tns:CRM_OA_KHTS_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KHTS_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructKHTSResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructMDBS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_MDBS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_MDBS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LCTYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XTTYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TITLE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MONTH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDBSMX" type="tns:ArrayOfCRM_OA_MDBSMX" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_MDBS_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_MDBS_IMG" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISTJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_MDBSMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_MDBSMX" nillable="true" type="tns:CRM_OA_MDBSMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_MDBSMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PAYWAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HX_SJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HX_FB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSITION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HX_JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HXRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XXDD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QSYJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_MDBS_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_MDBS_OPINION" nillable="true" type="tns:CRM_OA_MDBS_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_MDBS_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_MDBS_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_MDBS_IMG" nillable="true" type="tns:CRM_OA_MDBS_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_MDBS_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructMDBSResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructKAYEAR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_KAYEAR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_KAYEAR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YEAR2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZQ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POS2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JH2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDSL2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KAYEARMX" type="tns:ArrayOfCRM_OA_KAYEARMX" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_KAYEAR_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_KAYEAR_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KAYEARMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KAYEARMX" nillable="true" type="tns:CRM_OA_KAYEARMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KAYEARMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ITEM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTK2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JE2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JE2XG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYL2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KAYEAR_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KAYEAR_OPINION" nillable="true" type="tns:CRM_OA_KAYEAR_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KAYEAR_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KAYEAR_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KAYEAR_IMG" nillable="true" type="tns:CRM_OA_KAYEAR_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KAYEAR_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructKAYEARResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructKADT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_KADT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_KADT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HTYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LJSQJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHXJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDFASM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FAHUO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXJB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RCYJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KADTCP" type="tns:ArrayOfCRM_OA_KADTCP" />
+          <s:element minOccurs="0" maxOccurs="1" name="KADTMX" type="tns:ArrayOfCRM_OA_KADTMX" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_KADT_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_KADT_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KADTCP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KADTCP" nillable="true" type="tns:CRM_OA_KADTCP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KADTCP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SAPCP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCGJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXGJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZCSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BHSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KADTMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KADTMX" nillable="true" type="tns:CRM_OA_KADTMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KADTMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FYLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJHDMDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PROMISE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDJSZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJXS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KADT_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KADT_OPINION" nillable="true" type="tns:CRM_OA_KADT_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KADT_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KADT_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KADT_IMG" nillable="true" type="tns:CRM_OA_KADT_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KADT_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructKADTResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructKATSCL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_KATSCL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_KATSCL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HTYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LJSQJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YHXJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KATSCLMX" type="tns:ArrayOfCRM_OA_KATSCLMX" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_KATSCL_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_KATSCL_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KATSCLMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KATSCLMX" nillable="true" type="tns:CRM_OA_KATSCLMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KATSCLMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DISPLAY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RCYJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDJSZJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJXS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KATSCL_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KATSCL_OPINION" nillable="true" type="tns:CRM_OA_KATSCL_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KATSCL_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KATSCL_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KATSCL_IMG" nillable="true" type="tns:CRM_OA_KATSCL_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KATSCL_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructKATSCLResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructKACXY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_KACXY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_KACXY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SQR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SQRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KACXYMX" type="tns:ArrayOfCRM_OA_KACXYMX" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_KACXY_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_KACXY_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KACXYMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KACXYMX" nillable="true" type="tns:CRM_OA_KACXYMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KACXYMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FZR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KHJS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SEX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SFZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TEL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SGRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QZCS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSZE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SUPPORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHANGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BANK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BANKCARD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KACXY_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KACXY_OPINION" nillable="true" type="tns:CRM_OA_KACXY_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KACXY_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_KACXY_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_KACXY_IMG" nillable="true" type="tns:CRM_OA_KACXY_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_KACXY_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructKACXYResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StructCXHD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_OA_CXHD" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_OA_CXHD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SQR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SQRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSSAPSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDDX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HDMD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSZCSM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXHDFB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSCDFY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJCJHDWDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BASL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSXSRW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXSARW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJHDWDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LCLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXHDTC" type="tns:ArrayOfCRM_OA_CXHD_TC" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSZCFS" type="tns:ArrayOfCRM_OA_CXHD_GSZCFS" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXHDPG" type="tns:ArrayOfCRM_OA_CXHD_CXHDPG" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="tns:ArrayOfCRM_OA_CXHD_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION2" type="tns:ArrayOfCRM_OA_CXHD_OPINION" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMG" type="tns:ArrayOfCRM_OA_CXHD_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_CXHD_TC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_CXHD_TC" nillable="true" type="tns:CRM_OA_CXHD_TC" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_CXHD_TC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HDTCLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GIFT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRICE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCCOUNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJLPJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FB" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_CXHD_GSZCFS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_CXHD_GSZCFS" nillable="true" type="tns:CRM_OA_CXHD_GSZCFS" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_CXHD_GSZCFS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CPFL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DPMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJHDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYZCFS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYZC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYZCJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SNYJXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SNYJSL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_CXHD_CXHDPG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_CXHD_CXHDPG" nillable="true" type="tns:CRM_OA_CXHD_CXHDPG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_CXHD_CXHDPG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CPFL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DPMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJHDSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJHDXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYZCFS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYZC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FYZCJE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJTHL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_CXHD_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_CXHD_OPINION" nillable="true" type="tns:CRM_OA_CXHD_OPINION" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_CXHD_OPINION">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OPINION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_OA_CXHD_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_OA_CXHD_IMG" nillable="true" type="tns:CRM_OA_CXHD_IMG" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_OA_CXHD_IMG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IMGML" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMGMS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StructCXHDResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LKAYEAR_Finish">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LKAYEARTT" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LKAYEAR_FinishResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="KAYEAR_Finish">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KAYEARTT" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KAYEAR_FinishResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfCRM_OA_INFO" nillable="true" type="tns:ArrayOfCRM_OA_INFO" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthoritySoapIn">
+    <wsdl:part name="parameters" element="tns:GetAuthority" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthoritySoapOut">
+    <wsdl:part name="parameters" element="tns:GetAuthorityResponse" />
+  </wsdl:message>
+  <wsdl:message name="LaunchSoapIn">
+    <wsdl:part name="parameters" element="tns:Launch" />
+  </wsdl:message>
+  <wsdl:message name="LaunchSoapOut">
+    <wsdl:part name="parameters" element="tns:LaunchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFlowStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFlowState" />
+  </wsdl:message>
+  <wsdl:message name="GetFlowStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFlowStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="PendingSoapIn">
+    <wsdl:part name="parameters" element="tns:Pending" />
+  </wsdl:message>
+  <wsdl:message name="PendingSoapOut">
+    <wsdl:part name="parameters" element="tns:PendingResponse" />
+  </wsdl:message>
+  <wsdl:message name="TrackSoapIn">
+    <wsdl:part name="parameters" element="tns:Track" />
+  </wsdl:message>
+  <wsdl:message name="TrackSoapOut">
+    <wsdl:part name="parameters" element="tns:TrackResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_OA_FLOWSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_OA_FLOW" />
+  </wsdl:message>
+  <wsdl:message name="CRM_OA_FLOWSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_OA_FLOWResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRM_OA_FLOW_DaoFaSoapIn">
+    <wsdl:part name="parameters" element="tns:CRM_OA_FLOW_DaoFa" />
+  </wsdl:message>
+  <wsdl:message name="CRM_OA_FLOW_DaoFaSoapOut">
+    <wsdl:part name="parameters" element="tns:CRM_OA_FLOW_DaoFaResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructQJSoapIn">
+    <wsdl:part name="parameters" element="tns:StructQJ" />
+  </wsdl:message>
+  <wsdl:message name="StructQJSoapOut">
+    <wsdl:part name="parameters" element="tns:StructQJResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructCCSoapIn">
+    <wsdl:part name="parameters" element="tns:StructCC" />
+  </wsdl:message>
+  <wsdl:message name="StructCCSoapOut">
+    <wsdl:part name="parameters" element="tns:StructCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructKHSoapIn">
+    <wsdl:part name="parameters" element="tns:StructKH" />
+  </wsdl:message>
+  <wsdl:message name="StructKHSoapOut">
+    <wsdl:part name="parameters" element="tns:StructKHResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructKH_WDSoapIn">
+    <wsdl:part name="parameters" element="tns:StructKH_WD" />
+  </wsdl:message>
+  <wsdl:message name="StructKH_WDSoapOut">
+    <wsdl:part name="parameters" element="tns:StructKH_WDResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructYCKQSMSoapIn">
+    <wsdl:part name="parameters" element="tns:StructYCKQSM" />
+  </wsdl:message>
+  <wsdl:message name="StructYCKQSMSoapOut">
+    <wsdl:part name="parameters" element="tns:StructYCKQSMResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructZDFSoapIn">
+    <wsdl:part name="parameters" element="tns:StructZDF" />
+  </wsdl:message>
+  <wsdl:message name="StructZDFSoapOut">
+    <wsdl:part name="parameters" element="tns:StructZDFResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadSoapIn">
+    <wsdl:part name="parameters" element="tns:Upload" />
+  </wsdl:message>
+  <wsdl:message name="UploadSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadOAFinishStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadOAFinishStatus" />
+  </wsdl:message>
+  <wsdl:message name="ReadOAFinishStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadOAFinishStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Auto_UPDATE_AllSoapIn">
+    <wsdl:part name="parameters" element="tns:Auto_UPDATE_All" />
+  </wsdl:message>
+  <wsdl:message name="Auto_UPDATE_AllSoapOut">
+    <wsdl:part name="parameters" element="tns:Auto_UPDATE_AllResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructLKAYEARSoapIn">
+    <wsdl:part name="parameters" element="tns:StructLKAYEAR" />
+  </wsdl:message>
+  <wsdl:message name="StructLKAYEARSoapOut">
+    <wsdl:part name="parameters" element="tns:StructLKAYEARResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructHaiBaoSoapIn">
+    <wsdl:part name="parameters" element="tns:StructHaiBao" />
+  </wsdl:message>
+  <wsdl:message name="StructHaiBaoSoapOut">
+    <wsdl:part name="parameters" element="tns:StructHaiBaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructTSCLSoapIn">
+    <wsdl:part name="parameters" element="tns:StructTSCL" />
+  </wsdl:message>
+  <wsdl:message name="StructTSCLSoapOut">
+    <wsdl:part name="parameters" element="tns:StructTSCLResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructZZFSoapIn">
+    <wsdl:part name="parameters" element="tns:StructZZF" />
+  </wsdl:message>
+  <wsdl:message name="StructZZFSoapOut">
+    <wsdl:part name="parameters" element="tns:StructZZFResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructKHTSSoapIn">
+    <wsdl:part name="parameters" element="tns:StructKHTS" />
+  </wsdl:message>
+  <wsdl:message name="StructKHTSSoapOut">
+    <wsdl:part name="parameters" element="tns:StructKHTSResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructMDBSSoapIn">
+    <wsdl:part name="parameters" element="tns:StructMDBS" />
+  </wsdl:message>
+  <wsdl:message name="StructMDBSSoapOut">
+    <wsdl:part name="parameters" element="tns:StructMDBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructKAYEARSoapIn">
+    <wsdl:part name="parameters" element="tns:StructKAYEAR" />
+  </wsdl:message>
+  <wsdl:message name="StructKAYEARSoapOut">
+    <wsdl:part name="parameters" element="tns:StructKAYEARResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructKADTSoapIn">
+    <wsdl:part name="parameters" element="tns:StructKADT" />
+  </wsdl:message>
+  <wsdl:message name="StructKADTSoapOut">
+    <wsdl:part name="parameters" element="tns:StructKADTResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructKATSCLSoapIn">
+    <wsdl:part name="parameters" element="tns:StructKATSCL" />
+  </wsdl:message>
+  <wsdl:message name="StructKATSCLSoapOut">
+    <wsdl:part name="parameters" element="tns:StructKATSCLResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructKACXYSoapIn">
+    <wsdl:part name="parameters" element="tns:StructKACXY" />
+  </wsdl:message>
+  <wsdl:message name="StructKACXYSoapOut">
+    <wsdl:part name="parameters" element="tns:StructKACXYResponse" />
+  </wsdl:message>
+  <wsdl:message name="StructCXHDSoapIn">
+    <wsdl:part name="parameters" element="tns:StructCXHD" />
+  </wsdl:message>
+  <wsdl:message name="StructCXHDSoapOut">
+    <wsdl:part name="parameters" element="tns:StructCXHDResponse" />
+  </wsdl:message>
+  <wsdl:message name="LKAYEAR_FinishSoapIn">
+    <wsdl:part name="parameters" element="tns:LKAYEAR_Finish" />
+  </wsdl:message>
+  <wsdl:message name="LKAYEAR_FinishSoapOut">
+    <wsdl:part name="parameters" element="tns:LKAYEAR_FinishResponse" />
+  </wsdl:message>
+  <wsdl:message name="KAYEAR_FinishSoapIn">
+    <wsdl:part name="parameters" element="tns:KAYEAR_Finish" />
+  </wsdl:message>
+  <wsdl:message name="KAYEAR_FinishSoapOut">
+    <wsdl:part name="parameters" element="tns:KAYEAR_FinishResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorityHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorityHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFlowStateHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFlowStateHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="PendingHttpGetIn">
+    <wsdl:part name="ticketId" type="s:string" />
+    <wsdl:part name="firstNum" type="s:string" />
+    <wsdl:part name="pageSize" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PendingHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_OA_INFO" />
+  </wsdl:message>
+  <wsdl:message name="TrackHttpGetIn">
+    <wsdl:part name="ticketId" type="s:string" />
+    <wsdl:part name="firstNum" type="s:string" />
+    <wsdl:part name="pageSize" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TrackHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_OA_INFO" />
+  </wsdl:message>
+  <wsdl:message name="LogoutHttpGetIn">
+    <wsdl:part name="ticketID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogoutHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CRM_OA_FLOWHttpGetIn" />
+  <wsdl:message name="CRM_OA_FLOWHttpGetOut" />
+  <wsdl:message name="CRM_OA_FLOW_DaoFaHttpGetIn" />
+  <wsdl:message name="CRM_OA_FLOW_DaoFaHttpGetOut" />
+  <wsdl:message name="UploadHttpGetIn">
+    <wsdl:part name="path" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadOAFinishStatusHttpGetIn" />
+  <wsdl:message name="ReadOAFinishStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Auto_UPDATE_AllHttpGetIn" />
+  <wsdl:message name="Auto_UPDATE_AllHttpGetOut" />
+  <wsdl:message name="LKAYEAR_FinishHttpGetIn">
+    <wsdl:part name="LKAYEARTT" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LKAYEAR_FinishHttpGetOut" />
+  <wsdl:message name="KAYEAR_FinishHttpGetIn">
+    <wsdl:part name="KAYEARTT" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KAYEAR_FinishHttpGetOut" />
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorityHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorityHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFlowStateHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFlowStateHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="PendingHttpPostIn">
+    <wsdl:part name="ticketId" type="s:string" />
+    <wsdl:part name="firstNum" type="s:string" />
+    <wsdl:part name="pageSize" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PendingHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_OA_INFO" />
+  </wsdl:message>
+  <wsdl:message name="TrackHttpPostIn">
+    <wsdl:part name="ticketId" type="s:string" />
+    <wsdl:part name="firstNum" type="s:string" />
+    <wsdl:part name="pageSize" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TrackHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_OA_INFO" />
+  </wsdl:message>
+  <wsdl:message name="LogoutHttpPostIn">
+    <wsdl:part name="ticketID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LogoutHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CRM_OA_FLOWHttpPostIn" />
+  <wsdl:message name="CRM_OA_FLOWHttpPostOut" />
+  <wsdl:message name="CRM_OA_FLOW_DaoFaHttpPostIn" />
+  <wsdl:message name="CRM_OA_FLOW_DaoFaHttpPostOut" />
+  <wsdl:message name="UploadHttpPostIn">
+    <wsdl:part name="path" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadOAFinishStatusHttpPostIn" />
+  <wsdl:message name="ReadOAFinishStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="Auto_UPDATE_AllHttpPostIn" />
+  <wsdl:message name="Auto_UPDATE_AllHttpPostOut" />
+  <wsdl:message name="LKAYEAR_FinishHttpPostIn">
+    <wsdl:part name="LKAYEARTT" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LKAYEAR_FinishHttpPostOut" />
+  <wsdl:message name="KAYEAR_FinishHttpPostIn">
+    <wsdl:part name="KAYEARTT" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KAYEAR_FinishHttpPostOut" />
+  <wsdl:portType name="CRM_OASoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthority">
+      <wsdl:input message="tns:GetAuthoritySoapIn" />
+      <wsdl:output message="tns:GetAuthoritySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Launch">
+      <wsdl:input message="tns:LaunchSoapIn" />
+      <wsdl:output message="tns:LaunchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFlowState">
+      <wsdl:input message="tns:GetFlowStateSoapIn" />
+      <wsdl:output message="tns:GetFlowStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pending">
+      <wsdl:input message="tns:PendingSoapIn" />
+      <wsdl:output message="tns:PendingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Track">
+      <wsdl:input message="tns:TrackSoapIn" />
+      <wsdl:output message="tns:TrackSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW">
+      <wsdl:input message="tns:CRM_OA_FLOWSoapIn" />
+      <wsdl:output message="tns:CRM_OA_FLOWSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW_DaoFa">
+      <wsdl:input message="tns:CRM_OA_FLOW_DaoFaSoapIn" />
+      <wsdl:output message="tns:CRM_OA_FLOW_DaoFaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructQJ">
+      <wsdl:input message="tns:StructQJSoapIn" />
+      <wsdl:output message="tns:StructQJSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructCC">
+      <wsdl:input message="tns:StructCCSoapIn" />
+      <wsdl:output message="tns:StructCCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructKH">
+      <wsdl:input message="tns:StructKHSoapIn" />
+      <wsdl:output message="tns:StructKHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructKH_WD">
+      <wsdl:input message="tns:StructKH_WDSoapIn" />
+      <wsdl:output message="tns:StructKH_WDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructYCKQSM">
+      <wsdl:input message="tns:StructYCKQSMSoapIn" />
+      <wsdl:output message="tns:StructYCKQSMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructZDF">
+      <wsdl:input message="tns:StructZDFSoapIn" />
+      <wsdl:output message="tns:StructZDFSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Upload">
+      <wsdl:input message="tns:UploadSoapIn" />
+      <wsdl:output message="tns:UploadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadOAFinishStatus">
+      <wsdl:input message="tns:ReadOAFinishStatusSoapIn" />
+      <wsdl:output message="tns:ReadOAFinishStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Auto_UPDATE_All">
+      <wsdl:input message="tns:Auto_UPDATE_AllSoapIn" />
+      <wsdl:output message="tns:Auto_UPDATE_AllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructLKAYEAR">
+      <wsdl:input message="tns:StructLKAYEARSoapIn" />
+      <wsdl:output message="tns:StructLKAYEARSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructHaiBao">
+      <wsdl:input message="tns:StructHaiBaoSoapIn" />
+      <wsdl:output message="tns:StructHaiBaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructTSCL">
+      <wsdl:input message="tns:StructTSCLSoapIn" />
+      <wsdl:output message="tns:StructTSCLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructZZF">
+      <wsdl:input message="tns:StructZZFSoapIn" />
+      <wsdl:output message="tns:StructZZFSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructKHTS">
+      <wsdl:input message="tns:StructKHTSSoapIn" />
+      <wsdl:output message="tns:StructKHTSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructMDBS">
+      <wsdl:input message="tns:StructMDBSSoapIn" />
+      <wsdl:output message="tns:StructMDBSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructKAYEAR">
+      <wsdl:input message="tns:StructKAYEARSoapIn" />
+      <wsdl:output message="tns:StructKAYEARSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructKADT">
+      <wsdl:input message="tns:StructKADTSoapIn" />
+      <wsdl:output message="tns:StructKADTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructKATSCL">
+      <wsdl:input message="tns:StructKATSCLSoapIn" />
+      <wsdl:output message="tns:StructKATSCLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructKACXY">
+      <wsdl:input message="tns:StructKACXYSoapIn" />
+      <wsdl:output message="tns:StructKACXYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StructCXHD">
+      <wsdl:input message="tns:StructCXHDSoapIn" />
+      <wsdl:output message="tns:StructCXHDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LKAYEAR_Finish">
+      <wsdl:input message="tns:LKAYEAR_FinishSoapIn" />
+      <wsdl:output message="tns:LKAYEAR_FinishSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KAYEAR_Finish">
+      <wsdl:input message="tns:KAYEAR_FinishSoapIn" />
+      <wsdl:output message="tns:KAYEAR_FinishSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_OAHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthority">
+      <wsdl:input message="tns:GetAuthorityHttpGetIn" />
+      <wsdl:output message="tns:GetAuthorityHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFlowState">
+      <wsdl:input message="tns:GetFlowStateHttpGetIn" />
+      <wsdl:output message="tns:GetFlowStateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pending">
+      <wsdl:input message="tns:PendingHttpGetIn" />
+      <wsdl:output message="tns:PendingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Track">
+      <wsdl:input message="tns:TrackHttpGetIn" />
+      <wsdl:output message="tns:TrackHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutHttpGetIn" />
+      <wsdl:output message="tns:LogoutHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW">
+      <wsdl:input message="tns:CRM_OA_FLOWHttpGetIn" />
+      <wsdl:output message="tns:CRM_OA_FLOWHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW_DaoFa">
+      <wsdl:input message="tns:CRM_OA_FLOW_DaoFaHttpGetIn" />
+      <wsdl:output message="tns:CRM_OA_FLOW_DaoFaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Upload">
+      <wsdl:input message="tns:UploadHttpGetIn" />
+      <wsdl:output message="tns:UploadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadOAFinishStatus">
+      <wsdl:input message="tns:ReadOAFinishStatusHttpGetIn" />
+      <wsdl:output message="tns:ReadOAFinishStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Auto_UPDATE_All">
+      <wsdl:input message="tns:Auto_UPDATE_AllHttpGetIn" />
+      <wsdl:output message="tns:Auto_UPDATE_AllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LKAYEAR_Finish">
+      <wsdl:input message="tns:LKAYEAR_FinishHttpGetIn" />
+      <wsdl:output message="tns:LKAYEAR_FinishHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KAYEAR_Finish">
+      <wsdl:input message="tns:KAYEAR_FinishHttpGetIn" />
+      <wsdl:output message="tns:KAYEAR_FinishHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CRM_OAHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthority">
+      <wsdl:input message="tns:GetAuthorityHttpPostIn" />
+      <wsdl:output message="tns:GetAuthorityHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFlowState">
+      <wsdl:input message="tns:GetFlowStateHttpPostIn" />
+      <wsdl:output message="tns:GetFlowStateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pending">
+      <wsdl:input message="tns:PendingHttpPostIn" />
+      <wsdl:output message="tns:PendingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Track">
+      <wsdl:input message="tns:TrackHttpPostIn" />
+      <wsdl:output message="tns:TrackHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutHttpPostIn" />
+      <wsdl:output message="tns:LogoutHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW">
+      <wsdl:input message="tns:CRM_OA_FLOWHttpPostIn" />
+      <wsdl:output message="tns:CRM_OA_FLOWHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW_DaoFa">
+      <wsdl:input message="tns:CRM_OA_FLOW_DaoFaHttpPostIn" />
+      <wsdl:output message="tns:CRM_OA_FLOW_DaoFaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Upload">
+      <wsdl:input message="tns:UploadHttpPostIn" />
+      <wsdl:output message="tns:UploadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadOAFinishStatus">
+      <wsdl:input message="tns:ReadOAFinishStatusHttpPostIn" />
+      <wsdl:output message="tns:ReadOAFinishStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Auto_UPDATE_All">
+      <wsdl:input message="tns:Auto_UPDATE_AllHttpPostIn" />
+      <wsdl:output message="tns:Auto_UPDATE_AllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LKAYEAR_Finish">
+      <wsdl:input message="tns:LKAYEAR_FinishHttpPostIn" />
+      <wsdl:output message="tns:LKAYEAR_FinishHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KAYEAR_Finish">
+      <wsdl:input message="tns:KAYEAR_FinishHttpPostIn" />
+      <wsdl:output message="tns:KAYEAR_FinishHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CRM_OASoap" type="tns:CRM_OASoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthority">
+      <soap:operation soapAction="http://tempuri.org/GetAuthority" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Launch">
+      <soap:operation soapAction="http://tempuri.org/Launch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFlowState">
+      <soap:operation soapAction="http://tempuri.org/GetFlowState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pending">
+      <soap:operation soapAction="http://tempuri.org/Pending" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Track">
+      <soap:operation soapAction="http://tempuri.org/Track" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://tempuri.org/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW">
+      <soap:operation soapAction="http://tempuri.org/CRM_OA_FLOW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW_DaoFa">
+      <soap:operation soapAction="http://tempuri.org/CRM_OA_FLOW_DaoFa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructQJ">
+      <soap:operation soapAction="http://tempuri.org/StructQJ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructCC">
+      <soap:operation soapAction="http://tempuri.org/StructCC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKH">
+      <soap:operation soapAction="http://tempuri.org/StructKH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKH_WD">
+      <soap:operation soapAction="http://tempuri.org/StructKH_WD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructYCKQSM">
+      <soap:operation soapAction="http://tempuri.org/StructYCKQSM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructZDF">
+      <soap:operation soapAction="http://tempuri.org/StructZDF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Upload">
+      <soap:operation soapAction="http://tempuri.org/Upload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadOAFinishStatus">
+      <soap:operation soapAction="http://tempuri.org/ReadOAFinishStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auto_UPDATE_All">
+      <soap:operation soapAction="http://tempuri.org/Auto_UPDATE_All" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructLKAYEAR">
+      <soap:operation soapAction="http://tempuri.org/StructLKAYEAR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructHaiBao">
+      <soap:operation soapAction="http://tempuri.org/StructHaiBao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructTSCL">
+      <soap:operation soapAction="http://tempuri.org/StructTSCL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructZZF">
+      <soap:operation soapAction="http://tempuri.org/StructZZF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKHTS">
+      <soap:operation soapAction="http://tempuri.org/StructKHTS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructMDBS">
+      <soap:operation soapAction="http://tempuri.org/StructMDBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKAYEAR">
+      <soap:operation soapAction="http://tempuri.org/StructKAYEAR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKADT">
+      <soap:operation soapAction="http://tempuri.org/StructKADT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKATSCL">
+      <soap:operation soapAction="http://tempuri.org/StructKATSCL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKACXY">
+      <soap:operation soapAction="http://tempuri.org/StructKACXY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructCXHD">
+      <soap:operation soapAction="http://tempuri.org/StructCXHD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LKAYEAR_Finish">
+      <soap:operation soapAction="http://tempuri.org/LKAYEAR_Finish" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KAYEAR_Finish">
+      <soap:operation soapAction="http://tempuri.org/KAYEAR_Finish" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_OASoap12" type="tns:CRM_OASoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthority">
+      <soap12:operation soapAction="http://tempuri.org/GetAuthority" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Launch">
+      <soap12:operation soapAction="http://tempuri.org/Launch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFlowState">
+      <soap12:operation soapAction="http://tempuri.org/GetFlowState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pending">
+      <soap12:operation soapAction="http://tempuri.org/Pending" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Track">
+      <soap12:operation soapAction="http://tempuri.org/Track" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://tempuri.org/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW">
+      <soap12:operation soapAction="http://tempuri.org/CRM_OA_FLOW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW_DaoFa">
+      <soap12:operation soapAction="http://tempuri.org/CRM_OA_FLOW_DaoFa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructQJ">
+      <soap12:operation soapAction="http://tempuri.org/StructQJ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructCC">
+      <soap12:operation soapAction="http://tempuri.org/StructCC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKH">
+      <soap12:operation soapAction="http://tempuri.org/StructKH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKH_WD">
+      <soap12:operation soapAction="http://tempuri.org/StructKH_WD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructYCKQSM">
+      <soap12:operation soapAction="http://tempuri.org/StructYCKQSM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructZDF">
+      <soap12:operation soapAction="http://tempuri.org/StructZDF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Upload">
+      <soap12:operation soapAction="http://tempuri.org/Upload" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadOAFinishStatus">
+      <soap12:operation soapAction="http://tempuri.org/ReadOAFinishStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auto_UPDATE_All">
+      <soap12:operation soapAction="http://tempuri.org/Auto_UPDATE_All" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructLKAYEAR">
+      <soap12:operation soapAction="http://tempuri.org/StructLKAYEAR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructHaiBao">
+      <soap12:operation soapAction="http://tempuri.org/StructHaiBao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructTSCL">
+      <soap12:operation soapAction="http://tempuri.org/StructTSCL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructZZF">
+      <soap12:operation soapAction="http://tempuri.org/StructZZF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKHTS">
+      <soap12:operation soapAction="http://tempuri.org/StructKHTS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructMDBS">
+      <soap12:operation soapAction="http://tempuri.org/StructMDBS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKAYEAR">
+      <soap12:operation soapAction="http://tempuri.org/StructKAYEAR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKADT">
+      <soap12:operation soapAction="http://tempuri.org/StructKADT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKATSCL">
+      <soap12:operation soapAction="http://tempuri.org/StructKATSCL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructKACXY">
+      <soap12:operation soapAction="http://tempuri.org/StructKACXY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StructCXHD">
+      <soap12:operation soapAction="http://tempuri.org/StructCXHD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LKAYEAR_Finish">
+      <soap12:operation soapAction="http://tempuri.org/LKAYEAR_Finish" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KAYEAR_Finish">
+      <soap12:operation soapAction="http://tempuri.org/KAYEAR_Finish" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_OAHttpGet" type="tns:CRM_OAHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthority">
+      <http:operation location="/GetAuthority" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFlowState">
+      <http:operation location="/GetFlowState" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pending">
+      <http:operation location="/Pending" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Track">
+      <http:operation location="/Track" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <http:operation location="/Logout" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW">
+      <http:operation location="/CRM_OA_FLOW" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW_DaoFa">
+      <http:operation location="/CRM_OA_FLOW_DaoFa" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Upload">
+      <http:operation location="/Upload" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadOAFinishStatus">
+      <http:operation location="/ReadOAFinishStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auto_UPDATE_All">
+      <http:operation location="/Auto_UPDATE_All" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LKAYEAR_Finish">
+      <http:operation location="/LKAYEAR_Finish" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="KAYEAR_Finish">
+      <http:operation location="/KAYEAR_Finish" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CRM_OAHttpPost" type="tns:CRM_OAHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthority">
+      <http:operation location="/GetAuthority" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFlowState">
+      <http:operation location="/GetFlowState" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pending">
+      <http:operation location="/Pending" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Track">
+      <http:operation location="/Track" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <http:operation location="/Logout" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW">
+      <http:operation location="/CRM_OA_FLOW" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CRM_OA_FLOW_DaoFa">
+      <http:operation location="/CRM_OA_FLOW_DaoFa" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Upload">
+      <http:operation location="/Upload" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadOAFinishStatus">
+      <http:operation location="/ReadOAFinishStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auto_UPDATE_All">
+      <http:operation location="/Auto_UPDATE_All" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LKAYEAR_Finish">
+      <http:operation location="/LKAYEAR_Finish" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="KAYEAR_Finish">
+      <http:operation location="/KAYEAR_Finish" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CRM_OA">
+    <wsdl:port name="CRM_OASoap" binding="tns:CRM_OASoap">
+      <soap:address location="http://192.168.0.135/API/CRM/CRM_OA.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_OASoap12" binding="tns:CRM_OASoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/CRM_OA.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_OAHttpGet" binding="tns:CRM_OAHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/CRM_OA.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CRM_OAHttpPost" binding="tns:CRM_OAHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/CRM_OA.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

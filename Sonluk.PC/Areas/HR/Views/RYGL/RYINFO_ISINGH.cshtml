@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "工会管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="inghTpl">
+    {{#  if(d.ISINGH === 1){ }}
+    已入会
+    {{#  } else{ }}
+    未入会
+    {{# } }}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="quit">注销</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR人员管理</a>
+    <a><cite>工会管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_dr">导入</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-inline">
+                <label class="layui-form-label">公司：</label>
+                <div class="layui-input-inline">
+                    <select id="find_gs" lay-filter="find_gs"></select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">姓名：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="noselect" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">入会状态：</label>
+                <div class="layui-input-inline">
+                    <select id="find_isingh" lay-filter="find_isingh">
+                        <option value="">请选择</option>
+                        <option value="1" selected="selected">已入会</option>
+                        <option value="0">未入会</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px">入会日期：</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="date" id="GHRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="date" id="GHRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="ghTable" lay-filter="ghTable"></table>
+    </div>
+</div>
+<div id="div_gh" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">姓名：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="displayResult()" />
+        </div>
+        <label class="layui-form-label" style="width: 100px;">姓名：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_name" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">公司：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_gs" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 100px;">部门：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_bm" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">员工类别：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_yglb" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 100px;">在职状态：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_zzzt" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">证照类型：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_zzlb" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 100px;">证照号码：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_zzno" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">入职日期：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="isgh_rzrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 100px;">性别：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_sex" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">工会状态：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="isgh_ghzt" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 100px;">入会日期：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="isgh_rhrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+        </div>
+    </div>
+</div>
+<div id="div_daoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_drmb" style="width:150px">导入</button>
+    </div>
+</div>
+<div class="layui-form" id="div_ghry" hidden>
+    <table class="layui-hidden" id="ghryTable" lay-filter="ghryTable"></table>
+</div>
+<div hidden>
+    <input type="text" id="bl_ryid" value="">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/RYGL/RYINFO_ISINGH")
+}

@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "考勤记录查询";
+    Session["TITLENAME"] = "考勤记录查询";
+}
+
+<style>
+    .td {
+        height: 30px;
+    }
+</style>
+
+
+
+
+
+
+<div id="from1">
+    <div id="div1">
+
+        <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+            <button id="btn_cx" class="layui-btn" style="width:100%">查询</button>
+            <button id="btn_staffback" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+            <button id="btn_back" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+            <button id="btn_CCback" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+        </div>
+
+
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">开始日期：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <input id="opentime" type="date" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">结束日期：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <input id="endtime" type="date" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">部门：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <select id="department" lay-filter="department"></select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">员工类型：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <select id="staff_type" lay-filter="staff_type"></select>
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:100px; text-align:right;">员工姓名：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <input id="name" type="text" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">员工工号：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <input id="workID" type="text" class="layui-input">
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:100px; text-align:right;">只看异常考勤：</label>
+            <div class="layui-input-block" style="margin-left:110px; left:-1px;">
+                <select id="onlyQQ" lay-filter="onlyQQ">
+                    <option value="0" selected="selected">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+
+        </div>
+        
+
+        <hr class="layui-bg-black" />
+
+        @*<table id="result" lay-filter="result"></table>*@
+        <div id="div_StaffResult" style="margin:0 10px">
+
+        </div>
+        <div id="div_result" style="margin:0 10px">
+
+        </div>
+        <div id="div_detail" style="margin:0 10px">
+
+        </div>
+        <div id="div_CCdetail" style="margin:0 10px">
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/BaoBiao")
+}

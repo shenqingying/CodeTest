@@ -1,0 +1,193 @@
+﻿@using Sonluk.UI.Model.MES.SY_GCService;
+@using Sonluk.UI.Model.MES.SY_TYPEMXService;
+@{
+    ViewBag.Title = "仓库基础设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    MES_SY_TYPEMXLIST[] LJXT = ViewBag.LJXT;
+    MES_SY_GC[] GC = ViewBag.GC;
+
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+
+<script type="text/html" id="Tpl_ISACTION">
+    {{# if(d.ISACTION == 1){ }}
+    启用
+    {{# }else if(d.ISACTION== 0){ }}
+    关闭
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="Tpl_kcdd">
+    {{ d.KCDD + '-' + d.KCDDNAME }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">WMS系统设置</a>
+    <a><cite>仓库基础设置</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+    </div>
+
+
+    <table id="tb_ck" lay-filter="tb_ck"></table>
+
+</div>
+
+
+<div id="div_ck" class="layui-form" hidden>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">仓库编码：</label>
+            <div class="layui-input-inline">
+                <input id="CKNO" maxlength="3" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">仓库描述：</label>
+            <div class="layui-input-inline">
+                <input id="CKNAME" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">连接系统：</label>
+            <div class="layui-input-inline">
+                <select id="LJXT" lay-filter="LJXT" lay-search>
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < LJXT.Length; i++)
+                    {
+                        <option value="@LJXT[i].ID">@LJXT[i].MXNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-inline">
+                <select id="ISACTION" lay-filter="ISACTION" lay-search>
+                    <option value="1">启用</option>
+                    <option value="0">关闭</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline">
+                <input id="REMARK" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-tab layui-tab-card">
+            <ul class="layui-tab-title">
+                <li id="li_kcdd" class="layui-this">库存地点</li>
+                <li id="li_area">区域编码</li>
+            </ul>
+            <div class="layui-tab-content" >
+                <div id="div_tab_kcdd" class="layui-tab-item layui-show">
+                    <button class="layui-btn" id="btn_add_kcdd">新增</button>
+                    <table class="layui-hide" id="tb_kcdd" lay-filter="tb_kcdd"></table>
+                </div>
+                <div id="div_tab_area" class="layui-tab-item">
+                    <button class="layui-btn" id="btn_add_area">新增</button>
+                    <table class="layui-hide" id="tb_area" lay-filter="tb_area"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="div_kcdd" class="layui-form" hidden>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <select id="GC" lay-filter="GC" lay-search>
+                    <option value="0">请选择</option>
+                    @for (int i = 0; i < GC.Length; i++)
+                    {
+                    <option value="@GC[i].GC">@GC[i].GC-@GC[i].GCMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">库存地点：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <select id="KCDD" lay-filter="KCDD" lay-search>
+                    <option value="0"></option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="layui-inline">
+            <label class="layui-form-label">标识：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <select id="BS" lay-filter="BS" lay-search>
+                    <option value="0">请选择</option>
+                    <option value="1">内销</option>
+                    <option value="2">外销</option>
+                    <option value="3">其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline" style="width:230px;">
+                <input id="REMARK2" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_area" class="layui-form" hidden>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">区域编码：</label>
+            <div class="layui-input-inline">
+                <input id="QYBM" maxlength="3" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">区域描述：</label>
+            <div class="layui-input-inline">
+                <input id="QYNAME" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline">
+                <input id="REMARK3" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/html2canvas.js"></script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/System/CK_Setting")
+}

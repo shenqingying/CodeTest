@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "纸张格式";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string pageSize = "A4";
+    HttpCookie cookie = Request.Cookies.Get("IQCPMPageSize");
+    if (cookie != null)
+    {
+        pageSize = cookie.Value;
+    } 
+}
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">设置</a>
+        >
+        <a href="#">打印纸张</a>
+    </div>
+</div>
+<div class="panel-flow">
+    <input type="hidden" id="report-config-page-size" value="@Url.Action("PageSize", "Report", new { area = "MM" })">
+    <table class="panel-flow-table">
+        <tr>
+            <td class="panel-flow-table-title" colspan="2">采购入库送检单（包材类）</td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title">纸张格式：</td>
+            <td class="panel-flow-table-content">
+                <input type="radio" name="page-size" value="A4" @if (pageSize.Equals("A4")) {@("checked")}>A4（210mm×297mm）
+            </td>  
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title"></td>
+            <td class="panel-flow-table-content">
+                <input type="radio" name="page-size" value="241-140" @if (pageSize.Equals("241-140")) { @("checked") }>三联二等分（241mm×140mm）
+            </td>
+        </tr> 
+        <tr>
+            <td class="panel-flow-table-title"></td>
+            <td class="panel-flow-table-content">           
+                <input type="radio" name="page-size" value="241-280" @if (pageSize.Equals("241-280")) { @("checked")  }>2X三联二等分（241mm×280mm）
+            </td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title panel-flow-remark" colspan="3">此为服务端打印页面分析参数，保存于浏览器Cookie中。</td>
+        </tr>
+        <tr>
+            <td class="panel-flow-table-title"><div class="sonluk-button" id="submit">保存</div></td>
+            <td class="panel-flow-table-content panel-flow-success" id="result"></td>
+        </tr>
+    </table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/report/config")
+}

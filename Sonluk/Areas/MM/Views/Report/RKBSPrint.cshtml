@@ -1,0 +1,14 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<FileStreamInfo>
+@{
+    ViewBag.Title = "采购订单-入库标识";
+    Layout = "~/Views/Shared/_PDFLayout.cshtml";
+}
+<input type="hidden" value="@Model.Count()" id="node-count">
+@foreach (FileStreamInfo po in Model)
+{
+
+    <div class="pdf-display-file-title">@po.Name</div>
+    <embed class="pdf-display-file-body" src="~/Temp/PO/@(po.Name + "_" + po.TattedCode + "." + po.Extension)" />
+}
+

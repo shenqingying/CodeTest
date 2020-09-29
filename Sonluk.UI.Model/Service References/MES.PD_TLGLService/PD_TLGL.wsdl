@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_TL_DELETE_IN" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL_DELETE_IN">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TMTLID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GHNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_TL" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLRQ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JLR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SCDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:MES_PD_TL_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_PD_TL_LIST" type="tns:ArrayOfMES_PD_TL_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_PD_TL_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_PD_TL_LIST" nillable="true" type="tns:MES_PD_TL_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_PD_TL_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_TLTMTH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_TL_UPDATE_TLTMTH_IN" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL_UPDATE_TLTMTH_IN">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TMTLID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GHNAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_TLTMTHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_TLTMTHResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_TL" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_REPORT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_TL_IN_SELECT_REPORT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL_IN_SELECT_REPORT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBBH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CCWLLB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TLWLLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLRQS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLRQE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZPRQS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZPRQE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_REPORTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_REPORTResult" type="tns:MES_PD_TL_SELECT_REPORT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_TL_SELECT_REPORT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_PD_TL_SELECT_REPORT_LIST" type="tns:ArrayOfMES_PD_TL_SELECT_REPORT_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_PD_TL_SELECT_REPORT_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_PD_TL_SELECT_REPORT_LIST" nillable="true" type="tns:MES_PD_TL_SELECT_REPORT_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_PD_TL_SELECT_REPORT_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZPRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GDDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLLBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLTM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLWLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLWLNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLWLLBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JLRNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TLTH" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GYSPC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLSBBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLSBHMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLPFDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLPLDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLSCDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLBCMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLREMARK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PFDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLINFOREMARK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TLNOREMARK" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_TLTMTHSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_TLTMTH" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_TLTMTHSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_TLTMTHResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_REPORTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_REPORT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_REPORTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_REPORTResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PD_TLGLSoap">
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_TLTMTH">
+      <wsdl:input message="tns:UPDATE_TLTMTHSoapIn" />
+      <wsdl:output message="tns:UPDATE_TLTMTHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_REPORT">
+      <wsdl:input message="tns:SELECT_REPORTSoapIn" />
+      <wsdl:output message="tns:SELECT_REPORTSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PD_TLGLHttpGet" />
+  <wsdl:portType name="PD_TLGLHttpPost" />
+  <wsdl:binding name="PD_TLGLSoap" type="tns:PD_TLGLSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_TLTMTH">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_TLTMTH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_REPORT">
+      <soap:operation soapAction="http://tempuri.org/SELECT_REPORT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PD_TLGLSoap12" type="tns:PD_TLGLSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_TLTMTH">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_TLTMTH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_REPORT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_REPORT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PD_TLGLHttpGet" type="tns:PD_TLGLHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="PD_TLGLHttpPost" type="tns:PD_TLGLHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="PD_TLGL">
+    <wsdl:port name="PD_TLGLSoap" binding="tns:PD_TLGLSoap">
+      <soap:address location="http://192.168.0.223/API/MES/PD_TLGL.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_TLGLSoap12" binding="tns:PD_TLGLSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/PD_TLGL.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_TLGLHttpGet" binding="tns:PD_TLGLHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/PD_TLGL.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PD_TLGLHttpPost" binding="tns:PD_TLGLHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/PD_TLGL.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

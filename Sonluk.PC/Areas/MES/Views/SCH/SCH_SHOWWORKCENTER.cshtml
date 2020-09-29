@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "SCH_SHOWWORKCENTER";
+}
+@Html.Partial("~/Areas/WMS/Views/Shared/WMSHttp.cshtml")
+<link href="~/Scripts/layui2.2.5/css/layui.css" rel="stylesheet" />
+<link href="~/Content/swiper-bundle.min.css" rel="stylesheet" />
+<link href="~/Content/MES/SCH/dw.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/MES/SCH/SCH_SHOWMACHINE.js"></script>
+<script src="~/Scripts/echarts.min.js"></script>
+<script src="~/Scripts/swiper-bundle.min.js"></script>
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+<script src="~/Scripts/sonlui.min.js"></script>
+<script src="~/Scripts/Helper/multirights.js"></script>
+<script src="~/Scripts/EM/zwk.js"></script>
+
+<body>
+    <input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+    <div class="layui-form">
+        <div class="div-a" id="topChoiceDiv">
+            <div style="padding-top:13px"></div>
+            <div class="layui-inline">
+                <label class="layui-form-label " lid="label1" style="margin-left:-40px">工厂：</label>
+                <div class="layui-input-inline" style="width:200px">
+                    <select id="in_gc">
+                        <option value="" lid="c_selectplz">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="label2" style="margin-left:-20px">工作中心：</label>
+                <div class="layui-input-inline">
+                    <select id="in_gzzx">
+                        <option value="" lid="c_selectplz">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="label3" style="width:100px;margin-left:-20px">刷新（秒）：</label>
+                <div class="layui-input-inline">
+                    <input type="number" autocomplete="off" class="layui-input" id="in_refresh" style="width:100px" value="30">
+                </div>
+            </div>
+            <div class="layui-inline" style="padding-left:25px">
+                <button class="layui-btn" lid="btn1" id="btn1" onclick="StartShow(false)">启动</button>
+            </div>
+            <div style="padding-bottom:13px"></div>
+        </div>
+        <div class="div-c contentbg" id="TitleDiv" >
+            <div style="font-size:26px;text-align:center;padding-top:10px">
+                <h1 style="color:#e0e0e0">
+                    工作中心生产进度
+                </h1>
+            </div>
+            <div id="sj" style="text-align:right;color:#e0e0e0;font-size:18px;padding-right:10px">当前时间</div>
+        </div>
+        <div class="contentbg div-b" id="ContentDiv">
+            <canvas id="e" width="1000" height="1000"></canvas>
+            <canvas id="e1" width="1000" height="1000"></canvas>
+
+        </div>
+    </div>
+</body>
+
+<script>
+    layui.use([], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var layer = layui.layer;
+        var div = document.getElementById('ContentDiv');
+        Clock('sj', "当前时间：");
+        var loading = layer.load(1);
+        initRightList({
+            query: [{
+                GC: '#in_gc',
+                GZZX: '#in_gzzx'
+            }],
+            request: wmshttp,
+            layui: layui,
+            done: function (rst) {
+                layer.close(loading);
+            }
+        });
+        divSetConfig();
+        
+
+    });
+    function StartShow(isUpdate) {
+        
+        var gzzxms = $("#in_gzzx").find("option:selected").text();
+
+        var title = document.querySelector('h1');
+        title.innerHTML = gzzxms + title.innerHTML;
+    }
+
+
+
+
+    window.onresize = function () {
+        divSetConfig();
+    }
+    function divSetConfig() {
+        var height = document.body.clientHeight;
+        document.getElementById('ContentDiv').style.height = height - 100;
+
+    }
+    document.getElementById('ContentDiv').addEventListener('mousemove', mouseMove)
+    function mouseMove(ev) {
+        ev = ev || window.event;
+        var mousePos = mousePosition(ev);
+        var height = document.documentElement.clientHeight;
+        if (mousePos.y < height / 2) {
+            if (document.getElementById('topChoiceDiv').className.indexOf('up') != -1) {
+                document.getElementById('topChoiceDiv').classList.remove('up');
+                document.getElementById('topChoiceDiv').classList.add('down');
+            }
+
+        } else {
+            if (document.getElementById('topChoiceDiv').className.indexOf('down') != -1) {
+                document.getElementById('topChoiceDiv').classList.remove('down');
+            }
+
+            $$('topChoiceDiv').classList.add('up');
+        }
+    }
+    function mousePosition(ev) {
+        if (ev.pageX || ev.pageY) {
+            return { x: ev.pageX, y: ev.pageY };
+        }
+        return {
+            x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y: ev.clientY + document.body.scrollTop - document.body.clientTop
+        };
+    }
+    //window.onload = function () {
+    //    //alert('1234');
+    //    //var mychart = echarts.init(div);
+    //    //mychart.setOption(option);
+    //}
+</script>

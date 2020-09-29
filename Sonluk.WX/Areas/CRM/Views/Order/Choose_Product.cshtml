@@ -1,0 +1,194 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_PRODUCTService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "选择产品";
+    Session["TITLENAME"] = "选择产品";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+    CRM_PRODUCT_PRODUCT[] CPLX = ViewBag.CPLX;
+}
+
+<style type="text/css">
+    label {
+        text-align: right;
+    }
+
+    .weui-label {
+        width: 120px;
+    }
+
+
+
+    .weui-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+</style>
+
+
+<div id="div_order">
+
+
+
+
+    <div class="weui-cells weui-cells_form" hidden>
+        @*<div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">客户类型：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select id="khlx" class="weui-select">
+                            <option value="0">全部</option>
+                    </select>
+                </div>
+            </div>*@
+
+
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">CRM订单号：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="gslxr" class="weui-input" type="text" placeholder="" value="100000">
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">SAP订单号：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="gslxdh" class="weui-input" type="text" placeholder="" value="666666">
+            </div>
+        </div>
+
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">送达方：</label></div>
+            <div class="weui-cell__bd">
+                <input id="khzzsj" class="weui-input" type="text" value="123456">
+            </div>
+        </div>
+
+
+
+        <div class="weui-btn-area">
+            <a class="weui-btn weui-btn_plain-primary" href="javascript:" id="btn_insert">添加产品</a>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_back">返回订单界面</a>
+
+    </div>
+    <div id="div_typebtn" class="weui-btn-area" hidden>
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_type">选择产品类型</a>
+    </div>
+
+
+    <div id="div_type" class="weui-cells weui-cells_form">
+        <div class="weui-cells__title">请选择产品类型</div>
+        @if (CPLX.Length == 0)
+        {
+            <label class="weui-label" style="width:inherit;text-align:center;">无数据！</label>
+        }
+        @for (int i = 0; i < CPLX.Length; i++)
+        {
+            <div class="weui-flex">
+                <div class="weui-flex__item" style="text-align:center;">
+                    <img src="@CPLX[i].CPLXML" onclick="CPLX_click(@CPLX[i].CPLX)" style="height:120px;" />
+                    <label class="weui-label" style="width:inherit;text-align:center;">@CPLX[i].CPLXDES</label>
+                </div>
+                @if (i == CPLX.Length - 1)
+                {
+                    <div class="weui-flex__item" style="text-align:center;">
+
+                    </div>
+                }
+                else
+                {
+                    i++;
+                    <div class="weui-flex__item" style="text-align:center;">
+                        <img src="@CPLX[i].CPLXML" onclick="CPLX_click(@CPLX[i].CPLX)" style="height:120px;" />
+                        <label class="weui-label" style="width:inherit;text-align:center;">@CPLX[i].CPLXDES</label>
+                    </div>
+                }
+
+            </div>
+            <hr class="layui-bg-gray" />
+        }
+
+
+    </div>
+
+
+    <div id="div_cp" class="weui-cells weui-cells_form" hidden>
+        <div class="weui-cells__title">请选择单品</div>
+
+    </div>
+
+
+    <!-- 白色按钮 -->
+    @*<a href="javascript:" id="btn_save" class="weui-btn weui-btn_default" hidden>仅保存</a>*@
+    <!-- 绿色按钮 -->
+    @*<a href="javascript:" id="btn_submit" class="weui-btn weui-btn_primary" hidden>保存并提交</a>*@
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#btn_save").click(function () {
+            weui.alert('保存成功', function () {
+                //window.location.href = "../Order/Select_Order";
+            }, {
+                title: '提示'
+            });
+        });
+
+        $("#btn_submit").click(function () {
+            weui.alert('提交成功', function () {
+                //window.location.href = "../Order/Select_Order";
+            }, {
+                title: '提示'
+            });
+        });
+
+        $("#btn_back").click(function () {
+            location.href = "../Order/Update_Order";
+        });
+
+        $("#btn_type").click(function () {
+            $("#div_product").hide();
+            $("#div_type").show();
+            $("#div_typebtn").hide();
+        });
+
+        $("img").click(function () {
+            $("#div_product").show();
+            $("#div_type").hide();
+            $("#div_typebtn").show();
+        });
+
+    });
+
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Choose_Product")
+}

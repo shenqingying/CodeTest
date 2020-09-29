@@ -1,0 +1,1884 @@
+﻿@using Sonluk.UI.Model.CRM.CRM_LoginService;
+@using Sonluk.API.SDK.Configuration;
+@{
+    CRM_JURISDICTION_GROUP[] MenuInfo = null;
+    if (Session["MENUINFO"] != null)
+    {
+        MenuInfo = (CRM_JURISDICTION_GROUP[])Session["MENUINFO"];
+    }
+
+    int loca = 0;
+    if (Session["location"] != null)
+    {
+        loca = Convert.ToInt32(Session["location"]);
+    }
+
+    string name = "";
+    if (Session["NAME"] != null)
+    {
+        name = Session["NAME"].ToString();
+    }
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Scripts/layui2.5.4/css/layui.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Scripts/layui2.5.4/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/other.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body class="layui-layout-body">
+
+
+
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo"><a href="@Url.Action("Index1", "Public", new { area = "CRM" })" class="layui-logo"><img src="~/Content/MES/IMAGES/logo.png" /></a></div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            @*<ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item"><a href="">控制台</a></li>
+                    <li class="layui-nav-item"><a href="">商品管理</a></li>
+                    <li class="layui-nav-item"><a href="">用户</a></li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">其它系统</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">邮件管理</a></dd>
+                            <dd><a href="">消息管理</a></dd>
+                            <dd><a href="">授权管理</a></dd>
+                        </dl>
+                    </li>
+                </ul>*@
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        @*<img src="http://t.cn/RCzsdCq" class="layui-nav-img">*@
+                        @name
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="../System/Password" lid="c_changepw">修改密码</a></dd>
+                        @*<dd><a href="">安全设置</a></dd>*@
+                    </dl>
+                </li>
+                @*<li class="layui-nav-item"><a href="@Url.Action("SignIn","Public")">退出</a></li>*@
+                <li class="layui-nav-item"><a href="../../CRM/Public/SignIn?LOGINTYPE=1" lid="c_logout">退出</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+
+                    @if (MenuInfo != null)
+                    {
+                        for (int i = 0; i < MenuInfo.Length; i++)
+                        {
+                            <li id="@MenuInfo[i].CRM_HG_RIGHTGROUP.RGROUPMEMO" class="layui-nav-item">
+                                <a class="" href="javascript:;">@MenuInfo[i].CRM_HG_RIGHTGROUP.RGROUPNAME</a>
+
+                                @if (MenuInfo[i].CRM_HG_RIGHTList.Length > 0)
+                                {
+                                    CRM_HG_RIGHT[] child = MenuInfo[i].CRM_HG_RIGHTList;
+                                    <dl class="layui-nav-child">
+                                        @for (int j = 0; j < child.Length; j++)
+                                        {
+                                            if (string.IsNullOrEmpty(child[j].RIGHTADD) == false)
+                                            {
+                                                string[] childurl = child[j].RIGHTADD.Split(',');
+                                                <dd id="@child[j].RIGHTMEMO" class=""><a style="padding-left:35px" href="@Url.Action(childurl[0], childurl[1], new { area = childurl[2] })">@child[j].RIGHTNAME</a></dd>
+                                            }
+                                        }
+                                    </dl>
+                                }
+
+                            </li>
+                        }
+                    }
+
+
+
+
+
+                    @*<li id="khgl" class="layui-nav-item">
+                            <a class="" href="javascript:;">客户管理</a>
+                            <dl class="layui-nav-child">
+                                <dd id="insert_kehu" class=""><a href="@Url.Action("Insert", "KeHu")">新增客户</a></dd>
+                                <dd id="select_kehu"><a href="@Url.Action("Select", "KeHu")">客户列表</a></dd>
+                                <dd id="only_select_kehu"><a href="@Url.Action("Select_Only", "KeHu")">客户查询</a></dd>
+                                <dd id="sap_kehu"><a href="@Url.Action("Sap", "KeHu")">SAP匹配</a></dd>
+                                <dd id="daoru_kehu"><a href="@Url.Action("Daoru", "KeHu")">客户导入</a></dd>
+                                <dd id="power"><a href="@Url.Action("Power", "KeHu")">权限组管理</a></dd>
+                                <dd id="user_power"><a href="@Url.Action("UserPower", "KeHu")">分配用户到组</a></dd>
+                                <dd id="kehu_power"><a href="@Url.Action("KeHuPower", "KeHu")">分配客户到组</a></dd>
+                                <dd id="baobiao_kehu"><a href="@Url.Action("SpaceArea_Baobiao", "KeHu")">空白区域报表</a></dd>
+                            </dl>
+                        </li>
+                        <li id="yggl" class="layui-nav-item">
+                            <a>员工管理</a>
+                            <dl class="layui-nav-child">
+                                <dd id="insert_staff"><a href="@Url.Action("Insert", "Staff")">新增员工</a></dd>
+                                <dd id="select_staff"><a href="@Url.Action("Select", "Staff")">员工列表</a></dd>
+                                <dd id="daoru_staff"><a href="@Url.Action("Daoru", "Staff")">员工导入</a></dd>
+                                <dd id="kaoqin_manager"><a href="@Url.Action("Manager", "Staff")">考勤地址管理</a></dd>
+                                <dd id="kaoqin_confirm"><a href="@Url.Action("Confirm", "Staff")">考勤地址审核</a></dd>
+                            </dl>
+                        </li>
+                        <li id="kqgl" class="layui-nav-item">
+                            <a>考勤管理</a>
+                            <dl class="layui-nav-child">
+                                <dd id="apply_qingjia"><a href="@Url.Action("QingJia", "KaoQin")">请假管理</a></dd>
+                                <dd id="hexiao_qingjia"><a href="@Url.Action("HeXiao_QingJia", "KaoQin")">请假核销</a></dd>
+                                <dd id="apply_chuchai"><a href="@Url.Action("ChuChai", "KaoQin")">出差管理</a></dd>
+                                <dd id="hexiao_chuchai"><a href="@Url.Action("HeXiao_ChuChai", "KaoQin")">出差核销</a></dd>
+                                <dd id="apply_yichang"><a href="@Url.Action("YiChang", "KaoQin")">异常考勤</a></dd>
+                                <dd id="select_kaoqin"><a href="@Url.Action("BaoBiao", "KaoQin")">考勤记录查询</a></dd>
+                                <dd id="select_kaoqin_personal"><a href="@Url.Action("BaoBiao_Personal", "KaoQin")">个人考勤记录</a></dd>
+                            </dl>
+                        </li>
+
+                        <li id="bfgl" class="layui-nav-item">
+                            <a>拜访管理</a>
+                            <dl class="layui-nav-child">
+                                <dd id="set_plan"><a href="@Url.Action("PlanManage", "BaiFang")">日常任务拜访</a></dd>
+                                <dd id="set_zxplan"><a href="@Url.Action("ZXManage", "BaiFang")">专项活动</a></dd>
+                                <dd id="set_zpplan"><a href="@Url.Action("ZPManage", "BaiFang")">拜访指派</a></dd>
+                                <dd id="backlog"><a href="@Url.Action("Backlog", "BaiFang")">待办事项</a></dd>
+                                <dd id="manage_baifang"><a href="@Url.Action("BaiFangManage", "BaiFang")">拜访管理</a></dd>
+                                <dd id="cx_baifang"><a href="@Url.Action("CX_BaiFang", "BaiFang")">拜访查询</a></dd>
+                            </dl>
+                        </li>
+
+                        <li id="hdgl" class="layui-nav-item">
+                            <a>活动管理</a>
+                            <dl class="layui-nav-child">
+                                <dd id="insert_fee"><a href="@Url.Action("InsertFee", "HuoDong")">招待费申请</a></dd>
+                                <dd id="select_fee"><a href="@Url.Action("SelectFee", "HuoDong")">招待费记录查询</a></dd>
+                                <dd id="insert_saler"><a href="@Url.Action("InsertSaler", "HuoDong")">直营卖场促销员申请</a></dd>
+                                <dd id="select_saler"><a href="@Url.Action("SelectSaler", "HuoDong")">促销员申请记录查询</a></dd>
+                                <dd id="insert_system"><a href="@Url.Action("InsertSystem", "HuoDong")">NKA系统工作评估</a></dd>
+                                <dd id="select_system"><a href="@Url.Action("SelectSystem", "HuoDong")">NKA系统工作评估查询</a></dd>
+                                <dd id="insert_store"><a href="@Url.Action("InsertStore", "HuoDong")">NKA门店工作评估</a></dd>
+                                <dd id="select_store"><a href="@Url.Action("SelectStore", "HuoDong")">NKA门店工作评估查询</a></dd>
+                            </dl>
+                        </li>
+
+                        <li id="xsbb" class="layui-nav-item">
+                            <a>销售报表</a>
+                            <dl class="layui-nav-child">
+                                <dd id="select_dingdan"><a href="@Url.Action("Order", "SAPReport")">销售订单</a></dd>
+                                <dd id="select_chuhuo"><a href="@Url.Action("Shipment", "SAPReport")">销售出货</a></dd>
+                                <dd id="select_kaipiao"><a href="@Url.Action("Invoice", "SAPReport")">销售开票</a></dd>
+                            </dl>
+                        </li>
+
+                        <li id="xtgl" class="layui-nav-item">
+                            <a>系统管理</a>
+                            <dl class="layui-nav-child">
+                                <dd id="set_department"><a href="@Url.Action("Department", "System")">部门设置</a></dd>
+                                <dd id="set_job"><a href="@Url.Action("Job", "System")">职务设置</a></dd>
+                                <dd id="set_user"><a href="@Url.Action("Users", "System")">用户管理</a></dd>
+                                <dd id="set_role"><a href="@Url.Action("Role", "System")">角色设置</a></dd>
+                                <dd id="set_khlx"><a href="@Url.Action("KHLX", "System")">客户类型权限</a></dd>
+                                <dd id="set_data"><a href="@Url.Action("Data", "System")">数据字典</a></dd>
+                                <dd id="select_log"><a href="@Url.Action("Log", "System")">日志查询</a></dd>
+                                <dd id="set_function"><a href="@Url.Action("Function", "System")">功能设置</a></dd>
+                                <dd id="set_rili"><a href="@Url.Action("RiLi", "System")">日历设置</a></dd>
+                                <dd id="set_banzu"><a href="@Url.Action("BanZu", "System")">班组设置</a></dd>
+                                <dd id="set_pinci"><a href="@Url.Action("PinCi", "System")">拜访频次设置</a></dd>
+                                <dd id="set_xsqy"><a href="@Url.Action("SaleArea", "System")">销售区域设置</a></dd>
+                                <dd id="set_system"><a href="@Url.Action("System", "System")">系统配置</a></dd>
+                                <dd id="change_pwd"><a href="@Url.Action("Password", "System")">修改密码</a></dd>
+                            </dl>
+                        </li>*@
+
+                </ul>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                switch(@loca){
+                    //客户管理
+                    case 1:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#insert_kehu").addClass("layui-this");
+                        break;
+                    case 42:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#submit_kehu").addClass("layui-this");
+                        break;
+                    case 2:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#select_kehu").addClass("layui-this");
+                        break;
+                    case 50:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#only_select_kehu").addClass("layui-this");
+                        break;
+                    case 3:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#sap_kehu").addClass("layui-this");
+                        break;
+                    case 4:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#daoru_kehu").addClass("layui-this");
+                        break;
+                    case 5:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#power").addClass("layui-this");
+                        break;
+                    case 6:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#user_power").addClass("layui-this");
+                        break;
+                    case 7:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#kehu_power").addClass("layui-this");
+                        break;
+                    case 8:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#baobiao_kehu").addClass("layui-this");
+                        break;
+                    case 63:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#report_kehu").addClass("layui-this");
+                        break;
+                    case 93:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#report_lka").addClass("layui-this");
+                        break;
+                    case 541:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#Dao_Ru_ZDWD").addClass("layui-this");
+                        break;
+                    case 549:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#KeHuPower2").addClass("layui-this");
+                        break;
+                    case 553:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#Report_DisplayImg").addClass("layui-this");
+                        break;
+                    case 554:
+                        $("#khgl").addClass("layui-nav-itemed");
+                        $("#Select_LKA_SH").addClass("layui-this");
+                        break;
+
+                        //员工管理
+                    case 9:
+                        $("#yggl").addClass("layui-nav-itemed");
+                        $("#insert_staff").addClass("layui-this");
+                        break;
+                    case 10:
+                        $("#yggl").addClass("layui-nav-itemed");
+                        $("#select_staff").addClass("layui-this");
+                        break;
+                    case 11:
+                        $("#yggl").addClass("layui-nav-itemed");
+                        $("#daoru_staff").addClass("layui-this");
+                        break;
+                    case 45:
+                        $("#yggl").addClass("layui-nav-itemed");
+                        $("#kaoqin_manager").addClass("layui-this");
+                        break;
+                    case 12:
+                        $("#yggl").addClass("layui-nav-itemed");
+                        $("#kaoqin_confirm").addClass("layui-this");
+                        break;
+                        //考勤管理
+                    case 13:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#apply_qingjia").addClass("layui-this");
+                        break;
+                    case 46:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#hexiao_qingjia").addClass("layui-this");
+                        break;
+                    case 14:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#apply_chuchai").addClass("layui-this");
+                        break;
+                    case 15:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#apply_yichang").addClass("layui-this");
+                        break;
+                    case 20:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#YiChang_HeXiao").addClass("layui-this");
+                        break;
+                    case 16:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#select_kaoqin").addClass("layui-this");
+                        break;
+                    case 51:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#select_kaoqin_personal").addClass("layui-this");
+                        break;
+                    case 43:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#insert_chuchai").addClass("layui-this");
+                        break;
+                    case 44:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#select_chuchai").addClass("layui-this");
+                        break;
+                    case 64:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#retreat_chuchai").addClass("layui-this");
+                        break;
+                    case 60:
+                        $("#kqgl").addClass("layui-nav-itemed");
+                        $("#hexiao_chuchai").addClass("layui-this");
+                        break;
+                        //拜访管理
+                    case 17:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#plan_baifang").addClass("layui-this");
+                        break;
+                    case 18:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#assign_baifang").addClass("layui-this");
+                        break;
+                    case 19:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#signin_baifang").addClass("layui-this");
+                        break;
+                    case 21:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#select_baifang").addClass("layui-this");
+                        break;
+                    case 47:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#manage_baifang").addClass("layui-this");
+                        break;
+                    case 48:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#cx_baifang").addClass("layui-this");
+                        break;
+                    case 49:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#insert_baifang").addClass("layui-this");
+                        break;
+                    case 56:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#backlog").addClass("layui-this");
+                        break;
+                    case 57:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#set_zxplan").addClass("layui-this");
+                        break;
+                    case 58:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#set_zpplan").addClass("layui-this");
+                        break;
+                    case 59:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#set_plan").addClass("layui-this");
+                        break;
+                    case 65:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#cx_baifang_staff").addClass("layui-this");
+                        break;
+                    case 504:
+                        $("#bfgl").addClass("layui-nav-itemed");
+                        $("#cx_baifang_data").addClass("layui-this");
+                        break;
+                        //活动管理
+                    case 22:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#insert_fee").addClass("layui-this");
+                        break;
+                    case 23:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#select_fee").addClass("layui-this");
+                        break;
+                    case 62:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#select_fee_personal").addClass("layui-this");
+                        break;
+                    case 24:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#insert_saler").addClass("layui-this");
+                        break;
+                    case 25:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#select_saler").addClass("layui-this");
+                        break;
+                    case 26:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#insert_system").addClass("layui-this");
+                        break;
+                    case 27:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#select_system").addClass("layui-this");
+                        break;
+                    case 28:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#insert_store").addClass("layui-this");
+                        break;
+                    case 29:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#select_store").addClass("layui-this");
+                        break;
+                        //销售报表
+                    case 30:
+                        $("#xsbb").addClass("layui-nav-itemed");
+                        $("#select_dingdan").addClass("layui-this");
+                        break;
+                    case 31:
+                        $("#xsbb").addClass("layui-nav-itemed");
+                        $("#select_chuhuo").addClass("layui-this");
+                        break;
+                    case 32:
+                        $("#xsbb").addClass("layui-nav-itemed");
+                        $("#select_kaipiao").addClass("layui-this");
+                        break;
+                        //系统设置
+                    case 33:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_department").addClass("layui-this");
+                        break;
+                    case 34:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_job").addClass("layui-this");
+                        break;
+                    case 35:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_user").addClass("layui-this");
+                        break;
+                    case 36:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_roles").addClass("layui-this");
+                        break;
+                    case 37:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_data").addClass("layui-this");
+                        break;
+                    case 38:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#selete_log").addClass("layui-this");
+                        break;
+                    case 39:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_function").addClass("layui-this");
+                        break;
+                    case 40:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_system").addClass("layui-this");
+                        break;
+                    case 41:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#change_pwd").addClass("layui-this");
+                        break;
+                    case 86:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#khpassword").addClass("layui-this");
+                        break;
+                    case 52:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_rili").addClass("layui-this");
+                        break;
+                    case 53:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_banzu").addClass("layui-this");
+                        break;
+                    case 54:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_pinci").addClass("layui-this");
+                        break;
+                    case 55:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_xsqy").addClass("layui-this");
+                        break;
+                    case 61:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#set_khlx").addClass("layui-this");
+                        break;
+                    case 85:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#khAcount").addClass("layui-this");
+                        break;
+                    case 94:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#staff_openid").addClass("layui-this");
+                        break;
+                    case 552:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#STAFFDICT").addClass("layui-this");
+                        break;
+                        //防窜货
+                    case 66:
+                        $("#fchgl").addClass("layui-nav-itemed");
+                        $("#insert_pm").addClass("layui-this");
+                        break;
+                    case 67:
+                        $("#fchgl").addClass("layui-nav-itemed");
+                        $("#select_pm").addClass("layui-this");
+                        break;
+                    case 83:
+                        $("#fchgl").addClass("layui-nav-itemed");
+                        $("#insert_pm_cg").addClass("layui-this");
+                        break;
+                    case 84:
+                        $("#fchgl").addClass("layui-nav-itemed");
+                        $("#select_pm_cg").addClass("layui-this");
+                        break;
+                        //发票、公告
+                    case 68:
+                        $("#xxgl").addClass("layui-nav-itemed");
+                        $("#select_invoice").addClass("layui-this");
+                        break;
+                    case 69:
+                        $("#xxgl").addClass("layui-nav-itemed");
+                        $("#select_notice").addClass("layui-this");
+                        break;
+                    case 70:
+                        $("#xxgl").addClass("layui-nav-itemed");
+                        $("#sh_notice").addClass("layui-this");
+                        break;
+                        //产品
+                    case 71:
+                        $("#cpgl").addClass("layui-nav-itemed");
+                        $("#select_Product").addClass("layui-this");
+                        break;
+                    case 72:
+                        $("#cpgl").addClass("layui-nav-itemed");
+                        $("#select_ProductType").addClass("layui-this");
+                        break;
+                    case 73:
+                        $("#cpgl").addClass("layui-nav-itemed");
+                        $("#select_YJProduct").addClass("layui-this");
+                        break;
+                    case 74:
+                        $("#cpgl").addClass("layui-nav-itemed");
+                        $("#Select_ProductGroup").addClass("layui-this");
+                        break;
+                    case 75:
+                        $("#cpgl").addClass("layui-nav-itemed");
+                        $("#daoRu_ProductGroup").addClass("layui-this");
+                        break;
+                    case 76:
+                        $("#cpgl").addClass("layui-nav-itemed");
+                        $("#setKH_ProductGroup").addClass("layui-this");
+                        break;
+                    case 77:
+                        $("#cpgl").addClass("layui-nav-itemed");
+                        $("#productToGroup").addClass("layui-this");
+                        break;
+                        //订单
+                    case 78:
+                        $("#ddgl").addClass("layui-nav-itemed");
+                        $("#insert_Order").addClass("layui-this");
+                        break;
+                    case 79:
+                        $("#ddgl").addClass("layui-nav-itemed");
+                        $("#select_Order").addClass("layui-this");
+                        break;
+                    case 80:
+                        $("#ddgl").addClass("layui-nav-itemed");
+                        $("#report_Order").addClass("layui-this");
+                        break;
+                    case 81:
+                        $("#ddgl").addClass("layui-nav-itemed");
+                        $("#sh_Order").addClass("layui-this");
+                        break;
+                    case 82:
+                        $("#ddgl").addClass("layui-nav-itemed");
+                        $("#gd_Order").addClass("layui-this");
+                        break;
+                        //企业介绍
+                    case 87:
+                        $("#qyjs").addClass("layui-nav-itemed");
+                        $("#js_basic").addClass("layui-this");
+                        break;
+                    case 88:
+                        $("#qyjs").addClass("layui-nav-itemed");
+                        $("#js_product").addClass("layui-this");
+                        break;
+                    case 89:
+                        $("#qyjs").addClass("layui-nav-itemed");
+                        $("#js_promotion").addClass("layui-this");
+                        break;
+                    case 90:
+                        $("#qyjs").addClass("layui-nav-itemed");
+                        $("#js_basic_edit").addClass("layui-this");
+                        break;
+                    case 91:
+                        $("#qyjs").addClass("layui-nav-itemed");
+                        $("#js_product_edit").addClass("layui-this");
+                        break;
+                    case 92:
+                        $("#qyjs").addClass("layui-nav-itemed");
+                        $("#js_promotion_edit").addClass("layui-this");
+                        break;
+                        //费用
+                    case 95:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_LKAyear").addClass("layui-this");
+                        break;
+                    case 96:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_ABC_Product").addClass("layui-this");
+                        break;
+                    case 97:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_AdCompany").addClass("layui-this");
+                        break;
+                    case 98:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_LKAXS").addClass("layui-this");
+                        break;
+                    case 99:$("#feegl").addClass("layui-nav-itemed");
+                        $("#Check_AdCompany").addClass("layui-this");
+                        break;
+                    case 500:$("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Create_Fee").addClass("layui-this");
+                        break;
+                    case 501:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_ITEM").addClass("layui-this");
+                        break;
+                    case 502:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_LKAHXZL").addClass("layui-this");
+                        break;
+                    case 503:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_LKAHXDJ").addClass("layui-this");
+                        break;
+                    case 505:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_HaiBao").addClass("layui-this");
+                        break;
+                    case 506:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Special_Display").addClass("layui-this");
+                        break;
+                    case 507:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Check_Create_Fee").addClass("layui-this");
+                        break;
+                    case 508:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Wl").addClass("layui-this");
+                        break;
+                    case 509:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Travel").addClass("layui-this");
+                        break;
+                    case 510:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_FI").addClass("layui-this");
+                        break;
+                    case 511:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_JXSCXHD").addClass("layui-this");
+                        break;
+                    case 512:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_JXSRYZC").addClass("layui-this");
+                        break;
+                    case 513:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KAyear").addClass("layui-this");
+                        break;
+                    case 514:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_OutDisplay").addClass("layui-this");
+                        break;
+                    case 515:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KACXY").addClass("layui-this");
+                        break;
+                    case 516:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KACXYGZ").addClass("layui-this");
+                        break;
+                    case 517:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#Select_KHTS").addClass("layui-this");
+                        break;
+                    case 518:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CBZX").addClass("layui-this");
+                        break;
+                    case 519:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_HaiBao_Other").addClass("layui-this");
+                        break;
+                    case 520:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_SH_LKAHXZL").addClass("layui-this");
+                        break;
+                    case 521:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_SH_Travel").addClass("layui-this");
+                        break;
+                    case 522:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_NKAXS").addClass("layui-this");
+                        break;
+                    case 523:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Report_NKAXS").addClass("layui-this");
+                        break;
+                    case 524:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KAXS").addClass("layui-this");
+                        break;
+                    case 525:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Travel_SH").addClass("layui-this");
+                        break;
+                    case 526:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Travel_SP").addClass("layui-this");
+                        break;
+                    case 527:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_PSF").addClass("layui-this");
+                        break;
+                    case 528:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Other").addClass("layui-this");
+                        break;
+                    case 529:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KADT").addClass("layui-this");
+                        break;
+                    case 530:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KATSCL").addClass("layui-this");
+                        break;
+                    case 531:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_MDBS").addClass("layui-this");
+                        break;
+                    case 532:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KAHXZL").addClass("layui-this");
+                        break;
+                    case 533:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KAHXDJ").addClass("layui-this");
+                        break;
+                    case 534:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_MDBS_HX").addClass("layui-this");
+                        break;
+                    case 535:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_JXSHXDJ").addClass("layui-this");
+                        break;
+                    case 536:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_SH_KAHXZL").addClass("layui-this");
+                        break;
+                    case 537:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_JXSFee").addClass("layui-this");
+                        break;
+                    case 538:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_PRINT_KAHX").addClass("layui-this");
+                        break;
+                    case 539:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#Select_KHTSSH").addClass("layui-this");
+                        break;
+                    case 540:
+                        $("#hdgl").addClass("layui-nav-itemed");
+                        $("#Select_KHTSSP").addClass("layui-this");
+                        break;
+                    case 542:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CXHD_CPLX").addClass("layui-this");
+                        break;
+                    case 543:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CXHDTT").addClass("layui-this");
+                        break;
+                    case 544:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CXYGL").addClass("layui-this");
+                        break;
+                    case 545:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CXHDTT_HX").addClass("layui-this");
+                        break;
+                    case 546:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CXHDTT_PG").addClass("layui-this");
+                        break;
+                    case 547:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CXHDTT_SP").addClass("layui-this");
+                        break;
+                    case 548:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_MDBS_HX2").addClass("layui-this");
+                        break;
+                    case 550:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_HXZL_ZZF").addClass("layui-this");
+                        break;
+                    case 551:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_CXYWH").addClass("layui-this");
+                        break;
+                    case 555:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#LKA_SingleReport").addClass("layui-this");
+                        break;
+                    case 556:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_LKAyear_UpdateAll").addClass("layui-this");
+                        break;
+                    case 560:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KADT_HX").addClass("layui-this");
+                        break;
+                    case 561:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_KATSCL_HX").addClass("layui-this");
+                        break;
+                    case 562:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#JXS_REPORT").addClass("layui-this");
+                        break;
+                    case 563:
+                        $("#feegl").addClass("layui-nav-itemed");
+                        $("#Select_Special_Display_HX").addClass("layui-this");
+                        break;
+                        //KAorder
+                    case 1000:
+                        $("#kaorder").addClass("layui-nav-itemed");
+                        $("#DDCXDY").addClass("layui-this");
+                        break;
+                    case 1001:
+                        $("#kaorder").addClass("layui-nav-itemed");
+                        $("#SHBG").addClass("layui-this");
+                        break;
+                    case 1002:
+                        $("#kaorder").addClass("layui-nav-itemed");
+                        $("#HHXXWH").addClass("layui-this");
+                        break;
+                    case 1003:
+                        $("#kaorder").addClass("layui-nav-itemed");
+                        $("#DRF_LOGIN").addClass("layui-this");
+                        break;
+                    case 1004:
+                        $("#kaorder").addClass("layui-nav-itemed");
+                        $("#CreateOrder").addClass("layui-this");
+                        break;
+
+
+                        //MSG
+                    case 557:
+                        $("#send").addClass("layui-nav-itemed");
+                        $("#SYS_Info").addClass("layui-this");
+                        break;
+                    case 558:
+                        $("#send").addClass("layui-nav-itemed");
+                        $("#MSG_SENDWAY").addClass("layui-this");
+                        break;
+                    case 559:
+                        $("#send").addClass("layui-nav-itemed");
+                        $("#MSG_TYPE").addClass("layui-this");
+                        break;
+
+                        //MES
+                    case 100:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#DataGather").addClass("layui-this");
+                        break;
+                    case 101:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#FactoryManage").addClass("layui-this");
+                        break;
+                    case 102:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#WorkCenter").addClass("layui-this");
+                        break;
+                    case 103:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#DeviceManage").addClass("layui-this");
+                        break;
+                    case 104:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#WorkCenterRole").addClass("layui-this");
+                        break;
+                    case 105:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#PositionRole").addClass("layui-this");
+                        break;
+                    case 106:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#DepotRole").addClass("layui-this");
+                        break;
+                    case 107:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#Formula_Order").addClass("layui-this");
+                        break;
+                    case 108:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#QuantityManage").addClass("layui-this");
+                        break;
+                    case 109:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#Material_Group").addClass("layui-this");
+                        break;
+                    case 110:
+                        $("#mesgdzp").addClass("layui-nav-itemed");
+                        $("#Assign_WorkOrder").addClass("layui-this");
+                        break;
+                    case 111:
+                        $("#mesgdzp").addClass("layui-nav-itemed");
+                        $("#CREATE_WorkOrder").addClass("layui-this");
+                        break;
+                    case 115:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#Material").addClass("layui-this");
+                        break;
+                    case 116:
+                        $("#mesgdzp").addClass("layui-nav-itemed");
+                        $("#FJ").addClass("layui-this");
+                        break;
+                    case 117:
+                        $("#xtgl").addClass("layui-nav-itemed");
+                        $("#StaffManage").addClass("layui-this");
+                        break;
+                    case 118:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#ReplaceBZ").addClass("layui-this");
+                        break;
+                    case 119:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#PJCOUNT").addClass("layui-this");
+                        break;
+                    case 120:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#SBSelect").addClass("layui-this");
+                        break;
+                    case 121:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#QDCodeSC").addClass("layui-this");
+                        break;
+                    case 122:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#BBXX").addClass("layui-this");
+                        break;
+                    case 10021:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#SY_LANGUAGE_MANAGE").addClass("layui-this");
+                        break;
+                    case 10022:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#PLDH_MANAGE").addClass("layui-this");
+                        break;
+                    case 10023:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#PLDH_MANAGE_SELECT").addClass("layui-this");
+                        break;
+                    case 10024:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#BAT_SPECS").addClass("layui-this");
+                        break;
+                    case 10025:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#BAT_SPECS_SAMP").addClass("layui-this");
+                        break;
+                    case 10026:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#BAT_SPECS_PERFOR").addClass("layui-this");
+                        break;
+                    case 10027:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#BAT_PACKAGE").addClass("layui-this");
+                        break;
+                    case 10028:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#BAT_REPORT").addClass("layui-this");
+                        break;
+                    case 10029:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#RY_MANAGE").addClass("layui-this");
+                        break;
+                    case 10030:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#BAT_QLTY").addClass("layui-this");
+                        break;
+                    case 10031:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#BAT_QLTY_REPORT").addClass("layui-this");
+                        break;
+                    case 10046:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#BAT_QLTY_TMARK_REPORT").addClass("layui-this");
+                        break;
+                    case 10032:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#BAT_QLTY_TMARK").addClass("layui-this");
+                        break;
+                    case 123:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#SCRW_SELECT_FJ_YL").addClass("layui-this");
+                        break;
+                    case 124:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#CHANGEINFO_SELECT").addClass("layui-this");
+                        break;
+                    case 125:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#SCJD_SELECT").addClass("layui-this");
+                        break;
+                    case 126:
+                        $("#hrzzjg").addClass("layui-nav-itemed");
+                        $("#GSMANAGE").addClass("layui-this");
+                        break;
+                    case 127:
+                        $("#hrzzjg").addClass("layui-nav-itemed");
+                        $("#DEPTMANAGE").addClass("layui-this");
+                        break;
+                    case 128:
+                        $("#hrxtsz").addClass("layui-nav-itemed");
+                        $("#SY_TYPEMX").addClass("layui-this");
+                        break;
+                    case 129:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#TAXMANAGE").addClass("layui-this");
+                        break;
+                    case 130:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FLFA").addClass("layui-this");
+                        break;
+                    case 131:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_XZDA").addClass("layui-this");
+                        break;
+                    case 132:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_ZDMANAGE").addClass("layui-this");
+                        break;
+                    case 133:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FLDA").addClass("layui-this");
+                        break;
+                    case 134:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_ZXFJKC").addClass("layui-this");
+                        break;
+                    case 136:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FLDATZ").addClass("layui-this");
+                        break;
+                    case 135:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#KQ_JQGL").addClass("layui-this");
+                        break;
+                    case 137:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_MBGL").addClass("layui-this");
+                        break;
+                    case 138:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FFJLLIST").addClass("layui-this");
+                        break;
+                    case 139:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_KKGL").addClass("layui-this");
+                        break;
+                    case 140:
+                        $("#hrxtsz").addClass("layui-nav-itemed");
+                        $("#MYMANAGE").addClass("layui-this");
+                        break;
+                    case 141:
+                        $("#hrxtsz").addClass("layui-nav-itemed");
+                        $("#MYMANAGE_STAFFID").addClass("layui-this");
+                        break;
+                    case 142:
+                        $("#hrxtsz").addClass("layui-nav-itemed");
+                        $("#MYMANAGE_ADMIN").addClass("layui-this");
+                        break;
+                    case 143:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#MYMANAGE_ADMIN").addClass("layui-this");
+                        break;
+                    case 144:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_BDMANAGE").addClass("layui-this");
+                        break;
+                    case 145:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_DEPTKQ_SELECT").addClass("layui-this");
+                        break;
+                    case 146:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_DEPTKQ_MANAGE").addClass("layui-this");
+                        break;
+                    case 147:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_DEPT_MANAGE").addClass("layui-this");
+                        break;
+                    case 148:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_PBFZ_MANAGE").addClass("layui-this");
+                        break;
+                    case 149:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_BZ_MANAGE").addClass("layui-this");
+                        break;
+                    case 10000:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_RY_MANAGE").addClass("layui-this");
+                        break;
+                    case 10001:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_YSKQJL").addClass("layui-this");
+                        break;
+                        //case 10002:
+                        //    $("#hrkqgl").addClass("layui-nav-itemed");
+                        //    $("#KQ_YSKQJL_check").addClass("layui-this");
+                        //    break;
+                    case 10003:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_WCDJ_MANAGE").addClass("layui-this");
+                        break;
+                    case 10004:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_YCKQ_MANAGE").addClass("layui-this");
+                        break;
+                    case 10005:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#DEPT_REPORT_BZKHREPORT").addClass("layui-this");
+                        break;
+                    case 10006:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#RY_RYINFO_RLZREPORT").addClass("layui-this");
+                        break;
+                    case 10007:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_JJFL_HEARNAME_MANAGE").addClass("layui-this");
+                        break;
+                    case 10008:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_JJFL_HEAD_MANAGE").addClass("layui-this");
+                        break;
+                    case 10009:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_QJ_MANAGE").addClass("layui-this");
+                        break;
+                    case 10010:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#TJBB_CHANGEINFO_RYINFO").addClass("layui-this");
+                        break;
+                    case 10011:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_ZQMONTH_MANAGE").addClass("layui-this");
+                        break;
+                    case 10012:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FFJLLIST_TZ").addClass("layui-this");
+                        break;
+                    case 10013:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FFJL_GUOSREPORT").addClass("layui-this");
+                        break;
+                    case 10014:
+                        $("#hrxzgl").addClass("layui-nav-itemed");
+                        $("#YHRY_MANAGE").addClass("layui-this");
+                        break;
+                    case 10015:
+                        $("#hrxzgl").addClass("layui-nav-itemed");
+                        $("#DORM_MANAGE").addClass("layui-this");
+                        break;
+                    case 10016:
+                        $("#hrxzgl").addClass("layui-nav-itemed");
+                        $("#LIVE_MANAGE").addClass("layui-this");
+                        break;
+                    case 10017:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#YCRY_REPORT").addClass("layui-this");
+                        break;
+                    case 10018:
+                        $("#hrkqgl").addClass("layui-nav-itemed");
+                        $("#KQ_QJ_REPORT").addClass("layui-this");
+                        break;
+                    case 10019:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#TJBB_ZCREPORT").addClass("layui-this");
+                        break;
+                    case 10020:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FFJLMX_GAOWENJTREPORT").addClass("layui-this");
+                        break;
+                    case 150:
+                        $("#mesgdzp").addClass("layui-nav-itemed");
+                        $("#RW_SELECT").addClass("layui-this");
+                        break;
+                    case 151:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#TMGL_SELECT").addClass("layui-this");
+                        break;
+                    case 152:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#PD_TL_ERROR").addClass("layui-this");
+                        break;
+                    case 153:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#DepositBattery").addClass("layui-this");
+                        break;
+                    case 154:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#PD_TL_SELECT").addClass("layui-this");
+                        break;
+                    case 155:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#PD_SCRW_SELECT_FJ").addClass("layui-this");
+                        break;
+                    case 156:
+                        $("#mesgdzp").addClass("layui-nav-itemed");
+                        $("#RW_SELECT_ALL").addClass("layui-this");
+                        break;
+                    case 157:
+                        $("#mesgdzp").addClass("layui-nav-itemed");
+                        $("#YF_WorkOrder").addClass("layui-this");
+                        break;
+                    case 158:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#TM_DELETE").addClass("layui-this");
+                        break;
+                    case 159:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#TM_UPDATE_ZT_PL").addClass("layui-this");
+                        break;
+                    case 160:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#TL_GL_CC_SELECT").addClass("layui-this");
+                        break;
+                    case 161:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#FJ_ALL_TLXX").addClass("layui-this");
+                        break;
+                    case 162:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#MES_SBBH_TD").addClass("layui-this");
+                        break;
+                    case 163:
+                        $("#mestmgl").addClass("layui-nav-itemed");
+                        $("#SCDATE_TH").addClass("layui-this");
+                        break;
+                    case 170:
+                        $("#hrzzjg").addClass("layui-nav-itemed");
+                        $("#DUTYMANAGE").addClass("layui-this");
+                        break;
+                    case 180:
+                        $("#hrrygl").addClass("layui-nav-itemed");
+                        $("#YPDJ").addClass("layui-this");
+                        break;
+                    case 181:
+                        $("#hrrygl").addClass("layui-nav-itemed");
+                        $("#RYINFOGL_MAIN").addClass("layui-this");
+                        break;
+                    case 182:
+                        $("#hrxtsz").addClass("layui-nav-itemed");
+                        $("#SY_GSLY").addClass("layui-this");
+                        break;
+                    case 183:
+                        $("#hrxtsz").addClass("layui-nav-itemed");
+                        $("#SY_ZJH").addClass("layui-this");
+                        break;
+                    case 184:
+                        $("#hrrygl").addClass("layui-nav-itemed");
+                        $("#WS_RYINFOGL_MAIN").addClass("layui-this");
+                        break;
+                    case 185:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#TJ_GLBB").addClass("layui-this");
+                        break;
+                    case 186:
+                        $("#hrrygl").addClass("layui-nav-itemed");
+                        $("#RYINFO_RSDA").addClass("layui-this");
+                        break;
+                    case 187:
+                        $("#hrrygl").addClass("layui-nav-itemed");
+                        $("#RYINFO_ISINGH").addClass("layui-this");
+                        break;
+                    case 188:
+                        $("#hrrygl").addClass("layui-nav-itemed");
+                        $("#RYINFO_HTGL").addClass("layui-this");
+                        break;
+                    case 189:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#GSMX_GLBB").addClass("layui-this");
+                        break;
+                    case 190:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#WJWG_CXBB").addClass("layui-this");
+                        break;
+                    case 191:
+                        $("#hrxzgl").addClass("layui-nav-itemed");
+                        $("#RONGYGL").addClass("layui-this");
+                        break;
+                    case 192:
+                        $("#hrpxfz").addClass("layui-nav-itemed");
+                        $("#PXZT").addClass("layui-this");
+                        break;
+                    case 193:
+                        $("#hrxzgl").addClass("layui-nav-itemed");
+                        $("#XZGL_JSDA").addClass("layui-this");
+                        break;
+                    case 194:
+                        $("#hrxzgl").addClass("layui-nav-itemed");
+                        $("#BOOKZL").addClass("layui-this");
+                        break;
+                    case 195:
+                        $("#hrxzgl").addClass("layui-nav-itemed");
+                        $("#BOOKJY").addClass("layui-this");
+                        break;
+                    case 196:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#WBZW_CXBB").addClass("layui-this");
+                        break;
+                    case 197:
+                        $("#hrtjbb").addClass("layui-nav-itemed");
+                        $("#BIRTH_CXBB").addClass("layui-this");
+                        break;
+                    case 200:
+                        $("#mestpgl").addClass("layui-nav-itemed");
+                        $("#TPM_SELECT").addClass("layui-this");
+                        break;
+                    case 201:
+                        $("#mestpgl").addClass("layui-nav-itemed");
+                        $("#TPM_Manage").addClass("layui-this");
+                        break;
+                    case 202:
+                        $("#mestpgl").addClass("layui-nav-itemed");
+                        $("#TPM_ZHMADD").addClass("layui-this");
+                        break;
+                    case 203:
+                        $("#mestpgl").addClass("layui-nav-itemed");
+                        $("#TPM_ZHNO_SELECT").addClass("layui-this");
+                        break;
+                    case 204:
+                        $("#mestpgl").addClass("layui-nav-itemed");
+                        $("#TPM_ZHNO_Manage").addClass("layui-this");
+                        break;
+                    case 205:
+                        $("#5sxtsz").addClass("layui-nav-itemed");
+                        $("#set_dictionary").addClass("layui-this");
+                        break;
+                    case 206:
+                        $("#5sxtsz").addClass("layui-nav-itemed");
+                        $("#set_checkpoint").addClass("layui-this");
+                        break;
+                    case 207:
+                        $("#5sxtsz").addClass("layui-nav-itemed");
+                        $("#set_checkdetails").addClass("layui-this");
+                        break;
+                    case 208:
+                        $("#5sxtsz").addClass("layui-nav-itemed");
+                        $("#set_staff_dep").addClass("layui-this");
+                        break;
+                    case 209:
+                        $("#5scx").addClass("layui-nav-itemed");
+                        $("#set_checkinfo").addClass("layui-this");
+                        break;
+                    case 210:
+                        $("#5sxtsz").addClass("layui-nav-itemed");
+                        $("#set_CheckXMFL").addClass("layui-this");
+                        break;
+                    case 211:
+                        $("#5sxtsz").addClass("layui-nav-itemed");
+                        $("#set_CheckPointFL").addClass("layui-this");
+                        break;
+                    case 212:
+                        $("#5scx").addClass("layui-nav-itemed");
+                        $("#cx_bhg").addClass("layui-this");
+                        break;
+                    case 213:
+                        $("#5scx").addClass("layui-nav-itemed");
+                        $("#cx_hz").addClass("layui-this");
+                        break;
+                    case 214:
+                        $("#5scx").addClass("layui-nav-itemed");
+                        $("#UPDATE_INFO").addClass("layui-this");
+                        break;
+                    case 215:
+                        $("#5scx").addClass("layui-nav-itemed");
+                        $("#SELECT_COMPARE").addClass("layui-this");
+                        break;
+                    case 216:
+                        $("#5sxtsz").addClass("layui-nav-itemed");
+                        $("#STAFF_DEP_ACCESS").addClass("layui-this");
+                        break;
+
+
+                    case 220:
+                        $("#psbg").addClass("layui-nav-itemed");
+                        $("#set_ljcx").addClass("layui-this");
+                        break;
+                    case 221:
+                        $("#psbg").addClass("layui-nav-itemed");
+                        $("#set_ljbg").addClass("layui-this");
+                        break;
+                    case 222:
+                        $("#psbg").addClass("layui-nav-itemed");
+                        $("#set_bfbg").addClass("layui-this");
+                        break;
+                    case 223:
+                        $("#psbg").addClass("layui-nav-itemed");
+                        $("#set_wxfc").addClass("layui-this");
+                        break;
+                    case 224:
+                        $("#psbg").addClass("layui-nav-itemed");
+                        $("#set_wxjs").addClass("layui-this");
+                        break;
+                    case 225:
+                        $("#psfh").addClass("layui-nav-itemed");
+                        $("#set_jgfh").addClass("layui-this");
+                        break;
+                    case 226:
+                        $("#psfh").addClass("layui-nav-itemed");
+                        $("#set_cnyj").addClass("layui-this");
+                        break;
+                    case 227:
+                        $("#psfh").addClass("layui-nav-itemed");
+                        $("#set_wlxg").addClass("layui-this");
+                        break;
+                    case 228:
+                        $("#psfh").addClass("layui-nav-itemed");
+                        $("#set_gzcn").addClass("layui-this");
+                        break;
+                    case 229:
+                        $("#psfh").addClass("layui-nav-itemed");
+                        $("#set_calendar").addClass("layui-this");
+                        break;
+                    case 230:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#set_xtbb").addClass("layui-this");
+                        break;
+                    case 231:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#add_em").addClass("layui-this");
+                        break;
+                    case 232:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#select_em").addClass("layui-this");
+                        break;
+                    case 233:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#modify_em").addClass("layui-this");
+                        break;
+                    case 233:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#modify_em").addClass("layui-this");
+                        break;
+                    case 234:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#Contact_Management").addClass("layui-this");
+                        break;
+                    case 235:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#SBBHDEVICEGUIDE").addClass("layui-this");
+                        break;
+                    case 236:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#DEVICEGUIDE").addClass("layui-this");
+                        break;
+                    case 237:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#DEVICEGUIDEDETAIL").addClass("layui-this");
+                        break;
+                    case 238:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#DEVICERQJL").addClass("layui-this");
+                        break;
+                    case 239:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#PBGL").addClass("layui-this");
+                        break;
+                    case 240:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#MISSION_GL").addClass("layui-this");
+                        break;
+                    case 241:
+                        $("#emxtsz").addClass("layui-nav-itemed");
+                        $("#MISSION_Select").addClass("layui-this");
+                        break;
+                    case 242:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#SY_CN_MANAGE").addClass("layui-this");
+                        break;  
+                    case 243:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#SY_CN_SELECT").addClass("layui-this");
+                        break;
+                    case 244:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#SY_GYLX_MANAGE").addClass("layui-this");
+                        break;
+                    case 245:
+                        $("#mesxtsz").addClass("layui-nav-itemed");
+                        $("#SY_GYLX_SELECT").addClass("layui-this");
+                        break;
+                    case 246:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#BILL_MANAGE").addClass("layui-this");
+                        break;
+                    case 247:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#BILL_SELECT").addClass("layui-this");
+                        break;
+                    case 248:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#SCHEDULES_MANAGE").addClass("layui-this");
+                        break;
+                    case 249:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#SY_GZZX_SBBH_STATUS").addClass("layui-this");
+                        break;
+                    case 250:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#SY_GZZX_SBBH_STATUS_SELECT").addClass("layui-this");
+                        break;  
+                    case 251:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#SCHEDULES_SELECT").addClass("layui-this");
+                        break;
+                    case 252:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#PB_MANAGE").addClass("layui-this");
+                        break;
+                    case 253:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#PB_SELECT").addClass("layui-this");
+                        break;   
+                    case 254:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#SCH_SHOWCHOICE").addClass("layui-this");
+                        break;
+                    case 255:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#SCH_SHOWMACHINE").addClass("layui-this");
+                        break;
+                    case 256:
+                        $("#messch").addClass("layui-nav-itemed");
+                        $("#SCH_SHOWWORKCENTER").addClass("layui-this");
+                        break;
+
+                        
+                        // FICO
+                    case 11000:
+                        $("#fm").addClass("layui-nav-itemed");
+                        $("#ElectricInvoice").addClass("layui-this");
+                        break;
+                    case 11001:
+                        $("#fm").addClass("layui-nav-itemed");
+                        $("#ElectricInvoiceForEdit").addClass("layui-this");
+                        break;
+                    case 11002:
+                        $("#fm").addClass("layui-nav-itemed");
+                        $("#Select_ElectricInvoice").addClass("layui-this");
+                        break;
+                    //BARCODING
+                    case 11003:
+                        $("#barcode").addClass("layui-nav-itemed");
+                        $("#CODING").addClass("layui-this");
+                        break;
+                    case 11004:
+                        $("#barcode").addClass("layui-nav-itemed");
+                        $("#READ_CODING").addClass("layui-this");
+                        break;
+                    case 11005:
+                        $("#barcode").addClass("layui-nav-itemed");
+                        $("#MANAGE_CODING").addClass("layui-this");
+                        break;
+                    case 11006:
+                        $("#barcode").addClass("layui-nav-itemed");
+                        $("#CREATE_CODE").addClass("layui-this");
+                        break;
+                        // MOULD
+                    case 10033:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#MT_MOULD").addClass("layui-this");
+                        break;
+                    case 10047:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#MT_MOULDS").addClass("layui-this");
+                        break;
+                    case 10048:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#MT_MOULDW").addClass("layui-this");
+                        break;
+                    case 10034:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#MT_QLTY").addClass("layui-this");
+                        break;
+                    case 10035:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#MT_CONFIRM").addClass("layui-this");
+                        break;
+                    case 10036:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_NEW").addClass("layui-this");
+                        break;
+                    case 10037:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_ALTER_CFMS").addClass("layui-this");
+                        break;
+                    case 10038:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_CFM_MM").addClass("layui-this");
+                        break;
+                    case 10039:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_CFM_WT").addClass("layui-this");
+                        break;
+                    case 10040:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_CFM_QC").addClass("layui-this");
+                        break;
+                    case 10041:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_CFM_TEC").addClass("layui-this");
+                        break;
+                    case 10042:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_ALTER_CFME").addClass("layui-this");
+                        break;
+                    case 10043:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#REP_SEARCH").addClass("layui-this");
+                        break;
+                    case 10044:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#BIGSCREEN").addClass("layui-this");
+                        break;
+                    case 10045:
+                        $("#mould").addClass("layui-nav-itemed");
+                        $("#MT_STAFF").addClass("layui-this");
+                        break;
+                    case 10100:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#CLPB_MANAGE").addClass("layui-this");
+                        break;
+                    case 10101:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_TL_MANAGE").addClass("layui-this");
+                        break;
+                    case 10102:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_MFQQJ_MANAGE").addClass("layui-this");
+                        break;
+                    case 10103:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_KCSELECT_MANAGE").addClass("layui-this");
+                        break;
+                    case 10104:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_MFQQJ_SBLIST").addClass("layui-this");
+                        break;
+                    case 10105:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#MES_NOSM_TPM_SELECT").addClass("layui-this");
+                        break;
+                    case 10106:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_SY_JL_SELECT_MANAGE").addClass("layui-this");
+                        break;
+                    case 10107:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_SY_JL_DELETE_MANAGE").addClass("layui-this");
+                        break;
+                    case 10108:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#TM_FH_SELECT_MANAGE").addClass("layui-this");
+                        break;
+                    case 10109:
+                        $("#messelect").addClass("layui-nav-itemed");
+                        $("#MES_YH_SELECT").addClass("layui-this");
+                        break;
+                    case 10110:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#CLPB_MANAGE_SELECT").addClass("layui-this");
+                        break;
+                    case 10111:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_QJ_ERRORJL_SELECT").addClass("layui-this");
+                        break;
+                    case 10112:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_MFQFG_MANAGE").addClass("layui-this");
+                        break;
+                    case 10113:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_SCJDSELECT").addClass("layui-this");
+                        break;
+                    case 10114:
+                        $("#hrxzfl").addClass("layui-nav-itemed");
+                        $("#XZGL_FFJL_BACK").addClass("layui-this");
+                        break;
+                    case 10115:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_JCJLSELECT").addClass("layui-this");
+                        break;
+                    case 10116:
+                        $("#meszs").addClass("layui-nav-itemed");
+                        $("#ZS_JCJLMANAGE").addClass("layui-this");
+                        break;
+                    case 10117:
+                        $("#bc_tm").addClass("layui-nav-itemed");
+                        $("#RKBS_F_MANAGE").addClass("layui-this");
+                        break;
+                    case 10118:
+                        $("#bc_tm").addClass("layui-nav-itemed");
+                        $("#REPLACE_TBM").addClass("layui-this");
+                        break;
+                    case 10119:
+                        $("#bc_tm").addClass("layui-nav-itemed");
+                        $("#RKBS_B_MANAGE").addClass("layui-this");
+                        break;
+                    case 10120:
+                        $("#wmskcgl").addClass("layui-nav-itemed");
+                        $("#JPDMANAGE").addClass("layui-this");
+                        break;
+                    //WMS
+                    case 20000:
+                        $("#wmssys").addClass("layui-nav-itemed");
+                        $("#CK_Setting").addClass("layui-this");
+                        break;
+                    case 20001:
+                        $("#wmsyh").addClass("layui-nav-itemed");
+                        $("#YHXQXF").addClass("layui-this");
+                        break;
+                    case 20002:
+                        $("#wmskcgl").addClass("layui-nav-itemed");
+                        $("#WL_CHANGE").addClass("layui-this");
+                        break;
+                    case 20003:
+                        $("#bc_tm").addClass("layui-nav-itemed");
+                        $("#CPHWBS").addClass("layui-this");
+                        break;
+                    case 20004:
+                        $("#wmskcgl").addClass("layui-nav-itemed");
+                        $("#XSCK_GZSQ").addClass("layui-this");
+                        break;
+                    case 20005:
+                        $("#wmscxbb").addClass("layui-nav-itemed");
+                        $("#WLDZB").addClass("layui-this");
+                        break;
+                    case 20006:
+                        $("#wmscxbb").addClass("layui-nav-itemed");
+                        $("#JHZCCX").addClass("layui-this");
+                        break;
+                    //FW
+                    case 21001:
+                        $("#wmsfwgl").addClass("layui-nav-itemed");
+                        $("#TMPrint_GL").addClass("layui-this");
+                        break;
+                    case 21002:
+                        $("#wmsfwgl").addClass("layui-nav-itemed");
+                        $("#TMPrint_CX").addClass("layui-this");
+                        break;
+                    //WMS/Purchase(20010-20019)
+                    case 20010:
+                        $("#wmspur").addClass("layui-nav-itemed");
+                        $("#EntryQC").addClass("layui-this");
+                        break;
+                    case 20011:
+                        $("#wmspur").addClass("layui-nav-itemed");
+                        $("#EntryReportBC").addClass("layui-this");
+                        break;
+                    case 20012:
+                        $("#wmspur").addClass("layui-nav-itemed");
+                        $("#WHEntryBC").addClass("layui-this");
+                        break;
+                    //WMS/Purchase(20010-20019)
+                    //WMS/Pallet(20020-20029)
+                    case 20020:
+                        $("#wmspallet").addClass("layui-nav-itemed");
+                        $("#Management").addClass("layui-this");
+                        break;
+                    case 20021:
+                        $("#wmspallet").addClass("layui-nav-itemed");
+                        $("#Search").addClass("layui-this");
+                        break;
+                    case 20022:
+                        $("#wmspallet").addClass("layui-nav-itemed");
+                        $("#StackSearch").addClass("layui-this");
+                        break;
+                    case 20023:
+                        $("#wmspallet").addClass("layui-nav-itemed");
+                        $("#VehicleRequest").addClass("layui-this");
+                        break;
+                    //WMS/Pallet(20020-20029)
+                    default:
+                        break;
+                }
+            });
+        </script>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div id="detail" style="padding: 15px;">
+                <script src="~/Scripts/layui2.5.4/layui.js"></script>
+                <script src="~/Scripts/layui.config.js"></script> <!-- layui全局设置，扩展模块设置 -->
+                @Scripts.Render("~/bundles/sonlui")
+                @*@{Html.Action("/KeHu/Insert"); }*@
+                @RenderBody()
+
+            </div>
+        </div>
+
+        <div class="layui-footer" lid="c_copyright">
+            <!-- 底部固定区域 -->
+            © copyright by 双鹿电池-信息管理部
+        </div>
+    </div>
+
+    @{
+        foreach (var item in SSettings.Api)
+        {
+            <script>sonluk.config.http.api["@(((ApiSection)item).Name)"] = { address: "@(((ApiSection)item).Address)" }</script>
+        }
+        if (ViewContext.RouteData.DataTokens["Area"] != null)
+        {
+            <script>sonluk.value.url.area = "@(ViewContext.RouteData.DataTokens["Area"].ToString())"</script>
+        }
+        if (ViewContext.RouteData.Values["Controller"] != null)
+        {
+            <script>sonluk.value.url.controller = "@(ViewContext.RouteData.Values["Controller"].ToString())"</script>
+        }
+        if (ViewContext.RouteData.Values["Action"] != null)
+        {
+            <script>sonluk.value.url.action = "@(ViewContext.RouteData.Values["Action"].ToString())"</script>
+        }
+    }
+
+    <script>
+        sonluk.global.getResourcesOnly("title","title");
+        //JavaScript代码区域
+        $(document).ready(function(){
+            layui.use('element', function () {
+                var element = layui.element;
+                sonluk.style.auto();
+            });
+            if("@name" == ""){
+                alert(sonluk.value.global.common.c_msg19 || "由于长时间未操作,登录信息已过期,请重新登录");
+                window.location.href = "../../CRM/Public/SignIn";
+
+                return false;
+            }
+            $("head > title").html(sonluk.value.global.title[sonluk.value.url.area + "_" + sonluk.value.url.controller + "_" + sonluk.value.url.action]);
+            $('[lid="ViewBag_Title"]').html($("head > title").html());
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

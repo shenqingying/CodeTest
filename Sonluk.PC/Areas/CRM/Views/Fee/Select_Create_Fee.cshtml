@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "查询";
+}
+
+<script type="text/html" id="manage">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 10){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 20){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 30){ }}
+    已审核
+    {{# }else if(d.ISACTIVE == 40){ }}
+    实物照审核中
+    {{# }else if(d.ISACTIVE == 60){ }}
+    实物照已审核
+    {{# }else { }}
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">首页</a>
+    <a>制作费用管理</a>
+    <a><cite>制作费用申请</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div class="layui-form" id="div1">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_select" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            <button id="btn_submit_OA" class="layui-btn">提交至OA</button>
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">制作类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="ZZLX" lay-filter="ZZLX" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">省份：</label>
+                        <div class="layui-input-inline">
+                            <select id="SF" lay-filter="SF" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">城市：</label>
+                        <div class="layui-input-inline">
+                            <select id="CS" lay-filter="CS" lay-search>
+                                <option value="0" selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="KHLX" lay-filter="KHLX" lay-search>
+                                <option value="0" selected="selected">请选择客户类型</option>
+                                <option value="7">LKA</option>
+                                <option value="1">经销商</option>
+                                <option value="3">KA</option>
+                                <option value="5">终端网点</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="ISACTIVE" lay-filter="ISACTIVE" lay-search>
+                                <option value="0">全部</option>
+                                <option value="10" selected="selected">未提交</option>
+                                <option value="20">审核中</option>
+                                <option value="30">已审核</option>
+                                <option value="40">实物照审核中</option>
+                                <option value="60">实物照已审核</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:130px;text-align:right;">CRM编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="CRMID" type="text" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="MC" type="text" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="result" lay-filter="result"></table>
+    </div>
+</div>
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_Create_Fee")
+}

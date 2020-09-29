@@ -1,0 +1,42 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_PRODUCTService;
+@using Sonluk.UI.Model.MES.SY_MATERIALService;
+@{
+    ViewBag.Title = "HHXXWH_PRODUCT_PART3";
+    MES_SY_MATERIAL_LIST[] HHdata = ViewBag.HHdata;
+
+    //var data = JSON.parse(HHdata);
+}
+@*lay-data="{data:HHdata,id:'result'}"*@
+<table class="layui-table" lay-filter="result3">
+    <thead>
+        <tr>
+            @*<th lay-data="{ type: 'checkbox', fixed: 'left' }">序号</th>*@
+            @*<th lay-data="{field:'ID', width:134,hide:true}">SAP产品ID</th>*@
+            <th lay-data="{field:'CPPH', width:134,}">物料编码</th>
+            <th lay-data="{field:'CPMC', width:350,}">物料描述</th>
+            <th lay-data="{field:'DDDW', width:134,}">订单单位</th>
+            @*<th lay-data="{field:'CPLXDES', width:134}">产品类型</th>
+            <th lay-data="{field:'CPXLDES', width:187,}">产品系列</th>
+            <th lay-data="{field:'CPXHDES',width:92,}">产品型号</th>*@
+            @*<th lay-data="{ fixed: 'right', width: 138, align: 'center', toolbar: '#bar4', }">操作</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < HHdata.Length; i++)
+        {
+            <tr>
+                @*<td>@(i + 1)</td>*@
+                @*<td>@HHdata[i].ID</td>*@
+                <td>@HHdata[i].WLH</td>
+                <td>@HHdata[i].WLMS</td>
+                <td>@HHdata[i].UNITSNAME</td>
+                @*<td>@HHdata[i].CPLXDES</td>
+                <td>@HHdata[i].CPXLDES</td>
+                <td>@HHdata[i].CPXHDES</td>*@
+                
+            </tr>
+        }
+    </tbody>
+</table>
+
+<input id="PART3" value="@Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.HHdata)" hidden>

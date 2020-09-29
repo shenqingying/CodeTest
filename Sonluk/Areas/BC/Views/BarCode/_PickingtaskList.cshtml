@@ -1,0 +1,48 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService
+@model PickingtaskInfo
+@{
+    int index = 1;
+}
+<table cellpadding="0" cellspacing="0" border="0" width="99%" id="table-6" align="center">
+    <thead>
+        <tr>
+            <th height="50px" align="right" width="10%">时间：</th>
+            <th id="localtime" align="left" width="20%">@System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</th>
+            <th align="right" width="15%">累计拣配单数：</th>
+            <th align="left" width="5%">@Model.Ev_ljs</th>
+            <th align="right" width="15%">已完成拣配单：</th>
+            <th align="left" width="5%">@Model.Ev_ywcs</th>
+            <th align="right" width="15%">剩余拣配单：</th>
+            <th align="left">@(Convert.ToInt32(Model.Ev_ljs) - Convert.ToInt32(Model.Ev_ywcs))</th>
+        </tr>
+    </thead>
+</table>
+<table cellpadding="0" cellspacing="0" width="99%" id="table-4" align="center">
+    <thead>
+        <tr>
+            <th width="6%" height="50px" align="center">序号</th>
+            <th width="10%" align="left">拣配单</th>
+            <th width="34%" align="left">送货信息</th>
+            <th width="10%" align="left">送货人</th>
+            <th width="12%" align="left">件数</th>
+            <th width="8%" align="left">进度</th>
+            <th width="10%" align="left">状态</th>
+            <th width="10%" align="left">操作人</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ZSL_BCST106 node in Model.Zsl_bcs106)
+        {
+            <tr>
+                <td width="5%" height="40px" align="center">@(index++)</td>
+                <td width="10%" align="left">@node.Jpd</td>
+                <td width="34%" align="left">@node.Sdfdz</td>
+                <td width="10%" align="left">@node.Lxr</td>
+                <td width="12%" align="left">@node.Slhj</td>
+                <td width="8%" align="left">@node.Jdzs</td>
+                <td width="10%" align="left">@node.Ztzs</td>
+                <td width="10%" align="left">@node.Xgr</td>
+            </tr>
+        }
+    </tbody>
+</table>

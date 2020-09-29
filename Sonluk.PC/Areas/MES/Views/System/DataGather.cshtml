@@ -1,0 +1,174 @@
+﻿@using Sonluk.UI.Model.MES.SY_TYPEMXService;
+@{
+    ViewBag.Title = "数据字典维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    MES_SY_TYPEMXLIST[] langulist = ViewBag.langulist;
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs" lay-event="editLangu">多语言</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar1">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>数据字典维护</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gc" lay-filter="cx_gc">
+                    <option value="" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                    }
+                </select>
+            </div>
+
+            <label class="layui-form-label">类别：</label>
+            <div class="layui-input-inline">
+                <select id="cx_type" lay-filter="cx_type">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.Sy_type.Length; i++)
+                    {
+                        <option value="@Model.Sy_type[i].TYPEID">@Model.Sy_type[i].TYPENAME</option>
+                    }
+                </select>
+            </div>
+
+            <label class="layui-form-label">名称：</label>
+            <div class="layui-input-inline">
+                <input id="cx_name" type="text" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline">
+                <input id="cd_name" type="text" maxlength="12" autocomplete="off" class="layui-input" style="opacity: 0;width:10px">
+            </div>
+        </div>
+
+        <table class="layui-hide" id="tb_dg" lay-filter="tb_dg"></table>
+
+
+    </div>
+
+</div>
+
+<div id="div_dg" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="gc" lay-filter="gc">
+                <option value="" selected="selected"></option>
+                @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                {
+                    <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                }
+            </select>
+
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据类别：</label>
+        <div class="layui-input-inline">
+            <select id="sjlb" lay-filter="sjlb">
+                <option value="" selected="selected"></option>
+                @for (int i = 0; i < Model.Sy_type.Length; i++)
+                {
+                    <option value="@Model.Sy_type[i].TYPEID">@Model.Sy_type[i].TYPENAME</option>
+                }
+            </select>
+
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据名称：</label>
+        <div class="layui-input-inline">
+            <input id="sjname" type="text" autocomplete="off" class="layui-input" placeholder="必输项">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据编号：</label>
+        <div class="layui-input-inline">
+            <input id="sjno" type="text" autocomplete="off" onkeyup="value = value.replace(/[^\d]/g, '')" class="layui-input" placeholder="请输入数字">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据说明：</label>
+        <div class="layui-input-inline">
+            <input id="sjsm" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+</div>
+<div class="layui-form" id="div_langu1" hidden>
+    <input type="text" hidden id="xzid" value=""> 
+    <br />
+    <div class="layui-form-item" style="padding-left:10px">
+        <button id="btn_insert_langu" class="layui-btn">新增</button>
+    </div>  
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb1" lay-filter="tb1"></table>
+    </div>
+</div>
+<div class="layui-form" id="div_langu2" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述：</label>
+        <div class="layui-input-inline">
+            <input id="xzms" type="text" autocomplete="off" class="layui-input" readonly>
+        </div>
+    </div>
+    <input type="text" hidden id="xzid" value="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">语言：</label>
+        <div class="layui-input-inline">
+            <select id="in_langu" lay-filter="in_langu">
+                <option value="" selected="selected">请选择</option>
+                @for (int i = 0; i < @langulist.Length; i++)
+                {
+                    <option value="@langulist[i].ID">@langulist[i].MXNAME</option>
+                }
+            </select>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">多语言描述：</label>
+        <div class="layui-input-inline">
+            <input id="in_ms" type="text" autocomplete="off" class="layui-input" placeholder="请输入描述">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/DataGather")
+}

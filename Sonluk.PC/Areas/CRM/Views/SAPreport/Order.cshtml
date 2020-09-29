@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "销售订单";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+    
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>销售报表</a>
+    <a><cite>销售订单</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn">查询</button>
+            <button id="btn_back" class="layui-btn" style="display:none;">返回</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button id="hz_kh" class="layui-btn" style="display:none;">汇总-按客户</button>
+            <button id="hz_bgs" class="layui-btn" style="display:none;">汇总-按销售办公室</button>
+            <button id="hz_xsz" class="layui-btn" style="display:none;">汇总-按销售组</button>
+        </div>
+
+
+
+
+        @*第一行*@
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:130px">订单开始日期：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <input id="time_start" type="text" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label" style="width:130px">订单结束日期：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <input id="time_end" type="text" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-label">客户：</label>
+            <div class="layui-input-inline">
+                <input id="KH" type="text" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+        @*第二行*@
+        <div class="layui-form-item">
+
+            <label class="layui-form-label" style="width:130px">销售办公室：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <select id="xsbgs" lay-filter="xsbgs">
+                    <option value=""></option>
+                    <option value="11">数据</option>
+                    <option value="12">数据</option>
+                </select>
+            </div>
+
+            <label class="layui-form-label" style="width:130px">销售组：</label>
+            <div class="layui-input-inline" style="width:120px">
+                <select id="xsz" lay-filter="xsz">
+                    <option value=""></option>
+                    <option value="11">数据</option>
+                    <option value="12">数据</option>
+                </select>
+            </div>
+            <label class="layui-form-label">物料：</label>
+            <div class="layui-input-inline">
+                <input id="matnr" type="text" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+        <table id="HZ_KH" lay-filter="HZ_KH"></table>
+        <table id="HZ_xsbgs" lay-filter="HZ_xsbgs"></table>
+        <table id="HZ_xsz" lay-filter="HZ_xsz"></table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/SAP/Order")
+}

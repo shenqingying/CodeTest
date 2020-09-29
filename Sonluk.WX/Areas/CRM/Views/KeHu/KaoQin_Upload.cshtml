@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "考勤地址上传";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "考勤地址上传";
+
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+}
+
+<div id="form1" class="layui-form">
+
+    <div class="layui-form-item" style="width:100%;background-color: #009688;">
+
+        <button id="btn_upload" class="layui-btn" style="width:48%;">上传地址</button>|
+        <button id="btn_map" class="layui-btn" style="width:49%;margin-left:0">查看地图</button>
+
+    </div>
+
+
+</div>
+<div class="layui-form">
+    <br /><br /><br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:120px;text-align:right;">当前位置：</label>
+        <div class="layui-input-block">
+            <input id="address" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+
+    </div>
+
+
+
+
+
+</div>
+<div id="div_result"></div>
+
+<input id="appid" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#appid").val("@appid");
+
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/KaoQin")
+}

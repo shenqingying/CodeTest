@@ -1,0 +1,242 @@
+﻿@{
+    ViewBag.Title = "出差签到及评估";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    Session["TITLENAME"] = "出差签到及评估";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+
+<script type="text/html" id="tb_area">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<h2 id="h1" style="margin:0 10px" hidden></h2>
+<h2 id="h2" style="margin:0 10px" hidden></h2>
+
+<button id="btn_cx" class="layui-btn" lay-filter="formDemo" style="width:100%;">查询</button>
+
+<div class="layui-collapse">
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">查询条件</h2>
+        <div id="div_select_tiaojian" class="layui-colla-content">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始日期：</label>
+                <div class="layui-input-block">
+                    <input id="se_time_open" type="date" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+
+                </div>
+
+                <label class="layui-form-label">结束日期：</label>
+                <div class="layui-input-block">
+                    <input id="se_time_end" type="date" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+
+                </div>
+
+                <label class="layui-form-label">状态：</label>
+                <div class="layui-input-block">
+                    <select id="status" lay-filter="status">
+                        <option value="0" selected="selected">全部</option>
+                        <option value="3">申请已审核</option>
+                        <option value="4">核销未提交</option>
+                        <option value="5">核销审核中</option>
+                        <option value="6">核销已审核</option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<hr class="layui-bg-black" />
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+<br />
+<hr class="layui-bg-black" />
+<br />
+
+<div class="layui-footer" style="left:0;background: none;padding: 0;">
+    <div id="div8" class="layui-form">
+
+        <div class="layui-input-inline" style="width:100%;margin:0">
+            <button id="btn_cc" class="layui-btn" lay-submit="" style="width:100%;display:none;">新建出差申请</button>
+        </div>
+
+    </div>
+</div>
+@*<div id="004" class="layui-form">
+        <div id="div1" class="layui-form">
+            <h2 class="layui-colla-title" id="htitle">新增出差申请</h2>
+            <div class="layui-form-item">
+
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">出差人：</label>
+                <div class="layui-input-block">
+                    <input id="name" type="text" autocomplete="off" class="layui-input">
+                </div>
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">部门：</label>
+                <div class="layui-input-block">
+                    <select id="department" lay-filter="department" lay-ignore>
+                        <option value="0" selected="selected"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:110px;text-align:right;">出差地点：</label>
+                <div class="layui-input-block">
+                    <input id="address" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:110px;text-align:right;">本区域出差：</label>
+                <div class="layui-input-block">
+                    <select id="islocal" lay-filter="islocal" lay-ignore>
+                        <option value="0" selected="selected">请选择</option>
+                        <option value="1">是</option>
+                        <option value="2">否</option>
+                    </select>
+                </div>
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">正常业务出差：</label>
+                <div class="layui-input-block">
+                    <select id="isnormal" lay-filter="isnormal" lay-ignore>
+                        <option value="0" selected="selected">请选择</option>
+                        <option value="1">是</option>
+                        <option value="2">否</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+
+            <div class="layui-form-item">
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">出差日期：</label>
+                <div class="layui-input-block">
+                    <input id="time_open" type="date" placeholder="必填" autocomplete="off" class="layui-input">
+                </div>
+                <label class="layui-form-label" style="width:110px;">时间：</label>
+                <div class="layui-input-block">
+                    <select id="clock_open" lay-filter="clock_open" lay-ignore>
+                        <option value="0" selected="selected">请选择</option>
+                        <option value="08:00:00">8:00</option>
+                        <option value="12:00:00">12:00</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:110px;text-align:right;">至：</label>
+                <div class="layui-input-block">
+                    <input id="time_end" type="date" placeholder="必填" autocomplete="off" class="layui-input">
+                </div>
+                <label class="layui-form-label" style="width:110px;">时间：</label>
+                <div class="layui-input-block">
+                    <select id="clock_end" lay-filter="clock_end" lay-ignore>
+                        <option value="0" selected="selected">请选择</option>
+                        <option value="12:00:00">12:00</option>
+                        <option value="17:00:00">17:00</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">天数：</label>
+                <div class="layui-input-block">
+                    <input id="time_count" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:110px;text-align:right;">出行方式：</label>
+                <div class="layui-input-block">
+                    <select id="way" lay-filter="way" lay-ignore>
+                        <option value="0" selected="selected">请选择</option>
+                    </select>
+                </div>
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">预计金额：</label>
+                <div class="layui-input-block">
+                    <input id="fee" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="layui-form-item">
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">其他出行方式：</label>
+                <div class="layui-input-block">
+                    <select id="way_other" lay-filter="way_other" lay-ignore>
+                        <option value="0" selected="selected">请选择</option>
+                    </select>
+                </div>
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">其他方式费用：</label>
+                <div class="layui-input-block">
+                    <input id="fee_other" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                </div>
+
+
+            </div>
+
+
+            <div class="layui-form-item">
+
+                <label class="layui-form-label" style="width:110px;text-align:right;">实际金额：</label>
+                <div class="layui-input-block">
+                    <input id="fee_actual" type="text" placeholder="必填" autocomplete="off" class="layui-input">
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <div class="layui-form" style="width:100%;">
+        <div class="layui-form-item" style="margin:0">
+            <br />
+            <button id="btn_save" class="layui-btn" lay-filter="btn_save" style="width:49%;">保存</button>
+
+            <button id="btn_nosave" class="layui-btn layui-btn-danger" lay-filter="btn_nosave" style="width:49%;margin: 0;" hidden>取消</button>
+        </div>
+    </div>*@
+<input id="action_status" hidden value="insert" />
+<input id="zibiao_id" hidden />
+
+<input id="staffid" hidden />
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KaoQin/HeXiao_ChuChai")
+}

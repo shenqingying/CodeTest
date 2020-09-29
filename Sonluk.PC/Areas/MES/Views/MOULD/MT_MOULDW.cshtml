@@ -1,0 +1,791 @@
+﻿@{
+    ViewBag.Title = "模具维护（车间）";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+<style type="text/css">
+    .layui-form-modify .layui-form-item .layui-form-label1 {
+        width: 120px;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search">查询</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_export">导出</button>
+        <button class="layui-btn layui-btn-disabled" id="btn_QRcode">批量生成二维码</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GC" lay-filter="Term_GC">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="Term_GZZXBH" lay-filter="Term_GZZXBH">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">应用设备：</label>
+            <div class="layui-input-inline">
+                <select id="Term_SBBH">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">模具名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_MOULD" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">应用物料信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_WLH" class="layui-input">
+            </div>
+            <label class="layui-form-label1">材料匹配代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_MATCHCODE" class="layui-input">
+            </div>
+            <label class="layui-form-label1">型腔数量：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Term_CAVE" class="layui-input">
+            </div>
+            <label class="layui-form-label1">模具状态：</label>
+            <div class="layui-input-inline" style="width:300px;">
+                <select id="Term_STATUS" xm-select="Term_STATUS">
+                    <option value="正常!">正常</option>
+                    <option value="调试!">调试</option>
+                    <option value="维修!">维修</option>
+                    <option value="报废!">报废</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_MOULD" lay-filter="tb_MOULD"></table>
+</div>
+
+<div id="div_modify" class="layui-form layui-form-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_div_modify" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">模具名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Layer_MOULD" class="layui-input" lay-verify="required" disabled>
+            </div>
+            <label class="layui-form-label1">模具状态：</label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" id="Layer_STATUS" disabled>
+                    <option value="">请选择</option>
+                    <option value="正常">正常</option>
+                    <option value="调试">调试</option>
+                    <option value="维修">维修</option>
+                    <option value="报废">报废</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" id="Layer_GC" lay-filter="Layer_GC" disabled></select>
+            </div>
+            <label class="layui-form-label1">工作中心：</label>
+            <div class="layui-input-inline">
+                <select lay-verify="required" id="Layer_GZZXBH" lay-filter="Layer_GZZXBH" disabled></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">应用物料类别：</label>
+            <div class="layui-input-inline">
+                <select id="Layer_WLLBID" lay-search lay-filter="Layer_WLLBID" disabled>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">型腔数量：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Layer_CAVE" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">应用设备：</label>
+            <div class="layui-input-inline">
+                <select id="Layer_SBBH" disabled>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">材料匹配代码：</label>
+            <div class="layui-input-inline">
+                <select id="Layer_MATCHCODE" lay-search>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">应用物料信息：</label>
+            <div class="layui-input-inline" style="width:540px;">
+                <select id="Layer_WLH" lay-filter="Layer_WLH" disabled>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">规格型号：</label>
+            <div class="layui-input-inline" style="width:540px;">
+                <select id="Layer_TYPEID" disabled>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">每箱数量（只）：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Layer_CASENUM" class="layui-input" disabled>
+            </div>
+            <label class="layui-form-label1">每箱净重（KG）：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Layer_CASEWET" class="layui-input" lay-verify="weight" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">是否过全检机：</label>
+            <div class="layui-input-inline">
+                <select id="Layer_ISFIM" disabled>
+                    <option value=0>否</option>
+                    <option value=1>是</option>
+                </select>
+            </div>
+            <label class="layui-form-label1">是否可挑号：</label>
+            <div class="layui-input-inline">
+                <select id="Layer_ISNPA" disabled>
+                    <option value=0>否</option>
+                    <option value=1>是</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">备注：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="Layer_NOTES" class="layui-input" style="width:540px;">
+        </div>
+    </div>
+</div>
+
+<div id="div_QRcode" style="width:250px; height:280px; vertical-align: middle; text-align: center; font-size:16px; padding:15px;" hidden>
+    <img id="QRcode_Image" width="200" height="200" />
+    <div id="QRcode_Words1" style="padding:0px 0px 10px 0px;"></div>
+    <div id="QRcode_Adjust" style="text-align: left;">
+        <span id="QRcode_Words2"></span><br />
+        <span id="QRcode_Words3"></span>
+    </div>
+</div>
+<div hidden><img id="div_QRcode_Download_Image" alt="QDCode image" width="400" height="400" hidden /></div>
+
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+</script>
+<script type="text/html" id="tb_data_STATUS">
+    {{#
+         var STATUSColor = 'gray';
+         if(d.STATUS == '正常') STATUSColor = 'green';
+         else if(d.STATUS == '维修') STATUSColor = '#EAA900';
+         else if(d.STATUS == '报废') STATUSColor = 'red';
+    }}
+    <span style="color:{{ STATUSColor }}">{{ d.STATUS }}</span>
+</script>
+<script type="text/html" id="tb_data_ISFIM">
+    {{#  if(d.ISFIM == 1) { }}
+    {{ '是' }}
+    {{#  } else { }}
+    {{ '否' }}
+    {{#  } }}
+</script>
+<script type="text/html" id="tb_data_ISNPA">
+    {{#  if(d.ISNPA == 1) { }}
+    {{ '是' }}
+    {{#  } else { }}
+    {{ '否' }}
+    {{#  } }}
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/html2canvas")
+    <script>
+        var all_fy = 1;
+        var all_fysl = 10;
+        var all_limits = [10, 20, 50, 100, 200, 500];
+        var cacheData = [];
+        var cacheCheckData = [];
+        var cacheWL = [];
+        layui.use(['table', 'layer', 'form', 'element'], function () {
+            var layer = layui.layer;
+            var table = layui.table;
+            var form = layui.form;
+            var element = layui.element;
+            var assist = sonluk.layui;
+            var formSelects = layui.formSelects;
+
+            formSelects.render("Term_STATUS");
+            formSelects.value('Term_STATUS', ["正常!", "调试!", "维修!", "报废!"]);
+            list_init();
+            table_init();
+
+            var tip_index = 0;
+            $("#btn_export").mouseenter(function () {
+                if (cacheData.length == 0) tip_index = layer.tips('没有需要导出的数据', '#btn_export', { tips: [1, '#009688'], time: 0 });
+            }).mouseleave(function () {
+                layer.close(tip_index);
+            });
+            $("#btn_QRcode").mouseenter(function () {
+                if (cacheCheckData.length == 0) tip_index = layer.tips('请先勾选需要生成二维码的条目', '#btn_QRcode', { tips: [2, '#009688'], time: 0 });
+            }).mouseleave(function () {
+                layer.close(tip_index);
+            });
+
+            $('#Term_WLH').bind('keyup', function (event) {
+                if (event.keyCode == "13") table_init();
+            });
+            $('#Term_MOULD').bind('keyup', function (event) {
+                if (event.keyCode == "13") table_init();
+            });
+            $('#Term_MATCHCODE').bind('keyup', function (event) {
+                if (event.keyCode == "13") table_init();
+            });
+            $('#Term_CAVE').bind('keyup', function (event) {
+                if (event.keyCode == "13") table_init();
+            });
+
+            $("#btn_search").click(function () {
+                table_init();
+            });
+            $("#btn_export").click(function () {
+                if (cacheData.length !== undefined && cacheData.length != null && cacheData.length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: "../MOULD/MT_MOULD_Export",
+                        data: {
+                            datastring: JSON.stringify(cacheData)
+                        },
+                        success: function (data) {
+                            rstData = JSON.parse(data);
+                            if (rstData.TYPE == 'S') {
+                                window.open("../MOULD/Export_Download" + "?filename=" + rstData.MESSAGE + "&filenameout=模具维护导出.xlsx", "_self");
+                            }
+                            else {
+                                console.log(rstdata.MESSAGE);
+                            }
+                        }
+                    });
+                }
+            });
+            $("#btn_QRcode").click(function () {
+                if (cacheCheckData.length !== undefined && cacheCheckData.length != null && cacheCheckData.length > 0) QRdownload(cacheCheckData, { num: 0, total: cacheCheckData.length });
+            })
+
+            table.on('checkbox(tb_MOULD)', function (obj) {
+                cacheCheckData = table.checkStatus('tb_MOULD').data;
+                if (cacheCheckData.length != 0) {
+                    $("#btn_QRcode").removeClass("layui-btn-disabled");
+                }
+                else {
+                    $("#btn_QRcode").addClass("layui-btn-disabled");
+                }
+            });
+
+            table.on('tool(tb_MOULD)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+
+                if (layEvent === 'modify') {
+                    layer_init(layEvent, data);
+                }
+            });
+
+            form.on('select(Term_GC)', function (data) {
+                if (data.value != "") list_init('AfterTermGC');
+                else {
+                    $('#Term_GZZXBH').empty();
+                    $('#Term_GZZXBH').append(new Option("请选择", ""));
+                    $('#Term_SBBH').empty();
+                    $('#Term_SBBH').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+            form.on('select(Term_GZZXBH)', function (data) {
+                if (data.value != "") list_init('AfterTermGZZX');
+                else {
+                    $('#Term_SBBH').empty();
+                    $('#Term_SBBH').append(new Option("请选择", ""));
+                    form.render();
+                }
+            });
+
+            function table_init() {
+                var datastring = {
+                    GC: $('#Term_GC').val(),
+                    GZZXBH: $('#Term_GZZXBH').val(),
+                    SBBH: $('#Term_SBBH').val(),
+                    MOULD: $('#Term_MOULD').val(),
+                    WLH: $('#Term_WLH').val(),
+                    MATCHCODENAME: $('#Term_MATCHCODE').val(),
+                    CAVE: $('#Term_CAVE').val() || 0,
+                    STATUS: formSelects.value('Term_STATUS', 'valStr')
+                };
+                if (!/^[0-9]*$/.test(datastring.CAVE)) {
+                    layer.msg("型腔数量只能填整数");
+                    return;
+                }
+                var loading = layer.load(1);
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    url: "../MOULD/MT_MOULD_Search",
+                    data: {
+                        datastring: JSON.stringify(datastring)
+                    }
+                }).done(function (data) {
+                    var rstData = JSON.parse(data);
+                    if (rstData.MES_RETURN.TYPE == "S") {
+                        cacheData = rstData.MES_PMM_MOULD;
+                        assist.table.render({
+                            elem: '#tb_MOULD',
+                            data: cacheData,
+                            height: 'full-345',
+                            cols: [[
+                                { fixed: 'left', type: 'checkbox', width: 50 },
+                                { fixed: 'left', type: 'numbers', title: '序号' },
+                                { fixed: 'left', templet: '#tb_data_STATUS', title: '模具状态' },
+                                { fixed: 'left', field: 'MID', title: '模具编号' },
+                                { fixed: 'left', field: 'MOULD', title: '模具名称' },
+                                { field: 'GC', title: '工厂', width: 70 },
+                                { field: 'GZZXBH', title: '工作中心' },
+                                { field: 'GZZXMS', title: '工作中心描述' },
+                                { field: 'SBMS', title: '应用设备名称' },
+                                { field: 'WLH', title: '物料编码', width: 180 },
+                                { field: 'WLMS', title: '物料描述', width: 200, align: 'left' },
+                                { field: 'WLLBNAME', title: '物料类别' },
+                                { field: 'MATCHCODENAME', title: '材料配比' },
+                                { field: 'CAVE', title: '型腔数量' },
+                                { field: 'CASENUM', title: '每箱数量(只)' },
+                                { field: 'CASEWET', title: '每箱净重(kg)' },
+                                { templet: '#tb_data_ISFIM', title: '是否过全检机' },
+                                { templet: '#tb_data_ISNPA', title: '是否可挑号' },
+                                { field: 'MXNAME', title: '规格型号' },
+                                { field: 'NOTES', title: '备注', width: 200, align: 'left' },
+                                { fixed: 'right', toolbar: '#operate', title: '操作', width: 120 }
+                            ]],
+                            page: {
+                                limits: all_limits,
+                                limit: all_fysl,
+                                curr: all_fy,
+                                currfix: function (curr) { all_fy = curr; }
+                            }
+                        });
+                    }
+                    else if (rstData.MES_RETURN.TYPE == "E") layer.msg("查询失败，原因：" + rstData.MES_RETURN.MESSAGE);
+                    else layer.msg("查询失败！");
+                }).always(function () {
+                    layer.close(loading);
+                    if (cacheData.length != 0) {
+                        $("#btn_export").removeClass("layui-btn-disabled");
+                    }
+                    else {
+                        $("#btn_export").addClass("layui-btn-disabled");
+                    }
+                });
+            }
+
+            function list_init(order) {
+                order = order || "";
+                switch (order) {
+                    case "AfterTermGC":
+                        $('#Term_SBBH').empty();
+                        $('#Term_SBBH').append(new Option("请选择", ""));
+                        //工作中心(查询条件)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GZZXList",
+                            data: {
+                                GC: $('#Term_GC').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GZZXBH').empty();
+                                $('#Term_GZZXBH').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GZZXBH').append(new Option(item.GZZXBH + "-" + item.GZZXMS, item.GZZXBH));
+                                })
+                                if (rstData.length == 1) {
+                                    $('#Term_GZZXBH').val(rstData[0].GZZXBH);
+                                    list_init("AfterTermGZZX");
+                                }
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterTermGZZX":
+                        //应用设备(查询条件)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/SBList",
+                            data: {
+                                GC: $('#Term_GC').val(),
+                                GZZXBH: $('#Term_GZZXBH').val()
+                            },
+                            success: function (data) {
+                                $('#Term_SBBH').empty();
+                                $('#Term_SBBH').append(new Option("请选择", ""));
+                                $.each(JSON.parse(data), function (index, item) {
+                                    $('#Term_SBBH').append(new Option(item.SBMS, item.SBBH));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterLayerGC":
+                        $('#Layer_WLLBID').empty();
+                        $('#Layer_WLLBID').append(new Option("请选择", ""));
+                        $('#Layer_WLH').empty();
+                        $('#Layer_WLH').append(new Option("请选择", ""));
+                        $('#Layer_SBBH').empty();
+                        $('#Layer_SBBH').append(new Option("请选择", ""));
+                        //工作中心(弹出层)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GZZXList",
+                            data: {
+                                GC: $('#Layer_GC').val()
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Layer_GZZXBH').empty();
+                                $('#Layer_GZZXBH').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Layer_GZZXBH').append(new Option(item.GZZXBH + "-" + item.GZZXMS, item.GZZXBH));
+                                })
+                                if (rstData.length == 1) {
+                                    $('#Layer_GZZXBH').val(rstData[0].GZZXBH);
+                                    list_init("AfterLayerGZZX");
+                                }
+                                form.render();
+                            }
+                        });
+                        //电池型号(弹出层)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/BATList",
+                            data: {
+                                GC: $('#Layer_GC').val()
+                            },
+                            success: function (data) {
+                                $('#Layer_TYPEID').empty();
+                                $('#Layer_TYPEID').append(new Option("请选择", ""));
+                                $.each(JSON.parse(data), function (index, item) {
+                                    $('#Layer_TYPEID').append(new Option(item.MXNAME, item.ID));
+                                })
+                                form.render();
+                            }
+                        });
+                        //材料匹配代码(弹出层)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MATCHCODEList",
+                            data: {
+                                GC: $('#Layer_GC').val()
+                            },
+                            success: function (data) {
+                                $('#Layer_MATCHCODE').empty();
+                                $('#Layer_MATCHCODE').append(new Option("请选择", ""));
+                                $.each(JSON.parse(data), function (index, item) {
+                                    $('#Layer_MATCHCODE').append(new Option(item.YCLPBDM, item.CLPBID));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterLayerGZZX":
+                        $('#Layer_WLH').empty();
+                        $('#Layer_WLH').append(new Option("请选择", ""));
+                        //应用设备(弹出层)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/SBList",
+                            data: {
+                                GC: $('#Layer_GC').val(),
+                                GZZXBH: $('#Layer_GZZXBH').val()
+                            },
+                            success: function (data) {
+                                $('#Layer_SBBH').empty();
+                                $('#Layer_SBBH').append(new Option("请选择", ""));
+                                $.each(JSON.parse(data), function (index, item) {
+                                    $('#Layer_SBBH').append(new Option(item.SBMS, item.SBBH));
+                                })
+                                form.render();
+                            }
+                        });
+                        //应用物料类别(弹出层)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/WLLBList",
+                            data: {
+                                GC: $('#Layer_GC').val(),
+                                GZZXBH: $('#Layer_GZZXBH').val()
+                            },
+                            success: function (data) {
+                                $('#Layer_WLLBID').empty();
+                                $('#Layer_WLLBID').append(new Option("请选择", ""));
+                                $.each(JSON.parse(data), function (index, item) {
+                                    $('#Layer_WLLBID').append(new Option(item.WLLBNAME, item.WLLBID));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                    case "AfterLayerWLLB":
+                        //应用物料信息(弹出层)
+                        var WLLB = $('#Layer_WLLBID').val();
+                        if (WLLB == "") WLLB = 0;
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/WLList",
+                            data: {
+                                GC: $('#Layer_GC').val(),
+                                WLLB: Number(WLLB)
+                            },
+                            success: function (data) {
+                                cacheWL = JSON.parse(data);
+                                $('#Layer_WLH').empty();
+                                $('#Layer_WLH').append(new Option("请选择", ""));
+                                $.each(cacheWL, function (index, item) {
+                                    $('#Layer_WLH').append(new Option(item.WLH + "/" + item.WLMS, item.WLH));
+                                })
+                                form.render();
+                            }
+                        });
+                        break;
+                    default:
+                        //工厂(查询条件和弹出层)
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/GCList",
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                $('#Term_GC').empty();
+                                $('#Layer_GC').empty();
+                                $('#Term_GC').append(new Option("请选择", ""));
+                                $('#Layer_GC').append(new Option("请选择", ""));
+                                $.each(rstData, function (index, item) {
+                                    $('#Term_GC').append(new Option(item.GC + "-" + item.GCMS, item.GC));
+                                    $('#Layer_GC').append(new Option(item.GC + "-" + item.GCMS, item.GC));
+                                })
+                                if (rstData.length == 1) {
+                                    $('#Term_GC').val(rstData[0].GC);
+                                    list_init("AfterTermGC");
+                                    $('#Layer_GC').val(rstData[0].GC);
+                                    list_init("AfterLayerGC");
+                                }
+                                form.render();
+                            }
+                        });
+                        break;
+                }
+            }
+
+            function layer_init(event, data) {
+                event = event || "";
+                data = data || "";
+                var title = "修改";
+                var func = "MT_MOULD_Update";
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['保存', '取消'],
+                    area: ['800px', '600px'],
+                    content: $('#div_modify'),
+                    title: title,
+                    moveOut: true,
+                    success: function (layero, index) {
+                        $('#Layer_MOULD').val(data.MOULD);
+                        $('#Layer_STATUS').val(data.STATUS);
+                        $('#Layer_GC').val(data.GC);
+                        list_init('AfterLayerGC');
+                        $('#Layer_GZZXBH').val(data.GZZXBH);
+                        list_init('AfterLayerGZZX');
+                        if (data.WLLBID == 0) $('#Layer_WLLBID').val("");
+                        else $('#Layer_WLLBID').val(data.WLLBID);
+                        if (data.WLLBID > 0) list_init('AfterLayerWLLB');
+                        if (data.CAVE == 0) $('#Layer_CAVE').val("");
+                        else $('#Layer_CAVE').val(data.CAVE);
+                        $('#Layer_SBBH').val(data.SBBH);
+                        $('#Layer_MATCHCODE').val(data.MATCHCODE);
+                        $('#Layer_WLH').val(data.WLH);
+                        if (data.TYPEID == 0) $('#Layer_TYPEID').val("");
+                        else $('#Layer_TYPEID').val(data.TYPEID);
+                        $('#Layer_CASENUM').val(data.CASENUM);
+                        $('#Layer_CASEWET').val(data.CASEWET);
+                        $('#Layer_ISFIM').val(data.ISFIM);
+                        $('#Layer_ISNPA').val(data.ISNPA);
+                        $('#Layer_NOTES').val(data.NOTES);
+                        form.render();
+                    },
+                    yes: function (index, layero) {
+                        $("#btn_div_modify")[0].click();
+                        var MOULD = $('#Layer_MOULD').val();
+                        var STATUS = $('#Layer_STATUS').val();
+                        var GC = $('#Layer_GC').val();
+                        var GZZXBH = $('#Layer_GZZXBH').val();
+                        var WLLBID = $('#Layer_WLLBID').val();
+                        var CAVE = $('#Layer_CAVE').val();
+                        var SBBH = $('#Layer_SBBH').val();
+                        var MATCHCODE = $('#Layer_MATCHCODE').val();
+                        var WLH = $('#Layer_WLH').val();
+                        var TYPEID = $('#Layer_TYPEID').val();
+                        var CASENUM = $('#Layer_CASENUM').val();
+                        var CASEWET = $('#Layer_CASEWET').val();
+                        var ISFIM = $('#Layer_ISFIM').val();
+                        var ISNPA = $('#Layer_ISNPA').val();
+                        var NOTES = $('#Layer_NOTES').val();
+                        if (MOULD == "" || STATUS == "" || GC == "" || GZZXBH == "") return;
+                        if (!/^[0-9]+(\.[0-9]{0,2})?$/.test(CASEWET) && CASEWET != "") return;
+                        if (CAVE == "") CAVE = 0;
+                        if (CASENUM == "") CASENUM = 0;
+                        if (CASEWET == "") CASEWET = 0;
+                        if (WLLBID == "") WLLBID = 0;
+                        if (TYPEID == "") TYPEID = 0;
+                        var postData = {
+                            MID: data.MID || "",
+                            MOULD: MOULD,
+                            STATUS: STATUS,
+                            GC: GC,
+                            GZZXBH: GZZXBH,
+                            WLLBID: Number(WLLBID),
+                            CAVE: Number(CAVE),
+                            SBBH: SBBH,
+                            MATCHCODE: MATCHCODE,
+                            WLH: WLH,
+                            TYPEID: Number(TYPEID),
+                            CASENUM: Number(CASENUM),
+                            CASEWET: Number(CASEWET),
+                            ISFIM: Number(ISFIM),
+                            ISNPA: Number(ISNPA),
+                            NOTES: NOTES
+                        };
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/" + func,
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg(title + "成功！");
+                                    layer.close(index);
+                                    if (cacheData !== undefined && cacheData != null && cacheData.length > 0) table_init();
+                                }
+                                else if (rstData.TYPE == "E") layer.alert(title + "失败，原因：" + rstData.MESSAGE);
+                                else layer.alert(title + "失败，原因未知");
+                            }
+                        });
+                    }
+                });
+            }
+
+            function QRdownload(originData, addition, loading) {
+                var inputData = originData;
+                loading = loading || layer.load(1, {
+                    shade: 0.3,
+                    content: '二维码生成中，请稍后...',
+                    success: function (layero) {
+                        layero.find('.layui-layer-content').css({
+                            'color': 'white',
+                            'padding-top': '8px',
+                            'padding-left': '45px',
+                            'width': '200px'
+                        });
+                    }
+                });
+                if (addition !== undefined) inputData = originData[addition.num];
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    url: "../System/QDCode",
+                    data: {
+                        code: inputData.MID,
+                        format: "QRCODE",
+                        width: 200,
+                        height: 200,
+                        pure: 1
+                    },
+                    success: function (data) {
+                        $("#QRcode_Image").attr("src", "data:image/jpeg;base64," + JSON.parse(data));
+                        $("#QRcode_Words1").text(inputData.MID);
+                        $("#QRcode_Words2").text("工作中心：" + inputData.GZZXBH + "-" + inputData.GZZXMS);
+                        $("#QRcode_Words3").text("模具名称：" + inputData.MOULD);
+                        $("#div_QRcode").show();
+                        $("#QRcode_Adjust").css("padding-left", ($("#div_QRcode").width() - $("#QRcode_Words2").width()) / 2 + "px");
+                        html2canvas(document.getElementById('div_QRcode')).then(function (canvas) {
+                            document.querySelector('#div_QRcode_Download_Image').src = canvas.toDataURL(1);
+                            var a = $("<a></a>").attr("href", $('#div_QRcode_Download_Image')[0].src).attr("download", inputData.MOULD + ".jpg").appendTo("body");
+                            a[0].click();
+                            a.remove();
+                            $("#div_QRcode").hide();
+                            if (addition !== undefined) {
+                                addition.num++;
+                                if (addition.num < addition.total) QRdownload(originData, addition, loading);
+                                else layer.close(loading);
+                            }
+                        });
+                    },
+                    error: function (err) {
+                        layer.close(loading);
+                        layer.msg("二维码生成失败,请重试！");
+                    }
+                });
+            }
+        });
+    </script>
+}

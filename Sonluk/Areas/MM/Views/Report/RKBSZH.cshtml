@@ -1,0 +1,109 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<ZSL_BCS104>
+@{
+    ViewBag.Title = "采购订单-入库标识组合";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string select = "checked";
+    int i = 0;
+
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/input-width-po")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/mm/purchase-order-index")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">采购订单</a>
+        >
+        <a href="#">入库标识组合</a>
+    </div>
+</div>
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <table class="data-table-list">
+            <tr>
+                <td class="data-table-header">采购订单</td>
+                <td class="data-table-header">行项目</td>
+                <td class="data-table-header">交货日期</td>
+                <td class="data-table-header">物料编码</td>
+                <td class="data-table-header">物料描述</td>
+                <td class="data-table-header">订单数量</td>
+                <td class="data-table-header">未收数量</td>
+                <td class="data-table-header">基本单位</td>
+                <td class="data-table-header">销售订单</td>
+                <td class="data-table-header">销售项目</td>
+                <td class="data-table-header">已关联托数</td>
+                <td class="data-table-header">主键</td>
+                <td class="data-table-header">本托数量</td>
+            </tr>
+            @foreach (ZSL_BCS104 node in Model)
+            {
+                <tr class="data">
+                    <td>@node.Ebeln</td>
+                    <td>@node.Ebelp</td>
+                    <td>@node.Eindt</td>
+                    <td>@node.Matnr</td>
+                    <td>@node.Txz01</td>
+                    <td>@node.Zsl</td>
+                    <td>@node.Wssl</td>
+                    <td>@node.Meins</td>
+                    <td>@node.Vbeln</td>
+                    <td>@node.Vbelp</td>
+                    <td>@node.Yglts</td>
+                    <td><input type="checkbox" name="Zj1" value="X" @if (node.Zj == "X") { @select    }></td>
+                    <td><input type="text" value="@node.Sl.ToString("0")" class="deliv-qty" /></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div class="panel-search">
+    <table>
+        <tr id="tr-ts">
+            <td align="right">托数：</td>
+            <td><input type="text" class="panel-search-item-input input-width-od-sn panel-search-textarea-target" name="RKBSZH_TS" id="RKBSZH_TS" /></td>
+        </tr>
+    </table>
+    <div class="panel-search-refresh sonluk-button panel-search-button">查询入库标识</div>
+    <input type="hidden" value="@Url.Action("_RKBSZHList", "Report", new { area = "MM" })">
+    <div class="panel-search-submit sonluk-button panel-search-button">生成入库标识</div>
+    <input type="hidden" value="@Url.Action("GenerateRKBSZH", "Report", new { area = "MM" })">
+</div>
+
+    <div class="sonluk-table-layout">
+        <div class="sonluk-table">
+            <div class="sonluk-table-control">
+                <div>
+                    <div class="sonluk-table-control-response-time"></div>
+                    <div class="row-select-all sonluk-table-control-button">全选</div>
+                    <div class="sonluk-table-control-self-adaption-display">
+                        <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                        <div class="row-select-invert sonluk-table-control-button">反选</div>
+                        <div class="sonluk-table-control-space">|</div>
+                        <div class="print-button rkbs-reprint sonluk-table-control-button">打印</div>
+                        <input type="hidden" value="@Url.Action("PrepareRKBSZHData", "Report", new { area = "MM" })">
+                        <input type="hidden" value="@Url.Action("RKBSPrint", "Report", new { area = "MM" })">
+                        <div class="sonluk-table-control-space">|</div>
+                        <div class="print-button rkbs-delete sonluk-table-control-button">删除</div>
+                        <input type="hidden" value="@Url.Action("DeleteRKBS", "Report", new { area = "MM" })">
+                    </div>
+                </div>
+            </div>
+            <div class="sonluk-table-content" id="rkbszh-list"></div>
+        </div>
+    </div>
+
+    <!--下拉列表-->
+    @section scripts {
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/datetimepicker")
+        @Scripts.Render("~/bundles/spin")
+        @Scripts.Render("~/bundles/sonluk-ui/table")
+        @Scripts.Render("~/bundles/report/purchase-order-rkbszh")
+    }
+
+

@@ -1,0 +1,130 @@
+﻿@using Sonluk.UI.Model.CRM.ORDER_TTService;
+@{
+    ViewBag.Title = "SH_Order_Part";
+    CRM_ORDER_TT[] TTdata = ViewBag.TTdata;
+}
+
+@*@for (int i = 0; i < TTdata.Length; i++)
+{
+    string isactive = "";
+    switch (TTdata[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "已提交";
+            break;
+        case 30:
+            isactive = "";
+            break;
+        case 40:
+            isactive = "";
+            break;
+        case 50:
+            isactive = "已审核";
+            break;
+        case 60:
+            isactive = "已归档";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@TTdata[i].SDFNAME</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">发起时间</label>
+                <span class="weui-form-preview__value">@TTdata[i].CJSJ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单类型</label>
+                <span class="weui-form-preview__value">@TTdata[i].DDLXDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单状态</label>
+                <span class="weui-form-preview__value">@isactive</span>
+            </p>
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">查看</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="SH_Order(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">审核</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="Back_Order(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">回退</a>
+        </div>
+    </div>
+
+    <br />
+}*@
+
+
+
+@for (int i = 0; i < TTdata.Length; i++)
+{
+    string isactive = "";
+    switch (TTdata[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "已提交";
+            break;
+        case 30:
+            isactive = "";
+            break;
+        case 40:
+            isactive = "";
+            break;
+        case 50:
+            isactive = "已审核";
+            break;
+        case 60:
+            isactive = "已归档";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+    
+    <table id="table1" border="0" width="100%">
+
+        <tr>
+            <td>序号：@(i + 1)</td>
+        </tr>
+        <tr>
+            <td>状态：@isactive</td>
+            @*<td width="60"><button class="layui-btn layui-btn-xs" style="width:100%;height:30px" onclick="SH_Order(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">审核</button></td>*@
+            <td width="60"><button class="layui-btn layui-btn-xs" style="width:100%;height:30px" onclick="Link_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">查看</button></td>
+        </tr>
+        <tr>
+            <td colspan="2">售达方名称：@TTdata[i].SDFNAME</td>
+        </tr>
+        <tr>
+            <td height="30" colspan="2">售达方SAP编号：@TTdata[i].SDFID</td>
+        </tr>
+        <tr>
+            <td colspan="2">发起时间：@TTdata[i].CJSJ</td>
+        </tr>
+        <tr>
+            <td>订单类型：@TTdata[i].DDLXDES</td>
+            <td width="60" height="30">@*<button class="layui-btn layui-btn-xs layui-btn-danger" style="width:100%;height:30px" onclick="Back_Order(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">回退</button>*@</td>
+        </tr>
+        <tr>
+            <td colspan="2">备注：@TTdata[i].BEIZ</td>
+        </tr>
+        <tr>
+            <td colspan="2">业务员备注：@TTdata[i].BEIZ2</td>
+        </tr>
+    </table>
+    <hr class="layui-bg-black">
+}
+@if(TTdata.Length == 0)
+{
+    <br />
+    <label>无数据！</label>
+}

@@ -1,0 +1,374 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@using Sonluk.UI.Model.CRM.COST_CBZXService;
+@{
+    string lxrnp = System.Configuration.ConfigurationManager.AppSettings["lxr_pic"];
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "修改人员";
+
+    CRM_HG_DICT[] FGLD = ViewBag.FGLD;
+    CRM_HG_DICT[] SF = ViewBag.SF;
+    CRM_COST_CBZX[] CBZX = ViewBag.CBZX;
+}
+<script>
+    function send(id, value, layero) {
+        var SendValue = $(staffid, layero.find("iframe")[0].contentWindow.document);
+        SendValue.attr("value", value);
+
+    }
+
+</script>
+
+<script type="text/html" id="bar_select_address">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<script type="text/html" id="bar">
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+@*<script type="text/html" id="staff_type_Tpl">
+        {{# if(d.STAFFLX == 1){ }}
+        驻外业务员
+        {{# }else if(d.STAFFLX == 2){ }}
+        办公室人员
+        {{# }else if(d.STAFFLX == 3){ }}
+        直营卖场促销员
+        {{# }else if(d.STAFFLX == 4){ }}
+        客户业务员
+        {{# }else { }}
+        error
+        {{# } }}
+    </script>*@
+
+
+<script type="text/html" id="sex_Tpl">
+    {{# if(d.STAFFSEX == 1){ }}
+    男
+    {{# }else if(d.STAFFSEX== 2){ }}
+    女
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="marry_Tpl">
+    {{# if(d.STAFFHYZK == 1){ }}
+    未婚
+    {{# }else if(d.STAFFHYZK == 2){ }}
+    已婚
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+<script type="text/html" id="active_Tpl">
+    {{# if(d.ISACTIVE == 1){ }}
+    在职
+    {{# }else if(d.ISACTIVE == 0){ }}
+    离职
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>员工管理</a>
+    <a><cite>人员列表</cite></a>
+</span>
+<br />
+<br />
+
+
+<form id="from1" class="layui-form layui-form-pane">
+    <div id="div8" class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <button id="btn_save_staff" class="layui-btn" lay-submit="">保存</button>
+            </div>
+        </div>
+    </div>
+    <div id="from1" class="layui-form layui-form-pane">
+        <div id="div1" class="layui-form">
+
+            <div class="layui-collapse">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">基本信息</h2>
+                    <div class="layui-colla-content layui-show">
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align:right;">人员类型：</label>
+                            <div class="layui-input-inline" style="width:150px;">
+                                <select id="staff_type" lay-filter="staff_type">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">姓名：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <input id="name" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">工号：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <input id="workID" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="width:150px;text-align:right;">部门：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="department" lay-filter="sex">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                        </div>
+                        @* 第二行 *@
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align:right;">籍贯：</label>
+                            <div class="layui-input-inline" style="width:150px;">
+                                <input id="jiguan" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">性别：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="sex" lay-filter="sex">
+                                    <option value="0" selected="selected"></option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">学历：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="xueli" lay-filter="xueli">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label" style="width:150px;text-align:right;">婚姻状况：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="marry" lay-filter="marry">
+                                    <option value="0" selected="selected"></option>
+                                    <option value="1">未婚</option>
+                                    <option value="2">已婚</option>
+                                </select>
+                            </div>
+                        </div>
+                        @* 第三行 *@
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align:right;">邮箱地址：</label>
+                            <div class="layui-input-inline" style="width:150px;">
+                                <input id="email" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">联系电话：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <input id="tel" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">入职时间：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <input id="entry_time" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="width:150px;text-align:right;">调入民品部时间：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <input id="entryMPB_time" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        @* 第四行 *@
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align:right;">身份证号：</label>
+                            <div class="layui-input-inline" style="width:370px;">
+                                <input id="IDcard" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">生日：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <input id="birthday" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="width:150px;text-align:right;">政治面貌：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="zzmm" lay-filter="zzmm">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                        </div>
+                        @* 第五行 *@
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align:right;">常住地址：</label>
+                            <div class="layui-input-inline" style="width:370px;">
+                                <input id="address" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">职位：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="job" lay-filter="job">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label" style="width:150px;text-align:right;">岗位：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="post" lay-filter="post">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                        </div>
+                        @* 第六行 *@
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align:right;">毕业院校：</label>
+                            <div class="layui-input-inline" style="width:370px;">
+                                <input id="byyx" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="text-align:right;">班次：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="banci" lay-filter="banci">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label" style="width:150px;text-align:right;">日历版本：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="rili" lay-filter="rili">
+                                    <option value="0" selected="selected"></option>
+                                </select>
+                            </div>
+                        </div>
+                        @* 第七行 *@
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align:right;">工作内容：</label>
+                            <div class="layui-input-inline" style="width:590px;">
+                                <input id="work_content" type="text" name="title" placeholder="必填" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label" style="width:150px;text-align:right;">人员状态：</label>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select id="active" lay-filter="active">
+                                    <option value="1" selected="selected">在职</option>
+                                    <option value="0">离职</option>
+                                </select>
+                            </div>
+                        </div>
+                        @* 第九行 *@
+                        <div class="layui-form-item" style="width:920px;">
+                            <label class="layui-form-label" style="text-align:right;">备注：</label>
+                            <div class="layui-input-inline" style="width:590px;">
+                                <textarea id="remark" name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*子表信息*@
+        <div id="div_other" class="layui-form">
+            <div class="layui-collapse">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">考勤地址</h2>
+                    <div class="layui-colla-content">
+
+                        <table id="adress" lay-filter="adress"></table>
+                        <button id="insert_adress" class="layui-btn">新增</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="div_clf" class="layui-form">
+            <div class="layui-collapse">
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">差旅费信息</h2>
+                    <div class="layui-colla-content">
+
+                        <table id="result_clf" lay-filter="result_clf"></table>
+                        <button id="insert_clf" class="layui-btn">新增</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+@*检索考勤地址*@
+<div id="div_select_address" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_address" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+    </div>
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:130px;">考勤地址：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_address_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <table id="select_address_result" lay-filter="select_address_result"></table>
+</div>
+
+
+<div id="div_select_clf" class="layui-form" hidden>
+    
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:130px;">分管领导：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <select id="select_fgld" lay-filter="select_fgld" lay-search>
+                <option value="0" selected="selected"></option>
+                @for (int i = 0; i < FGLD.Length; i++)
+                {
+                    <option value="@FGLD[i].DICID">@FGLD[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:130px;">省份：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <select id="select_sf" lay-filter="select_sf" lay-search>
+                <option value="0" selected="selected"></option>
+                @for (int i = 0; i < SF.Length; i++)
+                {
+                    <option value="@SF[i].DICID">@SF[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:130px;">成本中心：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <select id="select_cbzx" lay-filter="select_cbzx" lay-search>
+                <option value="0" selected="selected"></option>
+                @for (int i = 0; i < CBZX.Length; i++)
+                {
+                    <option value="@CBZX[i].CBZXBH">@CBZX[i].CBZXMC</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+
+        <label class="layui-form-label" style="width:130px;">备注：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="beiz" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#netpath").val("@lxrnp");
+
+    });
+
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Staff/Update")
+}

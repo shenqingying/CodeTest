@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "包装关联替换";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_messet">MES系统设置</a>
+    <a><cite lid="vi_bztht">包装关联替换</cite></a>
+</span>
+<br />
+<br />
+
+
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_ytm">源条码：</label>
+            <div class="layui-input-inline">
+                <input id="S_TM" type="text" class="layui-input" autocomplete="off" maxlength="12">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="vi_mbm">目标码：</label>
+            <div class="layui-input-inline">
+                <input id="D_TM" type="text" class="layui-input" autocomplete="off" maxlength="12">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button id="btn_sure" class="layui-btn" lid="vi_qr">确认</button>
+        </div>
+    </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/ReplaceBZ")
+}

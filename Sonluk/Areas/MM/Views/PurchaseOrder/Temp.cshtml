@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "采购订单临时文件";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">维护</a>
+        >
+        <a href="#">采购订单临时文件</a>
+    </div>
+</div>
+<div class="panel-flow">
+    <form action="@Url.Action("RemoveTemp", "PurchaseOrder")" method="post" id="remove-temp-form">
+        <table class="panel-flow-table">
+            <tr>
+                <td class="panel-flow-table-title">文件</td>
+                <td class="panel-flow-table-content">@ViewBag.Count</td>
+            </tr>
+            <tr>
+                <td class="panel-flow-table-title">空间</td>
+                <td class="panel-flow-table-content">@ViewBag.Length</td>
+            </tr>
+            <tr>
+                <td class="panel-flow-table-title">最新</td>
+                <td class="panel-flow-table-content">@ViewBag.LastWriteTime</td>
+            </tr>
+            <tr>
+                <td class="panel-flow-table-title"></td>
+                <td class="panel-flow-table-content"><div class="sonluk-button" id="submit">移除一小时前文件</div></td>
+            </tr>
+        </table>
+    </form>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/mm/purchase-order-temp")
+}

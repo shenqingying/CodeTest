@@ -1,0 +1,81 @@
+﻿@using Sonluk.UI.Model.CRM.COST_CLFTTService;
+@{
+    ViewBag.Title = "Select_KACXY_Part";
+
+    CRM_COST_CLFTT[] TTdata = ViewBag.TTdata;
+
+}
+@for (int i = 0; i < TTdata.Length; i++)
+{
+    string isactive = "";
+    switch (TTdata[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 30:
+            isactive = "已审核";
+            break;
+        //case 40:
+        //    isactive = "";
+        //    break;
+        //case 50:
+        //    isactive = "已审核";
+            //break;
+        case 60:
+            isactive = "已审批";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+        <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@TTdata[i].STAFFNAME</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">部门</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].DEPNAME</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">分管领导</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].FGLDDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">省份</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].SFDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">成本中心</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].CBZXDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">状态</label>
+                <span class="weui-form-preview__value">&nbsp;@isactive</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请时间</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].CJSJ</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">查看</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">编辑</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" onclick="Link_Delete(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))" style="color:#E64340;">删除</a> 
+            <a class="weui-form-preview__btn weui-form-preview__btn" onclick="Link_submit(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">提交</a>
+            
+            
+        </div>
+    </div>
+    <br />
+}
+
+@if (TTdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}

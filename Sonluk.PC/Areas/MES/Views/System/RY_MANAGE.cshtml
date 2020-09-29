@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "员工工号管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>员工工号管理</cite></a>
+</span>
+<script type="text/html" id="barkh1">
+    <a class="layui-btn layui-btn-xs" lay-event="update">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_dr">导入</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">归属代码：</label>
+            <div class="layui-input-inline">
+                <select id="find_rygsdm" lay-filter="find_rygsdm"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">人员工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_rygh" autocomplete="off" class="layui-input" placeholder="（姓名/工号）">
+            </div>
+        </div>
+        @*<div class="layui-inline">
+            <label class="layui-form-label">人员姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_ryname" autocomplete="off" class="layui-input">
+            </div>
+        </div>*@
+    </div>
+    <table class="layui-hide" id="tb_rygh" lay-filter="tb_rygh"></table>
+</div>
+<div class="layui-form" id="div_ryghinfo" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">归属代码：</label>
+            <div class="layui-input-inline">
+                <select id="ryghinfo_rygsdm" lay-filter="ryghinfo_rygsdm"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">人员工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="ryghinfo_rygh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">人员姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="ryghinfo_ryname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_daoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_drmb" style="width:150px">导入</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">归属代码：</label>
+            <div class="layui-input-inline">
+                <select id="daoru_rygsdm" lay-filter="daoru_rygsdm"></select>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/RY_MANAGE")
+}

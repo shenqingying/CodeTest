@@ -1,0 +1,357 @@
+﻿@{
+    ViewBag.Title = "待办事项";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.CRM.Models;
+@model Sonluk.PC.Areas.CRM.Models.BF_Plan_csh
+<script type="text/html" id="KHtype_Tpl">
+    {{# if(d.KHLX == 1){ }}
+    经销商
+    {{# }else if(d.KHLX == 2){ }}
+    电商
+    {{# }else if(d.KHLX == 3 && d.MCSX == 1){ }}
+    直营卖场系统
+    {{# }else if(d.KHLX == 3 && d.MCSX == 2){ }}
+    直营卖场门店
+    {{# }else if(d.KHLX == 4){ }}
+    B2B
+    {{# }else if(d.KHLX == 5){ }}
+    网点终端
+    {{# }else if(d.KHLX == 6){ }}
+    批发
+    {{# }else if(d.KHLX == 7 && d.MCSX == 1){ }}
+    LKA系统
+    {{# }else if(d.KHLX == 7 && d.MCSX == 2){ }}
+    LKA门店
+    {{# }else { }}
+    新客户
+    {{# } }}
+</script>
+<div id="div_bfrw_lb" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn_bfrw_add">新建拜访任务</button>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_dbsx" lay-filter="tb_dbsx"></table>
+    <script type="text/html" id="khbflb">
+        <a class="layui-btn layui-btn-xs" lay-event="cjrz">创建日志</a>
+    </script>
+</div>
+<div id="div_bfrw_xz" class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">拜访类型</label>
+        <div class="layui-input-block">
+            <select id="s_add_bflx" lay-filter="s_add_bflx">
+                <option value="0" selected="selected">请务必先选一下拜访类型</option>
+                <option value="3">新客户开发</option>
+                <option value="4">客户日常检查</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div id="div_add_khlb" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn_find">查询</button>
+            <button class="layui-btn" id="btn_fh">返回</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">CRMID：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_crmid" autocomplete="off" class="layui-input" id="in_kh_crmid">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">客户类型：</label>
+            <div class="layui-input-inline">
+                <select id="in_kh_khlx" lay-filter="in_kh_khlx">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">经销商</option>
+                    <option value="2">电商</option>
+                    <option value="4">B2B</option>
+                    <option value="3">直营卖场</option>
+                    <option value="5">网点终端</option>
+                    <option value="6">批发</option>
+                    <option value="7">LKA终端</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">客户分组：</label>
+            <div class="layui-input-inline">
+                <select id="in_kh_khfz" lay-filter="in_kh_khfz">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.KH_GROUP.LongLength; i++)
+                    {
+                        <option value="@Model.KH_GROUP[i].GID">@Model.KH_GROUP[i].GNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">客户名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_mc" autocomplete="off" class="layui-input" id="in_kh_mc">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_kh" lay-filter="tb_kh"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="xjbf">新建拜访</a>
+    </script>
+</div>
+
+<div id="div_add_fprw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">CRMID：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_crmid_add" id="in_kh_crmid_add" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">客户名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_mc_add" id="in_kh_mc_add" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">拜访时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_bfsj" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_add_fprw" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">CRMID：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_crmid_add" id="in_kh_crmid_add" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">客户名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_mc_add" id="in_kh_mc_add" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">拜访时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_bfsj" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_add_xjkh" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn_add_xjkh">保存</button>
+            <button class="layui-btn" id="btn_fh">返回</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">客户名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_kh_mc_addxj" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">拜访时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_bfsj_addxj" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_add_xjbfrz" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">拜访ID：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_bfid" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">拜访类型：</label>
+            <div class="layui-input-inline1">
+                <select id="in_add_bfrz_bflx" lay-filter="in_kh_khfz">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">日常拜访</option>
+                    <option value="2">任务指派</option>
+                    <option value="3">新客户开发</option>
+                    <option value="4">客户日常检查</option>
+                    <option value="5">指定下次拜访</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">客户编号：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_khid" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">客户名称：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_khmc" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">客户类型：</label>
+            <div class="layui-input-inline1">
+                <select id="in_add_bfrz_khlx" lay-filter="in_add_bfrz_khlx">
+                    <option value="0" selected="selected">新客户</option>
+                    <option value="1">经销商</option>
+                    <option value="2">电商</option>
+                    <option value="4">B2B</option>
+                    <option value="3">直营卖场</option>
+                    <option value="5">网点终端</option>
+                    <option value="6">批发</option>
+                    <option value="7">LKA终端</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">销售渠道：</label>
+            <div class="layui-input-inline1">
+                <select id="in_add_bfrz_xsqd" lay-filter="in_add_bfrz_khlx">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">拜访地址：</label>
+        <div class="layui-input-block1">
+            <input type="text" name="in_add_bfrz_bfdz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">拜访时间：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_bfsj" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">是否签到：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_sfqd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">联系人：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_lxr" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">拜访次数：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_bfcs" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">电话：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_dh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">职务：</label>
+            <div class="layui-input-inline1">
+                <select id="in_add_bfrz_zw" lay-filter="in_add_bfrz_zw">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">拜访目的：</label>
+            <div class="layui-input-inline1">
+                <select id="in_add_bfrz_bfmd" lay-filter="in_add_bfrz_bfmd">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">拜访结果：</label>
+            <div class="layui-input-inline1">
+                <select id="in_add_bfrz_bfjg" lay-filter="in_add_bfrz_bfjg">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">下次拜访时间：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_xcbfsj" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">下次拜访内容：</label>
+            <div class="layui-input-inline1">
+                <input type="text" id="in_add_bfrz_xcbfnr" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">其他信息：</label>
+        <div class="layui-input-block1">
+            <input type="text" id="in_add_bfrz_qtxx" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">拜访状态：</label>
+        <div class="layui-input-block1">
+            <select id="in_add_bfrz_bfzt" lay-filter="in_add_bfrz_bfzt">
+                <option value="0" selected="selected">请选择</option>
+                <option value="1">未完成</option>
+                <option value="2">完成</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">备注：</label>
+        <div class="layui-input-block1">
+            <input type="text" name="title" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/ToDo")
+}

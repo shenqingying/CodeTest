@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_GC" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_GC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GCMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GCDYMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GCADDRESS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISAUTOWORKSPACE" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GCDM" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="readResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="readResult" type="tns:ArrayOfMES_SY_GC" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMES_SY_GC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_GC" nillable="true" type="tns:MES_SY_GC" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="deleteResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_GC" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insert">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_GC" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="insertResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_GC" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BY_ROLEResult" type="tns:ArrayOfMES_SY_GC" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LAY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LAYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_LAYResult" type="tns:MES_SY_GC_LAY_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_GC_LAY_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_GC_LAY" type="tns:ArrayOfMES_SY_GC_LAY" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_GC_LAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_GC_LAY" nillable="true" type="tns:MES_SY_GC_LAY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_SY_GC_LAY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GCMS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LAY_CHECKED" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_ALLUSER">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_GC" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_ALLUSERResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_ALLUSERResult" type="tns:ArrayOfMES_SY_GC" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="MES_SY_GC_LAY_SELECT" nillable="true" type="tns:MES_SY_GC_LAY_SELECT" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="readSoapIn">
+    <wsdl:part name="parameters" element="tns:read" />
+  </wsdl:message>
+  <wsdl:message name="readSoapOut">
+    <wsdl:part name="parameters" element="tns:readResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteSoapIn">
+    <wsdl:part name="parameters" element="tns:delete" />
+  </wsdl:message>
+  <wsdl:message name="deleteSoapOut">
+    <wsdl:part name="parameters" element="tns:deleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertSoapIn">
+    <wsdl:part name="parameters" element="tns:insert" />
+  </wsdl:message>
+  <wsdl:message name="insertSoapOut">
+    <wsdl:part name="parameters" element="tns:insertResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLESoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLESoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_LAY" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_LAYResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLUSERSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_ALLUSER" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ALLUSERSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_ALLUSERResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteHttpGetIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_SY_GC_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="deleteHttpPostIn">
+    <wsdl:part name="GC" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LAYHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_SY_GC_LAY_SELECT" />
+  </wsdl:message>
+  <wsdl:portType name="SY_GCSoap">
+    <wsdl:operation name="read">
+      <wsdl:input message="tns:readSoapIn" />
+      <wsdl:output message="tns:readSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input message="tns:deleteSoapIn" />
+      <wsdl:output message="tns:deleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insert">
+      <wsdl:input message="tns:insertSoapIn" />
+      <wsdl:output message="tns:insertSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <wsdl:input message="tns:SELECT_BY_ROLESoapIn" />
+      <wsdl:output message="tns:SELECT_BY_ROLESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <wsdl:input message="tns:SELECT_LAYSoapIn" />
+      <wsdl:output message="tns:SELECT_LAYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALLUSER">
+      <wsdl:input message="tns:SELECT_ALLUSERSoapIn" />
+      <wsdl:output message="tns:SELECT_ALLUSERSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_GCHttpGet">
+    <wsdl:operation name="delete">
+      <wsdl:input message="tns:deleteHttpGetIn" />
+      <wsdl:output message="tns:deleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <wsdl:input message="tns:SELECT_LAYHttpGetIn" />
+      <wsdl:output message="tns:SELECT_LAYHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_GCHttpPost">
+    <wsdl:operation name="delete">
+      <wsdl:input message="tns:deleteHttpPostIn" />
+      <wsdl:output message="tns:deleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <wsdl:input message="tns:SELECT_LAYHttpPostIn" />
+      <wsdl:output message="tns:SELECT_LAYHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SY_GCSoap" type="tns:SY_GCSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="read">
+      <soap:operation soapAction="http://tempuri.org/read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="http://tempuri.org/delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insert">
+      <soap:operation soapAction="http://tempuri.org/insert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BY_ROLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <soap:operation soapAction="http://tempuri.org/SELECT_LAY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALLUSER">
+      <soap:operation soapAction="http://tempuri.org/SELECT_ALLUSER" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_GCSoap12" type="tns:SY_GCSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="read">
+      <soap12:operation soapAction="http://tempuri.org/read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap12:operation soapAction="http://tempuri.org/delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insert">
+      <soap12:operation soapAction="http://tempuri.org/insert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BY_ROLE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_LAY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ALLUSER">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_ALLUSER" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_GCHttpGet" type="tns:SY_GCHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="delete">
+      <http:operation location="/delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <http:operation location="/SELECT_LAY" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_GCHttpPost" type="tns:SY_GCHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="delete">
+      <http:operation location="/delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LAY">
+      <http:operation location="/SELECT_LAY" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SY_GC">
+    <wsdl:port name="SY_GCSoap" binding="tns:SY_GCSoap">
+      <soap:address location="http://192.168.0.223/API/MES/SY_GC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_GCSoap12" binding="tns:SY_GCSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/SY_GC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_GCHttpGet" binding="tns:SY_GCHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/SY_GC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_GCHttpPost" binding="tns:SY_GCHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/SY_GC.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SELECT_LIST">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD_PACKINFO_SEARCH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_GD_PACKINFO_SEARCH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILLMX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GDDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DATES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DATEE" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_LISTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_LISTResult" type="tns:MES_PD_GD_PACKINFO_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_PD_GD_PACKINFO_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_PD_GD_PACKINFO" type="tns:ArrayOfMES_PD_GD_PACKINFO" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_PD_GD_PACKINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_PD_GD_PACKINFO" nillable="true" type="tns:MES_PD_GD_PACKINFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_PD_GD_PACKINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GDDH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="COUNTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CODOWORD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SNINFO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WORDSPACE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CXS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KPRQM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="INSULATION" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISPACK" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ERPNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSNOBILLMX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLMS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXHNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCDJNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSDATE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SL" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_SINGLE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GDDH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_SINGLEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_SINGLEResult" type="tns:MES_PD_GD_PACKINFO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="COVER">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_PD_GD_PACKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="COVERResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="COVERResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GDDH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_PD_GD_PACKINFO" nillable="true" type="tns:MES_PD_GD_PACKINFO" />
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SELECT_LISTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_LIST" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LISTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_LISTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SINGLESoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_SINGLE" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SINGLESoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_SINGLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="COVERSoapIn">
+    <wsdl:part name="parameters" element="tns:COVER" />
+  </wsdl:message>
+  <wsdl:message name="COVERSoapOut">
+    <wsdl:part name="parameters" element="tns:COVERResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SINGLEHttpGetIn">
+    <wsdl:part name="GDDH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SINGLEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_PD_GD_PACKINFO" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetIn">
+    <wsdl:part name="GDDH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SINGLEHttpPostIn">
+    <wsdl:part name="GDDH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SINGLEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_PD_GD_PACKINFO" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostIn">
+    <wsdl:part name="GDDH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="BAT_PACKAGESoap">
+    <wsdl:operation name="SELECT_LIST">
+      <wsdl:input message="tns:SELECT_LISTSoapIn" />
+      <wsdl:output message="tns:SELECT_LISTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_SINGLE">
+      <wsdl:input message="tns:SELECT_SINGLESoapIn" />
+      <wsdl:output message="tns:SELECT_SINGLESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="COVER">
+      <wsdl:input message="tns:COVERSoapIn" />
+      <wsdl:output message="tns:COVERSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BAT_PACKAGEHttpGet">
+    <wsdl:operation name="SELECT_SINGLE">
+      <wsdl:input message="tns:SELECT_SINGLEHttpGetIn" />
+      <wsdl:output message="tns:SELECT_SINGLEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpGetIn" />
+      <wsdl:output message="tns:DELETEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BAT_PACKAGEHttpPost">
+    <wsdl:operation name="SELECT_SINGLE">
+      <wsdl:input message="tns:SELECT_SINGLEHttpPostIn" />
+      <wsdl:output message="tns:SELECT_SINGLEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpPostIn" />
+      <wsdl:output message="tns:DELETEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BAT_PACKAGESoap" type="tns:BAT_PACKAGESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT_LIST">
+      <soap:operation soapAction="http://tempuri.org/SELECT_LIST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_SINGLE">
+      <soap:operation soapAction="http://tempuri.org/SELECT_SINGLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="COVER">
+      <soap:operation soapAction="http://tempuri.org/COVER" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BAT_PACKAGESoap12" type="tns:BAT_PACKAGESoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT_LIST">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_LIST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_SINGLE">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_SINGLE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="COVER">
+      <soap12:operation soapAction="http://tempuri.org/COVER" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BAT_PACKAGEHttpGet" type="tns:BAT_PACKAGEHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SELECT_SINGLE">
+      <http:operation location="/SELECT_SINGLE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BAT_PACKAGEHttpPost" type="tns:BAT_PACKAGEHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SELECT_SINGLE">
+      <http:operation location="/SELECT_SINGLE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BAT_PACKAGE">
+    <wsdl:port name="BAT_PACKAGESoap" binding="tns:BAT_PACKAGESoap">
+      <soap:address location="http://localhost/API/MES/BAT_PACKAGE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BAT_PACKAGESoap12" binding="tns:BAT_PACKAGESoap12">
+      <soap12:address location="http://localhost/API/MES/BAT_PACKAGE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BAT_PACKAGEHttpGet" binding="tns:BAT_PACKAGEHttpGet">
+      <http:address location="http://localhost/API/MES/BAT_PACKAGE.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BAT_PACKAGEHttpPost" binding="tns:BAT_PACKAGEHttpPost">
+      <http:address location="http://localhost/API/MES/BAT_PACKAGE.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

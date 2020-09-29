@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "部门分组维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>部门分组维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">部门名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_deptname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_deptkq" lay-filter="tb_deptkq"></table>
+</div>
+<div class="layui-form" id="div_deptinfo" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">部门名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="deptinfo_deptname" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">排班分组：</label>
+            <div class="layui-input-inline">
+                <select id="deptinfo_pbfz" lay-filter="deptinfo_pbfz" lay-search></select>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_DEPT_MANAGE")
+}

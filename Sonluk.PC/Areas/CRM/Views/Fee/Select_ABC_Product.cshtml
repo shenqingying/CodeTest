@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "产品查询";
+}
+
+<script type="text/html" id="manage">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="tpl_iscxz">
+    {{# if(d.ISCXZ == 1){ }}
+    是
+    {{# }else { }}
+    否
+    {{# } }}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="">首页</a>
+    <a>产品评估管理</a>
+    <a><cite>产品查询</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form" id="form1">
+    <div class="layui-form" id="div1">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_select" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            <button id="btn_daoru" class="layui-btn">导入</button>
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">SAP编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="SAP" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">产品名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="cpmc" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+        <table id="result" lay-filter="result"></table>
+    </div>
+</div>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_ABC_Product")
+}

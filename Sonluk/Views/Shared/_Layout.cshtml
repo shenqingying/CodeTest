@@ -1,0 +1,67 @@
+﻿@using Sonluk.UI.Model.Account.AccessService;
+@using Sonluk.Utility;
+@{
+    AccountInfo account = new AccountInfo();
+    if (Session["Account"] != null)
+    {
+        account = (AccountInfo)Session["Account"];
+    }
+    string logo = AppConfig.Settings("LogoAddress") ?? "~/Content/sonluk-ui/images/logo.png";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/sonluk.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @RenderSection("header", required: false)
+    @Styles.Render("~/Content/sonluk-ui/standard")
+</head>
+<body>
+
+    <div class="page">
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="header color-header">
+        <div class="header-logo">
+            <img class="header-logo-img" src="@Url.Content(logo)" alt="" />
+        </div>
+        <div class="header-control">
+        </div>
+        <div id="div_settinglb" style="display:none">
+
+            <div class="header-control-button" id="settinglb">托运类别默认</div>
+            @* <div class="header-control-button" id="currentlb"></div>*@
+
+            <input type="hidden" value="@Url.Action("_ListTYLB", "Sender",new { area = "LE" })" />
+        </div>
+
+
+        <div class="header-right-nav">
+            <img class="sign-out" src="@Url.Content("~/Content/images/sign-out-h50.png")" alt="" title="退出" />
+            <input type="hidden" value="@Url.Action("SignOut", "Access", new { area = "" })" />
+            <input type="hidden" value="@Url.Action("T", "Access", new { area = "" })" id="it_logonut" />
+            <div class="header-right-nav-item" id="account-name">@account.Name</div>
+            <img class="header-right-nav-item" src="@Url.Content("~/Content/images/user-h50.png")" alt="" />
+        </div>
+    </div>
+    <div class="nav-bar color-nav-bar">
+        <input type="hidden" value="@Url.Content("~/Content/sonluk-ui/images/blank.gif")" id="blankImageUrl" />
+        <input type="hidden" value="@account.Menu" id="nav-bar-node" />
+        <div class="nav-bar-menu">
+        </div>
+    </div>
+    <div class="nav-bar-display nav-bar-collapse">
+        <div class="nav-bar-display-arrow nav-bar-display-arrow-left"></div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/sonluk-ui")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

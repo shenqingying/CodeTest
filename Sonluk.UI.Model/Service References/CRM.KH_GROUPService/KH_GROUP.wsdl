@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_GROUP" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_KH_GROUP">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSQYID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PGID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHJLID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FGLDID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SORT" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_GROUP" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfCRM_KH_GROUPList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_KH_GROUPList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_KH_GROUPList" nillable="true" type="tns:CRM_KH_GROUPList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_KH_GROUPList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSQYID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PGID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHJLID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FGLDID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SORT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PGNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CPLXDES" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_KH_GROUPList" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByParamResult" type="tns:ArrayOfCRM_KH_GROUPList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DelectResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadbyGId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadbyGIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadbyGIdResult" type="tns:CRM_KH_GROUPList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySTAFFID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySTAFFIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadBySTAFFIDResult" type="tns:ArrayOfCRM_KH_GROUPList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadGidByGNAME">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="gname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadGidByGNAMEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ReadGidByGNAMEResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfCRM_KH_GROUPList" nillable="true" type="tns:ArrayOfCRM_KH_GROUPList" />
+      <s:element name="int" type="s:int" />
+      <s:element name="CRM_KH_GROUPList" nillable="true" type="tns:CRM_KH_GROUPList" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelectSoapIn">
+    <wsdl:part name="parameters" element="tns:Delect" />
+  </wsdl:message>
+  <wsdl:message name="DelectSoapOut">
+    <wsdl:part name="parameters" element="tns:DelectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadbyGIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadbyGId" />
+  </wsdl:message>
+  <wsdl:message name="ReadbyGIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadbyGIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadBySTAFFID" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadBySTAFFIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadGidByGNAMESoapIn">
+    <wsdl:part name="parameters" element="tns:ReadGidByGNAME" />
+  </wsdl:message>
+  <wsdl:message name="ReadGidByGNAMESoapOut">
+    <wsdl:part name="parameters" element="tns:ReadGidByGNAMEResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_GROUPList" />
+  </wsdl:message>
+  <wsdl:message name="DelectHttpGetIn">
+    <wsdl:part name="GID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DelectHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadbyGIdHttpGetIn">
+    <wsdl:part name="GID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadbyGIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:CRM_KH_GROUPList" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpGetIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_GROUPList" />
+  </wsdl:message>
+  <wsdl:message name="ReadGidByGNAMEHttpGetIn">
+    <wsdl:part name="gname" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadGidByGNAMEHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostIn">
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_GROUPList" />
+  </wsdl:message>
+  <wsdl:message name="DelectHttpPostIn">
+    <wsdl:part name="GID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DelectHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="ReadbyGIdHttpPostIn">
+    <wsdl:part name="GID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadbyGIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:CRM_KH_GROUPList" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpPostIn">
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySTAFFIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCRM_KH_GROUPList" />
+  </wsdl:message>
+  <wsdl:message name="ReadGidByGNAMEHttpPostIn">
+    <wsdl:part name="gname" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadGidByGNAMEHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="KH_GROUPSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <wsdl:input message="tns:ReadByParamSoapIn" />
+      <wsdl:output message="tns:ReadByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delect">
+      <wsdl:input message="tns:DelectSoapIn" />
+      <wsdl:output message="tns:DelectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadbyGId">
+      <wsdl:input message="tns:ReadbyGIdSoapIn" />
+      <wsdl:output message="tns:ReadbyGIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDSoapIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadGidByGNAME">
+      <wsdl:input message="tns:ReadGidByGNAMESoapIn" />
+      <wsdl:output message="tns:ReadGidByGNAMESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_GROUPHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delect">
+      <wsdl:input message="tns:DelectHttpGetIn" />
+      <wsdl:output message="tns:DelectHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadbyGId">
+      <wsdl:input message="tns:ReadbyGIdHttpGetIn" />
+      <wsdl:output message="tns:ReadbyGIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDHttpGetIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadGidByGNAME">
+      <wsdl:input message="tns:ReadGidByGNAMEHttpGetIn" />
+      <wsdl:output message="tns:ReadGidByGNAMEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="KH_GROUPHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delect">
+      <wsdl:input message="tns:DelectHttpPostIn" />
+      <wsdl:output message="tns:DelectHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadbyGId">
+      <wsdl:input message="tns:ReadbyGIdHttpPostIn" />
+      <wsdl:output message="tns:ReadbyGIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <wsdl:input message="tns:ReadBySTAFFIDHttpPostIn" />
+      <wsdl:output message="tns:ReadBySTAFFIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadGidByGNAME">
+      <wsdl:input message="tns:ReadGidByGNAMEHttpPostIn" />
+      <wsdl:output message="tns:ReadGidByGNAMEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KH_GROUPSoap" type="tns:KH_GROUPSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delect">
+      <soap:operation soapAction="http://tempuri.org/Delect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadbyGId">
+      <soap:operation soapAction="http://tempuri.org/ReadbyGId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <soap:operation soapAction="http://tempuri.org/ReadBySTAFFID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadGidByGNAME">
+      <soap:operation soapAction="http://tempuri.org/ReadGidByGNAME" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_GROUPSoap12" type="tns:KH_GROUPSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://tempuri.org/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delect">
+      <soap12:operation soapAction="http://tempuri.org/Delect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadbyGId">
+      <soap12:operation soapAction="http://tempuri.org/ReadbyGId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <soap12:operation soapAction="http://tempuri.org/ReadBySTAFFID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadGidByGNAME">
+      <soap12:operation soapAction="http://tempuri.org/ReadGidByGNAME" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_GROUPHttpGet" type="tns:KH_GROUPHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delect">
+      <http:operation location="/Delect" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadbyGId">
+      <http:operation location="/ReadbyGId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <http:operation location="/ReadBySTAFFID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadGidByGNAME">
+      <http:operation location="/ReadGidByGNAME" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="KH_GROUPHttpPost" type="tns:KH_GROUPHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delect">
+      <http:operation location="/Delect" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadbyGId">
+      <http:operation location="/ReadbyGId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySTAFFID">
+      <http:operation location="/ReadBySTAFFID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadGidByGNAME">
+      <http:operation location="/ReadGidByGNAME" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KH_GROUP">
+    <wsdl:port name="KH_GROUPSoap" binding="tns:KH_GROUPSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/KH_GROUP.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_GROUPSoap12" binding="tns:KH_GROUPSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/KH_GROUP.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_GROUPHttpGet" binding="tns:KH_GROUPHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/KH_GROUP.asmx" />
+    </wsdl:port>
+    <wsdl:port name="KH_GROUPHttpPost" binding="tns:KH_GROUPHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/KH_GROUP.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

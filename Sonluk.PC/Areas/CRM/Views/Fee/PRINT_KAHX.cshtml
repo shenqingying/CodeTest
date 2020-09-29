@@ -1,0 +1,568 @@
+﻿@using Sonluk.PC.Models.CRM;
+@{
+    ViewBag.Title = "Print_KAHX";
+    Layout = "~/Views/Shared/_Layout_Print_CRM.cshtml";
+    PrintKAHX data = ViewBag.data;
+
+
+
+
+
+
+}
+
+
+
+<style>
+    label {
+        text-align: left;
+        width: inherit;
+    }
+
+    .print_page_td_haveborder_zfdc2 {
+        text-align: center;
+    }
+</style>
+
+@if (data.KAHXDJMX[0].FYHXXS == 1311)
+{
+    //折扣
+    <br />
+    <div class="main">
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td>
+                    <div class="print-page-body-table-header">中银(宁波)电池有限公司</div>
+                </td>
+                <td>
+                    <div class="print-page-header-company-name2">费用报销单</div>
+                </td>
+            </tr>
+        </table>
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align:left">
+                    折扣申请单号：@ViewBag.NO
+                </td>
+                <td style="text-align:left">
+                    部门：民品部
+                </td>
+                <td style="text-align:left">
+                    金额单位：元
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                    <b>
+                        客户名称
+                    </b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                    @data.KAHXDJMX[0].PRINTKHMC
+                </td>
+            </tr>
+            <tr>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                    <b>
+                        折扣金额
+                    </b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                    @ViewBag.HJ
+                </td>
+            </tr>
+            <tr>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                    <b>
+                        大写金额
+                    </b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;text-align: left;">
+                    @ViewBag.HJ2
+                </td>
+            </tr>
+        </table>
+        <br /><br />
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align: left;">
+                    填表人：
+                </td>
+                <td style="text-align: left;">
+                    审核人：
+                </td>
+                <td style="text-align: left;">
+                    审批人：
+                </td>
+            </tr>
+        </table>
+        <br /><br />
+
+        <hr style="border: 1px dashed; width: 100%;height: 0;" />
+
+
+
+
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align:left">
+                    折扣申请单号：@ViewBag.NO
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                    <b>
+                        客户名称
+                    </b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                    @data.KAHXDJMX[0].PRINTKHMC
+                </td>
+            </tr>
+        </table>
+        @*<table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr>
+                <td colspan="6">*@
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+            <thead>
+                <tr>
+                    <th>卖场名称</th>
+                    <th>费用代码</th>
+                    <th>SAP成本中心</th>
+                    <th>费用项目</th>
+                    <th>费用金额</th>
+                    <th style="width: 120px;">备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int j = 0; j < data.HZ.Length; j++)
+                {
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].GNAME</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CWHSBH</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CBZXBH</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CWHSBHDES.Split('-')[2]</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].HXJE</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    </tr>
+                }
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                        合计金额(元)
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                        @ViewBag.HJ
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        @*</td>
+                </tr>
+            </table>*@
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+            <tr>
+                <td class="print_page_td_haveborder_zfdc2">
+                    <b>
+                        报销金额
+                    </b>
+                </td>
+                <td class="print_page_td_haveborder_zfdc2" style="text-align: left;">
+                    大写：@ViewBag.HJ2
+                </td>
+            </tr>
+        </table>
+
+
+
+
+    </div>
+}
+else
+{
+    if (data.KAHXDJMX[0].DISPLAYTEMP == 1)
+    {
+        //门店陈列费
+        <br />
+        <div class="main">
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td>
+                        <div class="print-page-body-table-header">中银(宁波)电池有限公司</div>
+                    </td>
+                    <td>
+                        <div class="print-page-header-company-name2">费用报销单</div>
+                    </td>
+                </tr>
+            </table>
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td style="text-align:left">
+                        申请单号：@ViewBag.NO
+                    </td>
+                    <td>
+                        部门：民品部
+                    </td>
+                    <td>
+                        报销日期：@DateTime.Now.ToString("yyyy.MM.dd")
+                    </td>
+                    <td>
+                        金额单位：元
+                    </td>
+                </tr>
+            </table>
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                        <b>
+                            客户名称
+                        </b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                        @data.KAHXDJMX[0].PRINTKHMC
+                    </td>
+                </tr>
+            </table>
+            @*<table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                <tr>
+                    <td colspan="6">*@
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+                <thead>
+                    <tr>
+                        <th>卖场名称</th>
+                        <th>费用代码</th>
+                        <th>SAP成本中心</th>
+                        <th>费用项目</th>
+                        <th>费用金额</th>
+                        <th style="width: 120px;">备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int j = 0; j < data.HZ.Length; j++)
+                    {
+                        <tr>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].GNAME (@data.HZ[j].FKFSAPSN)</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CWHSBH</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CBZXBH</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CWHSBHDES.Split('-')[2]</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].HXJE</td>
+                            <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                            合计金额(元)
+                        </td>
+                        <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                            @ViewBag.HJ
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @*</td>
+                    </tr>
+                </table>*@
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2">
+                        <b>
+                            报销金额
+                        </b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2" style="text-align: left;">
+                        大写：@ViewBag.HJ2
+                    </td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td style="text-align: left;">
+                        填表人：
+                    </td>
+                    <td style="text-align: left;">
+                        审核人：
+                    </td>
+                    <td style="text-align: left;">
+                        审批人：
+                    </td>
+                </tr>
+            </table>
+            <br /><br />
+
+
+
+
+            <hr style="border: 1px dashed; width: 100%;height: 0;" />
+
+
+
+
+
+
+
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td style="text-align:left">
+                        申请单号：@ViewBag.NO
+                    </td>
+                </tr>
+            </table>
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                        <b>
+                            客户名称
+                        </b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                        @data.KAHXDJMX[0].PRINTKHMC
+                    </td>
+                </tr>
+            </table>
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+                <thead>
+                    <tr>
+                        <th>卖场名称</th>
+                        <th>费用代码</th>
+                        <th>SAP成本中心</th>
+                        <th>费用项目</th>
+                        <th>费用金额</th>
+                        <th style="width: 120px;">备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int j = 0; j < data.KAHXDJMX.Length; j++)
+                    {
+                        <tr>
+                            <td class="print_page_td_haveborder_zfdc2">
+                                @(data.KAHXDJMX[j].MDMC == "" ? @data.KAHXDJMX[j].KHMC : @data.KAHXDJMX[j].MDMC)@*ConnectedGNAME*@
+                            </td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.KAHXDJMX[j].ITEM_CWHSBH</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.KAHXDJMX[j].CBZXBH</td>
+                            <td class="print_page_td_haveborder_zfdc2">
+                                @data.KAHXDJMX[j].ITEM_CWHSBHDES.Split('-')[2] @(data.KAHXDJMX[j].OTHER_FYLBDES == ""?"":"-" + @data.KAHXDJMX[j].OTHER_FYLBDES)
+                            </td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.KAHXDJMX[j].HXJE</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.KAHXDJMX[j].BEIZ</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                            合计金额(元)
+                        </td>
+                        <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                            @ViewBag.HJ
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            @*<table class="print-page_table_outside2" cellspacing="0" cellpadding="3" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                    <tr>
+                        <td style="width:4cm;" class="print_page_td_haveborder_zfdc2"><b>金额合计</b></td>
+                        <td class="print_page_td_haveborder_zfdc2"><b>可使用折扣金额</b></td>
+                        <td class="print_page_td_haveborder_zfdc2"><b>本期使用折扣金额</b></td>
+                        <td class="print_page_td_haveborder_zfdc2"><b>剩余折扣金额</b></td>
+                        <td class="print_page_td_haveborder_zfdc2"><b>本单实际金额</b></td>
+                        <td class="print_page_td_haveborder_zfdc2"><b>上期余额</b></td>
+                        <td class="print_page_td_haveborder_zfdc2"><b>本单应付金额</b></td>
+                    </tr>
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2">
+                            <label>@data[i].TTdata.TOTAL</label>
+                            <label>@data[i].TTdata.TOTAL2</label>
+                        </td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.DISCOUNT</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.DISCOUNT_THIS</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.DISCOUNT_BALANCE</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.ACTUAL</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.PREVIOUS_BALANCE</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].TTdata.PAY</td>
+                    </tr>
+                    <tr height="50px">
+                        <td class="print_page_td_haveborder_zfdc2">
+                            <b>处理人意见区</b>
+                        </td>
+                        <td class="print_page_td_haveborder_zfdc2" colspan="6">
+                            【同意】    @data[i].TTdata.SHRDES    @data[i].TTdata.SHSJ
+                        </td>
+                    </tr>
+
+                </table>
+                <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                    <tr height="50px">
+                        <td style="width:3cm;"><b>客户备注</b></td>
+                        <td class="print_page_td_haveborder_zfdc2" style="width:6cm;">@data[i].TTdata.BEIZ</td>
+                        <td style="width:3cm;"><b>业务员备注</b></td>
+                        <td class="print_page_td_haveborder_zfdc2" style="width:6cm;">@data[i].TTdata.BEIZ2</td>
+                    </tr>
+                </table>
+                <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">客服</td>
+                        <td class="print_page_td_haveborder_zfdc2"></td>
+                        <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">日期</td>
+                        <td class="print_page_td_haveborder_zfdc2"></td>
+                        <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">审核</td>
+                        <td class="print_page_td_haveborder_zfdc2"></td>
+                        <td class="print_page_td_haveborder_zfdc2" style="width:2cm;text-align:center;">日期</td>
+                        <td class="print_page_td_haveborder_zfdc2"></td>
+                    </tr>
+                </table>*@
+
+        </div>
+    }
+    else
+    {
+        <br />
+        <div class="main">
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td>
+                        <div class="print-page-body-table-header">中银(宁波)电池有限公司</div>
+                    </td>
+                    <td>
+                        <div class="print-page-header-company-name2">费用报销单</div>
+                    </td>
+                </tr>
+            </table>
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td style="text-align:left">
+                        部门：民品部
+                    </td>
+                    <td style="text-align:left">
+                        报销日期：@DateTime.Now.ToString("yyyy.MM.dd")
+                    </td>
+                    <td style="text-align:left">
+                        金额单位：元
+                    </td>
+                </tr>
+            </table>
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                        <b>
+                            客户名称
+                        </b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2" style="font-size: 16px;">
+                        @data.KAHXDJMX[0].PRINTKHMC
+                    </td>
+                </tr>
+            </table>
+            @*<table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                <tr>
+                    <td colspan="6">*@
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+                <thead>
+                    <tr>
+                        <th>卖场名称</th>
+                        <th>费用代码</th>
+                        <th>SAP成本中心</th>
+                        <th>费用项目</th>
+                        <th>费用金额</th>
+                        <th style="width: 120px;">备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int j = 0; j < data.HZ.Length; j++)
+                    {
+                        <tr>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].GNAME (@data.HZ[j].FKFSAPSN)</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CWHSBH</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CBZXBH</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].CWHSBHDES.Split('-')[2]</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].HXJE</td>
+                            <td class="print_page_td_haveborder_zfdc2">@data.HZ[j].BEIZ</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                            合计金额(元)
+                        </td>
+                        <td class="print_page_td_haveborder_zfdc2" colspan="3">
+                            @ViewBag.HJ
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @*</td>
+                    </tr>
+                </table>*@
+            <table class="print-page_table_outside2" cellspacing="0" cellpadding="2" border="1" style="font-size:12px;font-family:'Microsoft YaHei'">
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2">
+                        <b>
+                            报销金额
+                        </b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc2" style="text-align: left;">
+                        大写：@ViewBag.HJ2
+                    </td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td style="text-align: left;">
+                        填表人：
+                    </td>
+                    <td style="text-align: left;">
+                        部门经理：
+                    </td>
+                    <td style="text-align: left;">
+                        主管副总：
+                    </td>
+                </tr>
+            </table>
+            <br /><br />
+
+
+        </div>
+    }
+}
+
+
+
+

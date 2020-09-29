@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_LANGUAGE_YM" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_LANGUAGE_YM">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="YMID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMAREA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMCONTROLLER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMVIEW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMREMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJRID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGRID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMXM" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSGNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISCLMSG" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_TABLEZD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_LANGUAGE_TABLEZD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_LANGUAGE_TABLEZD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="YMAREA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMCONTROLLER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMVIEW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TABLEDM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SYLANGUAGEID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TABLEZDDM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TABLEZDNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TABLENAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMXM" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_TABLEZDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_TABLEZDResult" type="tns:MES_SY_LANGUAGE_TABLEZD_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_LANGUAGE_TABLEZD_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_LANGUAGE_TABLEZD" type="tns:ArrayOfMES_SY_LANGUAGE_TABLEZD" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_LANGUAGE_TABLEZD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_LANGUAGE_TABLEZD" nillable="true" type="tns:MES_SY_LANGUAGE_TABLEZD" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_ZD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_LANGUAGE_ZD" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_LANGUAGE_ZD">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ZDID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="YMID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZDDM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZDNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZDREMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJRID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGRID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZDLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZDSX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMAREA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMCONTROLLER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMVIEW" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YMXM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SYLANGUAGEID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_ZDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_ZDResult" type="tns:MES_SY_LANGUAGE_ZD_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_LANGUAGE_ZD_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_LANGUAGE_ZD" type="tns:ArrayOfMES_SY_LANGUAGE_ZD" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_LANGUAGE_ZD">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_LANGUAGE_ZD" nillable="true" type="tns:MES_SY_LANGUAGE_ZD" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TABLEZDSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_TABLEZD" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TABLEZDSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_TABLEZDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZDSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_ZD" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_ZDSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_ZDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WS_MES_SY_LANGUAGE_YMSoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TABLEZD">
+      <wsdl:input message="tns:SELECT_TABLEZDSoapIn" />
+      <wsdl:output message="tns:SELECT_TABLEZDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZD">
+      <wsdl:input message="tns:SELECT_ZDSoapIn" />
+      <wsdl:output message="tns:SELECT_ZDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WS_MES_SY_LANGUAGE_YMHttpGet" />
+  <wsdl:portType name="WS_MES_SY_LANGUAGE_YMHttpPost" />
+  <wsdl:binding name="WS_MES_SY_LANGUAGE_YMSoap" type="tns:WS_MES_SY_LANGUAGE_YMSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TABLEZD">
+      <soap:operation soapAction="http://tempuri.org/SELECT_TABLEZD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZD">
+      <soap:operation soapAction="http://tempuri.org/SELECT_ZD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_MES_SY_LANGUAGE_YMSoap12" type="tns:WS_MES_SY_LANGUAGE_YMSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TABLEZD">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_TABLEZD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_ZD">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_ZD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_MES_SY_LANGUAGE_YMHttpGet" type="tns:WS_MES_SY_LANGUAGE_YMHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="WS_MES_SY_LANGUAGE_YMHttpPost" type="tns:WS_MES_SY_LANGUAGE_YMHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="WS_MES_SY_LANGUAGE_YM">
+    <wsdl:port name="WS_MES_SY_LANGUAGE_YMSoap" binding="tns:WS_MES_SY_LANGUAGE_YMSoap">
+      <soap:address location="http://localhost/API/MES/WS_MES_SY_LANGUAGE_YM.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_MES_SY_LANGUAGE_YMSoap12" binding="tns:WS_MES_SY_LANGUAGE_YMSoap12">
+      <soap12:address location="http://localhost/API/MES/WS_MES_SY_LANGUAGE_YM.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_MES_SY_LANGUAGE_YMHttpGet" binding="tns:WS_MES_SY_LANGUAGE_YMHttpGet">
+      <http:address location="http://localhost/API/MES/WS_MES_SY_LANGUAGE_YM.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_MES_SY_LANGUAGE_YMHttpPost" binding="tns:WS_MES_SY_LANGUAGE_YMHttpPost">
+      <http:address location="http://localhost/API/MES/WS_MES_SY_LANGUAGE_YM.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

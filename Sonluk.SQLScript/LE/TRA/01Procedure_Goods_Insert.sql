@@ -1,0 +1,43 @@
+USE [HGMM]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[LE_TRA_Goods_Insert]
+	@HWMC varchar(100)=' ',
+	@SAPBH varchar(18)=' ' ,
+	@LBID int=0 ,
+	@LBMC varchar(100)=' ',
+	@DJSL numeric(19, 2),
+	@SLDWID int=0 ,
+	@SLDWMC varchar(10)=' ' ,
+	@DJMZ numeric(19, 3)=0,
+	@DJJZ numeric(19, 3)=0,
+	@ZLDWID int =0,
+	@ZLDW varchar(10)=' ' ,
+	@DJTJ numeric(19, 3),
+	@TJDWID int=0 ,
+	@TJDW varchar(10)=' ' 
+AS
+BEGIN
+	DECLARE 
+		@ID INT,
+		@SN varchar(100);
+				
+	SELECT @ID=MAX(HWID)+1 
+	FROM SP_HWQD;
+	
+	UPDATE HG_SYSINS
+	SET SYSINT = @ID
+	WHERE SYSNAME='SP_HWQD';
+	
+	INSERT INTO SP_HWQD 
+	(HWID, HWMC, SAPBH, LBID, LBMC, DJSL, SLDWID, SLDWMC, DJMZ, DJJZ, ZLDWID, ZLDW, DJTJ, TJDWID, TJDW)
+	VALUES 
+	(@ID, @HWMC, @SAPBH, @LBID, @LBMC, @DJSL, @SLDWID, @SLDWMC, @DJMZ, @DJJZ, @ZLDWID, @ZLDW, @DJTJ, @TJDWID, @TJDW)
+	
+	SELECT @ID ID;
+END

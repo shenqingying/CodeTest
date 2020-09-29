@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT_TPM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ZSL_BCS025" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_COUNT" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_BCS025">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MANDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TPGG" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPGGNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISFREE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TPLY" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPLYNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TPTYPE" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_TPMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_TPMResult" type="tns:ZBCFUN_TPINFO_INSERT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_TPINFO_INSERT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DELETE_TPM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_TPNO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_TPMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_TPMResult" type="tns:ZBCFUN_TPINFO_INSERT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_TPM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ZSL_BCS025" />
+            <s:element minOccurs="0" maxOccurs="1" name="model_IT_TPYD" type="tns:ArrayOfZSL_BCT012" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_FCODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_LGORT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_WERKS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSL_BCT012">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT012" nillable="true" type="tns:ZSL_BCT012" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCT012">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MANDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPZHNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPNO" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_TPMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_TPMResult" type="tns:ZBCFUN_TPINFO_INSERT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_TPM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:ZSL_BCS025" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_TPMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_TPMResult" type="tns:ZBCFUN_TPINFO_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_TPINFO_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_TPINFO" type="tns:ArrayOfZSL_BCT009" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCT009">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT009" nillable="true" type="tns:ZSL_BCT009" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCT009">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MANDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TPGG" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPGGNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISFREE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TPLY" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPLYNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGOBE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TPTYPE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPTYPENAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZHYDRQ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_TP_ZHM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_FCODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IT_TPZHNO" type="tns:ZSL_BCT011" />
+            <s:element minOccurs="0" maxOccurs="1" name="IT_TPZHNO_GL" type="tns:ArrayOfZSL_BCT012" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZSL_BCT011">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MANDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPZHNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_TP_ZHMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_TP_ZHMResult" type="tns:ZBCFUN_TP_ZHM_GL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_TP_ZHM_GL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IT_TPZHNO_GL" type="tns:ArrayOfZSL_BCT012" />
+          <s:element minOccurs="0" maxOccurs="1" name="ET_TPZHNO" type="tns:ArrayOfZSL_BCT011" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZSL_BCT011">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT011" nillable="true" type="tns:ZSL_BCT011" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_TP_ZHM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_FCODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_TPZHNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRQKS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRQJS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_CJRNAME" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_TP_ZHMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_TP_ZHMResult" type="tns:ZBCFUN_TP_ZHM_GL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_TP_ZHM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model_IS_TPZHNO_GL" type="tns:ZSL_BCT012" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_FCODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IV_TPZHNO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_TP_ZHMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_TP_ZHMResult" type="tns:ZBCFUN_TP_ZHM_GL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_TP_RKBS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IT_TPNO_GL" type="tns:ArrayOfZSL_BCT010" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSL_BCT010">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_BCT010" nillable="true" type="tns:ZSL_BCT010" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_BCT010">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MANDT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_TP_RKBSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_TP_RKBSResult" type="tns:ZBCFUN_TP_RKBS_GL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZBCFUN_TP_RKBS_GL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IT_TPNO_GL" type="tns:ArrayOfZSL_BCT010" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_TP_RKBS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IV_TPNO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_TP_RKBSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_TP_RKBSResult" type="tns:ZBCFUN_TP_RKBS_GL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_TP_RKBS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IS_TPNO_GL" type="tns:ZSL_BCT010" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE_TP_RKBSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETE_TP_RKBSResult" type="tns:ZBCFUN_TP_RKBS_GL" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_TPM_SYNC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_SY_TPM_SYNC" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_TPM_SYNC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TPM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CHARG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGORT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LGPLA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YSSL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CKDJH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TMZT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SOBKZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SONUM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARBPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LTXA1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDAUF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KDPOS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KSTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JSTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLDL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOBILL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOBILLMX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WLGROUP" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_TPM_SYNCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_TPM_SYNCResult" type="tns:MES_SY_TPM_SYNC_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_TPM_SYNC_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_TPM_SYNC" type="tns:ArrayOfMES_SY_TPM_SYNC" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_SY_TPM_SYNC_DELETE" type="tns:ArrayOfMES_SY_TPM_SYNC" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_SY_TPM_SYNC">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_SY_TPM_SYNC" nillable="true" type="tns:MES_SY_TPM_SYNC" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ZBCFUN_TPINFO_INSERT" nillable="true" type="tns:ZBCFUN_TPINFO_INSERT" />
+      <s:element name="ZBCFUN_TP_ZHM_GL" nillable="true" type="tns:ZBCFUN_TP_ZHM_GL" />
+      <s:element name="ZBCFUN_TP_RKBS_GL" nillable="true" type="tns:ZBCFUN_TP_RKBS_GL" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERT_TPMSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_TPM" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_TPMSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_TPMResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TPMSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_TPM" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TPMSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_TPMResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_TPMSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_TPM" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_TPMSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_TPMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TPMSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_TPM" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TPMSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_TPMResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_TP_ZHMSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_TP_ZHM" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_TP_ZHMSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_TP_ZHMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_ZHMSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_TP_ZHM" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_ZHMSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_TP_ZHMResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TP_ZHMSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_TP_ZHM" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TP_ZHMSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_TP_ZHMResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_TP_RKBSSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_TP_RKBS" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_TP_RKBSSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_TP_RKBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_RKBSSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_TP_RKBS" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_RKBSSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_TP_RKBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TP_RKBSSoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE_TP_RKBS" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TP_RKBSSoapOut">
+    <wsdl:part name="parameters" element="tns:DELETE_TP_RKBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TPM_SYNCSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_TPM_SYNC" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TPM_SYNCSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_TPM_SYNCResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TPMHttpGetIn">
+    <wsdl:part name="IV_TPNO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TPMHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_TPINFO_INSERT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_ZHMHttpGetIn">
+    <wsdl:part name="IV_FCODE" type="s:string" />
+    <wsdl:part name="IV_TPZHNO" type="s:string" />
+    <wsdl:part name="IV_CJRQKS" type="s:string" />
+    <wsdl:part name="IV_CJRQJS" type="s:string" />
+    <wsdl:part name="IV_CJRNAME" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_ZHMHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_TP_ZHM_GL" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_RKBSHttpGetIn">
+    <wsdl:part name="IV_TPNO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_RKBSHttpGetOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_TP_RKBS_GL" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TPMHttpPostIn">
+    <wsdl:part name="IV_TPNO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETE_TPMHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_TPINFO_INSERT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_ZHMHttpPostIn">
+    <wsdl:part name="IV_FCODE" type="s:string" />
+    <wsdl:part name="IV_TPZHNO" type="s:string" />
+    <wsdl:part name="IV_CJRQKS" type="s:string" />
+    <wsdl:part name="IV_CJRQJS" type="s:string" />
+    <wsdl:part name="IV_CJRNAME" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_ZHMHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_TP_ZHM_GL" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_RKBSHttpPostIn">
+    <wsdl:part name="IV_TPNO" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_TP_RKBSHttpPostOut">
+    <wsdl:part name="Body" element="tns:ZBCFUN_TP_RKBS_GL" />
+  </wsdl:message>
+  <wsdl:portType name="MES_TPMSoap">
+    <wsdl:operation name="INSERT_TPM">
+      <wsdl:input message="tns:INSERT_TPMSoapIn" />
+      <wsdl:output message="tns:INSERT_TPMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TPM">
+      <wsdl:input message="tns:DELETE_TPMSoapIn" />
+      <wsdl:output message="tns:DELETE_TPMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_TPM">
+      <wsdl:input message="tns:UPDATE_TPMSoapIn" />
+      <wsdl:output message="tns:UPDATE_TPMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TPM">
+      <wsdl:input message="tns:SELECT_TPMSoapIn" />
+      <wsdl:output message="tns:SELECT_TPMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_TP_ZHM">
+      <wsdl:input message="tns:INSERT_TP_ZHMSoapIn" />
+      <wsdl:output message="tns:INSERT_TP_ZHMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_ZHM">
+      <wsdl:input message="tns:SELECT_TP_ZHMSoapIn" />
+      <wsdl:output message="tns:SELECT_TP_ZHMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TP_ZHM">
+      <wsdl:input message="tns:DELETE_TP_ZHMSoapIn" />
+      <wsdl:output message="tns:DELETE_TP_ZHMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_TP_RKBS">
+      <wsdl:input message="tns:INSERT_TP_RKBSSoapIn" />
+      <wsdl:output message="tns:INSERT_TP_RKBSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_RKBS">
+      <wsdl:input message="tns:SELECT_TP_RKBSSoapIn" />
+      <wsdl:output message="tns:SELECT_TP_RKBSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TP_RKBS">
+      <wsdl:input message="tns:DELETE_TP_RKBSSoapIn" />
+      <wsdl:output message="tns:DELETE_TP_RKBSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TPM_SYNC">
+      <wsdl:input message="tns:SELECT_TPM_SYNCSoapIn" />
+      <wsdl:output message="tns:SELECT_TPM_SYNCSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_TPMHttpGet">
+    <wsdl:operation name="DELETE_TPM">
+      <wsdl:input message="tns:DELETE_TPMHttpGetIn" />
+      <wsdl:output message="tns:DELETE_TPMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_ZHM">
+      <wsdl:input message="tns:SELECT_TP_ZHMHttpGetIn" />
+      <wsdl:output message="tns:SELECT_TP_ZHMHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_RKBS">
+      <wsdl:input message="tns:SELECT_TP_RKBSHttpGetIn" />
+      <wsdl:output message="tns:SELECT_TP_RKBSHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_TPMHttpPost">
+    <wsdl:operation name="DELETE_TPM">
+      <wsdl:input message="tns:DELETE_TPMHttpPostIn" />
+      <wsdl:output message="tns:DELETE_TPMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_ZHM">
+      <wsdl:input message="tns:SELECT_TP_ZHMHttpPostIn" />
+      <wsdl:output message="tns:SELECT_TP_ZHMHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_RKBS">
+      <wsdl:input message="tns:SELECT_TP_RKBSHttpPostIn" />
+      <wsdl:output message="tns:SELECT_TP_RKBSHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MES_TPMSoap" type="tns:MES_TPMSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT_TPM">
+      <soap:operation soapAction="http://tempuri.org/INSERT_TPM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TPM">
+      <soap:operation soapAction="http://tempuri.org/DELETE_TPM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_TPM">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_TPM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TPM">
+      <soap:operation soapAction="http://tempuri.org/SELECT_TPM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_TP_ZHM">
+      <soap:operation soapAction="http://tempuri.org/INSERT_TP_ZHM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_ZHM">
+      <soap:operation soapAction="http://tempuri.org/SELECT_TP_ZHM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TP_ZHM">
+      <soap:operation soapAction="http://tempuri.org/DELETE_TP_ZHM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_TP_RKBS">
+      <soap:operation soapAction="http://tempuri.org/INSERT_TP_RKBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_RKBS">
+      <soap:operation soapAction="http://tempuri.org/SELECT_TP_RKBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TP_RKBS">
+      <soap:operation soapAction="http://tempuri.org/DELETE_TP_RKBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TPM_SYNC">
+      <soap:operation soapAction="http://tempuri.org/SELECT_TPM_SYNC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_TPMSoap12" type="tns:MES_TPMSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT_TPM">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_TPM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TPM">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_TPM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_TPM">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_TPM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TPM">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_TPM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_TP_ZHM">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_TP_ZHM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_ZHM">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_TP_ZHM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TP_ZHM">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_TP_ZHM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_TP_RKBS">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_TP_RKBS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_RKBS">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_TP_RKBS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_TP_RKBS">
+      <soap12:operation soapAction="http://tempuri.org/DELETE_TP_RKBS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TPM_SYNC">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_TPM_SYNC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_TPMHttpGet" type="tns:MES_TPMHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DELETE_TPM">
+      <http:operation location="/DELETE_TPM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_ZHM">
+      <http:operation location="/SELECT_TP_ZHM" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_RKBS">
+      <http:operation location="/SELECT_TP_RKBS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_TPMHttpPost" type="tns:MES_TPMHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DELETE_TPM">
+      <http:operation location="/DELETE_TPM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_ZHM">
+      <http:operation location="/SELECT_TP_ZHM" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_TP_RKBS">
+      <http:operation location="/SELECT_TP_RKBS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MES_TPM">
+    <wsdl:port name="MES_TPMSoap" binding="tns:MES_TPMSoap">
+      <soap:address location="http://localhost/API/MES/MES_TPM.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_TPMSoap12" binding="tns:MES_TPMSoap12">
+      <soap12:address location="http://localhost/API/MES/MES_TPM.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_TPMHttpGet" binding="tns:MES_TPMHttpGet">
+      <http:address location="http://localhost/API/MES/MES_TPM.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_TPMHttpPost" binding="tns:MES_TPMHttpPost">
+      <http:address location="http://localhost/API/MES/MES_TPM.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

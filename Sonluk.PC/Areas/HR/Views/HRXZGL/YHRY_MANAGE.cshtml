@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "与会人员管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>与会人员管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_xm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">政治面貌：</label>
+            <div class="layui-input-inline">
+                <select id="find_zzmm" lay-filter="find_zzmm"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">出生日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_dateks" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_datejs" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">职务级别：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <select xm-select="find_zwlevel" id="find_zwlevel" xm-select-height="36px"></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_yhry" lay-filter="tb_yhry"></table>
+</div>
+<div id="div_yhryinfo" class="layui-form" hidden>
+    <button class="layui-btn" id="btn_hrread">HR读取</button>
+    <button class="layui-btn" id="btn_zjadd">直接新增</button>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline" style="width: 515px;">
+                <input type="text" id="yhryinfo_xm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">职务级别：</label>
+            <div class="layui-input-inline">
+                <select id="yhryinfo_zwlevel" lay-filter="yhryinfo_zwlevel"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">政治面貌：</label>
+            <div class="layui-input-inline">
+                <select id="yhryinfo_zzmm" lay-filter="yhryinfo_zzmm"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">职务描述：</label>
+            <div class="layui-input-inline" style="width: 515px;">
+                <input type="text" id="yhryinfo_zwms" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">HR工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="yhryinfo_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">出生日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="yhryinfo_csrq" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司简称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="yhryinfo_gs" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">归属部门：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="yhryinfo_gsbm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">性别：</label>
+            <div class="layui-input-inline">
+                <select id="yhryinfo_xb" lay-filter="yhryinfo_xb">
+                    <option value="" selected="selected">请选择</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline" style="width: 515px;">
+                <input type="text" id="yhryinfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_readhr" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="readhr_gh" autocomplete="off" placeholder="（姓名/工号/证件号码）" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_wcdjinfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_wcdjinfo_add_ry" lay-filter="tb_wcdjinfo_add_ry"></table>
+</div>
+<div hidden>
+    <input type="text" id="bl_ryid" value="0">
+    <input type="text" id="bl_addlb" value="0">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/HRXZGL/YHRY_MANAGE")
+}

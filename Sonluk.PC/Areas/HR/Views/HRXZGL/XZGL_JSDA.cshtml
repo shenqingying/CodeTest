@@ -1,0 +1,350 @@
+﻿@{
+    ViewBag.Title = "技术档案管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>技术档案管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_dadm">档案代码设置</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">类别：</label>
+            <div class="layui-input-inline">
+                <select id="find_lb" lay-filter="find_lb">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">档案代码：</label>
+            <div class="layui-input-inline">
+                <select id="find_dadm" lay-filter="find_dadm">
+                    <option value="" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">案卷名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_ajname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">接收日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_JSRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_JSRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">密级：</label>
+            <div class="layui-input-inline">
+                <select id="find_mj" lay-filter="find_mj">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">文件状态：</label>
+            <div class="layui-input-inline">
+                <select id="find_zt" lay-filter="find_zt">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">在案</option>
+                    <option value="2">借出</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="daTable" lay-filter="daTable"></table>
+    </div>
+</div>
+<div id="div_daadd" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item" id="input_dah">
+        <label class="layui-form-label" style="width: 100px;">档案号：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dainfo_dah" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">类别：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <select id="dainfo_lb" lay-filter="dainfo_lb">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">档案代码：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <select id="dainfo_dadm" lay-filter="dainfo_dadm">
+                <option value="" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">接收日期：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" name="date" id="dainfo_jsdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">保管期限：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <select id="dainfo_bgqx" lay-filter="dainfo_bgqx">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">案卷名称：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dainfo_ajname" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">档案形式：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <select id="dainfo_xs" lay-filter="dainfo_xs">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+        <label class="layui-form-label">密级：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <select id="dainfo_mj" lay-filter="dainfo_mj">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">图纸数：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" id="dainfo_tzs" autocomplete="off" class="layui-input" oninput="value = value.replace(/[^\d]/g, '')" onkeyup="    add_count(this.id)" />
+        </div>
+        <label class="layui-form-label">文件数：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" id="dainfo_wjs" autocomplete="off" class="layui-input" oninput="value = value.replace(/[^\d]/g, '')" onkeyup="    add_count(this.id)" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">总张数：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" id="dainfo_zzs" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" onkeyup="    add_count(this.id)" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">来源：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dainfo_ly" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">条目一：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dainfo_tm1" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">条目二：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dainfo_tm2" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dainfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<div id="div_dadm" class="layui-form" hidden>
+    <div class="layui-form-item" style="padding:10px">
+        <button class="layui-btn" id="btn_dadm_add">新增</button>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="dadmTable" lay-filter="dadmTable"></table>
+    </div>
+</div>
+<div id="div_dadm_add" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">档案代码：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dadminfo_dadm" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">类别：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <select id="dadminfo_dalb" lay-filter="dadminfo_dalb">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">名称：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="dadminfo_daname" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<div id="div_jydj" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item" id="div_gh_show">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">姓名：</label>
+            <div class="layui-input-inline" style="width: 180px;">
+                <input type="text" id="dainfo_add_gh" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" id="div_gh_hide">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">工号：</label>
+            <div class="layui-input-inline" style="width: 180px;">
+                <input type="text" id="dainfo_add_gh2" autocomplete="off" class="layui-input" readonly="readonly" placeholder="（工号/姓名/证件号码）">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">姓名：</label>
+            <div class="layui-input-inline" style="width: 180px;">
+                <input type="text" id="dajy_name" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 50px;">性别：</label>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="dajy_xb" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 80px;">在职状态：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <input type="text" id="dajy_zzzt" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">公司：</label>
+            <div class="layui-input-inline" style="width: 365px;">
+                <input type="text" id="dajy_gs" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 80px;">部门：</label>
+            <div class="layui-input-inline" style="width: 185px;">
+                <input type="text" id="dajy_dept" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">借阅日期：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" name="date" id="dajy_jydate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label" style="width: 85px;">归还日期：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" name="date" id="dajy_ghdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">借阅目的：</label>
+        <div class="layui-input-inline" style="width: 365px;">
+            <input type="text" id="dajy_jymd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 365px;">
+            <input type="text" id="dajy_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" id="sjghdate">
+        <label class="layui-form-label" style="width: 100px;">实际归还日期：</label>
+        <div class="layui-input-inline" style="width: 120px;">
+            <input type="text" name="date" id="dajy_sjghdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+</div>
+<div id="div_dainfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_damx_add_ry" lay-filter="tb_damx_add_ry"></table>
+</div>
+<div id="div_dainfo_jyjl" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_dainfo_jyjl" lay-filter="tb_dainfo_jyjl"></table>
+</div>
+<div hidden>
+    <input type="text" id="bl_ryid" value="">
+    <input type="text" id="bl_DAJYJL" value="">
+</div>
+<style>
+    #dainfo_lb + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #dainfo_dadm + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #dainfo_bgqx + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #dainfo_jsdate {
+        background-color: #FAFFBD;
+    }
+    #dainfo_ajname {
+        background-color: #FAFFBD;
+    }
+    #dainfo_xs + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #dainfo_mj + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #dadminfo_dadm {
+        background-color: #FAFFBD;
+    }
+
+    #dadminfo_dalb + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+
+    #dadminfo_daname {
+        background-color: #FAFFBD;
+    }
+    #dajy_jydate {
+        background-color: #FAFFBD;
+    }
+    #dajy_ghdate {
+        background-color: #FAFFBD;
+    }
+    #dajy_jymd {
+        background-color: #FAFFBD;
+    }
+    #dainfo_add_gh {
+        background-color: #FAFFBD;
+    }
+    #dajy_sjghdate {
+        background-color: #FAFFBD;
+    }
+    th .layui-table-cell {
+        text-align: center;
+    }
+</style>
+    @section scripts {
+        @Scripts.Render("~/bundles/HR/HRXZGL/XZGL_JSDA")
+    }

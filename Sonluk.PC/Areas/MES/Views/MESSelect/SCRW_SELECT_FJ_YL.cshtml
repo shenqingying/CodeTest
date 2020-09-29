@@ -1,0 +1,84 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "负极用料查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="mesxtsz">MES系统设置</a>
+    <a><cite lid="fjylcx">负极用料查询</cite></a>
+</span>
+<br />
+<br />
+
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lid="c_search">查询</button>
+            <button id="btn_DC_all" class="layui-btn" lid="export">导出数据表</button>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="c_formGC">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="cx_gc" lay-filter="cx_gc">
+                        @if (Model.Sy_gc.Length == 1)
+                        {
+                            <option value="" lid="c_selectplz">请选择</option>
+                            <option value="@Model.Sy_gc[0].GC" selected="selected">@Model.Sy_gc[0].GC-@Model.Sy_gc[0].GCMS</option>
+                        }
+                        else
+                        {
+                            <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            for (int i = 0; i < Model.Sy_gc.Length; i++)
+                            {
+                                <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC-@Model.Sy_gc[i].GCMS</option>
+                            }
+                        }
+                    </select>
+                </div>
+                </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="c_formGZZX">工作中心：</label>
+                <div class="layui-input-inline">
+                    <select id="cx_gzzx" lay-filter="cx_gzzx"></select>
+                </div>
+                </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="SCRQc">生产日期：</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="date" id="in_SCRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="date" id="in_SCRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+                </div>
+            </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="cxlx">查询类型：</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="cx_lb" value="1" title="全部" lay-filter="cx_lb" checked="" lid="qb">
+                    <input type="radio" name="cx_lb" value="2" title="已投料" lay-filter="cx_lb" lid="ytl">
+                </div>
+            </div>
+        </div>
+
+        <table class="layui-hide" id="tb_fjyl" lay-filter="tb_fjyl"></table>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/MES/MESSelect/SCRW_SELECT_FJ_YL.js"></script>
+}

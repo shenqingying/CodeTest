@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "奖金福利表名设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="tpl_isaction">
+    {{# if(d.ISACTION == 1){ }}
+    正常
+    {{# }else if(d.ISACTION == 2){ }}
+    结案
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="ja">结案</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="ch">撤回</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>奖金福利表名设置</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">计发月份：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_sbmonthks" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_sbmonthejs" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">奖金福利名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_jjflname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_jjflname" lay-filter="tb_jjflname"></table>
+</div>
+<div id="div_jjflnameinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">计发月份：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="jjflnameinfo_sbmonth" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">奖金福利名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="jjflnameinfo_jjflname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_JJFL_HEARNAME_MANAGE")
+}

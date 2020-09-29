@@ -1,0 +1,103 @@
+﻿@using Sonluk.UI.Model.CRM.SAP_ReportService
+@{
+    ViewBag.Title = "Report_Order_FaHuoPart";
+
+    SAP_ReportInfo[] data = ViewBag.data;
+}
+
+
+
+@for (int i = 0; i < data.Length; i++)
+{
+
+    <div class="weui-form-preview" @*style="margin:0 10px"*@>
+        @*<div class="weui-form-preview__hd">
+                <em class="weui-form-preview__value">网上下单(六安市强盛商贸有限公司 2017-07-25 22:16)</em>
+            </div>*@
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">序号</label>
+                <span class="weui-form-preview__value">@(i + 1)</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Customer</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户名称</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CustomerName</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">销售订单日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Date</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">销售订单</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SalesOrder</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">销售订单行项目</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SalesOrderItem</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">物料</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Material</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">物料描述</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].MaterialDescription</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单数量</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Quantity</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">交货日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].DeliveryDate</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">交货单号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Delivery</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">交货行项目</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].DeliveryItem</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">交货数量</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].QuantityDelivered</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">基本单位</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].Unit2</span>
+            </p>
+            @*<p>
+                <label class="weui-form-preview__label">净价</label>
+                <span class="weui-form-preview__value">@data[i].Price</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">价格单位</label>
+                <span class="weui-form-preview__value">@data[i].Currency</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">税</label>
+                <span class="weui-form-preview__value">@data[i].Amount</span>
+            </p>*@
+            <p>
+                <label class="weui-form-preview__label">金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].JE</span>
+            </p>
+
+        </div>
+        @*<div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">查看</a>
+                <a class="weui-form-preview__btn " href="javascript:">提交审核</a>
+                <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;">删除</a>
+            </div>*@
+    </div>
+}
+
+@if (data.Length == 0)
+{
+    <label>无数据！</label>
+}

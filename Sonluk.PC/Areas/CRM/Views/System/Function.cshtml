@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "功能设置";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="Tpl_lj">
+    {{# if(d.IMAGELJ.indexOf('<') == -1){ }}
+    {{ d.IMAGELJ }}
+    {{# }else{ }}
+    <div style="text-align:center;">
+        <svg viewBox="0 0 1024 1024" width="26" height="26">{{ d.IMAGELJ }}</svg>
+    </div>
+    {{# } }}
+</script>
+
+<script type="text/html" id="PC_Tpl">
+    <input type="checkbox" name="pc" value="{{d.RIGHTID}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.PC == 1 ? 'checked' : '' }}>
+</script>
+
+<script type="text/html" id="WX_Tpl">
+    <input type="checkbox" name="wx" value="{{d.RIGHTID}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="sexDemo" {{ d.WX == 1 ? 'checked' : '' }}>
+</script>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>系统管理</a>
+    <a><cite>功能设置</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert_group" class="layui-btn">新增权限组</button>
+
+        </div>
+
+        <table id="result_group" lay-filter="result_group"></table>
+
+
+    </div>
+    <hr class="layui-bg-black" />
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert_right" class="layui-btn">新增权限</button>
+
+        </div>
+
+        <table id="result_right" lay-filter="result_right"></table>
+
+
+    </div>
+
+
+
+
+</div>
+
+<div id="div_group" class="layui-form" hidden>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限组名称：</label>
+        <div class="layui-input-inline">
+            <input id="group_name" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级权限组id：</label>
+        <div class="layui-input-inline">
+            <input id="group_pid" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">序号：</label>
+        <div class="layui-input-inline">
+            <input id="group_xh" type="text" class="layui-input" value="0">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限组说明：</label>
+        <div class="layui-input-inline">
+            <input id="group_content" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片路径：</label>
+        <div class="layui-input-inline">
+            <input id="group_path" type="text" class="layui-input">
+        </div>
+    </div>
+
+
+</div>
+
+<div id="div_right" class="layui-form" hidden>
+    <br />
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限名称：</label>
+        <div class="layui-input-inline">
+            <input id="right_name" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">序号：</label>
+        <div class="layui-input-inline">
+            <input id="right_xh" type="text" class="layui-input" value="0">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址：</label>
+        <div class="layui-input-inline">
+            <input id="right_address" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限说明：</label>
+        <div class="layui-input-inline">
+            <input id="right_content" type="text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片路径：</label>
+        <div class="layui-input-inline">
+            <input id="right_path" type="text" class="layui-input">
+        </div>
+    </div>
+
+</div>
+
+
+<input id="netpath" hidden />
+<input id="groupid" hidden />
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/System/Function")
+}

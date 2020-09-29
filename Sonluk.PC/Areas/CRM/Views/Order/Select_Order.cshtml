@@ -1,0 +1,215 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "订单查询";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 10){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 20){ }}
+    已提交
+    {{# }else if(d.ISACTIVE == 50){ }}
+    已审核
+    {{# }else if(d.ISACTIVE == 60){ }}
+    已归档
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="official">
+    {{# if(d.IsOfficial == 10){ }}
+    潜在客户
+    {{# }else if(d.IsOfficial == 20){ }}
+    签约客户
+    {{# }else if(d.IsOfficial == 30){ }}
+    非签约客户
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="havepower">
+    {{# if(d.GIDSTATUS == 1){ }}
+    是
+    {{# }else if(d.GIDSTATUS == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>订单管理</a>
+    <a><cite>订单查询</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            <button id="btn_print" class="layui-btn">打印</button>
+
+            @*<button id="btn_submit" class="layui-btn">提交</button>*@
+
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">订单类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="ddlx" lay-filter="ddlx">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">订单状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="isactive" lay-filter="isactive">
+                                <option value="0" selected="selected">全部</option>
+                                <option value="10">未提交 </option>
+                                <option value="20">已提交 </option>
+                                <option value="50">已审核</option>
+                                <option value="60">已归档</option>
+                            </select>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">新建时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_begin" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<div id="div_confirm" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="text-align:right;">售达方：</label>
+            <div class="layui-input-inline" style="width:220px;">
+                <label class="layui-form-label" style="text-align:left;">XXXXX</label>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="text-align:right;">送达方：</label>
+            <div class="layui-input-inline" style="width:220px;">
+                <label class="layui-form-label" style="text-align:left;">XXXXX</label>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="text-align:right;">收货地址：</label>
+            <div class="layui-input-inline" style="width:220px;">
+                <label class="layui-form-label" style="text-align:left;">XXXXXXXXXX</label>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="text-align:right;">付款时间：</label>
+            <div class="layui-input-inline" style="width:220px;">
+                <label class="layui-form-label" style="text-align:left;">2019-01-01</label>
+            </div>
+        </div>
+    </div>
+
+    <table id="table_confirm" lay-filter="table_confirm"></table>
+
+    <div id="div_hj">
+
+    </div>
+</div>
+
+<input id="netpath" hidden />
+
+
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Select_Order")
+}

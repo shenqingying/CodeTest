@@ -1,0 +1,144 @@
+﻿@using Sonluk.UI.Model.PS.NetWorkService;
+@model Sonluk.UI.Model.PS.NetWorkService.NetworkRead
+
+@if (Model.ET_RETURN.TYPE == "S")
+{
+    int bl = 0;
+    NetworkINFO networkinfo = Model.E_network;
+    Ps_vorINFO[] ps_vor = Model.E_vor;
+    Ps_trugINFO[] ps_trug = Model.E_trug;
+    string iswg = "X";
+    string isjs = "X";
+    for (int i = 0; i < ps_vor.Length; i++)
+    {
+        if (ps_vor[i].SUBNUM == 0 && ps_vor[i].AUERU == "X")
+        {
+            iswg = "X";
+        }
+        else
+        {
+            iswg = "";
+            break;
+        }
+    }
+    if (iswg != "X")
+    {
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">网络号</label>
+                <div class="layui-input-inline" style="width: 300px;">
+                    <input type="text" name="in_wlh" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Aufnr" readonly="readonly" id="lb_wlh">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">网络名称</label>
+                <div class="layui-input-inline" style="width: 400px;">
+                    <input type="text" name="in_wlmc" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Ktext" readonly="readonly">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">WBS号</label>
+                <div class="layui-input-inline" style="width: 300px;">
+                    <input type="text" name="in_wbsh" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Posid" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">WBS名称</label>
+                <div class="layui-input-inline" style="width: 400px;">
+                    <input type="text" name="in_wbsmc" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Post1" readonly="readonly">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">物料号</label>
+                <div class="layui-input-inline" style="width: 300px;">
+                    <input type="text" name="in_wbsh" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Zmatnr" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">物料名称</label>
+                <div class="layui-input-inline" style="width: 400px;">
+                    <input type="text" name="in_wbsmc" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Maktx" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        for (int i = 0; i < ps_vor.Length; i++)
+        {
+            if (ps_vor[i].SUBNUM > 0)
+            {
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当前工序</label>
+                    <div class="layui-input-inline" style="width: 835px;">
+                        <input type="text" name="in_dqgx" placeholder="" autocomplete="off" class="layui-input" value="@ps_vor[i].Vornr @ps_vor[i].LtxA1" readonly="readonly">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">计划数量</label>
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="hidden" name="in_jhsl" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Zmenge" id="in_jhsl" readonly="readonly">
+                            <input type="text" name="in_jhsl" placeholder="" autocomplete="off" class="layui-input" value="@(networkinfo.Zmenge - bl)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">报废数量</label>
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-normal" id="btnzj">+</button>
+                        </div>
+                        <div class="layui-inline">
+                            <input type="text" name="in_hgsl" placeholder="" autocomplete="off" class="layui-input" value="@ps_vor[i].SUBNUM" id="in_hgsl" style="width: 80px;">
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-normal" id="btnjs">-</button>
+                        </div>                         
+                        
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">数量单位</label>
+                        <div class="layui-input-inline" style="width: 88px;">
+                            <input type="text" name="in_sldw" placeholder="" autocomplete="off" class="layui-input" value="@networkinfo.Zmeins" readonly="readonly" id="in_Zmeins">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-form">报废原因</label>
+                    <div class="layui-input-inline" style="width: 835px;">
+                        <select name="interest" lay-filter="" id="select_bfyy">
+                            <option value="">请选择</option>
+                            @for (int j = 0; j < ps_trug.Length; j++)
+                            {
+                                <option value="@ps_trug[j].Grund">@ps_trug[j].Grdtx</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">详细原因</label>
+                    <div class="layui-input-inline" style="width: 835px;">
+                        <input type="text" name="in_xxyy" placeholder="" autocomplete="off" class="layui-input" id="in_xxyy">
+                    </div>
+                </div>
+                <input type="hidden" value="@ps_vor[i].SUBNUM" id="in_SUBNUM">
+                <input type="hidden" value="@ps_vor[i].Vornr" id="in_Vornr">
+                <input type="hidden" value="@ps_vor[i].Arbpl" id="in_Arbpl">
+                <input type="hidden" value="@ps_vor[i].KTSCH" id="in_KTSCH">
+                            break;
+
+            }
+            bl = bl + (int)ps_vor[i].Scrapnum;
+        }
+    }
+    else
+    {
+        <a>@networkinfo.Ktext 已完成报工</a>
+    }
+}
+else
+{
+    <a>@Model.ET_RETURN.MESSAGE</a>
+}

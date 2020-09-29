@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/PS/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/PS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/PS/">
+      <s:element name="read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="aufnr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="readResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="readResult" type="tns:NetworkRead" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="NetworkRead">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ET_RETURN" type="tns:PS_MSG" />
+          <s:element minOccurs="0" maxOccurs="1" name="E_trug" type="tns:ArrayOfPs_trugINFO" />
+          <s:element minOccurs="0" maxOccurs="1" name="E_vor" type="tns:ArrayOfPs_vorINFO" />
+          <s:element minOccurs="0" maxOccurs="1" name="E_network" type="tns:NetworkINFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PS_MSG">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPs_trugINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ps_trugINFO" nillable="true" type="tns:Ps_trugINFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ps_trugINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Grund" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Grdtx" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPs_vorINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Ps_vorINFO" nillable="true" type="tns:Ps_vorINFO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ps_vorINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Vornr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LtxA1" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Confirmnum" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Scrapnum" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Arbei" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Arbeh" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Arbpl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SUBNUM" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="USR02" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="USR03" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STEUS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUERU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTSCH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NetworkINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Gstrp" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gltrp" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Aufnr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ktext" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Posid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Post1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zmatnr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Maktx" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Zmenge" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zmeins" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="confirm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ps_work" type="tns:Ps_work" />
+            <s:element minOccurs="0" maxOccurs="1" name="ps_staff" type="tns:Ps_staff" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Ps_work">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Vornr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OpRz1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Opre1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Grund" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ismnw" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pernr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Aueru" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Leknw" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Iedd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Aufnr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ltxa1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Arbpl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTSCH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Ps_staff">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Inits" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pernr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rufnm" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="confirmResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirmResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="readXMXX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PSPID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="POSID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PSPIDPO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="POSIDPO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="readXMXXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="readXMXXResult" type="tns:ArrayOfPS_SXXGOA" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPS_SXXGOA">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PS_SXXGOA" nillable="true" type="tns:PS_SXXGOA" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PS_SXXGOA">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PSPID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSPT1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POST1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VERNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VERNA" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="readwlXX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="readwlXXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="readwlXXResult" type="tns:ArrayOfPS_wlXX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPS_wlXX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PS_wlXX" nillable="true" type="tns:PS_wlXX" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PS_wlXX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EKGRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EKNAM" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GYSMC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="I_EBELN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GYSMCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GYSMCResult" type="tns:ArrayOfZSL_PSS_OUT_NAME" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZSL_PSS_OUT_NAME">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSL_PSS_OUT_NAME" nillable="true" type="tns:ZSL_PSS_OUT_NAME" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_PSS_OUT_NAME">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VERNA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VERNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EKNAM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EKGRP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OJPOST1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSPID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSPOST1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MENGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZ01" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EBELP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LIFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="StaffINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INITS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StaffINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StaffINFOResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NetWork_READ_main">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NetWork_READ_mainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NetWork_READ_mainResult" type="tns:PS_ZPSFUG_Q_LJSJ" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PS_ZPSFUG_Q_LJSJ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="T_MSG" type="tns:PS_MSG" />
+          <s:element minOccurs="0" maxOccurs="1" name="T_OUT" type="tns:ZSL_PSS_OUT_LJSJ" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZSL_PSS_OUT_LJSJ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WMENGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WERKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ARBPL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LARNT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VORNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POST1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="POSID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZMEINS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZMENGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MAKTX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZMATNR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KTEXT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUFNR" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="NetworkRead" nillable="true" type="tns:NetworkRead" />
+      <s:element name="ArrayOfPS_SXXGOA" nillable="true" type="tns:ArrayOfPS_SXXGOA" />
+      <s:element name="ArrayOfPS_wlXX" nillable="true" type="tns:ArrayOfPS_wlXX" />
+      <s:element name="ArrayOfZSL_PSS_OUT_NAME" nillable="true" type="tns:ArrayOfZSL_PSS_OUT_NAME" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="PS_ZPSFUG_Q_LJSJ" nillable="true" type="tns:PS_ZPSFUG_Q_LJSJ" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="readSoapIn">
+    <wsdl:part name="parameters" element="tns:read" />
+  </wsdl:message>
+  <wsdl:message name="readSoapOut">
+    <wsdl:part name="parameters" element="tns:readResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmSoapIn">
+    <wsdl:part name="parameters" element="tns:confirm" />
+  </wsdl:message>
+  <wsdl:message name="confirmSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmResponse" />
+  </wsdl:message>
+  <wsdl:message name="readXMXXSoapIn">
+    <wsdl:part name="parameters" element="tns:readXMXX" />
+  </wsdl:message>
+  <wsdl:message name="readXMXXSoapOut">
+    <wsdl:part name="parameters" element="tns:readXMXXResponse" />
+  </wsdl:message>
+  <wsdl:message name="readwlXXSoapIn">
+    <wsdl:part name="parameters" element="tns:readwlXX" />
+  </wsdl:message>
+  <wsdl:message name="readwlXXSoapOut">
+    <wsdl:part name="parameters" element="tns:readwlXXResponse" />
+  </wsdl:message>
+  <wsdl:message name="GYSMCSoapIn">
+    <wsdl:part name="parameters" element="tns:GYSMC" />
+  </wsdl:message>
+  <wsdl:message name="GYSMCSoapOut">
+    <wsdl:part name="parameters" element="tns:GYSMCResponse" />
+  </wsdl:message>
+  <wsdl:message name="StaffINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:StaffINFO" />
+  </wsdl:message>
+  <wsdl:message name="StaffINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:StaffINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="NetWork_READ_mainSoapIn">
+    <wsdl:part name="parameters" element="tns:NetWork_READ_main" />
+  </wsdl:message>
+  <wsdl:message name="NetWork_READ_mainSoapOut">
+    <wsdl:part name="parameters" element="tns:NetWork_READ_mainResponse" />
+  </wsdl:message>
+  <wsdl:message name="readHttpGetIn">
+    <wsdl:part name="aufnr" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="readHttpGetOut">
+    <wsdl:part name="Body" element="tns:NetworkRead" />
+  </wsdl:message>
+  <wsdl:message name="readXMXXHttpGetIn">
+    <wsdl:part name="PSPID" type="s:string" />
+    <wsdl:part name="POSID" type="s:string" />
+    <wsdl:part name="PSPIDPO" type="s:string" />
+    <wsdl:part name="POSIDPO" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="readXMXXHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPS_SXXGOA" />
+  </wsdl:message>
+  <wsdl:message name="readwlXXHttpGetIn">
+    <wsdl:part name="MATNR" type="s:string" />
+    <wsdl:part name="MAKTX" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="readwlXXHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPS_wlXX" />
+  </wsdl:message>
+  <wsdl:message name="GYSMCHttpGetIn">
+    <wsdl:part name="I_EBELN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GYSMCHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfZSL_PSS_OUT_NAME" />
+  </wsdl:message>
+  <wsdl:message name="StaffINFOHttpGetIn">
+    <wsdl:part name="INITS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StaffINFOHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="NetWork_READ_mainHttpGetIn">
+    <wsdl:part name="AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NetWork_READ_mainHttpGetOut">
+    <wsdl:part name="Body" element="tns:PS_ZPSFUG_Q_LJSJ" />
+  </wsdl:message>
+  <wsdl:message name="readHttpPostIn">
+    <wsdl:part name="aufnr" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="readHttpPostOut">
+    <wsdl:part name="Body" element="tns:NetworkRead" />
+  </wsdl:message>
+  <wsdl:message name="readXMXXHttpPostIn">
+    <wsdl:part name="PSPID" type="s:string" />
+    <wsdl:part name="POSID" type="s:string" />
+    <wsdl:part name="PSPIDPO" type="s:string" />
+    <wsdl:part name="POSIDPO" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="readXMXXHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPS_SXXGOA" />
+  </wsdl:message>
+  <wsdl:message name="readwlXXHttpPostIn">
+    <wsdl:part name="MATNR" type="s:string" />
+    <wsdl:part name="MAKTX" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="readwlXXHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPS_wlXX" />
+  </wsdl:message>
+  <wsdl:message name="GYSMCHttpPostIn">
+    <wsdl:part name="I_EBELN" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GYSMCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfZSL_PSS_OUT_NAME" />
+  </wsdl:message>
+  <wsdl:message name="StaffINFOHttpPostIn">
+    <wsdl:part name="INITS" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StaffINFOHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="NetWork_READ_mainHttpPostIn">
+    <wsdl:part name="AUFNR" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NetWork_READ_mainHttpPostOut">
+    <wsdl:part name="Body" element="tns:PS_ZPSFUG_Q_LJSJ" />
+  </wsdl:message>
+  <wsdl:portType name="NetWorkSoap">
+    <wsdl:operation name="read">
+      <wsdl:input message="tns:readSoapIn" />
+      <wsdl:output message="tns:readSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirm">
+      <wsdl:input message="tns:confirmSoapIn" />
+      <wsdl:output message="tns:confirmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="readXMXX">
+      <wsdl:input message="tns:readXMXXSoapIn" />
+      <wsdl:output message="tns:readXMXXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="readwlXX">
+      <wsdl:input message="tns:readwlXXSoapIn" />
+      <wsdl:output message="tns:readwlXXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GYSMC">
+      <wsdl:input message="tns:GYSMCSoapIn" />
+      <wsdl:output message="tns:GYSMCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StaffINFO">
+      <wsdl:input message="tns:StaffINFOSoapIn" />
+      <wsdl:output message="tns:StaffINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NetWork_READ_main">
+      <wsdl:input message="tns:NetWork_READ_mainSoapIn" />
+      <wsdl:output message="tns:NetWork_READ_mainSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="NetWorkHttpGet">
+    <wsdl:operation name="read">
+      <wsdl:input message="tns:readHttpGetIn" />
+      <wsdl:output message="tns:readHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="readXMXX">
+      <wsdl:input message="tns:readXMXXHttpGetIn" />
+      <wsdl:output message="tns:readXMXXHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="readwlXX">
+      <wsdl:input message="tns:readwlXXHttpGetIn" />
+      <wsdl:output message="tns:readwlXXHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GYSMC">
+      <wsdl:input message="tns:GYSMCHttpGetIn" />
+      <wsdl:output message="tns:GYSMCHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StaffINFO">
+      <wsdl:input message="tns:StaffINFOHttpGetIn" />
+      <wsdl:output message="tns:StaffINFOHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NetWork_READ_main">
+      <wsdl:input message="tns:NetWork_READ_mainHttpGetIn" />
+      <wsdl:output message="tns:NetWork_READ_mainHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="NetWorkHttpPost">
+    <wsdl:operation name="read">
+      <wsdl:input message="tns:readHttpPostIn" />
+      <wsdl:output message="tns:readHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="readXMXX">
+      <wsdl:input message="tns:readXMXXHttpPostIn" />
+      <wsdl:output message="tns:readXMXXHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="readwlXX">
+      <wsdl:input message="tns:readwlXXHttpPostIn" />
+      <wsdl:output message="tns:readwlXXHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GYSMC">
+      <wsdl:input message="tns:GYSMCHttpPostIn" />
+      <wsdl:output message="tns:GYSMCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StaffINFO">
+      <wsdl:input message="tns:StaffINFOHttpPostIn" />
+      <wsdl:output message="tns:StaffINFOHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NetWork_READ_main">
+      <wsdl:input message="tns:NetWork_READ_mainHttpPostIn" />
+      <wsdl:output message="tns:NetWork_READ_mainHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetWorkSoap" type="tns:NetWorkSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="read">
+      <soap:operation soapAction="http://Sonluk.com/API/PS/read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirm">
+      <soap:operation soapAction="http://Sonluk.com/API/PS/confirm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readXMXX">
+      <soap:operation soapAction="http://Sonluk.com/API/PS/readXMXX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readwlXX">
+      <soap:operation soapAction="http://Sonluk.com/API/PS/readwlXX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GYSMC">
+      <soap:operation soapAction="http://Sonluk.com/API/PS/GYSMC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StaffINFO">
+      <soap:operation soapAction="http://Sonluk.com/API/PS/StaffINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetWork_READ_main">
+      <soap:operation soapAction="http://Sonluk.com/API/PS/NetWork_READ_main" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetWorkSoap12" type="tns:NetWorkSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="read">
+      <soap12:operation soapAction="http://Sonluk.com/API/PS/read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirm">
+      <soap12:operation soapAction="http://Sonluk.com/API/PS/confirm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readXMXX">
+      <soap12:operation soapAction="http://Sonluk.com/API/PS/readXMXX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readwlXX">
+      <soap12:operation soapAction="http://Sonluk.com/API/PS/readwlXX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GYSMC">
+      <soap12:operation soapAction="http://Sonluk.com/API/PS/GYSMC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StaffINFO">
+      <soap12:operation soapAction="http://Sonluk.com/API/PS/StaffINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetWork_READ_main">
+      <soap12:operation soapAction="http://Sonluk.com/API/PS/NetWork_READ_main" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetWorkHttpGet" type="tns:NetWorkHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="read">
+      <http:operation location="/read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readXMXX">
+      <http:operation location="/readXMXX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readwlXX">
+      <http:operation location="/readwlXX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GYSMC">
+      <http:operation location="/GYSMC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StaffINFO">
+      <http:operation location="/StaffINFO" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetWork_READ_main">
+      <http:operation location="/NetWork_READ_main" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetWorkHttpPost" type="tns:NetWorkHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="read">
+      <http:operation location="/read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readXMXX">
+      <http:operation location="/readXMXX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readwlXX">
+      <http:operation location="/readwlXX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GYSMC">
+      <http:operation location="/GYSMC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StaffINFO">
+      <http:operation location="/StaffINFO" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NetWork_READ_main">
+      <http:operation location="/NetWork_READ_main" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NetWork">
+    <wsdl:port name="NetWorkSoap" binding="tns:NetWorkSoap">
+      <soap:address location="http://192.168.0.107/test/PS/NetWork.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NetWorkSoap12" binding="tns:NetWorkSoap12">
+      <soap12:address location="http://192.168.0.107/test/PS/NetWork.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NetWorkHttpGet" binding="tns:NetWorkHttpGet">
+      <http:address location="http://192.168.0.107/test/PS/NetWork.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NetWorkHttpPost" binding="tns:NetWorkHttpPost">
+      <http:address location="http://192.168.0.107/test/PS/NetWork.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

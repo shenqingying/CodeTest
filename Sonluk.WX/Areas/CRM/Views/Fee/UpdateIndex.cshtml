@@ -1,0 +1,152 @@
+﻿@using Sonluk.UI.Model.CRM.COST_ZZFTTService;
+
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "新增制作费";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    CRM_COST_ZZFTT TTdata = ViewBag.TTdata;
+    
+}
+
+
+
+
+
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="@Url.Action("Select_Create_Fee", "Fee", new { TTID = @TTdata.TTID })" id="back">返回</a>
+
+   
+</div>
+<br />
+
+<div id="div1" class="weui-cells weui-cells_form" style="margin-top:0;">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="mendian1" class="weui-input" type="text" placeholder="" value="@TTdata.MCNAME">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="CRMID" class="weui-input" type="text" placeholder="" value="@TTdata.CRMID">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="div1" class="weui-cells weui-cells_form" style="margin-top:0;">
+
+    <div class="weui-grids">
+
+        <a href="@Url.Action("UpdateZZF_BaseInfo", "Fee",new {TTID = @TTdata.TTID})" class="weui-grid js_grid" >
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/jibenxinxi.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                基本信息
+            </p>
+        </a>
+        <a href="@Url.Action("UpdateZZF_GGSJT", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/sheji.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                广告设计图
+            </p>
+        </a>
+        <a href="@Url.Action("UpdateZZF_GGZZMX", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/mingxi.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                广告制作明细
+            </p>
+        </a>
+       
+        <a id="UpdateZZF_GGZLXY" href="@Url.Action("UpdateZZF_GGZLXY", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/xieyi.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                广告租赁协议
+            </p>
+        </a>
+       
+        <a href="@Url.Action("UpdateZZF_GGXGT", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/xiaoguo.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                广告效果图
+            </p>
+        </a>
+        <a href="@Url.Action("UpdateZZF_ZZQZP", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/zhaoian1.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                制作前照片
+            </p>
+        </a>
+        <a href="@Url.Action("UpdateZZF_ZWHJZP", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/zhaopian2.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                周围环境照片
+            </p>
+        </a>
+        <a id="UpdateZZF_GGWCHM" href="@Url.Action("UpdateZZF_GGWCHM", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/gghm.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                广告完成画面
+            </p>
+        </a>
+        <a href="@Url.Action("UpdateZZF_SPYJ", "Fee", new { TTID = @TTdata.TTID })" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="~/Image/fee/zzf/shenpi.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+                审批意见
+            </p>
+        </a>
+    </div>
+ </div>
+
+
+<input id="Num" value="@TTdata.KHLX" hidden />
+<input id="ISACTIVE" value="@TTdata.ISACTIVE" hidden />
+
+<script>
+    $(document).ready(function () {
+        if ($("#Num").val() == 1 || $("#Num").val() == 5)
+        {
+            $("#UpdateZZF_GGZLXY").show();
+        }
+        else {
+            $("#UpdateZZF_GGZLXY").hide();
+        }
+        if ($("#ISACTIVE").val() >= 30)
+        {
+            $("#UpdateZZF_GGWCHM").show();
+        }
+        else {
+            $("#UpdateZZF_GGWCHM").hide();
+        }
+    })
+</script>
+
+
+

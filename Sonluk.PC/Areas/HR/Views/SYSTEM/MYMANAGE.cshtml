@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "密钥维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="ishavemy_Tpl">
+    {{# if(d.MYSTAFFID > 0){ }}
+    已创建
+    {{# }else{ }}
+    未创建
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR系统设置</a>
+    <a><cite>密钥维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">用户名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_staffno" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_my" lay-filter="tb_my"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="insert">新增</a>
+        <a class="layui-btn layui-btn-xs" lay-event="modify">重置</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+<div id="div_myinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公钥密码：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="myinfo_gymm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">私钥密码：</label>
+            <div class="layui-input-inline">
+                <input type="password" id="myinfo_symm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/SYSTEM/MYMANAGE")
+}

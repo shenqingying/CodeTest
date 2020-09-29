@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "材料配比管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="barkh1">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>注塑追溯管理</a>
+    <a><cite>材料配比管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">材料配比代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_clpbdm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_clpbdm" lay-filter="tb_clpbdm"></table>
+    </div>
+</div>
+<div id="div_clpbdm" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="clpbdm_gc" lay-filter="clpbdm_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">原材料代码：</label>
+            <div class="layui-input-inline">
+                <select id="clpbdm_ycldm" lay-filter="clpbdm_ycldm"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">配比代码：</label>
+            <div class="layui-input-inline">
+                <select id="clpbdm_pbdm" lay-filter="clpbdm_pbdm"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">材料配比代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="clpbdm_clpbdm" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline" style="width: 530px;">
+                <input type="text" id="clpbdm_remark" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn layui-btn-sm" id="btn_add_wl">维护</button>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_clpbdm_wl" lay-filter="tb_clpbdm_wl"></table>
+    </div>
+</div>
+<div id="div_wlsearch" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">物料信息：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="wlsearch_wl" autocomplete="off" class="layui-input">
+            </div>
+            @*<div class="layui-input-inline" style="width: 50px;">
+                <button class="layui-btn layui-btn-sm" id="btn_wl_serch">查询</button>
+            </div>*@
+        </div>
+    </div>
+
+</div>
+<div id="div_wlinfo" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_wlinfo" lay-filter="tb_wlinfo"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/CLPB_MANAGE")
+}

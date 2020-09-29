@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_DEPT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_SY_DEPT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTFZR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTFZRNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTBZRS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTBMLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTBMLBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTCBZX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTPX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PBFZ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTIDLIST" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CXLB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XZDEPTPX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_DEPT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECTResult" type="tns:HR_SY_DEPT_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_SY_DEPT_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_SY_DEPT_LIST" type="tns:ArrayOfHR_SY_DEPT_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+          <s:element minOccurs="0" maxOccurs="1" name="DATALIST">
+            <s:complexType>
+              <s:sequence>
+                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_SY_DEPT_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_SY_DEPT_LIST" nillable="true" type="tns:HR_SY_DEPT_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_SY_DEPT_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTFZR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTFZRNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTBZRS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTBMLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTBMLBNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DEPTCBZX" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTION" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEPTPX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZZRS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FDEPTNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PBFZ" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PBFZNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XZDEPTPX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_LB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_DEPT" />
+            <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_LBResult" type="tns:HR_SY_DEPT_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_DEPT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_DEPT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_DEPT" />
+            <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BY_ROLEResult" type="tns:HR_SY_DEPT_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_RYCOUNT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DEPTID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_RYCOUNTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_RYCOUNTResult" type="tns:HR_SY_DEPT_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLE_LD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_SY_DEPT" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BY_ROLE_LDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BY_ROLE_LDResult" type="tns:HR_SY_DEPT_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_FID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DEPTID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_FIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_FIDResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HR_SY_DEPT_SELECT" nillable="true" type="tns:HR_SY_DEPT_SELECT" />
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT" />
+  </wsdl:message>
+  <wsdl:message name="SELECTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LBSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_LB" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LBSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_LBResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLESoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLE" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLESoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_RYCOUNTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_RYCOUNT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_RYCOUNTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_RYCOUNTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLE_LDSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLE_LD" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BY_ROLE_LDSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BY_ROLE_LDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_FIDSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_FID" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_FIDSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_FIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_RYCOUNTHttpGetIn">
+    <wsdl:part name="DEPTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_RYCOUNTHttpGetOut">
+    <wsdl:part name="Body" element="tns:HR_SY_DEPT_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_FIDHttpGetIn">
+    <wsdl:part name="DEPTID" type="s:string" />
+    <wsdl:part name="FID" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_FIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_RYCOUNTHttpPostIn">
+    <wsdl:part name="DEPTID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_RYCOUNTHttpPostOut">
+    <wsdl:part name="Body" element="tns:HR_SY_DEPT_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_FIDHttpPostIn">
+    <wsdl:part name="DEPTID" type="s:string" />
+    <wsdl:part name="FID" type="s:string" />
+    <wsdl:part name="STAFFID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_FIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="SY_DEPTSoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <wsdl:input message="tns:SELECTSoapIn" />
+      <wsdl:output message="tns:SELECTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LB">
+      <wsdl:input message="tns:SELECT_LBSoapIn" />
+      <wsdl:output message="tns:SELECT_LBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <wsdl:input message="tns:SELECT_BY_ROLESoapIn" />
+      <wsdl:output message="tns:SELECT_BY_ROLESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_RYCOUNT">
+      <wsdl:input message="tns:SELECT_RYCOUNTSoapIn" />
+      <wsdl:output message="tns:SELECT_RYCOUNTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE_LD">
+      <wsdl:input message="tns:SELECT_BY_ROLE_LDSoapIn" />
+      <wsdl:output message="tns:SELECT_BY_ROLE_LDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_FID">
+      <wsdl:input message="tns:UPDATE_FIDSoapIn" />
+      <wsdl:output message="tns:UPDATE_FIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_DEPTHttpGet">
+    <wsdl:operation name="SELECT_RYCOUNT">
+      <wsdl:input message="tns:SELECT_RYCOUNTHttpGetIn" />
+      <wsdl:output message="tns:SELECT_RYCOUNTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_FID">
+      <wsdl:input message="tns:UPDATE_FIDHttpGetIn" />
+      <wsdl:output message="tns:UPDATE_FIDHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SY_DEPTHttpPost">
+    <wsdl:operation name="SELECT_RYCOUNT">
+      <wsdl:input message="tns:SELECT_RYCOUNTHttpPostIn" />
+      <wsdl:output message="tns:SELECT_RYCOUNTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_FID">
+      <wsdl:input message="tns:UPDATE_FIDHttpPostIn" />
+      <wsdl:output message="tns:UPDATE_FIDHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SY_DEPTSoap" type="tns:SY_DEPTSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LB">
+      <soap:operation soapAction="http://tempuri.org/SELECT_LB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BY_ROLE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_RYCOUNT">
+      <soap:operation soapAction="http://tempuri.org/SELECT_RYCOUNT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE_LD">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BY_ROLE_LD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_FID">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_FID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_DEPTSoap12" type="tns:SY_DEPTSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LB">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_LB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BY_ROLE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_RYCOUNT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_RYCOUNT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BY_ROLE_LD">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BY_ROLE_LD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_FID">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_FID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_DEPTHttpGet" type="tns:SY_DEPTHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SELECT_RYCOUNT">
+      <http:operation location="/SELECT_RYCOUNT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_FID">
+      <http:operation location="/UPDATE_FID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SY_DEPTHttpPost" type="tns:SY_DEPTHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SELECT_RYCOUNT">
+      <http:operation location="/SELECT_RYCOUNT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_FID">
+      <http:operation location="/UPDATE_FID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SY_DEPT">
+    <wsdl:port name="SY_DEPTSoap" binding="tns:SY_DEPTSoap">
+      <soap:address location="http://192.168.0.223/API/HR/SY_DEPT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_DEPTSoap12" binding="tns:SY_DEPTSoap12">
+      <soap12:address location="http://192.168.0.223/API/HR/SY_DEPT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_DEPTHttpGet" binding="tns:SY_DEPTHttpGet">
+      <http:address location="http://192.168.0.223/API/HR/SY_DEPT.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SY_DEPTHttpPost" binding="tns:SY_DEPTHttpPost">
+      <http:address location="http://192.168.0.223/API/HR/SY_DEPT.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

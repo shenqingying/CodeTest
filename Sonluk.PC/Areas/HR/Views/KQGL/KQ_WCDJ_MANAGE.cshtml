@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "外出登记";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>外出登记</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_wcdj">外出登记</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">归属部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">外出日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_wcrqs" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_wcrqe" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_wcdj" lay-filter="tb_wcdj"></table>
+</div>
+<div id="div_wcdjinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-block" style="width: 495px;">
+                <input type="text" id="wcdjinfo_gh" autocomplete="off" placeholder="（姓名/工号/证件号码）" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-block" style="width: 185px;">
+                <input type="text" id="wcdjinfo_ygname" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">归属部门：</label>
+            <div class="layui-input-block" style="width: 185px;">
+                <input type="text" id="wcdjinfo_dept" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    @*<div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">登记日期：</label>
+                <div class="layui-input-block" style="width: 185px;">
+                    <input type="text" id="wcdjinfo_djrq" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>*@
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">外出时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="wcdjinfo_djsj" autocomplete="off" class="layui-input" readonly="readonly" placeholder="外出日期">
+            </div>
+            <div class="layui-form-mid"> </div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="wcdjinfo_djsjhour" autocomplete="off" class="layui-input" placeholder="小时">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="wcdjinfo_djsjfz" autocomplete="off" class="layui-input" placeholder="分钟">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="wcdjinfo_djsjm" autocomplete="off" class="layui-input" placeholder="秒">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">返回时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="wcdjinfo_backtime" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+            <div class="layui-form-mid"> </div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="wcdjinfo_backtimehour" autocomplete="off" class="layui-input" placeholder="小时">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="wcdjinfo_backtimefz" autocomplete="off" class="layui-input" placeholder="分钟">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="wcdjinfo_backtimem" autocomplete="off" class="layui-input" placeholder="秒">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">登记事由：</label>
+            <div class="layui-input-block" style="width: 495px;">
+                <input type="text" id="wcdjinfo_djsy" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_wcdjinfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_wcdjinfo_add_ry" lay-filter="tb_wcdjinfo_add_ry"></table>
+</div>
+<div hidden>
+    <input type="text" id="bl_ryid" value="">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_WCDJ_MANAGE")
+}

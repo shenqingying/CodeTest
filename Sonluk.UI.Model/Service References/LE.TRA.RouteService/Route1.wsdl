@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/LE/TRA/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/LE/TRA/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/LE/TRA/">
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="source" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="destination" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="weight" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="departure" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:RouteInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RouteInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeLimit" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Arrival" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CarrierID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Carrier" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SourceID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DestinationID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Distance" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prices" type="tns:ArrayOfPriceInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Zsf" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPriceInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PriceInfo" nillable="true" type="tns:PriceInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PriceInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Route" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LowerWeightLimit" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpperWeightLimit" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadByCityID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cityID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByCityIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByCityIDResult" type="tns:RouteInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:RouteInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:RouteInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadZSF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BZDID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EZDID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadZSFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadZSFResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadDJ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="source" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="destination" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="weight" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadDJResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadDJResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RouteInfo" nillable="true" type="tns:RouteInfo" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCityIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByCityID" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCityIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByCityIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadZSFSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadZSF" />
+  </wsdl:message>
+  <wsdl:message name="ReadZSFSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadZSFResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadDJSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadDJ" />
+  </wsdl:message>
+  <wsdl:message name="ReadDJSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadDJResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetIn">
+    <wsdl:part name="source" type="s:string" />
+    <wsdl:part name="destination" type="s:string" />
+    <wsdl:part name="weight" type="s:string" />
+    <wsdl:part name="departure" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:RouteInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCityIDHttpGetIn">
+    <wsdl:part name="cityID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCityIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:RouteInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadZSFHttpGetIn">
+    <wsdl:part name="BZDID" type="s:string" />
+    <wsdl:part name="EZDID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadZSFHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadDJHttpGetIn">
+    <wsdl:part name="source" type="s:string" />
+    <wsdl:part name="destination" type="s:string" />
+    <wsdl:part name="weight" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadDJHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostIn">
+    <wsdl:part name="source" type="s:string" />
+    <wsdl:part name="destination" type="s:string" />
+    <wsdl:part name="weight" type="s:string" />
+    <wsdl:part name="departure" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:RouteInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCityIDHttpPostIn">
+    <wsdl:part name="cityID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadByCityIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:RouteInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadZSFHttpPostIn">
+    <wsdl:part name="BZDID" type="s:string" />
+    <wsdl:part name="EZDID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadZSFHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadDJHttpPostIn">
+    <wsdl:part name="source" type="s:string" />
+    <wsdl:part name="destination" type="s:string" />
+    <wsdl:part name="weight" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadDJHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="RouteSoap">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCityID">
+      <wsdl:input message="tns:ReadByCityIDSoapIn" />
+      <wsdl:output message="tns:ReadByCityIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadZSF">
+      <wsdl:input message="tns:ReadZSFSoapIn" />
+      <wsdl:output message="tns:ReadZSFSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDJ">
+      <wsdl:input message="tns:ReadDJSoapIn" />
+      <wsdl:output message="tns:ReadDJSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RouteHttpGet">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCityID">
+      <wsdl:input message="tns:ReadByCityIDHttpGetIn" />
+      <wsdl:output message="tns:ReadByCityIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadZSF">
+      <wsdl:input message="tns:ReadZSFHttpGetIn" />
+      <wsdl:output message="tns:ReadZSFHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDJ">
+      <wsdl:input message="tns:ReadDJHttpGetIn" />
+      <wsdl:output message="tns:ReadDJHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RouteHttpPost">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCityID">
+      <wsdl:input message="tns:ReadByCityIDHttpPostIn" />
+      <wsdl:output message="tns:ReadByCityIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadZSF">
+      <wsdl:input message="tns:ReadZSFHttpPostIn" />
+      <wsdl:output message="tns:ReadZSFHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDJ">
+      <wsdl:input message="tns:ReadDJHttpPostIn" />
+      <wsdl:output message="tns:ReadDJHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RouteSoap" type="tns:RouteSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCityID">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadByCityID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadZSF">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadZSF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDJ">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadDJ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RouteSoap12" type="tns:RouteSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCityID">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadByCityID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadZSF">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadZSF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDJ">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadDJ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RouteHttpGet" type="tns:RouteHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCityID">
+      <http:operation location="/ReadByCityID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadZSF">
+      <http:operation location="/ReadZSF" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDJ">
+      <http:operation location="/ReadDJ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RouteHttpPost" type="tns:RouteHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByCityID">
+      <http:operation location="/ReadByCityID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadZSF">
+      <http:operation location="/ReadZSF" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDJ">
+      <http:operation location="/ReadDJ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Route">
+    <wsdl:port name="RouteSoap" binding="tns:RouteSoap">
+      <soap:address location="http://192.168.0.223/API/LE/TRA/Route.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RouteSoap12" binding="tns:RouteSoap12">
+      <soap12:address location="http://192.168.0.223/API/LE/TRA/Route.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RouteHttpGet" binding="tns:RouteHttpGet">
+      <http:address location="http://192.168.0.223/API/LE/TRA/Route.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RouteHttpPost" binding="tns:RouteHttpPost">
+      <http:address location="http://192.168.0.223/API/LE/TRA/Route.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,836 @@
+﻿@{
+    ViewBag.Title = "小工具";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Session["location"] = 0;
+}
+
+<style>
+    .layui-elem-field {
+        margin: 20px;
+        border-color: #009688;
+        color: #009688;
+    }
+
+        .layui-elem-field dd {
+            color: black;
+        }
+
+    .layui-form-colorpicker .layui-inline div {
+        left: -11px;
+    }
+
+    .layui-form-all .layui-form-item {
+        padding: 10px 0 0 10px;
+    }
+
+        .layui-form-all .layui-form-item label {
+            padding-left: 5px;
+        }
+</style>
+
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class="layui-this" lid="Tab1"></li>
+        <li lid="Tab2"></li>
+        <li lid="Tab3"></li>
+        <li lid="Tab4"></li>
+        <li lid="Tab5"></li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend lid="Total"></legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form layui-form-all">
+                                <div class="layui-form-item">
+                                    <label id="supportInfo"></label>
+                                </div>
+                                <div class="layui-form-item">
+                                    <button type="button" class="layui-btn" id="btnResetAll" lid="btnResetAll"></button>
+                                    <button type="button" class="layui-btn" id="btnClearAll" lid="btnClearAll"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend lid="Color"></legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form layui-form-colorpicker">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label1" lid="Label1"></label>
+                                        <div id="settingColorTag"></div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label1" lid="Label2"></label>
+                                        <div id="settingColorLR"></div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label1" lid="Label3"></label>
+                                        <div id="settingColorHead"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btnResetColor" lid="btnReset"></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend lid="Language"></legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <div class="layui-input-inline">
+                                            <select id="settingLanguage">
+                                                <option value="zh-CN">简体中文</option>
+                                                <option value="en-US">English</option>
+                                                <option value="vi-VN">Việt</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" class="layui-btn" id="btnSaveLanguage" lid="btnSave"></button>
+                                        <button type="button" class="layui-btn" id="btnClearLanguage" lid="btnClear"></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="layui-col-md6"></div>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>通过字符串获取表格数据</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">表格</label>
+                                    <div class="layui-input-block">
+                                        <textarea id="inputStr" placeholder="粘贴完整的表格元素" class="layui-textarea" style="height:200px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">JSON字符串</label>
+                                    <div class="layui-input-block">
+                                        <textarea id="outputStrToJSON" placeholder="获得JSON字符串" class="layui-textarea" style="height:200px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btn_StrToJS">Table转JS对象</button>
+                                        <button type="button" class="layui-btn" id="btn_StrToJSON">获得JSON字符串</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>通过Get请求获取表格数据</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">Get请求Url</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="inputGetUrl" autocomplete="off" class="layui-input" placeholder="Get请求Url">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">Get请求值</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="inputGetValue" autocomplete="off" class="layui-input layui-disabled" placeholder="Get请求值" disabled>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">JSON字符串</label>
+                                    <div class="layui-input-block">
+                                        <textarea id="outputUrlToJSON" placeholder="获得JSON字符串" class="layui-textarea" style="height:200px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btn_UrlToJS">Table转JS对象</button>
+                                        <button type="button" class="layui-btn" id="btn_UrlToJSON">获得JSON字符串</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div id="hd" hidden></div>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>加密字符串</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">加密字符串</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="inputEncryptStr" class="layui-input" placeholder="加密字符串">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">加密KEY</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="inputEncryptKey" class="layui-input" placeholder="加密字符串">
+                                        </div>
+                                        <label class="layui-form-label">加密类型</label>
+                                        <div class="layui-input-inline">
+                                            <select id="inputEncryptType">
+                                                <option value="">请选择</option>
+                                                <option value="DES">DES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">加密结果</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="outputEncryptStr" class="layui-input" placeholder="加密字符串">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btnEncryptStr">加密</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>解密字符串</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">解密字符串</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="inputDecryptStr" class="layui-input" placeholder="解密字符串">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">解密KEY</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="inputDecryptKey" class="layui-input" placeholder="解密KEY">
+                                        </div>
+                                        <label class="layui-form-label">解密类型</label>
+                                        <div class="layui-input-inline">
+                                            <select id="inputDecryptType">
+                                                <option value="">请选择</option>
+                                                <option value="DES">DES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">解密结果</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="outputDecryptStr" class="layui-input" placeholder="解密结果">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btnDecryptStr">解密</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>颜色选择器</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">HEX</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" value="" placeholder="请选择颜色" class="layui-input" id="outputHEXColor">
+                                    </div>
+                                    <div class="layui-inline" style="left: -11px;">
+                                        <div id="inputHEXColor"></div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">RGB</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" value="" placeholder="请选择颜色" class="layui-input" id="outputRGBColor">
+                                    </div>
+                                    <div class="layui-inline" style="left: -11px;">
+                                        <div id="inputRGBColor"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="layui-col-md6"></div>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>向Api发送POST请求</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">Api地址</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiAD" class="layui-input" placeholder="Api地址">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">Json字符串</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiOut" class="layui-input" placeholder="Json字符串">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">返回结果</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiIn" class="layui-input" placeholder="返回结果">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btnApiDownload">本地发送并下载</button>
+                                        <button type="button" class="layui-btn" id="btnApiLocal">本地发送（带token）</button>
+                                        <button type="button" class="layui-btn" id="btnApiServer">从服务器发送（不带token）</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>向Api上传文件</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">Api地址</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="UploadAD" class="layui-input" placeholder="Api地址" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <input type="file" id="UploadFile" multiple="multiple" placeholder="选择文件" style="display:none;">
+                                        <label class="layui-form-label" style="padding-top:4px">
+                                            <a id="btnUploadFile" style="height:30px;padding:0px 10px;line-height:30px" class="layui-btn">选择文件</a>
+                                        </label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input id="labelUploadFile" type="text" class="layui-input" disabled>
+                                            <input id="UploadProgress" class="layui-input" style="background-color:#8bdcd5; width:0%; padding:0px;margin-top:-38px;" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">上传结果</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="UploadInfor" class="layui-input" placeholder="上传结果">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btnUpload">上传</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>Api功能1：生成二维码</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">Api地址</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiF1AD" class="layui-input" placeholder="Api地址" value="Helper/Image/CreateQRCode" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">代码</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiF1Code" class="layui-input" placeholder="代码">
+                                        </div>
+                                    </div>
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">宽</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiF1Width" class="layui-input" placeholder="宽">
+                                        </div>
+                                    </div>
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">高</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiF1Height" class="layui-input" placeholder="高">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">返回结果</label>
+                                        <div class="layui-input-inline">
+                                            <img id="ApiF1Image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btnApiF1Generate">生成</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="layui-col-md6">
+                    <fieldset class="layui-elem-field">
+                        <legend>Api功能2：测试返回消息</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">Api地址</label>
+                                        <div class="layui-input-inline" style="width:513px;">
+                                            <input type="text" id="ApiF2AD" class="layui-input" placeholder="Api地址" value="Helper/Msg/ReadMsg" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">消息代码</label>
+                                        <div class="layui-input-inline" style="width:401px;">
+                                            <input type="text" id="ApiF2Code" class="layui-input" placeholder="代码">
+                                        </div>
+                                        <div class="layui-form-mid layui-word-aux">分隔符</div>
+                                        <div class="layui-input-inline" style="width:50px;">
+                                            <select id="ApiF2Sep">
+                                                <option value="/">/</option>
+                                                <option value=",">,</option>
+                                                <option value=".">.</option>
+                                                <option value="|">|</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class=" layui-inline">
+                                        <label class="layui-form-label">弹窗风格</label>
+                                        <div class="layui-input-inline">
+                                            <select id="ApiF2Style">
+                                                <option value="">跟随消息类型</option>
+                                                <option value="0">字符串消息框</option>
+                                                <option value="1">字符串确认框</option>
+                                                <option value="2">表格消息框</option>
+                                                <option value="3">表格确认框</option>
+                                                <option value="4">多彩消息框</option>
+                                                <option value="5">多彩确认框</option>
+                                            </select>
+                                        </div>
+                                        <label class="layui-form-label">弹窗时间</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="ApiF2Time" class="layui-input" placeholder="秒">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn" id="btnApiF2Generate">生成消息</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("#xtgl").addClass("layui-nav-itemed");
+        $("#EasyTools").addClass("layui-this");
+
+        sonluk.global.getResources();
+        sonluk.global.getResources("MES/Tools", "lv");
+        var slv = sonluk.value.global.lv;
+
+        layui.use(['form', 'element', 'colorpicker', 'table'], function () {
+            var colorpicker = layui.colorpicker;
+            var form = layui.form;
+            sonluk.global.replaceLayui();
+
+            //设置=============================================================
+
+            //设置：存储初始化
+            var configName = sonluk.save.name();
+            var languageName = sonluk.config.local.global;
+            var defaultValue = sonluk.value;
+            if (sonluk.style.auto("set")) $("#supportInfo").text(slv.msg1);
+            else $("#supportInfo").text(slv.msg2);
+            colorpickerRender();
+
+            //设置：总
+            $("#btnResetAll").click(function () {
+                layer.confirm('确定还原所有设置数据？', {
+                    icon: 0, title: '还原确认', btn: ['确定', '取消']
+                }, function (index) {
+                    $("#btnResetColor")[0].click();
+                    layer.close(index);
+                }, function (index) {
+                    layer.msg("已取消", {
+                        icon: 6,
+                        time: 800
+                    });
+                });
+            });
+            $("#btnClearAll").click(function () {
+                layer.confirm('确定清除所有设置数据？', {
+                    icon: 0, title: '清除确认', btn: ['确定', '取消']
+                }, function (index) {
+                    sonluk.save.remove(configName);
+                    $("#btnClearLanguage")[0].click();
+                    layer.close(index);
+                    location.reload();
+                }, function (index) {
+                    layer.msg("已取消", {
+                        icon: 6,
+                        time: 800
+                    });
+                });
+            });
+
+            //设置：颜色
+            $("#btnResetColor").click(function () {
+                sonluk.value.style.color = defaultValue.style.color;
+                sonluk.save.cover(configName, sonluk.value);
+                sonluk.style.auto("mix");
+                colorpickerRender();
+            });
+
+            //设置：颜色：颜色选择器函数
+            function colorpickerRender() {
+                colorpicker.render({
+                    elem: '#settingColorTag',
+                    color: sonluk.value.style.color.tag,
+                    predefine: true,
+                    done: function (color) {
+                        $('.layui-elem-field').css('color', color);
+                        $('.layui-elem-field').css('border-color', color);
+                        $('.layui-btn').css('background-color', color);
+                        sonluk.value.style.color.tag = color;
+                        sonluk.save.cover(configName, sonluk.value);
+                    }
+                });
+                colorpicker.render({
+                    elem: '#settingColorLR',
+                    color: sonluk.value.style.color.lr,
+                    predefine: true,
+                    done: function (color) {
+                        $('.layui-side .layui-nav').css('background-color', color);
+                        sonluk.value.style.color.lr = color;
+                        sonluk.save.cover(configName, sonluk.value);
+                    }
+                });
+                colorpicker.render({
+                    elem: '#settingColorHead',
+                    color: sonluk.value.style.color.head,
+                    predefine: true,
+                    done: function (color) {
+                        $('.layui-header').css('background-color', color);
+                        sonluk.value.style.color.head = color;
+                        sonluk.save.cover(configName, sonluk.value);
+                    }
+                });
+            }
+
+            //设置：语言
+            if ($.cookie(languageName) == undefined || $.cookie(languageName) == null || $.cookie(languageName) == "") {
+                if (sonluk.save.exist(languageName)) {
+                    $.cookie(languageName, sonluk.save.get(languageName), { expires: 7, path: '/' });
+                    location.reload();
+                }
+                else $("#settingLanguage").val(window.navigator.language);
+            }
+            else $("#settingLanguage").val($.cookie(languageName));
+            form.render();
+            $("#btnSaveLanguage").click(function () {
+                $.cookie(languageName, $("#settingLanguage").val(), { expires: 7, path: '/' });
+                sonluk.save.cover(languageName, $("#settingLanguage").val());
+                location.reload();
+            })
+            $("#btnClearLanguage").click(function () {
+                $.removeCookie(languageName, { path: '/' });
+                sonluk.save.remove(languageName);
+                location.reload();
+            })
+
+            //设置=============================================================
+
+            //Layui自带工具
+            //-HEX颜色选择器
+            colorpicker.render({
+                elem: '#inputHEXColor',
+                color: '#009688',
+                predefine: true,
+                done: function (color) {
+                    $('#outputHEXColor').val(color);
+                }
+            });
+            //-RGB颜色选择器
+            colorpicker.render({
+                elem: '#inputRGBColor',
+                color: '#009688',
+                alpha: true,
+                predefine: true,
+                format: 'rgb',
+                done: function (color) {
+                    $('#outputRGBColor').val(color);
+                }
+            });
+
+            //-Api功能2：测试返回消息
+            $("#btnApiF2Generate").click(function () {
+                sonluk.http.api.sget({
+                    url: $("#ApiF2AD").val() + "?code=" + $("#ApiF2Code").val() + "&sep=" + $("#ApiF2Sep").val(),
+                    module: "MES",
+                    success: function (data) {
+                        sonluk.msg.open("暂不支持", data.data[0].type, $("#ApiF2Style").val() == "" ? undefined : Number($("#ApiF2Style").val()), $("#ApiF2Time").val() == "" ? undefined : Number($("#ApiF2Time").val()));
+                    }
+                })
+            })
+        });
+
+        //HTML字符串截取数据
+        var cacheData = {};
+        //-通过字符串获取表格数据
+        $("#btn_StrToJS").click(function () {
+            $("#hd").empty();
+            $("#hd").append($("#inputStr").val());
+            var tableData = {
+                thead: [],
+                tbody: [[]]
+            };
+            $('#hd table thead tr th').each(function (i) {
+                tableData.thead[i] = $(this).text();
+            });
+            $('#hd table tbody tr').each(function (i) {
+                tableData.tbody[i] = [];
+                $(this).children('td').each(function (j) {
+                    tableData.tbody[i][j] = $(this).text();
+                });
+            });
+            cacheData = tableData;
+            $("#hd").empty();
+        });
+        $("#btn_StrToJSON").click(function () {
+            $("#btn_StrToJS")[0].click();
+            $("#outputStrToJSON").val(JSON.stringify(cacheData));
+        });
+        //-通过Get请求获取表格数据
+        $("#btn_UrlToJS").click(function () {
+            $("#hd").empty();
+            var inputStr = {
+                input: $("#inputGetUrl").val(),
+                tag: "table",
+                type: "url"
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../Tools/GetUrl",
+                data: {
+                    inputStr: JSON.stringify(inputStr)
+                },
+                success: function (data) {
+                    $("#hd").append(JSON.parse(data).data);
+                }
+            });
+            var tableData = {
+                thead: [],
+                tbody: [[]]
+            };
+            $('#hd table thead tr th').each(function (i) {
+                tableData.thead[i] = $(this).text();
+            });
+            $('#hd table tbody tr').each(function (i) {
+                tableData.tbody[i] = [];
+                $(this).children('td').each(function (j) {
+                    tableData.tbody[i][j] = $(this).text();
+                });
+            });
+            cacheData = tableData;
+            $("#hd").empty();
+        });
+        $("#btn_UrlToJSON").click(function () {
+            $("#btn_UrlToJS")[0].click();
+            $("#outputUrlToJSON").val(JSON.stringify(cacheData));
+        });
+
+        //加密解密字符串
+        //-加密字符串
+        $("#btnEncryptStr").click(function () {
+            var inputStr = {
+                data: $("#inputEncryptStr").val(),
+                key: $("#inputEncryptKey").val(),
+                type: $("#inputEncryptType").val()
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../Tools/EasyEncrypt",
+                data: {
+                    inputStr: JSON.stringify(inputStr)
+                },
+                success: function (data) {
+                    $("#outputEncryptStr").val(JSON.parse(data).data);
+                }
+            });
+        });
+        //-解密字符串
+        $("#btnDecryptStr").click(function () {
+            var inputStr = {
+                data: $("#inputDecryptStr").val(),
+                key: $("#inputDecryptKey").val(),
+                type: $("#inputDecryptType").val()
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../Tools/EasyDecrypt",
+                data: {
+                    inputStr: JSON.stringify(inputStr)
+                },
+                success: function (data) {
+                    $("#outputDecryptStr").val(JSON.parse(data).data);
+                }
+            });
+        });
+
+        //Api测试
+        //-本地向Api发送POST请求
+        $("#btnApiLocal").click(function () {
+            sonluk.http.api.spost($("#ApiAD").val(), JSON.parse($("#ApiOut").val()), function (data) {
+                $("#ApiIn").val(data);
+            }, "MES");
+        });
+        $("#btnApiDownload").click(function () {
+            sonluk.http.api.sdownload($("#ApiAD").val(), "MES", false, JSON.parse($("#ApiOut").val()));
+        });
+
+        //-服务器向Api发送POST请求
+        $("#btnApiServer").click(function () {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../Tools/ApiPostTest",
+                data: {
+                    location: $("#ApiAD").val(),
+                    inputStr: $("#ApiOut").val()
+                },
+                success: function (data) {
+                    $("#ApiIn").val(data);
+                }
+            });
+        });
+
+        //-本地向Api上传文件
+        $("#btnUpload").click(function () {
+            sonluk.http.upload({
+                url: $("#UploadAD").val(),
+                elem: "#UploadFile",
+                success: function (data) {
+                    $("#UploadInfor").val(data);
+                },
+                progress: function (now) {
+                    $("#UploadProgress").css("width", now);
+                }
+            })
+        });
+        $("#btnUploadFile").click(function () {
+            $("#UploadFile")[0].click();
+        });
+        $("#UploadFile").change(function () {
+            $("#labelUploadFile").val($("#UploadFile").val());
+            $("#UploadProgress").css("width", "0%");
+            $("#UploadInfor").val("");
+        });
+
+        //-Api功能1：生成二维码
+        $("#btnApiF1Generate").click(function () {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                headers: {
+                    "Sonluk-Token": sonluk.cookie.get("token")
+                },
+                url: sonluk.config.http.api.MES.address + $("#ApiF1AD").val(),
+                data: JSON.stringify({
+                    code: $("#ApiF1Code").val(),
+                    format: "QRCODE",
+                    width: Number($("#ApiF1Width").val()),
+                    height: Number($("#ApiF1Height").val()),
+                    pure: 1,
+                }),
+                success: function (data) {
+                    $("#ApiF1Image").attr("src", "data:image/*;base64," + data.data);
+                }
+            });
+        });
+    </script>
+}

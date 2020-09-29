@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "考勤地址审核";
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">审核</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>人员管理</a>
+    <a><cite>考勤地址审核</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+        <label class="layui-form-label">人员姓名：</label>
+        <div class="layui-input-inline">
+            <select id="ddl_staff" lay-filter="ddl_staff" lay-search>
+                <option value="0" selected="selected">全部</option>
+            </select>
+        </div>
+        <button id="btn_select" class="layui-btn" style="width:120px;">查询</button><br />
+        <table id="address" lay-filter="address"></table>
+
+    </div>
+</div>
+    <script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+
+    @section scripts {
+        @Scripts.Render("~/bundles/CRM/Staff/Confirm")
+    }

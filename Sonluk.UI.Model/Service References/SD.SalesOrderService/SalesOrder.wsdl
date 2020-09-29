@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sonluk.com/API/SD/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://sonluk.com/API/SD/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sonluk.com/API/SD/">
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:SOInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SOInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Header" type="tns:SOHeaderInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfSOItemInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SOHeaderInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Division" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SoldToParty" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipToParty" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerPODate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSOItemInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SOItemInfo" nillable="true" type="tns:SOItemInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SOItemInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Client" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SONumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialEntered" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReqQty" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesUnit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatlDesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReqmtsType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatlGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChangedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Plant" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReqDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Creator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestPallet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestSpecific" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestShrinkFilm" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestRemarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DelivStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="POItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDesc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Flag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessingRecordsStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessingRecordsDelete" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="tns:SOKeywordInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SOKeywordInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Item" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessingRecordsStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Creator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Plant" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartChangedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChangedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartCurrentDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseGroup" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfSOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessingRecords">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nodes" type="tns:ArrayOfSOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessingRecordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcessingRecordsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessingRecordsSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessingRecords" />
+  </wsdl:message>
+  <wsdl:message name="ProcessingRecordsSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessingRecordsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SalesOrderSoap">
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessingRecords">
+      <wsdl:input message="tns:ProcessingRecordsSoapIn" />
+      <wsdl:output message="tns:ProcessingRecordsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SalesOrderHttpGet" />
+  <wsdl:portType name="SalesOrderHttpPost" />
+  <wsdl:binding name="SalesOrderSoap" type="tns:SalesOrderSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://sonluk.com/API/SD/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://sonluk.com/API/SD/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessingRecords">
+      <soap:operation soapAction="http://sonluk.com/API/SD/ProcessingRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SalesOrderSoap12" type="tns:SalesOrderSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://sonluk.com/API/SD/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://sonluk.com/API/SD/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessingRecords">
+      <soap12:operation soapAction="http://sonluk.com/API/SD/ProcessingRecords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SalesOrderHttpGet" type="tns:SalesOrderHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="SalesOrderHttpPost" type="tns:SalesOrderHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="SalesOrder">
+    <wsdl:port name="SalesOrderSoap" binding="tns:SalesOrderSoap">
+      <soap:address location="http://192.168.0.132/API/SD/SalesOrder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SalesOrderSoap12" binding="tns:SalesOrderSoap12">
+      <soap12:address location="http://192.168.0.132/API/SD/SalesOrder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SalesOrderHttpGet" binding="tns:SalesOrderHttpGet">
+      <http:address location="http://192.168.0.132/API/SD/SalesOrder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SalesOrderHttpPost" binding="tns:SalesOrderHttpPost">
+      <http:address location="http://192.168.0.132/API/SD/SalesOrder.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,85 @@
+﻿@using Sonluk.UI.Model.PS.CNFHService;
+@{
+    ViewBag.Title = "维护加工网络";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ET_PRPS[] prpslist= ViewBag.WBS ;
+    ET_TCNRFPT[] tcnrfptList = ViewBag.TCNRFPT;
+}
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>加工产能预警</a>
+    <a><cite>维护加工网络</cite></a>
+</span>
+<div class="layui-form ">
+    <input type="hidden" value="@Url.Action("SELECTNETWORK", "PS")" id="SELECTNETWORK" />
+    <input type="hidden" value="@Url.Action("UpdateNetworkSap", "PS")" id="UpdateNetworkSap" />
+    
+    <div class="layui-form-item">
+    
+        <button class="layui-btn" id="btn_select">查询</button>
+        <button class="layui-btn" id="btn_update">批量修改网络</button>
+        <button class="layui-btn" id="btn_save">保存修改网络</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">WBS编号：</label>
+        <div class="layui-input-inline" style="width:250px">
+            <select id="in_wbs" lay-filter="in_wbs" lay-search>
+                <option value="" selected="selected">请选择</option>
+                @for (int i = 0; i < @prpslist.Length; i++)
+                {
+                    <option value="@prpslist[i].PSPNR">@prpslist[i].POSID</option>
+                }
+            </select>
+
+        </div>
+        <label class="layui-form-label">零件分类：</label>
+        <div class="layui-input-inline" style="width:450px">
+            <select id="in_fl" lay-filter="in_fl" lay-search xm-select="fl">
+                @*<option value="0" selected="selected">请选择</option>*@
+                @for (int i = 0; i < tcnrfptList.Length; i++)
+                {
+                    <option value="@tcnrfptList[i].RFPNT">@tcnrfptList[i].KTEXT</option>
+                }
+            </select>
+        </div>
+       
+
+
+    </div>
+    <div style="padding:10px">
+        <table class="layui-hide" id="tb_network" lay-filter="tb_network"></table>
+    </div>
+
+</div>
+<div class="layui-form" hidden id="div_updateNetwork">
+    <div style="padding:10px">
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始时间：</label>
+            <div class="layui-input-inline" style="width: 140px;">
+                <input type="text" name="date" id="in_time_ks" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+          
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束时间：</label>
+            <div class="layui-input-inline" style="width: 140px;">
+                <input type="text" name="date" id="in_time_js" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+      
+    </div>
+   
+
+</div>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/PS/updateNetwork")
+}

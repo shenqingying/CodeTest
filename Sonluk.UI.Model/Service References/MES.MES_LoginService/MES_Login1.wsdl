@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OPENID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WXDLCS" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PC" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="WX" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="GCID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="tns:MES_LoginINFO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_LoginINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TokenInfo" type="tns:TokenInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="JURISDICTION_GROUP" type="tns:ArrayOfCRM_JURISDICTION_GROUP" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TokenInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="access_token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="expires_in" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TOKENID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LANGUAGEID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_JURISDICTION_GROUP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_JURISDICTION_GROUP" nillable="true" type="tns:CRM_JURISDICTION_GROUP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_JURISDICTION_GROUP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_HG_RIGHTGROUP" type="tns:CRM_HG_RIGHTGROUP" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRM_HG_RIGHTList" type="tns:ArrayOfCRM_HG_RIGHT" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_HG_RIGHTGROUP">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RGROUPID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RGROUPNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRGROUPID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRIGHTNO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RGROUPMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMAGELJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCRM_HG_RIGHT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_HG_RIGHT" nillable="true" type="tns:CRM_HG_RIGHT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CRM_HG_RIGHT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="WX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PC" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RIGHTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RGROUPID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RIGHTNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RIGHTNO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RIGHTADD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RIGHTMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMAGELJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MSGNO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISCLMSG" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Login_language">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OPENID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WXDLCS" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PC" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="WX" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="GCID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="LANGUAGEID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login_languageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Login_languageResult" type="tns:MES_LoginINFO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_LoginINFO" nillable="true" type="tns:MES_LoginINFO" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="Login_languageSoapIn">
+    <wsdl:part name="parameters" element="tns:Login_language" />
+  </wsdl:message>
+  <wsdl:message name="Login_languageSoapOut">
+    <wsdl:part name="parameters" element="tns:Login_languageResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpGetIn">
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="OPENID" type="s:string" />
+    <wsdl:part name="WXDLCS" type="s:string" />
+    <wsdl:part name="PC" type="s:string" />
+    <wsdl:part name="WX" type="s:string" />
+    <wsdl:part name="GCID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_LoginINFO" />
+  </wsdl:message>
+  <wsdl:message name="Login_languageHttpGetIn">
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="OPENID" type="s:string" />
+    <wsdl:part name="WXDLCS" type="s:string" />
+    <wsdl:part name="PC" type="s:string" />
+    <wsdl:part name="WX" type="s:string" />
+    <wsdl:part name="GCID" type="s:string" />
+    <wsdl:part name="LANGUAGEID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Login_languageHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_LoginINFO" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpPostIn">
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="OPENID" type="s:string" />
+    <wsdl:part name="WXDLCS" type="s:string" />
+    <wsdl:part name="PC" type="s:string" />
+    <wsdl:part name="WX" type="s:string" />
+    <wsdl:part name="GCID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_LoginINFO" />
+  </wsdl:message>
+  <wsdl:message name="Login_languageHttpPostIn">
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="OPENID" type="s:string" />
+    <wsdl:part name="WXDLCS" type="s:string" />
+    <wsdl:part name="PC" type="s:string" />
+    <wsdl:part name="WX" type="s:string" />
+    <wsdl:part name="GCID" type="s:string" />
+    <wsdl:part name="LANGUAGEID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Login_languageHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_LoginINFO" />
+  </wsdl:message>
+  <wsdl:portType name="MES_LoginSoap">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login_language">
+      <wsdl:input message="tns:Login_languageSoapIn" />
+      <wsdl:output message="tns:Login_languageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_LoginHttpGet">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginHttpGetIn" />
+      <wsdl:output message="tns:LoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login_language">
+      <wsdl:input message="tns:Login_languageHttpGetIn" />
+      <wsdl:output message="tns:Login_languageHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MES_LoginHttpPost">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginHttpPostIn" />
+      <wsdl:output message="tns:LoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login_language">
+      <wsdl:input message="tns:Login_languageHttpPostIn" />
+      <wsdl:output message="tns:Login_languageHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MES_LoginSoap" type="tns:MES_LoginSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login_language">
+      <soap:operation soapAction="http://tempuri.org/Login_language" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_LoginSoap12" type="tns:MES_LoginSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login_language">
+      <soap12:operation soapAction="http://tempuri.org/Login_language" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_LoginHttpGet" type="tns:MES_LoginHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Login">
+      <http:operation location="/Login" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login_language">
+      <http:operation location="/Login_language" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MES_LoginHttpPost" type="tns:MES_LoginHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Login">
+      <http:operation location="/Login" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login_language">
+      <http:operation location="/Login_language" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MES_Login">
+    <wsdl:port name="MES_LoginSoap" binding="tns:MES_LoginSoap">
+      <soap:address location="http://localhost/API/MES/MES_Login.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_LoginSoap12" binding="tns:MES_LoginSoap12">
+      <soap12:address location="http://localhost/API/MES/MES_Login.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_LoginHttpGet" binding="tns:MES_LoginHttpGet">
+      <http:address location="http://localhost/API/MES/MES_Login.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MES_LoginHttpPost" binding="tns:MES_LoginHttpPost">
+      <http:address location="http://localhost/API/MES/MES_Login.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

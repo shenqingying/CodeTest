@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "公司维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR组织规划</a>
+    <a><cite>公司维护</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_gs" lay-filter="tb_gs"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+<div id="div_gsinfo" class="layui-form" hidden>
+
+    <div class="layui-row">
+        <div class="layui-col-xs6">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">公司代码：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_gsdm" autocomplete="off" maxlength="4" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">简称：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_jc" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">公司名称：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_gsname" autocomplete="off" class="layui-input" style="width: 250px">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">排序：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_px" autocomplete="off" class="layui-input" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">地址：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_gsaddress" autocomplete="off" class="layui-input" style="width: 490px">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">信用代码：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_xydm" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">法人代表：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_frdb" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">启用状态：</label>
+                    <div class="layui-input-block" style="width: 182px;">
+                        <select id="gsinfo_isaction" lay-filter="gsinfo_isaction">
+                            <option value="1" selected="selected">启用</option>
+                            <option value="0">关闭</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开户银行：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_khyh" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">银行账户：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_yhzh" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话：</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="gsinfo_tel" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">办公地点：</label>
+                    <div class="layui-input-block" style="width: 182px;">
+                        <select id="gsinfo_officeplace" lay-filter="gsinfo_officeplace"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">备注：</label>
+                    <div class="layui-input-block" style="width: 490px;">
+                        <input type="text" id="gsinfo_bz" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs6">
+            <div class="layui-upload">
+                <div class="layui-upload-list" style="margin:0px">
+                    <img id="demo1" width="550" height="350">
+                </div>
+                <button id="test1" style="width: 160px;" hidden>保存图片</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/ZZJG/GSMANAGE")
+}

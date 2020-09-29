@@ -1,0 +1,359 @@
+﻿@using Sonluk.UI.Model.CRM.COST_CXYGZService
+@{
+    ViewBag.Title = "Print_Order";
+    Layout = "~/Views/Shared/_Layout_Print_CRM.cshtml";
+    CRM_COST_CXYGZ[] data = ViewBag.data;
+
+    decimal KAXS = 0, OTHERFEE = 0;
+    double GWGZ = 0, TCJE = 0, THKJ = 0, SBKC = 0, YFHJ = 0;
+    string str = "";
+}
+
+<style>
+    label {
+        text-align: left;
+        width: inherit;
+    }
+
+    .print_page_td_haveborder_zfdc2 {
+        text-align: center;
+    }
+</style>
+
+@if (ViewBag.FORMAT == 1)
+{
+    //工资单
+    <br />
+    <div class="main2">
+        <table class="print_page_table_noborder_zfdc2">
+            <tr>
+                <td>
+                    @if(@data[0].GW == "2009" || @data[0].GW == "2013")
+                    {
+                        str = "人事外包促销员工资考核";
+                    }
+                    else if(@data[0].GW == "2011" || @data[0].GW == "4191")
+                    {
+                        str = "退休返聘促销员劳务";
+                    }
+                    else {
+                        str = @data[0].GWDES + "促销员";
+                    }
+                    <div class="print-page-body-table-header">中银(宁波)电池有限公司@(str)考核提成表</div>
+                </td>
+            </tr>
+        </table>
+        <table class="print_page_table_noborder_zfdc2">
+            <tr>
+                <td style="text-align:left">
+                    所属年月：@(data[0].CXYYEAR)年 @Convert.ToInt32(data[0].CXYMONTH)月
+                </td>
+                <td style="text-align:right">
+                    金额单位：元
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside3" cellspacing="0" cellpadding="5" border="1">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>所属系统</th>
+                    <th>省份</th>
+                    <th>城市</th>
+                    <th>所属门店</th>
+                    <th>姓名</th>
+                    @if (@data[0].GW != "2008")
+                    {
+                        <th>身份证号码</th>
+                    }
+                    <th>考核基数</th>
+                    <th>销售金额</th>
+                    @if (@data[0].GW != "2008")
+                    {
+                        if (data[0].GW == "2011" || data[0].GW == "4191")
+                        {
+                            <th>劳务费</th>
+                        }
+                        else
+                        {
+                            <th>基本工资</th>
+                        }
+                    }
+
+                    <th>提成数</th>
+                    <th>退货扣减</th>
+                    <th>其他</th>
+                    @if (@data[0].GW != "2008")
+                    {
+                        if (data[0].GW == "2011" && data[0].GW == "4191")
+                        {
+                            <th>实发费用</th>
+                        }
+                        else
+                        {
+                            <th>社保个人部分扣除</th>
+                            <th>实发工资</th>
+                        }
+                    }
+                    @if (@data[0].GW == "2008")
+                    {
+                        <th>应发合计</th>
+                    }
+                    @if (@data[0].GW != "2009" && @data[0].GW != "2013")
+                    {
+                        <th>备注</th>
+                        if (data[0].GW != "2011" && data[0].GW != "4191")
+                        {
+                            <th>职位类别</th>
+                        }
+
+                    }
+                    <th>开户行</th>
+                    <th>卡号</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < data.Length; i++)
+                {
+                <tr>
+                    <td style="width:0.8cm;" class="print_page_td_haveborder_zfdc2">@(i + 1)</td>
+                    <td style="width:3.0cm;" class="print_page_td_haveborder_zfdc2">@data[i].PJC</td>
+                    <td style="width:1cm;" class="print_page_td_haveborder_zfdc2">@data[i].SFDES</td>
+                    <td style="width:1cm;" class="print_page_td_haveborder_zfdc2">@data[i].CSDES</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].JC</td>
+                    <td style="width:1cm;" class="print_page_td_haveborder_zfdc2">@data[i].NAME</td>
+                    @if (@data[i].GW != "2008")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].CODE</td>
+                    }
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].BASE</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].KAXS</td>
+                    @if (@data[i].GW != "2008")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].GWGZ</td>
+                    }
+
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].TCJE</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].THCBKJ</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].OTHERFEE</td>
+                    @if (@data[i].GW != "2008")
+                    {
+                        if (data[i].GW != "2011" || data[i].GW != "4191")
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].SBKC</td>
+                        }
+                        if (@data[i].GW == "2009" || @data[i].GW == "2013")
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@(data[i].GWGZ + data[i].TCJE - data[i].THCBKJ - data[i].SBKC)</td>
+                        }
+                        else if (data[i].GW == "2011" || data[i].GW == "4191")
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@(data[i].GWGZ + data[i].TCJE - data[i].THCBKJ)</td>
+                        }
+                        else
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@data[i].YFHJ</td>
+                        }
+                    }
+                    @if (@data[i].GW == "2008")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">@(data[i].TCJE - data[i].THCBKJ)</td>
+                    }
+                    @if (@data[i].GW != "2009" && @data[i].GW != "2013")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].BEIZ</td>
+                        if (data[i].GW != "2011" && data[i].GW != "4191")
+                        {
+                        <td style="width:0.8cm;" class="print_page_td_haveborder_zfdc2">@data[i].GWDES</td>
+                        }
+                        
+                    }
+                    <td style="width:1.5cm;" class="print_page_td_haveborder_zfdc2">@data[i].BANK</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].CARDNUM</td>
+                </tr>
+                    KAXS = KAXS + data[i].KAXS;
+                    GWGZ = GWGZ + data[i].GWGZ;
+                    TCJE = TCJE + data[i].TCJE;
+                    THKJ = THKJ + data[i].THCBKJ;
+                    SBKC = SBKC + data[i].SBKC;
+                    OTHERFEE = OTHERFEE + data[i].OTHERFEE;
+                    if (data[i].GW == "2008")
+                    {
+                        YFHJ = YFHJ + (data[i].TCJE - data[i].THCBKJ);
+                    }
+                    else if (data[i].GW == "2009" || data[i].GW == "2013")
+                    {
+                        YFHJ = YFHJ + (data[i].GWGZ + data[i].TCJE - data[i].THCBKJ - data[i].SBKC);
+                    }
+                    else if(data[i].GW == "2011" || data[i].GW == "4191")
+                    {
+                        YFHJ = YFHJ + (data[i].GWGZ + data[i].TCJE - data[i].THCBKJ);
+                    }
+                    else
+                    {
+                        YFHJ = YFHJ + data[i].YFHJ;
+                    }
+
+                }
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2">合计</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    @if (@data[0].GW != "2008")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    }
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">@KAXS</td>
+                    @if (@data[0].GW != "2008")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">@GWGZ</td>
+                    }
+
+                    <td class="print_page_td_haveborder_zfdc2">@TCJE</td>
+                    <td class="print_page_td_haveborder_zfdc2">@THKJ</td>
+                    <td class="print_page_td_haveborder_zfdc2">@OTHERFEE</td>
+                    @if (@data[0].GW != "2008")
+                    {
+                        if (data[0].GW != "2011" || data[0].GW != "4191")
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">@SBKC</td>
+                        }
+                        <td class="print_page_td_haveborder_zfdc2">@YFHJ</td>
+                    }@if (@data[0].GW == "2008")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">@YFHJ</td>
+                    }
+                    @if (@data[0].GW != "2009" && @data[0].GW != "2013")
+                    {
+                        <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        if (data[0].GW != "2011" && data[0].GW != "4191")
+                        {
+                            <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                        }
+
+                    }
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+
+        <table class="print_page_table_noborder_zfdc2">
+            <tr>
+                <td style="text-align: left;">
+                    编制：
+                </td>
+                <td style="text-align: left;">
+                    审核：
+                </td>
+                <td style="text-align: left;">
+                    审批：
+                </td>
+            </tr>
+        </table>
+
+
+
+
+
+
+
+
+
+    </div>
+}
+else if (ViewBag.FORMAT == 2)
+{
+    <br />
+    <div class="main">
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td>
+                    <div class="print-page-body-table-header">K/A卖场促销活动费用申请</div>
+                </td>
+            </tr>
+        </table>
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align:left">
+                    尊敬的公司领导：
+                </td>
+            </tr>
+            <tr>
+                @{
+                    DateTime start = Convert.ToDateTime(data[0].CXYYEAR + "-" + data[0].CXYMONTH + "-01");
+                    DateTime end = start.AddMonths(1).AddDays(-1);
+                }
+                <td style="text-align:left">
+                    &nbsp;&nbsp; @(data[0].CXYYEAR)年@(start.ToString("MM月dd日"))至@(end.ToString("MM月dd日"))期间，公司在家乐福、麦德龙、大润发、华润万家、欧尚、易初莲花各门店展开了促销活动，实际产生促销费用@(ViewBag.HJ)元，具体明细如下：
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>所属系统</th>
+                    <th>省份</th>
+                    <th>城市</th>
+                    <th>所属门店</th>
+                    <th>销售金额(元)</th>
+                    <th>促销费(元)</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < data.Length; i++)
+                {
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2">@(i + 1)</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].PJC</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].SFDES</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].CSDES</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].JC</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].KAXS</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].YFHJ</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].BEIZ</td>
+                    </tr>
+                    KAXS = KAXS + data[i].KAXS;
+                    YFHJ = YFHJ + data[i].YFHJ;
+                }
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2">合计</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                    <td class="print_page_td_haveborder_zfdc2">@KAXS</td>
+                    <td class="print_page_td_haveborder_zfdc2">@YFHJ</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align: left;">
+                    编制：
+                </td>
+                <td style="text-align: left;">
+                    审核：
+                </td>
+                <td style="text-align: left;">
+                    审批：
+                </td>
+            </tr>
+        </table>
+    </div>
+
+}
+
+
+
+

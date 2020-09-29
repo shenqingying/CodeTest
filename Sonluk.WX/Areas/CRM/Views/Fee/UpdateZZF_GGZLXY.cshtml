@@ -1,0 +1,75 @@
+﻿@using Sonluk.UI.Model.CRM.COST_ZZFTTService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "编辑制作费基本信息";
+
+
+    CRM_COST_ZZFTT data = ViewBag.data;
+
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+
+
+}
+
+
+
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="@Url.Action("UpdateIndex", "Fee", new { TTID = @data.TTID })" id="back">返回</a>
+    @*<button id="insert_ggsj" class="weui-btn weui-btn_primary" style="width:49%;display:initial;margin:0 0;">新增</button>*@
+</div>
+<div id="div1" class="weui-cells weui-cells_form" style="margin-top:0;">
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户名称：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="mendian1" class="weui-input" type="text" placeholder="" value="@data.MCNAME">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">客户编号：</label></div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <input id="CRMID" class="weui-input" type="text" placeholder="" value="@data.CRMID">
+        </div>
+    </div>
+</div>
+<hr />
+
+<div id="div3" class="weui-cells weui-cells_form" style="margin-top:0;">
+    <div id="div_IMGresult">
+    </div>
+    <button class="weui-btn weui-btn_primary" id="btn_upload_img_camera" style="width:48%;display: initial;margin: 0 0;">拍照</button>
+    <button class="weui-btn weui-btn_primary" id="btn_upload_img_album" style="width:48%;display: initial;margin: 0 0;">相册</button>
+
+</div>
+
+
+<input id="staffid" value="@staffid" hidden />
+<input id="state" value="@state" hidden />
+<input id="appid" value="@appid" hidden />
+
+<input id="zzf_ttid" value="@data.TTID" hidden />
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/UpdateZZF_GGZLXY")
+}
+
+

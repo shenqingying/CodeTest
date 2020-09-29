@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "奖金福利明细录入";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string JJFLID = "";
+    if (Session["JJFLID"] != null)
+    {
+        JJFLID = Session["JJFLID"].ToString();
+    }
+    Session["JJFLID"] = null;
+    string ISACTION = "";
+    if (Session["ISACTION"] != null)
+    {
+        ISACTION = Session["ISACTION"].ToString();
+    }
+    Session["ISACTION"] = null;
+}
+<script type="text/html" id="tpl_isaction">
+    {{# if(d.ISACTION == 1){ }}
+    正常
+    {{# }else if(d.ISACTION == 2){ }}
+    结案
+    {{# }else { }}
+    {{# } }}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>奖金福利明细录入</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" onclick="location.href = '@Url.Action("XZGL_JJFL_HEAD_MANAGE", "XZGL")'">返回</button>
+        <button class="layui-btn" id="btn_savett">保存抬头</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1" style="width: 80px;">公司：</label>
+            <div class="layui-input-inline">
+                <select id="jjflinfo_gs" lay-filter="jjflinfo_gs"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" style="width: 80px;">部门：</label>
+            <div class="layui-input-inline">
+                <select id="jjflinfo_dept" lay-filter="jjflinfo_dept" lay-search></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" style="width: 80px;">计发月份：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="jjflinfo_sbmonth" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" style="width: 100px;">奖金福利名称：</label>
+            <div class="layui-input-inline">
+                <select id="jjflinfo_jjflname" lay-filter="jjflinfo_jjflname"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" id="div_mx_btn" hidden>
+        <button class="layui-btn" id="btn_mxcx" hidden>查询</button>
+        <button class="layui-btn" id="btn_mxdr" hidden>导入</button>
+        <button class="layui-btn" id="btn_mxtjry" hidden>添加人员</button>
+        <button class="layui-btn" id="btn_mxdc" hidden>导出</button>
+    </div>
+    <div class="layui-form-item" id="div_mx_cxtj" hidden>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 80px;">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_mx_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_jjflmx" lay-filter="tb_jjflmx"></table>
+</div>
+<div id="div_tjry" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">搜索项：</label>
+            <div class="layui-input-inline" style="width: 200px;">
+                <input type="text" id="find_gh" autocomplete="off" class="layui-input" placeholder="工号或姓名" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">在职状态：</label>
+            <div class="layui-input-inline" style="width: 200px;">
+                <select xm-select="find_zzzt" id="find_zzzt" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">员工类别：</label>
+            <div class="layui-input-inline" style="width: 200px;">
+                <select xm-select="find_yglb" id="find_yglb" xm-select-height="36px"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">入职日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tjry_rzrqs" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="tjry_rzrqe" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">离职日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="tjry_lzrqs" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="tjry_lzrqe" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" align="right">
+        <button class="layui-btn layui-btn-sm" id="btn_addry_find">查询</button>
+    </div>
+    <table class="layui-hide" id="tb_addry" lay-filter="tb_addry"></table>
+</div>
+<div id="div_update" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1" style="width: 80px;">借出部门：</label>
+            <div class="layui-input-inline">
+                @*<select id="jjflmx_jcbm" lay-filter="jjflmx_jcbm" lay-search></select>*@
+                <input type="text" id="jjflmx_jcbm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_mxupdate" lay-filter="tb_mxupdate"></table>
+</div>
+<div id="div_daoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_drmb" style="width:150px">导入</button>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="BL_JJFLID" value="@JJFLID">
+    <input type="text" id="BL_ISACTION" value="@ISACTION">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_JJFL_MX_MANAGE")
+}

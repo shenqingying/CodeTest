@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "编辑产品";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="shangxiawu">
+    {{# if(d.CCSJLX == 1){ }}
+    上午
+    {{# }else if(d.CCSJLX == 2){ }}
+    下午
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="qiandao">
+    {{# if(d.ISQD == true){ }}
+    已签到
+    {{# }else if(d.ISQD == false){ }}
+    未签到
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="QDWZ_Tpl">
+    {{# if(d.ISQD == true){ }}
+    {{ d.QDWZ }}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_CC">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar_CCMX">
+    @*<a class="layui-btn layui-btn-xs" lay-event="signin">签到</a>*@
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="tb_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>产品管理</a>
+    <a><cite>编辑产品</cite></a>
+</span>
+<br />
+<br />
+
+
+
+
+
+
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_save" class="layui-btn">保存</button>
+            <button id="btn_img" class="layui-btn">上传图片</button>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品类型：</label>
+            <div class="layui-input-inline">
+                <select id="cplx" lay-filter="cplx">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品系列：</label>
+            <div class="layui-input-inline">
+                <select id="cpxl" lay-filter="cpxl">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品型号：</label>
+            <div class="layui-input-inline">
+                <select id="cpxh" lay-filter="cpxh">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品品号：</label>
+            <div class="layui-input-inline">
+                <input id="cpph" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品名称：</label>
+            <div class="layui-input-inline">
+                <input id="cpmc" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">条形码：</label>
+            <div class="layui-input-inline">
+                <input id="code" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">订单单位：</label>
+            <div class="layui-input-inline">
+                <input id="dddw" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">标准单位：</label>
+            <div class="layui-input-inline">
+                <input id="bzdw" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">转换率：</label>
+            <div class="layui-input-inline">
+                <input id="rate" type="text" autocomplete="off" class="layui-input">
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品图片：</label>
+            <div class="layui-input-inline">
+
+                <img id="productimg" src="" style="width:200px;" />
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+<input id="staffid" hidden />
+<input id="bbid" hidden />
+
+<input id="path" hidden />
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#staffid").val("@Staffid");
+
+        });
+    </script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Product/Update_Product")
+}

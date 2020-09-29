@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "托盘管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="isfree">
+    {{# if(d.ISFREE == 2){}}
+    空闲
+    {{# }else if(d.ISFREE == 1){ }}
+    非空闲
+    {{# }else{ }}
+    error
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>托盘</a>
+    <a><cite>托盘管理</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增托盘</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+            <button id="btn_dc" class="layui-btn">导出数据</button>
+            <button id="btn_dy" class="layui-btn">批量打印</button>
+            <button id="btn_pldel" class="layui-btn">批量删除</button>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">托盘编号：</label>
+                <div class="layui-input-inline">
+                    <input id="cx_tpno" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="cx_gc" lay-filter="cx_gc">
+                        <option value="">请选择</option>
+                        @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                        {
+                            if (Model.Sy_gc.Length == 1)
+                            {
+                                <option value="@Model.Sy_gc[0].GC" selected="selected">@Model.Sy_gc[0].GC</option>
+                            }
+                            else
+                            {
+                                <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">库存地点：</label>
+                <div class="layui-input-inline">
+                    <select id="cx_kcdd" lay-filter="cx_kcdd">
+                        <option value="" selected="selected">请选择</option>
+                        @for (int i = 0; i < Model.MES_MM_CK_SELECT.MES_MM_CK.Length; i++)
+                        {
+                            <option value="@Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKDM">@Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKDM - @Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKMS</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">托盘规格：</label>
+                <div class="layui-input-inline">
+                    <select id="cx_tpgg" lay-filter="cx_tpgg">
+                        <option value="0" selected="selected">请选择</option>
+                        @for (int i = 0; i < Model.Sy_typemxlist.Length; i++)
+                        {
+                            if (Model.Sy_typemxlist[i].TYPEID == 20)
+                            {
+                                <option value="@Model.Sy_typemxlist[i].ID">@Model.Sy_typemxlist[i].MXNAME</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">空闲状态：</label>
+                <div class="layui-input-inline">
+                    <select id="is_free" lay-filter="is_free">
+                        <option value="0" selected="selected">请选择</option>
+                        <option value="2">空闲</option>
+                        <option value="1">非空闲</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建时间：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="date" id="in_CJRQ" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建人：</label>
+                <div class="layui-input-inline">
+                    <input id="cx_CJR" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">托盘属性：</label>
+                <div class="layui-input-inline">
+                    <select id="find_tptype" lay-filter="find_tptype">
+                        <option value="0" selected="selected">请选择</option>
+                        <option value="1">租赁</option>
+                        <option value="2">自购</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_TPINFO" lay-filter="tb_TPINFO"></table>
+    </div>
+</div>
+<div id="div_xztp" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item" id="hide_tpno">
+        <label class="layui-form-label" style="width:130px">托盘编号：</label>
+        <div class="layui-input-inline">
+            <input id="tpno" type="text" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">工厂：</label>
+        <div class="layui-input-inline">
+            <select id="gc" lay-filter="gc">
+                @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                {
+                    if (Model.Sy_gc.Length == 1)
+                    {
+                        <option value="@Model.Sy_gc[0].GC" selected="selected">@Model.Sy_gc[0].GC</option>
+                    }
+                    else
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">库存地点：</label>
+        <div class="layui-input-inline">
+            <select id="ckdd" lay-filter="ckdd">
+                <option value="" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.MES_MM_CK_SELECT.MES_MM_CK.Length; i++)
+                {
+                    <option value="@Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKDM">@Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKDM - @Model.MES_MM_CK_SELECT.MES_MM_CK[i].CKMS</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">托盘规格：</label>
+        <div class="layui-input-inline">
+            <select id="tpgg" lay-filter="tpgg">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.Sy_typemxlist.Length; i++)
+                {
+                    if (Model.Sy_typemxlist[i].TYPEID == 20)
+                    {
+                        <option value="@Model.Sy_typemxlist[i].ID">@Model.Sy_typemxlist[i].MXNAME</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" id="sldiv">
+        <label class="layui-form-label" style="width:130px">新增数量：</label>
+        <div class="layui-input-inline">
+            <input id="xzsl" type="text" autocomplete="off" onkeyup="value = value.replace(/[^\d]/g, '')" class="layui-input" placeholder="请输入数字">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">托盘来源：</label>
+        <div class="layui-input-inline">
+            <select id="tply" lay-filter="tply">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.Sy_typemxlist.Length; i++)
+                {
+                    if (Model.Sy_typemxlist[i].TYPEID == 21)
+                    {
+                        <option value="@Model.Sy_typemxlist[i].ID">@Model.Sy_typemxlist[i].MXNAME</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" id="hide_isfree">
+        <label class="layui-form-label" style="width:130px">空闲状态：</label>
+        <div class="layui-input-inline">
+            <select id="isfree_xg" lay-filter="isfree_xg">
+                @*<option value="0" selected="selected">请选择</option>*@
+                <option value="2" selected="selected">空闲</option>
+                <option value="1">非空闲</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px">托盘属性：</label>
+        <div class="layui-input-inline">
+            <select id="xztp_tptype" lay-filter="xztp_tptype">
+                <option value="0" selected="selected">请选择</option>
+                <option value="1">租赁</option>
+                <option value="2">自购</option>
+            </select>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/TPM/TPM_Manage")
+}

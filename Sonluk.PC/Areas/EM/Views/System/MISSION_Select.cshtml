@@ -1,0 +1,102 @@
+﻿@{
+    
+        ViewBag.Title = "新包装任务查询";
+        Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+   
+}
+
+<span class="layui-breadcrumb">
+    <a>电子文档系统管理</a>
+    <a><cite>新包装任务查询</cite></a>
+</span>
+<script type="text/html" id="status">
+    {{# if(d.STATUS == 1){ }}
+    已发起
+    {{# }else if(d.STATUS == 2){ }}
+    已接收
+    {{# }else if(d.STATUS == 3){ }}
+    已完成
+
+    {{# } }}
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn  layui-btn-xs" lay-event="mx">明细</a>
+
+</script>
+<input type="hidden" value="@Url.Action("MISSION_Read", "System")" id="MISSION_Read" />
+<input type="hidden" value="@Url.Action("MISSION_MX_SELECT", "System")" id="MISSION_MX_SELECT" />
+
+
+<div class="layui-form layui-form-pane" style="margin-top:10px">
+    <div class="layui-form-item">
+        <button id="btn_cx" class="layui-btn">查询</button>
+       
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务单</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_MISSION" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">物料号</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_MATNR" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">销售订单</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_VBELN" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">行项目</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_POSNR" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务状态</label>
+        <div class="layui-input-inline">
+            <select id="st_status" lay-filter="st_status">
+                <option value="0" selected="selected">请选择</option>
+                <option value="1">已发起</option>
+                <option value="2">已接收</option>
+                <option value="3">已完成</option>
+            </select>
+        </div>
+        <label class="layui-form-label">创建者</label>
+        <div class="layui-input-inline">
+            <input type="text" id="it_CJR" autocomplete="off" class="layui-input">
+        </div>
+
+        <label class="layui-form-label">创建日期：</label>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="date" id="in_cjrq_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.AddDays(0).ToString("yyyy-MM-dd")">
+        </div>
+        <div class="layui-form-mid">-</div>
+        <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="date" id="in_cjrq_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.AddDays(0).ToString("yyyy-MM-dd")">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_missiontable" lay-filter="tb_missiontable"></table>
+    </div>
+</div>
+
+<div id="mx_div" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_mxtable" lay-filter="tb_mxtable"></table>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/EM/system/MISSION_Select")
+}
+
+

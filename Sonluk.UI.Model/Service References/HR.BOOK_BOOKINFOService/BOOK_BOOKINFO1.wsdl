@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT_BOOKINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_BOOK_BOOKINFO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BOOKNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOKNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CBS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRICE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KC" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RKDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RKDATEKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RKDATEJS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RYID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GHDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GHNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYDATEKS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYDATEJS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SELECTLB" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERT_BOOKINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_BOOKINFOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_BOOKINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BOOKINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BOOKINFOResult" type="tns:HR_BOOK_BOOKINFO_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_BOOK_BOOKINFO_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_BOOK_BOOKINFO_LIST" type="tns:ArrayOfHR_BOOK_BOOKINFO_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_BOOK_BOOKINFO_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_BOOK_BOOKINFO_LIST" nillable="true" type="tns:HR_BOOK_BOOKINFO_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_BOOK_BOOKINFO_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BOOKNO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOKNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CBS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LXNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRICE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="KC" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RKCOUNT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RKDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMARK" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISZX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISDELETE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISGH" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GHDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JYDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YGNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKCOUNT" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RYID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_BOOKINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_BOOKINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_BOOKINFOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LOGOUT_BOOKINFO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LOGOUT_BOOKINFOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LOGOUT_BOOKINFOResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JY_BOOK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JY_BOOKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JY_BOOKResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GH_BOOK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GH_BOOKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GH_BOOKResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BOOK_LOOK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BOOK_LOOKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BOOK_LOOKResult" type="tns:HR_BOOK_BOOKINFO_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BOOK_LOOK_JY">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_BOOK_BOOKINFO" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_BOOK_LOOK_JYResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_BOOK_LOOK_JYResult" type="tns:HR_BOOK_BOOKINFO_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERT_BOOKINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_BOOKINFO" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_BOOKINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_BOOKINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BOOKINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BOOKINFO" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BOOKINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BOOKINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_BOOKINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_BOOKINFO" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_BOOKINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_BOOKINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="LOGOUT_BOOKINFOSoapIn">
+    <wsdl:part name="parameters" element="tns:LOGOUT_BOOKINFO" />
+  </wsdl:message>
+  <wsdl:message name="LOGOUT_BOOKINFOSoapOut">
+    <wsdl:part name="parameters" element="tns:LOGOUT_BOOKINFOResponse" />
+  </wsdl:message>
+  <wsdl:message name="JY_BOOKSoapIn">
+    <wsdl:part name="parameters" element="tns:JY_BOOK" />
+  </wsdl:message>
+  <wsdl:message name="JY_BOOKSoapOut">
+    <wsdl:part name="parameters" element="tns:JY_BOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="GH_BOOKSoapIn">
+    <wsdl:part name="parameters" element="tns:GH_BOOK" />
+  </wsdl:message>
+  <wsdl:message name="GH_BOOKSoapOut">
+    <wsdl:part name="parameters" element="tns:GH_BOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BOOK_LOOKSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BOOK_LOOK" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BOOK_LOOKSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BOOK_LOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BOOK_LOOK_JYSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_BOOK_LOOK_JY" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_BOOK_LOOK_JYSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_BOOK_LOOK_JYResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BOOK_BOOKINFOSoap">
+    <wsdl:operation name="INSERT_BOOKINFO">
+      <wsdl:input message="tns:INSERT_BOOKINFOSoapIn" />
+      <wsdl:output message="tns:INSERT_BOOKINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOKINFO">
+      <wsdl:input message="tns:SELECT_BOOKINFOSoapIn" />
+      <wsdl:output message="tns:SELECT_BOOKINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_BOOKINFO">
+      <wsdl:input message="tns:UPDATE_BOOKINFOSoapIn" />
+      <wsdl:output message="tns:UPDATE_BOOKINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LOGOUT_BOOKINFO">
+      <wsdl:input message="tns:LOGOUT_BOOKINFOSoapIn" />
+      <wsdl:output message="tns:LOGOUT_BOOKINFOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JY_BOOK">
+      <wsdl:input message="tns:JY_BOOKSoapIn" />
+      <wsdl:output message="tns:JY_BOOKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GH_BOOK">
+      <wsdl:input message="tns:GH_BOOKSoapIn" />
+      <wsdl:output message="tns:GH_BOOKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOK_LOOK">
+      <wsdl:input message="tns:SELECT_BOOK_LOOKSoapIn" />
+      <wsdl:output message="tns:SELECT_BOOK_LOOKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOK_LOOK_JY">
+      <wsdl:input message="tns:SELECT_BOOK_LOOK_JYSoapIn" />
+      <wsdl:output message="tns:SELECT_BOOK_LOOK_JYSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BOOK_BOOKINFOHttpGet" />
+  <wsdl:portType name="BOOK_BOOKINFOHttpPost" />
+  <wsdl:binding name="BOOK_BOOKINFOSoap" type="tns:BOOK_BOOKINFOSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT_BOOKINFO">
+      <soap:operation soapAction="http://tempuri.org/INSERT_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOKINFO">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_BOOKINFO">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LOGOUT_BOOKINFO">
+      <soap:operation soapAction="http://tempuri.org/LOGOUT_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JY_BOOK">
+      <soap:operation soapAction="http://tempuri.org/JY_BOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GH_BOOK">
+      <soap:operation soapAction="http://tempuri.org/GH_BOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOK_LOOK">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BOOK_LOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOK_LOOK_JY">
+      <soap:operation soapAction="http://tempuri.org/SELECT_BOOK_LOOK_JY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BOOK_BOOKINFOSoap12" type="tns:BOOK_BOOKINFOSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT_BOOKINFO">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOKINFO">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_BOOKINFO">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LOGOUT_BOOKINFO">
+      <soap12:operation soapAction="http://tempuri.org/LOGOUT_BOOKINFO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JY_BOOK">
+      <soap12:operation soapAction="http://tempuri.org/JY_BOOK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GH_BOOK">
+      <soap12:operation soapAction="http://tempuri.org/GH_BOOK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOK_LOOK">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BOOK_LOOK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_BOOK_LOOK_JY">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_BOOK_LOOK_JY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BOOK_BOOKINFOHttpGet" type="tns:BOOK_BOOKINFOHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="BOOK_BOOKINFOHttpPost" type="tns:BOOK_BOOKINFOHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="BOOK_BOOKINFO">
+    <wsdl:port name="BOOK_BOOKINFOSoap" binding="tns:BOOK_BOOKINFOSoap">
+      <soap:address location="http://192.168.0.223/API/HR/BOOK_BOOKINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BOOK_BOOKINFOSoap12" binding="tns:BOOK_BOOKINFOSoap12">
+      <soap12:address location="http://192.168.0.223/API/HR/BOOK_BOOKINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BOOK_BOOKINFOHttpGet" binding="tns:BOOK_BOOKINFOHttpGet">
+      <http:address location="http://192.168.0.223/API/HR/BOOK_BOOKINFO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BOOK_BOOKINFOHttpPost" binding="tns:BOOK_BOOKINFOHttpPost">
+      <http:address location="http://192.168.0.223/API/HR/BOOK_BOOKINFO.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

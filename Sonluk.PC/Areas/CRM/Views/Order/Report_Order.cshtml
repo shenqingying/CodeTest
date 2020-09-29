@@ -1,0 +1,281 @@
+﻿@using Sonluk.UI.Model.CRM.KH_KHService;
+@using Sonluk.UI.Model.CRM.HG_STAFFService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "订单报表";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+    CRM_KH_KH[] SDF = ViewBag.SDF;
+    CRM_KH_KH KH = ViewBag.KH;
+    CRM_HG_STAFF STAFF = ViewBag.STAFF;
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="isbz">
+    {{# if(d.ISBZ == 1){ }}
+    是
+    {{# }else if(d.ISBZ == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="isyx">
+    {{# if(d.ISYX != 0){ }}
+    是
+    {{# }else if(d.ISYX == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="dzs">
+    {{# if(d.ISDZS != 0){ }}
+    是
+    {{# }else if(d.ISDZS == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="img">
+    {{ d.DISIMG  }}张
+
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>订单管理</a>
+    <a><cite>订单报表</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            <button id="daochu" class="layui-btn">导出选中数据</button>
+            <button id="daochuAll" class="layui-btn">导出全部数据</button>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:110px">报表类型：</label>
+            <div class="layui-input-inline">
+                <select id="report_type" lay-filter="report_type">
+                    <option value="0" selected="selected">请选择报表类型</option>
+                    <option value="1">对账报表</option>
+                    <option value="2">发货报表</option>
+                    <option value="3">折扣发放明细表</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                    @* 对账报表 *@
+                    <div id="div_cx_duizhang" hidden>
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="text-align: right;">开始日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="duizhang_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                            </div>
+
+                            <label class="layui-form-label" style="text-align: right;">结束日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="duizhang_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="text-align: right;">售达方：</label>
+                            <div class="layui-input-inline">
+                                @*<input id="duizhang_sdf" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">*@
+                                <select id="duizhang_sdf" lay-filter="sdf">
+                                    <option value="0"></option>
+                                    @if (STAFF.USERLX == 1107)
+                                    {
+                                        <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                                    }
+                                    @if (SDF != null)
+                                    {
+                                        for (int i = 0; i < SDF.Length; i++)
+                                        {
+                                            <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+
+                        </div>
+                        
+
+                    </div>
+
+                    @* 发货报表 *@
+                    <div id="div_cx_fahuo" hidden>
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="text-align: right;">开始日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="fahuo_time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                            </div>
+
+                            <label class="layui-form-label" style="text-align: right;">结束日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="fahuo_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                            </div>
+
+
+                        </div>
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="text-align: right;">售达方：</label>
+                            <div class="layui-input-inline">
+                                @*<input id="fahuo_sdf" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">*@
+                                <select id="fahuo_sdf" lay-filter="sdf">
+                                    <option value="0"></option>
+                                    @if (STAFF.USERLX == 1107)
+                                    {
+                                        <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                                    }
+                                    @if (SDF != null)
+                                    {
+                                        for (int i = 0; i < SDF.Length; i++)
+                                        {
+                                            <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    @* 折扣发放明细表 *@
+                    <div id="div_cx_zhekou" hidden>
+                        
+
+                        <div class="layui-form-item">
+
+                            
+
+                            <label class="layui-form-label" style="text-align: right;">结束日期：</label>
+                            <div class="layui-input-inline">
+                                <input id="zhekou_time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label" style="text-align: right;">售达方：</label>
+                            <div class="layui-input-inline">
+                                @*<input id="zhekou_sdf" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">*@
+                                <select id="zhekou_sdf" lay-filter="sdf">
+                                    <option value="0"></option>
+                                    @if (STAFF.USERLX == 1107)
+                                    {
+                                        <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                                    }
+                                    @if (SDF != null)
+                                    {
+                                        for (int i = 0; i < SDF.Length; i++)
+                                        {
+                                            <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div id="div_result">
+            <table id="result" lay-filter="result"></table>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<input id="netpath" hidden />
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Report_Order")
+}

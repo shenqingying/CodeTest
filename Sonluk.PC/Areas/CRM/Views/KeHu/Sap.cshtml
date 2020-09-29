@@ -1,0 +1,143 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "SAP匹配";
+    CRM_HG_DICT[] KHLX = ViewBag.KHLX;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>SAP匹配</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+
+    <div class="layui-form-item">
+        <button id="btn_PP" class="layui-btn" style="width:120px;">SAP匹配</button><br />
+
+    </div>
+
+    <div id="div_kh">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户编号：</label>
+            <input id="crmid" style="width:200px;" type="text" placeholder="" autocomplete="off" class="layui-input" readonly>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称：</label>
+            <input id="name" style="width:200px;" type="text" placeholder="" autocomplete="off" class="layui-input" readonly>
+
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">SAP编号：</label>
+        <input id="sap" style="width:200px;" type="text" placeholder="" autocomplete="off" class="layui-input">
+
+    </div>
+</div>
+
+
+<div id="div_jump" class="layui-form" hidden>
+
+
+
+    <div class="layui-form-item">
+        <button id="btn_cxkh" class="layui-btn">查询</button>
+
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian2" class="layui-colla-content layui-show">
+
+
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label">客户类型：</label>
+                    <div class="layui-input-inline">
+                        <select id="KHtype" lay-filter="KHtype">
+                            <option value="0" selected="selected">全部</option>
+                            @for (int i = 0; i < KHLX.Length; i++)
+                            {
+                                <option value="@KHLX[i].DICID">@KHLX[i].DICNAME</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <label class="layui-form-label">卖场属性：</label>
+                    <div class="layui-input-inline">
+                        <select id="KHmcsx" lay-filter="KHmcsx">
+                            <option value="0" selected="selected">全部</option>
+                            <option value="1">系统</option>
+                            <option value="2">门店</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户名称：</label>
+                    <div class="layui-input-inline">
+                        <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <label class="layui-form-label">客户编号：</label>
+                    <div class="layui-input-inline">
+                        <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <table id="tb_kh" lay-filter="tb_kh"></table>
+
+
+    </div>
+
+</div>
+
+
+
+<input id="khid" hidden />
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/SAP")
+}

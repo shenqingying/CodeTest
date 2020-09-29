@@ -1,0 +1,186 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "产品查询";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+
+<script type="text/html" id="bar">
+    @*<a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>*@
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="official">
+    {{# if(d.IsOfficial == 10){ }}
+    潜在客户
+    {{# }else if(d.IsOfficial == 20){ }}
+    签约客户
+    {{# }else if(d.IsOfficial == 30){ }}
+    非签约客户
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="havepower">
+    {{# if(d.GIDSTATUS == 1){ }}
+    是
+    {{# }else if(d.GIDSTATUS == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>产品管理</a>
+    <a><cite>产品查询</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">产品类型：</label>
+                            <div class="layui-input-inline">
+                                <select id="cplx" lay-filter="cplx">
+                                    <option value="0" selected="selected">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">产品系列：</label>
+                            <div class="layui-input-inline">
+                                <select id="cpxl" lay-filter="cpxl">
+                                    <option value="0" selected="selected">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">产品型号：</label>
+                            <div class="layui-input-inline">
+                                <select id="cpxh" lay-filter="cpxh">
+                                    <option value="0" selected="selected">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">产品品号：</label>
+                            <div class="layui-input-inline">
+                                <input id="cpph" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:130px;text-align:right;">产品名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="cpmc" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<input id="netpath" hidden />
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Product/Select_Product")
+}

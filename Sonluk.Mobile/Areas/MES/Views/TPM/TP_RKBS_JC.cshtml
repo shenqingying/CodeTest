@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "入库标识关联取消";
+    Layout = "~/Views/Shared/_Layoutbig.cshtml";
+}
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tp_Tpl">
+    {{# if(d.TPM != ""){ }}
+    <a style="font-size:x-large;">{{d.TPM}}</a>
+    {{# } }}
+</script>
+
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" id="tm_tpm_sm" placeholder="请扫描托盘编号" autocomplete="off" style="height:50px" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div id="bodydiv" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label">托盘编号：</label>
+            <div class="layui-input-block">
+                <label class="layui-form-label" name="lb_tpno" id="lb_tpno"></label>
+            </div>
+        </div>
+    </div>
+    <div id="table_div" hidden>
+        <div>
+            <label class="layui-form-label">入库标识：</label>
+        </div>
+        <br />
+        <div>
+            <table class="layui-hide" id="tb_TPRKBS" lay-filter="tb_TPRKBS"></table>
+        </div>
+    </div>
+    <div id="div_foot" class="layui-footer" align="right">
+        <button id="btn_Y" class="layui-btn">确认解除</button>
+    </div>
+
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/TPM/TP_RKBS_JC")
+}

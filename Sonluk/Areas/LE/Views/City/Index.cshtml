@@ -1,0 +1,168 @@
+﻿@using Sonluk.UI.Model.LE.TRA.CityService
+@model IEnumerable<CityInfo>
+@{
+    ViewBag.Title = "城市";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int provinceSN = 1;
+    int citySN = 1;
+}
+@Styles.Render("~/Content/sonluk-ui/content-tree")
+@Styles.Render("~/Content/sonluk-ui/panel-pop-up")
+@Styles.Render("~/Content/le/consignment-note-edit")
+@Styles.Render("~/Content/le/city-index")
+
+<input type="hidden" value="@Url.Action("_Modify", "City")" id="city-modify-uri" />
+<input type="hidden" value="@Url.Action("_Delete", "City")" id="city-delete-uri" />
+<input type="hidden" value="@Url.Action("_Edit", "Route")" id="route-edit-uri" />
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">托运单</a>
+        >
+        <a href="#">站点</a>
+    </div>
+</div>
+<!--Root节点-->
+<div class="root">
+    <!--Alpha节点-->
+    <div class="alpha color-content-background">
+        <!--Beta节点集合-->
+        <div class="beta-set">
+            @foreach (CityInfo province in Model)
+            {
+                citySN = 1;
+                <!--Beta节点-->
+                <div class="beta">
+                    <!--Beta节点信息-->
+                    <div class="beta-title">
+                        <div class="beta-title-item float-left">@string.Format("{0:D2}. ", provinceSN++)</div>
+                        <div class="beta-title-item float-left"><input type="text" class="beta-title-item-input" value="@province.Name" maxlength="20" /></div>
+                        <span class="beta-title-button float-right beta-action-delete" title="删除">
+                            <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt=" " />
+                        </span>
+                        <input type="hidden" value="@province.ID" />
+                        <span class="beta-title-button float-right beta-action-save" title="保存">
+                            <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_check_h24.png")" alt=" " />
+                        </span>
+                    </div>
+                    <!--/Beta节点信息-->
+                    <div class="gamma-set">
+                        @foreach (CityInfo city in province.Children)
+                        {
+                            <!--Gamma节点-->
+                            <div class="gamma gamma-half float-left">
+                                <!--Gamma节点信息-->
+                                <span class="gamma-half-item float-left">@string.Format("{0:D2}.", citySN++)</span>
+                                <span class="gamma-half-item float-left"><input type="text" class="gamma-title-item-input" value="@city.Name" maxlength="20" /></span>
+                                <span class="gamma-button float-right gamma-action-delete" title="删除">
+                                    <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt="" />
+                                </span>
+                                <input type="hidden" value="@city.ID" />
+                                <span class="gamma-button float-right gamma-action-save" title="保存">
+                                    <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_check_h24.png")" alt="" />
+                                </span>
+                                <span class="gamma-button float-right gamma-action-route-edit" title="编辑">
+                                    <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_edit_h24.png")" alt="" />
+                                </span>
+                                <!--/Gamma节点信息-->
+                            </div>
+                            <!--/Gamma节点-->
+                        }
+                        <!--创建新Gamma节点-->
+                        <div class="gamma gamma-half float-left gamma-create-button" id="gamma-action-create" title="新建站点">
+                            <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_plus_h24.png")" alt="" />
+                        </div>
+                        <!--/创建新Gamma节点-->
+                        <!--Gamma节点-->
+                        <div class="gamma gamma-half float-left gamma-create">
+                            <!--Gamma节点信息-->
+                            <span class="gamma-half-item float-left">@string.Format("{0:D2}.", citySN++)</span>
+                            <span class="gamma-half-item float-left"><input type="text" class="gamma-title-item-input" value="" maxlength="20" /></span>
+                            <span class="gamma-button float-right gamma-action-delete" title="删除">
+                                <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt="" />
+                            </span>
+                            <input type="hidden" value="" />
+                            <span class="gamma-button float-right gamma-action-save" title="保存">
+                                <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_check_h24.png")" alt="" />
+                            </span>
+                            <span class="gamma-button float-right gamma-action-route-edit gamma-unsave" title="编辑">
+                                <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_edit_h24.png")" alt="" />
+                            </span>
+                            <!--/Gamma节点信息-->
+                        </div>
+                        <!--/Gamma节点-->
+                    </div>
+                </div>
+                <!--/Beta节点-->
+            }
+            <!--创建新Beta节点-->
+            <div class="beta beta-create-button" id="beta-action-create" title="新建省份">
+                <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_plus_h24.png")" alt="" />
+            </div>
+            <!--/创建新Beta节点-->
+            <!--新Beta节点-->
+            <div class="beta beta-create">
+                <!--Beta节点信息-->
+                <div class="beta-title">
+                    <div class="beta-title-item float-left">@string.Format("{0:D2}. ", provinceSN++)</div>
+                    <div class="beta-title-item float-left"><input type="text" class="beta-title-item-input" value="" maxlength="20" /></div>
+                    <span class="beta-title-button float-right beta-action-delete" title="删除">
+                        <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt=" " />
+                    </span>
+                    <input type="hidden" value="" />
+                    <span class="beta-title-button float-right beta-action-save" title="保存">
+                        <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_check_h24.png")" alt=" " />
+                    </span>
+                </div>
+                <div class="gamma-set">
+                    <!--创建新Gamma节点-->
+                    <div class="gamma gamma-half float-left gamma-create-button" id="gamma-action-create" title="新建站点">
+                        <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_plus_h24.png")" alt="" />
+                    </div>
+                    <!--/创建新Gamma节点-->
+                    <!--Gamma节点-->
+                    <div class="gamma gamma-half float-left gamma-create">
+                        <!--Gamma节点信息-->
+                        <span class="gamma-half-item float-left">@string.Format("{0:D2}.", 1)</span>
+                        <span class="gamma-half-item float-left"><input type="text" class="gamma-title-item-input" value="" maxlength="20" /></span>
+                        <span class="gamma-button float-right gamma-action-delete" title="删除">
+                            <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_cross_h24.png")" alt="" />
+                        </span>
+                        <input type="hidden" value="" />
+                        <span class="gamma-button float-right gamma-action-save" title="保存">
+                            <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_check_h24.png")" alt="" />
+                        </span>
+                        <span class="gamma-button float-right gamma-action-route-edit gamma-unsave" title="编辑">
+                            <img class="glyph" src="@Url.Content("~/Content/sonluk-ui/images/icon_edit_h24.png")" alt="" />
+                        </span>
+                        <!--/Gamma节点信息-->
+                    </div>
+                    <!--/Gamma节点-->
+                </div>
+
+                <!--/Beta节点信息-->
+            </div>
+            <!--/新Beta节点-->
+        </div>
+        <!--/Beta节点集合-->
+    </div>
+    <!--/Alpha节点-->
+    <div class="hr"></div>
+</div>
+<!--/Root节点-->
+
+<!--下拉列表-->
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+
+<!--弹出窗口-->
+<div class="panel-pop-up-background background-color-dark"></div>
+<div class="panel-pop-up" id="route-edit"></div>
+<!--弹出窗口-->
+<!--弹出窗口-->
+<div class="panel-pop-up-background background-color-dark panel-pop-up-background-city-select"></div>
+<div class="panel-pop-up" id="city-select"></div>
+<!--弹出窗口-->
+@section scripts {
+    @Scripts.Render("~/bundles/le/city-index")
+}

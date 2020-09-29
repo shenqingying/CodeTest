@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/MM" xmlns:s1="http://Sonluk.com/API/MM/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/MM" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/MM">
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="tns:POKeywordInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="POKeywordInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Item" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Plant" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlantName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DelivQty" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BaseUOM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SDDoc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SDocItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDelivDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DelivDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubjToR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteInd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustChngStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OldMatl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatlGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoMoreGR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PstngDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReqDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StgeLoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayGRDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayMRDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Function" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseGroup" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DisplayPrintMinCost" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:ArrayOfPOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPOItemInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="POItemInfo" nillable="true" type="tns:POItemInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="POItemInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PONumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Plant" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InitialQuantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="InitialDelivDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DelivQty" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewDelivDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BaseUOM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SDDoc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SDocItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DelivDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubjToR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteInd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustChngStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OldMatl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatlGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoMoreGR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PstngDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReqDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StgeLoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NetPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriceUnit" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPriceWidthTax" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="NetValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CrossVlaue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tax" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Line" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DelivDate_M" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quantity_M" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrintDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrintTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DelivDest" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DelivDestID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScheReq" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Index" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Prev" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Next" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Thread" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Schedule" type="tns:ArrayOfScheduleLineInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomText" type="tns:ArrayOfCustomTextInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="SDCustomText" type="tns:ArrayOfCustomTextInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfScheduleLineInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ScheduleLineInfo" nillable="true" type="tns:ScheduleLineInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ScheduleLineInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GRQTY" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrevQty" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Item" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Line" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaterialDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InitialDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="InitialQuantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IssuedQty" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DestinationID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrder" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SOItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Releaser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Delete" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomTextInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomTextInfo" nillable="true" type="tns:CustomTextInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomTextInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadBySO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="tns:SOKeywordInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SOKeywordInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Item" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProcessingRecordsStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Creator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Plant" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartChangedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChangedDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartCurrentDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseGroup" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadBySOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadBySOResult" type="tns:ArrayOfPOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySOFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="file" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadBySOFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadBySOFileResult" type="tns:ArrayOfPOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="History">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="number" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="itemNumber" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HistoryResult" type="tns:ArrayOfPOItemHistoryInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPOItemHistoryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="POItemHistoryInfo" nillable="true" type="tns:POItemHistoryInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="POItemHistoryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PONumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PocessID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FiscalYear" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatDoc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccDocItemCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="HistType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HistTypeDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MoveType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PstngDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QtyInPriceUnit" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="ValLocCurr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ValDocCurr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GRIRValLocCurr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BlockedQty" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="GRBlockedQty" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DbCrInd" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateDeliveryDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nodes" type="tns:ArrayOfPOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDeliveryDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateDeliveryDateResult" type="tns:ArrayOfMessageInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMessageInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MessageInfo" nillable="true" type="tns:MessageInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MessageInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ExportSet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemNodes" type="tns:ArrayOfPOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportSetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExportSetResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Export">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemNodes" type="tns:ArrayOfPOItemInfo" />
+            <s:element minOccurs="1" maxOccurs="1" name="type" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExportResult" type="tns:ArrayOfFileStreamInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFileStreamInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FileStreamInfo" nillable="true" type="tns:FileStreamInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FileStreamInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TattedCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Bytes" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AnalysePrintData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pageSize" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemNodes" type="tns:ArrayOfPOItemInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AnalysePrintDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AnalysePrintDataResult" type="tns:ArrayOfPageInfoOfPOInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPageInfoOfPOInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PageInfoOfPOInfo" nillable="true" type="tns:PageInfoOfPOInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PageInfoOfPOInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Index" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPage" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Children" type="tns:ArrayOfPOInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPOInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="POInfo" nillable="true" type="tns:POInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="POInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Header" type="tns:POHeaderInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurGroup" type="tns:PurchasingGroupInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="tns:CompanyInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Company" type="tns:CompanyInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomText" type="tns:ArrayOfCustomTextInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfPOItemInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="POHeaderInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Client" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Company" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Category" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ControlIndicator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeletionIndicator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Creator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemInterval" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastItem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Language" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentTerms" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurOrg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PurGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VendorSales" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VendorTelephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tax" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AmountWithoutTax" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReleaseCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PurchasingGroupInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Client" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OutputDevice" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TelephoneDiallingCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TelephoneExtension" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CityID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="District" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cellphone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOffices" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Default" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Children" type="tns:ArrayOfCompanyInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="General" type="tns:ArrayOfCompanyGeneralInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyInfo" nillable="true" type="tns:CompanyInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyGeneralInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyGeneralInfo" nillable="true" type="tns:CompanyGeneralInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyGeneralInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Client" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SortField" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HouseNumberAndStreet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstTelephoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganizationDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannelDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Division" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DivisionDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesGroupDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfPOItemInfo" nillable="true" type="tns:ArrayOfPOItemInfo" />
+      <s:element name="ArrayOfPOItemHistoryInfo" nillable="true" type="tns:ArrayOfPOItemHistoryInfo" />
+    </s:schema>
+    <s:schema targetNamespace="http://Sonluk.com/API/MM/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadBySO" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadBySOResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOFileSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadBySOFile" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOFileSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadBySOFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="HistorySoapIn">
+    <wsdl:part name="parameters" element="tns:History" />
+  </wsdl:message>
+  <wsdl:message name="HistorySoapOut">
+    <wsdl:part name="parameters" element="tns:HistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeliveryDateSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDeliveryDate" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeliveryDateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDeliveryDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExportSetSoapIn">
+    <wsdl:part name="parameters" element="tns:ExportSet" />
+  </wsdl:message>
+  <wsdl:message name="ExportSetSoapOut">
+    <wsdl:part name="parameters" element="tns:ExportSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExportSoapIn">
+    <wsdl:part name="parameters" element="tns:Export" />
+  </wsdl:message>
+  <wsdl:message name="ExportSoapOut">
+    <wsdl:part name="parameters" element="tns:ExportResponse" />
+  </wsdl:message>
+  <wsdl:message name="AnalysePrintDataSoapIn">
+    <wsdl:part name="parameters" element="tns:AnalysePrintData" />
+  </wsdl:message>
+  <wsdl:message name="AnalysePrintDataSoapOut">
+    <wsdl:part name="parameters" element="tns:AnalysePrintDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOFileHttpGetIn">
+    <wsdl:part name="file" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPOItemInfo" />
+  </wsdl:message>
+  <wsdl:message name="HistoryHttpGetIn">
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="itemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPOItemHistoryInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOFileHttpPostIn">
+    <wsdl:part name="file" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="ReadBySOFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPOItemInfo" />
+  </wsdl:message>
+  <wsdl:message name="HistoryHttpPostIn">
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="itemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPOItemHistoryInfo" />
+  </wsdl:message>
+  <wsdl:portType name="PurchaseOrderSoap">
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySO">
+      <wsdl:input message="tns:ReadBySOSoapIn" />
+      <wsdl:output message="tns:ReadBySOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySOFile">
+      <wsdl:input message="tns:ReadBySOFileSoapIn" />
+      <wsdl:output message="tns:ReadBySOFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <wsdl:input message="tns:HistorySoapIn" />
+      <wsdl:output message="tns:HistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeliveryDate">
+      <wsdl:input message="tns:UpdateDeliveryDateSoapIn" />
+      <wsdl:output message="tns:UpdateDeliveryDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportSet">
+      <wsdl:input message="tns:ExportSetSoapIn" />
+      <wsdl:output message="tns:ExportSetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <wsdl:input message="tns:ExportSoapIn" />
+      <wsdl:output message="tns:ExportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AnalysePrintData">
+      <wsdl:input message="tns:AnalysePrintDataSoapIn" />
+      <wsdl:output message="tns:AnalysePrintDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PurchaseOrderHttpGet">
+    <wsdl:operation name="ReadBySOFile">
+      <wsdl:input message="tns:ReadBySOFileHttpGetIn" />
+      <wsdl:output message="tns:ReadBySOFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <wsdl:input message="tns:HistoryHttpGetIn" />
+      <wsdl:output message="tns:HistoryHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PurchaseOrderHttpPost">
+    <wsdl:operation name="ReadBySOFile">
+      <wsdl:input message="tns:ReadBySOFileHttpPostIn" />
+      <wsdl:output message="tns:ReadBySOFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <wsdl:input message="tns:HistoryHttpPostIn" />
+      <wsdl:output message="tns:HistoryHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PurchaseOrderSoap" type="tns:PurchaseOrderSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySO">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/ReadBySO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySOFile">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/ReadBySOFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/History" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeliveryDate">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/UpdateDeliveryDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportSet">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/ExportSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/Export" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AnalysePrintData">
+      <soap:operation soapAction="http://Sonluk.com/API/MM/AnalysePrintData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PurchaseOrderSoap12" type="tns:PurchaseOrderSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySO">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/ReadBySO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBySOFile">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/ReadBySOFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/History" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeliveryDate">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/UpdateDeliveryDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportSet">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/ExportSet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/Export" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AnalysePrintData">
+      <soap12:operation soapAction="http://Sonluk.com/API/MM/AnalysePrintData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PurchaseOrderHttpGet" type="tns:PurchaseOrderHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ReadBySOFile">
+      <http:operation location="/ReadBySOFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <http:operation location="/History" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PurchaseOrderHttpPost" type="tns:PurchaseOrderHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ReadBySOFile">
+      <http:operation location="/ReadBySOFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <http:operation location="/History" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PurchaseOrder">
+    <wsdl:port name="PurchaseOrderSoap" binding="tns:PurchaseOrderSoap">
+      <soap:address location="http://192.168.0.218/API/MM/PurchaseOrder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PurchaseOrderSoap12" binding="tns:PurchaseOrderSoap12">
+      <soap12:address location="http://192.168.0.218/API/MM/PurchaseOrder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PurchaseOrderHttpGet" binding="tns:PurchaseOrderHttpGet">
+      <http:address location="http://192.168.0.218/API/MM/PurchaseOrder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PurchaseOrderHttpPost" binding="tns:PurchaseOrderHttpPost">
+      <http:address location="http://192.168.0.218/API/MM/PurchaseOrder.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

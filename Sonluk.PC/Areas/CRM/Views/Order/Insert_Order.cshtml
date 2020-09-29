@@ -1,0 +1,200 @@
+﻿@using Sonluk.UI.Model.CRM.KH_KHService;
+@using Sonluk.UI.Model.CRM.HG_STAFFService;
+@{
+    ViewBag.Title = "网上下单";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    CRM_KH_KH[] SDF = ViewBag.SDF;
+    CRM_KH_KH KH = ViewBag.KH;
+    CRM_HG_STAFF STAFF = ViewBag.STAFF;
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="iscancel_tpl">
+    {{# if(d.ISCANCEL == 1){ }}
+    是
+    {{# }else if(d.ISCANCEL == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+
+
+<script type="text/html" id="bar_CC">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar_CCMX">
+    @*<a class="layui-btn layui-btn-xs" lay-event="signin">签到</a>*@
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="tb_fujian">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="bar_cp">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看详细</a>
+    <a class="layui-btn layui-btn-xs" lay-event="copy">复制订单</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>订单管理</a>
+    <a><cite>网上下单</cite></a>
+</span>
+<br />
+<br />
+
+
+
+
+
+
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div class="layui-form-item">
+            <button id="btn_next" class="layui-btn">添加产品</button>
+            <button id="insert_copy" class="layui-btn">复制订单</button>
+        
+        
+    </div>
+
+    <div class="layui-form-item">
+
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="text-align:right;">售达方：</label>
+            <div class="layui-input-inline" style="width:400px;">
+                <select id="sdf" lay-filter="sdf">
+                    <option value="0"></option>
+                    @if (STAFF.USERLX == 1107)
+                    {
+                        <option value="@KH.SAPSN">@KH.SAPSN  @KH.MC</option>
+                    }
+                    @if (SDF != null)
+                    {
+                        for (int i = 0; i < SDF.Length; i++)
+                        {
+                            <option value="@SDF[i].SAPSN">@SDF[i].SAPSN  @SDF[i].MC</option>
+                        }
+                    }
+
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_kh" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="text-align:right;">送达方：</label>
+                <div class="layui-input-inline" style="width:400px;">
+                    <select id="ship" lay-filter="ship">
+                        <option value="0">请选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="text-align:right;">收货地址：</label>
+                <div class="layui-input-inline" style="width:400px;">
+                    <input id="address" type="text" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="text-align:right;">付款时间：</label>
+                <div class="layui-input-inline" style="width:400px;">
+                    <input id="fksj" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="text-align:right;">备注：</label>
+                <div class="layui-input-inline" style="width:400px;">
+                    <input id="remark" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="div_cp" class="layui-form" hidden>
+    <div id="div_cp1">
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+                    <div class="layui-form-item">
+                        <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:80px;text-align:right;">发起时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_begin" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.startdate">
+                        </div>
+
+                        <label class="layui-form-label" style="width:80px;text-align:right;">至：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="@ViewBag.enddate">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <table id="table_cp1" lay-filter="table_cp1"></table>
+    </div>
+    <div id="div_cp2" hidden>
+        <button id="btn_cp2_back" class="layui-btn">返回</button>
+        <table id="table_cp2" lay-filter="table_cp2"></table>
+    </div>
+</div>
+
+
+
+<input id="staffid" hidden />
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Insert_Order")
+}

@@ -1,0 +1,333 @@
+﻿@{
+    ViewBag.Title = "拜访查询";
+    Session["TITLENAME"] = "拜访查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+
+
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="KHtype_Tpl">
+    {{# if(d.KHLX == 1){ }}
+    经销商
+    {{# }else if(d.KHLX == 2){ }}
+    电商
+    {{# }else if(d.KHLX == 3 && d.MCSX == 1){ }}
+    直营卖场系统
+    {{# }else if(d.KHLX == 3 && d.MCSX == 2){ }}
+    直营卖场门店
+    {{# }else if(d.KHLX == 4){ }}
+    B2B
+    {{# }else if(d.KHLX == 5){ }}
+    网点终端
+    {{# }else if(d.KHLX == 6){ }}
+    批发
+    {{# }else if(d.KHLX == 7 && d.MCSX == 1){ }}
+    LKA系统
+    {{# }else if(d.KHLX == 7 && d.MCSX == 2){ }}
+    LKA门店
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="BFtype">
+    {{# if(d.BFLX == 1){ }}
+    客户日常检查
+    {{# }else if(d.BFLX == 2){ }}
+    新客户开发
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="BF_status">
+    {{# if(d.ISACTIVE == 1){ }}
+    未完成
+    {{# }else if(d.ISACTIVE == 2){ }}
+    已完成
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="status">
+    {{# if(d.KQISACTIVE == 1){ }}
+    是
+    {{# }else if(d.KQISACTIVE == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="juli">
+    {{ d.KQJL + "米" }}
+
+</script>
+
+<script type="text/html" id="imgTpl">
+    <img class="mytableimg" src="{{d.ML}}" />
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看图片</a>
+</script>
+
+<script type="text/html" id="picbar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">放大查看</a>
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+    /*.laytable-cell-1-WJM, .laytable-cell-2-WJM, .laytable-cell-3-WJM, .laytable-cell-4-WJM, .laytable-cell-5-WJM, .laytable-cell-6-WJM, .laytable-cell-7-WJM, .laytable-cell-8-WJM, .laytable-cell-9-WJM, .laytable-cell-10-WJM { 
+        height: auto;
+        max-width: 100%;
+    }*/
+    /*.layui-table-cell {
+        height: auto;
+        max-width: 100%;
+    }*/
+</style>
+
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>拜访管理</a>
+    <a><cite>拜访查询</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+    <button id="btn_cx" class="layui-btn">查询</button>
+    <button id="btn_back" class="layui-btn" style="display:none;">返回</button>
+    <br /><br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:110px">报表类型：</label>
+        <div class="layui-input-inline">
+            <select id="report_type" lay-filter="report_type">
+                <option value="0" selected="selected">请选择拜访类型</option>
+                <option value="1">计划任务拜访</option>
+                <option value="2">专项活动、拜访任务指派</option>
+                <option value="3">新客户开发、非计划日常拜访</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show" style="padding-right: 0px;">
+
+                @* 计划拜访 *@
+                <div id="div_cx_plan" hidden>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:110px">开始日期：</label>
+                        <div class="layui-input-inline">
+                            <input id="plan_date_start" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">结束日期：</label>
+                        <div class="layui-input-inline">
+                            <input id="plan_date_end" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">客户类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="KH_type" lay-filter="KH_type">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+
+                        <label class="layui-form-label" style="width:110px">拜访周期：</label>
+                        <div class="layui-input-inline">
+                            <select id="plan_bfzq" lay-filter="plan_bfzq">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">客户组：</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-unselect layui-form-select downpanel">
+                                <div class="layui-select-title">
+                                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                                    <input id="KHgroup" type="hidden" name="selectID" value="0">
+                                    <i class="layui-edge"></i>
+                                </div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd>
+                                        @*<ul id="classtree"></ul>*@
+                                        <div id="classtree"></div>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                @* 专项&指派 *@
+                <div id="div_cx_zxzp" hidden>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:110px">开始日期：</label>
+                        <div class="layui-input-inline">
+                            <input id="ZXZP_date_start" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">结束日期：</label>
+                        <div class="layui-input-inline">
+                            <input id="ZXZP_date_end" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">活动名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="ZXZP_name" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">任务类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="ZXZP_type" lay-filter="ZXZP_type">
+                                <option value="0" selected="selected">请选择</option>
+                                <option value="541">专项活动</option>
+                                <option value="542">任务指派</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">人员名称：</label>
+                        <div class="layui-input-inline">
+                            <select id="ZXZP_staffname" lay-filter="new_type" lay-search>
+                                <option value="" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="ZXZP_khname" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                @* 新客户&非计划 *@
+                <div id="div_cx_new" hidden>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:110px">开始日期：</label>
+                        <div class="layui-input-inline">
+                            <input id="new_date_start" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">结束日期：</label>
+                        <div class="layui-input-inline">
+                            <input id="new_date_end" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">任务类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="new_type" lay-filter="new_type">
+                                <option value="0" selected="selected">请选择</option>
+                                <option value="546">新客户开发</option>
+                                <option value="547">非计划日常拜访</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">人员名称：</label>
+                        <div class="layui-input-inline">
+                            <select id="new_staffname" lay-filter="new_type" lay-search>
+                                <option value="" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="new_khname" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <hr class="layui-bg-black" />
+
+    <div id="div_total">
+        <table id="result" lay-filter="result"></table>
+    </div>
+    <div id="div_mx">
+        <table id="resultMX" lay-filter="resultMX"></table>
+    </div>
+
+
+</div>
+<br /><br /><br />
+
+
+<div id="dic_pic" class="layui-form" hidden>
+
+
+    <br />
+
+
+    <table id="pic" lay-filter="pic"></table>
+
+
+
+
+</div>
+
+
+<input id="staffid" hidden />
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/BaiFangReport")
+}
+
+

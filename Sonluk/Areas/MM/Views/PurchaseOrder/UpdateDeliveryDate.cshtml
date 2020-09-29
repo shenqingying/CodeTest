@@ -1,0 +1,126 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@using Sonluk.UI.Model.Account.AccessService
+@model IEnumerable<POItemInfo>
+@{
+    ViewBag.Title = "更新交货日期";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AuthorizationInfo SAPAuth = (AuthorizationInfo)ViewBag.SAPAuth;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/input-width-po")
+@Styles.Render("~/Content/import-bar")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/mm/purchase-order-update-delivery-date")
+<input type="hidden" value="@Url.Action("_UpdateList", "PurchaseOrder")" id="purchase-order-read-by-sales-order">
+<input type="hidden" id="ReleaseCode" value="@SAPAuth.ReleaseCode">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">采购订单</a>
+        >
+        <a href="#">更新交货日期</a>
+    </div>
+</div>
+
+<div class="panel-search">
+    <div class="panel-search-line">
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">采购订单</div>
+            <input type="text" class="panel-search-item-input input-width-po-sn" id="Number" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">物料号</div>
+            <input type="text" class="panel-search-item-input input-width-po-material" id="Material" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">物料描述</div>
+            <input type="text" class="panel-search-item-input" id="MaterialDescription" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">物料组</div>
+            <input type="text" class="panel-search-item-input  input-width-po-material-group" id="MatlGroup" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">交货日期</div>
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="StartDelivDate" />
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="DelivDate" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">采购日期</div>
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="StartDate" />
+            <input type="text" class="date-picker-trigger panel-search-item-input" id="Date" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">销售订单</div>
+            <input type="text" class="panel-search-item-input input-width-po-so" id="SDDoc" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">供应商</div>
+            <input type="text" class="panel-search-item-input input-width-po-vendor" id="Vendor" />
+        </div>
+        <div class="panel-search-item">
+            <div class="panel-search-item-title">采购组</div>
+            <input type="text" class="panel-search-item-input input-width-po-pur-group" id="PurGroup" />
+        </div>
+        <input type="hidden" id="ReleaseGroup" value="@SAPAuth.ReleaseGroup">
+        <div class="panel-search-item">
+            <input type="radio" name="Status" value="0" checked> 交货未清
+            <input type="radio" name="Status" value="1"> 交货已清
+            <input type="radio" name="Status" value="2"> 全部
+        </div>
+        <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+        <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+        <input type="hidden" value="@Url.Action("_UpdateList", "PurchaseOrder")">
+    </div>
+
+    <div class="panel-search-line">
+        <div class="import-bar">
+            <div class="import-bar-content">
+                <form id="importFile" method="post" action="@Url.Action("_ImportSalesOrders", "PurchaseOrder")" target="importFileFrame" enctype="multipart/form-data">
+                    <input type="text" class="import-bar-input-text">
+                    <input type="file" class="import-bar-input-file" name="file" />
+                    <div class="import-bar-btn">销售订单批量导入查询</div>
+                </form>
+            </div>
+            <div class="import-bar-error"></div>
+            <iframe id="importFileFrame" name="importFileFrame" class="importFileFrame"></iframe>
+        </div>
+    </div>
+</div>
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="item-select-all sonluk-table-control-button">全选所属行项目</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="purchase-order-set-export sonluk-table-control-button">导出</div>
+                    <input type="hidden" value="@Url.Action("PrepareExportSetData", "PurchaseOrder")">
+                    <input type="hidden" value="@Url.Action("ExportSet", "PurchaseOrder", new { type = "UpdateDeliveryDate" })">
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="purchase-order-update sonluk-table-control-button">更新交货日期</div>
+                    <input type="hidden" value="@Url.Action("UpdateDeliveryDate", "PurchaseOrder")">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="purchase-order"></div>
+    </div>
+</div>
+<div class="sonluk-table-pop-up-background background-color-dark"></div>
+<div class="sonluk-table-pop-up" id="purchase-order-history">
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/mm/purchase-order-update-delivery-date")
+}

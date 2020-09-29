@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "图书资料管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>图书资料管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_daoru">导入</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">条码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_bookno" autocomplete="off" class="layui-input" placeholder="（书名/条码）">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">类型：</label>
+            <div class="layui-input-inline">
+                <select id="find_booklx" lay-filter="find_booklx">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">入库日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_RKRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_RKRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="BOOKTable" lay-filter="BOOKTable"></table>
+    </div>
+</div>
+<div id="div_BOOK" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item" id="input_dah">
+        <label class="layui-form-label" style="width: 100px;">条码：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="bookinfo_tm" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">书名：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="bookinfo_bookname" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">出版社：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="bookinfo_cks" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">作者：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="bookinfo_zz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">类型：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="bookinfo_lx" lay-filter="bookinfo_lx">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">价格：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="bookinfo_jg" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">入库日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="bookinfo_rkdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="bookinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="logout">注销</a>
+</script>
+<div id="div_daoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_drmb" style="width:150px">导入</button>
+    </div>
+</div>
+<style>
+    #bookinfo_lx + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+    #bookinfo_tm {
+        background-color: #FAFFBD;
+    }
+    #bookinfo_bookname {
+        background-color: #FAFFBD;
+    }
+    #bookinfo_cks {
+        background-color: #FAFFBD;
+    }
+    #bookinfo_zz {
+        background-color: #FAFFBD;
+    }
+    #bookinfo_rkdate {
+        background-color: #FAFFBD;
+    }
+    th .layui-table-cell {
+        text-align: center;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/HRXZGL/BOOKZL")
+}

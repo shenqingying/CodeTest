@@ -1,0 +1,968 @@
+﻿@{
+    ViewBag.Title = "RYINFO_RSDA_EDIT";
+    Layout = "~/Views/Shared/_Layout_RYXX.cshtml";
+}
+@using Sonluk.PC.Areas.HR.Models;
+@model Sonluk.PC.Areas.HR.Models.MODEL_RYINFO_PRINTF
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="zcth_Tpl">
+    {{#  if(d.ISBJSHOW === 1){ }}
+    <span class="td_bj">{{d.ZCLBNAME}}</span>
+    {{#  } else{ }}
+    <span>{{d.ZCLBNAME}}</span>
+    {{# } }}
+</script>
+<script type="text/html" id="jyth_Tpl">
+    {{#  if(d.ISSHOW === 1){ }}
+    <span class="td_bj">{{d.SCHOOL}}</span>
+    {{#  } else{ }}
+    <span>{{d.SCHOOL}}</span>
+    {{# } }}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script src="~/Scripts/ID_CARD/ID_Card.js"></script>
+<div class="layui-form" id="xfc" hidden>
+    <ul style="display: block;">
+        <li><a href="#dh_jbxx"><label class="layui-form-label" style="text-align: left; width: 100px;padding-bottom:0;">1.  基本信息</label></a></li>
+        <li><a href="#dh_jyjl"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">2.  教育经历</label></a></li>
+        <li><a href="#dh_grjl"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">3.  个人经历</label></a></li>
+        <li><a href="#dh_jtqk"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">4.  家庭情况</label></a></li>
+        <li><a href="#dh_zc"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">5.  职称</label></a></li>
+        <li><a href="#dh_htxx"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">6.  合同信息</label></a></li>
+        <li><a href="#dh_gsgl"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">7.  工伤管理</label></a></li>
+        <li><a href="#dh_wjgl"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">8.  违纪管理</label></a></li>
+        <li><a href="#dh_wbzw"><label class="layui-form-label" style="text-align: left; width: 100px; padding-bottom: 0; ">9.  外部职务管理</label></a></li>
+        <li><a href="#dh_grry"><label class="layui-form-label" style="text-align: left; width: 120px; padding-bottom: 0; ">10. 个人荣誉管理</label></a></li>
+    </ul>
+</div>
+<div style="position:fixed;top:0;height:270px;width:100%;padding-left:10px">
+    <div class="layui-form">
+        <div class="layui-input-inline">
+            <fieldset class="layui-elem-field">
+                <div class="layui-upload">
+                    <div class="layui-upload-list" style="margin:0px">
+                        <img id="demo1" style="width:3.5cm;height:4.9cm">
+                    </div>
+                    <button type="button" class="layui-btn" id="test1" style="width:3.5cm;">上传图片</button>
+                    <a id="pic_scr" hidden></a>
+                </div>
+        </div>
+        <div class="layui-input-inline">
+            <div class="layui-form-item" hidden>
+                <label class="layui-form-label" style="width: 100px;">RYID：</label>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label" id="text_RYID" style="text-align:left;font-size:x-large;">@Model.HR_RY_RYINFO_LIST.RYID</label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">姓名：</label>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label" id="text_name" style="text-align:left;font-size:x-large;width:200px"></label>
+                </div>
+            </div>
+            <fieldset class="layui-elem-field layui-field-title" style="color: #2F4056">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">部门：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_bm" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                    <label class="layui-form-label" style="width: 100px;">归属部门：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_gsbm" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">在职状态：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_zzzt" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                    <label class="layui-form-label" style="width: 100px;">职称：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_zc" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">入职日期：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_rzrq" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                    <div id="lzxx" hidden>
+                        <label class="layui-form-label" style="width: 100px;">离职日期：</label>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label" id="text_lzrq" style="text-align: left; min-width: 100px"></label>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="layui-body_ryxx">
+    <br />
+    <ul class="layui-timeline">
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_jbxx"></a>
+                <h3 class="layui-timeline-title">基本信息</h3>
+                <div id="div_addinfo" class="layui-form">
+                    <br />
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">工号：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_gh" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">姓名：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_name" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">证照类型：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_zzlb" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">证照号码：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_zzno" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">出生日期：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_birthday" name="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">性别：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_sex" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">证照有效期：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_sfzdate" name="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">职称：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_zc" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">学历：</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input type="text" id="addinfo_xxfs" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <div class="layui-input-inline" style="width:120px">
+                            <input type="text" id="addinfo_xl" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">专业：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_zy" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">员工类别：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_lb" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">在职状态：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_zztype" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">入职日期：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" name="date" id="in_DJRQ" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">工龄起算日：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" name="date" id="in_GLQSR" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">公司：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_gs" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">归属部门：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_gsbm" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">部门：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_bm" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">职务级别：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_zwlevelname" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">当前职务：</label>
+                        <div class="layui-input-inline" style="width: 640px;">
+                            <input type="text" id="addinfo_dqzw" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">旧工号：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_oldgh" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">毕业院校：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_byschool" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">国籍（地区）：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_gj" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">民族：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_mz" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">籍贯：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_jg" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">联系电话：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_lxdh" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">户籍地址：</label>
+                        <div class="layui-input-inline" style="width:640px">
+                            <input type="text" id="addinfo_hjdz" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">联系地址：</label>
+                        <div class="layui-input-inline" style="width:640px">
+                            <input type="text" id="addinfo_lxdz" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">婚姻状况：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_hyzk" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">政治面貌：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_zzmm" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">班制：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_bzinfo" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">当前岗位：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_dqgw" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">短号：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_phoneshort" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">是否存在以下情形：</label>
+                        <div class="layui-input-block">
+                            @if (Model.HR_RY_RYINFO_LIST.ISCJ == 1)
+                            {
+                                <div class="layui-unselect layui-form-checkbox layui-form-checked">
+                                    <span>残疾</span>
+                                    <i class="layui-icon layui-icon-ok">
+                                    </i>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="like[cj]" title="残疾" disabled>
+                            }
+                            @if (Model.HR_RY_RYINFO_LIST.ISLS == 1)
+                            {
+                                <div class="layui-unselect layui-form-checkbox layui-form-checked">
+                                    <span>烈属</span>
+                                    <i class="layui-icon layui-icon-ok">
+                                    </i>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="like[ls]" title="烈属" disabled>
+                            }
+                            @if (Model.HR_RY_RYINFO_LIST.ISGL == 1)
+                            {
+                                <div class="layui-unselect layui-form-checkbox layui-form-checked">
+                                    <span>孤老</span>
+                                    <i class="layui-icon layui-icon-ok">
+                                    </i>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="like[gl]" title="孤老" disabled>
+                            }
+                            @if (Model.HR_RY_RYINFO_LIST.ISJZZ == 1)
+                            {
+                                <div class="layui-unselect layui-form-checkbox layui-form-checked">
+                                    <span>居住证</span>
+                                    <i class="layui-icon layui-icon-ok">
+                                    </i>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="like[jzz]" title="居住证" disabled>
+                            }
+                            @if (Model.HR_RY_RYINFO_LIST.ISHY == 1)
+                            {
+                                <div class="layui-unselect layui-form-checkbox layui-form-checked">
+                                    <span>婚育证</span>
+                                    <i class="layui-icon layui-icon-ok">
+                                    </i>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="like[hyz]" title="婚育证" disabled>
+                            }
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">残疾证号：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_cj" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">烈属证号：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_ls" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">居住证有效期：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_jzz" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">婚育证编号：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_hyz" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                        <label class="layui-form-label" style="width: 100px;">有效日期：</label>
+                        <div class="layui-input-inline" style="width: 250px;">
+                            <input type="text" id="addinfo_hyyxrq" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 100px;">备注：</label>
+                        <div class="layui-input-inline" style="width: 640px;">
+                            <input type="text" id="addinfo_bz" autocomplete="off" class="layui-input" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_jyjl"></a>
+                <h3 class="layui-timeline-title">教育经历</h3>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <button class="layui-btn" id="btn_add_jyjl">新增</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="jyjl_Table" lay-filter="jyjl_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_grjl"></a>
+                <h3 class="layui-timeline-title">个人经历</h3>
+                <div class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <button class="layui-btn" id="btn_add_grjl">新增</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">当前职务：</label>
+                        <div class="layui-input-inline" style="width: 400px;">
+                            <input type="text" id="addinfo_dqzw_in" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">职务级别：</label>
+                            <div class="layui-input-inline" style="width: 300px;">
+                                <select id="addinfo_zwlevel" lay-filter="addinfo_zwlevel"></select>
+                            </div>
+                        </div>
+                        <button class="layui-btn" id="btn_zwbc_grjl">保存</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="grjl_Table" lay-filter="grjl_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_jtqk"></a>
+                <h3 class="layui-timeline-title">家庭情况</h3>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <button class="layui-btn" id="btn_add_jtqk">新增</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="jtqk_Table" lay-filter="jtqk_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_zc"></a>
+                <h3 class="layui-timeline-title">职称</h3>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <button class="layui-btn" id="btn_add_zc">新增</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="zc_Table" lay-filter="zc_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_htxx"></a>
+                <h3 class="layui-timeline-title">合同</h3>
+                <div class="layui-form">
+                    @*<div class="layui-form-item">
+                            <button class="layui-btn" id="btn_add_ht">新增</button>
+                        </div>*@
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="ht_Table" lay-filter="ht_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_gsgl"></a>
+                <h3 class="layui-timeline-title">工伤管理</h3>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <button class="layui-btn" id="btn_add_gsgl">新增</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="gsgl_Table" lay-filter="gsgl_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_wjgl"></a>
+                <h3 class="layui-timeline-title">违纪管理</h3>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <button class="layui-btn" id="btn_add_wjgl">新增</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="wjgl_Table" lay-filter="wjgl_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_wbzw"></a>
+                <h3 class="layui-timeline-title">外部职务管理</h3>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <button class="layui-btn" id="btn_add_wbzw">新增</button>
+                    </div>
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="wbzw_Table" lay-filter="wbzw_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <a name="dh_grry"></a>
+                <h3 class="layui-timeline-title">个人荣誉管理</h3>
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <table class="layui-hidden" id="grrygl_Table" lay-filter="grrygl_Table"></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="layui-form" id="div_jyjl" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">院校：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <input type="text" id="jyinfo_yx" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">起始日期：</label>
+        <div class="layui-input-inline" style="width:120px">
+            <input type="text" name="date" id="jyinfo_ksdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+        <label class="layui-form-label" style="width: 100px;">终止日期：</label>
+        <div class="layui-input-inline" style="width:120px">
+            <input type="text" name="date" id="jyinfo_jsdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">学习方式：</label>
+        <div class="layui-input-inline" style="width:120px">
+            <select id="jyinfo_xxfs" lay-filter="jyinfo_xxfs">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+        <label class="layui-form-label" style="width: 100px;">学历：</label>
+        <div class="layui-input-inline" style="width:120px">
+            <select id="jyinfo_xl" lay-filter="jyinfo_xl">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">专业：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <input type="text" id="jyinfo_zy" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">证书编号：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <input type="text" id="jyinfo_zsbh" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <input type="text" id="jyinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 130px;">是否标记：</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="isbj" lay-skin="switch" lay-filter="bjswitch" lay-text="标记|取消">
+        </div>
+    </div>
+</div>
+<div id="div_grjl" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">公司：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <select id="grinfo_gs" lay-filter="grinfo_gs">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">开始日期：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="date" id="grinfo_ksrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">截止日期：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="date" id="grinfo_jsrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">部门：</label>
+        <div class="layui-input-inline" style="width: 300px;" id="grinfo_bm_father">
+            <input type="text" id="grinfo_dept" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">职务：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" id="grinfo_zw" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" id="grinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<div id="div_jtqk" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">关系类别：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="jtinfo_gxlb" lay-filter="jtinfo_gxlb">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">关系人姓名：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="jtinfo_name" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">关系人单位：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="jtinfo_gxdw" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">关系人地址：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="jtinfo_gxdz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">关系人电话：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="jtinfo_gxdh" autocomplete="off" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="11">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="jtinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<div id="div_gsgl" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">岗位：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="gsinfo_gw" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">工伤发生日：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="gsinfo_gsfsr" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">工伤级数：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="gsinfo_gsjs" lay-filter="gsinfo_gsjs">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">医疗起始日：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="gsinfo_ylqsr" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">医疗截止日：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="gsinfo_yljzr" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">工伤说明：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="gsinfo_gssm"></textarea>
+        </div>
+    </div>
+</div>
+<div id="div_wjgl" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">发生日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="wjinfo_fsrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">事实说明：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="wjinfo_sssm"></textarea>
+        </div>
+    </div>
+</div>
+@*<div id="div_htgl" class="layui-form" hidden>
+        <br />
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">合同状态：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <select id="htinfo_zt" lay-filter="htinfo_zt">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">合同公司：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <select id="htinfo_gs" lay-filter="htinfo_gs">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">合同期限类型：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <select id="htinfo_qxlx" lay-filter="htinfo_qxlx">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">期限：</label>
+            <div class="layui-input-inline" style="width: 60px;">
+                <input type="text" id="htinfo_qxN" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+            </div>
+            <div class="layui-form-mid">年</div>
+            <div class="layui-input-inline" style="width: 60px;">
+                <input type="text" id="htinfo_qxM" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+            </div>
+            <div class="layui-form-mid">月</div>
+            <div class="layui-input-inline" style="width: 60px;">
+                <input type="text" id="htinfo_qxD" class="layui-input" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2">
+            </div>
+            <div class="layui-form-mid">日</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">签订日期：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input type="text" name="date" id="htinfo_qdrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">到期日：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input type="text" name="date" id="htinfo_dqr" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">试用期到期日：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input type="text" name="date" id="htinfo_syqdqr" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item" id="hide_jcdate">
+            <label class="layui-form-label" style="width: 100px;">解除日期：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input type="text" name="date" id="htinfo_jcrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">备注：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input type="text" id="htinfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>*@
+<div id="div_zcgl" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">来源类别：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="zcinfo_lb" lay-filter="zcinfo_lb">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">名称：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="zcinfo_name" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">等级：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="zcinfo_jb" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="zcinfo_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">机关（部门）：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="zcinfo_bm" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">证件编号：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="zcinfo_no" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">复审日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="zcinfo_fsdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="zcinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 130px;">是否聘用：</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="zcinfo_ispy" lay-skin="switch" lay-filter="zcinfo_ispy" lay-text="聘用|取消">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">聘用日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="zcinfo_pydate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item" id="hide_jcdate">
+        <label class="layui-form-label" style="width: 100px;">聘用系列：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="zcinfo_pyxl" lay-filter="zcinfo_pyxl">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">聘用级别：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <select id="zcinfo_pyjb" lay-filter="zcinfo_pyjb">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 130px;">是否标记：</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="zcinfo_isbj" lay-skin="switch" lay-filter="zcinfo_isbj" lay-text="标记|取消">
+        </div>
+    </div>
+</div>
+<div id="div_wbzw" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">职务名称：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="wzinfo_zwname" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">聘用单位：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="wzinfo_pydw" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">聘用日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="wzinfo_pydate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">截止日期：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" name="date" id="wzinfo_jzdate" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">备注：</label>
+        <div class="layui-input-inline" style="width: 250px;">
+            <input type="text" id="wzinfo_bz" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</div>
+<script type="text/html" id="jybar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sign">标记</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="grbar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="gxbar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="gsbar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="wjbar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+@*<script type="text/html" id="htbar">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>*@
+<script type="text/html" id="zcbar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="sign">标记</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="wzbar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<div hidden>
+    <input type="text" id="ghid" value="@Model.HR_RY_RYINFO_LIST.GH">
+</div>
+<style type="text/css">
+    .layui_table_bj_bgcolor {
+        background-color: #c2c2c2;
+    }
+
+    .dh_style {
+        margin: 20px;
+        font-size: large;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/RYGL/RYINFO_RSDA_EDIT")
+    @Scripts.Render("~/bundles/HR/RYGL/RYINFO_RSDA_EDIT_CHILD")
+}

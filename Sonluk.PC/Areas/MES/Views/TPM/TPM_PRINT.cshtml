@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "托盘码打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model List<MODEL_RWQD_PRINT>
+
+<div id="wrap" class="main">
+    @for (int i = 0; i < Model.Count; i++)
+{
+    if (i % 6 == 0)
+    {
+        <div class="bor_father1">
+            <table class="print_page_tpmoutside">
+                <tr>
+                    <td class="print_page_td_haveborder_tpm">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block;">
+                            <br />
+                            @{
+        string barcode = "";
+        barcode = Model[i].ZSL_BCS025.TPNO;
+                            }
+                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@Model[i].ZSL_BCS025.TPNO</big>
+                            <br />
+                        </div>
+                    </td>
+                    <td class="print_page_td_haveborder_tpm">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block; ">
+                            <br />
+                            @{
+        string barcode2 = "";
+        barcode2 = Model[i].ZSL_BCS025.TPNO;
+                            }
+                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode2, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@Model[i].ZSL_BCS025.TPNO</big>
+                            <br />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="bor_father">
+            <table class="print_page_tpmoutside">
+                <tr>
+                    <td class="print_page_td_haveborder_tpm">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block;">
+                            <br />
+                            @{
+        string barcode = "";
+        barcode = Model[i].ZSL_BCS025.TPNO;
+                            }
+                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@Model[i].ZSL_BCS025.TPNO</big>
+                            <br />
+                        </div>
+                    </td>
+                    <td class="print_page_td_haveborder_tpm">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block; ">
+                            <br />
+                            @{
+        string barcode2 = "";
+        barcode2 = Model[i].ZSL_BCS025.TPNO;
+                            }
+                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode2, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@Model[i].ZSL_BCS025.TPNO</big>
+                            <br />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            @*<div class="bor">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block;">
+                            <br />
+                            @{
+                string barcode = "";
+                barcode = Model[i].ZSL_BCS025.TPNO;
+                            }
+                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@Model[i].ZSL_BCS025.TPNO</big>
+                            <br />
+                        </div>
+                    </div>*@
+            @*<div class="bor">
+                        <div class="layui-form" style="width: 6cm; height: 4cm; display: inline-block; ">
+                            <br />
+                            @{
+                string barcode2 = "";
+                barcode2 = Model[i].ZSL_BCS025.TPNO;
+                            }
+                            <img src="@Url.Action("BarCode", "PD", new { area = "MES", code = barcode2, format = "CODE128", width = 220, height = 100, pure = 1 })">
+                            <br />
+                            <big>@Model[i].ZSL_BCS025.TPNO</big>
+                            <br />
+                        </div>
+                    </div>*@
+        </div>
+    }
+}
+</div>
+<style>
+    .print_page_tpmoutside {
+        margin: 0 auto;
+        border: 1px dashed black;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    .print_page_td_haveborder_tpm {
+        border: 1px dashed black;
+        margin-right: 30px;
+        margin-left: 30px;
+        width: 7cm;
+        height: 4cm;
+    }
+    .bor {
+        margin: 0 auto;
+        text-align: center;
+        vertical-align:middle;
+    }
+    .bor_father {
+        padding-top: 20px;
+        text-align: center;
+    }
+    .bor_father1 {
+        padding-top: 20px;
+        text-align: center;
+        page-break-before:always;
+    }
+</style> 

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AUTOINSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_XZGL_FLDATZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_XZGL_FLDATZ">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FLTZID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TZYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TZMONTH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MYPW" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FFJLID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AUTOINSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AUTOINSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_REPORT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_XZGL_FLDATZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_REPORTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_REPORTResult" type="tns:HR_XZGL_FLDATZ_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HR_XZGL_FLDATZ_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HR_XZGL_FLDATZ_LIST" type="tns:ArrayOfHR_XZGL_FLDATZ_LIST" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHR_XZGL_FLDATZ_LIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HR_XZGL_FLDATZ_LIST" nillable="true" type="tns:HR_XZGL_FLDATZ_LIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HR_XZGL_FLDATZ_LIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FLTZID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TZYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TZMONTH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISUSE" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="USERQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGTIME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SBRS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GJJRS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SBGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="GJJGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALLGR" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SBDW" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="GJJDW" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALLDW" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ALL" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_XZGL_FLDATZ" />
+            <s:element minOccurs="1" maxOccurs="1" name="LB" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AUTO_ADD_TO_FFJLMX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:HR_XZGL_FLDATZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AUTO_ADD_TO_FFJLMXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AUTO_ADD_TO_FFJLMXResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AUTOINSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:AUTOINSERT" />
+  </wsdl:message>
+  <wsdl:message name="AUTOINSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:AUTOINSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_REPORTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_REPORT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_REPORTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_REPORTResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="AUTO_ADD_TO_FFJLMXSoapIn">
+    <wsdl:part name="parameters" element="tns:AUTO_ADD_TO_FFJLMX" />
+  </wsdl:message>
+  <wsdl:message name="AUTO_ADD_TO_FFJLMXSoapOut">
+    <wsdl:part name="parameters" element="tns:AUTO_ADD_TO_FFJLMXResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WS_HR_XZGL_FLDATZSoap">
+    <wsdl:operation name="AUTOINSERT">
+      <wsdl:input message="tns:AUTOINSERTSoapIn" />
+      <wsdl:output message="tns:AUTOINSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_REPORT">
+      <wsdl:input message="tns:SELECT_REPORTSoapIn" />
+      <wsdl:output message="tns:SELECT_REPORTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AUTO_ADD_TO_FFJLMX">
+      <wsdl:input message="tns:AUTO_ADD_TO_FFJLMXSoapIn" />
+      <wsdl:output message="tns:AUTO_ADD_TO_FFJLMXSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WS_HR_XZGL_FLDATZHttpGet" />
+  <wsdl:portType name="WS_HR_XZGL_FLDATZHttpPost" />
+  <wsdl:binding name="WS_HR_XZGL_FLDATZSoap" type="tns:WS_HR_XZGL_FLDATZSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AUTOINSERT">
+      <soap:operation soapAction="http://tempuri.org/AUTOINSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_REPORT">
+      <soap:operation soapAction="http://tempuri.org/SELECT_REPORT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AUTO_ADD_TO_FFJLMX">
+      <soap:operation soapAction="http://tempuri.org/AUTO_ADD_TO_FFJLMX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_HR_XZGL_FLDATZSoap12" type="tns:WS_HR_XZGL_FLDATZSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AUTOINSERT">
+      <soap12:operation soapAction="http://tempuri.org/AUTOINSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_REPORT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_REPORT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AUTO_ADD_TO_FFJLMX">
+      <soap12:operation soapAction="http://tempuri.org/AUTO_ADD_TO_FFJLMX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_HR_XZGL_FLDATZHttpGet" type="tns:WS_HR_XZGL_FLDATZHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="WS_HR_XZGL_FLDATZHttpPost" type="tns:WS_HR_XZGL_FLDATZHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="WS_HR_XZGL_FLDATZ">
+    <wsdl:port name="WS_HR_XZGL_FLDATZSoap" binding="tns:WS_HR_XZGL_FLDATZSoap">
+      <soap:address location="http://192.168.0.223/API/HR/WS_HR_XZGL_FLDATZ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_HR_XZGL_FLDATZSoap12" binding="tns:WS_HR_XZGL_FLDATZSoap12">
+      <soap12:address location="http://192.168.0.223/API/HR/WS_HR_XZGL_FLDATZ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_HR_XZGL_FLDATZHttpGet" binding="tns:WS_HR_XZGL_FLDATZHttpGet">
+      <http:address location="http://192.168.0.223/API/HR/WS_HR_XZGL_FLDATZ.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_HR_XZGL_FLDATZHttpPost" binding="tns:WS_HR_XZGL_FLDATZHttpPost">
+      <http:address location="http://192.168.0.223/API/HR/WS_HR_XZGL_FLDATZ.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

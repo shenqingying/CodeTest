@@ -1,0 +1,256 @@
+﻿@{
+    ViewBag.Title = "培训管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="sign">签到</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="bmgl">报名管理</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="download">下载</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar3">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR培训发展</a>
+    <a><cite>培训管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增培训</button>
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_pxmx" onclick="location.href = '@Url.Action("PXMX", "PXFZ")'">培训明细</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">培训主题：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_pxzt" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">培训日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PXRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PXRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="PXTable" lay-filter="PXTable"></table>
+    </div>
+</div>
+<div id="div_pxzt" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">公司：</label>
+        <div class="layui-input-inline" style="width: 130px;">
+            <select id="pxinfo_gs" lay-filter="pxinfo_gs"></select>
+        </div>
+        <label class="layui-form-label">部门：</label>
+        <div class="layui-input-inline" style="width: 130px;" id="pxinfo_dept_father">
+            <select id="pxinfo_dept_child" lay-filter="pxinfo_dept_child"></select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">培训主题：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <input type="text" id="pxinfo_pxzt" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">起始日期：</label>
+        <div class="layui-input-inline" style="width: 130px;">
+            <input type="text" name="date" id="pxinfo_PXRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">结束日期：</label>
+        <div class="layui-input-inline" style="width: 130px;">
+            <input type="text" name="date" id="pxinfo_PXRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">培训老师：</label>
+        <div class="layui-input-inline" style="width: 130px;">
+            <input type="text" id="pxinfo_pxls" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">培训级别：</label>
+        <div class="layui-input-inline" style="width: 130px;">
+            <select id="pxinfo_jb" lay-filter="pxinfo_jb">
+                <option value="0" selected="selected"></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">培训单位：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <input type="text" id="pxinfo_pxjs" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">培训地点：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <input type="text" id="pxinfo_pxdd" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">培训结果：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="pxinfo_pxjg"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">说明：</label>
+        <div class="layui-input-inline" style="width: 380px;">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="pxinfo_sm"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <button type="button" class="layui-btn layui-btn-normal" id="btn_fjsc">上传附件</button>
+            <button type="button" class="layui-btn" id="btn_xzfj">下载附件</button>
+            <div class="layui-upload-list">
+                <table class="layui-table" id="uptable" hidden>
+                    <thead>
+                        <tr>
+                            <th>文件名</th>
+                            <th>大小</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="demoList"></tbody>
+                </table>
+            </div>
+            <button type="button" class="layui-btn" id="btn_sc">开始上传</button>
+        </div>
+    </div>
+</div>
+<div id="div_pxqd" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <button type="button" class="layui-btn" id="btn_dr">批量导入</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">培训主题：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="pxqd_pxzt" autocomplete="off" class="layui-input" readonly="readonly">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 100px;">姓名：</label>
+        <div class="layui-input-inline" style="width: 360px;">
+            <input type="text" id="pxqd_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="displayResult()" /> @*onkeypress="if(window.event.keyCode==13) this.blur()">*@
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="qdTable" lay-filter="qdTable"></table>
+    </div>
+</div>
+<div class="layui-form" id="div_downloadfj" hidden>
+    <div class="dBody">
+        <table class="layui-hidden" id="fjTable" lay-filter="fjTable"></table>
+    </div>
+</div>
+<div class="layui-form" id="div_pxzt_bmry" hidden>
+    <table class="layui-hidden" id="pxzt_bmry" lay-filter="pxzt_bmry"></table>
+</div>
+
+<div id="div_daoru" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_drmb" style="width:150px">导入</button>
+    </div>
+</div>
+<div id="div_daoru1" class="layui-form" style="padding:30px;text-align:center" hidden>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_download1" style="width:150px">下载模版</button>
+        <button class="layui-btn" id="btn_drmb1" style="width:150px">导入</button>
+    </div>
+</div>
+<div id="div_bmgl" class="layui-form" style="text-align:center" hidden>
+    <div class="layui-form-item">
+        <br />
+        <button type="button" class="layui-btn layui-btn-normal" id="btn_addry">上传人员</button>
+        <button type="button" class="layui-btn" id="btn_showry">查看人员</button>
+        <button type="button" class="layui-btn" id="btn_showreport">导出报表</button>
+    </div>
+</div>
+<div id="div_wcdjinfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_wcdjinfo_add_ry" lay-filter="tb_wcdjinfo_add_ry"></table>
+</div>
+<div hidden>
+    <input type="text" id="bl_pxid" value="">
+</div>
+<style>
+    #pxinfo_jb + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_gs + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_dept_child + .layui-form-select .layui-select-title input {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_deptShow {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_pxzt {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_PXRQ_S {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_PXRQ_E {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_pxls {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_pxjs {
+        background-color: #FAFFBD;
+    }
+
+    #pxinfo_pxdd {
+        background-color: #FAFFBD;
+    }
+
+    th .layui-table-cell {
+        text-align: center;
+    }
+</style>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/PXFZ/PXZT")
+}

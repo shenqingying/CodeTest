@@ -1,0 +1,102 @@
+﻿@using Sonluk.UI.Model.MES.SY_GCService;
+@{
+    ViewBag.Title = "过账授权";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    MES_SY_GC[] GC = ViewBag.GC;
+    string date = DateTime.Now.ToString("yyyy-MM-dd");
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+<script type="text/html" id="Tpl_KFZT">
+    {{# if(d.KFZT == 1){ }}
+    未开放
+    {{# }else if(d.KFZT == 2){ }}
+    已开放
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+
+
+
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+
+</div>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>库存管理</a>
+    <a><cite>过账授权</cite></a>
+</span>
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    <div id="div_height">
+
+
+        <div class="layui-form-item">
+
+            <button id="btn_cx" class="layui-btn">明细查询</button>
+            <button id="btn_daoru" class="layui-btn">导入</button>
+
+        </div>
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">交货单：</label>
+                <div class="layui-input-inline">
+                    <input id="JHD" type="text" autocomplete="off" placeholder="请扫描交货单" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:70px;text-align:right;">开放状态：</label>
+                <div class="layui-input-inline">
+                    <select id="KFZT" lay-filter="KFZT" lay-search>
+                        <option value="1">未开放</option>
+                        <option value="2" selected="selected">已开放</option>
+                    </select>
+                </div>
+                <button id="btn_save" class="layui-btn">保存</button>
+            </div>
+        </div>
+
+
+
+    </div>
+    <table id="table_WL" lay-filter="table_WL"></table>
+
+
+</div>
+
+
+<div id="div_daoru" hidden class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="btn_download" class="layui-btn">下载模版</button>
+        <button id="btn_confirm" class="layui-btn">导入</button>
+    </div>
+
+</div>
+
+
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+<input id="XSCK_READ" value="@Url.Action("XSCK_READ", "BC_TM")" type="hidden">
+
+@section scripts {
+    @Scripts.Render("~/bundles/WMS/BC_TM/XSCK_GZSQ")
+}

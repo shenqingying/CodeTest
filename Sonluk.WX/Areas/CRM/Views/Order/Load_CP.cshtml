@@ -1,0 +1,51 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_PRODUCTService;
+@{
+    ViewBag.Title = "Load_CP";
+    CRM_PRODUCT_PRODUCT[] data = ViewBag.PRODUCT;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+
+    <div class="weui-flex">
+        <div class="weui-flex__item" style="text-align:center;">
+            <img src="@data[i].ML" style="height:100px;" />
+            <label class="weui-label" style="width:inherit;text-align:center;height: 50px;font-size:17px;">@data[i].CPMC</label>
+            @if (@data[i].CountInOrder == 0)
+            {
+                <button class="weui-btn weui-btn_plain-primary" id="btn_@data[i].PRODUCTID" style="width:75%;line-height:2;" onclick="CP_click(@data[i].PRODUCTID)">添加</button>
+            }
+            else
+            {
+                <button class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled" id="btn_@data[i].PRODUCTID" style="width:75%;line-height:2;" onclick="CP_click(@data[i].PRODUCTID)">已添加</button>
+            }
+        </div>
+
+        @if (i == data.Length - 1)
+        {
+            <div class="weui-flex__item" style="text-align:center;">
+            </div>
+        }
+        else
+        {
+            i++;
+            <div class="weui-flex__item" style="text-align:center;">
+                <img src="@data[i].ML" style="height:100px;" />
+                <label class="weui-label" style="width:inherit;text-align:center;height: 50px;font-size:17px;">@data[i].CPMC</label>
+                @if (@data[i].CountInOrder == 0)
+                {
+                    <button class="weui-btn weui-btn_plain-primary" id="btn_@data[i].PRODUCTID" style="width:75%;line-height:2;" onclick="CP_click(@data[i].PRODUCTID)">添加</button>
+                }
+                else
+                {
+                    <button class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled" id="btn_@data[i].PRODUCTID" style="width:75%;line-height:2;" onclick="CP_click(@data[i].PRODUCTID)">已添加</button>
+                }
+            </div>
+
+        }
+
+
+
+    </div>
+    <hr class="layui-bg-gray" />
+}

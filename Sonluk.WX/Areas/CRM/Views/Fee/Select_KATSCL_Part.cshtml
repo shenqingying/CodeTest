@@ -1,0 +1,72 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KATSCLTTService;
+@{
+    ViewBag.Title = "Select_KATSCL_Part";
+    CRM_COST_KATSCLTT[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+    string isactive = "";
+    switch (data[i].MX_ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 30:
+            isactive = "已审核";
+            break;
+        default:
+            break;
+    }
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MC</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">合同年份</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HTYEAR</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户SAP编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SAPSN</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].BEIZ</span>
+            </p>
+            @*<p>
+                <label class="weui-form-preview__label">创建时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CJSJ</span>
+            </p>*@
+            <p>
+                <label class="weui-form-preview__label">状态</label>
+                <span class="weui-form-preview__value">&nbsp;@isactive</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">编辑</button>
+            <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_delete(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">删除</button>
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />

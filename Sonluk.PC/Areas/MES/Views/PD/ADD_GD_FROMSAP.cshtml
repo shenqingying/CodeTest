@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "从SAP导入工单";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn_back">返回</button>
+            <button class="layui-btn" id="btn_find">查询</button>
+            <button class="layui-btn" id="btn_add_fock_gd">创建选中工单</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_pd_gc" lay-filter="in_pd_gc">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                    {
+                        <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工单日期:</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PDRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PDRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        @*<div class="layui-inline">
+                <label class="layui-form-label">物料类别：</label>
+                <div class="layui-input-inline">
+                    <select id="in_pd_gc" lay-filter="in_pd_gc">
+                        <option value="0" selected="selected">请选择</option>
+                    </select>
+                </div>
+            </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label">SAP工单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_sapbill" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_GD" lay-filter="tb_GD"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/PD/ADD_GD_FROMSAP")
+}

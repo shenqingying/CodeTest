@@ -1,0 +1,530 @@
+﻿@{
+    ViewBag.Title = "质量问题维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>@ViewBag.PreMenu</a>
+    <a><cite>@ViewBag.Title</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search">查询</button>
+        <button class="layui-btn" id="btn_new_QLTY">新增质量问题</button>
+        <button class="layui-btn" id="btn_new_REP">新增维修内容</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">查询类别：</label>
+        <div class="layui-input-inline" style="width:120px;">
+            <input type="radio" name="type" value="1" title="质量问题" checked>
+        </div>
+        <div class="layui-input-inline" style="width:120px;">
+            <input type="radio" name="type" value="2" title="维修内容">
+        </div>
+        <label class="layui-form-label">查询内容：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="Term_QRNAME" class="layui-input">
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_main" lay-filter="tb_main"></table>
+</div>
+
+<div id="div_modify_QLTY" class="layui-form layui-form-item-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_div_modify_QLTY" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">质量问题代码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Layer_QCODE" class="layui-input" lay-verify="required">
+            </div>
+            <label class="layui-form-label1">质量问题描述：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="Layer_QNAME" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">是否启用：</label>
+        <div class="layui-input-inline">
+            <input type="checkbox" id="Layer_QISACTION" lay-skin="switch" lay-text="已启用|未启用" checked>
+        </div>
+    </div>
+    <div class="layui-form-item" id="div_Layer_btn_new">
+        <button class="layui-btn" id="Layer_btn_new">新增维修内容关联</button>
+        <table class="layui-hide" id="tb_QR" lay-filter="tb_QR"></table>
+    </div>
+</div>
+
+<div id="div_modify_QR" class="layui-form layui-form-item-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_div_modify_QR" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label1" style="width:150px;">维修内容以及代码：</label>
+        <div class="layui-input-inline">
+            <select id="Layerson_RCODE" lay-verify="required" style="width:150px;">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="div_modify_REP" class="layui-form layui-form-item-modify" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_div_modify_REP" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">维修内容代码：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="Layer_RCODE" class="layui-input" lay-verify="required">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">维修内容：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="Layer_RNAME" class="layui-input" lay-verify="required">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">是否启用：</label>
+        <div class="layui-input-inline">
+            <input type="checkbox" id="Layer_RISACTION" lay-skin="switch" lay-text="已启用|未启用" checked>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="operateson">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="isAction">
+    {{#  if(d.RISACTION == 1 || d.QISACTION == 1){ }}
+    <label style="color: #009688;">已启用</label>
+    {{#  } else { }}
+    <label style="color: #FF5722;">未启用</label>
+    {{#  } }}
+</script>
+
+@section scripts {
+    <script>
+        var all_fy = 1;
+        var all_fysl = 10;
+        var all_limits = [10, 20, 50, 100, 200];
+        var cacheData = [];
+        var cacheQID = 0;
+        var cacheType = "1";
+        layui.use(['table', 'layer', 'form', 'element'], function () {
+            var layer = layui.layer;
+            var table = layui.table;
+            var form = layui.form;
+            var element = layui.element;
+            var assist = sonluk.layui;
+
+            table_init();
+            list_init();
+
+            $("#btn_new_QLTY").click(function () {
+                layer_QLTY_init();
+            });
+            $("#btn_new_REP").click(function () {
+                layer_REP_init();
+            });
+            $("#Layer_btn_new").click(function () {
+                layer_QR_init(cacheQID);
+            });
+            $("#btn_search").click(function () {
+                table_init();
+            });
+
+            $('#Term_QRNAME').bind('keyup', function (event) {
+                if (event.keyCode == "13") table_init();
+            });
+
+            form.on('radio()', function (data) {
+                if (data.elem.name == "type") {
+                    cacheType = data.value;
+                    table_init();
+                }
+            });
+
+            table.on('tool(tb_main)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+
+                if (layEvent === 'modify') {
+                    if (cacheType == "1") layer_QLTY_init(layEvent, data);
+                    else if (cacheType == "2") layer_REP_init(layEvent, data);
+                }
+                else if (layEvent === 'delete') {
+                    var postUrl;
+                    var postData;
+                    if (cacheType == "1") {
+                        postUrl = "MT_QLTY_Delete_QLTY";
+                        postData = data.QID;
+                    }
+                    else if (cacheType == "2") {
+                        postUrl = "MT_QLTY_Delete_REP";
+                        postData = data.RID;
+                    }
+                    layer.confirm('确定要删除吗？', function (index) {
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/" + postUrl,
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") layer.msg("删除成功！");
+                                else if (rstData.TYPE == "E") layer.msg("删除失败，原因：" + rstData.MESSAGE);
+                                else layer.msg("删除失败，原因未知");
+                                table_init();
+                            }
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+
+            table.on('tool(tb_QR)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                var tr = obj.tr;
+
+                if (layEvent === 'delete') {
+                    layer.confirm('确定要去除该关联吗？', function (index) {
+                        var postData = {
+                            QID: data.QID,
+                            RID: data.RID
+                        }
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MT_QLTY_Delete_QR",
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") layer.msg("删除成功！");
+                                else if (rstData.TYPE == "E") layer.msg("删除失败，原因：" + rstData.MESSAGE);
+                                else layer.msg("删除失败，原因未知");
+                                table_QR_init();
+                            }
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+
+            function layer_QLTY_init(event, data) {
+                event = event || "";
+                data = data || "";
+                var title = "新增";
+                var func = "MT_QLTY_Add_QLTY";
+                var layerHeight = '250px';
+                if (event == "modify") {
+                    title = "修改";
+                    func = "MT_QLTY_Update_QLTY";
+                    layerHeight = '550px';
+                }
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['保存', '取消'],
+                    area: ['750px', layerHeight],
+                    content: $('#div_modify_QLTY'),
+                    title: title,
+                    moveOut: true,
+                    success: function (layero, index) {
+                        if (event == "modify") {
+                            $("#div_Layer_btn_new").removeAttr('hidden');
+                            $("#Layer_QCODE").val(data.QCODE);
+                            $("#Layer_QNAME").val(data.QNAME);
+                            if (data.QISACTION == 1) $('#Layer_QISACTION').prop('checked', 'true');
+                            else $('#Layer_QISACTION').removeAttr('checked');
+                            cacheQID = data.QID;
+                        }
+                        else {
+                            $("#div_Layer_btn_new").attr('hidden', '');
+                            $("#Layer_QCODE").val("");
+                            $("#Layer_QNAME").val("");
+                            $("#Layer_QISACTION").prop('checked', 'true');
+                            cacheQID = 0;
+                        }
+                        table_QR_init();
+                        form.render();
+                    },
+                    yes: function (index, layero) {
+                        $("#btn_div_modify_QLTY")[0].click();
+                        var QCODE = $("#Layer_QCODE").val();
+                        var QNAME = $("#Layer_QNAME").val();
+                        var QISACTION = $('#Layer_QISACTION').prop('checked') ? 1 : 0;
+                        if (QCODE == "" || QNAME == "") return;
+                        var postData = {
+                            QID: data.QID || 0,
+                            QCODE: QCODE,
+                            QNAME: QNAME,
+                            QISACTION: QISACTION
+                        };
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/" + func,
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg(title + "成功！");
+                                    layer.close(index);
+                                    table_init();
+                                }
+                                else if (rstData.TYPE == "E") layer.alert(title + "失败，原因：" + rstData.MESSAGE);
+                                else layer.alert(title + "失败，原因未知");
+                            }
+                        });
+                    }
+                });
+            }
+
+            function layer_QR_init(data) {
+                data = data || "";
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['保存', '取消'],
+                    area: ['500px', '250px'],
+                    content: $('#div_modify_QR'),
+                    title: "新增",
+                    moveOut: true,
+                    success: function (layero, index) {
+                        $("#Layerson_RCODE").val("");
+                        $("#Layerson_RNAME").val("");
+                        form.render();
+                    },
+                    yes: function (index, layero) {
+                        $("#btn_div_modify_QR")[0].click();
+                        var RID = $("#Layerson_RCODE").val();
+                        if (RID == "") return;
+                        var postData = {
+                            QID: data,
+                            RID: Number(RID),
+                        };
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/MT_QLTY_Cover_QR",
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg("新增成功！");
+                                    layer.close(index);
+                                    table_QR_init();
+                                }
+                                else if (rstData.TYPE == "E") layer.alert("新增失败，原因：" + rstData.MESSAGE);
+                                else layer.alert("新增失败，原因未知");
+                            }
+                        });
+                    }
+                });
+            }
+
+            function layer_REP_init(event, data) {
+                event = event || "";
+                data = data || "";
+                var title = "新增";
+                var func = "MT_QLTY_Add_REP";
+                if (event == "modify") {
+                    title = "修改";
+                    func = "MT_QLTY_Update_REP";
+                }
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: ['保存', '取消'],
+                    area: ['500px', '250px'],
+                    content: $('#div_modify_REP'),
+                    title: title,
+                    moveOut: true,
+                    success: function (layero, index) {
+                        if (event == "modify") {
+                            $("#Layer_RCODE").val(data.RCODE);
+                            $("#Layer_RNAME").val(data.RNAME);
+                            if (data.RISACTION == 1) $('#Layer_RISACTION').prop('checked', 'true');
+                            else $('#Layer_RISACTION').removeAttr('checked');
+                        }
+                        else {
+                            $("#Layer_RCODE").val("");
+                            $("#Layer_RNAME").val("");
+                            $('#Layer_RISACTION').prop('checked', 'true');
+                        }
+                        form.render();
+                    },
+                    yes: function (index, layero) {
+                        $("#btn_div_modify_REP")[0].click();
+                        var RCODE = $("#Layer_RCODE").val();
+                        var RNAME = $("#Layer_RNAME").val();
+                        var RISACTION = $('#Layer_RISACTION').prop('checked') ? 1 : 0;
+                        if (RCODE == "" || RNAME == "") return;
+                        var postData = {
+                            RID: data.RID || 0,
+                            RCODE: RCODE,
+                            RNAME: RNAME,
+                            RISACTION: RISACTION
+                        };
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "../MOULD/" + func,
+                            data: {
+                                datastring: JSON.stringify(postData)
+                            },
+                            success: function (data) {
+                                var rstData = JSON.parse(data);
+                                if (rstData.TYPE == "S") {
+                                    layer.msg(title + "成功！");
+                                    layer.close(index);
+                                    table_init();
+                                    list_init();
+                                }
+                                else if (rstData.TYPE == "E") layer.alert(title + "失败，原因：" + rstData.MESSAGE);
+                                else layer.alert(title + "失败，原因未知");
+                            }
+                        });
+                    }
+                });
+            }
+
+            function table_init() {
+                var QRNAME = $("#Term_QRNAME").val();
+                var postData = {};
+                var myCol = [];
+                var postUrl = "";
+
+                if (cacheType == "1") {
+                    myCol = [
+                    { field: 'QCODE', title: '质量问题代码' },
+                    { field: 'QNAME', title: '质量问题描述' }
+                    ];
+                    postData = {
+                        QNAME: QRNAME,
+                        QISACTION: -1
+                    };
+                    postUrl = "MT_QLTY_Search_QLTY";
+                }
+                else if (cacheType == "2") {
+                    myCol = [
+                    { field: 'RCODE', title: '维修内容代码' },
+                    { field: 'RNAME', title: '维修内容' }
+                    ];
+                    postData = {
+                        RNAME: QRNAME,
+                        RISACTION: -1
+                    };
+                    postUrl = "MT_QLTY_Search_REP";
+                }
+                else return;
+
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/" + postUrl,
+                    data: {
+                        datastring: JSON.stringify(postData)
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            cacheData = rstData.MES_PMM_QR;
+                            assist.table.render({
+                                elem: '#tb_main',
+                                data: cacheData,
+                                height: 'full-300',
+                                cols: [[
+                                { type: 'numbers', title: '序号' },
+                                { field: myCol[0].field, title: myCol[0].title },
+                                { field: myCol[1].field, title: myCol[1].title, width: 200 },
+                                { fixed: 'right', toolbar: '#isAction', title: '是否启用' },
+                                { fixed: 'right', toolbar: '#operate', title: '操作', width: 120 }
+                                ]],
+                                page: {
+                                    limits: all_limits,
+                                    limit: all_fysl,
+                                    curr: all_fy,
+                                    currfix: function (curr) { all_fy = curr; }
+                                }
+                            });
+                        }
+                        else if (rstData.MES_RETURN.TYPE == "E") layer.msg("查询失败，原因：" + rstData.MES_RETURN.MESSAGE);
+                        else layer.msg("查询失败！");
+                    }
+                });
+            }
+
+            function table_QR_init() {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/MT_QLTY_Search_QR",
+                    data: {
+                        datastring: JSON.stringify(cacheQID)
+                    },
+                    success: function (data) {
+                        var rstData = JSON.parse(data);
+                        if (rstData.MES_RETURN.TYPE == "S") {
+                            assist.table.render({
+                                elem: '#tb_QR',
+                                data: rstData.MES_PMM_QR,
+                                cols: [[
+                                { type: 'numbers', title: '序号' },
+                                { field: 'RCODE', title: '维修内容代码' },
+                                { field: 'RNAME', title: '维修内容', minWidth: 200 },
+                                { fixed: 'right', toolbar: '#operateson', title: '操作', width: 120 }
+                                ]],
+                                page: {
+                                    limits: [5],
+                                    limit: 5,
+                                    curr: 1
+                                }
+                            });
+                        }
+                        else if (rstData.MES_RETURN.TYPE == "E") layer.alert("关系获取失败，原因：" + rstData.MESSAGE);
+                        else layer.alert("关系获取失败，原因未知");
+                    }
+                });
+            }
+
+            function list_init() {
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: "../MOULD/RCODEList",
+                    success: function (data) {
+                        $('#Layerson_RCODE').empty();
+                        $('#Layerson_RCODE').append(new Option("请选择", ""));
+                        $.each(JSON.parse(data), function (index, item) {
+                            $('#Layerson_RCODE').append(new Option(item.RCODE + "-" + item.RNAME, item.RID));
+                        })
+                        form.render();
+                    }
+                });
+            }
+        });
+    </script>
+}

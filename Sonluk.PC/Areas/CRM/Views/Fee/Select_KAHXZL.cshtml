@@ -1,0 +1,294 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "KA费用效果评估";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+
+
+
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="do">确定</a>
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="Tpl_isactive">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+
+
+<script type="text/html" id="tpl_mcsx">
+    {{# if(d.MCSX == 1){ }}
+    系统
+    {{# }else if(d.MCSX == 2){ }}
+    门店
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>KA费用效果评估</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_insert" class="layui-btn">新增</button>
+            <button id="btn_cx" class="layui-btn">查询</button>
+
+
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content">
+
+
+                    <div class="layui-form-item">
+
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:150px;text-align:right;">合同年份：</label>
+                            <div class="layui-input-inline">
+                                <input id="year" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:150px;text-align:right;">客户名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="lkaname" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:150px;text-align:right;">客户编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="lkacrmid" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:150px;text-align:right;">客户SAP编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="jxssapsn" type="text" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        @*<div class="layui-inline">
+                                <label class="layui-form-label" style="width:150px;text-align:right;">年度费用开始时间：</label>
+                                <div class="layui-input-inline">
+                                    <input id="begindate" type="text" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label" style="width:150px;text-align:right;">年度费用结束时间：</label>
+                                <div class="layui-input-inline">
+                                    <input id="enddate" type="text" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>*@
+
+                        @*<div class="layui-inline">
+                                <label class="layui-form-label" style="width:150px;text-align:right;">状态：</label>
+                                <div class="layui-input-inline">
+                                    <select id="isactive" lay-filter="isactive">
+                                        <option value="0">全部</option>
+                                        <option value="1" selected="selected">未提交 </option>
+                                        <option value="2">已提交 </option>
+                                        <option value="3">已审核</option>
+                                    </select>
+                                </div>
+                            </div>*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+
+    </div>
+
+</div>
+
+<div id="div_insert" class="layui-form" hidden>
+    <br />
+    <div id="div_kh">
+
+        <div class="layui-form-item">
+            <button id="btn_cxkh" class="layui-btn">查询</button>
+
+        </div>
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:120px;">卖场属性：</label>
+                        <div class="layui-input-inline">
+                            <select id="KHmcsx" lay-filter="KHmcsx">
+                                <option value="0" selected="selected">请选择</option>
+                                <option value="1">系统</option>
+                                <option value="2">门店</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">客户名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">客户编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">客户SAP编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="KH_SAP" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">上级客户名称：</label>
+                            <div class="layui-input-inline">
+                                <input id="upKH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:120px;">上级客户编号：</label>
+                            <div class="layui-input-inline">
+                                <input id="upKH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <table id="tb_kh" lay-filter="tb_kh"></table>
+
+
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="div_insert2" hidden>
+        <div class="layui-form-item">
+            <button id="btn_back" class="layui-btn">返回</button>
+            <button id="btn_save" class="layui-btn">保存</button>
+
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">客户名称：</label>
+                <div class="layui-input-inline">
+                    <input id="khmc" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">客户编号：</label>
+                <div class="layui-input-inline">
+                    <input id="crmid" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">客户SAP编号：</label>
+                <div class="layui-input-inline">
+                    <input id="sapsn" type="text" name="title" placeholder="" autocomplete="off" class="layui-input" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">合同年份：</label>
+                <div class="layui-input-inline">
+                    <input id="insert_year" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+<input id="netpath" value="@netpath" hidden />
+<input id="khid" hidden />
+
+
+
+
+<script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Select_KAHXZL")
+}

@@ -1,0 +1,422 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_PRODUCT_HHService;
+@using Sonluk.UI.Model.MES.MM_CKService;
+@{
+    ViewBag.Title = "订单创建";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+    CRM_PRODUCT_PRODUCT_HH[] CXP = ViewBag.CXP;
+    MES_MM_CK[] KCDD = ViewBag.KCDD;
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="iscancel_tpl">
+    {{# if(d.ISCANCEL == 1){ }}
+    是
+    {{# }else if(d.ISCANCEL == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_iscf">
+    {{# if(d.ISCF == 1){ }}
+    X
+    {{# }else if(d.ISCANCEL == 0){ }}
+
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_ProdName">
+    {{d.ProdName}}
+    {{# if(d.ProdSpec != ""){ }}
+    /
+    {{d.ProdSpec}}
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_dddw">
+    {{# if(d.DDDW == "CTN"){ }}
+    箱
+    {{# }else if(d.DDDW == "PCS"){ }}
+    只
+    {{# }else { }}
+    {{d.DDDW}}
+    {{# } }}
+</script>
+
+<script type="text/html" id="bar_bzdw">
+    {{# if(d.BZDW == "PCS"){ }}
+    只
+    {{# }else { }}
+    {{d.BZDW}}
+    {{# } }}
+</script>
+
+<script type="text/html" id="color">
+    {{# if(d.DDSL == 0){ }}
+    <span class="span_color"></span>
+    {{# }else { }}
+    <span class="span_color">{{d.DDSL}}</span>
+    {{# } }}
+
+</script>
+
+
+<div id="temp">
+    <script type="text/html" id="bar">
+        @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="bar_orderMX">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+</div>
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>KA订单管理</a>
+    <a><cite>订单创建</cite></a>
+</span>
+<br />
+<br />
+
+
+
+
+
+
+
+
+<div id="div1" class="layui-form" style="margin-left:10px">
+    @*<div class="layui-form-item">
+            <button id="btn_save" class="layui-btn" style="display:none;">保存</button>
+
+            <button id="btn_submit" class="layui-btn">保存并提交</button>
+
+        </div>*@
+
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:70px;text-align:right;">订单编号：</label>
+            <div class="layui-input-inline" style="width:500px;">
+                <input id="khpo" type="text" autocomplete="off" placeholder="请扫描商品订购单" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline" style="padding-left:15px">
+            <input id="checkbox1" title="直接创建" type="checkbox" name="checkbox1" lay-skin="primary">
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<div id="div_order" class="layui-form" hidden>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订单类别：</label>
+            <div class="layui-input-inline">
+                <input id="ddlb" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:100px;text-align:right;">订购金额：</label>
+                <div class="layui-input-inline">
+                    <input id="dgje" type="text" placeholder="" class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">售达方：</label>
+            <div class="layui-input-inline" style="width:520px;">
+                <input id="sdf" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">快报：</label>
+            <div class="layui-input-inline">
+                <input id="StoreNews" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">送达方：</label>
+            <div class="layui-input-inline" style="width:520px;">
+                <select id="sdf2" lay-filter="sdf2">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">采购订单编号：</label>
+            <div class="layui-input-inline">
+                <input id="cgddbh" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+
+            <label class="layui-form-label" style="width:100px;text-align:right;">客户交货日期：</label>
+            <div class="layui-input-inline">
+                <input id="khjhrq" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+
+        </div>
+    </div>
+
+    @*<table id="table_orderMX" lay-filter="table_orderMX"></table>*@
+
+    <div class="layui-form-item">
+        <button id="btn_insert" class="layui-btn">新增</button>
+        <button id="btn_chaifen" class="layui-btn">拆分</button>
+
+    </div>
+    @*<div id="div_orderMX">
+
+        </div>*@
+    <table id="result_mx" lay-filter="result_mx"></table>
+</div>
+
+
+
+<div id="div_wl" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">物料信息：</label>
+            <div class="layui-input-inline" style="width: 355px;">
+                <select id="select_wlinfo" lay-filter="select_wlinfo" lay-search>
+                    @*<option value="0">请选择</option>*@
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">库存地点：</label>
+            <div class="layui-input-inline" style="width: 355px;">
+                <select id="select_kcdd" lay-filter="select_kcdd">
+                    <option value="0">请选择</option>
+                    @for (int i = 0; i < KCDD.Length; i++)
+                    {
+                        <option value="@KCDD[i].CKDM">@(KCDD[i].GC)-@(KCDD[i].CKMS)</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订购量：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="wl_ddsl" type="text" placeholder="" class="layui-input" maxlength="7">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订购单位：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="wl_dddw" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <input id="cpmc" hidden />
+    <input id="ddsl" hidden />
+    <input id="dddw" hidden />
+</div>
+
+<div id="div_insert" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">促销品：</label>
+            <div class="layui-input-inline" style="width: 355px;">
+                <select id="select_cxp" lay-filter="select_cxp">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < CXP.Length; i++)
+                    {
+                        <option value="@CXP[i].CPPH">@(CXP[i].CPPH) | @(CXP[i].SAPMX) | @(CXP[i].DDDW)</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">库存地点：</label>
+            <div class="layui-input-inline" style="width: 355px;">
+                <select id="select_cxpkcdd" lay-filter="select_cxpkcdd">
+                    <option value="0">请选择</option>
+                    @for (int i = 0; i < KCDD.Length; i++)
+                    {
+                        <option value="@KCDD[i].CKDM">@(KCDD[i].GC)-@(KCDD[i].CKMS)</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订购量：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="cxp_ddsl" type="text" placeholder="" class="layui-input" maxlength="7">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订购单位：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="cxp_dddw" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="div_chaifen" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订单信息：</label>
+            <div class="layui-input-inline" style="width: 500px;">
+                <input id="chaifen_ddxx" type="text"  placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">品名/规格：</label>
+            <div class="layui-input-inline" style="width:500px;">
+                <input id="chaifen_pm" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">货号：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="chaifen_hh" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订购量：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="chaifen_ddsl" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+            <label id="lb_dddw" class="layui-form-label" style="width:100px;text-align:left;"></label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button id="btn_weihu" class="layui-btn">维护</button>
+
+    </div>
+    <input id="orderitem" hidden />
+    <input id="barcode" hidden />
+
+    <table id="table_chaifen" lay-filter="table_chaifen"></table>
+
+</div>
+
+<div id="div_weihu" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">物料信息：</label>
+            <div class="layui-input-inline" style="width: 355px;">
+                <select id="weihu_wl" lay-filter="weihu_wl" lay-search>
+                    @*<option value="0" selected="selected">请选择</option>*@
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">库存地点：</label>
+            <div class="layui-input-inline" style="width: 355px;">
+                <select id="select_weihukcdd" lay-filter="select_weihukcdd">
+                    <option value="0">请选择</option>
+                    @for (int i = 0; i < KCDD.Length; i++)
+                    {
+                        <option value="@KCDD[i].CKDM">@(KCDD[i].GC)-@(KCDD[i].CKMS)</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订购量：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="weihu_ddsl" type="text" placeholder="" class="layui-input" maxlength="7">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:100px;text-align:right;">订购单位：</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input id="weihu_dddw" type="text" placeholder="" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="div_selectorder" class="layui-form" hidden>
+
+    <div id="result_selectorder">
+
+    </div>
+    <table id="table_selectorder" lay-filter="table_selectorder"></table>
+</div>
+
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+<input id="ORDERTTID" hidden />
+<input id="now" value="@DateTime.Now.ToString("yyyy-MM-dd")" hidden />
+<input id="ordersrc" hidden />
+<input id="storenum" hidden />
+<input id="kcdd" hidden />
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KAOrder/CreateOrder")
+}

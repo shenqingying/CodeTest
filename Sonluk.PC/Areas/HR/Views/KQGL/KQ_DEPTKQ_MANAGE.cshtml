@@ -1,0 +1,311 @@
+﻿@{
+    ViewBag.Title = "部门考勤管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="rqbj_Tpl">
+    {{# if(d.RQBJ == 0){ }}
+    正常
+    {{# }else if(d.RQBJ == 1){ }}
+    加班
+    {{# }else if(d.RQBJ == 2){ }}
+    节假日
+    {{# }else if(d.RQBJ == 3){ }}
+    调休
+    {{# } }}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<script type="text/html" id="barkh">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="modify_jb">加班</a>
+    <a class="layui-btn layui-btn-xs" lay-event="modify_tx">调休</a>
+    <a class="layui-btn layui-btn-xs" lay-event="modify_zc">正常</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="barkh1">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR考勤管理</a>
+    <a><cite>部门考勤管理</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_sgbk">手工补卡</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_pl_delete">批量删除</button>
+        <button class="layui-btn" id="btn_pl_jbbj">批量加班标记</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_gh" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">部门：</label>
+            <div class="layui-input-inline" style="width: 300px;" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">考勤日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_kqrqs" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_kqrqe" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_deptkq" lay-filter="tb_deptkq"></table>
+</div>
+<div class="layui-form" id="div_deptkqinfo" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="deptkqinfo_gh" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="deptkqinfo_ygname" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="deptkqinfo_dept" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">考勤日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="deptkqinfo_kqrq" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工作时长：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="deptkqinfo_worktime" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" id="deptkqinfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">上班时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="deptkqinfo_sbsj" autocomplete="off" class="layui-input" readonly="readonly" placeholder="日期">
+            </div>
+            <div class="layui-form-mid"> </div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_sbxs" autocomplete="off" class="layui-input" placeholder="小时" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_sbfz" autocomplete="off" class="layui-input" placeholder="分钟" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_sbm" autocomplete="off" class="layui-input" placeholder="秒" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">下班时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="deptkqinfo_xbsj" autocomplete="off" class="layui-input" readonly="readonly" placeholder="日期">
+            </div>
+            <div class="layui-form-mid"> </div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_xbxs" autocomplete="off" class="layui-input" placeholder="小时" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_xbfz" autocomplete="off" class="layui-input" placeholder="分钟" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_xbm" autocomplete="off" class="layui-input" placeholder="秒" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    @*<div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">上班时间：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptkqinfo_sbsj" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">下班时间：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptkqinfo_xbsj" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>*@
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">休息时间：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="deptkqinfo_freetime" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-form" id="div_deptkqinfo_add" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 70px;">考勤日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="deptkqinfo_add_kqrq" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 70px;">工作时长：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="deptkqinfo_add_worktime" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 70px;">休息时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="deptkqinfo_add_freetime" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 70px;">备注：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" id="deptkqinfo_add_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 70px;">上班时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="deptkqinfo_add_sbrq" autocomplete="off" class="layui-input" readonly="readonly" placeholder="日期">
+            </div>
+            <div class="layui-form-mid"> </div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_add_sbxs" autocomplete="off" class="layui-input" placeholder="小时" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_add_sbfz" autocomplete="off" class="layui-input" placeholder="分钟" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_add_sbm" autocomplete="off" class="layui-input" placeholder="秒" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 70px;">下班时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="deptkqinfo_add_xbrq" autocomplete="off" class="layui-input" readonly="readonly" placeholder="日期">
+            </div>
+            <div class="layui-form-mid"> </div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_add_xbxs" autocomplete="off" class="layui-input" placeholder="小时" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_add_xbfz" autocomplete="off" class="layui-input" placeholder="分钟" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+            <div class="layui-form-mid">:</div>
+            <div class="layui-input-inline" style="width: 80px;">
+                <input type="text" id="deptkqinfo_add_xbm" autocomplete="off" class="layui-input" placeholder="秒" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 70px;">姓名：</label>
+            <div class="layui-input-inline" style="width: 300px;">
+                <input type="text" id="deptkqinfo_add_gh" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()" placeholder="（姓名/工号/证件号码）">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_deptkqrylist" lay-filter="tb_deptkqrylist"></table>
+    @*<div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">工号：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptkqinfo_add_gh" autocomplete="off" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()" placeholder="（工号/姓名/证件号码）">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">姓名：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptkqinfo_add_ygname" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">部门：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptkqinfo_add_dept" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>*@
+    @*<div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">上班时间：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptkqinfo_add_sbsj" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">下班时间：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptkqinfo_add_xbsj" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>*@
+</div>
+<div id="div_xzdainfo_add_ry" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_xzdamx_add_ry" lay-filter="tb_xzdamx_add_ry"></table>
+</div>
+<div hidden>
+    <input type="text" id="bl_ryid" value="">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_DEPTKQ_MANAGE")
+}

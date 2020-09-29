@@ -1,0 +1,356 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "创建工单";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+<script type="text/html" id="GDtype_Tpl">
+    {{# if(d.ISOPEN == 0){ }}
+    {{slv.wfk}}
+    {{# }else if(d.ISOPEN == 1){ }}
+    {{slv.yfk}}
+    {{# }else { }}
+    error111
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="messcgl">MES生产管理</a>
+    <a><cite lid="cjgd">创建工单</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add" lid="sgcj">手工创建</button>
+        <button class="layui-btn" id="btn_add_pl" lid="plsgcj">批量手工创建</button>
+        <button class="layui-btn" id="btn_find" lid="c_search">查询</button>
+        <button class="layui-btn" id="btn_addfromsap" lid="erptb">ERP同步</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="GCc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_pd_gc" lay-filter="in_pd_gc">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        <option value="" lid="c_selectplz">请选择</option>
+                        <option value="@Model.MES_SY_GC[0].GC" selected="selected">@Model.MES_SY_GC[0].GC-@Model.MES_SY_GC[0].GCMS</option>
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="GZZXc">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        if (Model.GZXX.Length == 1)
+                        {
+                            <option value="" lid="c_selectplz">请选择</option>
+                            <option value="@Model.GZXX[0].GZZXBH" selected="selected">@Model.GZXX[0].GZZXBH-@Model.GZXX[0].GZZXMS</option>
+                        }
+                        else
+                        {
+                            <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            for (int i = 0; i < Model.GZXX.Length; i++)
+                            {
+                                <option value="@Model.GZXX[i].GZZXBH">@Model.GZXX[i].GZZXBH-@Model.GZXX[i].GZZXMS</option>
+                            }
+                        }
+                    }
+                    else
+                    {
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="WLLBc">物料类别：</label>
+            <div class="layui-input-inline">
+                <select id="in_wllb" lay-filter="in_wllb">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        if (Model.WLLB.Length == 1)
+                        {
+                            <option value="0" lid="c_selectplz">请选择</option>
+                            <option value="@Model.WLLB[0].WLLBID" selected="selected">@Model.WLLB[0].WLLBNAME</option>
+                        }
+                        else
+                        {
+                            <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                            for (int i = 0; i < Model.WLLB.Length; i++)
+                            {
+                                <option value="@Model.WLLB[i].WLLBID">@Model.WLLB[i].WLLBNAME</option>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <option value="0" selected="selected" lid="c_selectplz">请选择</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="GDDHc">MES工单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_gddh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="WLHc">物料编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_wlbm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="ERPNOc">ERP工单：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_erpno" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="gdrq">工单日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PDRQ_S" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_PDRQ_E" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_PD" lay-filter="tb_PD"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">{{scom.c_modify}}</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+    </script>
+</div>
+
+<div id="div1_modify" class="layui-form" hidden>
+    <form id="from1" class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="GDDHc">MES工单号：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_mesgd_input" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="GZZXc">工作中心：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_gzzx_input" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="GCc">工厂：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_gc_input" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="ERPNOc">ERP工单：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_erpgd_input" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="WLHc">物料号：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_wlh_input" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="WLMSc">物料描述：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_wlms_input" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="ISOPENc">放开校验：</label>
+                <div class="layui-input-inline">
+                    <select id="xg_isopen_s" lay-filter="xg_isopen_s">
+                        <option value="0" selected="selected" lid="wfk">未放开</option>
+                        <option value="1" lid="yfk">已放开</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="KSDATEc">开始日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_ksrq_input" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="JSDATEc">结束日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_jsrq_input" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="SLc">数量：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_sl_input" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="UNITSNAMEc">单位：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="xg_dw_input" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="div_gdadd" class="layui-form" hidden>
+    <form id="from1" class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="GCc">工厂：</label>
+            <div class="layui-input-block" style="width: 320px;">
+                <select id="add_gc" lay-filter="add_gc">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        <option value=""></option>
+                        <option value="@Model.MES_SY_GC[0].GC" selected="selected">@Model.MES_SY_GC[0].GC</option>
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="GZZXc">工作中心：</label>
+            <div class="layui-input-block" style="width: 320px;">
+                <select id="add_gzzx" lay-filter="add_gzzx">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        if (Model.GZXX.Length == 1)
+                        {
+                            <option value="" lid="c_selectplz">请选择</option>
+                            <option value="@Model.GZXX[0].GZZXBH" selected="selected">@Model.GZXX[0].GZZXBH-@Model.GZXX[0].GZZXMS</option>
+                        }
+                        else
+                        {
+                            <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            for (int i = 0; i < Model.GZXX.Length; i++)
+                            {
+                                <option value="@Model.GZXX[i].GZZXBH">@Model.GZXX[i].GZZXBH-@Model.GZXX[i].GZZXMS</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="WLGROUPc">物料组：</label>
+            <div class="layui-input-block" style="width: 320px;">
+                <select id="add_wlgroup" lay-filter="add_wlgroup">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        if (Model.WLGROUP.Length == 1)
+                        {
+                            <option value="" lid="c_selectplz">请选择</option>
+                            <option value="@Model.WLGROUP[0].WLGROUP" selected="selected">@Model.WLGROUP[0].WLGROUP-@Model.WLGROUP[0].WLGROUPNAME</option>
+                        }
+                        else
+                        {
+                            <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            for (int i = 0; i < Model.WLGROUP.Length; i++)
+                            {
+                                <option value="@Model.WLGROUP[i].WLGROUP">@Model.WLGROUP[i].WLGROUP-@Model.WLGROUP[i].WLGROUPNAME</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" id="div_gdadd_wl">
+            <label class="layui-form-label" lid="WLHc">物料号：</label>
+            <div class="layui-input-block" style="width: 320px;">
+                <select id="add_wlh" lay-filter="add_wlh">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        if (Model.WLGROUP.Length == 1 && Model.GZZXCOUNT == 1)
+                        {
+                            if (Model.WL.Length == 1)
+                            {
+                                <option value="" lid="c_selectplz">请选择</option>
+                                <option value="@Model.WL[0].WLH" selected="selected">@Model.WL[0].WLH-@Model.WL[0].WLMS</option>
+                            }
+                            else
+                            {
+                                <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                                for (int i = 0; i < Model.WL.Length; i++)
+                                {
+                                    <option value="@Model.WL[i].WLH">@Model.WL[i].WLH-@Model.WL[i].WLMS</option>
+                                }
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        @*<div class="layui-form-item">
+                <label class="layui-form-label">放开校验：</label>
+                <div class="layui-input-block" style="width: 320px;">
+                    <select id="add_isopen" lay-filter="add_isopen" disabled="disabled">
+                        <option value="0" selected="selected">未开放</option>
+                        <option value="1">已开放</option>
+                    </select>
+                </div>
+            </div>*@
+        <div class="layui-form-item" id="div_gdadd_sl">
+            <label class="layui-form-label" lid="SLc">数量：</label>
+            <div class="layui-input-block" style="width: 320px;">
+                <input type="text" id="add_sl" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" lid="KSDATEc">开始日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="add_ksrq" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="add_jsrq" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        <div id="div_gdadd_wl_tb">
+            @*<div class="layui-form-item">
+                    <label class="layui-form-label">物料号：</label>
+                    <div class="layui-input-block" style="width: 320px;">
+                    </div>
+                </div>*@
+            <table id="tb_gdadd_wl" lay-filter="tb_gdadd_wl"></table>
+        </div>
+    </form>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/PD/CREATE_WorkOrder")
+}

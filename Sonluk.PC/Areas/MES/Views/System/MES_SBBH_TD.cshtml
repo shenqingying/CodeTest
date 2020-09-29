@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "设备号替换功能";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_MES_ALL
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>设备号替换</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find">查询</button>
+        <button class="layui-btn" id="btn_add">新增</button>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="in_pd_gc" lay-filter="in_pd_gc">
+                        <option value="" selected="selected">请选择</option>
+                        @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">工作中心：</label>
+                <div class="layui-input-inline">
+                    <select id="in_gzzx" lay-filter="in_gzzx">
+                        <option value="" selected="selected">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">设备号：</label>
+                <div class="layui-input-inline">
+                    <select id="in_sbbh" lay-filter="in_sbbh">
+                        <option value="" selected="selected">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">替代编号：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="in_tdno" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_tdbh" lay-filter="tb_tdbh"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="update">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+<div id="div_add" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <label class="layui-form-label">工厂：</label>
+        <div class="layui-input-block">
+            <select id="add_gc" lay-filter="add_gc">
+                <option value="" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                {
+                    <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                }
+            </select>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工作中心：</label>
+            <div class="layui-input-block">
+                <select id="add_gzzx" lay-filter="add_gzzx">
+                    <option value="" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备号：</label>
+            <div class="layui-input-block">
+                <select id="add_sbbh" lay-filter="add_sbbh">
+                    <option value="" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">替代备注：</label>
+            <div class="layui-input-block">
+                <input type="text" id="add_tdremark" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/MES_SBBH_TD")
+}

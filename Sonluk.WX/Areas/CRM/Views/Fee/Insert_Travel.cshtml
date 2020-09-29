@@ -1,0 +1,140 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService
+@using Sonluk.UI.Model.CRM.COST_CBZXService
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "差旅费报销单申请";
+    Session["TITLENAME"] = "差旅费报销单申请";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+    CRM_COST_CBZX[] CBZX = ViewBag.CBZX;
+    CRM_HG_DICT[] FGLD = ViewBag.FGLD;
+    CRM_HG_DICT[] SF = ViewBag.SF;
+}
+
+
+<div id="div1" hidden>
+
+    <div class="weui-btn-area">
+
+        <button class="weui-btn weui-btn_primary" id="btn_save">保存</button>
+
+    </div>
+
+    <br />
+
+    <div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">出差人：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="STAFFID" class="weui-input" type="text" placeholder="" value="@Session["NAME"]">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">报销日期：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="BXRQ" class="weui-input" type="date" placeholder="" value="@ViewBag.nowdate">
+            </div>
+        </div>
+
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">分管领导：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="FGLD" lay-filter="FGLD" class="weui-select">
+                    <option value="0" selected="selected"></option>
+                </select>
+                @*<select id="FGLD" class="weui-select">
+                        <option value="0" selected="selected">请选择</option>
+                        @for (int i = 0; i < FGLD.Length; i++)
+                        {
+                            if(@FGLD[i].DICID == data)
+                            {
+                                <option value="@FGLD[i].DICID">@FGLD[i].DICNAME</option>
+                            }
+                            else
+                            {
+                            <option value="@FGLD[i].DICID">@FGLD[i].DICNAME</option>
+                            }
+
+                        }
+                    </select>*@
+            </div>
+        </div>
+
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">省份：</label>
+            </div>
+            <div class="weui-cell__bd">
+
+                <select id="SF" lay-filter="SF" class="weui-select">
+                    <option value="0" selected="selected"></option>
+                </select>
+
+                @*<select id="SF" class="weui-select">
+                        <option value="0" selected="selected">请选择</option>
+                        @for (int i = 0; i < SF.Length; i++)
+                        {
+
+                            <option value="@SF[i].DICID">@SF[i].DICNAME</option>
+
+                        }
+                    </select>*@
+            </div>
+        </div>
+
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">成本中心：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select id="CBZX" class="weui-select">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < CBZX.Length; i++)
+                {
+
+                        <option value="@CBZX[i].CBZXBH">@CBZX[i].CBZXBH @CBZX[i].CBZXMC</option>
+
+                }
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">出差事由：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="CCSY" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">备注：</label></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <input id="BEIZ" class="weui-input" type="text" placeholder="">
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<div id="div_result" style="margin:0 10px">
+</div>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Insert_Travel")
+}
+
+
+
+

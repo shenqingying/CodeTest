@@ -1,0 +1,163 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "打印日期自定义";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    DateTime dtime = DateTime.Now;
+    dtime = dtime.AddDays(1);
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_MES_ALL
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="mestmgl">MES条码管理</a>
+    <a><cite lid="dyrqzdy">打印日期自定义</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_find" lid="c_search">查询</button>
+        <button class="layui-btn" id="btn_add" lid="c_add">新增</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_formGC">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    @if (Model.GCCOUNT == 1)
+                    {
+                        <option value="" lid="c_selectplz">请选择</option>
+                        <option value="@Model.MES_SY_GC[0].GC" selected="selected">@Model.MES_SY_GC[0].GC-@Model.MES_SY_GC[0].GCMS</option>
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="SCDATEc">生产日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_s" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scrq_e" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <div id="div_table_list">
+        <table class="layui-hide" id="tb_scdate_list" lay-filter="tb_scdate_list"></table>
+        <script type="text/html" id="barkh">
+            <a class="layui-btn layui-btn-xs" lay-event="select">{{scom.c_view}}</a>
+            <a class="layui-btn layui-btn-xs" lay-event="update">{{scom.c_modify}}</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+        </script>
+    </div>
+</div>
+<div id="div_scdate_th" class="layui-form" hidden>
+    <div id="div_scdate_th_xg">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="c_formGC">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="th_scdate_gc" lay-filter="th_scdate_gc">
+                        @if (Model.MES_SY_GC.Length == 1)
+                        {
+                            <option value="@Model.MES_SY_GC[0].GC">@Model.MES_SY_GC[0].GC-@Model.MES_SY_GC[0].GCMS</option>
+                        }
+                        else
+                        {
+                            <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                            for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                            {
+                                <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="YRQc">源日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_old" autocomplete="off" class="layui-input" readonly="readonly" value="@dtime.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="MBSCDATEc">目标日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_new" autocomplete="off" class="layui-input" readonly="readonly" value="@dtime.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="SCDATETHc">替换日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_thzfc" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="BZc">备注：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_bz" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="div_scdate_th_xs">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="c_formGC">工厂：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_xs_gc" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="YRQc">源日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_xs_old" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="MBSCDATEc">目标日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_xs_new" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="SCDATETHc">替换日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_xs_thzfc" autocomplete="off" class="layui-input" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" lid="BZc">备注：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="th_scdate_xs_bz" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn" id="btn_gzzx" lid="wh">维护</button>
+    <table class="layui-hide" id="tb_scdate_gzzx" lay-filter="tb_scdate_gzzx"></table>
+    <script type="text/html" id="barkh2">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{scom.c_delete}}</a>
+    </script>
+</div>
+<div id="div_scdate_th_gzzx" class="layui-form" hidden>
+    <div class="layui-form-item">
+    </div>
+    <table class="layui-hide" id="tb_scdate_gzzx_xz" lay-filter="tb_scdate_gzzx_xz"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/TMManage/SCDATE_TH")
+}

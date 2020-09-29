@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "我";
+    Session["TITLENAME"] = "我";
+    string Name = "";
+    if (Session["NAME"] != null)
+    {
+        Name = Session["NAME"].ToString();
+    }
+}
+
+
+
+<!-- 列表组顶部说明文字 -->
+<div class="weui-cells__title"></div>
+
+<div class="weui-cells__title">账户信息</div>
+<div class="weui-cells">
+    @*<div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+        <img src="images/pic_160.png" style="width: 50px;display: block">
+        <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
+    </div>*@
+    <div class="weui-cell__bd" style="height:50px;">
+        <p style="transform: translate(0, 50%);padding-left:15px;">@Name</p>
+    </div>
+</div>
+
+<div class="weui-cells">
+    <a href="../System/KHPassword" class="weui-cell weui-cell_access">
+        <div class="weui-cell__bd">
+            <p>修改密码</p>
+        </div>
+        <div class="weui-cell__ft"></div>
+    </a>
+</div>
+
+<div class="weui-cells__title"></div>
+<!-- 带说明的列表 -->
+<div class="weui-cells">
+    <a href="../../CRM/Public/SignIn?LOGINTYPE=1">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p style="color:red;text-align:center;">退出登录</p>
+            </div>
+            <div class="weui-cell__ft"></div>     @*说明文字*@
+        </div>
+    </a>
+</div>
+
+
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@section scripts {
+    @Scripts.Render("~/bundles/CRM/Test/Select")
+}*@

@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "订单排班查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<input type="hidden" value="@Url.Action("GET_GZZX_BYGC", "PD", new { area = "MES"})" id="url_gzzx" />
+<input type="hidden" value="@Url.Action("ReadSCHEDULES_STATUS", "SCH",new { area="MES"})" id="ReadSCHEDULES_STATUS" />
+<input type="hidden" value="@Url.Action("CreateSCHEDULES_STATUS", "SCH",new { area="MES"})" id="CreateSCHEDULES_STATUS" />
+<input type="hidden" value="@Url.Action("DeleteSCHEDULES_STATUS", "SCH",new { area="MES"})" id="DeleteSCHEDULES_STATUS" />
+<input type="hidden" value="@Url.Action("SELECT_GD_SCHEDULES", "SCH",new { area="MES"})" id="SELECT_GD_SCHEDULES" />
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="head">MES进度管理</a>
+    <a lid="headsub"><cite>订单排班管理</cite></a>
+</span>
+<div class="layui-form" id="div_head">
+
+    <div class="layui-form-item">
+        <button id="btn1" class="layui-btn" lid="btn1">查询</button>
+      
+    </div>
+    <div class="layui-form-item" style="padding-top:20px">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label1">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    @if (Model.MES_SY_GC.Length == 1)
+                    {
+                        <option selected="selected" value="@Model.MES_SY_GC[0].GC">@Model.MES_SY_GC[0].GC-@Model.MES_SY_GC[0].GCMS</option>
+                    }
+                    else
+                    {
+                        <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                        for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                        {
+                            <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label2">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label4">生产订单号/任务单号：</label>
+            <div class="layui-input-inline">
+                <input type="text" lid="placeholder4" placeholder="生产订单号/任务单号" autocomplete="off" class="layui-input" id="in_erpno">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:120px" lid="label3">排班日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_zprq_ks" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_zprq_js" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb1" lay-filter="tb1"></table>
+    </div>
+
+
+</div>
+<div id="div5" class="layui-form" hidden>
+    <br /><br />
+    <label class="layui-form-label" lid="label3">排班日期：</label>
+    <div class="layui-input-inline">
+        <input type="text" name="date" id="div5_pbrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+    </div>
+</div>
+<div id="div7" class="layui-form" hidden>
+    <div class="layui-form-item" style="padding:10px 30px 0 30px">
+        <input type="text" name="div7_tm" lid="placeholder1" placeholder="请扫描生产订单号" autocomplete="off" class="layui-input" id="div7_tm">
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label14">MES工单号：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input input_content" id="div7_gddh" readonly>
+        </div>
+        <label class="layui-form-label" lid="label9">生产订单号：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input input_content" id="div7_erpno" readonly>
+        </div>
+
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label10">物料号：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input input_content" id="div7_wlh" readonly>
+        </div>
+        <label class="layui-form-label" lid="label11">作业指导书：</label>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" class="layui-input input_content" id="div7_manualbb" readonly>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label8">排班日期：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="div7_pbrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" lid="label12">扫描自动排单</label>
+        <div class="layui-input-inline">
+            <input type="checkbox" name="div7_pbswitch" lay-skin="switch" lay-filter="div7_pbswitch" lay-text="ON|OFF">
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="label13">作业指导书验证</label>
+            <div class="layui-input-inline">
+                <input type="checkbox" name="div7_yzmanual" lay-skin="switch" lay-filter="div7_yzmanual" lay-text="ON|OFF">
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="div6" class="layui-form" hidden>
+    <br /><br />
+    <label class="layui-form-label" lid="label8">排班日期：</label>
+    <div class="layui-input-inline">
+        <input type="text" name="date" id="div6_pbrq" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" readonly>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/SCH/PB_SELECT", "~/bundles/zwk")
+}
+

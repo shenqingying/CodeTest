@@ -1,0 +1,44 @@
+﻿@using Sonluk.UI.Model.CRM.QYJS_FILEService;
+@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = ViewBag.NAME;
+    CRM_QYJS_FILE[] data = ViewBag.data;
+}
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        @for (int i = 0; i < data.Length; i++)
+        {
+            <div style="text-align:center;width:100%;">
+                <br /><br />
+
+                <img src="@data[i].ML" style="width:100%;" />
+
+
+            </div>
+
+        }
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+@*@section scripts {
+        @Scripts.Render("~/bundles/CRM/Company/Product")
+    }*@
+
+

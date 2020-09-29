@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "退货登记";
+    Layout = "~/Views/Shared/_Layoutbig.cshtml";
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+}
+<script type="text/html" id="bar">
+    <a class="layui-btn_table_min layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tp_Tpl">
+    {{# if(d.TPNO != ""){ }}
+    <a style="font-size:x-large;">{{d.TPNO}}</a>
+    {{# } }}
+</script>
+<style>
+    .placeholder {
+        font-style: italic;
+    }
+    /*利用<i>来安放图标*/
+</style>
+<style type="text/css">
+    .layui-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: 8px;
+    }
+</style>
+<style type="text/css">
+    .layui-table-cell {
+        height: auto;
+        line-height: 28px;
+        padding: 0 15px;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        box-sizing: border-box;
+    }
+</style>
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" id="tm_tpm_sm" placeholder="(请扫描客户编号/物料标识卡)" autocomplete="off" style="height:50px" class="layui-input">
+                @*<i class="layui-icon" style="position: absolute;top:20px;right: 0px;">&#xe615;</i>*@
+                @*<i class="layui-icon" style="top: 5px; font-size: 30px">&#xe615;</i>*@
+            </div>
+        </div>
+    </div>
+    <div id="table_div">
+        <table class="layui-hide" id="tb_INFO" lay-filter="tb_INFO"></table>
+    </div>
+    <hr />
+    <div id="div_region" hidden>
+        @*<table class="layui-hide" id="tb_region" lay-filter="tb_region"></table>*@
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label id="in_kh" class="layui-form-label" style="text-align: right;"></label>
+                <label id="in_address" class="layui-form-label" style="text-align: right;"></label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div id="div_foot" class="layui-footer" align="right" hidden>
+        <div class="layui-form-item">
+            <button id="btn_address" class=" layui-btn layui-btn-normal">库存地点</button>
+            <button id="btn_yes" class="layui-btn layui-btn-normal">确认</button>
+        </div>
+    </div>
+    <div id="div_layer" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="select_factory" type="text" autocomplete="off" class="layui-input" lay-filter="select_factory"></select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">库存地点：</label>
+                <div class="layui-input-inline">
+                    <select id="select_address" type="text" autocomplete="off" class="layui-input"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="div_layer_GC" hidden>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">工厂：</label>
+                <div class="layui-input-inline">
+                    <select id="find_factory" type="text" autocomplete="off" class="layui-input" lay-filter="find_factory"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_qrinfo" class="layui-form" hidden>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <textarea placeholder="备注文本" class="layui-textarea" id="lb_bzwb"></textarea>
+        </div>
+    </div>
+</div>
+<input id="staffid" value="@staffid" hidden />
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/ZS_THDJ_MANAGE")
+}

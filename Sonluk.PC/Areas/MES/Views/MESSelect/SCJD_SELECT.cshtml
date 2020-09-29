@@ -1,0 +1,122 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "生产进度查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    
+}
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODEL_Assign_WorkOrder
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="mescx">MES查询</a>
+    <a><cite lid="scjdcx">生产进度查询</cite></a>
+</span>
+
+<div class="layui-form layui-form-pane">
+    <div class="layui-form-item">
+      
+           
+            <div class="layui-input-inline">
+                <input type="radio" name="sex" value="0" title="设备" checked lay-filter="in_radio" lid="sb">
+                <input type="radio" name="sex" value="1" title="工单" lay-filter="in_radio" lid="gd">
+            </div>
+       
+        <button class="layui-btn" id="btn_find" lid="c_search">查询</button>
+        <button class="layui-btn" id="btn_DC" lid="c_export">数据导出</button>
+    </div>
+    <div class="layui-form-item">
+        
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_GC">工厂</label>
+            <div class="layui-input-inline">
+                <select id="in_gc" lay-filter="in_gc">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                    @for (int i = 0; i < Model.MES_SY_GC.Length; i++)
+                    {
+                        <option value="@Model.MES_SY_GC[i].GC">@Model.MES_SY_GC[i].GC-@Model.MES_SY_GC[i].GCMS</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="c_GZZX">工作中心</label>
+            <div class="layui-input-inline">
+                <select id="in_gzzx" lay-filter="in_gzzx" lay-search>
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="div_sbh" class="layui-inline">
+            <label class="layui-form-label" lid="c_SBBH">设备号</label>
+            <div class="layui-input-inline">
+                <select id="in_sbbh" lay-filter="in_sbbh" lay-search>
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>
+            </div>
+        </div>
+        
+      
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="wlbm">物料编码</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_matnr" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+   
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="xsdd">销售订单</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_xsnobill" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="ddxm">订单项目</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_xsnobillmx" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="erpgd">ERP工单</label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_erpno" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="wllb">物料类别</label>
+            <div class="layui-input-inline">
+                <select id="in_wllb" lay-filter="in_wllb">
+                    <option value="" selected="selected" lid="c_selectplz">请选择</option>
+                </select>              
+            </div>
+        </div>
+        <div id="div_scdate" class="layui-inline">
+            <label class="layui-form-label" lid="scrq">生产日期</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scdate_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_scdate_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+        <div id="div_gddate" class="layui-inline" style="display:none">
+            <label class="layui-form-label" lid="gdrq">工单日期</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_gddate_begin" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_gddate_end" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <div id="div_table">
+        <table class="layui-hide" id="jl_table" lay-filter="jl_table"></table>
+    </div>
+    
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/SCJD_SELECT")
+}

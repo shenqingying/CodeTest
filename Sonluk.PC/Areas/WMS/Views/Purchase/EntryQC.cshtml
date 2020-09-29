@@ -1,0 +1,456 @@
+﻿@{
+    ViewBag.Title = "品管部检验登记";
+}
+
+@Html.Partial("~/Areas/WMS/Views/Shared/WMSHttp.cshtml")
+
+<style>
+    #div_modify .layui-input-inline {
+        width: 400px;
+    }
+</style>
+
+<span class="layui-breadcrumb"></span>
+
+<br />
+<br />
+
+<div class="layui-form layui-form-fix">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="rksjd+c_COLON">入库送检单：</label>
+            <div class="layui-input-inline">
+                <input id="inputTM" type="text" class="layui-input" lid="qsmrksjdbcl" placeholder="请扫描入库送检单(包材类)" onkeydown="javascript: if (event && event.keyCode == 13) searchTM();" autofocus>
+            </div>
+            <button class="layui-btn" onclick="updateTM()" lid="c_save">保存</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        @*<div class="layui-inline">
+                <label class="layui-form-label1" lid="rksjd+c_COLON">入库送检单：</label>
+                <div class="layui-input-inline" style="width:105px;">
+                    <input type="text" id="SHNO" class="layui-input layui-disabled" readonly>
+                </div>
+            </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="c_GC+c_COLON">工厂：</label>
+            <div class="layui-input-inline" style="width:250px;">
+                <input type="text" id="GC" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="gys+c_COLON">供应商：</label>
+            <div class="layui-input-inline" style="width:250px;">
+                <input type="text" id="GYS" class="layui-input layui-disabled" readonly>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1" lid="mxss+c_COLON">明细搜索：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="SearchTerm" class="layui-input" onkeydown="javascript: if (event && event.keyCode == 13) searchCache();">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" onclick="clearTM()" lid="qk">清空</button>
+        </div>
+        @*<div class="layui-inline">
+                <label class="layui-form-label1" lid="c_notes+c_COLON">备注：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="REMARK" class="layui-input">
+                </div>
+            </div>*@
+    </div>
+    <table class="layui-hide" id="MXList" lay-filter="MXList"></table>
+</div>
+
+<div id="div_modify" class="layui-form layui-form-modify" hidden style="padding:30px 0 0 0">
+    <form id="form_modify">
+        <div class="layui-form-item" id="layerBZ">
+            <div class="layui-inline">
+                <label class="layui-form-label1" lid="c_notes+c_COLON">备注：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="MXREMARK" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/html" id="operate">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">{{sc.c_modify}}</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">{{sc.c_delete}}</a>
+</script>
+
+<script type="text/html" id="tpl_CGDD">
+    {{d.CGDDNO || ''}}-{{d.CGDDMXNO || ''}}
+</script>
+
+<script type="text/html" id="tpl_XSBILL">
+    {{# if(d.XSBILLNO){ }}
+    {{d.XSBILLNO || ''}}-{{d.XSBILLMXNO || ''}}
+    {{# } }}
+</script>
+
+<script type="text/html" id="tpl_WL">
+    {{d.WLH || ''}} - {{d.WLMS || ''}}
+</script>
+
+<script type="text/html" id="tpl_CPZT">
+    <div style="color:{{subCache.CPZTColor[d.CPZT]}}">{{d.CPMXZTNAME}}</div>
+</script>
+
+@section scripts {
+    <script>
+        sonluk.global.getResources();
+        sonluk.global.getResources('WMS/Purchase', 'lv');
+        var sc = sonluk.values.global.common;
+        var slv = sonluk.values.global.lv;
+        var cache = {};
+        var subCache = {
+            Def: {},
+            CPZTColor: [],
+            CPZT: '',
+            CPZTs: {},
+            CPMXZTs: {}
+        };
+        layui.use(['table', 'layer', 'form', 'element'], function () {
+            sonluk.layui.breadcrumbefix();
+            sonluk.layuiCatch();
+            var table = layui.table;
+            var layer = layui.layer;
+            var form = layui.form;
+            var assist = sonluk.layui;
+            var msg = sonluk.msg;
+            var MXListCols = [
+                { field: 'SHNO', width: 115 },
+                { field: 'SHMXNO', width: 70 },
+                { templet: '#tpl_CGDD', title: slv.cgddxm, width: 160 },
+                { templet: '#tpl_WL', title: slv.wlxx, width: 400, align: 'left' },
+                { templet: '#tpl_XSBILL', title: slv.xsddxm, width: 130 },
+                { field: 'CGSL', align: 'right' },
+                { field: 'UNITNAME' },
+                { templet: '#tpl_CPZT', title: slv.cpzt },
+                { field: 'REMARK', minWidth: 100, align: 'left' },
+                { fixed: 'right', templet: '#operate', title: sc.c_Operate, width: 120 }
+            ]
+
+            initAll();
+
+            function initAll() {
+                table.on('tool(MXList)', function (obj) {
+                    var data = obj.data;
+                    var layEvent = obj.event;
+                    if (layEvent === 'modify') {
+                        initLayer(data.SHNO, data.SHMXNO);
+                    }
+                    else if (layEvent === 'delete') {
+                        layer.confirm(sc.c_msg11, function (index) {
+                            for (var i = 0; i < cache.WMS_CG_SHNO_ITEM.length; i++) {
+                                if (cache.WMS_CG_SHNO_ITEM[i].SHNO == data.SHNO && cache.WMS_CG_SHNO_ITEM[i].SHMXNO == data.SHMXNO) {
+                                    cache.WMS_CG_SHNO_ITEM.splice(i, 1);
+                                    break;
+                                }
+                            }
+                            searchCache();
+                            layer.close(index);
+                        });
+                    }
+                });
+
+                form.on('radio(CPZT)', function (data) {
+                    subCache.CPZT = data.value;
+                });
+            }
+
+            function initLayer(id, mxid) {
+                layer.open({
+                    skin: 'select_out',
+                    type: 1,
+                    shade: 0,
+                    btn: [sc.c_save, sc.c_cancel],
+                    area: ['700px', '350px'],
+                    content: $('#div_modify'),
+                    title: sc.c_modify,
+                    moveOut: true,
+                    success: function (layero, index) {
+                        $('.layui-layer-content').css('overflow', 'auto');
+                        var selectItem = cache.WMS_CG_SHNO_ITEM.find(function (item) { return (item.SHNO == id && item.SHMXNO == mxid) });
+                        subCache.CPZT = selectItem.CPZT + '+' + selectItem.CPMXZT;
+                        $('input[title]').removeAttr('checked');
+                        $('[title="' + selectItem.CPMXZTNAME + '"]').attr('checked', '');
+                        $('#MXREMARK').val(selectItem.REMARK);
+                        form.render();
+                        $('.layui-form-radio').css('width', '100px');
+                    },
+                    yes: function (index, layero) {
+                        var CPZTs = subCache.CPZT.split('+');
+                        var selectItem = cache.WMS_CG_SHNO_ITEM.find(function (item) { return (item.SHNO == id && item.SHMXNO == mxid) });
+                        selectItem.CPZT = Number(CPZTs[0]) || 0;
+                        selectItem.CPZTNAME = subCache.CPZTs[CPZTs[0]] || '';
+                        selectItem.CPMXZT = Number(CPZTs[1]) || 0;
+                        selectItem.CPMXZTNAME = subCache.CPMXZTs[CPZTs[1]] || '';
+                        selectItem.REMARK = $('#MXREMARK').val();
+                        searchCache();
+                        layer.close(index);
+                    }
+                });
+            }
+
+            function initTitle() {
+                if (cache.SHNO) {
+                    $('#SHNO').val(cache.SHNO);
+                    $('#GYS').val(cache.GYSNO + '-' + cache.GYSNAME);
+                    //$('#REMARK').val(cache.REMARK);
+                    $('#SearchTerm').val('');
+                    wmshttp.post({
+                        url: 'MES/SY/ReadSY_GCByRole',
+                        data: {
+                            GC: cache.GC
+                        },
+                        success: function (data) {
+                            if (data.success && data.data.length > 0) $('#GC').val(cache.GC + '-' + data.data[0].GCMS);
+                            else $('#GC').val(cache.GC);
+                        }
+                    });
+                }
+                else {
+                    $('#SHNO').val('');
+                    $('#GYS').val('');
+                    //$('#REMARK').val('');
+                    $('#SearchTerm').val('');
+                    $('#GC').val('');
+                }
+                form.render();
+            }
+
+            function initTable(data) {
+                data = data || cache.WMS_CG_SHNO_ITEM || [];
+                data.forEach(function (item) {
+                    if (!item.CPZT) {
+                        item.CPZT = subCache.Def.CPZT;
+                        item.CPMXZT = subCache.Def.CPMXZT;
+                        item.CPZTNAME = subCache.Def.CPZTNAME;
+                        item.CPMXZTNAME = subCache.Def.CPMXZTNAME;
+                    }
+                });
+                var fixHeight = 205;
+                $('.layui-form-fix .layui-form-item').each(function (index, elem) {
+                    fixHeight += elem.clientHeight;
+                });
+                assist.table.render({
+                    elem: '#MXList',
+                    data: data,
+                    height: 'full-' + fixHeight,
+                    cols: [MXListCols],
+                    limit:9999
+                });
+            }
+
+            function initQS(GC, callback) {
+                wmshttp.get({
+                    url: 'Helper/Dic/ReadTypemxs',
+                    query: {
+                        factoryCode: GC,
+                        typeID: 9
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            var layerBZ = $('#layerBZ');
+                            layerBZ.parent().empty().append(layerBZ);
+                            data.data.sort(compare);
+                            if (data.data.length == 0) {
+                                callback(false, GC + slv.msg15);
+                                return;
+                            }
+                            for (var i = 0; i < data.data.length; i++) {
+                                var getTime = 0;
+                                var param = data.data[i];
+                                var item
+                                    = '<div class="layui-form-item"><div class="layui-inline">'
+                                    + '<label class="layui-form-label1">' + param.MXNAME + '：</label>'
+                                    + '<div class="layui-input-inline" id="radio' + param.ID + '" style="color:' + param.MXREMARK + ';"></div>'
+                                    + '</div></div>';
+                                if (param.MXBS == 1) {
+                                    subCache.Def.CPZT = param.ID;
+                                    subCache.Def.CPZTNAME = param.MXNAME;
+                                }
+                                subCache.CPZTs[param.ID] = param.MXNAME;
+                                subCache.CPZTColor[param.ID] = param.MXREMARK;
+                                $(item).insertBefore('#layerBZ');
+                                wmshttp.get({
+                                    url: 'Helper/Dic/ReadTypemxs',
+                                    query: {
+                                        factoryCode: GC,
+                                        fid: param.ID
+                                    },
+                                    success: function (datason) {
+                                        if (datason.success) {
+                                            for (var j = 0; j < datason.data.length; j++) {
+                                                var paramson = datason.data[j];
+                                                var itemson = $('<input type="radio" name="prodStatus" value="' + paramson.FID + "+" + paramson.ID + '" title="' + paramson.MXNAME + '" lay-filter="CPZT">');
+                                                if (paramson.MXBS == 1) {
+                                                    subCache.Def.CPMXZT = paramson.ID;
+                                                    subCache.Def.CPMXZTNAME = paramson.MXNAME;
+                                                }
+                                                subCache.CPMXZTs[paramson.ID] = paramson.MXNAME;
+                                                $('#radio' + paramson.FID).append(itemson);
+                                            }
+                                            form.render();
+                                            getTime++;
+                                            if (getTime == data.data.length) callback(true);
+                                        }
+                                        else callback(false, data.messages);
+                                    }
+                                });
+                            }
+                        }
+                        else callback(false, data.messages);
+                    }
+                });
+                function compare(obj1, obj2) {
+                    var val1 = obj1.MXNO || 0;
+                    var val2 = obj2.MXNO || 0;
+                    if (val1 < val2) return -1;
+                    else if (val1 > val2) return 1;
+                    else return 0;
+                }
+            }
+
+            window.searchCache = function () {
+                if ($('#SearchTerm').val() == '') initTable();
+                else {
+                    var newList = [];
+                    cache.WMS_CG_SHNO_ITEM.forEach(function (item) {
+                        for (let key in item) {
+                            if (item[key] && item[key].toString().indexOf($('#SearchTerm').val()) != -1) {
+                                newList.push(item);
+                                break;
+                            }
+                        }
+                    });
+                    initTable(newList);
+                }
+            }
+
+            window.searchTM = function () {
+                var number = $('#inputTM').val();
+                $('#inputTM').val('');
+                $('#inputTM').blur();
+                if (number.length == 0) {
+                    $('#inputTM').focus();
+                    return;
+                }
+                if (!number.toLowerCase().startsWith('s') || number.length != 10) {
+                    msg.warn(slv.msg1, null, function () { $('#inputTM').focus(); });
+                    return;
+                }
+                var loading = layer.load(1, { time: 10000 });
+                wmshttp.post({
+                    url: 'WMS/CG_SHNO/READ',
+                    data: { SHNO: number, LB: 1 },
+                    success: function (data) {
+                        if (data.success) {
+                            //条码校验
+                            if (data.data.length == 0) {
+                                msg.warn(slv.msg2, null, function () { $('#inputTM').focus(); });
+                                layer.close(loading);
+                                return;
+                            }
+                            else if (data.data[0].CGLB != 1) {
+                                msg.warn(slv.msg3, null, function () { $('#inputTM').focus(); });
+                                layer.close(loading);
+                                return;
+                            }
+                            if (cache && cache.WMS_CG_SHNO_ITEM) {
+                                layer.close(loading);
+                                var newData = data.data[0];
+                                //条码累加校验
+                                if (newData.GC != cache.GC) {
+                                    msg.warn(slv.msg17, null, function () { $('#inputTM').focus(); });
+                                    return;
+                                }
+                                if (newData.GYSNO != cache.GYSNO) {
+                                    msg.warn(slv.msg18, null, function () { $('#inputTM').focus(); });
+                                    return;
+                                }
+                                for (var i = 0; i < cache.WMS_CG_SHNO_ITEM.length; i++) {
+                                    if (cache.WMS_CG_SHNO_ITEM[i].SHNO == newData.SHNO) {
+                                        msg.warn(slv.msg19a + ' ' + newData.SHNO + ' ' + slv.msg19b, null, function () { $('#inputTM').focus(); });
+                                        return;
+                                    }
+                                }
+                                newData.WMS_CG_SHNO_ITEM.forEach(function (item) {
+                                    cache.WMS_CG_SHNO_ITEM.push(item);
+                                });
+                                form.render();
+                                initTable();
+                                $('#inputTM').focus();
+                            }
+                            else {
+                                cache = data.data[0];
+                                initQS(cache.GC, function (success, message) {
+                                    if (success) {
+                                        initTitle();
+                                        initTable();
+                                        $('#inputTM').focus();
+                                        layer.close(loading);
+                                    }
+                                    else {
+                                        msg.err(message, null, function () { $('#inputTM').focus(); });
+                                        layer.close(loading);
+                                    }
+                                });
+                            }
+                        }
+                        else msg.error(data.messages, null, function () { $('#inputTM').focus(); });
+                    }
+                });
+            };
+
+            window.updateTM = function () {
+                //校验开始
+                var denied = false;
+                if (!cache.SHNO || !cache.SHNO.toLowerCase().startsWith('s') || cache.SHNO.length != 10) {
+                    msg.warn(slv.msg4, null, function () { $('#inputTM').focus(); });
+                    return;
+                }
+                if (cache.WMS_CG_SHNO_ITEM.length == 0) {
+                    msg.warn(slv.msg10, null, function () { $('#inputTM').focus(); });
+                    return;
+                }
+                cache.WMS_CG_SHNO_ITEM.forEach(function (item) {
+                    if (!denied && (!item.CPZT || !item.CPMXZT)) {
+                        msg.warn(item.SHMXNO + slv.msg11, null, function () { $('#inputTM').focus(); });
+                        denied = true;
+                    }
+                });
+                if (denied) return;
+                //校验结束
+                cache.REMARK = $('#REMARK').val();
+                var loading = layer.load(1);
+                wmshttp.post({
+                    url: 'WMS/CG_SHNO/UPDATE_ZJ',
+                    data: cache,
+                    success: function (data) {
+                        if (data.success) {
+                            clearTM();
+                            msg.ok(slv.msg5);
+                        }
+                        else msg.err(data.messages, null, function () { $('#inputTM').focus(); });
+                    },
+                    complete: function () {
+                        layer.close(loading);
+                    }
+                });
+                $('#inputTM').focus();
+            };
+
+            window.clearTM = function () {
+                cache = {};
+                initTitle();
+                initTable([]);
+                $('#inputTM').focus();
+            };
+        });
+    </script>
+}

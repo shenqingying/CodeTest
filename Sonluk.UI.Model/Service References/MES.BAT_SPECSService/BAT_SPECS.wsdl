@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SELECT_SPECS_FULL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_DCBZ">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCXH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCXHRI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_DCCCBZ" type="tns:ArrayOfMES_DCCCBZ" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_DCDXN" type="tns:ArrayOfMES_DCDXN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_DCCCBZ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_DCCCBZ" nillable="true" type="tns:MES_DCCCBZ" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_DCCCBZ">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCBZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCBZRI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCMAX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCMIN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_DCDXN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_DCDXN" nillable="true" type="tns:MES_DCDXN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_DCDXN">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCBZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DCBZRI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCFDFS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCMAD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SDLX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SDLXRI" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_SPECS_FULLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_SPECS_FULLResult" type="tns:MES_DCBZ_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_DCBZ_SELECT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_DCBZ" type="tns:ArrayOfMES_DCBZ" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_DCBZ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_DCBZ" nillable="true" type="tns:MES_DCBZ" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_LIST">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LISTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_LISTResult" type="tns:MES_DCBZ_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LIST_LEFT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DCXH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_LIST_LEFTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_LIST_LEFTResult" type="tns:MES_DCBZ_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_FULL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_FULLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_FULLResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DCXH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DELETEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DELETEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_SPECS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_SPECSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_SPECSResult" type="tns:MES_DCBZ_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_PERFOR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_PERFORResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_PERFORResult" type="tns:MES_DCBZ_SELECT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_SPECS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_SPECSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_SPECSResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_PERFOR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_DCBZ" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="INSERT_PERFORResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERT_PERFORResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MES_DCBZ_SELECT" nillable="true" type="tns:MES_DCBZ_SELECT" />
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SELECT_SPECS_FULLSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_SPECS_FULL" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SPECS_FULLSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_SPECS_FULLResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LISTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_LIST" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LISTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_LISTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LIST_LEFTSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_LIST_LEFT" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LIST_LEFTSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_LIST_LEFTResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_FULLSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_FULL" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_FULLSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_FULLResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapIn">
+    <wsdl:part name="parameters" element="tns:DELETE" />
+  </wsdl:message>
+  <wsdl:message name="DELETESoapOut">
+    <wsdl:part name="parameters" element="tns:DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SPECSSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_SPECS" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_SPECSSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_SPECSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PERFORSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_PERFOR" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_PERFORSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_PERFORResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_SPECSSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_SPECS" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_SPECSSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_SPECSResponse" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_PERFORSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT_PERFOR" />
+  </wsdl:message>
+  <wsdl:message name="INSERT_PERFORSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERT_PERFORResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LIST_LEFTHttpGetIn">
+    <wsdl:part name="DCXH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LIST_LEFTHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_DCBZ_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetIn">
+    <wsdl:part name="DCXH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LIST_LEFTHttpPostIn">
+    <wsdl:part name="DCXH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_LIST_LEFTHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_DCBZ_SELECT" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostIn">
+    <wsdl:part name="DCXH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DELETEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:portType name="BAT_SPECSSoap">
+    <wsdl:operation name="SELECT_SPECS_FULL">
+      <wsdl:input message="tns:SELECT_SPECS_FULLSoapIn" />
+      <wsdl:output message="tns:SELECT_SPECS_FULLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LIST">
+      <wsdl:input message="tns:SELECT_LISTSoapIn" />
+      <wsdl:output message="tns:SELECT_LISTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LIST_LEFT">
+      <wsdl:input message="tns:SELECT_LIST_LEFTSoapIn" />
+      <wsdl:output message="tns:SELECT_LIST_LEFTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_FULL">
+      <wsdl:input message="tns:INSERT_FULLSoapIn" />
+      <wsdl:output message="tns:INSERT_FULLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <wsdl:input message="tns:UPDATESoapIn" />
+      <wsdl:output message="tns:UPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETESoapIn" />
+      <wsdl:output message="tns:DELETESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_SPECS">
+      <wsdl:input message="tns:SELECT_SPECSSoapIn" />
+      <wsdl:output message="tns:SELECT_SPECSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PERFOR">
+      <wsdl:input message="tns:SELECT_PERFORSoapIn" />
+      <wsdl:output message="tns:SELECT_PERFORSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_SPECS">
+      <wsdl:input message="tns:INSERT_SPECSSoapIn" />
+      <wsdl:output message="tns:INSERT_SPECSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_PERFOR">
+      <wsdl:input message="tns:INSERT_PERFORSoapIn" />
+      <wsdl:output message="tns:INSERT_PERFORSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BAT_SPECSHttpGet">
+    <wsdl:operation name="SELECT_LIST_LEFT">
+      <wsdl:input message="tns:SELECT_LIST_LEFTHttpGetIn" />
+      <wsdl:output message="tns:SELECT_LIST_LEFTHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpGetIn" />
+      <wsdl:output message="tns:DELETEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BAT_SPECSHttpPost">
+    <wsdl:operation name="SELECT_LIST_LEFT">
+      <wsdl:input message="tns:SELECT_LIST_LEFTHttpPostIn" />
+      <wsdl:output message="tns:SELECT_LIST_LEFTHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <wsdl:input message="tns:DELETEHttpPostIn" />
+      <wsdl:output message="tns:DELETEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BAT_SPECSSoap" type="tns:BAT_SPECSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT_SPECS_FULL">
+      <soap:operation soapAction="http://tempuri.org/SELECT_SPECS_FULL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LIST">
+      <soap:operation soapAction="http://tempuri.org/SELECT_LIST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LIST_LEFT">
+      <soap:operation soapAction="http://tempuri.org/SELECT_LIST_LEFT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_FULL">
+      <soap:operation soapAction="http://tempuri.org/INSERT_FULL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_SPECS">
+      <soap:operation soapAction="http://tempuri.org/SELECT_SPECS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PERFOR">
+      <soap:operation soapAction="http://tempuri.org/SELECT_PERFOR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_SPECS">
+      <soap:operation soapAction="http://tempuri.org/INSERT_SPECS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_PERFOR">
+      <soap:operation soapAction="http://tempuri.org/INSERT_PERFOR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BAT_SPECSSoap12" type="tns:BAT_SPECSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SELECT_SPECS_FULL">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_SPECS_FULL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LIST">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_LIST" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_LIST_LEFT">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_LIST_LEFT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_FULL">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_FULL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <soap12:operation soapAction="http://tempuri.org/DELETE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_SPECS">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_SPECS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_PERFOR">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_PERFOR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_SPECS">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_SPECS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="INSERT_PERFOR">
+      <soap12:operation soapAction="http://tempuri.org/INSERT_PERFOR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BAT_SPECSHttpGet" type="tns:BAT_SPECSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SELECT_LIST_LEFT">
+      <http:operation location="/SELECT_LIST_LEFT" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BAT_SPECSHttpPost" type="tns:BAT_SPECSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SELECT_LIST_LEFT">
+      <http:operation location="/SELECT_LIST_LEFT" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE">
+      <http:operation location="/DELETE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BAT_SPECS">
+    <wsdl:port name="BAT_SPECSSoap" binding="tns:BAT_SPECSSoap">
+      <soap:address location="http://localhost/API/MES/BAT_SPECS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BAT_SPECSSoap12" binding="tns:BAT_SPECSSoap12">
+      <soap12:address location="http://localhost/API/MES/BAT_SPECS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BAT_SPECSHttpGet" binding="tns:BAT_SPECSHttpGet">
+      <http:address location="http://localhost/API/MES/BAT_SPECS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BAT_SPECSHttpPost" binding="tns:BAT_SPECSHttpPost">
+      <http:address location="http://localhost/API/MES/BAT_SPECS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

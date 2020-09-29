@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout-weui.cshtml";
+    ViewBag.Title = "订单查询";
+    Session["TITLENAME"] = "订单查询";
+}
+
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="btn_cx">查询</a>
+</div>
+
+<div class="weui-cells weui-cells_form" style="margin-top:0;">
+
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content" style="padding-right: 0px;">
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">订单类型：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="ddlx" class="weui-select">
+                            <option value="0" selected="selected">全部</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">订单状态：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="isactive" class="weui-select">
+                            <option value="0" selected="selected">全部</option>
+                            <option value="10">未提交 </option>
+                            <option value="20">已提交 </option>
+                            <option value="50">已审核</option>
+                            <option value="60">已归档</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">新建时间：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="time_begin" class="weui-input" type="date" placeholder="" value="@ViewBag.startdate">
+                    </div>
+                </div>
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">至：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input id="time_end" class="weui-input" type="date" placeholder="" value="@ViewBag.enddate">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div id="div_result" style="margin:0 10px">
+
+</div>
+
+
+
+
+
+
+@*<div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">网上下单(六安市强盛商贸有限公司 2017-07-25 22:16)</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">发起时间</label>
+                <span class="weui-form-preview__value">2018-12-06</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单类型</label>
+                <span class="weui-form-preview__value">常规订单</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">订单状态</label>
+                <span class="weui-form-preview__value">未提交</span>
+            </p>
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">查看</a>
+            <a class="weui-form-preview__btn " href="javascript:">提交审核</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;">删除</a>
+        </div>
+    </div>*@
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Order/Select_Order")
+}

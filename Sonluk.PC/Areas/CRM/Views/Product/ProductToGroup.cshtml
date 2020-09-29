@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "分配产品到组";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Session["TITLENAME"] = "分配产品到组";
+}
+
+<script type="text/html" id="tb_group">
+    @*<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>*@
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="bar_select_kh">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>产品管理</a>
+    <a><cite>分配产品到组</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+
+
+    <div class="layui-form-item">
+        
+        <button id="insert_to_group" class="layui-btn">新增</button>
+
+        <button id="btn_cx" class="layui-btn" >查询</button><br />
+
+        
+       
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">产品组：</label>
+                        <div class="layui-input-inline">
+                            <select id="cx_group" lay-filter="cx_group">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">产品名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="cx_cpmc" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <table id="result" lay-filter="result"></table>
+
+</div>
+
+
+
+@*新增产品到组的界面*@
+<div id="008" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_group" class="layui-btn" lay-filter="btn_save_group">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        @*<div class="layui-inline">
+            <label class="layui-form-label">产品名称：</label>
+            <div class="layui-input-inline">
+                <input id="cpmc" type="text" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label">产品组：</label>
+            <div class="layui-input-inline">
+                <select id="group" lay-filter="group" lay-search>
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*检索产品*@
+<div id="div_select_cp" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品类型：</label>
+            <div class="layui-input-inline">
+                <select id="js_cplx" lay-filter="js_cplx">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品系列：</label>
+            <div class="layui-input-inline">
+                <select id="js_cpxl" lay-filter="js_cpxl">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品型号：</label>
+            <div class="layui-input-inline">
+                <select id="js_cpxh" lay-filter="js_cpxh">
+                    <option value="0" selected="selected">请选择</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品品号：</label>
+            <div class="layui-input-inline">
+                <input id="js_cpph" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产品名称：</label>
+            <div class="layui-input-inline">
+                <input id="js_cpmc" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <table id="select_result" lay-filter="select_result"></table>
+
+</div>
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Product/ProductToGroup")
+}

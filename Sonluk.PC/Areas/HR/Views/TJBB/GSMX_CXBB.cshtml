@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "工伤明细查询报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="see">查看</a>
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR统计报表</a>
+    <a><cite>工伤明细查询报表</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_dc">导出</button>
+        <button class="layui-btn" id="btn_select">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="noselect" autocomplete="off" class="layui-input" placeholder="（姓名/工号/证件号码）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px">工伤日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="find_gsdateks" lay-verify="date" placeholder="MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="find_gsdatejs" lay-verify="date" placeholder="MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="dBody">
+        <table class="layui-hidden" id="gsTable" lay-filter="gsTable"></table>
+    </div>
+</div>
+<div id="div_gs" class="layui-form" hidden>
+    <br />
+    <div class="layui-form">
+        <div class="layui-input-inline" style="margin:10px">
+            <fieldset class="layui-elem-field">
+                <div class="layui-upload">
+                    <div class="layui-upload-list" style="margin:0px">
+                        <img id="demo1" style="width:3.5cm;height:4.9cm">
+                    </div>
+                    <a id="pic_scr" hidden></a>
+                </div>
+        </div>
+        <div class="layui-input-inline">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 100px;">姓名：</label>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label" id="text_name" style="text-align:left;font-size:x-large;width:200px"></label>
+                </div>
+            </div>
+            <fieldset class="layui-elem-field layui-field-title" style="color: #2F4056">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">部门：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_bm" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                    <label class="layui-form-label" style="width: 100px;">归属部门：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_gsbm" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">在职状态：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_zzzt" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                    <label class="layui-form-label" style="width: 100px;">职称：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_zc" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px;">入职日期：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label" id="text_rzrq" style="text-align: left; min-width: 100px"></label>
+                    </div>
+                    <div id="lzxx" hidden>
+                        <label class="layui-form-label" style="width: 100px;">离职日期：</label>
+                        <div class="layui-input-inline">
+                            <label class="layui-form-label" id="text_lzrq" style="text-align: left; min-width: 100px"></label>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">岗位：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="gsgl_gw" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">工伤发生日：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="gsgl_fsr" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+            <label class="layui-form-label" style="width: 100px;">工伤级数：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="gsgl_dj" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">医疗起始日：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="gsgl_qsr" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+            <label class="layui-form-label" style="width: 100px;">医疗截止日：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="gsgl_jzr" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 100px;">工伤说明：</label>
+            <div class="layui-input-inline" style="width: 520px;">
+                <textarea placeholder="请输入内容" class="layui-textarea" id="gsgl_remark" readonly="readonly"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div hidden>
+    <input type="text" id="bl_ryid" value="">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/TJBB/GSMX_CXBB")
+}

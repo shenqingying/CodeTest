@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "拜访报表";
+    Session["TITLENAME"] = "拜访报表";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+
+
+<style type="text/css">
+    .laytable-cell-1-WJM, .laytable-cell-2-WJM, .laytable-cell-3-WJM, .laytable-cell-4-WJM, .laytable-cell-5-WJM, .laytable-cell-6-WJM, .laytable-cell-7-WJM, .laytable-cell-8-WJM, .laytable-cell-9-WJM, .laytable-cell-10-WJM { /*最后的pic为字段的field*/
+        height: auto;
+        max-width: 100%;
+    }
+</style>
+
+
+<script type="text/html" id="imgTpl">
+    <img src="{{d.ML}}" />
+</script>
+
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+<div id="form1">
+    <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+        <button id="btn_cx" class="layui-btn" style="width:100%">查询</button>
+        <button id="btn_back" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+        <button id="btn_imgback" class="layui-btn" style="width:100%;display:none;margin-left: 0px;">返回</button>
+    </div>
+    
+
+
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">查询条件</h2>
+            <div id="div_select_tiaojian" class="layui-colla-content layui-show" style="padding-right: 0px;">
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:110px">报表类型：</label>
+                    <div class="layui-input-block">
+                        <select id="report_type" lay-filter="report_type">
+                            <option value="0" selected="selected">请选择拜访类型</option>
+                            <option value="1">计划任务拜访</option>
+                            <option value="2">专项活动、拜访任务指派</option>
+                            <option value="3">新客户开发、非计划日常拜访</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                @* 计划拜访 *@
+                <div id="div_cx_plan" hidden>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:110px">开始日期：</label>
+                        <div class="layui-input-block">
+                            <input id="plan_date_start" type="date" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">结束日期：</label>
+                        <div class="layui-input-block">
+                            <input id="plan_date_end" type="date" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">客户类型：</label>
+                        <div class="layui-input-block">
+                            <select id="KH_type" lay-filter="KH_type">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+
+                        <label class="layui-form-label" style="width:110px">拜访周期：</label>
+                        <div class="layui-input-block">
+                            <select id="plan_bfzq" lay-filter="plan_bfzq">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px;">客户分组：</label>
+                        <div class="layui-input-block">
+                            <select id="KHgroup" lay-filter="to_group008">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                @* 专项&指派 *@
+                <div id="div_cx_zxzp" hidden>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:110px">开始日期：</label>
+                        <div class="layui-input-block">
+                            <input id="ZXZP_date_start" type="date" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">结束日期：</label>
+                        <div class="layui-input-block">
+                            <input id="ZXZP_date_end" type="date" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">活动名称：</label>
+                        <div class="layui-input-block">
+                            <input id="ZXZP_name" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">任务类型：</label>
+                        <div class="layui-input-block">
+                            <select id="ZXZP_type" lay-filter="ZXZP_type">
+                                <option value="0" selected="selected">请选择</option>
+                                <option value="541">专项活动</option>
+                                <option value="542">任务指派</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">人员名称：</label>
+                        <div class="layui-input-block">
+                            <input id="ZXZP_staffname" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">客户名称：</label>
+                        <div class="layui-input-block">
+                            <input id="ZXZP_khname" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                @* 新客户&非计划 *@
+                <div id="div_cx_new" hidden>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:110px">开始日期：</label>
+                        <div class="layui-input-block">
+                            <input id="new_date_start" type="date" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">结束日期：</label>
+                        <div class="layui-input-block">
+                            <input id="new_date_end" type="date" autocomplete="off" class="layui-input">
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">任务类型：</label>
+                        <div class="layui-input-block">
+                            <select id="new_type" lay-filter="new_type">
+                                <option value="0" selected="selected">请选择</option>
+                                <option value="546">新客户开发</option>
+                                <option value="547">非计划日常拜访</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">人员名称：</label>
+                        <div class="layui-input-block">
+                            <input id="new_staffname" type="text" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:110px">客户名称：</label>
+                        <div class="layui-input-block">
+                            <input id="new_khname" type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <hr class="layui-bg-black" />
+
+    <div id="div_total" style="margin:0 10px">
+
+    </div>
+    <div id="div_mx" style="margin:0 10px">
+
+    </div>
+    <div id="div_img" style="margin:0 10px">
+
+    </div>
+
+</div>
+<br /><br /><br />
+
+
+
+<input id="staffid" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/BaiFangReport")
+}
+
+

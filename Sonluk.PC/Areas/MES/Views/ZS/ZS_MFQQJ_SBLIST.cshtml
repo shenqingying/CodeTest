@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "密封圈全检实时工况";
+    //  Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Layout = "~/Views/Shared/_Layout_KB.cshtml";
+}
+
+@*<span class="layui-breadcrumb" lay-separator=">">
+        <a>模具追溯</a>
+        <a><cite>密封圈全检工况</cite></a>
+    </span>*@
+<style>
+    .t_table {
+        display: table;
+        border-collapse: separate;
+        box-sizing: border-box;
+        border-spacing: 2px;
+        /*border-color: grey;*/
+       margin: 0 auto;
+    }
+
+    .td_height{
+        height:18.5px;
+    }
+    .layui-form-radio {
+       line-height: 28px;
+       margin:0px -15px 0px 0px;
+       padding-right:10px;
+       cursor:pointer;
+       font-size: 0;
+    }
+    .T_tr {
+        width: 100%;
+        height: 100%
+    }
+    @@media screen and (max-width: 1460px) {
+        .fix {
+            width: 1460px;
+        }
+    }
+
+    /*padding-top: 10px*/
+</style>
+
+<div id="div_result" class="cd-pricing-container cd-full-width fix" style="padding-top:0px;height:100%">
+
+    
+    <div class="layui-form" id="div_form" width:100%;>
+        <div class="layui-input-inline" style="float:left;text-align: center;width:100%;">@*margin-left: 20%;*@
+            <span style="font-size:30px;height:40px;color:white">密封圈全检实时工况</span>
+        </div>
+    </div>
+    <div class="layui-footer" style="text-align:right" id="footer">
+        <div class="layui-inline">
+            <label class="layui-form-label">合计页：</label>
+            <label class="layui-form-label" id="Text_Total" style="width:5px"></label>
+            <label class="layui-form-label">当前页：</label>
+            <label class="layui-form-label" id="Text_Curr" style="width:30px"></label>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/ZS/ZS_MFQQJ_SBLIST")
+}

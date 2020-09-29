@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout_PDA.cshtml";
+    ViewBag.Title = "扫码出货";
+    Session["TITLENAME"] = "扫码出货";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+
+    string DXM_url = System.Configuration.ConfigurationManager.AppSettings["DXM_url"];
+
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+
+
+<div>
+    @*<button id="btn_tongbu" class="layui-btn" style="width:100%">同步数据</button>*@
+    <br />
+
+    <div id="div_fxs" class="layui-form-item">
+        <label class="layui-form-label" style="width:90px;text-align:right;">分销商编号：</label>
+        <div class="layui-input-block" style="margin-left: 100px;">
+            <input id="CRMID" type="text" placeholder="请输入分销商的CRMID" autocomplete="off" class="layui-input">
+
+        </div>
+
+        <div id="div_result" style="margin:auto 10px;">
+            <label id="lb_text" class="layui-form-label" style="display:none;">客户名称：</label>
+            <label id="lb_mc" class="layui-form-label" style="width:auto;"></label>
+        </div>
+
+        
+    </div>
+
+    <hr class="layui-bg-black" />
+
+    <div id="div_dxm" class="layui-form-item" style="display:none;">
+        <label class="layui-form-label" style="width:90px;text-align:right;">箱码：</label>
+        <div class="layui-input-block" style="margin-left: 100px;">
+            <input id="DXM" type="text" placeholder="请输入大箱码" autocomplete="off" class="layui-input">
+            
+            <label id="lb_tip" class="layui-form-label" style="width:auto;">已扫0箱</label>
+        </div>
+        
+    </div>
+
+   <div id="div_table">
+       <table id="tb_dxm" lay-filter="tb_dxm"></table>
+   </div>
+
+    
+
+    
+
+    @*<div style="text-align:center;">
+        <div class="layui-input-inline" style="width:80%;margin-top:30%;padding-right:10px;">
+            <button id="btn_confirm" class="layui-btn" style="width:100%;height:100px;font-size:20px;border-radius:15px;border:2px solid;">确定</button>
+        </div>
+    </div>*@
+   
+    <a id="maodian"></a>
+    <br /><br /><br /><br />
+    <div class="layui-footer" style="left:0;background: #009688;padding: 0;">
+
+        <div class="layui-input-inline" style="width:100%;margin:0">
+            <button id="btn_confirm" class="layui-btn" style="width:100%">确定</button>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+<div class="bottom"></div>
+
+
+<input id="staffid" hidden />
+<input id="state" hidden />
+<input id="appid" hidden />
+
+<input id="dxm_url" hidden />
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+        $("#dxm_url").val("@DXM_url");
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/FCH/ScanCH")
+}

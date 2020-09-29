@@ -1,0 +1,131 @@
+﻿@using Sonluk.UI.Model.MM.ScheduleRequisitionService
+@using Sonluk.UI.Model.Account.AccessService
+@model ScheReqInfo
+@{
+    ViewBag.Title = "交货计划请求审批";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string auth = ViewBag.Auth;
+    string status = auth.ToString() +"-"+ Model.Status;
+    AuthorizationInfo SAPAuth = (AuthorizationInfo)ViewBag.SAPAuth;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/mm/schedule-requisition-edit")
+<input type="hidden" id="schedule-requisition-serial-number" value="@Model.SerialNumber">
+<input type="hidden" id="schedule-requisition-item-release" value="@Url.Action("ItemStatus", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-submit-status" value="@Url.Action("Status", "ScheduleRequisition")">
+<input type="hidden" id="schedule-requisition-index" value="@Url.Action("Index", "ScheduleRequisition", new { Auth=auth})">
+<input type="hidden" id="already-submit" value="0">
+<input type="hidden" id="status" value="@status">
+<input type="hidden" id="release-code" value="@SAPAuth.ReleaseCode">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">采购订单</a>
+        >
+        <a href="#">交货计划请求</a>
+        >
+        <a href="#">审批</a>
+    </div>
+</div>
+<div id="schedule-requisition">
+    <div class="panel-flow">
+        <table class="panel-flow-table">
+            <tr>
+                <td class="panel-flow-table-title">序列号:</td>
+                <td class="panel-flow-table-content">@Model.SerialNumber</td>
+                <td class="panel-flow-table-title">状态:</td>
+                <td class="panel-flow-table-content" id="schedule-requisition-status">@Model.StatusDescription</td>
+            </tr>
+            <tr>
+                <td class="panel-flow-table-title">申请:</td>
+                <td class="panel-flow-table-content">@Model.Date @Model.Time @Model.Creator</td>
+                <td class="panel-flow-table-title"></td>
+                <td class="panel-flow-table-content"></td>
+            </tr>
+            <tr>
+                <td class="panel-flow-table-title">批准:</td>
+                <td class="panel-flow-table-content">@Model.NodePPCtrlDate @Model.NodePPCtrlTime @Model.NodePPCtrl</td>
+                <td class="panel-flow-table-title">同步:</td>
+                <td class="panel-flow-table-content">@Model.NodePurCtrlDate @Model.NodePurCtrlTime @Model.NodePurCtrl</td>
+            </tr>
+            <tr>
+                <td class="panel-flow-table-title">变更原因:</td>
+                <td class="panel-flow-table-content" colspan="3">@Model.Remark</td>
+            </tr>
+            <tr>
+                <td class="panel-flow-table-title">意见:</td>
+                <td class="panel-flow-table-content" colspan="3"><input type="text" class="panel-flow-table-input-text" id="comments" value="@Model.NodeComments"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="sonluk-table-layout">
+        <div class="sonluk-table">
+            <div class="sonluk-table-control">
+                <div>
+                    <div class="row-select-all sonluk-table-control-button">全选</div>
+                    <div class="sonluk-table-control-self-adaption-display">
+                        <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                        <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sonluk-table-content">
+                <table class="data-table">
+                    <tr>
+                        <td class="data-table-header">序号</td>
+                        <td class="data-table-header">采购凭证</td>
+                        <td class="data-table-header">行项目</td>
+                        <td class="data-table-header">计划行</td>
+                        <td class="data-table-header">物料号</td>
+                        <td class="data-table-header">物料描述</td>
+                        <td class="data-table-header">数量</td>
+                        <td class="data-table-header">需求数量</td>
+                        <td class="data-table-header">日期</td>
+                        <td class="data-table-header">需求日期</td>
+                        <td class="data-table-header">交货点</td>
+                        <td class="data-table-header">采购组</td>
+                        <td class="data-table-header">销售凭证</td>
+                        <td class="data-table-header">行项目</td>
+                        <td class="data-table-header">供应商</td>
+                        <td class="data-table-header">状态</td>
+                    </tr>
+                    @{int index = 1;}
+                    @foreach (ScheduleLineInfo node in Model.Items)
+                    {
+
+                        if (SAPAuth.PurchasingGroup.Equals("") || SAPAuth.PurchasingGroup.Equals(node.PurGroup))
+                        {
+                            <tr>
+                                <td>@(index++)<input type="hidden" value="@Model.SerialNumber"></td>
+                                <td>@node.Number</td>
+                                <td>@node.Item</td>
+                                <td>@node.Line</td>
+                                <td>@node.Material</td>
+                                <td class="text-align-left">@node.MaterialDescription</td>
+                                <td>@node.InitialQuantity.ToString("0.###")</td>
+                                <td @if (node.InitialQuantity != node.Quantity) { @("class=color-changed-background")  }>@node.Quantity.ToString("0.###")</td>
+                                <td>@node.InitialDate</td>
+                                <td @if (node.InitialDate != node.Date) { @("class=color-changed-background")   }>@node.Date</td>
+                                <td @if (!node.DestinationID.Equals("0")) { @("class=color-changed-background")    }>@node.Destination</td>
+                                <td>@node.PurGroup</td>
+                                <td>@node.SalesOrder</td>
+                                <td>@node.SOItem</td>
+                                <td>@node.Vendor</td>
+                                <td>@node.StatusDescription</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/mm/schedule-requisition-release")
+}

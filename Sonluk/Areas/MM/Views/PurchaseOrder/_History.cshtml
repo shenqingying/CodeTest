@@ -1,0 +1,32 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<POItemHistoryInfo>
+<div class="sonluk-table-pop-up-title">@ViewBag.Title</div>
+<div class="sonluk-table-pop-up-content">
+    <table>
+        <tr>
+            <td class="data-table-header">凭证类别</td>
+            <td class="data-table-header">移动</td>
+            <td class="data-table-header">凭证编号</td>
+            <td class="data-table-header">项目</td>
+            <td class="data-table-header">过账日期</td>
+            <td class="data-table-header">数量</td>
+            <td class="data-table-header">单位</td>
+            <td class="data-table-header">标识</td>
+            <td class="data-table-header">订单单位</td>
+        </tr>
+        @foreach (POItemHistoryInfo node in Model)
+        {
+            <tr>
+                <td>@node.HistTypeDescription</td>
+                <td>@node.MoveType</td>
+                <td>@node.MatDoc</td>
+                <td>@node.AccDocItemCount</td>
+                <td>@node.PstngDate</td>
+                <td class="text-align-right">@node.Quantity</td>
+                <td>EA</td>
+                <td>@node.DbCrInd</td>
+                <td class="text-align-right">@node.QtyInPriceUnit</td>
+            </tr>
+        }
+    </table>
+</div>

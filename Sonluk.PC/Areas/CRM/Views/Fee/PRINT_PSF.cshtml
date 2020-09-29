@@ -1,0 +1,240 @@
+﻿@using Sonluk.UI.Model.CRM.COST_PSFService
+@{
+    ViewBag.Title = "Print_PSF";
+    Layout = "~/Views/Shared/_Layout_Print_CRM.cshtml";
+    CRM_COST_PSF[] data = ViewBag.data;
+
+
+    decimal KPJE = 0, KJJE = 0, KPJEHJ = 0, MDPSF = 0, ZCPSF = 0, OTHER = 0, PSFHJ = 0,JHJE = 0,YSJE = 0;
+    int MDSL = 0;
+    string season = "";
+    switch (data[0].SEASON)
+    {
+        case "1":
+            season = "第一季度";
+            break;
+        case "2":
+            season = "第二季度";
+            break;
+        case "3":
+            season = "第三季度";
+            break;
+        case "4":
+            season = "第四季度";
+            break;
+        default:
+            break;
+    }
+
+}
+
+
+
+<style>
+    label {
+        text-align: left;
+        width: inherit;
+    }
+
+    .print_page_td_haveborder_zfdc2 {
+        text-align: center;
+    }
+</style>
+
+@if (data[0].PSFTYPE == 2030)
+{
+    //物流公司
+    <br />
+    <div class="main">
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td>
+                    <div class="print-page-body-table-header">@(data[0].SFDES)市场配送费核算表</div>
+                </td>
+            </tr>
+        </table>
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align:left">
+                    所属期：@(data[0].GSYEAR)年 @Convert.ToInt32(data[0].GSMONTH)月
+                </td>
+                <td style="text-align:right">
+                    金额单位：元
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+            <thead>
+                <tr>
+                    <th>系统</th>
+                    @*<th>@Convert.ToInt32(data[0].GSMONTH)月实际开票金额</th>
+                    <th>@Convert.ToInt32(data[0].GSMONTH)月发票中扣减的费用金额</th>*@
+                    <th>@Convert.ToInt32(data[0].GSMONTH)月配送金额</th>
+                    <th>门店配送费</th>
+                    <th>总仓配送费</th>
+                    <th>其他</th>
+                    <th>配送费合计</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < data.Length; i++)
+                {
+                    <tr>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].GNAME</td>
+                        @*<td class="print_page_td_haveborder_zfdc2">@data[i].SJKPJE</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].FPKJJE</td>*@
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].KPJEHJ</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].MDPSF</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].ZCPSF</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].OTHER</td>
+                        <td class="print_page_td_haveborder_zfdc2">@data[i].PSFHJ</td>
+                        <td style="width:2cm" class="print_page_td_haveborder_zfdc2">@data[i].BEIZ</td>
+                    </tr>
+                    //KPJE = KPJE + data[i].SJKPJE;
+                    //KJJE = KJJE + data[i].FPKJJE;
+                    KPJEHJ = KPJEHJ + data[i].KPJEHJ;
+                    MDPSF = MDPSF + data[i].MDPSF;
+                    ZCPSF = ZCPSF + data[i].ZCPSF;
+                    OTHER = OTHER + data[i].OTHER;
+                    PSFHJ = PSFHJ + data[i].PSFHJ;
+                }
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2">合计</td>
+                    @*<td class="print_page_td_haveborder_zfdc2">@KPJE</td>
+                    <td class="print_page_td_haveborder_zfdc2">@KJJE</td>*@
+                    <td class="print_page_td_haveborder_zfdc2">@KPJEHJ</td>
+                    <td class="print_page_td_haveborder_zfdc2">@MDPSF</td>
+                    <td class="print_page_td_haveborder_zfdc2">@ZCPSF</td>
+                    <td class="print_page_td_haveborder_zfdc2">@OTHER</td>
+                    <td class="print_page_td_haveborder_zfdc2">@PSFHJ</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <br />
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align: left;">
+                    编制：
+                </td>
+                <td style="text-align: left;">
+                    审核：
+                </td>
+                <td style="text-align: left;">
+                    审批：
+                </td>
+            </tr>
+        </table>
+
+
+
+
+
+
+
+
+
+    </div>
+}
+else if (data[0].PSFTYPE == 2031)
+{
+    <br />
+    <div class="main">
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td>
+                    <div class="print-page-body-table-header">@(data[0].GSYEAR)年度经销客户直营卖场配送费核算表</div>
+                </td>
+            </tr>
+        </table>
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align:left">
+                    所属季度：@season
+                </td>
+                <td style="text-align:right">
+                    金额单位：元
+                </td>
+            </tr>
+        </table>
+        <table class="print-page_table_outside2" cellspacing="0" cellpadding="5" border="1">
+            <thead>
+                <tr>
+                    @*<th>区域</th>*@
+                    <th>客户名称</th>
+                    @*<th>系统</th>*@
+                    <th>维护门店数量</th>
+                    <th>配送金额</th>
+                    @*<th>华东华润验收金额</th>*@
+                    <th>配送费</th>
+                    @*<th>总仓配送费</th>*@
+                    <th>其他</th>
+                    <th>配送费合计</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < data.Length; i++)
+                {
+                <tr>
+                    @*<td style="width:40px" class="print_page_td_haveborder_zfdc2">@data[i].SFDES</td>*@
+                    <td style="width:100px" class="print_page_td_haveborder_zfdc2">@data[i].JXSNAME</td>
+                    @*<td style="width:100px" class="print_page_td_haveborder_zfdc2">@data[i].MC</td>*@
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].MDSL</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].JHJE</td>
+                    @*<td class="print_page_td_haveborder_zfdc2">@data[i].YSJE</td>*@
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].MDPSF</td>
+                    @*<td class="print_page_td_haveborder_zfdc2">@data[i].ZCPSF</td>*@
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].OTHER</td>
+                    <td class="print_page_td_haveborder_zfdc2">@data[i].PSFHJ</td>
+                    <td style="width:2cm" class="print_page_td_haveborder_zfdc2">@data[i].BEIZ</td>
+                </tr>
+                    MDSL = MDSL + data[i].MDSL;
+                    JHJE = JHJE + data[i].JHJE;
+                    //YSJE = YSJE + data[i].YSJE;
+                    MDPSF = MDPSF + data[i].MDPSF;
+                    //ZCPSF = ZCPSF + data[i].ZCPSF;
+                    OTHER = OTHER + data[i].OTHER;
+                    PSFHJ = PSFHJ + data[i].PSFHJ;
+                }
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc2">合计</td>
+                    @*<td class="print_page_td_haveborder_zfdc2">&nbsp;</td>*@
+                    @*<td class="print_page_td_haveborder_zfdc2">&nbsp;</td>*@
+                    <td class="print_page_td_haveborder_zfdc2">@MDSL</td>
+                    <td class="print_page_td_haveborder_zfdc2">@JHJE</td>
+                    @*<td class="print_page_td_haveborder_zfdc2">@YSJE</td>*@
+                    <td class="print_page_td_haveborder_zfdc2">@MDPSF</td>
+                    @*<td class="print_page_td_haveborder_zfdc2">@ZCPSF</td>*@
+                    <td class="print_page_td_haveborder_zfdc2">@OTHER</td>
+                    <td class="print_page_td_haveborder_zfdc2">@PSFHJ</td>
+                    <td class="print_page_td_haveborder_zfdc2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <br />
+        <table class="print_page_table_noborder_zfdc">
+            <tr>
+                <td style="text-align: left;">
+                    编制：
+                </td>
+                <td style="text-align: left;">
+                    审核：
+                </td>
+                <td style="text-align: left;">
+                    审批：
+                </td>
+            </tr>
+        </table>
+    </div>
+
+}
+
+
+
+

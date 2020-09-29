@@ -1,0 +1,30 @@
+﻿@using Sonluk.UI.Model.OA.FlowService
+@model IEnumerable<FlowLogInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">No.</td>
+        <td class="data-table-header">时间</td>
+        <td class="data-table-header">类型</td>
+        <td class="data-table-header">状态</td>
+        <td class="data-table-header">通知单</td>
+        <td class="data-table-header">流程</td>
+        <td class="data-table-header">流程类型</td>
+        <td class="data-table-header">备注</td>
+    </tr>
+    @{int i = 1;}
+    @foreach (FlowLogInfo node in Model)
+    {
+        <tr>
+            <td>@(i++)</td>
+            <td>@node.Date</td>
+            <td class="text-align-left">@node.Type</td>
+            <td class="text-align-left">@node.Status</td>
+            <td class="text-align-left">@node.QualityNotification</td>
+            <td class="text-align-left">@node.SerialNumber</td>
+            <td class="text-align-left">@node.Template</td>
+            <td class="text-align-left">@node.Remark</td>
+        </tr>
+    }
+</table>
+

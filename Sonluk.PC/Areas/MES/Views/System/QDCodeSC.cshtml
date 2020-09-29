@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "二维码生成工具";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>二维码生成工具</cite></a>
+</span>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:auto">请输入要生成的内容：</label>
+            <div class="layui-input-inline" style="width:300px">
+                <input type="text" id="in_sth" autocomplete="off" class="layui-input">
+            </div>
+            <button id="btn_SC" class="layui-btn">生成二维码</button>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<div class="layui-card" style="width:320px; height:320px; vertical-align: middle; text-align: center;">
+    <div class="layui-card-header">二维码预览</div>
+    <div class="layui-card-body" id="imgQD" style="width:300px; height:300px; vertical-align: middle; text-align: center;">
+        <img id="ImagePic" width="200" height="200" />
+        <br />
+        <h2 id="result"></h2>
+    </div>
+</div>
+<br />
+<br />
+<div id="div_BC" class="layui-form-item" style="width:320px; height:320px; vertical-align: middle; text-align: center;" hidden>
+   <button id="btn_bc" class="layui-btn">生成图片</button>
+</div>
+
+<div id="div_QDimg" class="layui-form" style="vertical-align: middle; text-align: center;" hidden>
+    <img id="img1" alt="QDCode image" width="400" height="400" />
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/System/QDCodeSC")
+}

@@ -1,0 +1,80 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KAHXZLTTService;
+@{
+    ViewBag.Title = "Select_KAHXZL_Part";
+    CRM_COST_KAHXZLTT[] data = ViewBag.data;
+    int ReadOnly = ViewBag.ReadOnly;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+    string mcsx = "";
+    switch (data[i].MCSX)
+    {
+        case 1:
+            mcsx = "系统";
+            break;
+        case 2:
+            mcsx = "门店";
+            break;
+        default:
+            break;
+    }
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MC</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">合同年份</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HTYEAR</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户类型</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].KHLXDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">卖场属性</label>
+                <span class="weui-form-preview__value">&nbsp;@mcsx</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户SAP编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SAPSN</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请人</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CJRNAME</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CJSJ</span>
+            </p>
+           
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">查看</button>
+            @if (ReadOnly == 0)
+            {
+                <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">编辑</button>
+                <button class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_delete(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">删除</button>
+            }
+            
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+@*<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />*@

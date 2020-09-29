@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "物流追踪";
+    Session["TITLENAME"] = "物流追踪";
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    string state = "";
+    string appid = "";
+
+
+    state = Session["state"].ToString();
+        
+        
+    appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        
+       
+    
+
+    
+}
+<div id="from1">
+    <div id="div1">
+
+        <br /><br />
+
+        <div class="layui-form-item">
+            <table width="100%" style=" margin-right: 10px;">
+                <tr>
+                    <td width="70px">
+                        <label class="layui-form-label" style="width:90px; text-align:right;">出库单编号：</label>
+                    </td>
+                    <td>
+                        <input id="NUMBER" type="text" placeholder="请输入出库单编号" autocomplete="off" class="layui-input">
+                    </td>
+                    <td width="70px">
+                        <button id="btn_scan" class="layui-btn">扫码</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br /><br />
+
+        <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688" id="next">
+            <button id="btn_next" class="layui-btn" lay-submit lay-filter="formDemo" style="width:100%">下一步</button>
+
+        </div>
+
+
+        <div id="div_result" style="margin:0 10px">
+
+        </div>
+
+
+        <div id="div_foot" class="layui-footer" style="left:0;background: none;padding: 0;"hidden>
+            <div class="layui-input-inline" style="width:100%;margin:0;background-color:#009688">
+                <button id="insert_img_camera" class="layui-btn" style="width:100%">拍照</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<input id="staffid" hidden />
+<input id="state" hidden />
+<input id="appid" hidden />
+<input id="dxm_url" hidden />
+
+<input id="lat" hidden />
+<input id="lon" hidden />
+<input id="address" hidden />
+<input id="province" hidden />
+<input id="city" hidden />
+
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+
+       
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/WL/WLIndex")
+}
+

@@ -1,0 +1,81 @@
+﻿@using Sonluk.UI.Model.BC.BarCodeService
+@model PickingtaskInfo
+@{
+    ViewBag.Title = "工作任务";
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>工作任务</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bc/picking-task")
+
+    <style type="text/css">
+        #table-6 thead th {
+        background-color: rgb(128, 102, 160);
+        color: #fff;
+        border-bottom-width: 0;
+        font-size: 20px;
+        font-family: Verdana;
+        }
+
+        /* Border styles */
+        #table-4 thead th {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: rgb(128, 102, 160);
+        background: rgb(223, 216, 232);
+        }
+        #table-4 tr {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: rgb(211, 202, 221);
+        }
+        #table-4 {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: rgb(211, 202, 221);
+        }
+
+        /* Padding and font style */
+        #table-4 td, #table-4 th {
+        padding: 5px 10px;
+        font-size: 20px;
+        font-family: Verdana;
+        color: rgb(95, 74, 121);
+        }
+
+        /* Alternating background colors */
+        #table-4 tr:nth-child(even) {
+        background: rgb(223, 216, 232)
+        }
+        #table-4 tr:nth-child(odd) {
+        background: #FFF
+        }
+    </style>
+</head>
+<body @*onload="tick();"*@>
+    
+    <table width="99%" align="center">
+        <tr>
+            <td height="5%">
+                <marquee  scrolldelay="40" direction="left" scrollamount="1" truespeed="" border="0" width="97%">
+                    <font size="15px" color="red">
+                        <div id="picking-task-message">
+                            1、城市配送9点半要装二号桥的货！                    
+                        </div>
+                        <input type="hidden" value="@Url.Action("_PickingtaskMessage", "BarCode")">
+                    </font>
+                </marquee>
+            </td>
+        </tr>
+    </table>
+    <div id="picking-task-list">
+    </div>
+    <input type="hidden" value="@Url.Action("_PickingtaskList", "BarCode")">
+    
+</body>
+</html>
+

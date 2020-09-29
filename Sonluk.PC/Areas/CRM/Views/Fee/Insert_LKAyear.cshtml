@@ -1,0 +1,292 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "LKA年度费用申请";
+
+    string name = "";
+    if (Session["NAME"] != null)
+    {
+        name = Session["NAME"].ToString();
+    }
+}
+
+<script type="text/html" id="bar_select_jxs">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<script type="text/html" id="bar_select_market">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<script type="text/html" id="bar_select_lka">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>费用管理</a>
+    <a><cite>LKA年度费用申请</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form">
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_next" class="layui-btn" lay-submit="">下一步</button>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">归属年份：</label>
+            <div class="layui-input-inline">
+                <input id="year" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-inline">
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">申请人：</label>
+            <div class="layui-input-inline">
+                <input id="sqr" type="text" placeholder="" autocomplete="off" class="layui-input" value="@name" disabled>
+            </div>
+
+
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">单位：</label>
+            <div class="layui-input-inline">
+                <input id="dw" type="text" autocomplete="off" class="layui-input" value="元" disabled>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">首次申请日期：</label>
+            <div class="layui-input-inline">
+                <input id="sqdate" type="text" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">最后修改时间：</label>
+            <div class="layui-input-inline">
+                <input id="sqdate" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销客户名称：</label>
+            <div class="layui-input-inline">
+                <input id="jxsname" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销客户SAP编号：</label>
+            <div class="layui-input-inline">
+                <input id="jxsid" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">LKA系统CRM编号：</label>
+            <div class="layui-input-inline">
+                <input id="crmid" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">卖场名称：</label>
+            <div class="layui-input-inline">
+                <input id="mcname" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">年度费用开始日期：</label>
+            <div class="layui-input-inline">
+                <input id="startdate" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">年度费用结束日期：</label>
+            <div class="layui-input-inline">
+                <input id="enddate" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">归属年度月份总数：</label>
+            <div class="layui-input-inline">
+                <input id="monthcount" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+    @*<div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">归属年份：</label>
+            <div class="layui-input-inline">
+                <input id="year" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-inline">
+
+            <label class="layui-form-label" style="width:130px;text-align:right;">申请人：</label>
+            <div class="layui-input-inline">
+                <input id="sqr" type="text" placeholder="" autocomplete="off" class="layui-input" value="@name" disabled>
+            </div>
+
+
+        </div>
+
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">申请日期：</label>
+            <div class="layui-input-inline">
+                <input id="sqdate" type="text" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" disabled>
+            </div>
+        </div>
+
+        
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销客户名称：</label>
+            <div class="layui-input-inline">
+                <input id="jxsname" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">经销客户编号：</label>
+            <div class="layui-input-inline">
+                <input id="jxsid" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">LKA系统CRM编号：</label>
+            <div class="layui-input-inline">
+                <input id="crmid" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">卖场名称：</label>
+            <div class="layui-input-inline">
+                <input id="mcname" type="text" autocomplete="off" class="layui-input" disabled>
+            </div>
+        </div>
+
+        
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">年度费用开始日期：</label>
+            <div class="layui-input-inline">
+                <input id="startdate" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">年度费用结束日期：</label>
+            <div class="layui-input-inline">
+                <input id="enddate" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">归属年度月份总数：</label>
+            <div class="layui-input-inline">
+                <input id="monthcount" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">单位：</label>
+            <div class="layui-input-inline">
+                <input id="dw" type="text" autocomplete="off" class="layui-input" value="元" disabled>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </div>*@
+
+
+    
+</div>
+
+
+
+
+
+
+@*检索LKA*@
+<div id="div_select_lka" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_lka_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">LKA名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_lka_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_lka_result" lay-filter="select_lka_result"></table>
+
+</div>
+
+
+
+
+
+
+<script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/Fee/Insert_LKAyear")
+}

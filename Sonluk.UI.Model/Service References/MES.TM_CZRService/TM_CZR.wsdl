@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="INSERT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_TM_CZR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_TM_CZR">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWBH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CZLB" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRGH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZRNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GWID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GWNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GZZXBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SBBH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISREPLACE" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="INSERTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="INSERTResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_RETURN">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XH" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TMSX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SELECT_CZR_NOW">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_TM_CZR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SELECT_CZR_NOWResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SELECT_CZR_NOWResult" type="tns:MES_TM_CZR_SELECT_CZR_NOW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_TM_CZR_SELECT_CZR_NOW">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MES_TM_CZR" type="tns:ArrayOfMES_TM_CZR" />
+          <s:element minOccurs="0" maxOccurs="1" name="CZR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MES_RETURN" type="tns:MES_RETURN" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMES_TM_CZR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MES_TM_CZR" nillable="true" type="tns:MES_TM_CZR" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UPDATE_LEAVE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_LEAVEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_LEAVEResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_GW">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:MES_TM_CZR" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPDATE_GWResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPDATE_GWResult" type="tns:MES_RETURN" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_RYNAME">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GH" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GET_RYNAMEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GET_RYNAMEResult" type="tns:MES_SY_CZR_BYGH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MES_SY_CZR_BYGH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="MES_RETURN" nillable="true" type="tns:MES_RETURN" />
+      <s:element name="MES_SY_CZR_BYGH" nillable="true" type="tns:MES_SY_CZR_BYGH" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="INSERTSoapIn">
+    <wsdl:part name="parameters" element="tns:INSERT" />
+  </wsdl:message>
+  <wsdl:message name="INSERTSoapOut">
+    <wsdl:part name="parameters" element="tns:INSERTResponse" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_CZR_NOWSoapIn">
+    <wsdl:part name="parameters" element="tns:SELECT_CZR_NOW" />
+  </wsdl:message>
+  <wsdl:message name="SELECT_CZR_NOWSoapOut">
+    <wsdl:part name="parameters" element="tns:SELECT_CZR_NOWResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_LEAVESoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_LEAVE" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_LEAVESoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_LEAVEResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_GWSoapIn">
+    <wsdl:part name="parameters" element="tns:UPDATE_GW" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_GWSoapOut">
+    <wsdl:part name="parameters" element="tns:UPDATE_GWResponse" />
+  </wsdl:message>
+  <wsdl:message name="GET_RYNAMESoapIn">
+    <wsdl:part name="parameters" element="tns:GET_RYNAME" />
+  </wsdl:message>
+  <wsdl:message name="GET_RYNAMESoapOut">
+    <wsdl:part name="parameters" element="tns:GET_RYNAMEResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_LEAVEHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_LEAVEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="GET_RYNAMEHttpGetIn">
+    <wsdl:part name="GH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_RYNAMEHttpGetOut">
+    <wsdl:part name="Body" element="tns:MES_SY_CZR_BYGH" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_LEAVEHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPDATE_LEAVEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_RETURN" />
+  </wsdl:message>
+  <wsdl:message name="GET_RYNAMEHttpPostIn">
+    <wsdl:part name="GH" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GET_RYNAMEHttpPostOut">
+    <wsdl:part name="Body" element="tns:MES_SY_CZR_BYGH" />
+  </wsdl:message>
+  <wsdl:portType name="TM_CZRSoap">
+    <wsdl:operation name="INSERT">
+      <wsdl:input message="tns:INSERTSoapIn" />
+      <wsdl:output message="tns:INSERTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_CZR_NOW">
+      <wsdl:input message="tns:SELECT_CZR_NOWSoapIn" />
+      <wsdl:output message="tns:SELECT_CZR_NOWSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_LEAVE">
+      <wsdl:input message="tns:UPDATE_LEAVESoapIn" />
+      <wsdl:output message="tns:UPDATE_LEAVESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_GW">
+      <wsdl:input message="tns:UPDATE_GWSoapIn" />
+      <wsdl:output message="tns:UPDATE_GWSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_RYNAME">
+      <wsdl:input message="tns:GET_RYNAMESoapIn" />
+      <wsdl:output message="tns:GET_RYNAMESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TM_CZRHttpGet">
+    <wsdl:operation name="UPDATE_LEAVE">
+      <wsdl:input message="tns:UPDATE_LEAVEHttpGetIn" />
+      <wsdl:output message="tns:UPDATE_LEAVEHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_RYNAME">
+      <wsdl:input message="tns:GET_RYNAMEHttpGetIn" />
+      <wsdl:output message="tns:GET_RYNAMEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="TM_CZRHttpPost">
+    <wsdl:operation name="UPDATE_LEAVE">
+      <wsdl:input message="tns:UPDATE_LEAVEHttpPostIn" />
+      <wsdl:output message="tns:UPDATE_LEAVEHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_RYNAME">
+      <wsdl:input message="tns:GET_RYNAMEHttpPostIn" />
+      <wsdl:output message="tns:GET_RYNAMEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TM_CZRSoap" type="tns:TM_CZRSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_CZR_NOW">
+      <soap:operation soapAction="http://tempuri.org/SELECT_CZR_NOW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_LEAVE">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_LEAVE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_GW">
+      <soap:operation soapAction="http://tempuri.org/UPDATE_GW" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_RYNAME">
+      <soap:operation soapAction="http://tempuri.org/GET_RYNAME" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TM_CZRSoap12" type="tns:TM_CZRSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="INSERT">
+      <soap12:operation soapAction="http://tempuri.org/INSERT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SELECT_CZR_NOW">
+      <soap12:operation soapAction="http://tempuri.org/SELECT_CZR_NOW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_LEAVE">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_LEAVE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_GW">
+      <soap12:operation soapAction="http://tempuri.org/UPDATE_GW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_RYNAME">
+      <soap12:operation soapAction="http://tempuri.org/GET_RYNAME" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TM_CZRHttpGet" type="tns:TM_CZRHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="UPDATE_LEAVE">
+      <http:operation location="/UPDATE_LEAVE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_RYNAME">
+      <http:operation location="/GET_RYNAME" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TM_CZRHttpPost" type="tns:TM_CZRHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="UPDATE_LEAVE">
+      <http:operation location="/UPDATE_LEAVE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_RYNAME">
+      <http:operation location="/GET_RYNAME" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TM_CZR">
+    <wsdl:port name="TM_CZRSoap" binding="tns:TM_CZRSoap">
+      <soap:address location="http://192.168.0.223/API/MES/TM_CZR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TM_CZRSoap12" binding="tns:TM_CZRSoap12">
+      <soap12:address location="http://192.168.0.223/API/MES/TM_CZR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TM_CZRHttpGet" binding="tns:TM_CZRHttpGet">
+      <http:address location="http://192.168.0.223/API/MES/TM_CZR.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TM_CZRHttpPost" binding="tns:TM_CZRHttpPost">
+      <http:address location="http://192.168.0.223/API/MES/TM_CZR.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,179 @@
+﻿@using Sonluk.UI.Model.LE.TRA.ComplaintService
+@model ComplaintInfo
+@{
+    if (Model.ID > 0)
+    {
+        ViewBag.Title = "投诉-" + Model.ID.ToString() + "-" + Model.Carrier.ShortName;
+    }
+    else
+    {
+        ViewBag.Title = "投诉-新建";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string check = "checked=checked";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/panel-layout-flow")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/import-bar")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/le/complaint-edit")
+
+<input type="hidden" value="@Url.Action("_Reason", "Complaint")" id="complaint-reason-uri" />
+<input type="hidden" value="@Url.Action("_Modify", "Complaint")" id="complaint-save-uri" />
+<input type="hidden" value="@Url.Action("Edit", "Complaint", new { id = UrlParameter.Optional })" id="complaint-edit-uri" />
+
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">托运单</a>
+        >
+        <a href="#">投诉</a>
+        >
+        <a href="#">编辑</a>
+    </div>
+</div>
+
+<div class="panel-layout-flow">
+    <input type="hidden" id="ID" value="@Model.ID" />
+    <div class="panel-layout-flow-line">
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">物流公司</div>
+            <input type="text" class="panel-layout-flow-item-input drop-list-target-carrier  input-width-cn-carrier" id="carrier-short-name" value="@Model.Carrier.ShortName" />
+            <input type="hidden" id="carrier-ID" value="@Model.Carrier.ID" />
+            <input type="hidden" value="@Url.Action("_List", "Carrier")" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">托运单ID</div>
+            <input type="text" class="panel-layout-flow-item-input input-width-cn-number " id="consignment-note" value="@Model.ConsignmentNote" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">投诉方式</div>
+            <input type="text" class="panel-layout-flow-item-input drop-list-target-type input-width-cn-complaint-type" id="type" value="@Model.Type" />
+            <input type="hidden" id="type-ID" value="@Model.TypeID" />
+            <input type="hidden" value="@Url.Action("_Type", "Complaint")" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">收货人</div>
+            <input type="text" class="panel-layout-flow-item-input input-width-cn-receiver" id="receiver-short-name" value="@Model.Receiver.ShortName" />
+            <input type="hidden" id="receiver-ID" value="@Model.Receiver.ID" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">退回日期</div>
+            <input type="text" class="date-picker-trigger panel-layout-flow-item-input" id="return-date" value="@Model.ReturnDate" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">联系函编号</div>
+            <input type="text" class="panel-layout-flow-item-input input-width-cn-number" id="contact-letter" value="@Model.ContactLetter" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">应到日期</div>
+            <input type="text" class="date-picker-trigger panel-layout-flow-item-input" id="appointed-delivery-date" value="@Model.AppointedDeliveryDate" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">实到日期</div>
+            <input type="text" class="date-picker-trigger panel-layout-flow-item-input" id="delivery-date" value="@Model.DeliveryDate" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">迟到天数</div>
+            <input type="text" class="panel-layout-flow-item-input delay-days-trigger input-width-cn-number" id="delay-days" value="@Model.DelayDays" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="checkbox" id="goods-get-wet" value="true" class="panel-layout-flow-item-checkbox" @if (Model.GoodsGetWet) { @check      }> 货物淋湿
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="checkbox" id="package-damage" value="true" class="panel-layout-flow-item-checkbox" @if (Model.PackageDamage) { @check      }> 包装破损
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="checkbox" id="package-pollution" value="true" class="panel-layout-flow-item-checkbox" @if (Model.PackagePollution) { @check      }> 包装污染
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="checkbox" id="goods-damage" value="true" class="panel-layout-flow-item-checkbox" @if (Model.GoodsDamage) { @check      }> 货物损坏
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="checkbox" id="goods-shortage" value="true" class="panel-layout-flow-item-checkbox" @if (Model.GoodsShortage) { @check      }> 货物短缺
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">损坏金额</div>
+            <input type="text" class="panel-layout-flow-item-input input-width-cn-number" id="damage-value" value="@Model.DamageValue" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <div class="panel-layout-flow-item-title">重工费</div>
+            <input type="text" class="panel-layout-flow-item-input input-width-cn-number" id="rework-value" value="@Model.ReworkValue" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="checkbox" id="compensable" value="true" class="panel-layout-flow-item-checkbox" @if (Model.Compensable) { @check      }> 需要赔偿金额
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="text" class="panel-layout-flow-item-input input-width-cn-number" id="compensation" value="@Model.Compensation" />
+        </div>
+        <div class="panel-layout-flow-item">
+            <input type="checkbox" id="completed"  value="true" class="panel-layout-flow-item-checkbox" @if (Model.Completed) { @check         }> 处理完成
+        </div>
+    </div>
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="item-remove-trigger sonluk-table-control-button">移除</div>
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="complaint">
+            <input type="hidden" value="@Model.Items.Count()" id="node-count">
+            <table class="data-table">
+                <tr>
+                    <td class="data-table-header">交货单</td>
+                    <td class="data-table-header">物料</td>
+                    <td class="data-table-header">物料描述</td>
+                    <td class="data-table-header">退回件数</td>
+                    <td class="data-table-header">退回数量</td>
+                    <td class="data-table-header">退回原因</td>
+                    <td class="data-table-header">单价</td>
+                    <td class="data-table-header">损坏数量</td>
+                    <td class="data-table-header">损坏金额</td>
+                    <td class="data-table-header">重工费</td>
+                    <td class="data-table-header">业务员</td>
+                </tr>
+                @foreach (ComplaintItemInfo item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Delivery</td>
+                        <td>@item.Material</td>
+                        <td class="text-align-left">@item.MaterialDescription</td>
+                        <td class="text-align-right"><input type="text" value="@item.ReturnWholeQty" /></td>
+                        <td class="text-align-right"><input type="text" value="@item.ReturnQty.ToString("0.###")" /></td>
+                        <td class="text-align-left"><input type="text" value="@item.ReturnReason" class="drop-list-target-reason" /></td>
+                        <td class="text-align-right"><input type="text" value="@item.UnitValue.ToString("0.###")" /></td>
+                        <td class="text-align-right"><input type="text" value="@item.DamageQty.ToString("0.###")" /></td>
+                        <td class="text-align-right"><input type="text" value="@item.DamageValue.ToString("0.###")" /></td>
+                        <td class="text-align-right"><input type="text" value="@item.ReworkValue.ToString("0.###")" /></td>
+                        <td>@item.Sales</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--下拉列表-->
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/le/complaint-edit")
+}

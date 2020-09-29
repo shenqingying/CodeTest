@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "福利方案";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>福利方案</cite></a>
+</span>
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <table class="layui-hide" id="tb_flfa" lay-filter="tb_flfa"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</div>
+<div id="div_flfainfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">省份：</label>
+            <div class="layui-input-block" style="width: 185px;">
+                <select id="flfainfo_sf" lay-filter="flfainfo_sf"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">城市：</label>
+            <div class="layui-input-block" style="width: 185px;">
+                <select id="flfainfo_cs" lay-filter="flfainfo_cs"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">社保方案：</label>
+            <div class="layui-input-block">
+                <input type="text" id="flfainfo_sbfaname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-block" style="width: 185px;">
+                <select id="flfainfo_isaction" lay-filter="gsinfo_isaction">
+                    <option value="0" selected="selected">关闭</option>
+                    <option value="1">启用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-block" style="width: 490px;">
+                <input type="text" id="flfainfo_remark" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn layui-btn-sm" id="btn_addmx">新增</button>
+    <table class="layui-hide" id="tb_flfamx" lay-filter="tb_flfamx"></table>
+</div>
+<div id="div_flfamxinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">险种名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="flfamxinfo_xz" lay-filter="flfamxinfo_xz"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">小数保留规则：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="flfamxinfo_xsblgz" lay-filter="flfamxinfo_xsblgz"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">基数范围：</label>
+            <div class="layui-input-inline1" style="width: 100px;">
+                <input type="text" id="flfamxinfo_xx" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline1" style="width: 100px;">
+                <input type="text" id="flfamxinfo_sx" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">单位比例(%)：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="flfamxinfo_dwbl" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">个人比例(%)：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="flfamxinfo_grbl" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">有效小数位：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="flfamxinfo_yxws" lay-filter="flfamxinfo_yxws">
+                    <option value="0" selected="selected">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">备注：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="flfamxinfo_bz" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">工资表字段：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="flfamxinfo_gzbzd" lay-filter="flfamxinfo_gzbzd" lay-search></select>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_FLFA")
+}

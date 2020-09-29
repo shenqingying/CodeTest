@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "电子指导书新增";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Sonluk.UI.Model.MES.SY_TYPEMXService.MES_SY_TYPEMXLIST[] mxList = ViewBag.mxList;
+    Sonluk.UI.Model.EM.SY_STAFF_EMTYPEService.EM_SY_STAFF_EMTYPE[] roleList = ViewBag.roleList;
+}
+
+
+<span class="layui-breadcrumb" lay-separator>
+    <a>电子文档系统管理</a>
+    <a><cite>电子文档新增</cite></a>
+
+</span>
+<input type="hidden" value="@Url.Action("UploadEMfile", "System")" id="UploadEMfile" />
+
+<div class="layui-form">
+    <br /><br />
+    <div class="layui-form-item layui-form-pane">
+        <label class="layui-form-label" style="width:140px;">电子文档类别：</label>
+        <div class="layui-input-inline">
+            <select id="in_emtype" lay-filter="in_emtype" lay-search>
+                @if (roleList.Length == 1)
+                {                  
+                    for (int i = 0; i < @mxList.Length; i++)
+                    {
+                        if (roleList[0].EMTYPEID == mxList[i].ID)
+                        {
+                            <option value="@mxList[i].ID" selected="selected">@mxList[i].MXNAME</option>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <option value="0" selected="selected">请选择</option>
+                    for (int i = 0; i < @mxList.Length; i++)
+                    {
+                        <option value="@mxList[i].ID">@mxList[i].MXNAME</option>
+                    }
+                }
+              
+            </select>
+            
+        </div>
+        <button type="button"  class="layui-btn" id="reset">刷新当前页面</button>
+
+    </div>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+        <div class="layui-upload-list">
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>文件名</th>
+                        <th>大小</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="demoList"></tbody>
+            </table>
+        </div>
+        <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+    </div> 
+
+
+</div>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/EM/system/INSERT_EM")
+}

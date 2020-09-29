@@ -1,0 +1,371 @@
+﻿@using Sonluk.UI.Model.CRM.HG_DICTService;
+@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "客户列表";
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+
+    CRM_HG_DICT[] YYZT = ViewBag.YYZT;
+
+
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="tpl_mcsx">
+    {{# if(d.MCSX == 1){ }}
+    系统
+    {{# }else if(d.MCSX == 2){ }}
+    门店
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISACTIVE == 1){ }}
+    未提交
+    {{# }else if(d.ISACTIVE == 2){ }}
+    审核中
+    {{# }else if(d.ISACTIVE == 3){ }}
+    已审核
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="official">
+    {{# if(d.IsOfficial == 10){ }}
+    潜在客户
+    {{# }else if(d.IsOfficial == 20){ }}
+    签约客户
+    {{# }else if(d.IsOfficial == 30){ }}
+    非签约客户
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<script type="text/html" id="havepower">
+    {{# if(d.GIDSTATUS == 1){ }}
+    是
+    {{# }else if(d.GIDSTATUS == 0){ }}
+    否
+    {{# }else { }}
+
+    {{# } }}
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>客户列表</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+
+        <div class="layui-form-item">
+            <button id="btn_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+            @*<button id="reset" type="reset" class="layui-btn layui-btn-primary">重置</button>*@
+            <button id="daochu_kehu" class="layui-btn">导出主数据</button>
+            <button id="daochu_qt" class="layui-btn">导出其他信息</button>
+
+            <button id="submit_OA" class="layui-btn">提交</button>
+
+        </div>
+
+
+        <div class="layui-collapse">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">查询条件</h2>
+                <div id="div_select_tiaojian" class="layui-colla-content layui-show">
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户性质：</label>
+                        <div class="layui-input-inline">
+                            <select id="isofficial" lay-filter="isofficial">
+                                <option value="0">请选择</option>
+                                <option value="20">签约客户 </option>
+                                <option value="30">非签约客户 </option>
+                                <option value="10">潜在客户</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户类型：</label>
+                        <div class="layui-input-inline">
+                            <select id="KHtype" lay-filter="KHtype">
+                                <option value="0" selected="selected">请选择</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">卖场属性：</label>
+                        <div class="layui-input-inline">
+                            <select id="mcsx_type" lay-filter="mcsx_type">
+                                <option value="0">全部</option>
+                                <option value="1">系统</option>
+                                <option value="2">门店</option>
+                            </select>
+                        </div>
+
+
+
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="KH_ID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">SAP编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="sap" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">客户组：</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-unselect layui-form-select downpanel">
+                                <div class="layui-select-title">
+                                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                                    <input type="hidden" name="selectID" value="0">
+                                    <i class="layui-edge"></i>
+                                </div>
+                                <dl class="layui-anim layui-anim-upbit">
+                                    <dd>
+                                        @*<ul id="classtree"></ul>*@
+                                        <div id="classtree"></div>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+
+
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">提交状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="submit_status" lay-filter="submit_status">
+                                <option value="0">全部</option>
+                                <option value="1">未提交</option>
+                                <option value="2">审核中</option>
+                                <option value="3">已审核</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">营业状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="yyzt" lay-filter="yyzt">
+                                <option value="0">全部</option>
+                                @for (int i = 0; i < YYZT.Length; i++)
+                                {
+                                    <option value="@YYZT[i].DICID">@YYZT[i].DICNAME</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">陈列照片状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="display_status" lay-filter="display_status">
+                                <option value="0">全部</option>
+                                <option value="-1">照片未上传</option>
+                                <option value="10">未审核</option>
+                                <option value="15">审核未通过</option>
+                                <option value="30">审核通过</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">双鹿陈列道具：</label>
+                        <div class="layui-input-inline">
+                            <select id="displayitem" lay-filter="displayitem">
+                                <option value="0">全部</option>
+                                <option value="1">有</option>
+                                <option value="2">无</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">上级客户名称：</label>
+                        <div class="layui-input-inline">
+                            <input id="PKH_name" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">上级客户编号：</label>
+                        <div class="layui-input-inline">
+                            <input id="PCRMID" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    @*<div class="layui-form-item">
+
+                            <label class="layui-form-label">省份：</label>
+                            <div class="layui-input-inline">
+                                <select id="province" lay-filter="province">
+                                    <option value="0" selected></option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label">城市：</label>
+                            <div class="layui-input-inline">
+                                <select id="city" lay-filter="city">
+                                    <option value="0" selected></option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item">
+
+                            <label class="layui-form-label">销售组织：</label>
+                            <div class="layui-input-inline">
+                                <select id="xszz" lay-filter="xszz">
+                                    <option value="0" selected="selected">请选择</option>
+                                </select>
+                            </div>
+
+                            <label class="layui-form-label">业务员：</label>
+                            <div class="layui-input-inline">
+                                <select id="saler" lay-filter="saler" lay-search>
+                                    <option value="0" selected="selected">请选择</option>
+                                </select>
+                            </div>
+
+                        </div>*@
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">只看电子锁：</label>
+                        <div class="layui-input-inline">
+                            <select id="onlyDZS" lay-filter="onlyDZS">
+                                <option value="0" selected="selected">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">只看直销商：</label>
+                        <div class="layui-input-inline">
+                            <select id="onlyZXS" lay-filter="onlyZXS">
+                                <option value="0" selected="selected">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px;text-align:right;">活动名称：</label>
+                        <div class="layui-input-inline">
+                            <select id="HDMC" lay-filter="HDMC">
+                                <option value="0">全部</option>
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">活动照片状态：</label>
+                        <div class="layui-input-inline">
+                            <select id="huodongimg_status" lay-filter="huodongimg_status">
+                                <option value="0">全部</option>
+                                <option value="-1">照片未上传</option>
+                                <option value="10">未审核</option>
+                                <option value="15">审核未通过</option>
+                                <option value="30">审核通过</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">新建时间：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_start" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+                        <div class="layui-input-inline">
+                            <input id="time_end" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+
+                        <label class="layui-form-label" style="width:130px;text-align:right;">地址：</label>
+                        <div class="layui-input-inline">
+                            <input id="mddz" type="text" name="title" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <table id="result" lay-filter="result"></table>
+        <table id="123" lay-filter="123"></table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<input id="netpath" hidden />
+
+@*<script>
+        $(document).ready(function () {
+            $("#reset").trigger('click');
+        });
+    </script>*@
+
+
+
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#netpath").val("@netpath");
+        $("#daochu").click(function () {
+            //新增区域信息
+            return false;
+        });
+    });
+</script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/Select")
+}

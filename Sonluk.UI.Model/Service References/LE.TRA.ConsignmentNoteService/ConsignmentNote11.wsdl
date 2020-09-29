@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Sonluk.com/API/LE/TRA/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://Sonluk.com/API/LE/TRA/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Sonluk.com/API/LE/TRA/">
+      <s:element name="Exists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serialNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExistsResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CurrentNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="carrierID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CurrentNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CurrentNumberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Generate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="deliverySet" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="carrier" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="replace" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GenerateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateResult" type="tns:CNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CNInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FKLB" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Carrier" type="tns:CompanyInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="SAP" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DateEnd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Source" type="tns:CityInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="tns:CityInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceiverEdit" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Receiver" type="tns:CompanyInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender" type="tns:CompanyInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Volume" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Insurance" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DirectCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TransitCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OtherCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Compensation" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DefaultArrivalLimit" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeliveryCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="InvoiceCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CertificationCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Delivery" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Instruction" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryDateEnd" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickUpByReceiver" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HomeDelivery" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickUpByCertificate" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickUpByFax" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Dispatch" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Feedback" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeliveryFeedback" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Stamp" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unload" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Requirement" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FeedbackRecord" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ComplaintRecord" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Creator" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatorID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sum" type="tns:ArrayOfInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfCNItemInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="JHDFK" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="JHDWHLIST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrintTxt" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZSCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TYLB" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CityID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="District" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contact" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cellphone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOffices" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Default" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Children" type="tns:ArrayOfCompanyInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="General" type="tns:ArrayOfCompanyGeneralInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyInfo" nillable="true" type="tns:CompanyInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyGeneralInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyGeneralInfo" nillable="true" type="tns:CompanyGeneralInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyGeneralInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Client" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SortField" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HouseNumberAndStreet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstTelephoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganization" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesOrganizationDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistributionChannelDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Division" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DivisionDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesGroupDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CityInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Children" type="tns:ArrayOfCityInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProvinceID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCityInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CityInfo" nillable="true" type="tns:CityInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCNItemInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CNItemInfo" nillable="true" type="tns:CNItemInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CNItemInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Header" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GoodsType" type="tns:GoodsInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="PackageType" type="tns:PackageInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Whole" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Odd" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Volume" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitInsurance" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Insurance" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DirectCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TransitCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OtherCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCost" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GoodsInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrossWeight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="NetWeight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="WeightUnitID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WeightUnit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Volume" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="VolumeUnitID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VolumeUnit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Package" type="tns:PackageInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PackageInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:CNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Select">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keywords" type="tns:CNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectResult" type="tns:ArrayOfCNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCNInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CNInfo" nillable="true" type="tns:CNInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Read">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadResult" type="tns:CNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadCNDeliveryByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadCNDeliveryByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadCNDeliveryByIDResult" type="tns:ArrayOfCNDeliveryInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCNDeliveryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CNDeliveryInfo" nillable="true" type="tns:CNDeliveryInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CNDeliveryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TYDID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STATUS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FILLNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FILLTIME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FILLID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReadCNDelivery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VBELN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadCNDeliveryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadCNDeliveryResult" type="tns:ArrayOfCNDeliveryInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Report">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keywords" type="tns:CNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReportResult" type="tns:ArrayOfCNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="node" type="tns:CNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CNDeliveryUPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serialNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TYDID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STATUS" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FILLNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FILLID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CNDeliveryUPDATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CNDeliveryUPDATEResult" type="tns:ArrayOfCNDeliveryInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Export">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nodes" type="tns:ArrayOfCNInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExportResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="int" type="s:int" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="CNInfo" nillable="true" type="tns:CNInfo" />
+      <s:element name="ArrayOfCNDeliveryInfo" nillable="true" type="tns:ArrayOfCNDeliveryInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ExistsSoapIn">
+    <wsdl:part name="parameters" element="tns:Exists" />
+  </wsdl:message>
+  <wsdl:message name="ExistsSoapOut">
+    <wsdl:part name="parameters" element="tns:ExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CurrentNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:CurrentNumber" />
+  </wsdl:message>
+  <wsdl:message name="CurrentNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:CurrentNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateSoapIn">
+    <wsdl:part name="parameters" element="tns:Generate" />
+  </wsdl:message>
+  <wsdl:message name="GenerateSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapIn">
+    <wsdl:part name="parameters" element="tns:Select" />
+  </wsdl:message>
+  <wsdl:message name="SelectSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapIn">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="ReadSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadCNDeliveryByID" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadCNDeliveryByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliverySoapIn">
+    <wsdl:part name="parameters" element="tns:ReadCNDelivery" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliverySoapOut">
+    <wsdl:part name="parameters" element="tns:ReadCNDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReportSoapIn">
+    <wsdl:part name="parameters" element="tns:Report" />
+  </wsdl:message>
+  <wsdl:message name="ReportSoapOut">
+    <wsdl:part name="parameters" element="tns:ReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="CNDeliveryUPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:CNDeliveryUPDATE" />
+  </wsdl:message>
+  <wsdl:message name="CNDeliveryUPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:CNDeliveryUPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExportSoapIn">
+    <wsdl:part name="parameters" element="tns:Export" />
+  </wsdl:message>
+  <wsdl:message name="ExportSoapOut">
+    <wsdl:part name="parameters" element="tns:ExportResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExistsHttpGetIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExistsHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="CurrentNumberHttpGetIn">
+    <wsdl:part name="carrierID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CurrentNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpGetOut">
+    <wsdl:part name="Body" element="tns:CNInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryByIDHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCNDeliveryInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryHttpGetIn">
+    <wsdl:part name="VBELN" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCNDeliveryInfo" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="CNDeliveryUPDATEHttpGetIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+    <wsdl:part name="TYDID" type="s:string" />
+    <wsdl:part name="STATUS" type="s:string" />
+    <wsdl:part name="FILLNAME" type="s:string" />
+    <wsdl:part name="FILLID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CNDeliveryUPDATEHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCNDeliveryInfo" />
+  </wsdl:message>
+  <wsdl:message name="ExistsHttpPostIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExistsHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="CurrentNumberHttpPostIn">
+    <wsdl:part name="carrierID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CurrentNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadHttpPostOut">
+    <wsdl:part name="Body" element="tns:CNInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryByIDHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCNDeliveryInfo" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryHttpPostIn">
+    <wsdl:part name="VBELN" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReadCNDeliveryHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCNDeliveryInfo" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="CNDeliveryUPDATEHttpPostIn">
+    <wsdl:part name="serialNumber" type="s:string" />
+    <wsdl:part name="TYDID" type="s:string" />
+    <wsdl:part name="STATUS" type="s:string" />
+    <wsdl:part name="FILLNAME" type="s:string" />
+    <wsdl:part name="FILLID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CNDeliveryUPDATEHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCNDeliveryInfo" />
+  </wsdl:message>
+  <wsdl:portType name="ConsignmentNoteSoap">
+    <wsdl:operation name="Exists">
+      <wsdl:input message="tns:ExistsSoapIn" />
+      <wsdl:output message="tns:ExistsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CurrentNumber">
+      <wsdl:input message="tns:CurrentNumberSoapIn" />
+      <wsdl:output message="tns:CurrentNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Generate">
+      <wsdl:input message="tns:GenerateSoapIn" />
+      <wsdl:output message="tns:GenerateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <wsdl:input message="tns:SelectSoapIn" />
+      <wsdl:output message="tns:SelectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadSoapIn" />
+      <wsdl:output message="tns:ReadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDeliveryByID">
+      <wsdl:input message="tns:ReadCNDeliveryByIDSoapIn" />
+      <wsdl:output message="tns:ReadCNDeliveryByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDelivery">
+      <wsdl:input message="tns:ReadCNDeliverySoapIn" />
+      <wsdl:output message="tns:ReadCNDeliverySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report">
+      <wsdl:input message="tns:ReportSoapIn" />
+      <wsdl:output message="tns:ReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CNDeliveryUPDATE">
+      <wsdl:input message="tns:CNDeliveryUPDATESoapIn" />
+      <wsdl:output message="tns:CNDeliveryUPDATESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <wsdl:input message="tns:ExportSoapIn" />
+      <wsdl:output message="tns:ExportSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ConsignmentNoteHttpGet">
+    <wsdl:operation name="Exists">
+      <wsdl:input message="tns:ExistsHttpGetIn" />
+      <wsdl:output message="tns:ExistsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CurrentNumber">
+      <wsdl:input message="tns:CurrentNumberHttpGetIn" />
+      <wsdl:output message="tns:CurrentNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpGetIn" />
+      <wsdl:output message="tns:ReadHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDeliveryByID">
+      <wsdl:input message="tns:ReadCNDeliveryByIDHttpGetIn" />
+      <wsdl:output message="tns:ReadCNDeliveryByIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDelivery">
+      <wsdl:input message="tns:ReadCNDeliveryHttpGetIn" />
+      <wsdl:output message="tns:ReadCNDeliveryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CNDeliveryUPDATE">
+      <wsdl:input message="tns:CNDeliveryUPDATEHttpGetIn" />
+      <wsdl:output message="tns:CNDeliveryUPDATEHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ConsignmentNoteHttpPost">
+    <wsdl:operation name="Exists">
+      <wsdl:input message="tns:ExistsHttpPostIn" />
+      <wsdl:output message="tns:ExistsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CurrentNumber">
+      <wsdl:input message="tns:CurrentNumberHttpPostIn" />
+      <wsdl:output message="tns:CurrentNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadHttpPostIn" />
+      <wsdl:output message="tns:ReadHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDeliveryByID">
+      <wsdl:input message="tns:ReadCNDeliveryByIDHttpPostIn" />
+      <wsdl:output message="tns:ReadCNDeliveryByIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDelivery">
+      <wsdl:input message="tns:ReadCNDeliveryHttpPostIn" />
+      <wsdl:output message="tns:ReadCNDeliveryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CNDeliveryUPDATE">
+      <wsdl:input message="tns:CNDeliveryUPDATEHttpPostIn" />
+      <wsdl:output message="tns:CNDeliveryUPDATEHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConsignmentNoteSoap" type="tns:ConsignmentNoteSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Exists">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Exists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrentNumber">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/CurrentNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Generate">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Generate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Select" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDeliveryByID">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadCNDeliveryByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDelivery">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadCNDelivery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Report" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CNDeliveryUPDATE">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/CNDeliveryUPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <soap:operation soapAction="http://Sonluk.com/API/LE/TRA/Export" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConsignmentNoteSoap12" type="tns:ConsignmentNoteSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Exists">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Exists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrentNumber">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/CurrentNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Generate">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Generate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Select">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Select" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Read" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDeliveryByID">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadCNDeliveryByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDelivery">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/ReadCNDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Report" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CNDeliveryUPDATE">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/CNDeliveryUPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <soap12:operation soapAction="http://Sonluk.com/API/LE/TRA/Export" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConsignmentNoteHttpGet" type="tns:ConsignmentNoteHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Exists">
+      <http:operation location="/Exists" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrentNumber">
+      <http:operation location="/CurrentNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDeliveryByID">
+      <http:operation location="/ReadCNDeliveryByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDelivery">
+      <http:operation location="/ReadCNDelivery" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CNDeliveryUPDATE">
+      <http:operation location="/CNDeliveryUPDATE" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConsignmentNoteHttpPost" type="tns:ConsignmentNoteHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Exists">
+      <http:operation location="/Exists" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CurrentNumber">
+      <http:operation location="/CurrentNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <http:operation location="/Read" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDeliveryByID">
+      <http:operation location="/ReadCNDeliveryByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadCNDelivery">
+      <http:operation location="/ReadCNDelivery" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CNDeliveryUPDATE">
+      <http:operation location="/CNDeliveryUPDATE" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConsignmentNote">
+    <wsdl:port name="ConsignmentNoteSoap" binding="tns:ConsignmentNoteSoap">
+      <soap:address location="http://192.168.0.16/API/LE/TRA/ConsignmentNote.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConsignmentNoteSoap12" binding="tns:ConsignmentNoteSoap12">
+      <soap12:address location="http://192.168.0.16/API/LE/TRA/ConsignmentNote.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConsignmentNoteHttpGet" binding="tns:ConsignmentNoteHttpGet">
+      <http:address location="http://192.168.0.16/API/LE/TRA/ConsignmentNote.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConsignmentNoteHttpPost" binding="tns:ConsignmentNoteHttpPost">
+      <http:address location="http://192.168.0.16/API/LE/TRA/ConsignmentNote.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

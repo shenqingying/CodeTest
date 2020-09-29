@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "配料清单查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a lid="vi_cx">MES查询</a>
+    <a><cite lid="vi_plqdcx">配料清单查询</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu" lid="vi_dc">导出</button>
+        <button class="layui-btn" id="btn_find" lid="vi_cx">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_gc">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="find_gc" lay-filter="find_gc"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_pflb">配方类别：</label>
+            <div class="layui-input-inline">
+                <select id="find_pfdhlb" lay-filter="find_pfdhlb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_pfdh">配方单号：</label>
+            <div class="layui-input-inline">
+                <input id="find_pfdh" type="text" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_pldh">配料单号：</label>
+            <div class="layui-input-inline">
+                <input id="find_pldh" type="text" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_wlxx">物料信息：</label>
+            <div class="layui-input-inline">
+                <input id="find_wlh" type="text" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" lid="vi_yxrq">有效日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_yxrqs" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly="readonly">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_yxrqe" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_pldhzjlist" lay-filter="tb_pldhzjlist"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/PLDH_MANAGE_SELECT")
+}

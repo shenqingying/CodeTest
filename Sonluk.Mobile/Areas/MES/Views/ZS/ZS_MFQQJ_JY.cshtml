@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "全检校验";
+    Layout = "~/Views/Shared/_Layoutbig.cshtml";
+
+    string staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        staffid = Session["STAFFID"].ToString();
+    }
+}
+
+<script type="text/html" id="bar">
+    <a class="layui-btn_table_min layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="tp_Tpl">
+    {{# if(d.TPNO != ""){ }}
+    <a style="font-size:x-large;">{{d.TPNO}}</a>
+    {{# } }}
+</script>
+<style>
+    .placeholder {
+        font-style: italic;
+    }
+    /*利用<i>来安放图标*/
+</style>
+<style type="text/css">
+    .layui-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: 8px;
+    }
+</style>
+<style type="text/css">
+    .layui-table-cell {
+        height: auto;
+        line-height: 28px;
+        padding: 0 10px;
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        box-sizing: border-box;
+    }
+</style>
+<div class="layui-body">
+    <div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-block-title">
+                <input type="text" id="in_sm" placeholder="(请扫描物料标识卡）" autocomplete="off" style="height:50px" class="layui-input" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+    </div>
+    <div id="table_div" hidden>
+        <table class="layui-hide" id="tb_INFO" lay-filter="tb_INFO"></table>
+    </div>
+    <hr />
+</div>
+
+<script>
+    layui.use(['form', 'laydate', 'element', 'laydate', 'table', 'jquery'], function () {
+        var layer = layui.layer
+        var laydate = layui.laydate;
+        var table = layui.table;
+        var form = layui.form;
+        $('#in_sm').focus();
+        $('#in_sm').bind('keyup', function (event) {
+            if (event.keyCode == "13") {
+                var in_sm = $("#in_sm").val();
+                $("#in_sm").val("");
+                $('#in_sm').focus();
+                if (in_sm.length !== 12 && in_sm !== "") {
+                    layer.msg("请扫描物料标识卡");
+                    return false;
+                }
+                else {
+                    var datastring = {
+                        TM: in_sm,
+                    }
+                    $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: "../ZS/GET_TMINFO",
+                        data: {
+                            datastring: JSON.stringify(datastring)
+                        },
+
+                        success: function (result) {
+                            var resdata = JSON.parse(result);
+                            if (resdata.MES_RETURN.TYPE === "S") {
+                                if (resdata.MES_TM_TMINFO_LIST.length > 0) {
+                                    if (resdata.MES_TM_TMINFO_LIST[0].TMLB === 2) {
+                                        banddate(in_sm);
+                                    }
+                                    else {
+                                        layer.msg("请扫描物料标识卡");
+                                    }
+                                }
+                                else {
+                                    layer.msg("请扫描物料标识卡");
+                                }
+                            }
+                        },
+                        error: function () {
+                            layer.msg("请扫描物料标识卡");
+                        }
+                    })
+                }
+            }
+        });
+        $('#in_sm').on('blur', function () {
+            $('#in_sm').focus();
+        });
+    });
+    function banddate(in_sm) {
+        var table = layui.table;
+        var datastring = {
+            LB: 4,
+            TM: in_sm
+        };
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../ZS/ZS_SY_JLMX_SELECT",
+            data: {
+                datastring: JSON.stringify(datastring)
+            },
+            success: function (data) {
+                var resdata = JSON.parse(data);
+                if (resdata.MES_RETURN.TYPE === "S") {
+                    if (resdata.MES_ZS_SY_JL_MX.length > 0) {
+                        $("#table_div").show();
+                        table.render({
+                            elem: '#tb_INFO',
+                            data: resdata.MES_ZS_SY_JL_MX,
+                            cols: [[ //表头
+                                { field: 'TM', title: '条码', width: 120 },
+                                { field: 'MOULD', title: '模具号', width: 120 }
+                            ]]
+                            , page: false
+                            , limit: 999
+                        });
+                    }
+                    else {
+                        $("#table_div").hide();
+                        layer.msg("物料标识卡全检校验通过");
+                    }
+                }
+                else {
+                    layer.alert(resdata.MES_RETURN.MESSAGE);
+                    return false;
+                }
+            }
+        });
+    }
+</script>

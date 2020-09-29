@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_KAXS">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="KAXSID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KHID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KAYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KAMONTH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="JXXS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TXXS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJXS" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISACTIVE" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CJR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJSJ" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="XGR" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGSJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CJRDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XGRDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XSLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SJLXDES" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TIME_BEGIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TIME_END" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GMEMO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ1" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ2" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ3" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ4" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ5" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ6" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ7" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ8" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ9" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ10" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ11" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ12" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="POSHJ13" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PKHID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DPXS" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="THL" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadByParamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadByParamResult" type="tns:ArrayOfCRM_COST_KAXS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_KAXS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_KAXS" nillable="true" type="tns:CRM_COST_KAXS" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_MX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXSReportMX" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_KAXSReportMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XTMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWY" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX1" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX1" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ1" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX2" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX2" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ2" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX3" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX3" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ3" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX4" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX4" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ4" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX5" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX5" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ5" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX6" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX6" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ6" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX7" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX7" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ7" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX8" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX8" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ8" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX9" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX9" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ9" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX10" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX10" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ10" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX11" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX11" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ11" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX12" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX12" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ12" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TX13" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="JX13" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HJ13" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="KAYEAR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_MXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Report_MXResult" type="tns:ArrayOfCRM_COST_KAXSReportMX" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_KAXSReportMX">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_KAXSReportMX" nillable="true" type="tns:CRM_COST_KAXSReportMX" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_MXFH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXS_Report_MXFH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_KAXS_Report_MXFH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="KHID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XTMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MDMC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRMID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEIZ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YWY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXXH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXZK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXXH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXZK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JXTH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TXTH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJTH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KAYEAR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJLX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_MXFHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Report_MXFHResult" type="tns:ArrayOfCRM_COST_KAXS_Report_MXFH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_KAXS_Report_MXFH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_KAXS_Report_MXFH" nillable="true" type="tns:CRM_COST_KAXS_Report_MXFH" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXS" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReportResult" type="tns:ArrayOfCRM_COST_KAXS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Report_KP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXSReportKP" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_KAXSReportKP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GMEMO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YEAR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="KP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_KPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Report_KPResult" type="tns:ArrayOfCRM_COST_KAXSReportKP" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_KAXSReportKP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_KAXSReportKP" nillable="true" type="tns:CRM_COST_KAXSReportKP" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_FH">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXSReportFH" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_KAXSReportFH">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL10" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL11" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL12" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="XS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZK" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GMEMO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YEAR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SJLX" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_FHResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Report_FHResult" type="tns:ArrayOfCRM_COST_KAXSReportFH" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_KAXSReportFH">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_KAXSReportFH" nillable="true" type="tns:CRM_COST_KAXSReportFH" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="KAXSID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Report_Compare">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:CRM_COST_KAXSReport_Compare" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptoken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CRM_COST_KAXSReport_Compare">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SJLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="XSLX" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BEGINDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ENDDATE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GMEMO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GNAME" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CPLX" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SORT" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CURRENT_HJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PAST_HJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="COMPARE_NUM1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="COMPARE_NUM2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_CompareResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Report_CompareResult" type="tns:ArrayOfCRM_COST_KAXSReport_Compare" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCRM_COST_KAXSReport_Compare">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CRM_COST_KAXSReport_Compare" nillable="true" type="tns:CRM_COST_KAXSReport_Compare" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadByParam" />
+  </wsdl:message>
+  <wsdl:message name="ReadByParamSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadByParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="Report_MXSoapIn">
+    <wsdl:part name="parameters" element="tns:Report_MX" />
+  </wsdl:message>
+  <wsdl:message name="Report_MXSoapOut">
+    <wsdl:part name="parameters" element="tns:Report_MXResponse" />
+  </wsdl:message>
+  <wsdl:message name="Report_MXFHSoapIn">
+    <wsdl:part name="parameters" element="tns:Report_MXFH" />
+  </wsdl:message>
+  <wsdl:message name="Report_MXFHSoapOut">
+    <wsdl:part name="parameters" element="tns:Report_MXFHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReportSoapIn">
+    <wsdl:part name="parameters" element="tns:Report" />
+  </wsdl:message>
+  <wsdl:message name="ReportSoapOut">
+    <wsdl:part name="parameters" element="tns:ReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="Report_KPSoapIn">
+    <wsdl:part name="parameters" element="tns:Report_KP" />
+  </wsdl:message>
+  <wsdl:message name="Report_KPSoapOut">
+    <wsdl:part name="parameters" element="tns:Report_KPResponse" />
+  </wsdl:message>
+  <wsdl:message name="Report_FHSoapIn">
+    <wsdl:part name="parameters" element="tns:Report_FH" />
+  </wsdl:message>
+  <wsdl:message name="Report_FHSoapOut">
+    <wsdl:part name="parameters" element="tns:Report_FHResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Report_CompareSoapIn">
+    <wsdl:part name="parameters" element="tns:Report_Compare" />
+  </wsdl:message>
+  <wsdl:message name="Report_CompareSoapOut">
+    <wsdl:part name="parameters" element="tns:Report_CompareResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetIn">
+    <wsdl:part name="KAXSID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostIn">
+    <wsdl:part name="KAXSID" type="s:string" />
+    <wsdl:part name="ptoken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="COST_KAXSSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <wsdl:input message="tns:ReadByParamSoapIn" />
+      <wsdl:output message="tns:ReadByParamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report_MX">
+      <wsdl:input message="tns:Report_MXSoapIn" />
+      <wsdl:output message="tns:Report_MXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report_MXFH">
+      <wsdl:input message="tns:Report_MXFHSoapIn" />
+      <wsdl:output message="tns:Report_MXFHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report">
+      <wsdl:input message="tns:ReportSoapIn" />
+      <wsdl:output message="tns:ReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report_KP">
+      <wsdl:input message="tns:Report_KPSoapIn" />
+      <wsdl:output message="tns:Report_KPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report_FH">
+      <wsdl:input message="tns:Report_FHSoapIn" />
+      <wsdl:output message="tns:Report_FHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report_Compare">
+      <wsdl:input message="tns:Report_CompareSoapIn" />
+      <wsdl:output message="tns:Report_CompareSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_KAXSHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpGetIn" />
+      <wsdl:output message="tns:DeleteHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="COST_KAXSHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteHttpPostIn" />
+      <wsdl:output message="tns:DeleteHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="COST_KAXSSoap" type="tns:COST_KAXSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_MX">
+      <soap:operation soapAction="http://tempuri.org/Report_MX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_MXFH">
+      <soap:operation soapAction="http://tempuri.org/Report_MXFH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report">
+      <soap:operation soapAction="http://tempuri.org/Report" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_KP">
+      <soap:operation soapAction="http://tempuri.org/Report_KP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_FH">
+      <soap:operation soapAction="http://tempuri.org/Report_FH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_Compare">
+      <soap:operation soapAction="http://tempuri.org/Report_Compare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_KAXSSoap12" type="tns:COST_KAXSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadByParam">
+      <soap12:operation soapAction="http://tempuri.org/ReadByParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_MX">
+      <soap12:operation soapAction="http://tempuri.org/Report_MX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_MXFH">
+      <soap12:operation soapAction="http://tempuri.org/Report_MXFH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report">
+      <soap12:operation soapAction="http://tempuri.org/Report" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_KP">
+      <soap12:operation soapAction="http://tempuri.org/Report_KP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_FH">
+      <soap12:operation soapAction="http://tempuri.org/Report_FH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_Compare">
+      <soap12:operation soapAction="http://tempuri.org/Report_Compare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_KAXSHttpGet" type="tns:COST_KAXSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="COST_KAXSHttpPost" type="tns:COST_KAXSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <http:operation location="/Delete" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="COST_KAXS">
+    <wsdl:port name="COST_KAXSSoap" binding="tns:COST_KAXSSoap">
+      <soap:address location="http://192.168.0.135/API/CRM/COST_KAXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_KAXSSoap12" binding="tns:COST_KAXSSoap12">
+      <soap12:address location="http://192.168.0.135/API/CRM/COST_KAXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_KAXSHttpGet" binding="tns:COST_KAXSHttpGet">
+      <http:address location="http://192.168.0.135/API/CRM/COST_KAXS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="COST_KAXSHttpPost" binding="tns:COST_KAXSHttpPost">
+      <http:address location="http://192.168.0.135/API/CRM/COST_KAXS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

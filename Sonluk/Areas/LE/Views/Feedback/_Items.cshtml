@@ -1,0 +1,74 @@
+﻿@using Sonluk.UI.Model.LE.TRA.FeedbackService
+@model IEnumerable<FeedbackInfo>
+@{ 
+   string select = "●";
+   int count = 0;   
+}
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">ID</td>
+        <td class="data-table-header">托运单ID</td>
+        <td class="data-table-header">物流公司</td>
+        <td class="data-table-header">发货日期</td>
+        <td class="data-table-header">到站</td>
+        <td class="data-table-header">品名</td>
+        <td class="data-table-header">件数</td>
+        <td class="data-table-header">重量</td>
+        <td class="data-table-header">体积</td>
+        <td class="data-table-header">计费重量</td>
+        <td class="data-table-header">单价</td>
+        <td class="data-table-header">运费</td>
+        <td class="data-table-header">直送费</td>
+        <td class="data-table-header">装卸费</td>
+        <td class="data-table-header">其他费用</td>
+        <td class="data-table-header">费用小计</td>
+        <td class="data-table-header">实际支付</td>
+        <td class="data-table-header">确认</td>
+        <td class="data-table-header">正常</td>
+        <td class="data-table-header">备注</td>
+        <td class="data-table-header">日期</td>
+        <td class="data-table-header">付款金额</td>
+        <td class="data-table-header">说明</td>
+        <td class="data-table-header">状态</td>
+        <td class="data-table-header">填写人</td>
+        <td class="data-table-header">填写时间</td>
+    </tr>
+    @foreach (FeedbackInfo node in Model)
+    {
+        foreach (FeedbackItemInfo item in node.Items)
+        {
+            count++;
+            <tr>
+                <td class="text-align-right">@node.ID</td>
+                <td class="text-align-right">@item.ConsignmentNote</td>
+                <td class="text-align-left">@node.Carrier.ShortName</td>
+                <td>@item.DepartureDate</td>
+                <td>@item.Destination</td>
+                <td class="text-align-left">@item.GoodsType</td>
+                <td class="text-align-right">@item.WholeQty</td>
+                <td class="text-align-right">@item.Weight</td>
+                <td class="text-align-right">@item.Volume</td>
+                <td class="text-align-right">@item.ChargedWeight</td>
+                <td class="text-align-right">@item.UnitPrice</td>
+                <td class="text-align-right">@item.Cost</td>
+                <td class="text-align-right">@item.DirectCost</td>
+                <td class="text-align-right">@item.HandlingCost</td>
+                <td class="text-align-right">@item.OtherCost</td>
+                <td class="text-align-right">@item.TotalCost</td>
+                <td class="text-align-right">@item.Payment</td>
+                <td>@if (item.Confirmed){ @select}</td>
+                <td>@if (item.Normal){ @select}</td>
+                <td class="text-align-left">@item.Remark</td>
+                <td>@node.Date</td>
+                <td class="text-align-right">@node.Payment</td>
+                <td class="text-align-left">@node.Remark</td>
+                <td>@node.Status</td>
+                <td>@node.Creator</td>
+                <td>@node.CreateDate</td>
+            </tr>
+
+        }
+
+    }
+</table>
+<input type="hidden" value="@count" id="node-count">

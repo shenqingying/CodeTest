@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "新建拜访计划";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+@using Sonluk.PC.Areas.CRM.Models;
+@model Sonluk.PC.Areas.CRM.Models.BF_Plan_csh
+
+
+<div class="layui-form" style="width:50%">
+    <div class="layui-form-item">
+        <label class="layui-form-label">拜访类型：</label>
+        <div class="layui-input-block">
+            <select id="BFtype" lay-filter="BFtype">
+                <option value="0" selected="selected">请务必先选一下拜访的类型</option>
+                <option value="1">按分类拜访</option>
+                <option value="2">按人员拜访</option>
+                <option value="3">按客户拜访</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div id="div1_xz" class="layui-form" hidden>
+    <form id="from1" class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户类型：</label>
+            <div class="layui-input-inline">
+                <select id="KH_name" lay-filter="KH_name">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">经销商</option>
+                    <option value="2">电商</option>
+                    <option value="4">B2B</option>
+                    <option value="3">直营卖场</option>
+                    <option value="5">网点终端</option>
+                    <option value="6">批发</option>
+                    <option value="7">LKA终端</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户分组：</label>
+            <div class="layui-input-inline">
+                <select id="KH_group" lay-filter="KH_group">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.KH_GROUP.LongLength; i++)
+                    {
+                        <option value="@Model.KH_GROUP[i].GID">@Model.KH_GROUP[i].GNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拜访频次：</label>
+            <div class="layui-input-inline">
+                <select id="KH_time" lay-filter="KH_time">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.BFJH.LongLength; i++)
+                    {
+                        <option value="@Model.BFJH[i].DICID">@Model.BFJH[i].DICNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="div1_table" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn_add">新建</button>
+            <button class="layui-btn" id="btn_find">查询</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">客户分组：</label>
+            <div class="layui-input-inline">
+                <select id="KH_group1" lay-filter="KH_group">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.KH_GROUP.LongLength; i++)
+                    {
+                        <option value="@Model.KH_GROUP[i].GID">@Model.KH_GROUP[i].GNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">客户类型：</label>
+            <div class="layui-input-inline">
+                <select id="KH_name1" lay-filter="KH_name">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">经销商</option>
+                    <option value="2">电商</option>
+                    <option value="4">B2B</option>
+                    <option value="3">直营卖场</option>
+                    <option value="5">网点终端</option>
+                    <option value="6">批发</option>
+                    <option value="7">LKA终端</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_fl" lay-filter="tb_fl"></table>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</div>
+<div id="div2_xz" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <label class="layui-form-label">拜访频次：</label>
+        <div class="layui-input-inline">
+            <select id="in_ry_m_bfpc" lay-filter="in_ry_m_bfpc">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.BFJH.LongLength; i++)
+                {
+                    <option value="@Model.BFJH[i].DICID">@Model.BFJH[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<div id="div2_table" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn_find_ry">查询</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline">
+                <select id="in_ry_dept" lay-filter="in_ry_dept" required>
+                    <option value="0" selected="selected"></option>
+                    @for (int i = 0; i < Model.DEPT.LongLength; i++)
+                    {
+                        <option value="@Model.DEPT[i].DEPID">@Model.DEPT[i].DEPNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_yg_gh" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">员工类型</label>
+            <div class="layui-input-inline">
+                <select id="in_ry_yglx" lay-filter="in_ry_yglx">
+                    <option value="0" selected="selected"></option>
+                    <option value="1">驻外业务员</option>
+                    <option value="2">办公室人员</option>
+                    <option value="3">直营卖场促销员</option>
+                    <option value="4">客户业务员</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_yg_xm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_ry" lay-filter="tb_ry"></table>
+</div>
+<div id="div3_xz" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <label class="layui-form-label">拜访频次：</label>
+        <div class="layui-input-inline">
+            <select id="in_kh_m_bfpc" lay-filter="in_ry_m_bfpc">
+                <option value="0" selected="selected">请选择</option>
+                @for (int i = 0; i < Model.BFJH.LongLength; i++)
+                {
+                    <option value="@Model.BFJH[i].DICID">@Model.BFJH[i].DICNAME</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<div id="div3_table" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn_find_kh">查询</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">CRMID：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_crmid" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">客户类型：</label>
+            <div class="layui-input-inline">
+                <select id="in_kh_khlx" lay-filter="KH_name">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">经销商</option>
+                    <option value="2">电商</option>
+                    <option value="4">B2B</option>
+                    <option value="3">直营卖场</option>
+                    <option value="5">网点终端</option>
+                    <option value="6">批发</option>
+                    <option value="7">LKA终端</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">客户分组：</label>
+            <div class="layui-input-inline">
+                <select id="in_kh_khfz" lay-filter="in_kh_khfz">
+                    <option value="0" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.KH_GROUP.LongLength; i++)
+                    {
+                        <option value="@Model.KH_GROUP[i].GID">@Model.KH_GROUP[i].GNAME</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">客户名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="in_kh_mc" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_kh" lay-filter="tb_kh"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/BaiFang/Plan")
+}

@@ -1,0 +1,105 @@
+﻿@*xur多语言化*@
+@{
+    ViewBag.Title = "负极生产看板";
+    Layout = "~/Views/Shared/_Layout_KB.cshtml";
+}
+
+@using Sonluk.PC.Areas.MES.Models;
+@model Sonluk.PC.Areas.MES.Models.MODLEDataGather
+
+<script type="text/html" id="titleTpl">
+    {{#  if(d.ISACTION === 2 && d.ISLEAVE===0){ }}
+    <span class="td_ywc" style="font-size:xx-small">{{slv.ywc}}</span>
+    {{#  } else if(d.ISACTION === 2 && d.ISLEAVE===1){ }}
+    <span class="td_ylz" style="font-size:xx-small">{{slv.ylz}}</span>
+    {{#  } else if(d.ISACTION != 2 && d.ISLEAVE===0) { }}
+    <span class="td_wwc" style="font-size:xx-small">{{scom.c_undone}}</span>
+    {{# } }}
+</script>
+<script type="text/html" id="pfdh_Tpl">
+    {{# if(d.REMARK!=""){}}
+    {{# if(d.ISACTION===2 && d.ISLEAVE===0){ }}
+    <span class="td_ywc" style="font-size: 22px; color: #F44E5A">{{d.PFDH}}</span>
+    {{#  } else if(d.ISACTION === 2 && d.ISLEAVE===1){ }}
+    <span class="td_ylz" style="font-size: 22px; color: #F44E5A">{{d.PFDH}}</span>
+    {{# }else{ }}
+    <span style="font-size: 22px; color: #F44E5A">{{d.PFDH}}</span>
+    {{# } }}
+    {{# }else{ }}
+    {{# if(d.ISACTION===2 && d.ISLEAVE===0){ }}
+    <span class="td_ywc" style="font-size: 22px; color: black">{{d.PFDH}}</span>
+    {{#  } else if(d.ISACTION === 2 && d.ISLEAVE===1){ }}
+    <span class="td_ylz" style="font-size: 22px; color: black">{{d.PFDH}}</span>
+    {{# }else{ }}
+    <span style="font-size: 22px; color: black">{{d.PFDH}}</span>
+    {{# } }}
+    {{# } }}
+</script>
+<script type="text/html" id="th_Tpl">
+    {{# if(d.TH != ""&& d.ISACTION===2 && d.ISLEAVE===0){ }}
+    <a class="td_ywc" style="">{{d.TH}}</a>
+    {{#  } else if(d.PFDH != ""&& d.ISACTION === 2 && d.ISLEAVE===1){ }}
+    <span class="td_ylz" style="">
+        {{d.TH}}</a>
+        {{# }else{ }}
+        <a style="">{{d.TH}}</a>
+        {{# } }}
+</script>
+
+<head>
+    <title>负极生产看板</title>
+</head>
+<br>
+<body>
+    <div class="cd-pricing-container cd-full-width" style="padding-top:0px;width:100%">
+        <div class="div-inline" style="float:left">
+            <span class="cd-value" style="color:#c2c2c2;font-size:10px;" lid="c_formReTime">刷新时间：</span>
+            <span class="cd-value" style="color: #F44E5A; font-size: 15px;" id="lb_sxsj"></span>
+            <span class="cd-value" style="color: white; font-size: 10px;"> / </span>
+            <span class="cd-value" style="color: #c2c2c2; font-size: 10px;" lid="c_formReInterval">刷新间隔：</span>
+            <span class="cd-value" style="color: #F44E5A; font-size: 15px;">15</span>
+            <span class="cd-value" style="color: #c2c2c2; font-size: 10px;">S</span>
+        </div>
+        <div class="div-inline">
+            <span class="cd-value" style="color:white;font-size:30px;text-align:center" lid="xgcjscjdkb">锌膏车间生产进度看板</span>
+        </div>
+        <div class="layui-form" style="display:inline;float:right;">
+            <div class="layui-input-inline">
+                <input type="radio" name="rwlb" title="进度" value="1" lay-filter="rwlb" id="jdkb" checked lid="jd">
+                <input type="radio" name="rwlb" title="明天任务" value="2" lay-filter="rwlb" lid="mtrw">
+                <input type="radio" name="rwlb" title="全部任务" value="3" lay-filter="rwlb" lid="qbrw">
+            </div>
+        </div>
+        <ul class="cd-pricing-list cd-bounce-invert" id="maxdiv" style="height:100%;">
+            @for (int i = 0; i < Model.Sy_gzzx_sbh.Length; i++)
+{
+    <li class="cd-popular">
+        <ul class="cd-pricing-wrapper" style="margin-right:5px;padding:5px">
+            <li class="is-visible" style="padding:0;height:100%">
+                <header class="cd-pricing-header" style="height:5%">
+                    <div class="cd-price">
+                        <span class="cd-currency" lid="sb">设备</span>
+                        <span class="cd-value" id="SBBH">@Model.Sy_gzzx_sbh[i].SBMS</span>
+                    </div>
+                </header>
+                <div class="cd-pricing-body" style="margin:10px;height:100%">
+                    <table class="layui-table" id="@Model.Sy_gzzx_sbh[i].SBMS" lay-filter="@Model.Sy_gzzx_sbh[i].SBMS"></table>
+                </div>
+            </li>
+        </ul>
+    </li>
+}
+        </ul> <!-- .cd-pricing-list -->
+    </div> <!-- .cd-pricing-container -->
+</body>
+
+<div id="div_mesgd" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_mesgd" lay-filter="tb_mesgd"></table>
+</div>
+<script language="JavaScript">
+    setTimeout(function () { location.reload() }, 600000); //指定1秒刷新一次
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/MESSelect/FJ_ALL_TLXX")
+}

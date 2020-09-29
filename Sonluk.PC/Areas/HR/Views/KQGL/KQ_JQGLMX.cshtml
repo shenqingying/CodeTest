@@ -1,0 +1,397 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "考勤汇总管理";
+    string MONTH = "";
+    if (Session["MONTH"] != null)
+    {
+        MONTH = Session["MONTH"].ToString();
+        Session["MONTH"] = null;
+    }
+    string GS = "";
+    if (Session["GS"] != null)
+    {
+        GS = Session["GS"].ToString();
+        Session["GS"] = null;
+    }
+    string netpath = System.Configuration.ConfigurationManager.AppSettings["NETPATH"];
+}
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="bar2">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+<script type="text/html" id="zhuangtai">
+    {{# if(d.ISCL == 1){ }}
+    引用
+    {{# }else if(d.ISCL == 0){ }}
+    未引用
+    {{# }else { }}
+
+    {{# } }}
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script type="text/html" id="tpl_jqgl">
+    {{ d.KQYEAR + "-" + d.KQMONTH }}
+</script>
+<script type="text/html" id="tpl_jqgl2">
+    {{ d.KQZQKS + "-" + d.KQZQJS }}
+</script>
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>考勤汇总管理</cite></a>
+    <a><cite>考勤明细数据</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form">
+    <div class="layui-form-item">
+        <button id="btn_dcmx" class="layui-btn">导出</button>
+        <button id="btn_cxMX" class="layui-btn">查询</button>
+        <button class="layui-btn" onclick="location.href = '@Url.Action("KQ_JQGL", "KQGL")'">返回</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">月份：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_months" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_monthe" autocomplete="off" class="layui-input" readonly="readonly" value="@DateTime.Now.ToString("yyyy-MM")">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs">
+                    <option value="" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">部门：</label>
+            <div class="layui-input-inline" id="find_dept_father">
+                <select id="find_dept_child" lay-filter="find_dept_child">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">工号：</label>
+            <div class="layui-input-inline">
+                <input id="staffno" type="text" class="layui-input" placeholder="（工号/姓名/证件号码）">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">员工类别：</label>
+            <div class="layui-input-inline">
+                <select xm-select="stafftype" id="stafftype" xm-select-height="36px"></select>
+            </div>
+        </div>
+    </div>
+
+    <table id="resultMX" lay-filter="resultMX"></table>
+</div>
+
+<div id="div_daoru" hidden>
+    <div id="div_daorubtn" class="layui-form-item">
+        <button id="btn_confirm" class="layui-btn">确认</button>
+
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">考勤月份：</label>
+            <div class="layui-input-inline">
+                <input id="daoru_time" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">考勤周期：</label>
+            <div class="layui-input-inline">
+                <input id="daoru_start" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">至：</label>
+            <div class="layui-input-inline">
+                <input id="daoru_end" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">描述：</label>
+            <div class="layui-input-inline">
+                <input id="daoru_ms" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="div_updeteMX" hidden>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">工号：</label>
+            <div class="layui-input-inline">
+                <input id="staffnoMX" type="text" class="layui-input" disabled>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">姓名：</label>
+            <div class="layui-input-inline">
+                <input id="nameMX" type="text" class="layui-input" disabled>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">部门：</label>
+            <div class="layui-input-inline">
+                <input id="depMX" type="text" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">员工类别：</label>
+            <div class="layui-input-inline">
+                <input id="stafftypeMX" type="text" class="layui-input" disabled>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">出勤天数：</label>
+            <div class="layui-input-inline">
+                <input id="CHUQ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">旷工天数：</label>
+            <div class="layui-input-inline">
+                <input id="KUANGG" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">病假天数：</label>
+            <div class="layui-input-inline">
+                <input id="BINJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">事假天数：</label>
+            <div class="layui-input-inline">
+                <input id="SHIJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">产假天数：</label>
+            <div class="layui-input-inline">
+                <input id="CHANJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">婚假天数：</label>
+            <div class="layui-input-inline">
+                <input id="HUNJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">丧假天数：</label>
+            <div class="layui-input-inline">
+                <input id="SANGJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">工伤假天数：</label>
+            <div class="layui-input-inline">
+                <input id="GONGSJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">哺乳假天数：</label>
+            <div class="layui-input-inline">
+                <input id="BURJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">护理假天数：</label>
+            <div class="layui-input-inline">
+                <input id="HULJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">年休假天数：</label>
+            <div class="layui-input-inline">
+                <input id="NIANXJ" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:130px;text-align:right;">公差：</label>
+            <div class="layui-input-inline">
+                <input id="GONGC" type="text" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="div_daochu" class="layui-form" hidden>
+    <div id="div_daochubtn" class="layui-form-item">
+        <button id="btn_confirm_daochu" class="layui-btn">确认</button>
+
+    </div>
+
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">考勤周期：</label>
+            <div class="layui-input-inline">
+                <input id="daochu_start" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">至：</label>
+            <div class="layui-input-inline">
+                <input id="daochu_end" type="text" autocomplete="off" class="layui-input" readonly>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">报表类型：</label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <select id="lb" lay-filter="lb">
+                    <option value="1">员工明细</option>
+                    <option value="2">员工汇总</option>
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+    @*<div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">工号：</label>
+                <div class="layui-input-inline">
+                    <input id="daoru_ms" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">姓名：</label>
+                <div class="layui-input-inline">
+                    <input id="daoru_ms" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:130px;text-align:right;">部门：</label>
+                <div class="layui-input-inline">
+                    <input id="daoru_ms" type="text" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+        </div>*@
+</div>
+<div hidden>
+    <input id="netpath" hidden value="@netpath">
+    <input type="text" id="BL_MONTH" value="@MONTH">
+    <input type="text" id="BL_GS" value="@GS">
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/KQGL/KQ_JQGLMX")
+}

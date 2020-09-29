@@ -1,0 +1,22 @@
+﻿@using Sonluk.UI.Model.DEV.LogService
+@model IEnumerable<LogInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">No.</td>
+        <td class="data-table-header">时间</td>
+        <td class="data-table-header">标题</td>
+        <td class="data-table-header">内容</td>
+    </tr>
+    @{int i = 1;}
+    @foreach (LogInfo node in Model)
+    {
+        <tr>
+            <td>@(i++)</td>
+            <td>@node.Date</td>
+            <td class="text-align-left">@node.Title</td>
+            <td class="text-align-left">@node.Content</td>
+        </tr>
+    }
+</table>
+

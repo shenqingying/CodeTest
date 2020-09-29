@@ -1,0 +1,97 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KAYEARTTService;
+@{
+    ViewBag.Title = "Select_MDBS_Part";
+    CRM_COST_KAYEARTT[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+    string isactive = "";
+    switch (data[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 40:
+            isactive = "审核未通过";
+            break;
+        case 45:
+            isactive = "再次未提交";
+            break;
+        case 50:
+            isactive = "再次审核中";
+            break;
+        case 60:
+            isactive = "已审核";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MC</em>
+            <em class="weui-form-preview__value">@data[i].CRMID</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">年月</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HTYEAR</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请人</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].MC</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户SAP编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SAPSN</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">开始时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].BEGINDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">结束时间</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].ENDDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">归属年度月份总数</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].MONTHCOUNT</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">提交次数</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SUBMITCOUNT</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">状态</label>
+                <span class="weui-form-preview__value">&nbsp;@isactive</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">查看</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">编辑</a>
+
+            <a class="weui-form-preview__btn weui-form-preview__btn" style="color:#E64340;" onclick="click_delete(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">删除</a>
+
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />

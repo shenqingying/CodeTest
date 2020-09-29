@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "反馈-查询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime date = DateTime.Now;
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/panel-flow")
+@Styles.Render("~/Content/sonluk-ui/input-width-cn")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/sonluk-ui/panel-pop-up")
+@Styles.Render("~/Content/le/consignment-note-edit")
+<input type="hidden" value="@Url.Action("Edit", "Feedback")" id="feedback-edit" />
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">托运单</a>
+        >
+        <a href="#">反馈</a>
+        >
+        <a href="#">查询</a>
+    </div>
+</div>
+<div class="panel-search">
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">物流公司</div>
+        <input type="text" class="panel-search-item-input drop-list-target-carrier input-width-cn-carrier" />
+        <input type="hidden" class="panel-search-item-input-hidden" id="Carrier-ID" value=""  />
+        <input type="hidden" value="@Url.Action("_List", "Carrier")" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">到站</div>
+        <input type="text" class="panel-search-item-input pop-up-target-receiver-city input-width-cn-city" id="Destination" />
+        <input type="hidden" class="panel-search-item-input-hidden" id="Destination-ID" value=""  />
+        <input type="hidden" value="@Url.Action("_List", "City")" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">托运单ID</div>
+        <input type="text" class="panel-search-item-input input-width-od-type input-width-cn-number" id="ConsignmentNote" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">发货日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="DepartureDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="DepartureDateEnd" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">反馈日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="Date" value="@date.ToString("yyyy-MM-dd")" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="DateEnd" value="@date.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">说明</div>
+        <input type="text" class="panel-search-item-input input-width-po-sn" id="Remark" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">明细备注</div>
+        <input type="text" class="panel-search-item-input input-width-po-sn" id="ItemRemark" />
+    </div>
+    <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+    <div class="panel-search-items-submit sonluk-button panel-search-button">汇&nbsp;&nbsp;总</div>
+    <input type="hidden" value="@Url.Action("_Items", "Feedback")">
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+    <input type="hidden" value="@Url.Action("_List", "Feedback")">
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="export-button  sonluk-table-control-button feedback-export">导出</div>
+                    <input type="hidden" value="@Url.Action("_PrepareExport", "Feedback")">
+                    <input type="hidden" value="@Url.Action("_Export", "Feedback")">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="feedback"></div>
+    </div>
+</div>
+<div class="sonluk-table-response-time"></div>
+<!--下拉列表-->
+<div class="drop-list" id="drop-list">
+</div>
+<!--下拉列表-->
+<!--弹出窗口-->
+<div class="panel-pop-up-background background-color-dark"></div>
+<div class="panel-pop-up" id="city-select"></div>
+<!--弹出窗口-->
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/le/feedback-index")
+}

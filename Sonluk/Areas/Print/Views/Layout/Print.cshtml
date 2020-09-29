@@ -1,0 +1,48 @@
+﻿@using Sonluk.UI.Model.Print.LayoutService
+@model LayoutInfo
+@{
+    ViewBag.Title = "套打";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+    string isdisplay = "hidden";
+    if (ViewBag.doc == "ConsignmentNote-12" || ViewBag.doc == "ConsignmentNote-6")
+    {
+        isdisplay = "";
+    }
+}
+@Styles.Render("~/Content/print/layout-print")
+<input type="hidden" value="@ViewBag.QuickPrint" id="quick-print" />
+<input type="hidden" value="@ViewBag.Data" id="data" />
+<input type="hidden" value="@ViewBag.Message" id="message" />
+<input type="hidden" value="consignment-note" id="type" />
+<input type="hidden" value="@Url.Action("BarCode", "BarCode", new { area = "BC" })" id="barcode-uri">
+<div class="print-layout-edit-page" style="@Model.Style" >
+    <img src="~/temp/Consignmentnote-12.jpg" width="899px" @isdisplay />
+    @foreach (ControlInfo node in Model.Controls)
+    {
+        switch (node.Type)
+        {
+            case "dateTime":
+            case "textBox":
+                {
+                    <div class="print-layout-edit-control control-@node.Type" style="@node.Style" name="@node.Value"></div>
+                    break;
+                }
+            case "label":
+                {
+                    <div class="print-layout-edit-control control-@node.Type" style="@node.Style">@node.Value</div>
+                    break;
+                }
+            case "2dcode":
+                {
+                    <div class="print-layout-edit-control control-@node.Type" style="@node.Style" name="@node.Value">
+                        @*<img src="@Url.Action("BarCode", "BarCode", new { area = "BC" })?code=@node.Value&format=QRCODE&width=70&height=60&pure=1">*@
+                        <img src="">
+                    </div>
+                    break;
+                }
+        }
+    }
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/print/layout-print")
+}

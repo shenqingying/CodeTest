@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "检查项目分类维护";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<input type="hidden" value="@Url.Action("Dictionary_Select_LB", "System")" id="Select_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Update_LB", "System")" id="Update_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Delete_LB", "System")" id="Delete_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Create_LB", "System")" id="Create_Dict_lb" />
+<input type="hidden" value="@Url.Action("Dictionary_Select_MX", "System")" id="Select_Dict_mx" />
+<input type="hidden" value="@Url.Action("Dictionary_Update_MX", "System")" id="Update_Dict_mx" />
+<input type="hidden" value="@Url.Action("Dictionary_Delete_MX", "System")" id="Delete_Dict_mx" />
+<input type="hidden" value="@Url.Action("Dictionary_Create_MX", "System")" id="Create_Dict_mx" />
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<span class="layui-breadcrumb" lay-separator>
+    <a>5S系统管理</a>
+    <a><cite>检查项目分类维护</cite></a>
+</span>
+<br />
+<br />
+<div class="layui-form-item">
+    <button id="btn_xzmx" class="layui-btn">新增</button>
+    <table id="table_mx" lay-filter="table_mx"></table>
+</div>
+<div id="div_mx" class="layui-form" hidden>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">项目名称：</label>
+        <div class="layui-input-inline">
+            <input id="mx_name" type="text" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <input id="mx_bz" type="text" class="layui-input">
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/System/CheckXMFL")
+}

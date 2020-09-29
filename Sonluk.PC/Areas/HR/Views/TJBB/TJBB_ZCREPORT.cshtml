@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "职称明细查询报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR统计报表</a>
+    <a><cite>职称明细查询报表</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">来源类别：</label>
+            <div class="layui-input-inline">
+                <select id="find_lylb" lay-filter="find_lylb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_xm" autocomplete="off" class="layui-input" placeholder="（姓名/工号）" onkeypress="if(window.event.keyCode==13) this.blur()">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">职称名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_zcname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">获取日期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_dateks" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline">
+                <input type="text" id="find_datejs" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_zcinfo" lay-filter="tb_zcinfo"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/TJBB/TJBB_ZCREPORT")
+}

@@ -1,0 +1,204 @@
+﻿@{
+    ViewBag.Title = "客户权限";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Session["TITLENAME"] = "客户权限";
+}
+
+<script type="text/html" id="tb_group">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+<script type="text/html" id="bar_select_kh">
+    <a class="layui-btn layui-btn-xs" lay-event="confirm">确认</a>
+</script>
+
+<style type="text/css">
+    body .layui-tree-skin-shihuang .layui-tree-branch {
+        color: #EDCA50;
+    }
+
+    .downpanel .layui-select-title span {
+        line-height: 38px;
+    }
+
+    /*继承父类颜色*/
+    .downpanel dl dd:hover {
+        background-color: inherit;
+    }
+</style>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>客户管理</a>
+    <a><cite>客户权限</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">分组：</label>
+        @*<div class="layui-input-inline" style="width:100px;">
+                <select id="group" lay-filter="group">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>*@
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="treeclass">请选择</span>
+                    <input type="hidden" name="selectID" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="classtree"></ul>*@
+                        <div id="classtree"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <label class="layui-form-label">客户简称：</label>
+        <div class="layui-input-inline">
+            <input id="name" type="text" required lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input">
+        </div>
+
+        <button id="btn_select" class="layui-btn" style="width:120px;">查询</button><br />
+
+        <table id="result" lay-filter="result"></table>
+        <button id="insert_to_group" class="layui-btn">新增</button>
+        <button id="btn_move" class="layui-btn">客户组批量修改</button>
+    </div>
+
+</div>
+
+
+
+@*新增客户到组的界面*@
+<div id="008" class="layui-form" hidden>
+
+    <div class="layui-form-item" hidden>
+        <div class="layui-input-inline" style="width:150px;">
+            <button id="btn_save_group" class="layui-btn" lay-filter="btn_save_group">保存</button>
+        </div>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户编号：</label>
+        <div class="layui-input-inline">
+            <input id="kehuid" type="text" autocomplete="off" class="layui-input">
+
+        </div>
+        <button id="btn_help_select" class="layui-btn" lay-filter="btn_help_select">检索</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分配到组：</label>
+        @*<div class="layui-input-inline" style="width:150px;">
+                <select id="to_group008" lay-filter="to_group008">
+                    <option value="0" selected="selected"></option>
+                </select>
+            </div>*@
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="insert_treeclass">请选择</span>
+                    <input type="hidden" name="selectID2" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="intsert_classtree"></ul>*@
+                        <div id="intsert_classtree"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@*检索客户*@
+<div id="div_select_kh" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <button id="select_cx" class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width:130px;">客户类型：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <select id="select_type" lay-filter="select_type">
+                <option value="0" selected="selected">请选择</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label" style="width:130px;">客户名称：</label>
+        <div class="layui-input-inline" style="width:230px;">
+            <input id="select_name" type="text" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+
+    <table id="select_result" lay-filter="select_result"></table>
+
+</div>
+
+@* 组迁移 *@
+<div id="div_move" class="layui-form" hidden>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">从：</label>
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="treeclass_old">请选择</span>
+                    <input type="hidden" name="selectID_old" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="classtree_old"></ul>*@
+                        <div id="classtree_old"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">迁移到：</label>
+        <div class="layui-input-inline">
+            <div class="layui-unselect layui-form-select downpanel">
+                <div class="layui-select-title">
+                    <span class="layui-input layui-unselect" id="treeclass_new">请选择</span>
+                    <input type="hidden" name="selectID_new" value="0">
+                    <i class="layui-edge"></i>
+                </div>
+                <dl class="layui-anim layui-anim-upbit">
+                    <dd>
+                        @*<ul id="classtree_new"></ul>*@
+                        <div id="classtree_new"></div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/layui2.5.4/layui.all.js"></script>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/KeHu/KeHuPower")
+}

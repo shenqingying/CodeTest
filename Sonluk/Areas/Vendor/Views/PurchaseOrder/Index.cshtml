@@ -1,0 +1,125 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<POItemInfo>
+@{
+    ViewBag.Title = "采购订单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header {
+    @Styles.Render("~/Content/bootstrap")
+}
+@Styles.Render("~/Content/sonluk-ui/panel-search")
+@Styles.Render("~/Content/sonluk-ui/input-width-po")
+@Styles.Render("~/Content/datetimepicker")
+@Styles.Render("~/Content/sonluk-ui/table")
+@Styles.Render("~/Content/mm/purchase-order-index")
+<input type="hidden" id="purchase-order-history-uri" value="@Url.Action("_History", "PurchaseOrder", new { area = "MM" })">
+<div class="content-header">
+    <div class="content-header-nav">
+        <a href="#">采购订单</a>
+        >
+        <a href="#">查询</a>
+    </div>
+</div>
+
+<div class="panel-search">
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">采购订单</div>
+        <input type="text" class="panel-search-item-input input-width-po-sn" id="Number" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">物料号</div>
+        <input type="text" class="panel-search-item-input input-width-po-material" id="Material" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">物料描述</div>
+        <input type="text" class="panel-search-item-input" id="MaterialDescription" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">采购组</div>
+        <input type="text" class="panel-search-item-input input-width-po-pur-group" id="PurGroup" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">交货日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="StartDelivDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="DelivDate" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">采购日期</div>
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="StartDate" />
+        <input type="text" class="date-picker-trigger panel-search-item-input" id="Date" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">销售订单</div>
+        <input type="text" class="panel-search-item-input input-width-po-so" id="SDDoc" />
+    </div>
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">工厂</div>
+        <input type="text" class="panel-search-item-input input-width-po-werks" id="Werks" />
+    </div>
+    <div class="panel-search-item">
+        <input type="radio" name="Status" value="0" checked> 交货未清
+        <input type="radio" name="Status" value="1"> 交货已清
+        <input type="radio" name="Status" value="2"> 全部
+    </div>
+
+    <div class="panel-search-item">
+        <div class="panel-search-item-title">&nbsp;&nbsp;备注：文字颜色</div>
+        <div class="panel-search-item-title color-changed-background">■</div>
+        <div class="panel-search-item-title">表示有变更</div>
+    </div>
+    <div class="panel-search-reset sonluk-button panel-search-button">清&nbsp;&nbsp;空</div>
+    <div class="panel-search-submit sonluk-button panel-search-button">检&nbsp;&nbsp;索</div>
+    <input type="hidden" value="@Url.Action("_List", "PurchaseOrder")">
+    @*<div class="panel-search-test sonluk-button panel-search-button">测&nbsp;&nbsp;试</div>*@
+</div>
+
+<div class="sonluk-table-layout">
+    <div class="sonluk-table">
+        <div class="sonluk-table-control">
+            <div>
+                <div class="sonluk-table-control-response-time"></div>
+                <div class="row-select-all sonluk-table-control-button">全选</div>
+                <div class="sonluk-table-control-self-adaption-display">
+                    <div class="row-select-cancel-all sonluk-table-control-button">清除</div>
+                    <div class="row-select-invert sonluk-table-control-button">反选</div>
+                    <div class="item-select-all sonluk-table-control-button">全选所属行项目</div>
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="print-type sonluk-table-control-radio">
+                        <input type="radio" name="print-type" value="DeliveryF">送货清单
+                        <input type="radio" name="print-type" value="IQCPM" checked>入库送检单(包材类)
+                        <input type="radio" name="print-type" value="RKBS">入库标识
+                        <input type="radio" name="print-type" value="RKBSZH">组合装
+                        <input type="radio" name="print-type" value="DeliveryGCL">送货清单(工程类)
+                        <input type="radio" name="print-type" value="RKBSGCL">入库标识(工程类)
+                    </div>
+                    <div class="print-button purchase-order-print sonluk-table-control-button">打印</div>
+                    <input type="hidden" value="@Url.Action("AnalysePrintData", "Report", new { area = "MM" })">
+                    <input type="hidden" id="purchase-order-print-uri-DeliveryF" value="@Url.Action("DeliveryF", "Report", new { area = "MM" })">
+                    <input type="hidden" id="purchase-order-print-uri-IQCPM" value="@Url.Action("IQCPM", "Report", new { area = "MM" })">
+                    <input type="hidden" id="purchase-order-print-uri-RKBS" value="@Url.Action("RKBS", "Report", new { area = "MM" })">
+                    <input type="hidden" id="purchase-order-print-uri-RKBSZH" value="@Url.Action("RKBSZH", "Report", new { area = "MM" })">
+                    <input type="hidden" id="purchase-order-print-uri-DeliveryGCL" value="@Url.Action("DeliveryGCL", "Report", new { area = "MM" })">
+                    <input type="hidden" id="purchase-order-print-uri-RKBSGCL" value="@Url.Action("RKBSGCL", "Report", new { area = "MM" })">
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="export-button purchase-order-export sonluk-table-control-button">订单打印</div>
+                    <input type="hidden" value="@Url.Action("PrepareExportData", "PurchaseOrder", new { area = "MM" })">
+                    <input type="hidden" value="@Url.Action("Export", "PurchaseOrder", new { area = "MM" })">
+                    <div class="sonluk-table-control-space">|</div>
+                    <div class="export-button purchase-order-set-export sonluk-table-control-button">导出</div>
+                    <input type="hidden" value="@Url.Action("PrepareExportSetData", "PurchaseOrder", new { area = "MM" })">
+                    <input type="hidden" value="@Url.Action("ExportSet", "PurchaseOrder", new { area = "MM", type = "Vendor" })">
+                </div>
+            </div>
+        </div>
+        <div class="sonluk-table-content" id="purchase-order"></div>
+    </div>
+</div>
+<div class="sonluk-table-pop-up-background background-color-dark"></div>
+<div class="sonluk-table-pop-up" id="purchase-order-history"></div>
+@section scripts {
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/spin")
+    @Scripts.Render("~/bundles/sonluk-ui/table")
+    @Scripts.Render("~/bundles/vendor/purchase-order-index")
+}

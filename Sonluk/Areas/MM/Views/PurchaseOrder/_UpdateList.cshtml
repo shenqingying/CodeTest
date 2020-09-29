@@ -1,0 +1,65 @@
+﻿@using Sonluk.UI.Model.MM.PurchaseOrderService
+@model IEnumerable<POItemInfo>
+<input type="hidden" value="@Model.Count()" id="node-count">
+<table class="data-table">
+    <tr>
+        <td class="data-table-header">采购凭证</td>
+        <td class="data-table-header">行项目</td>
+        <td class="data-table-header">计划行</td>
+        <td class="data-table-header">销售凭证</td>
+        <td class="data-table-header">行项目</td>        
+        <td class="data-table-header">日期</td>
+        <td class="data-table-header">供应商</td>      
+        <td class="data-table-header">物料号</td>
+        <td class="data-table-header">物料描述</td>
+        <td class="data-table-header">交货日期</td>
+        <td class="data-table-header">日期更新</td>
+        <td class="data-table-header">更新状态</td>
+        <td class="data-table-header">数量</td>
+        <td class="data-table-header">已收货数量</td>
+        <td class="data-table-header">单位</td>
+        <td class="data-table-header">采购组</td>
+        <td class="data-table-header">物料组</td>
+        <td class="data-table-header">工厂</td>
+        <td class="data-table-header">状态</td>
+    </tr>
+    @foreach (POItemInfo node in Model)
+    {
+        <tr>
+            <td>@node.PONumber</td>
+            <td>@node.Number</td>
+            <td>@node.Line</td>
+            <td>@if (node.SDDoc != null && node.SDDoc.Length > 0){ @Convert.ToInt64(node.SDDoc); }</td>
+            <td>@{if (node.SDocItem != 0){@node.SDocItem}}</td>            
+            <td>@node.Date</td>
+            <td>@node.Vendor</td>           
+            <td>@if (node.Material != null && node.Material.Length > 0){ @Convert.ToInt64(node.Material);}</td>
+            <td class="text-align-left">@node.MaterialDescription</td>
+            <td>@node.DelivDate</td>
+            <td><input type="text" value="@{if (node.NewDelivDate != null){@node.NewDelivDate}else{@node.DelivDate}}" class="deliv-date"></td>
+            <td>U</td>
+            <td class="text-align-right">@node.Quantity</td>
+            <td class="text-align-right">@node.DelivQty</td>
+            <td>@node.BaseUOM</td>
+            <td>@node.PurGroup</td>
+            <td>@node.MatlGroup</td>
+            <td>@node.Plant</td>
+            <td>@node.NoMoreGR</td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

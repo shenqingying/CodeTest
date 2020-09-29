@@ -1,0 +1,58 @@
+﻿@using Sonluk.UI.Model.CRM.COST_KATSCLMXService;
+@{
+    ViewBag.Title = "Select_KATSCL_Unconnected_Part";
+    CRM_COST_KATSCLMX[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MC</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">开始日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].BEGINDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">结束日期</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].ENDDATE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">陈列方式</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CLFSDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">申请金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].FYJE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">预计销售</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].YJXS</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">预计费比</label>
+                <span class="weui-form-preview__value">&nbsp;@(data[i].YJFB)%</span>
+            </p>
+           
+
+        </div>
+        <div class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_TSCLconfirm(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">确认</button>
+
+
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+    @*<input id="resultmodel" value="@Newtonsoft.Json.JsonConvert.SerializeObject(data)" hidden />*@

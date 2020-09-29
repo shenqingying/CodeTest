@@ -1,0 +1,208 @@
+﻿@{
+    string Name = "";
+    if (Session["NAME"] != null)
+    {
+        Name = Session["NAME"].ToString();
+    }
+    string titlename = "";
+    if (Session["TITLENAME"] != null)
+    {
+        titlename = Session["TITLENAME"].ToString();
+    }
+
+    string state = "";
+    if (Session["state"] == "WX")
+    {
+        state = "WX";
+    }
+    if (Session["state"] == "QY")
+    {
+        state = "QY";
+    }
+
+    string token = "";
+    if (Session["token"] != null)
+    {
+        token = Session["token"].ToString();
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
+
+    @*<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+    <link href="~/Scripts/weui-1.1.3/weui-1.1.3/dist/style/weui.css" rel="stylesheet" />
+    <script src="~/Scripts/weui.js/dist/weui.js"></script>*@
+
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/bundles/CRM/css/weui")
+    @Scripts.Render("~/bundles/CRM/js/weui")
+
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js" charset="utf-8"></script>
+    <link href="~/Scripts/layui2.4.5/css/layui.css" rel="stylesheet" />
+
+
+    @*@Styles.Render("~/Content/layui/css/layuimain")*@
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <style type="text/css">
+        select {
+            /*border: solid 1px #000;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            padding-right: 14px;*/
+            height: 40px;
+            -webkit-appearance: none;
+            appearance: none;
+            border: none;
+            font-size: 14px;
+            padding: 0px 10px;
+            display: block;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+            color: #333333;
+            border-radius: 4px;
+            border: solid 1px #DDD;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color: #f8f8f8;">
+
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" style="background-color:#019C00;" hidden>
+            <div class="layui-logo">
+                @*@titlename*@
+                <a href="@Url.Action("Index1", "Public", new { area = "CRM" })" style="padding-left:0;color:#DDD"><i style="font-size: 24px;" id="home" class="layui-icon">&#xe68e;</i></a>
+            </div>
+            <ul class="layui-nav layui-layout-left" style="padding-left:0px;left:0">
+                <li class="layui-nav-item">
+                    @*<a href="@Url.Action("Index", "Public")"><img class="layui-nav-img-home" src="~/Image/test1.png" style="width: 40px;" /></a>*@
+                    @*<a href="@Url.Action("Index", "Public")"><img class="layui-nav-img-home" src="~/Image/test1.png" style="width: 40px;" /></a>*@
+                    @*<a id="history1"><i style="font-size: 24px;" id="history" class="layui-icon">&#xe603;</i></a>*@
+                    <a id="history1"><i id="history" class="layui-icon" style="font-size: 16px;">返回@*&#xe603;*@</i></a>
+                </li>
+            </ul>
+
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a style="font-size: 16px;">@Name</a>
+                    <dl class="layui-nav-child">
+                        @*<dd><a id="loginout" href="@Url.Action("SignIn", "Public", new {state=@state })">退出</a></dd>*@
+                        @*<dd><a id="loginout" href="@Url.Action("SignIn", "Public", new { area = "CRM" })">退出</a></dd>*@
+                        <dd><a id="loginout" href="../../CRM/Public/SignIn?LOGINTYPE=1">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        @RenderBody()
+    </div>
+
+    <br /><br /><br /><br />
+    <div class="weui-footer weui-footer_fixed-bottom" style="bottom:0;">
+
+
+        <div class="weui-tab">
+            <div class="weui-tab__panel">
+
+            </div>
+            <div class="weui-tabbar">
+                <a id="a_sy" class="weui-tabbar__item weui-bar__item_on">
+                    <img src="/CRMmobile/CRMupload/upload/ico/kehu/SAP.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">首页</p>
+                </a>
+                <a id="a_gg" class="weui-tabbar__item">
+                    <img src="/CRMmobile/CRMupload/upload/ico/kehu/spaceArea.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">公告</p>
+                </a>
+                <a id="a_wd" class="weui-tabbar__item">
+                    <img src="/CRMmobile/CRMupload/upload/ico/yuangong.png" alt="" class="weui-tabbar__icon">
+                    <p class="weui-tabbar__label">我</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/layui2.4.5/layui.all.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ("@Name" == "") {
+                //weui.alert("由于长时间未操作,登录信息已过期,请重新登录");
+                weui.alert('由于长时间未操作,登录信息已过期,请重新登录', function () {
+                    window.location.href = "../../CRM/Public/SignIn?place=" + localStorage.getItem("place");
+                }, {
+                    title: '提示'
+                });
+
+
+                return false;
+            }
+            layui.use('element', function () {
+                var element = layui.element;
+
+
+            });
+            $("#history").click(function () {
+                window.history.go(-1);
+            });
+
+
+            if (sessionStorage.getItem("Tabbar") != null) {
+                switch (sessionStorage.getItem("Tabbar").toString()) {
+                    case "sy":
+                        $("#a_sy").addClass("weui-bar__item_on");
+                        $("#a_gg").removeClass("weui-bar__item_on");
+                        $("#a_wd").removeClass("weui-bar__item_on");
+                        break;
+                    case "gg":
+                        $("#a_sy").removeClass("weui-bar__item_on");
+                        $("#a_gg").addClass("weui-bar__item_on");
+                        $("#a_wd").removeClass("weui-bar__item_on");
+                        break;
+                    case "wd":
+                        $("#a_sy").removeClass("weui-bar__item_on");
+                        $("#a_gg").removeClass("weui-bar__item_on");
+                        $("#a_wd").addClass("weui-bar__item_on");
+                        break;
+                }
+            }
+
+            $("#a_sy").click(function () {
+
+                sessionStorage.setItem("Tabbar", "sy");
+                location.href = "../../CRM/Order/Index1";
+            });
+            $("#a_gg").click(function () {
+
+                sessionStorage.setItem("Tabbar", "gg");
+                location.href = "../../CRM/MSG/Notice";
+            });
+            $("#a_wd").click(function () {
+
+                sessionStorage.setItem("Tabbar", "wd");
+                location.href = "../../CRM/Public/Account";
+            });
+
+
+
+        });
+
+    </script>
+
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "~/Areas/CRM/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "查询喷码";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+
+    string state = "";
+    string appid = "";
+    if (Session["state"] != null)
+    {
+        state = Session["state"].ToString();
+        if (Session["state"] == "WX")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+        }
+        else if (Session["state"] == "QY")
+        {
+            appid = System.Configuration.ConfigurationManager.AppSettings["CorpID"];
+        }
+
+    }
+
+
+    string DXM_url = System.Configuration.ConfigurationManager.AppSettings["DXM_url"];
+
+}
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
+
+
+<div>
+    @*<div class="layui-form-item">
+
+            <button id="btn_next" class="layui-btn" lay-filter="formDemo">下一步</button>
+        </div>*@
+    <div class="layui-form-item" style="width:100%;margin:0;background-color:#009688">
+        <div id="div_btn1">
+            <button id="btn_next" class="layui-btn" style="width:47%;margin-left:0;">下一步</button>
+            |
+            <button id="btn_sao" class="layui-btn" style="width:47%;margin-left:0;">扫码</button>
+        </div>
+        <div id="div_btn2" hidden>
+            <button id="btn_back" class="layui-btn" lay-submit lay-filter="formDemo" style="width:47%;margin-left:0;">返回</button>
+            |
+            <button id="btn_cx" class="layui-btn" style="width:47%;margin-left:0;">查询</button>
+            <button id="btn_sao2" class="layui-btn" style="width:47%;margin-left:0;display:none;">重新扫码</button>
+        </div>
+
+    </div>
+
+    <br />
+
+    <div id="step1">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="text-align:right;">日期唛：</label>
+            <div class="layui-input-block">
+                <input id="charg" type="text" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="text-align:right;">喷码：</label>
+            <div class="layui-input-block">
+                <input id="pm" type="text" autocomplete="off" class="layui-input">
+
+            </div>
+        </div>
+    </div>
+
+    <div id="step2" class="layui-form" hidden>
+        <label class="layui-form-label" style="width:100%;text-align:left;">请选择产品：</label>
+        <div class="layui-form-item">
+            <div id="div_matnr" class="layui-input-block" style="margin-left:auto;">
+                @*<select id="Material" lay-filter="Material"></select>*@
+                <input type="radio" name="sex" value="男" title="男">
+                <input type="radio" name="sex" value="女" title="女" checked>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div id="div_allresult" style="margin:auto 10px;" hidden>
+        <div id="div_result_tiaojian">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="text-align:right;width:60px;">日期唛：</label>
+                <div class="layui-input-block" style="margin-left: 70px;">
+                    <label id="lb_charg" class="layui-form-label" style="text-align:center;width:100%;"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="text-align:right;width:60px;">喷码：</label>
+                <div class="layui-input-block" style="margin-left: 70px;">
+                    <label id="lb_pm" class="layui-form-label" style="text-align:center;width:100%;"></label>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="text-align:right;width:60px;">产品：</label>
+                <div class="layui-input-block" style="margin-left: 70px;">
+                    <label id="lb_matnr" class="layui-form-label" style="text-align:center;width:100%;white-space:initial;"></label>
+                </div>
+            </div>
+            <hr class="layui-bg-black" />
+        </div>
+
+
+
+        <div id="div_result">
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<input id="staffid" hidden />
+<input id="state" hidden />
+<input id="appid" hidden />
+
+<input id="dxm_url" hidden />
+
+<script>
+    $(document).ready(function () {
+        $("#staffid").val("@Staffid");
+        $("#state").val("@state");
+        $("#appid").val("@appid");
+        $("#dxm_url").val("@DXM_url");
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/CRM/FCH/SelectBarCode_KH")
+}

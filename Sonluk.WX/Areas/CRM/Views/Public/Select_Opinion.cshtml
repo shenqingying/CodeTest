@@ -1,0 +1,135 @@
+﻿@using Sonluk.UI.Model.CRM.OA_OPINIONService;
+@{
+    ViewBag.Title = "Select_Opinion";
+    CRM_OA_OPINION[] opinion = ViewBag.opinion;
+
+    int OACSBH = ViewBag.OACSBH;
+    int OACSLB = ViewBag.OACSLB;
+    int ReadOnly = ViewBag.ReadOnly;
+
+
+
+
+
+
+
+}
+
+@for (int i = 0; i < opinion.Length; i++)
+{
+
+
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@opinion[i].SPRNAME &nbsp;@opinion[i].ATTITUDE</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">审批意见</label>
+                <span class="weui-form-preview__value">&nbsp;@opinion[i].OPINION</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">审批时间</label>
+                <span class="weui-form-preview__value">&nbsp;@opinion[i].SPSJ</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">回复人</label>
+                <span class="weui-form-preview__value">&nbsp;@opinion[i].STAFFNAME</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">回复内容</label>
+                <span class="weui-form-preview__value">&nbsp;@opinion[i].HFNR</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">回复时间</label>
+                <span class="weui-form-preview__value">&nbsp;@opinion[i].HFSJ</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            @if (ReadOnly == 0)
+            {
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="opinion_hf(@Newtonsoft.Json.JsonConvert.SerializeObject(opinion[i]))">回复</a>
+            }
+
+        </div>
+    </div>
+    <br />
+}
+@if (opinion.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无审批意见</label>
+    <br /><br />
+}
+
+
+
+
+
+    @* 审批意见回复 *@
+    <div id="div_opinion_edit" class="layui-form" hidden>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">回复内容：</label>
+            <div class="layui-input-block">
+                <textarea id="div_opinion_content" name="desc" placeholder="请输入内容" class="layui-textarea" style="height:250px;"></textarea>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+        function opinion_hf(data) {
+            layer.open({
+                type: 1,
+                shade: 0,
+                btn: ['保存', '取消'],
+                area: ['100%', '100%'], //宽高
+                content: $("#div_opinion_edit"),
+                title: '编辑回复内容',
+                moveOut: true,
+                success: function (layero, index) {
+                    $("#div_opinion_content").val(data.HFNR);
+                },
+                yes: function (index, layero) {
+
+                    var newdata = {
+                        ID: data.ID,
+                        HFNR: $("#div_opinion_content").val()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../Fee/Data_Update_Opinion",
+                        data: {
+                            data: JSON.stringify(newdata)
+                        },
+                        success: function (result) {
+                            var res = JSON.parse(result);
+                            if (res.KEY > 0) {
+                                OPINIONLoad(@OACSBH,@OACSLB,@ReadOnly);
+                                layer.close(index);
+                            }
+
+                            layer.msg(res.MSG);
+                        },
+                        error: function () {
+                            alert("系统错误,请联系管理员");
+                        }
+                    });
+
+                },
+                end: function () {
+                    $("#div_opinion_content").val("");
+                    $("#div_opinion_edit").hide();
+
+                }
+
+            });
+        }
+    </script>

@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "电池标准数值";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>MES系统设置</a>
+    <a><cite>电池标准数值</cite></a>
+</span>
+
+<br />
+<br />
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_search_specs">查询</button>
+        <button class="layui-btn" id="btn_add_specs">新增标准</button>
+    </div>
+    <br />
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">标准名称：</label>
+            <div class="layui-input-block">
+                <select id="list_specs_left" lay-search="" lay-filter="list_specs_left"></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" id="tb_bat_list" lay-filter="tb_bat_list" lay-data="{id: 'tb_bat_list'}"></table>
+</div>
+
+<div id="div_modify_main" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_modify_main" lay-filter="btn_modify_main" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">标准名称：</label>
+        <div class="layui-input-inline">
+            <select lay-verify="required" id="list_specs">
+                <option value="">请选择</option></select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        @{
+            string[] listname = { "开路电压(V)：", "电池尺寸A：", "电池尺寸B：", "电池尺寸C：" };
+            for (int i = 0; i < 4; i++)
+            {
+                <div class="layui-inline">
+                    <label class="layui-form-label1" id="MES_DCCCBZ_DCBZ@(i)">@listname[i]</label>
+                    <label class="layui-form-label1">最大：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="MES_DCCCBZ_DCMAX@(i)" autocomplete="off" class="layui-input">
+                    </div>
+                    <label class="layui-form-label1">最小：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="MES_DCCCBZ_DCMIN@(i)" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div><hr class="layui-bg-gray"></div>
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add_perfor">新增标准说明</button>
+    </div>
+    <table class="layui-hide" id="tb_bat_perfor" lay-filter="tb_bat_perfor"></table>
+</div>
+
+<div id="div_modify_son" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <button id="btn_modify_son" lay-filter="btn_modify_son" lay-submit="" hidden></button>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">标准说明：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="MES_DCDXN_DCFDFS" autocomplete="off" class="layui-input" lay-verify="required">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">标准值：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="MES_DCDXN_DCMAD" autocomplete="off" class="layui-input" lay-verify="required">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label1">素电类型：</label>
+        <div class="layui-input-inline">
+            <select lay-verify="required|bat_type" id="MES_DCDXN_SDLX"></select>
+        </div>
+    </div>
+</div>
+
+<div id="div_display" class="layui-form" hidden style="padding:30px 30px 0 30px">
+    <div class="layui-form-item">
+        <label class="layui-form-label1">标准名称：</label>
+        <div class="layui-input-inline">
+            <label class="layui-form-label1" id="list_specs_disabled"></label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        @{
+            for (int i = 0; i < 4; i++)
+            {
+                <div class="layui-inline">
+                    <label class="layui-form-label1">@listname[i]</label>
+                    <label class="layui-form-label1">最大：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label1" id="MES_DCCCBZ_DCMAX_disabled@(i)"></label>
+                    </div>
+                    <label class="layui-form-label1">最小：</label>
+                    <div class="layui-input-inline">
+                        <label class="layui-form-label1" id="MES_DCCCBZ_DCMIN_disabled@(i)"></label>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div><hr class="layui-bg-gray"></div>
+    <table class="layui-hide" id="tb_bat_perfor_disabled" lay-filter="tb_bat_perfor_disabled"></table>
+</div>
+
+<script type="text/html" id="operate_specs">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+
+<script type="text/html" id="operate_perfor">
+    <a class="layui-btn layui-btn-xs" lay-event="modifyson">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deleteson">删除</a>
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/MES/YCLSY/BAT_SPECS")
+}

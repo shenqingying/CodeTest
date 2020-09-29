@@ -1,0 +1,106 @@
+﻿@using  Sonluk.UI.Model.CRM.COST_CXYService;
+@{
+    ViewBag.Title = "Select_KACXY_Part";
+
+    CRM_COST_CXY[] TTdata = ViewBag.TTdata;
+
+    int Num = ViewBag.Num;
+}
+
+
+@for (int i = 0; i < TTdata.Length; i++)
+{
+    string isactive = "";
+    switch (TTdata[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 30:
+            isactive = "已审核";
+            break;
+        //case 40:
+        //    isactive = "";
+        //    break;
+        //case 50:
+        //    isactive = "已审核";
+            //break;
+        case 60:
+            isactive = "已完成";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@TTdata[i].MC</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">门店编号</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">省份</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].SFDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">城市</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].CSDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">岗位</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].GWDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">姓名</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].NAME</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">状态</label>
+                <span class="weui-form-preview__value">&nbsp;@isactive</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">创建人</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].CJRDES</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">创建时间</label>
+                <span class="weui-form-preview__value">&nbsp;@TTdata[i].CJSJ</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_watch(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">查看</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="Link_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">编辑</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn" onclick="Link_Delete(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))" style="color:#E64340;">删除</a>
+            @if(Num == 1)
+            {
+                <a class="weui-form-preview__btn weui-form-preview__btn" onclick="Link_OA(@Newtonsoft.Json.JsonConvert.SerializeObject(TTdata[i]))">提交OA</a>
+            }
+            
+        </div>
+    </div>
+    <br />
+}
+
+
+@if (TTdata.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "点检汇总查询";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    Sonluk.UI.Model.S5.STAFF_DEPService.FIVES_STAFF_DEP[] bmlist = ViewBag.DeptArr;
+}
+<input type="hidden" value="@Url.Action("CheckInfoHZ_Select", "Report")" id="CheckInfoHZ_Select" />
+<input type="hidden" value="@Url.Action("CheckInfo_Select_DJHZ", "Report")" id="CheckInfo_Select" />
+<input type="hidden" value="@Url.Action("PFMX_Select", "Report")" id="PFMX_Select" />
+<input type="hidden" value="@Url.Action("EXPORT_CHeck_SELECT", "Report")" id="EXPORT_CHeck_SELECT" />
+<input type="hidden" value="@Url.Action("EXPORT_CheckInfo", "Report")" id="EXPORT_CheckInfo" />
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="select_MX">明细</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+<script type="text/html" id="MXbar">
+    <a class="layui-btn layui-btn-xs" lay-event="select_MX">不合格明细</a>
+    @*<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>*@
+</script>
+<script type="text/html" id="status">
+    {{# if(d.HGL != '100.0%'){ }}
+    <span style="color: #FF0000">{{d.HGL}}</span>
+    {{# }else {}}
+    {{d.HGL}}
+    {{# } }}
+</script>
+<script type="text/html" id="status1">
+    {{# if(d.HG == 1){ }}
+    <span style="color: #FF0000">不合格</span>
+    {{# }else if(d.HG == 0){}}
+    合格
+    {{# } }}
+</script>
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>5S查询</a>
+    <a><cite>点检汇总查询</cite></a>
+</span>
+<div class="layui-form layui-form-pane">
+    <br />
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_select">查询</button>
+        <button class="layui-btn" id="btn_dcbc">导出</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门：</label>
+        <div class="layui-input-inline">
+            <select id="in_bm" lay-filter="in_bm" lay-search>
+                <option value=0 selected="selected">请选择</option>
+                @for (int i = 0; i < bmlist.Length; i++)
+                {
+                    if (bmlist.Length == 1)
+                    {
+                        <option value="@bmlist[i].DEPTID" selected="selected">@bmlist[i].DEPTNAME</option>
+
+                    }
+                    else
+                    {
+                        <option value="@bmlist[i].DEPTID">@bmlist[i].DEPTNAME</option>
+                    }
+                }
+            </select>
+        </div>
+        <label class="layui-form-label">检查点：</label>
+        <div class="layui-input-inline">
+            <select id="in_CheckPoint" lay-filter="in_CheckPoint" lay-search>
+                <option value="" selected="selected">请选择</option>
+            </select>
+        </div>
+
+        @*<label class="layui-form-label">检查人：</label>
+        <div class="layui-input-inline">
+            <select id="in_staff" lay-filter="in_staff" lay-search>
+                <option value="" selected="selected">请选择</option>
+                @for (int i = 0; i < stafflist.Length; i++)
+                {
+                    <option value="@stafflist[i].STAFFID">@stafflist[i].SNAME</option>
+                }
+            </select>
+        </div>*@
+        <div class="layui-inline">
+            <label class="layui-form-label">检验时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_time_ks" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd")">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="date" id="in_time_js" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <table id="table_djhz" lay-filter="table_djhz"></table>
+    </div>
+</div>
+<div class="layui-form " id="div_checkinfoTable">
+    
+        <table id="checkinfoTable" lay-filter="checkinfoTable"></table>
+    
+</div>
+<div class="layui-form " id="div_checkinfomxTable">
+    
+        <table id="table_checkinfomx" lay-filter="table_checkinfomx"></table>
+   
+</div>
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/FIVES/Report/DJHZ")
+}

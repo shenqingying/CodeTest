@@ -1,0 +1,165 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+    ViewBag.Title = "编辑广告公司";
+
+    string Staffid = "";
+    if (Session["STAFFID"] != null)
+    {
+        Staffid = Session["STAFFID"].ToString();
+    }
+}
+<div id="temp">
+    <script type="text/html" id="tb_fujian">
+        <a class="layui-btn layui-btn-xs" lay-event="watch">查看</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+    </script>
+</div>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<span class="layui-breadcrumb" lay-separator=">">
+    <a href="../Public/Index1">首页</a>
+    <a>广告管理</a>
+    <a><cite>修改广告公司</cite></a>
+</span>
+<br />
+<br />
+
+<div id="form1" class="layui-form">
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="btn_save" class="layui-btn">保存</button>
+            <button id="btn_submit" class="layui-btn" hidden>保存并提交</button>
+        </div>
+    </div>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">基本信息</h2>
+            <div class="layui-colla-content layui-show">
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label" style="width:130px;text-align:right;">广告公司名称：</label>
+                    <div class="layui-input-inline">
+                        <input id="GGGSMC" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                    <label class="layui-form-label" style="width:130px;text-align:right;">省份：</label>
+                    <div class="layui-input-inline">
+                        <select id="SF" lay-filter="SF">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+
+
+                    <label class="layui-form-label" style="width:130px;text-align:right;">城市：</label>
+                    <div class="layui-input-inline">
+                        <select id="CS" lay-filter="CS">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+
+                    <label class="layui-form-label" style="width:130px;text-align:right;">联系电话：</label>
+                    <div class="layui-input-inline">
+                        <input id="TEL" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                    <label class="layui-form-label" style="width:130px;text-align:right;">地址：</label>
+                    <div class="layui-input-inline">
+                        <input id="ADDRESS" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+
+                    <label class="layui-form-label" style="width:130px;text-align:right;">广告公司开户银行：</label>
+                    <div class="layui-input-inline">
+                        <input id="KHYH" type="text" autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:130px;text-align:right;">广告公司开户账户：</label>
+                    <div class="layui-input-inline">
+                        <input id="KHZH" type="text" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        @*附件一*@
+        <div id="div_upload1" class="layui-form">
+            <div class="layui-collapse">
+                @*附件*@
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">广告公司营业执照</h2>
+                    <div class="layui-colla-content ">
+                        <table id="fujian_upload1" lay-filter="fujian_upload1"></table>
+                        <button id="insert_fujian1" class="layui-btn">新增</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*附件二*@
+        <div id="div_upload2" class="layui-form">
+            <div class="layui-collapse">
+                @*附件*@
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">广告公司开户许可</h2>
+                    <div class="layui-colla-content ">
+                        <table id="fujian_upload2" lay-filter="fujian_upload2"></table>
+                        <button id="insert_fujian2" class="layui-btn">新增</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*附件三*@
+        <div id="div_upload3" class="layui-form">
+            <div class="layui-collapse">
+                @*附件*@
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">广告制作协议</h2>
+                    <div class="layui-colla-content">
+                        <table id="fujian_upload3" lay-filter="fujian_upload3"></table>
+                        <button id="insert_fujian3" class="layui-btn">新增</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+<br />
+
+
+<div  class="layui-form" id="div_beiz" hidden>
+    <label class="layui-form-label" style="width:130px;text-align:right;">备注</label>
+
+    <div class="layui-input-block" >
+        <input type="checkbox" id="in_1" name="in_1" lay-filter="in_1" lay-skin="primary" title="广告公司营业执照务必复印件加盖公章后寄到公司备案" />
+    </div>
+    <div class="layui-input-block">
+        <input type="checkbox" id="in_2" name="in_2" lay-filter="in_2" lay-skin="primary" title="广告制作协议原件务必加盖公章或者合同章之后寄到公司备案" />
+    </div>
+</div>
+
+
+
+
+
+
+
+    <input id="staffid" hidden />
+    <script src="~/Scripts/layui2.2.5/layui.all.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#staffid").val("@Staffid");
+
+        });
+    </script>
+    @section scripts {
+        @Scripts.Render("~/bundles/CRM/Fee/Update_AdCompany")
+    }

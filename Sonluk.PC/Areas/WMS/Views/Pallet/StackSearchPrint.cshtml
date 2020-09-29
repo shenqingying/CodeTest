@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "托盘组合码打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+}
+
+<style>
+    .noprintgap {
+        height: 20px;
+    }
+
+    .main_tpzhno {
+        margin-bottom: 0cm;
+    }
+</style>
+
+@foreach (var TPZHNO in ViewBag.TPZHNOs)
+{
+    <div class="noprint noprintgap"></div>
+    <div id="wrap" class="main_tpzhno">
+        <table class="print-page_table_outside_tpzhno">
+            <tr>
+                <td colspan="4" class="print_page_td_haveborder_tpzhno1">
+                    <table style="width:100%">
+                        <tr style="width:100%">
+                            <td class="print-page-body-table-header" valign="top">托盘组合码</td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" class="print_page_td_noborder4_tpzhno">
+                                <img src="@Url.Action("BarCode", "Sessionless", new { area = "WMS", code = TPZHNO.TPZHNO, format = "QRCODE", width = 70, height = 70, pure = 1})">
+                                <br />
+                                <big id="TPZHNO">@TPZHNO.TPZHNO</big>
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="print-page_td_haveborder_tpzhno">序号</td>
+                <td class="print-page_td_haveborder_tpzhno">托盘编号</td>
+                <td class="print-page_td_haveborder_tpzhno">序号</td>
+                <td class="print-page_td_haveborder_tpzhno">托盘编号</td>
+            </tr>
+            @for (int j = 0; j < TPZHNO.TPM.Count; j++)
+            {
+                <tr>
+                    <td class="print-page_td_haveborder_tpzhno">
+                        <a>@(j + 1)</a>
+                    </td>
+                    <td class="print-page_td_haveborder_tpzhno">@TPZHNO.TPM[j++].TPNO</td>
+                    @if (j < TPZHNO.TPM.Count)
+                    {
+                        <td class="print-page_td_haveborder_tpzhno">
+                            <a>@(j + 1)</a>
+                        </td>
+                        <td class="print-page_td_haveborder_tpzhno">@TPZHNO.TPM[j].TPNO</td>
+                    }
+                    else
+                    {
+                        <td class="print-page_td_haveborder_tpzhno"></td>
+                        <td class="print-page_td_haveborder_tpzhno"></td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+}

@@ -1,0 +1,254 @@
+﻿@{
+    ViewBag.Title = "模版管理";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR薪资福利</a>
+    <a><cite>模版管理</cite></a>
+</span>
+<script type="text/html" id="isaction_Tpl">
+    {{# if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else if(d.ISACTION == 1){ }}
+    启用
+    {{# } }}
+</script>
+<script type="text/html" id="JSORDER_Tpl">
+    {{# if(d.JSORDER == 0){ }}
+    {{# }else if(d.JSORDER == 1){ }}
+    税前
+    {{# }else if(d.JSORDER == 2){ }}
+    税后
+    {{# } }}
+</script>
+<script type="text/html" id="JSFS_Tpl">
+    {{# if(d.JSFS == 0){ }}
+    需要维护
+    {{# }else if(d.JSFS == 1){ }}
+    含税
+    {{# }else if(d.JSFS == 2){ }}
+    不含税
+    {{# } }}
+</script>
+<script type="text/html" id="ISFIXED_Tpl">
+    {{# if(d.ISFIXED == 0){ }}
+    不固定
+    {{# }else if(d.ISFIXED == 1){ }}
+    固定
+    {{# } }}
+</script>
+<script type="text/html" id="barkh_mx">
+    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" id="btn_add">新增</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-inline">
+                <select id="find_gs" lay-filter="find_gs"></select>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_mb" lay-filter="tb_mb"></table>
+    <script type="text/html" id="barkh">
+        <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+        <a class="layui-btn layui-btn-xs" lay-event="copy">复制</a>
+        <a class="layui-btn layui-btn-xs" lay-event="zdmodify">字段编辑</a>
+    </script>
+    <div id="div_mbmx" hidden>
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>模版字段编辑</legend>
+        </fieldset>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">模版描述：</label>
+                <div class="layui-input-block" style="width: 200px;">
+                    <input type="text" id="mbmx_mbname" autocomplete="off" class="layui-input" disabled="disabled">
+                </div>
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_mbmx" lay-filter="tb_mbmx"></table>
+    </div>
+</div>
+<div id="div_mbinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">公司：</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <select id="mbinf_gs" lay-filter="mbinf_gs"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">模版描述：</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <input type="text" id="mbinf_mbname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">模版类别：</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <select id="mbinf_mblb" lay-filter="mbinf_mblb"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">启用状态：</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <select id="mbinf_isaction" lay-filter="mbinf_isaction">
+                    <option value="0" selected="selected">关闭</option>
+                    <option value="1">启用</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">计税方式：</label>
+            <div class="layui-input-block" style="width: 200px;">
+                <select id="mbinf_jsfs" lay-filter="mbinf_jsfs">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">含税</option>
+                    <option value="2">不含税</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button class="layui-btn layui-btn-sm" id="btn_whzd">字段调整</button>
+    <table class="layui-hide" id="tb_mbinfo" lay-filter="tb_mbinfo"></table>
+</div>
+<div id="div_mbinfo_mxzd" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_mbinfomx" lay-filter="tb_mbinfomx"></table>
+</div>
+<div id="div_mbmxinfo" class="layui-form" hidden>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="gzzdinfo_zdms" autocomplete="off" class="layui-input" disabled="disabled">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">排序码：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="gzzdinfo_pxm" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">小数保留规则：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_xsblgz" lay-filter="gzzdinfo_xsblgz"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">有效小数位：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_yxws" lay-filter="gzzdinfo_yxws">
+                    <option value="0" selected="selected">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">公式输入：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_ishavegs" lay-filter="gzzdinfo_ishavegs">
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">计算顺序：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="gzzdinfo_jslevel" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">税前/税后：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_jsorder" lay-filter="gzzdinfo_jsorder">
+                    <option value="0">请选择</option>
+                    <option value="1">税前</option>
+                    <option value="2">税后</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">打印长度：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <input type="text" id="gzzdinfo_printcd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">固定显示：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gzzdinfo_isfixed" lay-filter="gzzdinfo_isfixed">
+                    <option value="0">不固定</option>
+                    <option value="1">固定</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">公式：</label>
+            <div class="layui-input-inline1" style="width: 520px;">
+                @*<input type="text" id="gzzdinfo_gs" autocomplete="off" class="layui-input" readonly="readonly">*@
+                <textarea placeholder="" class="layui-textarea" id="gzzdinfo_gs" readonly="readonly"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="div_gs" class="layui-form" hidden>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" id="gs_ms"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段来源：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gs_zdly" lay-filter="gs_zdly">
+                    <option value="0">请选择</option>
+                    <option value="1">工资字段</option>
+                    <option value="2">引用字段</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label1">字段名称：</label>
+            <div class="layui-input-inline1" style="width: 185px;">
+                <select id="gs_zdmc" lay-filter="gs_zdmc" lay-search></select>
+            </div>
+        </div>
+        <button class="layui-btn" id="btn_addzd">添加</button>
+    </div>
+    <button class="layui-btn" id="btn_1">+</button>
+    <button class="layui-btn" id="btn_2">-</button>
+    <button class="layui-btn" id="btn_3">*</button>
+    <button class="layui-btn" id="btn_4">/</button>
+    <button class="layui-btn" id="btn_5">CASE WHEN</button>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/XZGL/XZGL_MBGL")
+}

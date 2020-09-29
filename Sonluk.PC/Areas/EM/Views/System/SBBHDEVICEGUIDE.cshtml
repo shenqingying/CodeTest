@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "操作规程绑定";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+
+}
+<style>
+    .layui-form-item .layui-form-checkbox[lay-skin=primary] {
+        margin-top: 0px;
+    }
+</style>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs" lay-event="bind">绑定操作规程</a>
+
+</script>
+<script type="text/html" id="indexTpl">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="qyzt">
+    {{# if(d.ISACTION == 1){ }}
+    启用
+    {{# }else if(d.ISACTION == 0){ }}
+    关闭
+    {{# }else { }}
+    error
+    {{# } }}
+</script>
+<input id="Insert_SBBHDEVICETYPE" value="@Url.Action("Insert_SBBHDEVICETYPE", "System")" type="hidden" />
+<input id="Read_SBBHDEVICETYPE" value="@Url.Action("Read_SBBHDEVICETYPE", "System")" type="hidden" />
+
+<input id="Insert_SY_SBBHMANUAL" value="@Url.Action("Insert_SY_SBBHMANUAL", "System")" type="hidden" />
+<input id="Update_SY_SBBHMANUAL" value="@Url.Action("Update_SY_SBBHMANUAL", "System")" type="hidden" />
+<input id="Read_SY_SBBHMANUAL" value="@Url.Action("Read_SY_SBBHMANUAL", "System")" type="hidden" />
+<input id="Delete_SY_SBBHMANUAL" value="@Url.Action("Delete_SY_SBBHMANUAL", "System")" type="hidden" />
+
+<input type="hidden" value="@Url.Action("SelectManual", "System")" id="SelectManual" />
+<input type="hidden" value="@Url.Action("Modify_SBBHMANUAL", "System")" id="Modify_SBBHMANUAL" />
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>电子文档系统管理</a>
+    <a><cite>操作规程绑定</cite></a>
+</span>
+<br />
+<br />
+<div id="from1" class="layui-form layui-form-pane">
+    <div id="div1" class="layui-form">
+        <div class="layui-form-item">
+           @* <button id="btn_insert" class="layui-btn">新增</button>*@
+            <button id="btn_cx" class="layui-btn">查询</button>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工厂：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gc" lay-filter="cx_gc">
+                    <option value="" selected="selected">请选择</option>
+                    @for (int i = 0; i < Model.Sy_gc.Length; i++)
+                    {
+                        <option value="@Model.Sy_gc[i].GC">@Model.Sy_gc[i].GC</option>
+                    }
+                </select>
+            </div>
+            <label class="layui-form-label">工作中心：</label>
+            <div class="layui-input-inline">
+                <select id="cx_gzzx" lay-filter="cx_gzzx" lay-search>
+                    <option value="" selected="selected">请选择</option>
+                    @*@for (int i = 0; i < Model.Sy_gzzx.Length; i++)
+            {
+                <option value="@Model.Sy_gzzx[i].ID">@Model.Sy_gzzx[i].GZZXBH</option>
+            }*@
+                </select>
+            </div>
+            <label class="layui-form-label">设备号：</label>
+            <div class="layui-input-inline">
+                <select id="cx_sbh" lay-filter="cx_sbh" lay-search>
+                    <option value="" selected="selected">请选择</option>
+                    @*@for (int i = 0; i < Model.Sy_gzzx.Length; i++)
+            {
+                <option value="@Model.Sy_gzzx[i].ID">@Model.Sy_gzzx[i].GZZXBH</option>
+            }*@
+                </select>
+            </div>
+        </div>
+        <table class="layui-hide" id="tb_sb" lay-filter="tb_sb"></table>
+    </div>
+</div>
+<div id="div_sbbhmanual" class="layui-form" hidden >
+    <br />
+    <div class="layui-form-item" >
+        @*<button id="btn_insert" class="layui-btn">新增</button>*@
+        <label class="layui-form-label">工厂：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="in_gc" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">工作中心：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="in_gzzx" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+  
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备编号：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="in_sbbh" autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">设备描述：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="in_sbbhms" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+  
+
+    <div class="layui-form-item">
+        <table class="layui-hide" id="tb_manual" lay-filter="tb_manual"></table>
+       
+    </div>
+    
+    
+</div>
+<div id="div_manual" class="layui-form" hidden>
+    <table class="layui-hide" id="tb_sbbhmanual" lay-filter="tb_sbbhmanual"></table>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/EM/system/SBBHDEVICEGUIDE")
+}
+
+

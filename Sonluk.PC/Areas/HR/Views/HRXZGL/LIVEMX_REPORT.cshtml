@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "宿舍入住明细报表";
+    Layout = "~/Views/Shared/_Layout_CRM.cshtml";
+}
+<script type="text/html" id="SHENGYCOUNT_Tpl">
+    {{d.ROOMRYCOUNT-d.LIVECOUNT}}
+</script>
+<script type="text/html" id="ROOMZT_Tpl">
+    {{# if(d.ROOMZT == 1){ }}
+    空房
+    {{# }else if(d.ROOMZT == 2){ }}
+    未满
+    {{# }else if(d.ROOMZT == 3){ }}
+    满房
+    {{# } }}
+</script>
+<script type="text/html" id="LIVETYPE_Tpl">
+    {{# if(d.LIVETYPE == 1){ }}
+    入住
+    {{# }else if(d.LIVETYPE == 2){ }}
+    搬离
+    {{# } }}
+</script>
+<script type="text/javascript" src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+<script type="text/javascript" src="~/Scripts/ztree/selectTree.js"></script>
+<script type="text/javascript" src="~/Scripts/layui2.2.5/extend/formSelects-v4.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/ztree/plugin/css/index.css">
+<link rel="stylesheet" type="text/css" href="~/Scripts/layui2.2.5/css/formSelects-v4.css">
+<span class="layui-breadcrumb" lay-separator=">">
+    <a>HR行政管理</a>
+    <a><cite>宿舍入住明细报表</cite></a>
+</span>
+<div class="layui-form">
+    <div class="layui-form-item">
+        <button class="layui-btn" onclick="location.href = '@Url.Action("LIVE_MANAGE", "HRXZGL")'">返回</button>
+        <button class="layui-btn" id="btn_daochu">导出</button>
+        <button class="layui-btn" id="btn_find">查询</button>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">宿舍名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_dormname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间号：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_roomname" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">入住人员：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="find_dormry" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间类型：</label>
+            <div class="layui-input-inline">
+                <select xm-select="find_roomtype" id="find_roomtype" xm-select-height="36px"></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房间状态：</label>
+            <div class="layui-input-inline">
+                <select id="find_roomzt" lay-filter="find_roomzt">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">空房</option>
+                    <option value="2">未满</option>
+                    <option value="3">满房</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">状态：</label>
+            <div class="layui-input-inline">
+                <select id="find_livezt" lay-filter="find_livezt">
+                    <option value="0" selected="selected">请选择</option>
+                    <option value="1">入住</option>
+                    <option value="2">搬离</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">入住日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_dateks" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_datejs" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">搬离日期：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_dateks2" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" id="find_datejs2" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="tb_dormnamelist" lay-filter="tb_dormnamelist"></table>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/HR/HRXZGL/LIVEMX_REPORT")
+}

@@ -1,0 +1,98 @@
+﻿@using Sonluk.UI.Model.CRM.COST_MDBSHXService;
+@{
+    ViewBag.Title = "Select_MDBS_Part";
+    CRM_COST_MDBSHX[] data = ViewBag.data;
+}
+
+@for (int i = 0; i < data.Length; i++)
+{
+    string FYLB = "";
+    string isactive = "";
+    switch (data[i].FYLB)
+    {
+        case 1:
+            FYLB = "欧尚、大润发";
+            break;
+        case 2:
+            FYLB = "除欧尚、大润发";
+            break;
+        default:
+            break;
+    }
+    switch (data[i].ISACTIVE)
+    {
+        case 10:
+            isactive = "未提交";
+            break;
+        case 20:
+            isactive = "审核中";
+            break;
+        case 30:
+            isactive = "已审核";
+            break;
+        case 40:
+            isactive = "核销未提交";
+            break;
+        case 50:
+            isactive = "核销审核中";
+            break;
+        case 60:
+            isactive = "已核销";
+            break;
+        default:
+            isactive = "";
+            break;
+    }
+
+
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <em class="weui-form-preview__value">@data[i].MDMC</em>
+            <em class="weui-form-preview__value">@data[i].CRMID</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <p>
+                <label class="weui-form-preview__label">年月</label>
+                <span class="weui-form-preview__value">&nbsp;@(data[i].HTYEAR)-@(data[i].HTMONTH)</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">费用类别</label>
+                <span class="weui-form-preview__value">&nbsp;@FYLB</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户名称</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].MC</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].CRMID</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">客户SAP编号</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].SAPSN</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">核销金额</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].HXJE</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">发票号码</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].FPHM</span>
+            </p>
+            <p>
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value">&nbsp;@data[i].BEIZ</span>
+            </p>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="click_edit(@Newtonsoft.Json.JsonConvert.SerializeObject(data[i]))">编辑</a>
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" style="color:#E64340;" onclick="click_delete(@data[i].MDBSHXID)">删除</a>
+        </div>
+    </div>
+    <br />
+}
+@if (data.Length == 0)
+{
+    <label class="weui-form-preview__label">暂无数据</label>
+    <br /><br />
+}

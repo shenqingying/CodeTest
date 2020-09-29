@@ -1,0 +1,162 @@
+﻿@model List<Sonluk.UI.Model.MES.TM_TMINFOService.SELECT_MES_TM_TMINFO_PRINT>
+@{
+    ViewBag.Title = "暂放素电打印";
+    Layout = "~/Views/Shared/_Layout_Print.cshtml";
+}
+@for (int i = 0; i < Model.Count; i++)
+{
+    int mxcount = Model[i].MES_TM_ZFDCMX.Length;
+    for (int j = 0; j < (mxcount / 16) + 1; j++)
+    {
+        <div id="wrap" class="main">
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    <td rowspan="2" width="80"></td>
+                    <td>
+                        <div class="print-page-header-company-name">@Model[i].MES_TM_TMINFO_LIST.GCDYMS</div>
+                    </td>
+                    <td rowspan="2" width="80">
+                        <img src="@Url.Action("BarCode", "PD", new { area = "MES",code=Model[i].MES_TM_TMINFO_LIST.TM,format="QRCODE",width=70,height=70,pure=1})">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="print-page-body-table-header">暂放素电汇总表</div>
+                    </td>
+                </tr>
+            </table>
+            <table class="print_page_table_noborder_zfdc">
+                <tr>
+                    @if (Model[i].MES_TM_TMINFO_LIST.LOTNO == "")
+                    {
+                        <td class="print_page_td_nohaveborder_left">
+                            编号:JS4717A
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="print_page_td_nohaveborder_left">
+                            编号:@Model[i].MES_TM_TMINFO_LIST.LOTNO
+                        </td>
+                    }
+                    <td class="print_page_td_nohaveborder_right">
+                        @Model[i].MES_TM_TMINFO_LIST.TM
+                    </td>
+                </tr>
+                <tr>
+                    <td class="print_page_td_nohaveborder_left">
+                        物料信息：@Model[i].MES_TM_TMINFO_LIST.WLH-@Model[i].MES_TM_TMINFO_LIST.WLMS
+                    </td>
+                    <td class="print_page_td_nohaveborder_right">
+                        @Model[i].MES_TM_TMINFO_LIST.PC
+                    </td>
+                </tr>
+            </table>
+            <table class="print_page_table_outside_zfdc">
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>生产线</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Model[i].MES_TM_TMINFO_LIST.SBHMS
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>电池型号</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Model[i].MES_TM_TMINFO_LIST.DCXHMS/@Model[i].MES_TM_TMINFO_LIST.DCDJMS
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>暂放类别</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Model[i].MES_TM_TMINFO_LIST.ZFDCLBNAME
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>素电总数量</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Convert.ToInt32(Model[i].MES_TM_TMINFO_LIST.SL)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>幢号</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Model[i].MES_TM_TMINFO_LIST.TH
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>生产时间段</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Model[i].MES_TM_TMINFO_LIST.KSTIME.Substring(0, 10)<a>至</a>@Model[i].MES_TM_TMINFO_LIST.JSTIME.Substring(0, 10)
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>存放天数</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Model[i].MES_TM_TMINFO_LIST.CFTS
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>入库日期</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        @Model[i].MES_TM_TMINFO_LIST.SCDATEP
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="print_page_td_haveborder_zfdc">
+                        <b>生产日期</b>
+                    </td>
+                    <td class="print_page_td_haveborder_zfdc">
+                        <b>素电数量（节）</b>
+                    </td>
+                    <td colspan="2" class="print_page_td_haveborder_zfdc">
+                        <b>生产日期</b>
+                    </td>
+                    <td colspan="2" class="print_page_td_haveborder_zfdc">
+                        <b>素电数量（节）</b>
+                    </td>
+                </tr>
+                @for (int a = 0; a < 8; a++)
+                {
+                    <tr>
+                        <td colspan="3" class="print_page_td_haveborder_zfdc">
+                            @if (mxcount >= (j * 16 + a + 1))
+                            {
+                                <a>@Model[i].MES_TM_ZFDCMX[(j * 16 + a)].KSTIME</a><a>至</a><a>@Model[i].MES_TM_ZFDCMX[(j * 16 + a)].JSTIME</a>
+                            }
+                        </td>
+                        <td class="print_page_td_haveborder_zfdc">
+                            @if (mxcount >= (j * 16 + a + 1))
+                            {
+                                <a>@Model[i].MES_TM_ZFDCMX[(j * 16 + a)].SL</a>
+                            }
+                        </td>
+                        <td colspan="2" class="print_page_td_haveborder_zfdc">
+                            @if (mxcount >= (j * 16 + a + 1 + 8))
+                            {
+                                <a>@Model[i].MES_TM_ZFDCMX[(j * 16 + a + 8)].KSTIME</a><a>至</a><a>@Model[i].MES_TM_ZFDCMX[(j * 16 + a + 8)].JSTIME</a>
+                            }
+                        </td>
+                        <td colspan="2" class="print_page_td_haveborder_zfdc">
+                            @if (mxcount >= (j * 16 + a + 1 + 8))
+                            {
+                                <a>@Model[i].MES_TM_ZFDCMX[(j * 16 + a + 8)].SL</a>
+                            }
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3" class="print_page_td_haveborder_zfdc"><b>素电已挑：</b></td>
+                    <td colspan="3" class="print_page_td_haveborder_zfdc"><b>挑电日期：</b></td>
+                    <td colspan="2" class="print_page_td_haveborder_zfdc"><b>检验员确认：</b></td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="print_page_td_haveborder_remark_zfdc"><b>备注：</b>@Model[i].MES_TM_TMINFO_LIST.REMARK</td>
+                </tr>
+            </table>
+        </div>
+    }
+}

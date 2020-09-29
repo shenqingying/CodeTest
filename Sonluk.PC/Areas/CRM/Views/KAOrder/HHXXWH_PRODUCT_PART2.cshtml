@@ -1,0 +1,41 @@
+﻿@using Sonluk.UI.Model.CRM.PRODUCT_PRODUCT_HHService;
+@{
+    ViewBag.Title = "HHXXWH_PRODUCT_PART2";
+    CRM_PRODUCT_PRODUCT_HH[] HHdata = ViewBag.HHdata;
+
+    //var data = JSON.parse(HHdata);
+}
+
+@*lay-data="{data:HHdata,id:'result'}"*@
+<table class="layui-table" lay-filter="result2">
+    <thead>
+        <tr>
+            <th lay-data="{ title: '序号', templet: '#indexTpl', width: 60 }">序号</th>
+            <th lay-data="{field:'ID', width:134,hide:true}">ID</th>
+            <th lay-data="{field:'HHID', width:134,hide:true}">SAP产品ID</th>
+            <th lay-data="{field:'CPPH', width:134,hide:true}">SAP产品ID</th>
+            <th lay-data="{field:'CPPH', width:118}">物料编码</th>
+            <th lay-data="{field:'SAPMX', width:164,}">物料描述</th>
+            <th lay-data="{field:'DDDW',width:90,}">订单单位</th>
+            <th lay-data="{field:'BEGINDATE',width:110,}">有效期开始</th>
+            <th lay-data="{field:'ENDDATE',width:110,}">有效期结束</th>
+            <th lay-data="{ fixed: 'right', width: 138,  toolbar: '#bar3', }">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < HHdata.Length; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@HHdata[i].ID</td>
+                <td>@HHdata[i].HHID</td>
+                <td>@HHdata[i].CPPH</td>
+                <td>@HHdata[i].CPPH</td>
+                <td>@HHdata[i].SAPMX</td>
+                <td>@HHdata[i].DDDW</td>
+                <td>@HHdata[i].BEGINDATE</td>
+                <td>@HHdata[i].ENDDATE</td>
+            </tr>
+        }
+    </tbody>
+</table>
